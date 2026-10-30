@@ -9,6 +9,20 @@ import { Achievement } from '../types/achievement';
 import { AchievementIcon, RARITY_STYLES } from './AchievementIcon';
 import { getFlowerForLevel } from '../data/flowers';
 import { FlowerIcon } from './FlowerIcon';
+import bulbLitImg from '../assets/bulb_lit.png';
+import chapterBadge1 from '../assets/chapter_badge_1.png';
+import chapterBadge2 from '../assets/chapter_badge_2.png';
+import chapterBadge3 from '../assets/chapter_badge_3.png';
+import chapterBadge4 from '../assets/chapter_badge_4.png';
+import chapterBadge5 from '../assets/chapter_badge_5.png';
+
+const CHAPTER_BADGES: Record<number, string> = {
+  1: chapterBadge1,
+  2: chapterBadge2,
+  3: chapterBadge3,
+  4: chapterBadge4,
+  5: chapterBadge5,
+};
 
 interface VictoryModalProps {
   levelTitle: string;
@@ -57,16 +71,28 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
     <div className="fixed inset-0 z-50 bg-black/55 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 select-none">
       <div className="w-full max-w-sm sm:max-w-md max-h-[96dvh] bg-[#f7faf4] border border-[#dce3d5] rounded-3xl p-4 sm:p-5 shadow-2xl text-center animate-in fade-in zoom-in-95 duration-150 flex flex-col justify-between overflow-y-auto">
         <div>
-          {/* Glowing Lotus / Flower Emblem */}
-          <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-2 rounded-2xl bg-gradient-to-br from-emerald-400 via-teal-500 to-emerald-700 p-0.5 shadow-md flex items-center justify-center">
-            <div className="w-full h-full bg-[#ecfdf5] rounded-[14px] flex items-center justify-center">
-              <FlowerIcon
-                isBlooming={true}
-                petalColor={flower.petalColor}
-                glowColor={flower.glowColor}
-                coreColor={flower.coreColor}
-                shape={flower.shape}
-                size={34}
+          {/* Glowing Lotus / Flower & Chapter Emblem */}
+          <div className="relative w-16 h-16 sm:w-18 sm:h-18 mx-auto mb-2 flex items-center justify-center">
+            {/* Halo pulse */}
+            <div
+              className="absolute inset-0 rounded-full blur-md opacity-50 animate-pulse"
+              style={{ backgroundColor: flower.glowColor || '#10b981' }}
+            />
+            {/* Jade circular plate */}
+            <div className="relative z-10 w-full h-full rounded-2xl bg-gradient-to-b from-[#133327] to-[#0a2017] p-1.5 shadow-lg border-2 border-emerald-400/50 flex items-center justify-center">
+              <img
+                src={bulbLitImg}
+                alt={flower.name}
+                className="w-full h-full object-contain animate-in zoom-in-75 duration-300"
+                style={{ filter: `drop-shadow(0 0 10px ${flower.glowColor || '#34d399'})` }}
+              />
+            </div>
+            {/* Chapter Medallion floating on bottom-right corner */}
+            <div className="absolute -bottom-1.5 -right-1.5 z-20 w-7 h-7 sm:w-8 sm:h-8 rounded-full drop-shadow-md">
+              <img
+                src={CHAPTER_BADGES[flower.chapter] || chapterBadge1}
+                alt={flower.chapterName}
+                className="w-full h-full object-contain"
               />
             </div>
           </div>
@@ -104,20 +130,18 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
 
           {/* Unlocked Flower Handbook Card */}
           <div className="p-2.5 mb-2.5 rounded-2xl bg-gradient-to-r from-[#eef8f4] to-[#f4faf7] border border-emerald-300/80 shadow-xs text-left flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-white shadow-xs border border-emerald-200 flex items-center justify-center shrink-0">
-              <FlowerIcon
-                isBlooming={true}
-                petalColor={flower.petalColor}
-                glowColor={flower.glowColor}
-                coreColor={flower.coreColor}
-                shape={flower.shape}
-                size={34}
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-b from-[#133327] to-[#0a2017] shadow-xs border border-emerald-400/40 p-1 flex items-center justify-center shrink-0">
+              <img
+                src={bulbLitImg}
+                alt={flower.name}
+                className="w-full h-full object-contain"
+                style={{ filter: `drop-shadow(0 0 6px ${flower.glowColor || '#34d399'})` }}
               />
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-1.5">
                 <span className="text-[10px] text-emerald-800 font-bold bg-emerald-100/90 px-1.5 py-0.2 rounded">
-                  🌸 图鉴解锁
+                  🌸 第{flower.chapter}卷 · {flower.chapterName}
                 </span>
                 <span className="text-xs font-black text-[#133325] truncate">
                   {flower.name}
@@ -130,7 +154,7 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
             {onOpenFloraCompendium && (
               <button
                 onClick={onOpenFloraCompendium}
-                className="px-2 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold shrink-0 transition-colors cursor-pointer"
+                className="px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold shrink-0 transition-colors cursor-pointer shadow-xs"
               >
                 看花谱
               </button>

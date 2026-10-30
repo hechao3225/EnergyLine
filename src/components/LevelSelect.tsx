@@ -22,6 +22,19 @@ import {
 import { sound } from '../utils/audio';
 import { getFlowerForLevel } from '../data/flowers';
 import { FlowerIcon } from './FlowerIcon';
+import chapterBadge1 from '../assets/chapter_badge_1.png';
+import chapterBadge2 from '../assets/chapter_badge_2.png';
+import chapterBadge3 from '../assets/chapter_badge_3.png';
+import chapterBadge4 from '../assets/chapter_badge_4.png';
+import chapterBadge5 from '../assets/chapter_badge_5.png';
+
+const CHAPTER_BADGES: Record<string, string> = {
+  ch1: chapterBadge1,
+  ch2: chapterBadge2,
+  ch3: chapterBadge3,
+  ch4: chapterBadge4,
+  ch5: chapterBadge5,
+};
 
 interface LevelSelectProps {
   levels: LevelConfig[];
@@ -325,8 +338,12 @@ export const LevelSelect: React.FC<LevelSelectProps> = ({
                         {/* Cloud puff Left */}
                         <div className="w-28 h-10 bg-white/70 rounded-full blur-[2px] shadow-sm transform -translate-x-3" />
                         {/* Signpost */}
-                        <div className="px-4 py-1.5 rounded-2xl bg-[#0f3424]/90 border border-emerald-400/40 text-emerald-100 shadow-xl flex items-center gap-1.5 text-xs font-bold pointer-events-auto backdrop-blur-xs">
-                          <span className="text-amber-300">☁️</span>
+                        <div className="px-4 py-1.5 rounded-2xl bg-[#0f3424]/95 border border-emerald-400/40 text-emerald-100 shadow-xl flex items-center gap-2 text-xs font-bold pointer-events-auto backdrop-blur-xs">
+                          <img
+                            src={CHAPTER_BADGES[CHAPTERS[idx + 1].id]}
+                            alt={CHAPTERS[idx + 1].name}
+                            className="w-5 h-5 object-contain"
+                          />
                           <span>第 {idx + 2} 篇章 · {CHAPTERS[idx + 1].name}</span>
                           <span className="text-[10px] text-emerald-300/70 font-mono">
                             ({CHAPTERS[idx + 1].range[0]}-{CHAPTERS[idx + 1].range[1]})
@@ -561,16 +578,15 @@ export const LevelSelect: React.FC<LevelSelectProps> = ({
                 </button>
 
                 {/* Chapter Buttons (5 to 1, top to bottom) */}
-                {[...CHAPTERS].reverse().map((ch, revIdx) => {
-                  const chIndex = 5 - revIdx;
+                {[...CHAPTERS].reverse().map((ch) => {
                   return (
                     <button
                       key={ch.id}
                       onClick={() => scrollToLevel(ch.range[0])}
                       title={`${ch.name} (${ch.range[0]}-${ch.range[1]}关)`}
-                      className="w-7 h-7 rounded-xl bg-emerald-900/60 hover:bg-emerald-700/80 text-emerald-200 hover:text-white border border-emerald-600/30 flex items-center justify-center text-[11px] font-bold transition-all cursor-pointer hover:scale-105 active:scale-95"
+                      className="w-7 h-7 rounded-full bg-emerald-950/70 hover:bg-emerald-800/80 border border-emerald-400/40 p-0.5 flex items-center justify-center transition-all cursor-pointer hover:scale-115 active:scale-95 shadow-md"
                     >
-                      {chIndex}
+                      <img src={CHAPTER_BADGES[ch.id]} alt={ch.name} className="w-full h-full object-contain" />
                     </button>
                   );
                 })}
@@ -612,10 +628,17 @@ export const LevelSelect: React.FC<LevelSelectProps> = ({
                 );
                 return (
                   <div key={ch.id} className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-[#1b2f27]">
-                        {ch.name} ({ch.range[0]}-{ch.range[1]})
-                      </span>
+                    <div className="flex items-center justify-between pb-1 border-b border-[#e1e9db]">
+                      <div className="flex items-center gap-1.5">
+                        <img
+                          src={CHAPTER_BADGES[ch.id]}
+                          alt={ch.name}
+                          className="w-5 h-5 object-contain"
+                        />
+                        <span className="text-xs font-bold text-[#1b2f27]">
+                          {ch.name} ({ch.range[0]}-{ch.range[1]})
+                        </span>
+                      </div>
                       <span className="text-[10px] text-[#5d7367]">
                         {ch.description}
                       </span>

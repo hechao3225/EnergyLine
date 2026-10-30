@@ -9,6 +9,11 @@ import { getTilePorts } from '../utils/circuit';
 import { FlowerIcon } from './FlowerIcon';
 import { getFlowerForLevel } from '../data/flowers';
 import { haptics } from '../utils/haptics';
+import springSourceImg from '../assets/spring_source.png';
+import bulbUnlitImg from '../assets/bulb_unlit.png';
+import bulbLitImg from '../assets/bulb_lit.png';
+import valveSwitchImg from '../assets/valve_switch.png';
+import valveDiodeImg from '../assets/valve_diode.png';
 
 interface TileViewProps {
   tile: Tile;
@@ -36,6 +41,39 @@ export const TileView: React.FC<TileViewProps> = ({
   const activePorts = useMemo(() => getTilePorts(tile), [tile]);
   const flower = useMemo(() => getFlowerForLevel(levelId), [levelId]);
 
+  const longPressTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isLongPressTriggered = React.useRef<boolean>(false);
+
+  const startPress = () => {
+    isLongPressTriggered.current = false;
+    if (longPressTimerRef.current) clearTimeout(longPressTimerRef.current);
+    longPressTimerRef.current = setTimeout(() => {
+      isLongPressTriggered.current = true;
+      onLongPressStart?.();
+    }, 450);
+  };
+
+  const endPress = () => {
+    if (longPressTimerRef.current) {
+      clearTimeout(longPressTimerRef.current);
+      longPressTimerRef.current = null;
+    }
+    if (isLongPressTriggered.current) {
+      onLongPressEnd?.();
+    }
+  };
+
+  const handleClick = () => {
+    if (isLongPressTriggered.current) {
+      isLongPressTriggered.current = false;
+      return;
+    }
+    if (isRotatable) {
+      haptics.tapLight();
+      onClick(tile);
+    }
+  };
+
   // Color tokens for Sacred Spring & Jade Aqueducts
   const unpoweredPipe = '#3a5043'; // Aged mossy jade groove
   const poweredPipe = '#0d9488';   // Clear emerald water canal
@@ -49,16 +87,13 @@ export const TileView: React.FC<TileViewProps> = ({
 
   return (
     <div
-      onClick={() => {
-        if (isRotatable) {
-          haptics.tapLight();
-          onClick(tile);
-        }
-      }}
-      onMouseDown={() => onLongPressStart?.()}
-      onMouseUp={() => onLongPressEnd?.()}
-      onTouchStart={() => onLongPressStart?.()}
-      onTouchEnd={() => onLongPressEnd?.()}
+      onClick={handleClick}
+      onMouseDown={startPress}
+      onMouseUp={endPress}
+      onMouseLeave={endPress}
+      onTouchStart={startPress}
+      onTouchEnd={endPress}
+      onTouchCancel={endPress}
       className={`relative w-full aspect-square rounded-[14px] sm:rounded-[20px] select-none flex items-center justify-center transition-colors duration-200 ${
         tile.type === 'empty'
           ? 'bg-[#e2e9dd]/70'
@@ -92,63 +127,15 @@ export const TileView: React.FC<TileViewProps> = ({
             />
             <circle cx="70" cy="40" r="3" fill="#fef08a" />
 
-            {/* Mossy stone pedestal */}
-            <rect
-              x="12"
-              y="18"
-              width="44"
-              height="44"
-              rx="12"
-              fill="#1e3a30"
-              stroke="#132720"
-              strokeWidth="2.5"
-            />
-            {/* Inner Spring Pool */}
-            <circle
-              cx="34"
-              cy="40"
-              r="17"
-              fill="#064e3b"
-              stroke="#059669"
-              strokeWidth="2"
-            />
-            {/* Swirling Spring Ripples */}
-            <circle
-              cx="34"
-              cy="40"
-              r="12"
-              fill="#0ea5e9"
-              opacity="0.3"
-              className="animate-pulse"
-            />
-            <circle
-              cx="34"
-              cy="40"
-              r="7"
-              fill="#38bdf8"
-            />
-            <circle
-              cx="32"
-              cy="38"
-              r="2.5"
-              fill="#ffffff"
-            />
-
-            {/* Droplet emblem on spring basin */}
-            <path
-              d="M34 29 Q 31 33 34 37 Q 37 33 34 29 Z"
-              fill="#ffffff"
-              opacity="0.9"
-            />
-
-            {/* Jade outlet collar */}
-            <rect
-              x="54"
-              y="32"
-              width="7"
-              height="16"
-              rx="2.5"
-              fill="#10b981"
+            {/* Sacred Spring Eye Totem */}
+            <image
+              href={springSourceImg}
+              x="8"
+              y="10"
+              width="60"
+              height="60"
+              preserveAspectRatio="xMidYMid meet"
+              className="drop-shadow-md"
             />
           </svg>
         </div>
@@ -157,55 +144,46 @@ export const TileView: React.FC<TileViewProps> = ({
       {/* Flower Bud / Blooming Flower Tile (Goal) */}
       {tile.type === 'bulb' && (
         <div className="absolute inset-0 w-full h-full overflow-visible pointer-events-none flex items-center justify-center">
-          <svg viewBox="0 0 80 80" className="w-full h-full overflow-visible">
-            {/* Incoming aqueduct conduit from left neighbor (-5 to 28) */}
-            <path
-              d="M-5 40h33"
-              stroke={pipeColor}
-              strokeWidth="11"
-              strokeLinecap="round"
+          {/* Decorative Jade Base Ring */}
+          <svg viewBox="0 0 80 80" className="w-full h-full overflow-visible absolute inset-0">
+            <circle
+              cx="40"
+              cy="40"
+              r="28"
+              fill={isLit ? '#e6fcf1' : '#f0f5ee'}
+              stroke={isLit ? '#10b981' : '#bacbbb'}
+              strokeWidth="2"
+              strokeDasharray={isLit ? 'none' : '4 3'}
             />
-            {isPowered && (
-              <>
-                <path
-                  d="M-5 40h33"
-                  stroke={poweredWaterCore}
-                  strokeWidth="3.5"
-                  strokeDasharray="6 4"
-                  className="animate-[dash_1s_linear_infinite]"
-                />
-                <circle cx="12" cy="40" r="3" fill="#fef08a" />
-              </>
+            {isLit && (
+              <circle
+                cx="40"
+                cy="40"
+                r="34"
+                fill="none"
+                stroke="#34d399"
+                strokeWidth="1"
+                strokeOpacity="0.5"
+                className="animate-ping"
+                style={{ animationDuration: '3s' }}
+              />
             )}
-
-            {/* Aqueduct stone socket base */}
-            <rect
-              x="25"
-              y="33"
-              width="9"
-              height="14"
-              rx="3"
-              fill={isLit ? '#134e4a' : '#334139'}
-            />
           </svg>
 
-          {/* Centered Flower Graphic */}
-          <div className="absolute left-[26px] sm:left-[28px] top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none">
+          {/* High-definition Xianxia Flower Asset */}
+          <div className="relative z-10 w-full h-full flex items-center justify-center pointer-events-none">
             {isLit ? (
-              <FlowerIcon
-                isBlooming={true}
-                petalColor={flower.petalColor}
-                glowColor={flower.glowColor}
-                coreColor={flower.coreColor}
-                shape={flower.shape}
-                size={48}
-                className="animate-in zoom-in-75 duration-300"
+              <img
+                src={bulbLitImg}
+                alt={flower.name || 'Blooming Lotus'}
+                className="w-[88%] h-[88%] object-contain drop-shadow-[0_0_14px_rgba(52,211,153,0.8)] animate-in zoom-in-75 duration-300"
+                style={{ filter: `drop-shadow(0 0 10px ${flower.glowColor || '#34d399'})` }}
               />
             ) : (
-              <FlowerIcon
-                isBlooming={false}
-                petalColor={flower.petalColor}
-                size={34}
+              <img
+                src={bulbUnlitImg}
+                alt="Sleeping Bud"
+                className="w-[72%] h-[72%] object-contain drop-shadow-md opacity-95 transition-transform duration-300 hover:scale-105"
               />
             )}
           </div>
@@ -222,34 +200,42 @@ export const TileView: React.FC<TileViewProps> = ({
             {/* 1. Straight Aqueduct Line */}
             {tile.type === 'line' && (
               <>
-                <path
-                  d="M-5 40h90"
-                  stroke={pipeColor}
-                  strokeWidth="11"
-                  strokeLinecap="round"
-                />
+                {/* Outer carved jadeite channel groove */}
+                <path d="M-5 40h90" stroke="#223328" strokeWidth="15" strokeLinecap="round" />
+                {/* Polished inner jade pipe */}
+                <path d="M-5 40h90" stroke={pipeColor} strokeWidth="10.5" strokeLinecap="round" />
                 {isPowered && (
                   <path
                     d="M-5 40h90"
                     stroke={poweredWaterCore}
-                    strokeWidth="3.5"
+                    strokeWidth="3.8"
                     strokeDasharray="6 4"
                     strokeLinecap="round"
                     className="animate-[dash_1s_linear_infinite]"
                   />
                 )}
-                <circle cx="16" cy="40" r="3" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
-                <circle cx="64" cy="40" r="3" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
+                <circle cx="16" cy="40" r="3.2" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
+                <circle cx="64" cy="40" r="3.2" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
               </>
             )}
 
             {/* 2. Corner / Elbow Aqueduct */}
             {tile.type === 'corner' && (
               <>
+                {/* Outer carved jadeite channel groove */}
+                <path
+                  d="M40 85V40h45"
+                  stroke="#223328"
+                  strokeWidth="15"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                />
+                {/* Polished inner jade pipe */}
                 <path
                   d="M40 85V40h45"
                   stroke={pipeColor}
-                  strokeWidth="11"
+                  strokeWidth="10.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   fill="none"
@@ -258,7 +244,7 @@ export const TileView: React.FC<TileViewProps> = ({
                   <path
                     d="M40 85V40h45"
                     stroke={poweredWaterCore}
-                    strokeWidth="3.5"
+                    strokeWidth="3.8"
                     strokeDasharray="6 4"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -266,19 +252,29 @@ export const TileView: React.FC<TileViewProps> = ({
                     className="animate-[dash_1s_linear_infinite]"
                   />
                 )}
-                <circle cx="40" cy="40" r="3.5" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
-                <circle cx="64" cy="40" r="3" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
-                <circle cx="40" cy="64" r="3" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
+                <circle cx="40" cy="40" r="3.8" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
+                <circle cx="64" cy="40" r="3.2" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
+                <circle cx="40" cy="64" r="3.2" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
               </>
             )}
 
             {/* 3. T-Shape Junction Aqueduct */}
             {tile.type === 't_shape' && (
               <>
+                {/* Outer carved jadeite channel groove */}
+                <path
+                  d="M-5 40h90 M40 40v45"
+                  stroke="#223328"
+                  strokeWidth="15"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                />
+                {/* Polished inner jade pipe */}
                 <path
                   d="M-5 40h90 M40 40v45"
                   stroke={pipeColor}
-                  strokeWidth="11"
+                  strokeWidth="10.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   fill="none"
@@ -287,7 +283,7 @@ export const TileView: React.FC<TileViewProps> = ({
                   <path
                     d="M-5 40h90 M40 40v45"
                     stroke={poweredWaterCore}
-                    strokeWidth="3.5"
+                    strokeWidth="3.8"
                     strokeDasharray="6 4"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -295,20 +291,29 @@ export const TileView: React.FC<TileViewProps> = ({
                     className="animate-[dash_1s_linear_infinite]"
                   />
                 )}
-                <circle cx="40" cy="40" r="3.5" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
-                <circle cx="16" cy="40" r="3" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
-                <circle cx="64" cy="40" r="3" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
-                <circle cx="40" cy="64" r="3" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
+                <circle cx="40" cy="40" r="3.8" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
+                <circle cx="16" cy="40" r="3.2" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
+                <circle cx="64" cy="40" r="3.2" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
+                <circle cx="40" cy="64" r="3.2" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
               </>
             )}
 
             {/* 4. Cross 4-Way Aqueduct */}
             {tile.type === 'cross' && (
               <>
+                {/* Outer carved jadeite channel groove */}
+                <path
+                  d="M-5 40h90 M40 -5v90"
+                  stroke="#223328"
+                  strokeWidth="15"
+                  strokeLinecap="round"
+                  fill="none"
+                />
+                {/* Polished inner jade pipe */}
                 <path
                   d="M-5 40h90 M40 -5v90"
                   stroke={pipeColor}
-                  strokeWidth="11"
+                  strokeWidth="10.5"
                   strokeLinecap="round"
                   fill="none"
                 />
@@ -316,73 +321,111 @@ export const TileView: React.FC<TileViewProps> = ({
                   <path
                     d="M-5 40h90 M40 -5v90"
                     stroke={poweredWaterCore}
-                    strokeWidth="3.5"
+                    strokeWidth="3.8"
                     strokeDasharray="6 4"
                     strokeLinecap="round"
                     fill="none"
                     className="animate-[dash_1s_linear_infinite]"
                   />
                 )}
-                <circle cx="40" cy="40" r="4" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
-                <circle cx="16" cy="40" r="3" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
-                <circle cx="64" cy="40" r="3" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
-                <circle cx="40" cy="16" r="3" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
-                <circle cx="40" cy="64" r="3" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
+                <circle cx="40" cy="40" r="4.2" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
+                <circle cx="16" cy="40" r="3.2" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
+                <circle cx="64" cy="40" r="3.2" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
+                <circle cx="40" cy="16" r="3.2" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
+                <circle cx="40" cy="64" r="3.2" fill={rivetColor} stroke={isPowered ? '#0d9488' : '#2d4036'} strokeWidth="1" />
               </>
             )}
 
             {/* 5. Jade Sluice Gate (Switch) */}
             {tile.type === 'switch' && (
               <>
-                <path d="M-5 40h33" stroke={pipeColor} strokeWidth="11" strokeLinecap="round" />
-                <path d="M52 40h33" stroke={pipeColor} strokeWidth="11" strokeLinecap="round" />
-                <circle cx="28" cy="40" r="4.5" fill="#475569" />
-                <circle cx="52" cy="40" r="4.5" fill="#475569" />
+                {/* Conduits leading into switch */}
+                <path d="M-5 40h24" stroke="#223328" strokeWidth="15" strokeLinecap="round" />
+                <path d="M-5 40h24" stroke={pipeColor} strokeWidth="10.5" strokeLinecap="round" />
+                <path d="M60 40h25" stroke="#223328" strokeWidth="15" strokeLinecap="round" />
+                <path d="M60 40h25" stroke={pipeColor} strokeWidth="10.5" strokeLinecap="round" />
 
-                {/* Sluice gate blade */}
+                {/* Sluice Gate Sprite Icon with mechanical toggle animation */}
+                <g
+                  style={{
+                    transform: tile.switchClosed === false ? 'rotate(45deg)' : 'rotate(0deg)',
+                    transformOrigin: '40px 40px',
+                    transition: 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  }}
+                >
+                  <image
+                    href={valveSwitchImg}
+                    x="14"
+                    y="14"
+                    width="52"
+                    height="52"
+                    preserveAspectRatio="xMidYMid meet"
+                    className="drop-shadow-md"
+                  />
+                </g>
+
+                {/* Open/Closed Water Flow Connection */}
                 {tile.switchClosed !== false ? (
-                  <path
-                    d="M28 40h24"
-                    stroke={isPowered ? '#10b981' : '#3a5043'}
-                    strokeWidth="7"
-                    strokeLinecap="round"
-                  />
+                  <>
+                    <path
+                      d="M19 40h42"
+                      stroke={isPowered ? '#0d9488' : '#3a5043'}
+                      strokeWidth="7"
+                      strokeLinecap="round"
+                    />
+                    {isPowered && (
+                      <path
+                        d="M19 40h42"
+                        stroke={poweredWaterCore}
+                        strokeWidth="3.2"
+                        strokeDasharray="4 3"
+                        strokeLinecap="round"
+                        className="animate-[dash_1s_linear_infinite]"
+                      />
+                    )}
+                    {/* Emerald active seal indicator */}
+                    <circle cx="40" cy="63" r="3.5" fill="#10b981" stroke="#ffffff" strokeWidth="1" />
+                  </>
                 ) : (
-                  <path
-                    d="M28 40L48 24"
-                    stroke="#f43f5e"
-                    strokeWidth="7"
-                    strokeLinecap="round"
-                  />
+                  <>
+                    {/* Ancient bronze & cinnabar barrier seal blocking channel */}
+                    <rect x="36" y="27" width="8" height="26" rx="2" fill="#7f1d1d" stroke="#f43f5e" strokeWidth="1.5" />
+                    <line x1="40" y1="29" x2="40" y2="51" stroke="#fecdd3" strokeWidth="1.5" strokeLinecap="round" />
+                    <circle cx="40" cy="63" r="3.5" fill="#f43f5e" stroke="#ffffff" strokeWidth="1" />
+                  </>
                 )}
-
-                <circle
-                  cx="40"
-                  cy="56"
-                  r="3.5"
-                  fill={tile.switchClosed !== false ? '#10b981' : '#f43f5e'}
-                />
               </>
             )}
 
             {/* 6. One-Way Flow Water Valve (Diode) */}
             {tile.type === 'diode' && (
               <>
-                <path d="M-5 40h90" stroke={pipeColor} strokeWidth="11" strokeLinecap="round" />
-                <rect x="25" y="27" width="30" height="26" rx="6" fill="#1e293b" />
-                <polygon
-                  points="32,32 32,48 44,40"
-                  fill={isPowered ? '#38bdf8' : '#64748b'}
+                {/* Channel Conduits */}
+                <path d="M-5 40h90" stroke="#223328" strokeWidth="15" strokeLinecap="round" />
+                <path d="M-5 40h90" stroke={pipeColor} strokeWidth="10.5" strokeLinecap="round" />
+
+                {/* Diode Arrow Shuttle Sprite Icon */}
+                <image
+                  href={valveDiodeImg}
+                  x="12"
+                  y="12"
+                  width="56"
+                  height="56"
+                  preserveAspectRatio="xMidYMid meet"
+                  className="drop-shadow-md"
                 />
-                <line
-                  x1="45"
-                  y1="32"
-                  x2="45"
-                  y2="48"
-                  stroke={isPowered ? '#38bdf8' : '#64748b'}
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                />
+
+                {/* Flow Stream */}
+                {isPowered && (
+                  <path
+                    d="M-5 40h90"
+                    stroke={poweredWaterCore}
+                    strokeWidth="3.8"
+                    strokeDasharray="6 4"
+                    strokeLinecap="round"
+                    className="animate-[dash_1s_linear_infinite]"
+                  />
+                )}
               </>
             )}
           </svg>

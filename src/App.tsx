@@ -44,6 +44,7 @@ import {
   trackUndoOperation,
   loadUnlockedAchievements,
 } from './utils/achievements';
+import bgMainImg from './assets/bg_main.jpg';
 
 function getTileActionDescription(tile: Tile, action: 'rotate' | 'switch'): string {
   if (action === 'switch') {
@@ -505,7 +506,15 @@ export default function App() {
   }, [activeLevelConfig, handleUndo, handleRedo]);
 
   return (
-    <div className="h-[100dvh] max-h-[100dvh] overflow-hidden overscroll-none select-none bg-[#edf2e7] text-[#172a23] flex flex-col justify-between selection:bg-teal-200">
+    <div
+      className="h-[100dvh] max-h-[100dvh] overflow-hidden overscroll-none select-none text-[#172a23] flex flex-col justify-between selection:bg-teal-200 relative bg-[#eef3eb]"
+      style={{
+        backgroundImage: `linear-gradient(to bottom, rgba(245,248,242,0.55) 0%, rgba(240,246,238,0.65) 50%, rgba(225,236,220,0.78) 100%), url(${bgMainImg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
       {/* Top Header */}
       <GameHeader
         currentView={currentView}

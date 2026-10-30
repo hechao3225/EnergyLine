@@ -8,6 +8,21 @@ import { getAllFlowers, getFlowerForLevel } from '../data/flowers';
 import { FlowerEntry, FlowerRarity } from '../types/flower';
 import { FlowerIcon } from './FlowerIcon';
 import { X, Sparkles, Droplets, Trophy, Lock, ChevronLeft, ChevronRight, BookOpen } from 'lucide-react';
+import bulbLitImg from '../assets/bulb_lit.png';
+import bulbUnlitImg from '../assets/bulb_unlit.png';
+import chapterBadge1 from '../assets/chapter_badge_1.png';
+import chapterBadge2 from '../assets/chapter_badge_2.png';
+import chapterBadge3 from '../assets/chapter_badge_3.png';
+import chapterBadge4 from '../assets/chapter_badge_4.png';
+import chapterBadge5 from '../assets/chapter_badge_5.png';
+
+const CHAPTER_BADGES: Record<number, string> = {
+  1: chapterBadge1,
+  2: chapterBadge2,
+  3: chapterBadge3,
+  4: chapterBadge4,
+  5: chapterBadge5,
+};
 
 interface FloraCompendiumModalProps {
   isOpen: boolean;
@@ -113,14 +128,14 @@ export const FloraCompendiumModal: React.FC<FloraCompendiumModalProps> = ({
           </div>
 
           {/* Chapter Selector Filter */}
-          <div className="flex items-center gap-1 overflow-x-auto py-1 scrollbar-none text-[11px]">
+          <div className="flex items-center gap-1.5 overflow-x-auto py-1 scrollbar-none text-[11px]">
             {[
-              { id: 0, label: '全部花谱' },
-              { id: 1, label: '一·地脉' },
-              { id: 2, label: '二·巨干' },
-              { id: 3, label: '三·繁枝' },
-              { id: 4, label: '四·云海' },
-              { id: 5, label: '五·天巅' },
+              { id: 0, label: '全部花谱', badge: null },
+              { id: 1, label: '一·地脉', badge: chapterBadge1 },
+              { id: 2, label: '二·巨干', badge: chapterBadge2 },
+              { id: 3, label: '三·繁枝', badge: chapterBadge3 },
+              { id: 4, label: '四·云海', badge: chapterBadge4 },
+              { id: 5, label: '五·天巅', badge: chapterBadge5 },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -128,13 +143,16 @@ export const FloraCompendiumModal: React.FC<FloraCompendiumModalProps> = ({
                   setSelectedChapter(tab.id);
                   setCurrentPage(1);
                 }}
-                className={`px-2.5 py-1 rounded-xl whitespace-nowrap transition-all cursor-pointer font-medium ${
+                className={`px-2.5 py-1 rounded-xl whitespace-nowrap transition-all cursor-pointer font-medium flex items-center gap-1.5 ${
                   selectedChapter === tab.id
-                    ? 'bg-emerald-500 text-white shadow-xs font-bold'
+                    ? 'bg-emerald-500 text-white shadow-xs font-bold ring-1 ring-emerald-300/40'
                     : 'bg-white/5 text-emerald-200/70 hover:bg-white/10'
                 }`}
               >
-                {tab.label}
+                {tab.badge && (
+                  <img src={tab.badge} alt="" className="w-3.5 h-3.5 object-contain shrink-0" />
+                )}
+                <span>{tab.label}</span>
               </button>
             ))}
           </div>
@@ -173,21 +191,20 @@ export const FloraCompendiumModal: React.FC<FloraCompendiumModalProps> = ({
                   {/* Visual Center Flower Icon */}
                   <div className="my-1.5 flex items-center justify-center">
                     {isUnlocked ? (
-                      <FlowerIcon
-                        isBlooming={true}
-                        petalColor={flower.petalColor}
-                        glowColor={flower.glowColor}
-                        coreColor={flower.coreColor}
-                        shape={flower.shape}
-                        size={36}
-                      />
+                      <div className="relative w-10 h-10 flex items-center justify-center">
+                        <img
+                          src={bulbLitImg}
+                          alt={flower.name}
+                          className="w-full h-full object-contain"
+                          style={{ filter: `drop-shadow(0 0 7px ${flower.glowColor || '#34d399'})` }}
+                        />
+                      </div>
                     ) : (
-                      <div className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-                        <FlowerIcon
-                          isBlooming={false}
-                          petalColor="#475f50"
-                          size={24}
-                          showDew={false}
+                      <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center p-1">
+                        <img
+                          src={bulbUnlitImg}
+                          alt="沉睡未醒"
+                          className="w-full h-full object-contain opacity-55 grayscale-[35%]"
                         />
                       </div>
                     )}
@@ -258,24 +275,42 @@ export const FloraCompendiumModal: React.FC<FloraCompendiumModalProps> = ({
               </div>
 
               {/* Large Flower Showcase */}
-              <div className="my-2 p-3 rounded-full bg-black/30 border border-emerald-500/30">
-                {clearedSet.has(activeFlower.id) ? (
-                  <FlowerIcon
-                    isBlooming={true}
-                    petalColor={activeFlower.petalColor}
-                    glowColor={activeFlower.glowColor}
-                    coreColor={activeFlower.coreColor}
-                    shape={activeFlower.shape}
-                    size={80}
+              <div className="relative my-3 w-28 h-28 flex items-center justify-center">
+                {/* Background Altar Halo */}
+                <div
+                  className="absolute inset-0 rounded-full blur-lg opacity-40 animate-pulse"
+                  style={{
+                    backgroundColor: clearedSet.has(activeFlower.id)
+                      ? (activeFlower.glowColor || '#10b981')
+                      : '#3a5043'
+                  }}
+                />
+                <div className="relative z-10 w-full h-full rounded-3xl bg-gradient-to-b from-[#103326] to-[#071912] border-2 border-emerald-500/40 p-2 shadow-2xl flex items-center justify-center">
+                  {clearedSet.has(activeFlower.id) ? (
+                    <img
+                      src={bulbLitImg}
+                      alt={activeFlower.name}
+                      className="w-full h-full object-contain animate-in zoom-in-75 duration-300"
+                      style={{
+                        filter: `drop-shadow(0 0 14px ${activeFlower.glowColor || '#34d399'}) drop-shadow(0 0 4px ${activeFlower.petalColor || '#10b981'})`
+                      }}
+                    />
+                  ) : (
+                    <img
+                      src={bulbUnlitImg}
+                      alt="沉睡未醒"
+                      className="w-[85%] h-[85%] object-contain opacity-70 grayscale-[25%]"
+                    />
+                  )}
+                </div>
+                {/* Chapter Medallion floating */}
+                <div className="absolute -bottom-2 -right-2 z-20 w-8 h-8 rounded-full drop-shadow-md">
+                  <img
+                    src={CHAPTER_BADGES[activeFlower.chapter] || chapterBadge1}
+                    alt={activeFlower.chapterName}
+                    className="w-full h-full object-contain"
                   />
-                ) : (
-                  <FlowerIcon
-                    isBlooming={false}
-                    petalColor="#475f50"
-                    size={80}
-                    showDew={false}
-                  />
-                )}
+                </div>
               </div>
 
               {/* Title & Alias */}

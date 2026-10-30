@@ -7,6 +7,7 @@ import React, { useMemo } from 'react';
 import { SimulationResult, Tile } from '../types/game';
 import { TileView } from './TileView';
 import { computeActiveWaterPaths } from '../utils/flowPaths';
+import boardAltarImg from '../assets/board_altar.png';
 
 interface GameBoardProps {
   tiles: Tile[];
@@ -61,53 +62,62 @@ export const GameBoard: React.FC<GameBoardProps> = ({
   return (
     <div className="flex flex-col items-center justify-center w-full mx-auto select-none">
       {/* 6x6 Tile Grid dynamically scaled for Android portrait 21:9 & 19.5:9 phone screens */}
-      <div className="relative w-full max-w-[min(calc(100vw-24px),calc(100dvh-260px),410px)] aspect-square">
-        <div
-          className="w-full h-full grid gap-1 sm:gap-2 p-2 sm:p-3.5 rounded-2xl sm:rounded-[26px] bg-[#edf4e9] border-2 border-[#cfe0cb] shadow-[inset_0_2px_12px_rgba(16,185,129,0.06)] overflow-hidden"
-          style={{
-            gridTemplateColumns: `repeat(${gridCols}, minmax(0, 1fr))`,
-          }}
-        >
-          {tileGrid.map((rowArr, r) =>
-            rowArr.map((tile, c) => {
-              if (!tile) {
+      <div className="relative w-full max-w-[min(calc(100vw-20px),calc(100dvh-250px),420px)] aspect-square flex items-center justify-center select-none">
+        {/* Decorative White Jade Altar Frame & Base */}
+        <img
+          src={boardAltarImg}
+          alt="Altar Board Frame"
+          className="absolute inset-0 w-full h-full pointer-events-none z-0 object-fill drop-shadow-xl"
+        />
+
+        {/* Inner Altar Board & Cells */}
+        <div className="relative z-10 w-[84%] h-[84%] flex items-center justify-center">
+          <div
+            className="w-full h-full grid gap-1 sm:gap-1.5 p-1 rounded-xl overflow-hidden"
+            style={{
+              gridTemplateColumns: `repeat(${gridCols}, minmax(0, 1fr))`,
+            }}
+          >
+            {tileGrid.map((rowArr, r) =>
+              rowArr.map((tile, c) => {
+                if (!tile) {
+                  return (
+                    <div
+                      key={`empty-${r}-${c}`}
+                      className="w-full aspect-square rounded-[10px] sm:rounded-xl bg-[#e5ebe0]/40 flex items-center justify-center"
+                    >
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#9eb1a4]" />
+                    </div>
+                  );
+                }
+
+                const isPowered = simulation.poweredTileIds.has(tile.id);
+                const isLit = tile.type === 'bulb' && simulation.litBulbIds.has(tile.id);
+
                 return (
-                  <div
-                    key={`empty-${r}-${c}`}
-                    className="w-full aspect-square rounded-[12px] sm:rounded-2xl bg-[#e5ebe0]/40 flex items-center justify-center"
-                  >
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#9eb1a4]" />
-                  </div>
+                  <TileView
+                    key={tile.id}
+                    tile={tile}
+                    isPowered={isPowered}
+                    isLit={isLit}
+                    isPeekActive={isPeekActive}
+                    onClick={onTileClick}
+                    onLongPressStart={onLongPressStart}
+                    onLongPressEnd={onLongPressEnd}
+                    interactive={interactive}
+                    levelId={levelId}
+                  />
                 );
-              }
+              })
+            )}
+          </div>
 
-              const isPowered = simulation.poweredTileIds.has(tile.id);
-              const isLit = tile.type === 'bulb' && simulation.litBulbIds.has(tile.id);
-
-              return (
-                <TileView
-                  key={tile.id}
-                  tile={tile}
-                  isPowered={isPowered}
-                  isLit={isLit}
-                  isPeekActive={isPeekActive}
-                  onClick={onTileClick}
-                  onLongPressStart={onLongPressStart}
-                  onLongPressEnd={onLongPressEnd}
-                  interactive={interactive}
-                  levelId={levelId}
-                />
-              );
-            })
-          )}
-        </div>
-
-        {/* Sacred Spring Water Flow & Infusion Particle Layer */}
-        <svg
-          className="pointer-events-none absolute inset-0 z-20 w-full h-full p-2 sm:p-3.5"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
+          {/* Sacred Spring Water Flow & Infusion Particle Layer */}
+          <svg
+            className="pointer-events-none absolute inset-0 z-20 w-full h-full p-1.5 sm:p-2"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+          >
           <defs>
             <linearGradient id="springFlowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#38bdf8" />
@@ -231,6 +241,7 @@ export const GameBoard: React.FC<GameBoardProps> = ({
               })}
           </div>
         )}
+        </div>
       </div>
 
       {/* Subtle Caption at Bottom */}
