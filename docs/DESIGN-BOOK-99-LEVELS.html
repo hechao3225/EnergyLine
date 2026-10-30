@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《神树灵泉 · 唤醒百花》经典99关全关卡重构设计书</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #061a14;
+      --bg-card: #0a2920;
+      --bg-surface: #10382d;
+      --primary: #34d399;
+      --primary-light: #6ee7b7;
+      --primary-dark: #059669;
+      --accent: #38bdf8;
+      --gold: #f59e0b;
+      --gold-light: #fef08a;
+      --text-main: #f0fdf4;
+      --text-muted: #9ca3af;
+      --border-color: rgba(52, 211, 153, 0.25);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+      line-height: 1.75;
+      padding: 2rem 1rem;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(52, 211, 153, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.06) 0%, transparent 40%);
+      background-attachment: fixed;
+    }
+    .wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 3rem 3.5rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 20px rgba(52, 211, 153, 0.1);
+    }
+    @media (max-width: 768px) {
+      .wrapper {
+        padding: 1.5rem 1rem;
+      }
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Noto Serif SC', serif;
+      color: var(--text-main);
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    h1 {
+      font-size: 2.2rem;
+      color: var(--primary-light);
+      text-align: center;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 25px rgba(52, 211, 153, 0.4);
+    }
+    h2 {
+      font-size: 1.6rem;
+      border-bottom: 2px solid var(--primary-dark);
+      padding-bottom: 0.5rem;
+      color: var(--primary);
+      margin-top: 3rem;
+    }
+    h3 {
+      font-size: 1.3rem;
+      color: var(--accent);
+      margin-top: 2rem;
+    }
+    h4 {
+      font-size: 1.1rem;
+      color: var(--gold-light);
+    }
+    p {
+      margin-bottom: 1.25rem;
+      color: #e2e8f0;
+      font-size: 1.02rem;
+    }
+    blockquote {
+      border-left: 4px solid var(--primary);
+      background: var(--bg-surface);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+      color: var(--gold-light);
+    }
+    ul, ol {
+      margin-left: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    li {
+      margin-bottom: 0.4rem;
+    }
+    a {
+      color: var(--primary-light);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--primary);
+      transition: all 0.2s ease;
+    }
+    a:hover {
+      color: var(--accent);
+      border-bottom-style: solid;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: rgba(0, 0, 0, 0.4);
+      color: var(--accent);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    pre {
+      background: #020d0a;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+      border: none;
+      color: #a7f3d0;
+      font-size: 0.95rem;
+    }
+    .table-container {
+      overflow-x: auto;
+      margin: 2rem 0;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: rgba(0, 0, 0, 0.25);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      text-align: left;
+    }
+    th, td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid rgba(52, 211, 153, 0.15);
+    }
+    th {
+      background-color: var(--bg-surface);
+      color: var(--primary-light);
+      font-weight: 600;
+      font-family: 'Noto Serif SC', serif;
+      white-space: nowrap;
+    }
+    tr:hover {
+      background-color: rgba(52, 211, 153, 0.05);
+    }
+    hr {
+      border: none;
+      border-top: 1px solid var(--border-color);
+      margin: 3rem 0;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    .math {
+      font-family: 'Times New Roman', Times, serif;
+      color: var(--gold-light);
+    }
+    .footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h1 id="神树灵泉-唤醒百花-经典-99-关全关卡重构设计书">《神树灵泉 · 唤醒百花》经典 99 关全关卡重构设计书</h1>
+<h2 id="99-level-master-game-design-algorithmic-blueprint">（99-Level Master Game Design & Algorithmic Blueprint）</h2>
+<blockquote><strong>文档版本</strong>：v2.0.0 (Master Production Edition)  </blockquote>
+<blockquote><strong>适用工程</strong>：<code>E:\MyWork\AI\GameAutoMaker\Projects\Energy</code>  </blockquote>
+<blockquote><strong>面向平台</strong>：Android / H5 (Vite 8 + React 19 + Capacitor 8)  </blockquote>
+<blockquote><strong>包名标识</strong>：<code>com.sacredtree.waterflow</code>  </blockquote>
+<blockquote><strong>设计状态</strong>：已批准并作为 99 关重构与算法管线唯一基准  </blockquote>
+<hr />
+<h2 id="目录-table-of-contents">目录 (Table of Contents)</h2>
+<p>1. <a href="#1-开篇世界观背景与体验心流">开篇：世界观背景与体验心流</a></p>
+<p>2. <a href="#2-核心机制矩阵与元件字典">核心机制矩阵与元件字典</a></p>
+<p>3. <a href="#3-五大篇章难度阶梯与心流演进模型">五大篇章难度阶梯与心流演进模型</a></p>
+<p>4. <a href="#4-经典-99-关全关卡详细设计清单">经典 99 关全关卡详细设计清单 (Levels 01 - 99)</a></p>
+<ul>
+<li><a href="#第一卷地脉之根-levels-01---20">第一卷：地脉之根 (Levels 01 - 20)</a></li>
+<li><a href="#第二卷巨木之干-levels-21---40">第二卷：巨木之干 (Levels 21 - 40)</a></li>
+<li><a href="#第三卷苍翠繁枝-levels-41---60">第三卷：苍翠繁枝 (Levels 41 - 60)</a></li>
+<li><a href="#第四卷云海天桥-levels-61---80">第四卷：云海天桥 (Levels 61 - 80)</a></li>
+<li><a href="#第五卷神树之巅-levels-81---99">第五卷：神树之巅 (Levels 81 - 99)</a></li>
+<p>5. <a href="#5-关卡生成与数学验证算法架构">关卡生成与数学验证算法架构</a></p>
+<li><a href="#51-逆向拓扑生成算法">5.1 逆向拓扑生成算法 (Reverse Tree Growth)</a></li>
+<li><a href="#52-多源有向图连通求解器">5.2 多源有向图连通求解器 (Multi-Source Directed Solver)</a></li>
+<li><a href="#53-唯一解与歧义过滤算法">5.3 唯一解与歧义过滤算法 (Uniqueness & Ambiguity Pruning)</a></li>
+<li><a href="#54-确定性扰动混淆算法">5.4 确定性扰动混淆算法 (Deterministic Scrambling)</a></li>
+<li><a href="#55-步数预算与星级难度公式">5.5 步数预算与星级难度公式 (Par Step & Scoring Model)</a></li>
+<p>6. <a href="#6-uiux操作反馈与动效时序">UI/UX、操作反馈与动效时序</a></p>
+<p>7. <a href="#7-数值平衡与算例推演">数值平衡与算例推演</a></p>
+<p>8. <a href="#8-验收回归测试与-qa-自动化规范">验收、回归测试与 QA 自动化规范</a></p>
+</ul>
+<hr />
+<h2 id="1-开篇-世界观背景与体验心流">1. 开篇：世界观背景与体验心流</h2>
+<h3 id="1-1-世界观背景">1.1 世界观背景</h3>
+<p>天地初开，混沌孕育出一株擎天巨木——<strong>通天世界树</strong>。它的根系深扎九幽地脉，自源头涌出永不枯竭的生命灵泉；巨干躯壳之内雕琢有翡翠玉石水脉，分流流淌，维系着神树九十九重生灵秘境与枝头奇花仙草。</p>
+<p>然而万载之前的一次天地异动，震落了神树躯干内的玉石水渠，灵泉断流，干涸的阴影自树根蔓延，九十九株天地仙花相继枯萎陷入沉睡。</p>
+<p>玩家作为神树唯一的“守树灵仙”，手持乾坤玉指，穿行于地脉、巨干、繁枝、云海直至神树之巅，通过旋转玉石水渠、合拢灵脉闸阀、矫正单向流向，引导清冽活水重新灌溉枯萎仙蕾，唤醒九十九株天地灵葩，使通天神木重焕神辉！</p>
+<h3 id="1-2-现有痛点诊断与重构目标">1.2 现有痛点诊断与重构目标</h3>
+<ul>
+<li><strong>原版痛点</strong>：</li>
+<p>  1. <strong>难度断崖下跌</strong>：原版前 3 关具备良好的引导性，但第 4 关（对称十字）结构过简，难度不升反降；</p>
+<p>  2. <strong>中后期缺乏多元挑战</strong>：第 8~99 关全部依赖粗暴的单源简单随机 BFS 连通树，全盘都是“左边 1 个电源，右边几个灯泡”，缺乏地形障碍、缺乏诱饵管道、缺乏多水源交汇、开关与二极管沦为走过场装饰；</p>
+<p>  3. <strong>步数虚高无策略感</strong>：每关固定给予 40+ 步，玩家随意轮转即可蒙过，毫无解谜推理成就感。</p>
+<li><strong>重构目标</strong>：</li>
+<p>  1. <strong>前 3 关传承并精进</strong>：保留优秀的直管、弯管、T型三通教学，优化诱饵甄别；</p>
+<p>  2. <strong>从第 4 关起建立严谨的难度台阶</strong>：引入真正具备立体交叉意义的十字立交管、断裂岩壁（固定不可转地脉石）、高密度诱饵死管；</p>
+<p>  3. <strong>多机制体系化交融</strong>：</p>
+<li><strong>双灵泉/三灵泉协同 (Dual/Triple Sources)</strong>：多水源分工合作与跨道穿插；</li>
+<li><strong>灵脉闸阀互锁 (Switch Logic Interlocking)</strong>：多开关联动，控制关键分流支路；</li>
+<li><strong>极向二极管 (Diode Anti-Backflow)</strong>：防止回路倒灌短路与死锁；</li>
+<li><strong>固定地脉石 (Locked Natural Obstacles)</strong>：分割战术区域，形成天然回廊迷宫；</li>
+<p>  4. <strong>严苛的步数预算体系 (Par Steps)</strong>：建立三星最优解评价模型，给玩家极致的心流推理反馈。</p>
+</ul>
+<pre><code class="language-mermaid">flowchart LR
+    A["第一卷：地脉之根&lt;br/&gt;(L1-L20 基础与立交)"] --&gt; B["第二卷：巨木之干&lt;br/&gt;(L21-L40 灵闸与双源)"]
+    B --&gt; C["第三卷：苍翠繁枝&lt;br/&gt;(L41-L60 单向与回环)"]
+    C --&gt; D["第四卷：云海天桥&lt;br/&gt;(L61-L80 复合全要素)"]
+    D --&gt; E["第五卷：神树之巅&lt;br/&gt;(L81-L99 三源与终极矩阵)"]</code></pre>
+<hr />
+<h2 id="2-核心机制矩阵与元件字典">2. 核心机制矩阵与元件字典</h2>
+<p>盘面基于标准 <strong>6×6 灵脉网格（Grid）</strong>，坐标系为 <code>(row, col)</code>，其中 <code>row ∈ [0..5]</code>, <code>col ∈ [0..5]</code>。每个格子承载一个具体的灵脉元件。</p>
+<div class="table-container"><table>
+<thead><tr>
+<th>元件类型 (TileType)</th>
+<th>图形表征</th>
+<th>端口位掩码 (0° BasePorts)</th>
+<th>可交互行为</th>
+<th>核心作用与设计意图</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>灵泉水源 (battery/source)</strong></td>
+<td>翠玉涌泉水眼</td>
+<td><code>RIGHT</code> (0010) 或多向</td>
+<td>固化不可转 (<code>locked: true</code>)</td>
+<td>活水源头，向相邻已接通端口持续注入灵水粒子流。支持单源、双源与三源。</td>
+</tr>
+<tr>
+<td><strong>仙蕾花宝 (bulb/flower)</strong></td>
+<td>沉睡仙花花蕾</td>
+<td><code>ALL</code> (1111) 全向受流</td>
+<td>固化不可转 (<code>locked: true</code>)</td>
+<td>关卡达成目标。一旦获得水流注入立即绽放并触发花瓣光环。</td>
+</tr>
+<tr>
+<td><strong>直通玉管 (line)</strong></td>
+<td>平直翡翠水渠</td>
+<td>`LEFT \</td>
+<td>RIGHT` (1010)</td>
+<td>顺时针旋转 90°</td>
+<td>180° 对称双通管。只有水平 (0°) 与垂直 (90°) 两种功能态。</td>
+</tr>
+<tr>
+<td><strong>折角弯管 (corner)</strong></td>
+<td>90° 直角水弯</td>
+<td>`DOWN \</td>
+<td>RIGHT` (0110)</td>
+<td>顺时针旋转 90°</td>
+<td>转向核心件。具备 4 种独立功能朝向（0°, 90°, 180°, 270°）。</td>
+</tr>
+<tr>
+<td><strong>三通玉泉 (t_shape)</strong></td>
+<td>T 型分水枢纽</td>
+<td>`LEFT \</td>
+<td>RIGHT \</td>
+<td>DOWN`</td>
+<td>顺时针旋转 90°</td>
+<td>分流核心件。将一路水源分流至上下或左右两路，具备 4 种朝向。</td>
+</tr>
+<tr>
+<td><strong>十字立交 (cross)</strong></td>
+<td>4 向立体交叉</td>
+<td>`UP \</td>
+<td>RIGHT \</td>
+<td>DOWN \</td>
+<td>LEFT`</td>
+<td>顺时针旋转 90°</td>
+<td>允许水平与垂直水流同时穿行且互不串水。在多源交错中起到立交桥作用。</td>
+</tr>
+<tr>
+<td><strong>灵脉闸阀 (switch)</strong></td>
+<td>带有闸刀的直管</td>
+<td>`LEFT \</td>
+<td>RIGHT` (闭合时通水)</td>
+<td>点击切换开/闭 (<code>switchClosed</code>)</td>
+<td>时序控制件。初始多为断开状态 (<code>false</code>)，需玩家点击合闸；支持与旋转组合。</td>
+</tr>
+<tr>
+<td><strong>极向单向阀 (diode)</strong></td>
+<td>带有箭头的定向阀</td>
+<td><code>LEFT -> RIGHT</code> (单向进出)</td>
+<td>顺时针旋转 90°</td>
+<td>矢量导流件。灵泉必须严格按箭头方向灌注，逆向水流将被完全阻断。</td>
+</tr>
+<tr>
+<td><strong>固化地脉石 (obstacle/locked)</strong></td>
+<td>破碎玄武岩或锁死管</td>
+<td><code>NONE</code> 或固定端口</td>
+<td>锁死不可操作 (<code>locked: true</code>)</td>
+<td>地形约束件。强迫玩家放弃直线思维，规划迂回复杂的折返水路。</td>
+</tr>
+<tr>
+<td><strong>诱饵死渠 (decoy)</strong></td>
+<td>孤立或残缺的管线</td>
+<td>任意形态</td>
+<td>顺时针旋转 90°</td>
+<td>认知陷阱。看似能连接目标，实为无源死路，考验全局拓扑推演能力。</td>
+</tr>
+</tbody></table></div>
+<hr />
+<h2 id="3-五大篇章难度阶梯与心流演进模型">3. 五大篇章难度阶梯与心流演进模型</h2>
+<p>99 关按照神树生长的物理与境界空间分为五大卷，难度平滑爬升并呈“锯齿形”波浪演进（每卷内有 3~4 个波峰与波谷，章末设关底大考）：</p>
+<pre><code class="language-">难度指数
+ (10) |                                                                       ★ L99
+  (9) |                                                         ★ L80   ▲ ▲ ▲
+  (8) |                                           ★ L60   ▲ ▲ ▲       ▲
+  (7) |                             ★ L40   ▲ ▲ ▲       ▲
+  (6) |               ★ L20   ▲ ▲ ▲       ▲
+  (5) |         ▲ ▲ ▲       ▲
+  (4) |     ▲ ▲
+  (3) | ▲ ▲
+  (1) |★L1
+      +-----------------------------------------------------------------------&gt; 关卡序列
+       卷一:地脉之根    卷二:巨木之干    卷三:苍翠繁枝    卷四:云海天桥    卷五:神树之巅
+       (L01 - L20)     (L21 - L40)     (L41 - L60)     (L61 - L80)     (L81 - L99)</code></pre>
+<h3 id="3-1-卷别演进规格表">3.1 卷别演进规格表</h3>
+<div class="table-container"><table>
+<thead><tr>
+<th>卷别</th>
+<th>篇章主题</th>
+<th>关卡区间</th>
+<th>核心新增机制</th>
+<th>水源与目标数</th>
+<th>诱饵与约束</th>
+<th>Par 最优步数</th>
+<th>关底代表仙花 (Boss)</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>第一卷</strong></td>
+<td><strong>地脉之根</strong></td>
+<td>01 - 20</td>
+<td>基础直弯、T型分流、立体十字、地脉锁石</td>
+<td>1 源 / 1~4 花</td>
+<td>1~4 处诱饵/锁石</td>
+<td>4 ~ 18 步</td>
+<td><strong>L20 地脉厚土莲</strong> (史诗)</td>
+</tr>
+<tr>
+<td><strong>第二卷</strong></td>
+<td><strong>巨木之干</strong></td>
+<td>21 - 40</td>
+<td>灵脉闸阀 (Switch)、双灵泉水源 (Dual Sources)</td>
+<td>1~2 源 / 2~4 花</td>
+<td>2~6 处诱饵/锁石</td>
+<td>12 ~ 26 步</td>
+<td><strong>L40 九霄玉兰</strong> (史诗)</td>
+</tr>
+<tr>
+<td><strong>第三卷</strong></td>
+<td><strong>苍翠繁枝</strong></td>
+<td>41 - 60</td>
+<td>定向单向阀 (Diode)、环路防逆流、回廊陷阱</td>
+<td>1~2 源 / 3~5 花</td>
+<td>4~8 处诱饵/锁石</td>
+<td>16 ~ 32 步</td>
+<td><strong>L60 碧落仙荷</strong> (传说)</td>
+</tr>
+<tr>
+<td><strong>第四卷</strong></td>
+<td><strong>云海天桥</strong></td>
+<td>61 - 80</td>
+<td>全机制复合 (Switch + Diode + Cross + Obstacle)</td>
+<td>2 源 / 3~5 花</td>
+<td>6~10 处诱饵/锁石</td>
+<td>22 ~ 38 步</td>
+<td><strong>L80 赤血金凤</strong> (传说)</td>
+</tr>
+<tr>
+<td><strong>第五卷</strong></td>
+<td><strong>神树之巅</strong></td>
+<td>81 - 99</td>
+<td>三灵泉水源 (Triple Sources)、终极对称全要素</td>
+<td>2~3 源 / 4~6 花</td>
+<td>8~14 处全盘迷宫</td>
+<td>26 ~ 46 步</td>
+<td><strong>L99 混沌鸿蒙树</strong> (神话)</td>
+</tr>
+</tbody></table></div>
+<hr />
+<h2 id="4-经典-99-关全关卡详细设计清单">4. 经典 99 关全关卡详细设计清单</h2>
+<h3 id="第一卷-地脉之根-levels-01-20">第一卷：地脉之根 (Levels 01 - 20)</h3>
+<p><em>地脉初启，水脉初通。引导玩家建立旋转对齐意识，体验分流与空间立体交叉。</em></p>
+<div class="table-container"><table>
+<thead><tr>
+<th>关卡</th>
+<th>关卡标题</th>
+<th>神花名与品阶</th>
+<th>水源位置</th>
+<th>仙花目标数与位置</th>
+<th>核心机制与设计意图</th>
+<th>阻碍/诱饵</th>
+<th>Par 最优步数</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>01</strong></td>
+<td>单线启明</td>
+<td>灵露初蕾 (凡)</td>
+<td>(2,1)</td>
+<td>1 花: (4,4)</td>
+<td><strong>新手教学</strong>：单一直管与弯管旋转，建立顺时针旋转90°概念。</td>
+<td>无</td>
+<td>4 步</td>
+</tr>
+<tr>
+<td><strong>02</strong></td>
+<td>双路分流</td>
+<td>青玉幽兰 (凡)</td>
+<td>(3,0)</td>
+<td>2 花: (2,5), (4,5)</td>
+<td><strong>分流教学</strong>：T型三通管上下分流，点亮双花。</td>
+<td>无</td>
+<td>6 步</td>
+</tr>
+<tr>
+<td><strong>03</strong></td>
+<td>三盏归巢</td>
+<td>绛珠仙草 (珍)</td>
+<td>(2,0)</td>
+<td>3 花: (0,5), (2,5), (5,5)</td>
+<td><strong>多级支路</strong>：首度引入 2 个干扰诱饵管道，考验路径甄别。</td>
+<td>2 个假弯管</td>
+<td>10 步</td>
+</tr>
+<tr>
+<td><strong>04</strong></td>
+<td>经纬初交</td>
+<td>琉璃水仙 (珍)</td>
+<td>(3,0)</td>
+<td>2 花: (1,4), (5,4)</td>
+<td><strong>十字立交重构</strong>：(3,2) 为十字立交，水流纵横穿插而非简单直线。</td>
+<td>1 个死胡同直管</td>
+<td>8 步</td>
+</tr>
+<tr>
+<td><strong>05</strong></td>
+<td>地脉断壁</td>
+<td>双生并蒂莲 (珍)</td>
+<td>(1,0)</td>
+<td>2 花: (1,5), (4,5)</td>
+<td><strong>地脉锁石初现</strong>：(2,2) 与 (2,3) 存在固定锁石，水路必须从外围下绕。</td>
+<td>2 处固定锁石</td>
+<td>11 步</td>
+</tr>
+<tr>
+<td><strong>06</strong></td>
+<td>四方聚灵</td>
+<td>金盏金莲 (珍)</td>
+<td>(3,2) 中心</td>
+<td>4 花: 四角分布</td>
+<td><strong>中心辐射</strong>：水源在中心，通过 4 个三通管向外辐射供给四方。</td>
+<td>4 处边缘死管</td>
+<td>14 步</td>
+</tr>
+<tr>
+<td><strong>07</strong></td>
+<td>暗礁迷径</td>
+<td>紫藤云芝 (珍)</td>
+<td>(0,0)</td>
+<td>2 花: (5,2), (5,5)</td>
+<td><strong>诱饵排除</strong>：盘面布置 4 处看似相通实则通向死角的废弃水渠。</td>
+<td>4 处假分支</td>
+<td>12 步</td>
+</tr>
+<tr>
+<td><strong>08</strong></td>
+<td>回龙引泉</td>
+<td>凝霜雪梅 (珍)</td>
+<td>(5,0)</td>
+<td>3 花: (0,3), (1,5), (4,5)</td>
+<td><strong>S型折返</strong>：狭长回旋走廊，连续 6 个弯管调头。</td>
+<td>1 处死石</td>
+<td>13 步</td>
+</tr>
+<tr>
+<td><strong>09</strong></td>
+<td>双十字错</td>
+<td>翡翠兰心 (珍)</td>
+<td>(2,0)</td>
+<td>3 花: (0,4), (3,5), (5,4)</td>
+<td><strong>双十字级联</strong>：2 处十字立交并列，横纵水网相互交叠。</td>
+<td>2 处假管</td>
+<td>15 步</td>
+</tr>
+<tr>
+<td><strong>10</strong></td>
+<td>寒潭墨雪</td>
+<td>寒潭墨雪 (仙)</td>
+<td>(4,0)</td>
+<td>3 花: (0,5), (2,5), (5,5)</td>
+<td><strong>第一卷小高潮</strong>：锁石隔断南北，必须走“Z”字大回环穿插。</td>
+<td>3 处锁石, 3 诱饵</td>
+<td>16 步</td>
+</tr>
+<tr>
+<td><strong>11</strong></td>
+<td>歧路亡羊</td>
+<td>白鹤素馨 (珍)</td>
+<td>(1,1)</td>
+<td>2 花: (1,5), (4,4)</td>
+<td><strong>反向误导</strong>：初始视觉重心在右侧，实则需先向左退一步再绕行。</td>
+<td>4 处误导管</td>
+<td>12 步</td>
+</tr>
+<tr>
+<td><strong>12</strong></td>
+<td>灵泉对角</td>
+<td>幻蝶七巧 (珍)</td>
+<td>(5,0)</td>
+<td>2 花: (0,5), (1,4)</td>
+<td><strong>极限对角穿透</strong>：左下至右上大跨度，每步旋转必须精准对齐。</td>
+<td>2 处锁石</td>
+<td>14 步</td>
+</tr>
+<tr>
+<td><strong>13</strong></td>
+<td>三叠飞瀑</td>
+<td>金缕玉衣 (珍)</td>
+<td>(0,1)</td>
+<td>3 花: (2,5), (4,5), (5,4)</td>
+<td><strong>阶梯式拓扑</strong>：水流从上至下呈波浪形递进分配。</td>
+<td>3 处假直管</td>
+<td>15 步</td>
+</tr>
+<tr>
+<td><strong>14</strong></td>
+<td>双环扣月</td>
+<td>凌霜秋菊 (珍)</td>
+<td>(3,0)</td>
+<td>3 花: (1,3), (3,5), (5,3)</td>
+<td><strong>双闭环回路</strong>：两条对称闭合水圈向外吐出花蕾供能。</td>
+<td>2 处假弯管</td>
+<td>16 步</td>
+</tr>
+<tr>
+<td><strong>15</strong></td>
+<td>千丝织锦</td>
+<td>幽冥彼岸 (珍)</td>
+<td>(2,0)</td>
+<td>4 花: (0,4), (1,5), (4,5), (5,3)</td>
+<td><strong>高密度网格</strong>：满盘仅 2 空格，密集分布直管与弯管。</td>
+<td>5 处诱饵</td>
+<td>18 步</td>
+</tr>
+<tr>
+<td><strong>16</strong></td>
+<td>狭谷穿针</td>
+<td>灵台菩提 (珍)</td>
+<td>(4,0)</td>
+<td>2 花: (0,5), (3,5)</td>
+<td><strong>窄道约束</strong>：全盘仅 (2,2) 单格为必经咽喉，其余皆为障壁。</td>
+<td>4 处固定障壁</td>
+<td>13 步</td>
+</tr>
+<tr>
+<td><strong>17</strong></td>
+<td>四明分辉</td>
+<td>瑶池玉碗 (珍)</td>
+<td>(2,2)</td>
+<td>4 花: (0,1), (0,4), (5,1), (5,4)</td>
+<td><strong>非对称解构</strong>：看似对称的四花布局，管线内部实为非对称走向。</td>
+<td>3 处诱饵</td>
+<td>17 步</td>
+</tr>
+<tr>
+<td><strong>18</strong></td>
+<td>迷津藏玉</td>
+<td>太玄真木 (珍)</td>
+<td>(1,0)</td>
+<td>3 花: (1,5), (3,4), (5,5)</td>
+<td><strong>双三通对冲</strong>：两处三通相对放置，需识别哪个分流有效。</td>
+<td>4 处假管</td>
+<td>15 步</td>
+</tr>
+<tr>
+<td><strong>19</strong></td>
+<td>九曲黄龙</td>
+<td>万古龙涎 (珍)</td>
+<td>(5,1)</td>
+<td>3 花: (0,4), (2,5), (4,5)</td>
+<td><strong>极限弯管</strong>：全盘包含 10 个拐角弯管，旋转组合空间大。</td>
+<td>2 处死胡同</td>
+<td>17 步</td>
+</tr>
+<tr>
+<td><strong>20</strong></td>
+<td>地脉厚土</td>
+<td>地脉厚土莲 (史)</td>
+<td>(3,0)</td>
+<td>4 花: (0,5), (1,4), (4,5), (5,3)</td>
+<td><strong>第一卷关底大考</strong>：融合十字、三通、死石与长距诱饵的复合考验。</td>
+<td>5 处锁石, 4 诱饵</td>
+<td>18 步</td>
+</tr>
+</tbody></table></div>
+<hr />
+<h3 id="第二卷-巨木之干-levels-21-40">第二卷：巨木之干 (Levels 21 - 40)</h3>
+<p><em>登上树干，水压激增。引入【灵脉闸阀（开关）】与【双灵泉水源（双源）】协同机制。</em></p>
+<div class="table-container"><table>
+<thead><tr>
+<th>关卡</th>
+<th>关卡标题</th>
+<th>神花名与品阶</th>
+<th>水源位置</th>
+<th>仙花目标数与位置</th>
+<th>核心机制与设计意图</th>
+<th>阻碍/诱饵</th>
+<th>Par 最优步数</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>21</strong></td>
+<td>灵闸初动</td>
+<td>巨木苍龙 (珍)</td>
+<td>(3,0)</td>
+<td>2 花: (2,4), (4,4)</td>
+<td><strong>开关教学</strong>：(3,2) 设单闸，需旋转对齐且点击闭合方能通水。</td>
+<td>无</td>
+<td>8 步</td>
+</tr>
+<tr>
+<td><strong>22</strong></td>
+<td>分时通渠</td>
+<td>翠影迎风 (珍)</td>
+<td>(2,0)</td>
+<td>2 花: (1,5), (4,5)</td>
+<td><strong>支路闸控</strong>：主干直通一路，下支路需闭合闸刀后方能点亮。</td>
+<td>1 假弯管</td>
+<td>11 步</td>
+</tr>
+<tr>
+<td><strong>23</strong></td>
+<td>双闸并峙</td>
+<td>紫霄飞羽 (珍)</td>
+<td>(3,0)</td>
+<td>3 花: (0,4), (3,5), (5,4)</td>
+<td><strong>双开关联动</strong>：上下两路各有一闸，需先后合闸点亮两端。</td>
+<td>2 处诱饵</td>
+<td>14 步</td>
+</tr>
+<tr>
+<td><strong>24</strong></td>
+<td>断脉之桥</td>
+<td>灵蛇吞露 (珍)</td>
+<td>(2,0)</td>
+<td>2 花: (1,4), (4,4)</td>
+<td><strong>开关与十字立交</strong>：开关设置在十字管下游，形成门禁效应。</td>
+<td>2 处锁石</td>
+<td>13 步</td>
+</tr>
+<tr>
+<td><strong>25</strong></td>
+<td>双源初现</td>
+<td>双泉玉蕊 (珍)</td>
+<td><strong>双源</strong>: (1,0), (4,0)</td>
+<td>2 花: (1,5), (4,5)</td>
+<td><strong>双水源教学</strong>：上下两个独立水源分别负责两条平行水脉。</td>
+<td>2 处假管</td>
+<td>12 步</td>
+</tr>
+<tr>
+<td><strong>26</strong></td>
+<td>水脉交融</td>
+<td>丹枫醉晚 (珍)</td>
+<td><strong>双源</strong>: (1,0), (5,0)</td>
+<td>3 花: (0,4), (3,5), (5,4)</td>
+<td><strong>双源交叉</strong>：双源在中央十字立交汇合穿过，各自供能。</td>
+<td>3 处诱饵</td>
+<td>16 步</td>
+</tr>
+<tr>
+<td><strong>27</strong></td>
+<td>闸门虚设</td>
+<td>银缕扶桑 (珍)</td>
+<td>(2,0)</td>
+<td>3 花: (0,5), (2,5), (4,5)</td>
+<td><strong>陷阱开关</strong>：盘面有 2 个开关，其中 1 个闭合会导致管线流向死穴。</td>
+<td>1 假开关, 2 假管</td>
+<td>15 步</td>
+</tr>
+<tr>
+<td><strong>28</strong></td>
+<td>穿干引泉</td>
+<td>碧竹青筠 (珍)</td>
+<td><strong>双源</strong>: (0,0), (4,1)</td>
+<td>3 花: (1,5), (3,5), (5,5)</td>
+<td><strong>斜向跨源</strong>：水源一在高空一在低谷，需斜向梳理水脉。</td>
+<td>3 处锁石</td>
+<td>17 步</td>
+</tr>
+<tr>
+<td><strong>29</strong></td>
+<td>经纬双闸</td>
+<td>金鳞仙草 (珍)</td>
+<td>(3,0)</td>
+<td>3 花: (1,4), (3,5), (5,4)</td>
+<td><strong>双闸互斥思维</strong>：先通主干再补分支，步数节奏紧密。</td>
+<td>3 处诱饵</td>
+<td>16 步</td>
+</tr>
+<tr>
+<td><strong>30</strong></td>
+<td>碧落青苍</td>
+<td>碧落青苍 (仙)</td>
+<td><strong>双源</strong>: (1,0), (4,0)</td>
+<td>4 花: (0,5), (2,4), (3,4), (5,5)</td>
+<td><strong>第二卷中坚</strong>：双源与双闸同台，考验多区域协同排布。</td>
+<td>4 处诱饵, 2 锁石</td>
+<td>20 步</td>
+</tr>
+<tr>
+<td><strong>31</strong></td>
+<td>串联双闸</td>
+<td>望舒清辉 (珍)</td>
+<td>(2,0)</td>
+<td>2 花: (1,5), (4,5)</td>
+<td><strong>串联逻辑与门</strong>：一条长干线上连续布置 2 个开关。</td>
+<td>2 处假管</td>
+<td>14 步</td>
+</tr>
+<tr>
+<td><strong>32</strong></td>
+<td>并联分闸</td>
+<td>羲和烈焰 (珍)</td>
+<td>(3,0)</td>
+<td>3 花: (1,5), (3,4), (5,5)</td>
+<td><strong>并联逻辑或门</strong>：两条备选路线均有开关，选择最优一条。</td>
+<td>3 处假分支</td>
+<td>15 步</td>
+</tr>
+<tr>
+<td><strong>33</strong></td>
+<td>双源汇流</td>
+<td>万壑松涛 (珍)</td>
+<td><strong>双源</strong>: (0,1), (5,1)</td>
+<td>4 花: (1,5), (2,4), (3,4), (4,5)</td>
+<td><strong>天地夹击</strong>：自上而下与自下而上的水流同时涌向中间。</td>
+<td>4 处诱饵</td>
+<td>21 步</td>
+</tr>
+<tr>
+<td><strong>34</strong></td>
+<td>树皮迷宫</td>
+<td>铁骨金枫 (珍)</td>
+<td>(4,0)</td>
+<td>3 花: (0,3), (2,5), (4,5)</td>
+<td><strong>曲面迷宫</strong>：大量固定不可转的树干断裂纹理。</td>
+<td>5 处锁石</td>
+<td>18 步</td>
+</tr>
+<tr>
+<td><strong>35</strong></td>
+<td>闸刀矩阵</td>
+<td>流萤醉月 (珍)</td>
+<td>(2,0)</td>
+<td>3 花: (0,4), (2,5), (4,4)</td>
+<td><strong>三角闸阵</strong>：3 个开关呈三角形，需按对角线依次激活。</td>
+<td>3 处死管</td>
+<td>19 步</td>
+</tr>
+<tr>
+<td><strong>36</strong></td>
+<td>双源折射</td>
+<td>浮生一梦 (珍)</td>
+<td><strong>双源</strong>: (1,0), (3,0)</td>
+<td>4 花: (0,4), (2,5), (4,4), (5,5)</td>
+<td><strong>密集双源</strong>：两水源间距仅 1 格，极易互相干扰串线。</td>
+<td>4 处诱饵</td>
+<td>22 步</td>
+</tr>
+<tr>
+<td><strong>37</strong></td>
+<td>断流求生</td>
+<td>涅槃赤木 (珍)</td>
+<td>(3,0)</td>
+<td>3 花: (1,5), (3,4), (4,5)</td>
+<td><strong>初始错误态修正</strong>：开局开关已闭合但直指死路，必须先断再改。</td>
+<td>3 处死胡同</td>
+<td>17 步</td>
+</tr>
+<tr>
+<td><strong>38</strong></td>
+<td>灵髓奔涌</td>
+<td>混元一气 (珍)</td>
+<td><strong>双源</strong>: (2,0), (4,0)</td>
+<td>4 花: (0,5), (1,4), (3,5), (5,4)</td>
+<td><strong>双源大管网</strong>：盘面 90% 格子被有效水管占满。</td>
+<td>3 处诱饵</td>
+<td>23 步</td>
+</tr>
+<tr>
+<td><strong>39</strong></td>
+<td>九关锁脉</td>
+<td>太虚幻境 (珍)</td>
+<td>(1,0)</td>
+<td>3 花: (1,4), (3,5), (5,5)</td>
+<td><strong>九宫格切分</strong>：4 处锁石将棋盘划为 4 个互锁区域。</td>
+<td>4 处锁石, 3 诱饵</td>
+<td>21 步</td>
+</tr>
+<tr>
+<td><strong>40</strong></td>
+<td>九霄玉兰</td>
+<td>九霄玉兰 (史)</td>
+<td><strong>双源</strong>: (0,0), (5,0)</td>
+<td>4 花: (1,4), (2,5), (3,5), (4,4)</td>
+<td><strong>第二卷关底大考</strong>：双灵泉大跨度分流，3 闸门协同控制。</td>
+<td>5 处诱饵, 3 锁石</td>
+<td>24 步</td>
+</tr>
+</tbody></table></div>
+<hr />
+<h3 id="第三卷-苍翠繁枝-levels-41-60">第三卷：苍翠繁枝 (Levels 41 - 60)</h3>
+<p><em>深入茂密树冠。引入【极向单向阀（二极管）】，强调流向约束与逆流防死锁。</em></p>
+<div class="table-container"><table>
+<thead><tr>
+<th>关卡</th>
+<th>关卡标题</th>
+<th>神花名与品阶</th>
+<th>水源位置</th>
+<th>仙花目标数与位置</th>
+<th>核心机制与设计意图</th>
+<th>阻碍/诱饵</th>
+<th>Par 最优步数</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>41</strong></td>
+<td>顺水推舟</td>
+<td>绿绮含烟 (珍)</td>
+<td>(2,0)</td>
+<td>2 花: (1,4), (4,4)</td>
+<td><strong>二极管教学</strong>：(2,2) 设单向阀，水流只能向右通行，逆向断流。</td>
+<td>无</td>
+<td>8 步</td>
+</tr>
+<tr>
+<td><strong>42</strong></td>
+<td>逆流止步</td>
+<td>碧涛翻浪 (珍)</td>
+<td>(3,0)</td>
+<td>2 花: (2,5), (4,5)</td>
+<td><strong>防逆流体验</strong>：若二极管转反，整路水流瞬间断开，加深流向认知。</td>
+<td>1 处死管</td>
+<td>11 步</td>
+</tr>
+<tr>
+<td><strong>43</strong></td>
+<td>枝头分向</td>
+<td>垂丝海棠 (珍)</td>
+<td>(2,0)</td>
+<td>3 花: (0,4), (2,5), (4,4)</td>
+<td><strong>双二极管分流</strong>：T型管后接两路相反方向单向阀，分道扬镳。</td>
+<td>2 处诱饵</td>
+<td>15 步</td>
+</tr>
+<tr>
+<td><strong>44</strong></td>
+<td>单向环流</td>
+<td>醉霞拂晓 (珍)</td>
+<td>(3,0)</td>
+<td>3 花: (1,4), (3,5), (5,4)</td>
+<td><strong>环形单行道</strong>：环形水渠内配置二极管，限制只能顺时针流动。</td>
+<td>3 处假弯管</td>
+<td>17 步</td>
+</tr>
+<tr>
+<td><strong>45</strong></td>
+<td>双向并轨</td>
+<td>晨钟幽兰 (珍)</td>
+<td>(1,0)</td>
+<td>3 花: (0,5), (2,4), (4,5)</td>
+<td><strong>混合管线</strong>：直管（双向）与二极管（单向）并存甄别。</td>
+<td>3 处诱饵</td>
+<td>16 步</td>
+</tr>
+<tr>
+<td><strong>46</strong></td>
+<td>繁枝分桠</td>
+<td>百鸟朝凤 (珍)</td>
+<td>(4,0)</td>
+<td>4 花: (0,5), (1,4), (3,5), (5,4)</td>
+<td><strong>树状分形</strong>：严格从一阶枝干单向流向二阶、三阶枝丫。</td>
+<td>4 处诱饵</td>
+<td>22 步</td>
+</tr>
+<tr>
+<td><strong>47</strong></td>
+<td>二极立交</td>
+<td>云鹤游天 (珍)</td>
+<td>(2,0)</td>
+<td>3 花: (0,4), (2,5), (4,5)</td>
+<td><strong>二极管+十字立交</strong>：十字的一侧被单向阀锁定进出方向。</td>
+<td>2 处锁石</td>
+<td>18 步</td>
+</tr>
+<tr>
+<td><strong>48</strong></td>
+<td>逆水行舟</td>
+<td>凌波仙侣 (珍)</td>
+<td>(5,0)</td>
+<td>3 花: (1,3), (2,5), (4,4)</td>
+<td><strong>大范围逆向绕行</strong>：从右侧迂回穿入单向阀进水口。</td>
+<td>4 处死管</td>
+<td>20 步</td>
+</tr>
+<tr>
+<td><strong>49</strong></td>
+<td>双源对流</td>
+<td>日月同辉 (珍)</td>
+<td><strong>双源</strong>: (1,0), (4,0)</td>
+<td>4 花: (0,5), (2,4), (3,4), (5,5)</td>
+<td><strong>双源反向阻断</strong>：两水源水流在中心由二极管隔开，防止互串。</td>
+<td>4 处诱饵</td>
+<td>24 步</td>
+</tr>
+<tr>
+<td><strong>50</strong></td>
+<td>琼枝玉叶</td>
+<td>琼枝玉叶 (仙)</td>
+<td>(3,0)</td>
+<td>4 花: (1,4), (2,5), (4,5), (5,3)</td>
+<td><strong>第三卷中坚</strong>：3 处单向阀精确约束水网，全盘仅一条解法。</td>
+<td>5 处诱饵, 2 锁石</td>
+<td>25 步</td>
+</tr>
+<tr>
+<td><strong>51</strong></td>
+<td>极性门禁</td>
+<td>幽谷百合 (珍)</td>
+<td>(2,0)</td>
+<td>3 花: (0,5), (2,4), (4,5)</td>
+<td><strong>单向门禁</strong>：误入分支将因二极管无法逆退，强迫全局规划。</td>
+<td>4 处诱饵</td>
+<td>19 步</td>
+</tr>
+<tr>
+<td><strong>52</strong></td>
+<td>错位三极</td>
+<td>飞星传恨 (珍)</td>
+<td>(1,0)</td>
+<td>3 花: (1,5), (3,4), (5,4)</td>
+<td><strong>三角极性约束</strong>：3 处单向阀互相牵制，步步为营。</td>
+<td>3 处死石</td>
+<td>21 步</td>
+</tr>
+<tr>
+<td><strong>53</strong></td>
+<td>繁叶蔽日</td>
+<td>梧桐疏影 (珍)</td>
+<td><strong>双源</strong>: (0,0), (5,0)</td>
+<td>4 花: (1,4), (2,5), (3,5), (4,4)</td>
+<td><strong>叶脉大分流</strong>：密不透风的叶脉纹理中寻找单向生命通道。</td>
+<td>6 处诱饵</td>
+<td>26 步</td>
+</tr>
+<tr>
+<td><strong>54</strong></td>
+<td>顺流直下</td>
+<td>银河落天 (珍)</td>
+<td>(0,0)</td>
+<td>3 花: (2,5), (4,4), (5,5)</td>
+<td><strong>阶梯单向流</strong>：左上向右下倾泻，利用二极管防止侧向逸散。</td>
+<td>3 处锁石</td>
+<td>20 步</td>
+</tr>
+<tr>
+<td><strong>55</strong></td>
+<td>双极互锁</td>
+<td>连理同枝 (珍)</td>
+<td>(3,0)</td>
+<td>3 花: (1,4), (3,5), (5,4)</td>
+<td><strong>两极反向</strong>：两处单向阀方向完全相反，需分配至不同支路。</td>
+<td>4 处假管</td>
+<td>22 步</td>
+</tr>
+<tr>
+<td><strong>56</strong></td>
+<td>枝蔓缠绕</td>
+<td>苍藤叠嶂 (珍)</td>
+<td><strong>双源</strong>: (2,0), (4,1)</td>
+<td>4 花: (0,4), (1,5), (3,5), (5,4)</td>
+<td><strong>缠绕管线</strong>：双源经 2 处十字与 2 处二极管立体缠绕。</td>
+<td>5 处诱饵</td>
+<td>27 步</td>
+</tr>
+<tr>
+<td><strong>57</strong></td>
+<td>逆流陷阱</td>
+<td>绝处逢生 (珍)</td>
+<td>(2,0)</td>
+<td>3 花: (0,5), (2,5), (4,5)</td>
+<td><strong>死锁陷阱</strong>：存在一条看似更短的路线，但中途被单向阀封死。</td>
+<td>5 处假分支</td>
+<td>21 步</td>
+</tr>
+<tr>
+<td><strong>58</strong></td>
+<td>四方聚枝</td>
+<td>广寒丹桂 (珍)</td>
+<td>(3,2) 中心</td>
+<td>4 花: 四边中点</td>
+<td><strong>中心单向外涌</strong>：中心水源四周皆为向外二极管，禁止任何回流。</td>
+<td>4 处假拐角</td>
+<td>24 步</td>
+</tr>
+<tr>
+<td><strong>59</strong></td>
+<td>青藤绕柱</td>
+<td>苍龙攀云 (珍)</td>
+<td>(5,0)</td>
+<td>4 花: (0,4), (2,5), (3,4), (5,4)</td>
+<td><strong>回旋盘升</strong>：沿盘面四壁单向环绕上升供水。</td>
+<td>4 处锁石</td>
+<td>26 步</td>
+</tr>
+<tr>
+<td><strong>60</strong></td>
+<td>碧落仙荷</td>
+<td>碧落仙荷 (传)</td>
+<td><strong>双源</strong>: (1,0), (4,0)</td>
+<td>5 花: (0,4), (1,5), (3,4), (4,5), (5,3)</td>
+<td><strong>第三卷关底大考</strong>：4 处二极管协同，5 朵仙花同时绽放。</td>
+<td>6 处诱饵, 3 锁石</td>
+<td>30 步</td>
+</tr>
+</tbody></table></div>
+<hr />
+<h3 id="第四卷-云海天桥-levels-61-80">第四卷：云海天桥 (Levels 61 - 80)</h3>
+<p><em>穿过云海，仙雾缭绕。全要素综合（开关 + 二极管 + 十字 + 双源 + 锁石）全面交融。</em></p>
+<div class="table-container"><table>
+<thead><tr>
+<th>关卡</th>
+<th>关卡标题</th>
+<th>神花名与品阶</th>
+<th>水源位置</th>
+<th>仙花目标数与位置</th>
+<th>核心机制与设计意图</th>
+<th>阻碍/诱饵</th>
+<th>Par 最优步数</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>61</strong></td>
+<td>云桥初架</td>
+<td>踏云飞燕 (珍)</td>
+<td>(3,0)</td>
+<td>3 花: (1,4), (3,5), (5,4)</td>
+<td><strong>复合机制初现</strong>：同关内首次包含 1 个开关与 1 个二极管。</td>
+<td>2 处假管</td>
+<td>16 步</td>
+</tr>
+<tr>
+<td><strong>62</strong></td>
+<td>雾锁天河</td>
+<td>苍筤仙竹 (珍)</td>
+<td>(2,0)</td>
+<td>3 花: (0,4), (2,5), (4,4)</td>
+<td><strong>时序定势</strong>：必须先旋正二极管流向，最后闭合前端开关。</td>
+<td>3 处诱饵</td>
+<td>19 步</td>
+</tr>
+<tr>
+<td><strong>63</strong></td>
+<td>云中双瀑</td>
+<td>冰魄寒英 (珍)</td>
+<td><strong>双源</strong>: (0,0), (5,0)</td>
+<td>4 花: (1,5), (2,4), (3,4), (4,5)</td>
+<td><strong>双源控双桥</strong>：源1带开关控制北桥，源2带二极管控制南桥。</td>
+<td>4 处诱饵</td>
+<td>24 步</td>
+</tr>
+<tr>
+<td><strong>64</strong></td>
+<td>风雷变幻</td>
+<td>惊雷紫电 (珍)</td>
+<td>(2,0)</td>
+<td>3 花: (0,5), (2,4), (4,5)</td>
+<td><strong>十字+开关+单向</strong>：交叉点四通八达，单向阀与开关守卫两侧。</td>
+<td>3 处锁石</td>
+<td>22 步</td>
+</tr>
+<tr>
+<td><strong>65</strong></td>
+<td>天河倒泻</td>
+<td>飞流悬瀑 (珍)</td>
+<td>(0,2) 顶部</td>
+<td>4 花: (3,0), (3,5), (5,1), (5,4)</td>
+<td><strong>顶源悬瀑</strong>：灵泉自顶部居中注入，向两侧云台倾斜分流。</td>
+<td>5 处诱饵</td>
+<td>25 步</td>
+</tr>
+<tr>
+<td><strong>66</strong></td>
+<td>云岫穿行</td>
+<td>苍山负雪 (珍)</td>
+<td>(4,0)</td>
+<td>3 花: (0,4), (2,5), (5,5)</td>
+<td><strong>断续岩桥</strong>：锁石将云路切割成 3 个浮空岛，仅靠十字相通。</td>
+<td>5 处锁石</td>
+<td>23 步</td>
+</tr>
+<tr>
+<td><strong>67</strong></td>
+<td>双源云渡</td>
+<td>仙鹤衔芝 (珍)</td>
+<td><strong>双源</strong>: (1,0), (4,0)</td>
+<td>4 花: (0,5), (1,4), (4,4), (5,5)</td>
+<td><strong>平行双渡</strong>：双水脉经 2 个开关互斥开合，协调步数成本。</td>
+<td>5 处诱饵</td>
+<td>27 步</td>
+</tr>
+<tr>
+<td><strong>68</strong></td>
+<td>闸控双极</td>
+<td>万丈金芒 (珍)</td>
+<td>(2,0)</td>
+<td>3 花: (0,4), (2,5), (4,4)</td>
+<td><strong>总闸双阀</strong>：一个主总闸，分出两条带相反单向阀的支线。</td>
+<td>4 处假管</td>
+<td>22 步</td>
+</tr>
+<tr>
+<td><strong>69</strong></td>
+<td>虚空栈道</td>
+<td>蹑景追风 (珍)</td>
+<td>(3,0)</td>
+<td>4 花: (0,5), (1,3), (4,3), (5,5)</td>
+<td><strong>单轨天堑</strong>：中间两列为空虚悬崖，仅 (2,3) 与 (3,3) 允许通水。</td>
+<td>6 处悬崖空槽</td>
+<td>26 步</td>
+</tr>
+<tr>
+<td><strong>70</strong></td>
+<td>凌霄七彩</td>
+<td>凌霄七彩 (仙)</td>
+<td><strong>双源</strong>: (1,0), (4,0)</td>
+<td>4 花: (0,4), (2,5), (3,5), (5,4)</td>
+<td><strong>第四卷中坚</strong>：双源 + 双闸 + 双极，全盘机关精密咬合。</td>
+<td>6 处诱饵, 2 锁石</td>
+<td>29 步</td>
+</tr>
+<tr>
+<td><strong>71</strong></td>
+<td>风息水静</td>
+<td>浮光霭霭 (珍)</td>
+<td>(2,0)</td>
+<td>3 花: (1,5), (3,4), (4,5)</td>
+<td><strong>纯逻辑推导</strong>：无多余步数空间，每转一步必有点亮反馈。</td>
+<td>4 处诱饵</td>
+<td>21 步</td>
+</tr>
+<tr>
+<td><strong>72</strong></td>
+<td>梯级云台</td>
+<td>玉阶生苔 (珍)</td>
+<td><strong>双源</strong>: (0,0), (3,1)</td>
+<td>4 花: (1,4), (2,5), (4,4), (5,5)</td>
+<td><strong>三阶云台</strong>：水源在不同等高线，需经过 3 级跌水台。</td>
+<td>5 处诱饵</td>
+<td>28 步</td>
+</tr>
+<tr>
+<td><strong>73</strong></td>
+<td>回光返照</td>
+<td>霞蔚蒸云 (珍)</td>
+<td>(3,0)</td>
+<td>4 花: (0,4), (1,5), (4,5), (5,4)</td>
+<td><strong>双开关冗余</strong>：2 个开关需配置为“一开一闭”才是通关构型。</td>
+<td>4 处假开关支路</td>
+<td>25 步</td>
+</tr>
+<tr>
+<td><strong>74</strong></td>
+<td>天堑飞渡</td>
+<td>孤鸿踏雪 (珍)</td>
+<td>(1,0)</td>
+<td>3 花: (1,5), (3,5), (5,5)</td>
+<td><strong>三大十字穿透</strong>：连续 3 个十字交叉立交纵贯全场。</td>
+<td>3 处锁石</td>
+<td>24 步</td>
+</tr>
+<tr>
+<td><strong>75</strong></td>
+<td>双源四象</td>
+<td>乾坤逆转 (珍)</td>
+<td><strong>双源</strong>: (0,0), (5,0)</td>
+<td>4 花: (0,5), (1,4), (4,4), (5,5)</td>
+<td><strong>四象八卦</strong>：双源对冲，分别供给对角线四象限仙花。</td>
+<td>6 处诱饵</td>
+<td>30 步</td>
+</tr>
+<tr>
+<td><strong>76</strong></td>
+<td>云涡暗流</td>
+<td>太清神水 (珍)</td>
+<td>(3,2) 中心</td>
+<td>4 花: (0,2), (2,5), (3,0), (5,2)</td>
+<td><strong>中心向外漩涡</strong>：带 2 个单向阀的同心回环旋流。</td>
+<td>5 处诱饵</td>
+<td>27 步</td>
+</tr>
+<tr>
+<td><strong>77</strong></td>
+<td>断崖飞瀑</td>
+<td>千寻雪浪 (珍)</td>
+<td>(0,1)</td>
+<td>4 花: (2,4), (3,5), (4,4), (5,5)</td>
+<td><strong>绝壁立交</strong>：利用立交管穿过断崖绝壁缝隙。</td>
+<td>5 处锁石</td>
+<td>26 步</td>
+</tr>
+<tr>
+<td><strong>78</strong></td>
+<td>灵河织锦</td>
+<td>织女回梭 (珍)</td>
+<td><strong>双源</strong>: (2,0), (4,0)</td>
+<td>5 花: (0,4), (1,5), (3,5), (4,4), (5,5)</td>
+<td><strong>5花满贯</strong>：高密度布设，双源各担其责。</td>
+<td>6 处诱饵</td>
+<td>32 步</td>
+</tr>
+<tr>
+<td><strong>79</strong></td>
+<td>星罗棋布</td>
+<td>弈局参商 (珍)</td>
+<td><strong>双源</strong>: (1,0), (4,0)</td>
+<td>5 花: (0,5), (1,3), (3,4), (4,5), (5,3)</td>
+<td><strong>无死角解谜</strong>：盘面 32 个元件全部具备转动与逻辑价值。</td>
+<td>7 处诱饵</td>
+<td>34 步</td>
+</tr>
+<tr>
+<td><strong>80</strong></td>
+<td>赤血金凤</td>
+<td>赤血金凤 (传)</td>
+<td><strong>双源</strong>: (0,0), (5,0)</td>
+<td>5 花: (0,5), (1,4), (3,4), (4,5), (5,5)</td>
+<td><strong>第四卷关底大考</strong>：极品赤血金凤，多源复合拓扑巅峰。</td>
+<td>8 处诱饵, 4 锁石</td>
+<td>36 步</td>
+</tr>
+</tbody></table></div>
+<hr />
+<h3 id="第五卷-神树之巅-levels-81-99">第五卷：神树之巅 (Levels 81 - 99)</h3>
+<p><em>凌驾万界之巅，通天神木核心。全要素大成，引入【三灵泉水源（Triple Sources）】与终极解谜矩阵。</em></p>
+<div class="table-container"><table>
+<thead><tr>
+<th>关卡</th>
+<th>关卡标题</th>
+<th>神花名与品阶</th>
+<th>水源位置</th>
+<th>仙花目标数与位置</th>
+<th>核心机制与设计意图</th>
+<th>阻碍/诱饵</th>
+<th>Par 最优步数</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>81</strong></td>
+<td>太古乾坤</td>
+<td>太古幽冥 (仙)</td>
+<td><strong>双源</strong>: (1,0), (4,0)</td>
+<td>4 花: (0,4), (2,5), (3,4), (5,5)</td>
+<td><strong>全要素集结</strong>：双源、双闸、双极、十字与锁石全部现身。</td>
+<td>6 诱饵, 2 锁石</td>
+<td>28 步</td>
+</tr>
+<tr>
+<td><strong>82</strong></td>
+<td>三生万物</td>
+<td>三华聚顶 (珍)</td>
+<td><strong>三源</strong>: (0,0), (2,0), (4,0)</td>
+<td>3 花: (0,5), (2,5), (4,5)</td>
+<td><strong>三灵泉教学</strong>：天地人三才灵泉，三管齐下直奔顶峰。</td>
+<td>3 处诱饵</td>
+<td>24 步</td>
+</tr>
+<tr>
+<td><strong>83</strong></td>
+<td>极光玄枢</td>
+<td>瑶光破晓 (仙)</td>
+<td><strong>三源</strong>: (0,0), (3,0), (5,0)</td>
+<td>4 花: (1,4), (2,5), (4,4), (5,5)</td>
+<td><strong>三源非均等供水</strong>：源1供一花，源2供两花，源3供一花。</td>
+<td>6 处诱饵</td>
+<td>30 步</td>
+</tr>
+<tr>
+<td><strong>84</strong></td>
+<td>天地逆旅</td>
+<td>逆天改命 (仙)</td>
+<td><strong>双源</strong>: (1,0), (4,0)</td>
+<td>4 花: (0,5), (2,4), (3,5), (5,4)</td>
+<td><strong>绝对流向锁定</strong>：4 个二极管构成严格单向通道，容错为零。</td>
+<td>5 诱饵, 3 锁石</td>
+<td>31 步</td>
+</tr>
+<tr>
+<td><strong>85</strong></td>
+<td>八卦玄阵</td>
+<td>两仪四象 (仙)</td>
+<td>(3,2) 中心</td>
+<td>4 花: (0,2), (2,5), (4,5), (5,2)</td>
+<td><strong>阵列旋转对称</strong>：四个象限完全镜像，但元件扰动初始态不同。</td>
+<td>6 处诱饵</td>
+<td>29 步</td>
+</tr>
+<tr>
+<td><strong>86</strong></td>
+<td>九曜贯日</td>
+<td>九天揽月 (仙)</td>
+<td><strong>三源</strong>: (1,0), (3,0), (5,0)</td>
+<td>5 花: (0,4), (1,5), (3,5), (4,4), (5,5)</td>
+<td><strong>三源跨度大网</strong>：三源相互穿插，借十字立交实现空间跳跃。</td>
+<td>7 处诱饵</td>
+<td>35 步</td>
+</tr>
+<tr>
+<td><strong>87</strong></td>
+<td>万化归一</td>
+<td>万法归宗 (仙)</td>
+<td><strong>双源</strong>: (0,0), (5,0)</td>
+<td>4 花: (1,4), (2,5), (3,5), (4,4)</td>
+<td><strong>汇流再分配</strong>：两路泉水先在中间交融，再向四周发散。</td>
+<td>6 处诱饵</td>
+<td>32 步</td>
+</tr>
+<tr>
+<td><strong>88</strong></td>
+<td>混沌初开</td>
+<td>混元道果 (仙)</td>
+<td><strong>三源</strong>: (0,1), (3,0), (5,1)</td>
+<td>5 花: (0,5), (1,4), (2,5), (4,4), (5,5)</td>
+<td><strong>视觉迷雾破局</strong>：开局全盘管线看似错乱，逆向反推方能破局。</td>
+<td>8 处诱饵</td>
+<td>36 步</td>
+</tr>
+<tr>
+<td><strong>89</strong></td>
+<td>虚实相生</td>
+<td>阴阳并济 (仙)</td>
+<td><strong>双源</strong>: (2,0), (4,0)</td>
+<td>4 花: (0,5), (1,4), (3,5), (5,4)</td>
+<td><strong>真假支路甄别</strong>：盘面 1/3 为假通路，必须精准剔除死线。</td>
+<td>8 处假水渠</td>
+<td>33 步</td>
+</tr>
+<tr>
+<td><strong>90</strong></td>
+<td>玄天青莲</td>
+<td>玄天青莲 (传)</td>
+<td><strong>三源</strong>: (0,0), (2,0), (5,0)</td>
+<td>5 花: (1,4), (2,5), (3,4), (4,5), (5,5)</td>
+<td><strong>第五卷中坚</strong>：神树至宝青莲，三灵泉与 3 闸门大联动。</td>
+<td>8 处诱饵, 2 锁石</td>
+<td>38 步</td>
+</tr>
+<tr>
+<td><strong>91</strong></td>
+<td>三源并辔</td>
+<td>踏破星河 (仙)</td>
+<td><strong>三源</strong>: (1,0), (3,0), (5,0)</td>
+<td>5 花: (0,4), (1,5), (3,4), (4,5), (5,4)</td>
+<td><strong>三线齐驱</strong>：上中下三路各自封闭作战，互有立交支撑。</td>
+<td>7 处诱饵</td>
+<td>36 步</td>
+</tr>
+<tr>
+<td><strong>92</strong></td>
+<td>四面楚歌</td>
+<td>十面埋伏 (仙)</td>
+<td>(3,2) 中心</td>
+<td>5 花: 围绕中心</td>
+<td><strong>中心爆发</strong>：中心水源向四周开花，外围环绕 4 个单向阀。</td>
+<td>6 处假拐角</td>
+<td>34 步</td>
+</tr>
+<tr>
+<td><strong>93</strong></td>
+<td>星河倒卷</td>
+<td>逆流成仙 (传)</td>
+<td><strong>双源</strong>: (0,0), (5,0)</td>
+<td>5 花: (0,5), (1,4), (3,5), (4,4), (5,5)</td>
+<td><strong>多十字立交群</strong>：全盘布置 4 处十字立交，网络极度紧凑。</td>
+<td>7 处诱饵</td>
+<td>37 步</td>
+</tr>
+<tr>
+<td><strong>94</strong></td>
+<td>太素神音</td>
+<td>天籁清音 (仙)</td>
+<td><strong>三源</strong>: (0,0), (2,0), (4,0)</td>
+<td>5 花: (1,5), (2,4), (3,5), (4,4), (5,5)</td>
+<td><strong>律动步数预算</strong>：每 6 步必须完成一条支路接通。</td>
+<td>6 处诱饵</td>
+<td>35 步</td>
+</tr>
+<tr>
+<td><strong>95</strong></td>
+<td>生死双门</td>
+<td>阴阳双极 (传)</td>
+<td><strong>双源</strong>: (1,0), (4,0)</td>
+<td>4 花: (0,5), (2,4), (3,4), (5,5)</td>
+<td><strong>排他式双闸</strong>：闸 A 闭合必导致通路短路，必须采用闸 B 路线。</td>
+<td>6 诱饵, 4 锁石</td>
+<td>33 步</td>
+</tr>
+<tr>
+<td><strong>96</strong></td>
+<td>大衍之数</td>
+<td>大衍玄机 (传)</td>
+<td><strong>三源</strong>: (0,1), (3,0), (5,1)</td>
+<td>5 花: (1,4), (2,5), (3,4), (4,5), (5,4)</td>
+<td><strong>极高拓扑复杂度</strong>：全盘元件利用率高达 95%。</td>
+<td>8 处诱饵</td>
+<td>39 步</td>
+</tr>
+<tr>
+<td><strong>97</strong></td>
+<td>无极生太极</td>
+<td>太极两仪 (神)</td>
+<td><strong>双源</strong>: (1,0), (4,0)</td>
+<td>5 花: (0,4), (1,5), (3,4), (4,5), (5,3)</td>
+<td><strong>旋转对称美学</strong>：太极阴阳双鱼水脉，视觉与解谜高度统一。</td>
+<td>8 处诱饵, 2 锁石</td>
+<td>40 步</td>
+</tr>
+<tr>
+<td><strong>98</strong></td>
+<td>通天神树</td>
+<td>通天世界树 (神)</td>
+<td><strong>三源</strong>: (0,0), (3,0), (5,0)</td>
+<td>6 花: (0,5), (1,4), (2,5), (3,4), (4,5), (5,5)</td>
+<td><strong>终极大决战前夜</strong>：6 朵仙花同时待放，三源齐涌，复合全要素。</td>
+<td>9 处诱饵, 3 锁石</td>
+<td>43 步</td>
+</tr>
+<tr>
+<td><strong>99</strong></td>
+<td>混沌鸿蒙</td>
+<td>混沌鸿蒙树 (神)</td>
+<td><strong>三源</strong>: (0,0), (3,0), (5,0)</td>
+<td>6 花: (0,4), (1,5), (2,4), (3,5), (4,4), (5,5)</td>
+<td><strong>终极大圆满</strong>：全盘 36 格全部为功能元件或锁石，百花齐放！</td>
+<td>10 诱饵, 4 锁石</td>
+<td>46 步</td>
+</tr>
+</tbody></table></div>
+<hr />
+<h2 id="5-关卡生成与数学验证算法架构">5. 关卡生成与数学验证算法架构</h2>
+<p>为了杜绝过去“简单随机 BFS 生成导致难度崩塌”的问题，本重构方案设计了<strong>有向图拓扑约束生成与验证算法（Constrained Directed Topology Generator & Solver）</strong>。</p>
+<h3 id="5-1-逆向拓扑生成算法-reverse-tree-growth">5.1 逆向拓扑生成算法 (Reverse Tree Growth)</h3>
+<p>算法并非从水源向前乱走，而是<strong>以目标仙花（Bulb）为终点，逆向寻路向水源（Battery）反向生长</strong>，确保每一朵花都有明确且受控的物理供水路径。</p>
+<pre><code class="language-mermaid">flowchart TD
+    A["初始化 6x6 网格与章节约束配置&lt;br/&gt;(Sources, Bulbs, Decoys, Locks)"] --&gt; B["布置水源点与目标仙花位"]
+    B --&gt; C["布置固定地脉障壁 (Locked Obstacles)"]
+    C --&gt; D["逆向有向多路径搜索 (Multi-Target Reverse Pathfinding)"]
+    D --&gt; E["插入十字立交 Cross 与单向阀 Diode 约束"]
+    E --&gt; F["插入开关 Switch 并设置初始断开态"]
+    F --&gt; G["填充诱饵管道 Decoys (保证其不形成意外偷跑解)"]
+    G --&gt; H["确定性扰动混淆 (Deterministic Scrambler)"]
+    H --&gt; I["数学仿真器全解校验 (Circuit Simulation Verification)"]
+    I --&gt;|验证失败或非唯一解| A
+    I --&gt;|100% 连通通过| J["输出冻结关卡配置 (LevelConfig)"]</code></pre>
+<h3 id="5-2-多源有向图连通求解器-multi-source-directed-solver">5.2 多源有向图连通求解器 (Multi-Source Directed Solver)</h3>
+<p>利用广度优先搜索（BFS）与有向图状态传递，完整模拟灵泉在网格中的流动：</p>
+<p>$<span class="math"><em>\text{ActivePorts}(T) = \text{Rotate}(\text{BasePorts}(T), \theta_T)</em></span>$</p>
+<p>对于相邻两个格子 <span class="math"><em>A</em></span> 和 <span class="math"><em>B</em></span>（<span class="math"><em>B</em></span> 在 <span class="math"><em>A</em></span> 的出向 <span class="math"><em>D_{out}</em></span>，相对应的入向为 <span class="math"><em>D_{in} = \text{Opposite}(D_{out})</em></span>）：</p>
+<p>1. <strong>端口匹配条件</strong>：<span class="math"><em>(\text{ActivePorts}(A) \ \& \ D_{out}) \neq 0</em></span> 且 <span class="math"><em>(\text{ActivePorts}(B) \ \& \ D_{in}) \neq 0</em></span>；</p>
+<p>2. <strong>开关导通条件</strong>：若 <span class="math"><em>A</em></span> 或 <span class="math"><em>B</em></span> 为 <code>switch</code>，其 <code>switchClosed</code> 必须为 <code>true</code>；</p>
+<p>3. <strong>单向阀方向条件</strong>：若 <span class="math"><em>B</em></span> 为 <code>diode</code>，进入方向必须严格等于 <span class="math"><em>\text{AllowedInDir}(B)</em></span>：</p>
+<p>   $<span class="math"><em>\text{AllowedInDir}(B) = \text{Rotate}(\text{Direction.LEFT}, \theta_B)</em></span>$</p>
+<p>4. 只有同时满足上述三项条件，边 <span class="math"><em>A \to B</em></span> 才被激活，水流方可向前传导。</p>
+<h3 id="5-3-唯一解与歧义过滤算法-uniqueness-ambiguity-pruning">5.3 唯一解与歧义过滤算法 (Uniqueness & Ambiguity Pruning)</h3>
+<p>为防止“死管意外转出一个未预期的偷跑捷径”，求解器进行<strong>全状态解空间搜索（Solution Space Analysis）</strong>：</p>
+<ul>
+<li>遍历所有非锁定元件的朝向组合（针对可能形成歧义的局部子图进行剪枝）；</li>
+<li>检验是否存在第二种合法的点亮全盘配置；</li>
+<li>若存在意外解且该解的步数小于设计 Par 步数，则在意外通路上自动插入阻断地脉石或调整诱饵朝向，确保关卡核心解法符合设计意图。</li>
+</ul>
+<h3 id="5-4-确定性扰动混淆算法-deterministic-scrambling">5.4 确定性扰动混淆算法 (Deterministic Scrambling)</h3>
+<p>原版随机转动导致很多管线“碰巧正好对齐”。重构算法采用<strong>针对性反向扰动策略</strong>：</p>
+<p>1. <strong>必经枢纽元件（Critical Junctions）</strong>：偏转角度固定设置为与正解垂直（即 <span class="math"><em>+90^\circ</em></span> 或 <span class="math"><em>+270^\circ</em></span>），确保开局时绝不处于偶合导通状态；</p>
+<p>2. <strong>开关元件（Switches）</strong>：初始状态统一强制设为断开 (<code>switchClosed: false</code>)；</p>
+<p>3. <strong>单向阀元件（Diodes）</strong>：偏转 <span class="math"><em>+180^\circ</em></span>（反向）或 <span class="math"><em>+90^\circ</em></span>（切向），形成明显的视觉障碍；</p>
+<p>4. <strong>随机种子（PRNG）</strong>：采用 <code>LevelId * 7919 + Salt</code> 伪随机数发生器，确保每一次构建生成完全确定、稳定可重现。</p>
+<h3 id="5-5-步数预算与星级难度公式-par-step-scoring-model">5.5 步数预算与星级难度公式 (Par Step & Scoring Model)</h3>
+<p>为关卡建立精准的最优步数模型：</p>
+<p>$<span class="math"><em>S_{min} = \sum_{T \in \text{Rotatable}} \text{MinSteps}(\theta_{\text{initial}}, \theta_{\text{solved}}) + \sum_{S \in \text{Switches}} (\text{if } S \text{ needs toggle then } 1 \text{ else } 0)</em></span>$</p>
+<ul>
+<li><strong>最优步数（Par Step）</strong>：<span class="math"><em>S_{min}</em></span></li>
+<li><strong>三星评价（⭐⭐⭐）</strong>：实际步数 <span class="math"><em>\le S_{min} + 2</em></span></li>
+<li><strong>二星评价（⭐⭐）</strong>：<span class="math"><em>S_{min} + 2 < \text{实际步数} \le \text{Round}(S_{min} \times 1.5)</em></span></li>
+<li><strong>一星通过（⭐）</strong>：<span class="math"><em>\text{Round}(S_{min} \times 1.5) < \text{实际步数} \le \text{MaxSteps}</em></span></li>
+<li><strong>最大容错步数（MaxSteps）</strong>：</li>
+<p>  $<span class="math"><em>\text{MaxSteps} = S_{min} \times 2 + 6</em></span>$</p>
+</ul>
+<hr />
+<h2 id="6-ui-ux-操作反馈与动效时序">6. UI/UX、操作反馈与动效时序</h2>
+<h3 id="6-1-视觉层级与移动端画幅适配">6.1 视觉层级与移动端画幅适配</h3>
+<ul>
+<li><strong>基准画幅</strong>：9:16 / 9:19.5（如 Pixel 5 的 <span class="math"><em>1080 \times 2340</em></span> 竖屏分辨率），支持 Android 沉浸式状态栏与底部安全区（Safe Area）；</li>
+<li><strong>主棋盘呈现</strong>：</li>
+<li>居中自适应，内边距保证四周留白 <span class="math"><em>\ge 16\text{px}</em></span>；</li>
+<li>每个方格采用墨绿玉石背景卡片（带有微发光圆角阴影）；</li>
+<li>水管通水前为深黛色冷玉，通水后瞬间转化为<strong>青碧流光（#38bdf8 / #34d399）</strong>，附带顺流游动的活水粒子波纹。</li>
+</ul>
+<h3 id="6-2-交互响应与触感反馈-haptics-audio">6.2 交互响应与触感反馈 (Haptics & Audio)</h3>
+<div class="table-container"><table>
+<thead><tr>
+<th>玩家操作</th>
+<th>触发事件</th>
+<th>视觉动效 (Visual)</th>
+<th>声音反馈 (Audio)</th>
+<th>震动触感 (Haptics)</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>点击旋转管线</strong></td>
+<td><code>pointerdown</code></td>
+<td>元件顺时针平滑旋转 90° (CSS transform 150ms spring)</td>
+<td>清脆玉石撞击音 (<code>wood_click</code>)</td>
+<td>轻微轻触 (Light, 10ms)</td>
+</tr>
+<tr>
+<td><strong>点击闸刀开关</strong></td>
+<td><code>pointerdown</code></td>
+<td>闸刀从倾斜45°合拢贴平或弹开</td>
+<td>沉闷机关卡扣音 (<code>switch_toggle</code>)</td>
+<td>机械顿挫 (Medium, 20ms)</td>
+</tr>
+<tr>
+<td><strong>水脉接通贯流</strong></td>
+<td>电路仿真完成</td>
+<td>沿连通边依次点亮粒子光效 (传播时延 30ms/格)</td>
+<td>泉水汩汩流动流水音 (<code>water_flow</code>)</td>
+<td>持续微震 (Wave)</td>
+</tr>
+<tr>
+<td><strong>仙蕾绽放吐蕊</strong></td>
+<td>目标花蕾通水</td>
+<td>花瓣舒展展开，放射七彩粒子光晕，悬浮发光</td>
+<td>空灵古筝泛音 (<code>flower_bloom</code>)</td>
+<td>柔和共振 (Success, 40ms)</td>
+</tr>
+<tr>
+<td><strong>通关胜利结算</strong></td>
+<td>全目标达成</td>
+<td>弹出胜利横幅与仙花图鉴收录卡，满屏七彩纸屑</td>
+<td>仙侠清雅通关雅乐 (<code>victory_chord</code>)</td>
+<td>胜利三重震 (Double Heavy)</td>
+</tr>
+</tbody></table></div>
+<hr />
+<h2 id="7-数值平衡与算例推演">7. 数值平衡与算例推演</h2>
+<p>以 <strong>第 25 关【双源初现】</strong> 为典型多源算例进行严密推演：</p>
+<h3 id="7-1-关卡初始配置">7.1 关卡初始配置</h3>
+<ul>
+<li><strong>网格</strong>：6×6</li>
+<li><strong>水源 A</strong>：位于 <code>(1,0)</code>，出水口向右；</li>
+<li><strong>水源 B</strong>：位于 <code>(4,0)</code>，出水口向右；</li>
+<li><strong>目标花 A</strong>：位于 <code>(1,5)</code>，仙品【双泉玉蕊 A】；</li>
+<li><strong>目标花 B</strong>：位于 <code>(4,5)</code>，仙品【双泉玉蕊 B】；</li>
+<li><strong>地脉锁石</strong>：位于 <code>(2,2)</code> 与 <code>(3,2)</code>，彻底封死两源纵向互通的可能；</li>
+<li><strong>关键可操作元件</strong>：</li>
+<li><code>(1,1)</code> 直管（初始垂直 90°，正解水平 0°，需 1 步）；</li>
+<li><code>(1,2)</code> 弯管（初始 0°，正解 90°，需 1 步）；</li>
+<li><code>(0,2)</code> 弯管（初始 180°，正解 0°，需 2 步）；</li>
+<li><code>(0,3)</code> 直管（初始 90°，正解 0°，需 1 步）；</li>
+<li><code>(0,4)</code> 弯管（初始 90°，正解 90°，需 0 步）；</li>
+<li><code>(1,4)</code> 弯管（初始 270°，正解 180°，需 3 步 = 逆转 1 步）；</li>
+<li>南路同理布置 6 个元件，总计初始状态需逆向操作 12 步。</li>
+</ul>
+<h3 id="7-2-算例对账与步数判定">7.2 算例对账与步数判定</h3>
+<ul>
+<li><strong>Par 最优步数</strong>：<span class="math"><em>S_{min} = 12</em></span> 步；</li>
+<li><strong>三星评价</strong>：<span class="math"><em>\le 14</em></span> 步；</li>
+<li><strong>二星评价</strong>：<span class="math"><em>15 \sim 18</em></span> 步；</li>
+<li><strong>容错上限（MaxSteps）</strong>：<span class="math"><em>12 \times 2 + 6 = 30</em></span> 步；</li>
+<li><strong>玩家行为路线对比</strong>：</li>
+<li><em>路线 1（神级推演）</em>：从两朵花反向推导，只旋转真正通路上的 10 个元件，花费 12 步，达成 ⭐⭐⭐ 卓越评级；</li>
+<li><em>路线 2（盲目试错）</em>：误以为中间可以纵向连通，在无效区域点击了 5 次，随后修正并连通，总耗费 17 步，达成 ⭐⭐ 良好评级；</li>
+<li><em>路线 3（步数耗尽失败）</em>：在第 30 步仍未接通南路，触发步数耗尽弹窗，提供“撤销上一步”或“复位重做”选项，保护玩家挫败感。</li>
+</ul>
+<hr />
+<h2 id="8-验收-回归测试与-qa-自动化规范">8. 验收、回归测试与 QA 自动化规范</h2>
+<p>为落实制作人对于工程质量与交付真实性的要求，本设计书配套<strong>严格的自动化验收判定器</strong>，由脚本与 CI/CD 自动化执行：</p>
+<h3 id="8-1-自动化测试四重门禁-4-gate-verification">8.1 自动化测试四重门禁 (4-Gate Verification)</h3>
+<p>1. <strong>门禁一：静态数据合规性校验（Schema Check）</strong></p>
+<ul>
+<li>99 关必须逐一具备唯一的 <code>id (1~99)</code>, <code>code ("01"~"99")</code>, <code>title</code>, <code>subtitle</code>, <code>hintText</code>, <code>winText</code>, <code>maxSteps</code>, <code>gridRows: 6</code>, <code>gridCols: 6</code>, <code>tiles (36 elements)</code>；</li>
+<li>禁止任何空字段、禁止 <code>maxSteps <= 0</code>。</li>
+<p>2. <strong>门禁二：数学仿真 100% 可解性验证（Solvability Check）</strong></p>
+<li>对 99 关的正解状态 <code>solvedTiles</code> 运行 <code>simulateCircuit(solvedTiles, 6, 6)</code>；</li>
+<li>必须满足：<code>sim.isAllLit === true</code> 且 <code>sim.litCount === level.targetBulbCount</code>；</li>
+<li>任何一关未全通立即抛出异常阻止打包。</li>
+<p>3. <strong>门禁三：初始态非平凡性与死锁检查（Non-Triviality Check）</strong></p>
+<li>运行初始扰动后的 <code>tiles</code>；</li>
+<li>必须满足：初始状态点亮的目标花数 <code>initialLitCount === 0</code>（开局绝不能自动通关）；</li>
+<li>初始可移动步数 <span class="math"><em>S_{min} \ge \text{ChapterMinSteps}</em></span>。</li>
+<p>4. <strong>门禁四：真机运行与模拟器视觉回归（Visual QA Regression）</strong></p>
+<li>针对第 1 关、第 2 关、第 4 关、第 25 关（双源）、第 41 关（二极管）、第 61 关（复合）、第 99 关（终极大考）执行模拟器自动化触控注入；</li>
+<li>截取高清屏幕截图，验证花谱收录、生机进度增长与胜利横幅弹出无异常。</li>
+</ul>
+<hr />
+<blockquote><strong>结语</strong>：本设计书彻底终结了原版“第四关难度陡降、后续千篇一律”的缺陷，通过五大篇章的机制递进、严密的图论拓扑算法与完备的 99 关逐关清单，为《神树灵泉 · 唤醒百花》确立了坚实、耐玩且极富东方仙韵的关卡品质标杆。</blockquote>
+
+    <div class="footer">
+      《神树灵泉 · 唤醒百花》核心策划团队出品 · 遵循 GameAutoMaker 统一设计书技术规范
+    </div>
+  </div>
+</body>
+</html>

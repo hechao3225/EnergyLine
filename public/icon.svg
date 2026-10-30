@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b" />
+      <stop offset="50%" stop-color="#047857" />
+      <stop offset="100%" stop-color="#022c22" />
+    </linearGradient>
+    <linearGradient id="waterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#67e8f9" />
+      <stop offset="50%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="50%" stop-color="#facc15" />
+      <stop offset="100%" stop-color="#ca8a04" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background with subtle jade border -->
+  <rect width="512" height="512" rx="108" fill="url(#bgGrad)" />
+  <rect x="12" y="12" width="488" height="488" rx="96" fill="none" stroke="#34d399" stroke-width="4" stroke-opacity="0.35" />
+
+  <!-- Sacred Tree Rings & Ancient Runes -->
+  <circle cx="256" cy="265" r="170" fill="none" stroke="#10b981" stroke-width="2" stroke-opacity="0.25" stroke-dasharray="8 6" />
+  <circle cx="256" cy="265" r="140" fill="none" stroke="#34d399" stroke-width="2" stroke-opacity="0.3" />
+
+  <!-- Sacred Spring Glowing Water Paths (Circuit channels) -->
+  <path d="M 256 390 L 256 310 Q 256 265 210 265 L 140 265" fill="none" stroke="url(#waterGrad)" stroke-width="14" stroke-linecap="round" filter="url(#glow)" />
+  <path d="M 256 310 Q 256 265 302 265 L 372 265" fill="none" stroke="url(#waterGrad)" stroke-width="14" stroke-linecap="round" filter="url(#glow)" />
+  <path d="M 256 310 L 256 160" fill="none" stroke="url(#waterGrad)" stroke-width="14" stroke-linecap="round" filter="url(#glow)" />
+
+  <!-- Jade Water Well / Source at Center-Bottom -->
+  <circle cx="256" cy="390" r="34" fill="#047857" stroke="#6ee7b7" stroke-width="6" />
+  <circle cx="256" cy="390" r="20" fill="url(#waterGrad)" filter="url(#glow)" />
+  <circle cx="256" cy="390" r="8" fill="#ffffff" />
+
+  <!-- Left Lotus Bulb Node -->
+  <circle cx="140" cy="265" r="28" fill="#065f46" stroke="#34d399" stroke-width="4" />
+  <path d="M 140 248 C 128 260 128 274 140 282 C 152 274 152 260 140 248 Z" fill="#f472b6" filter="url(#glow)" />
+
+  <!-- Right Lotus Bulb Node -->
+  <circle cx="372" cy="265" r="28" fill="#065f46" stroke="#34d399" stroke-width="4" />
+  <path d="M 372 248 C 360 260 360 274 372 282 C 384 274 384 260 372 248 Z" fill="#f472b6" filter="url(#glow)" />
+
+  <!-- Sacred Blossom at Tree Peak -->
+  <g transform="translate(256, 150)">
+    <circle cx="0" cy="0" r="42" fill="#065f46" stroke="url(#goldGrad)" stroke-width="6" />
+    <!-- Flower Petals -->
+    <path d="M 0 -24 C -12 -12 -12 6 0 16 C 12 6 12 -12 0 -24 Z" fill="#fb7185" />
+    <path d="M -24 0 C -12 -12 6 -12 16 0 C 6 12 -12 12 -24 0 Z" fill="#f472b6" />
+    <path d="M 0 24 C -12 12 -12 -6 0 -16 C 12 -6 12 12 0 24 Z" fill="#fb7185" />
+    <path d="M 24 0 C 12 -12 -6 -12 -16 0 C -6 12 12 12 24 0 Z" fill="#f472b6" />
+    <!-- Golden Core -->
+    <circle cx="0" cy="0" r="12" fill="url(#goldGrad)" filter="url(#glow)" />
+    <circle cx="0" cy="0" r="4" fill="#ffffff" />
+  </g>
+
+  <!-- Glowing Water Droplets / Spiritual Infusion -->
+  <circle cx="256" cy="220" r="7" fill="#a5f3fc" filter="url(#glow)" />
+  <circle cx="210" cy="265" r="6" fill="#a5f3fc" filter="url(#glow)" />
+  <circle cx="302" cy="265" r="6" fill="#a5f3fc" filter="url(#glow)" />
+  <circle cx="256" cy="340" r="7" fill="#a5f3fc" filter="url(#glow)" />
+</svg>

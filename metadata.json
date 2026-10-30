@@ -1,0 +1,6 @@
+{
+  "name": "蜂巢供能",
+  "description": "让每一盏灯，都找到回家的电流。极简清爽的电路导线旋转与供能解谜游戏。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
