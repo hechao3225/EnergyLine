@@ -94,38 +94,48 @@ export const TileView: React.FC<TileViewProps> = ({
       onTouchStart={startPress}
       onTouchEnd={endPress}
       onTouchCancel={endPress}
-      className={`relative w-full aspect-square rounded-[14px] sm:rounded-[20px] select-none flex items-center justify-center transition-colors duration-200 ${
+      className={`relative w-full aspect-square rounded-[14px] sm:rounded-[20px] select-none flex items-center justify-center transition-all duration-200 ${
         tile.type === 'empty'
-          ? 'bg-[#e2e9dd]/70'
+          ? 'bg-transparent'
           : isPowered
-          ? 'bg-[#eef8f5] border-2 border-[#10b981] shadow-[0_2px_14px_rgba(16,185,129,0.22)]'
-          : 'bg-[#ffffff] border-2 border-[#d9e2d3] hover:border-[#b4c5ad]'
-      } ${isRotatable ? 'cursor-pointer hover:shadow-xs active:scale-[0.98]' : ''}`}
+          ? 'bg-emerald-500/[0.08] shadow-[inset_0_0_12px_rgba(16,185,129,0.22)] border border-emerald-400/40'
+          : isRotatable
+          ? 'bg-emerald-950/[0.03] border border-emerald-900/10 hover:border-emerald-700/30 hover:bg-emerald-900/[0.06] shadow-[inset_0_1px_2px_rgba(0,0,0,0.04)]'
+          : 'bg-transparent'
+      } ${isRotatable ? 'cursor-pointer hover:shadow-xs active:scale-[0.97]' : ''}`}
     >
       {/* Empty slot dot */}
       {tile.type === 'empty' && (
-        <div className="w-2 h-2 rounded-full bg-[#9bb0a3]" />
+        <div className="w-1.5 h-1.5 rounded-full bg-emerald-900/25" />
       )}
 
       {/* Spring Eye (Source) Tile: Ancient Stone Well with bubbling life spring */}
       {tile.type === 'battery' && (
         <div className="absolute inset-0 w-full h-full overflow-visible pointer-events-none flex items-center justify-center">
           <svg viewBox="0 0 80 80" className="w-full h-full overflow-visible">
+            {/* Outer carved jadeite channel groove into right neighbor */}
+            <path
+              d="M50 40h35"
+              stroke="#223328"
+              strokeWidth="15"
+              strokeLinecap="round"
+            />
             {/* Water conduit output into the right neighbor */}
             <path
-              d="M56 40h29"
+              d="M50 40h35"
               stroke="#0d9488"
-              strokeWidth="11"
+              strokeWidth="10.5"
               strokeLinecap="round"
             />
             <path
-              d="M56 40h29"
+              d="M50 40h35"
               stroke="#38bdf8"
-              strokeWidth="3.5"
+              strokeWidth="3.8"
               strokeDasharray="6 4"
+              strokeLinecap="round"
               className="animate-[dash_1s_linear_infinite]"
             />
-            <circle cx="70" cy="40" r="3" fill="#fef08a" />
+            <circle cx="70" cy="40" r="3.2" fill="#fef08a" stroke="#0d9488" strokeWidth="1" />
 
             {/* Sacred Spring Eye Totem */}
             <image
@@ -144,15 +154,15 @@ export const TileView: React.FC<TileViewProps> = ({
       {/* Flower Bud / Blooming Flower Tile (Goal) */}
       {tile.type === 'bulb' && (
         <div className="absolute inset-0 w-full h-full overflow-visible pointer-events-none flex items-center justify-center">
-          {/* Decorative Jade Base Ring */}
+          {/* Decorative Jade Altar Pedestal Ring */}
           <svg viewBox="0 0 80 80" className="w-full h-full overflow-visible absolute inset-0">
             <circle
               cx="40"
               cy="40"
               r="28"
-              fill={isLit ? '#e6fcf1' : '#f0f5ee'}
-              stroke={isLit ? '#10b981' : '#bacbbb'}
-              strokeWidth="2"
+              fill={isLit ? 'rgba(16, 185, 129, 0.12)' : 'rgba(34, 51, 40, 0.04)'}
+              stroke={isLit ? '#10b981' : '#6b8a76'}
+              strokeWidth="1.5"
               strokeDasharray={isLit ? 'none' : '4 3'}
             />
             {isLit && (

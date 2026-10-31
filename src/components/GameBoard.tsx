@@ -84,9 +84,9 @@ export const GameBoard: React.FC<GameBoardProps> = ({
                   return (
                     <div
                       key={`empty-${r}-${c}`}
-                      className="w-full aspect-square rounded-[10px] sm:rounded-xl bg-[#e5ebe0]/40 flex items-center justify-center"
+                      className="w-full aspect-square flex items-center justify-center"
                     >
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#9eb1a4]" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-900/20" />
                     </div>
                   );
                 }
