@@ -59,25 +59,25 @@ export const UndoHistoryTimeline: React.FC<UndoHistoryTimelineProps> = ({
 
   if (compact) {
     return (
-      <div className="w-full flex items-center justify-between gap-1.5 px-2 py-1 bg-white/90 border border-[#dce3d5] rounded-xl shadow-xs shrink-0">
+      <div className="w-full flex items-center justify-between gap-1.5 px-2.5 py-1 jade-panel shrink-0 select-none">
         <button
           onClick={onUndo}
           disabled={!canUndo}
-          className={`flex items-center gap-0.5 px-2 py-1 text-xs font-semibold rounded-lg transition-all ${
+          className={`flex items-center gap-0.5 px-2.5 py-1 text-xs font-bold rounded-lg transition-all ${
             canUndo
-              ? 'bg-[#edf3e8] text-[#1c2e27] active:scale-95 cursor-pointer'
-              : 'opacity-35 text-slate-400 cursor-not-allowed'
+              ? 'jade-button cursor-pointer'
+              : 'opacity-35 text-slate-400 cursor-not-allowed bg-[#edf3e8]'
           }`}
           title="撤销 (Ctrl+Z)"
         >
           <Undo2 className="w-3.5 h-3.5" />
-          <span className="text-[11px]">撤销</span>
+          <span className="text-[11px] whitespace-nowrap">撤销</span>
         </button>
 
         {/* Center: Scrollable Step Node Pills + Current Step Tag */}
         <div
           ref={containerRef}
-          className="flex-1 flex items-center gap-1 overflow-x-auto py-0.5 px-1 no-scrollbar justify-center"
+          className="flex-1 flex items-center gap-1.5 overflow-x-auto py-0.5 px-1 no-scrollbar justify-center"
         >
           {timeline.map((snapshot, idx) => {
             const isCurrent = idx === currentIndex;
@@ -89,10 +89,10 @@ export const UndoHistoryTimeline: React.FC<UndoHistoryTimelineProps> = ({
                 onClick={() => onJumpToStep(idx)}
                 className={`shrink-0 w-6 h-6 rounded-full text-[10px] font-mono font-bold flex items-center justify-center transition-all cursor-pointer ${
                   isCurrent
-                    ? 'bg-[#0d9488] text-white shadow-xs ring-2 ring-teal-400/50 scale-105'
+                    ? 'jade-button-active scale-105'
                     : idx < currentIndex
-                    ? 'bg-[#dff0e6] text-[#0f766e]'
-                    : 'bg-[#edf2e7] text-slate-400'
+                    ? 'bg-[#d8e8dd] text-[#144230] border border-[#a8c4b2]'
+                    : 'bg-[#e5eee3] text-slate-400 border border-[#cadacb]'
                 }`}
                 title={`第 ${idx} 步: ${snapshot.description}`}
               >
@@ -105,7 +105,7 @@ export const UndoHistoryTimeline: React.FC<UndoHistoryTimelineProps> = ({
         {currentIndex > 1 && onResetToStart && (
           <button
             onClick={onResetToStart}
-            className="p-1 text-[#55695d] hover:text-[#1c2e27] hover:bg-[#edf3e8] rounded-md transition-colors cursor-pointer"
+            className="p-1 text-[#436252] hover:text-[#0e2a1d] jade-button rounded-md transition-colors cursor-pointer"
             title="复位至初始状态"
           >
             <RotateCcw className="w-3 h-3" />
@@ -115,14 +115,14 @@ export const UndoHistoryTimeline: React.FC<UndoHistoryTimelineProps> = ({
         <button
           onClick={onRedo}
           disabled={!canRedo}
-          className={`flex items-center gap-0.5 px-2 py-1 text-xs font-semibold rounded-lg transition-all ${
+          className={`flex items-center gap-0.5 px-2.5 py-1 text-xs font-bold rounded-lg transition-all ${
             canRedo
-              ? 'bg-teal-600 text-white active:scale-95 cursor-pointer'
-              : 'opacity-35 text-slate-400 cursor-not-allowed'
+              ? 'jade-button cursor-pointer'
+              : 'opacity-35 text-slate-400 cursor-not-allowed bg-[#edf3e8]'
           }`}
           title="重做 (Ctrl+Y)"
         >
-          <span className="text-[11px]">重做</span>
+          <span className="text-[11px] whitespace-nowrap">重做</span>
           <Redo2 className="w-3.5 h-3.5" />
         </button>
       </div>

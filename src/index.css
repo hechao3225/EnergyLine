@@ -88,3 +88,55 @@ html, body {
   display: flex;
   flex-direction: column;
 }
+
+/* ========================================================
+   国风青玉金丝统一装饰体系 (统一全界面区域面板与边框)
+   ======================================================== */
+.jade-panel {
+  background: linear-gradient(180deg, rgba(248, 251, 247, 0.94) 0%, rgba(239, 246, 239, 0.94) 50%, rgba(233, 242, 232, 0.94) 100%);
+  border: 1px solid rgba(135, 165, 148, 0.75);
+  box-shadow: 0 2px 8px rgba(18, 45, 32, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.jade-panel-hover {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.jade-panel-hover:hover {
+  background: linear-gradient(180deg, rgba(253, 255, 252, 0.97) 0%, rgba(244, 250, 244, 0.97) 50%, rgba(238, 246, 237, 0.97) 100%);
+  border-color: rgba(110, 150, 128, 0.9);
+  box-shadow: 0 4px 12px rgba(18, 45, 32, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+.jade-button {
+  background: linear-gradient(180deg, #f2f7f1 0%, #e3ede2 100%);
+  border: 1px solid #afc6b7;
+  color: #1b382a;
+  box-shadow: 0 1px 2px rgba(20, 45, 30, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  transition: all 0.15s ease;
+}
+.jade-button:hover {
+  background: linear-gradient(180deg, #f8fcf7 0%, #ebf3ea 100%);
+  border-color: #8dafa0;
+  color: #10291e;
+}
+.jade-button:active {
+  transform: scale(0.96);
+  box-shadow: inset 0 1px 2px rgba(20, 40, 30, 0.15);
+}
+
+.jade-button-active {
+  background: linear-gradient(180deg, #1c5e46 0%, #124332 100%);
+  border: 1px solid #0f392a;
+  color: #ffffff !important;
+  box-shadow: 0 2px 6px rgba(16, 60, 44, 0.28), inset 0 1px 0 rgba(110, 231, 183, 0.45);
+}
+
+.jade-pill {
+  background: linear-gradient(180deg, #edf4eb 0%, #e1ebe0 100%);
+  border: 1px solid #b6ccbf;
+  color: #1a3629;
+}
+

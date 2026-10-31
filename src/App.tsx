@@ -530,7 +530,6 @@ export default function App() {
         onOpenRules={() => setIsRulesOpen(true)}
         onOpenStory={() => setIsStoryOpen(true)}
         onOpenFloraCompendium={() => setIsFloraOpen(true)}
-        onOpenAndroidModal={() => setIsAndroidModalOpen(true)}
         isFullscreen={isFullscreen}
         onToggleFullscreen={handleToggleFullscreen}
       />
@@ -539,23 +538,23 @@ export default function App() {
       <main className="flex-1 flex flex-col justify-center overflow-hidden min-h-0 w-full">
         {currentView === 'story' && (
           <>
-            {/* Mobile Dedicated 21:9 & 19.5:9 Zero-Scroll Layout (< lg) */}
-            <div className="lg:hidden flex flex-col justify-between items-center h-full w-full px-2 pt-0.5 pb-[max(0.35rem,env(safe-area-inset-bottom,0px))] overflow-hidden select-none">
-              {/* Top Quick Status Bar */}
-              <div className="w-full max-w-[420px] flex items-center justify-between gap-1.5 px-3 py-1.5 bg-white/85 backdrop-blur-xs rounded-2xl border border-[#dce3d5] shadow-xs shrink-0">
+            {/* Mobile Dedicated 20:9 Zero-Scroll Layout (< lg) */}
+            <div className="lg:hidden flex flex-col justify-between items-center h-full w-full px-2.5 pt-1 pb-[max(0.5rem,env(safe-area-inset-bottom,0px))] overflow-hidden select-none gap-1.5">
+              {/* Top Quick Status Bar - Jade Panel */}
+              <div className="w-full max-w-[420px] flex items-center justify-between gap-1.5 px-3 py-1.5 jade-panel shrink-0">
                 {/* Level selector trigger */}
                 <button
                   onClick={() => setIsLevelSelectOpen(true)}
-                  className="flex items-center gap-1.5 text-left group cursor-pointer"
+                  className="flex items-center gap-2 text-left group cursor-pointer min-w-0"
                 >
-                  <div className="w-7 h-7 rounded-xl bg-teal-50 border border-teal-200 text-[#0d9488] flex items-center justify-center font-bold text-xs group-hover:bg-teal-100 transition-colors">
+                  <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-[#1b5e46] to-[#124533] text-white flex items-center justify-center font-bold text-xs shadow-xs border border-[#0f392a] shrink-0">
                     {activeLevelConfig.id}
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-xs font-bold text-[#1b2f27] truncate max-w-[110px]">
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-xs font-bold text-[#0e2a1d] truncate max-w-[110px] leading-tight">
                       {activeLevelConfig.title}
                     </span>
-                    <span className="text-[10px] text-[#55695f]">
+                    <span className="text-[10px] text-[#4b6757] leading-tight">
                       {bestStepsRecord[activeLevelConfig.id]
                         ? `最佳 ${bestStepsRecord[activeLevelConfig.id]} 步`
                         : '未完成'}
@@ -564,12 +563,12 @@ export default function App() {
                 </button>
 
                 {/* Center counters */}
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-1.5 shrink-0">
                   <div
                     className={`px-2 py-0.5 rounded-lg text-xs font-bold border ${
                       remainingSteps <= 3
-                        ? 'bg-red-50 text-red-600 border-red-200 animate-pulse'
-                        : 'bg-slate-50 text-[#1b2f27] border-slate-200'
+                        ? 'bg-red-50 text-red-700 border-red-300 animate-pulse'
+                        : 'jade-pill'
                     }`}
                   >
                     步数 {remainingSteps}
@@ -577,8 +576,8 @@ export default function App() {
                   <div
                     className={`px-2 py-0.5 rounded-lg text-xs font-bold border flex items-center gap-1 ${
                       simulation.isAllLit
-                        ? 'bg-emerald-100 text-emerald-800 border-emerald-300'
-                        : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                        ? 'bg-emerald-100 text-emerald-900 border-emerald-400'
+                        : 'jade-pill text-emerald-800'
                     }`}
                   >
                     <span>🌸</span>
@@ -589,37 +588,37 @@ export default function App() {
                 </div>
 
                 {/* Actions: Rules, Peek, Restart */}
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 shrink-0">
                   <button
                     onClick={() => setIsRulesOpen(true)}
                     title="规则说明"
-                    className="w-7 h-7 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center cursor-pointer transition-colors"
+                    className="w-7 h-7 rounded-xl jade-button flex items-center justify-center cursor-pointer"
                   >
-                    <BookOpen className="w-3.5 h-3.5" />
+                    <BookOpen className="w-3.5 h-3.5 text-emerald-800" />
                   </button>
                   <button
                     onClick={() => setIsPeekActive(!isPeekActive)}
                     title="透视水渠端口"
                     className={`w-7 h-7 rounded-xl flex items-center justify-center cursor-pointer transition-colors border ${
                       isPeekActive
-                        ? 'bg-amber-100 text-amber-800 border-amber-300'
-                        : 'bg-slate-100 text-slate-700 border-transparent hover:bg-slate-200'
+                        ? 'jade-button-active'
+                        : 'jade-button'
                     }`}
                   >
-                    <Eye className="w-3.5 h-3.5" />
+                    <Eye className="w-3.5 h-3.5 text-emerald-800" />
                   </button>
                   <button
                     onClick={handleRestart}
                     title="重置关卡"
-                    className="w-7 h-7 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center cursor-pointer transition-colors"
+                    className="w-7 h-7 rounded-xl jade-button flex items-center justify-center cursor-pointer"
                   >
-                    <RotateCcw className="w-3.5 h-3.5" />
+                    <RotateCcw className="w-3.5 h-3.5 text-emerald-800" />
                   </button>
                 </div>
               </div>
 
               {/* Sacred Tree Branch Growth Banner on Mobile */}
-              <div className="w-full max-w-[420px] shrink-0 my-0.5">
+              <div className="w-full max-w-[420px] shrink-0">
                 <SacredTreeBranchWidget
                   clearedCount={clearedLevels.length}
                   latestLevelId={clearedLevels[clearedLevels.length - 1] || 1}
@@ -628,7 +627,7 @@ export default function App() {
                 />
               </div>
 
-              {/* Center 6x6 Circuit Board */}
+              {/* Center 6x6 Circuit Board - Maximized for 20:9 Ratio */}
               <div className="flex-1 flex items-center justify-center w-full min-h-0 py-0.5">
                 <GameBoard
                   tiles={tiles}
@@ -655,30 +654,30 @@ export default function App() {
                   compact={true}
                 />
 
-                {/* Bottom Navigation Buttons */}
-                <div className="flex items-center justify-between gap-1.5 px-2.5 py-1.5 bg-white/70 rounded-xl border border-[#dce3d5]/80">
+                {/* Bottom Navigation Buttons - Jade Panel */}
+                <div className="flex items-center justify-between gap-1.5 px-3 py-1.5 jade-panel">
                   <button
                     onClick={() => setIsLevelSelectOpen(true)}
-                    className="flex items-center gap-1 px-2.5 py-1 text-xs font-semibold text-[#3d5348] hover:bg-white rounded-lg transition-colors cursor-pointer"
+                    className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold jade-button rounded-lg transition-colors cursor-pointer"
                   >
-                    <Grid className="w-3.5 h-3.5" />
+                    <Grid className="w-3.5 h-3.5 text-emerald-800" />
                     <span>选关 (1-99)</span>
                   </button>
 
                   <button
                     onClick={() => setShowMobileHint(!showMobileHint)}
-                    className={`flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
-                      showMobileHint ? 'bg-amber-100 text-amber-800' : 'text-[#3d5348] hover:bg-white'
+                    className={`flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-lg transition-colors cursor-pointer ${
+                      showMobileHint ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'jade-button'
                     }`}
                   >
-                    <Lightbulb className="w-3.5 h-3.5 text-amber-500" />
+                    <Lightbulb className="w-3.5 h-3.5 text-amber-600" />
                     <span>提示</span>
                   </button>
 
                   {remainingSteps <= 0 && !simulation.isAllLit ? (
                     <button
                       onClick={() => setRemainingSteps((s) => s + 10)}
-                      className="flex items-center gap-1 px-2.5 py-1 text-xs font-bold text-red-700 bg-red-100 hover:bg-red-200 rounded-lg transition-colors cursor-pointer animate-bounce"
+                      className="flex items-center gap-1 px-2.5 py-1 text-xs font-bold text-red-800 bg-red-100 hover:bg-red-200 border border-red-300 rounded-lg transition-colors cursor-pointer animate-bounce"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       <span>+10步</span>
@@ -686,25 +685,25 @@ export default function App() {
                   ) : simulation.isAllLit ? (
                     <button
                       onClick={handleNextLevel}
-                      className="flex items-center gap-1 px-3 py-1 text-xs font-bold text-white bg-[#0d9488] hover:bg-[#0f766e] rounded-lg shadow-xs transition-colors cursor-pointer"
+                      className="flex items-center gap-1 px-3 py-1 text-xs font-bold jade-button-active rounded-lg transition-colors cursor-pointer"
                     >
                       <span>下一关</span>
                       <ChevronRight className="w-3.5 h-3.5" />
                     </button>
                   ) : (
-                    <span className="text-[11px] text-[#697d72] px-1 truncate max-w-[130px]">
-                      {activeLevelConfig.gridRows}×{activeLevelConfig.gridCols} 电路
+                    <span className="text-[11px] text-[#4b6757] font-medium px-1 truncate max-w-[130px]">
+                      {activeLevelConfig.gridRows}×{activeLevelConfig.gridCols} 灵脉
                     </span>
                   )}
                 </div>
 
                 {/* Mobile Hint Popup bar if toggled */}
                 {showMobileHint && (
-                  <div className="px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 flex items-center justify-between">
+                  <div className="px-3 py-1.5 jade-panel border-amber-300 bg-amber-50/95 text-xs text-amber-900 flex items-center justify-between">
                     <span className="truncate">{activeLevelConfig.hintText}</span>
                     <button
                       onClick={() => setShowMobileHint(false)}
-                      className="text-amber-700 font-bold ml-2 text-xs cursor-pointer"
+                      className="text-amber-800 font-bold ml-2 text-xs cursor-pointer p-0.5"
                     >
                       ✕
                     </button>

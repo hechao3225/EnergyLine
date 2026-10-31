@@ -38,15 +38,15 @@ export const SacredTreeBranchWidget: React.FC<SacredTreeBranchWidgetProps> = ({
   return (
     <div
       onClick={onClickTree}
-      className={`group px-2.5 py-1.5 rounded-2xl bg-white/85 hover:bg-white border transition-all cursor-pointer flex items-center justify-between gap-2.5 shadow-xs ${
+      className={`group px-3 py-1.5 jade-panel jade-panel-hover cursor-pointer flex items-center justify-between gap-2.5 ${
         isSprouting
-          ? 'border-emerald-400 ring-2 ring-emerald-300/60 shadow-emerald-500/20'
-          : 'border-[#d6dfce]'
+          ? 'ring-2 ring-emerald-400/80 shadow-[0_0_15px_rgba(52,211,153,0.35)]'
+          : ''
       }`}
       title="点击查看99关通天神木生长全景"
     >
       {/* Chapter Medallion & Title */}
-      <div className="flex items-center gap-2 min-w-0">
+      <div className="flex items-center gap-2.5 min-w-0">
         <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full p-0.5 flex items-center justify-center shrink-0 drop-shadow-sm">
           <img
             src={CHAPTER_BADGES[flower.chapter] || chapterBadge1}
@@ -60,14 +60,14 @@ export const SacredTreeBranchWidget: React.FC<SacredTreeBranchWidgetProps> = ({
 
         <div className="flex flex-col min-w-0">
           <div className="flex items-center gap-1.5">
-            <span className="text-xs font-bold text-[#143526] leading-none truncate">
+            <span className="text-xs sm:text-sm font-bold text-[#0e2a1d] leading-none whitespace-nowrap">
               {flower.chapterName}
             </span>
-            <span className="text-[10px] text-emerald-700 bg-emerald-100/90 px-1.5 py-0.2 rounded font-mono font-bold shrink-0">
+            <span className="text-[10px] text-emerald-800 bg-[#deede1] px-1.5 py-0.2 rounded border border-[#afcbb9] font-mono font-bold shrink-0">
               {clearedCount}/99
             </span>
           </div>
-          <span className="text-[10px] text-[#526e60] mt-0.5 truncate">
+          <span className="text-[10px] text-[#4b6757] mt-0.5 truncate">
             {isSprouting ? '💧 灵泉涌动 · 萌发新芽！' : `第 ${flower.chapter} 卷 · 滋养神木主脉`}
           </span>
         </div>
