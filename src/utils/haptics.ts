@@ -54,6 +54,16 @@ class HapticEngine {
     }
   }
 
+  // Solid 26ms heavy click when toggling sluice gate switch
+  public tapHeavy() {
+    if (!this.enabled || !this.isSupported()) return;
+    try {
+      navigator.vibrate(26);
+    } catch {
+      // ignore
+    }
+  }
+
   // Medium 22ms pulse when a channel completes or lights up a flower
   public pulseFlower() {
     if (!this.enabled || !this.isSupported()) return;

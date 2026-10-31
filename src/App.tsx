@@ -48,19 +48,21 @@ import bgMainImg from './assets/bg_main.jpg';
 
 function getTileActionDescription(tile: Tile, action: 'rotate' | 'switch'): string {
   if (action === 'switch') {
-    return `切换 (${tile.row + 1}, ${tile.col + 1}) 开关`;
+    return `切换 (${tile.row + 1}, ${tile.col + 1}) 水闸通断`;
   }
-  let name = '导线';
+  let name = '水渠';
   if (tile.type === 'line') name = '直管';
   else if (tile.type === 'corner') name = '弯管';
   else if (tile.type === 't_shape') name = '三通';
   else if (tile.type === 'cross') name = '十字';
+  else if (tile.type === 'switch') name = '水闸水渠';
+  else if (tile.type === 'diode') name = '单向灵梭';
   return `旋转 (${tile.row + 1}, ${tile.col + 1}) ${name}`;
 }
 
 export default function App() {
   const [currentView, setCurrentView] = useState<GameView>('story');
-  const [levelIndex, setLevelIndex] = useState<number>(2); // Defaults to Level 2 (Screenshot 1)
+  const [levelIndex, setLevelIndex] = useState<number>(24); // Defaults to Level 24 (断脉之桥)
   const [customLevel, setCustomLevel] = useState<LevelConfig | null>(null);
   const [isLevelSelectOpen, setIsLevelSelectOpen] = useState<boolean>(false);
   const [isPeekActive, setIsPeekActive] = useState<boolean>(false);
@@ -68,13 +70,7 @@ export default function App() {
   const [showVictoryModal, setShowVictoryModal] = useState<boolean>(false);
   const [isProfileOpen, setIsProfileOpen] = useState<boolean>(false);
   const [isRulesOpen, setIsRulesOpen] = useState<boolean>(false);
-  const [isStoryOpen, setIsStoryOpen] = useState<boolean>(() => {
-    try {
-      return !localStorage.getItem('sacred_tree_story_seen');
-    } catch {
-      return false;
-    }
-  });
+  const [isStoryOpen, setIsStoryOpen] = useState<boolean>(false);
   const [isFloraOpen, setIsFloraOpen] = useState<boolean>(false);
   const [isAndroidModalOpen, setIsAndroidModalOpen] = useState<boolean>(false);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(() => Boolean(typeof document !== 'undefined' && document.fullscreenElement));
@@ -328,7 +324,7 @@ export default function App() {
   }, [clearedLevels]);
 
   // Handle tile click (rotate 90° clockwise or toggle switch)
-  const handleTileClick = (clickedTile: Tile) => {
+  const handleTileClick = (clickedTile: Tile, action?: 'rotate' | 'toggle-switch') => {
     if (clickedTile.locked || clickedTile.type === 'empty') return;
 
     if (remainingSteps <= 0 && !simulation.isAllLit) {
@@ -340,8 +336,10 @@ export default function App() {
     let nextTiles: Tile[];
     let actionDesc = '';
 
-    if (clickedTile.type === 'switch') {
+    // Switch tile: toggle-switch action toggles open/close; otherwise rotates 90°
+    if (clickedTile.type === 'switch' && action === 'toggle-switch') {
       sound.playSwitch();
+      haptics.tapHeavy();
       hasToggledSwitchRef.current = true;
       actionDesc = getTileActionDescription(clickedTile, 'switch');
       nextTiles = tiles.map((t) => {
@@ -355,6 +353,7 @@ export default function App() {
       });
     } else {
       sound.playRotate();
+      haptics.tapLight();
       actionDesc = getTileActionDescription(clickedTile, 'rotate');
       nextTiles = tiles.map((t) => {
         if (t.id === clickedTile.id) {

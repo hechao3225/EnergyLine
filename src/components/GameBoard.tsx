@@ -15,7 +15,7 @@ interface GameBoardProps {
   gridCols: number;
   simulation: SimulationResult;
   isPeekActive: boolean;
-  onTileClick: (tile: Tile) => void;
+  onTileClick: (tile: Tile, action?: 'rotate' | 'toggle-switch') => void;
   onLongPressStart: () => void;
   onLongPressEnd: () => void;
   interactive?: boolean;

@@ -87,4 +87,22 @@ if (sim41_fwd.poweredTileIds.size <= sim41_rev.poweredTileIds.size) {
   throw new Error('顺水推舟顺流瓦片数应大于逆向阻水瓦片数！');
 }
 
-console.log('=== 全部测试通过 (4/4 PASS) ===');
+console.log('=== 5. 验证 第 24 关“断脉之桥”水闸旋转导通与 4 仙花通关 ===');
+const lvl24 = DEFAULT_LEVELS.find((l) => l.id === 24)!;
+const tiles24_solved = lvl24.tiles.map((t) => {
+  if (t.row === 3 && t.col === 1) return { ...t, rotation: 0 };
+  if (t.row === 2 && t.col === 4) return { ...t, rotation: 270 };
+  if (t.row === 1 && t.col === 4) return { ...t, rotation: 0 };
+  if (t.row === 4 && t.col === 4) return { ...t, rotation: 90, switchClosed: true }; // 旋转水闸管道为垂直并开闸导通
+  if (t.row === 5 && t.col === 4) return { ...t, rotation: 270 };
+  return t;
+});
+let sim24 = simulateCircuit(tiles24_solved, lvl24.gridRows, lvl24.gridCols);
+console.log(
+  `[PASS] 第24关对齐旋转水闸后：已点亮花朵 = ${sim24.litBulbIds.size} / ${sim24.totalBulbs}，通关状态 = ${sim24.isAllLit}`
+);
+if (!sim24.isAllLit) {
+  throw new Error('第 24 关水闸旋转并开启后应顺利点亮全部 4 朵花通关！');
+}
+
+console.log('=== 全部测试通过 (5/5 PASS) ===');

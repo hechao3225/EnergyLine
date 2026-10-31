@@ -20,7 +20,7 @@ interface TileViewProps {
   isPowered: boolean;
   isLit?: boolean;
   isPeekActive?: boolean;
-  onClick: (tile: Tile) => void;
+  onClick: (tile: Tile, action?: 'rotate' | 'toggle-switch') => void;
   onLongPressStart?: () => void;
   onLongPressEnd?: () => void;
   interactive?: boolean;
@@ -49,8 +49,13 @@ export const TileView: React.FC<TileViewProps> = ({
     if (longPressTimerRef.current) clearTimeout(longPressTimerRef.current);
     longPressTimerRef.current = setTimeout(() => {
       isLongPressTriggered.current = true;
-      onLongPressStart?.();
-    }, 450);
+      if (tile.type === 'switch' && interactive && !tile.locked) {
+        haptics.tapHeavy();
+        onClick(tile, 'toggle-switch');
+      } else {
+        onLongPressStart?.();
+      }
+    }, 400);
   };
 
   const endPress = () => {
@@ -70,7 +75,7 @@ export const TileView: React.FC<TileViewProps> = ({
     }
     if (isRotatable) {
       haptics.tapLight();
-      onClick(tile);
+      onClick(tile, 'rotate');
     }
   };
 
@@ -440,6 +445,51 @@ export const TileView: React.FC<TileViewProps> = ({
             )}
           </svg>
         </div>
+      )}
+
+      {/* Switch Sluice Gate Interactive Overlay: Center Toggle Seal + Corner Rotate Handle */}
+      {tile.type === 'switch' && (
+        <>
+          {/* Center Sluice Gate Touch Target: Toggle Open/Close */}
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+              if (interactive && !tile.locked) {
+                haptics.tapHeavy();
+                onClick(tile, 'toggle-switch');
+              }
+            }}
+            className="absolute z-20 w-[56%] h-[56%] rounded-full cursor-pointer flex items-center justify-center group active:scale-90 transition-transform"
+            title="点击开闭水闸"
+          >
+            {/* Emerald/Cinnabar State Seal Badge */}
+            <div
+              className={`px-1.5 py-0.2 rounded-full text-[9px] font-black tracking-tighter border shadow-xs transition-all pointer-events-none select-none flex items-center gap-0.5 ${
+                tile.switchClosed !== false
+                  ? 'bg-emerald-600/90 text-white border-emerald-300 shadow-[0_0_8px_rgba(16,185,129,0.7)]'
+                  : 'bg-rose-700/90 text-rose-100 border-rose-300 shadow-[0_0_8px_rgba(244,63,94,0.7)]'
+              }`}
+            >
+              <span className="w-1.5 h-1.5 rounded-full animate-pulse bg-white" />
+              <span>{tile.switchClosed !== false ? '通' : '断'}</span>
+            </div>
+          </div>
+
+          {/* Top-Right Dedicated Rotate Handle */}
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+              if (interactive && !tile.locked) {
+                haptics.tapLight();
+                onClick(tile, 'rotate');
+              }
+            }}
+            className="absolute -top-1 -right-1 z-20 w-5 h-5 rounded-full bg-[#1b3a2b] hover:bg-[#124231] border border-emerald-400/70 text-emerald-200 flex items-center justify-center text-[10px] cursor-pointer shadow-sm active:scale-85 transition-all select-none"
+            title="点击顺时针旋转90°"
+          >
+            ↻
+          </div>
+        </>
       )}
 
       {/* Port Peek Indicators */}
