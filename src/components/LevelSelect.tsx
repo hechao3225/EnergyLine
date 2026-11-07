@@ -21,12 +21,13 @@ import {
 } from 'lucide-react';
 import { sound } from '../utils/audio';
 import { getFlowerForLevel } from '../data/flowers';
+import { getStarThresholds, getStarsForRecord, MAX_STARS } from '../utils/rating';
 import { FlowerIcon } from './FlowerIcon';
-import chapterBadge1 from '../assets/chapter_badge_1.png';
-import chapterBadge2 from '../assets/chapter_badge_2.png';
-import chapterBadge3 from '../assets/chapter_badge_3.png';
-import chapterBadge4 from '../assets/chapter_badge_4.png';
-import chapterBadge5 from '../assets/chapter_badge_5.png';
+import chapterBadge1 from '../assets/chapter_badge_1.webp';
+import chapterBadge2 from '../assets/chapter_badge_2.webp';
+import chapterBadge3 from '../assets/chapter_badge_3.webp';
+import chapterBadge4 from '../assets/chapter_badge_4.webp';
+import chapterBadge5 from '../assets/chapter_badge_5.webp';
 
 const CHAPTER_BADGES: Record<string, string> = {
   ch1: chapterBadge1,
@@ -77,15 +78,9 @@ function getLevelCoords(levelId: number) {
   return { xPercent, y };
 }
 
-// Calculate stars for a level
+// Calculate stars for a level (0 when not cleared, never invented)
 function getLevelStars(level: LevelConfig, isCleared: boolean, bestStep?: number): number {
-  if (!isCleared) return 0;
-  if (bestStep === undefined) return 3;
-  const remainingEst = Math.max(0, level.maxSteps - bestStep);
-  const ratio = remainingEst / level.maxSteps;
-  if (ratio >= 0.4) return 3;
-  if (ratio >= 0.15) return 2;
-  return 1;
+  return getStarsForRecord(bestStep, level, isCleared);
 }
 
 export const LevelSelect: React.FC<LevelSelectProps> = ({
@@ -139,6 +134,14 @@ export const LevelSelect: React.FC<LevelSelectProps> = ({
       return () => clearTimeout(timer);
     }
   }, [viewMode]);
+
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [onClose]);
 
   // Jump to specific level or chapter
   const scrollToLevel = (lvlId: number) => {
@@ -197,8 +200,8 @@ export const LevelSelect: React.FC<LevelSelectProps> = ({
 
   const handleStartLevel = (lvlId: number) => {
     sound.playWin();
-    onSelectLevel(lvlId);
     onClose();
+    onSelectLevel(lvlId);
   };
 
   return (
@@ -227,7 +230,9 @@ export const LevelSelect: React.FC<LevelSelectProps> = ({
               <div className="flex items-center gap-2 text-[11px] text-emerald-200/80 mt-0.5">
                 <span className="flex items-center gap-1 text-amber-300 font-semibold">
                   <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                  <span>{totalStars} 星</span>
+                  <span>
+                    {totalStars} / {TOTAL_LEVELS * MAX_STARS} 星
+                  </span>
                 </span>
                 <span>·</span>
                 <span>已点亮 {clearedLevels.length}/99</span>
@@ -543,10 +548,10 @@ export const LevelSelect: React.FC<LevelSelectProps> = ({
                       {/* Stars Rating under the Node */}
                       {isCleared ? (
                         <div className="flex items-center gap-0.5 -mt-1.5 z-25 bg-[#0a271c]/90 px-1.5 py-0.2 rounded-full border border-emerald-500/30 shadow-xs">
-                          {[1, 2, 3].map((starNum) => (
+                          {[1, 2, 3, 4].map((starNum) => (
                             <Star
                               key={starNum}
-                              className={`w-2.5 h-2.5 ${
+                              className={`w-2 h-2 ${
                                 starNum <= stars
                                   ? 'fill-amber-400 text-amber-400 drop-shadow-xs'
                                   : 'text-emerald-800'
@@ -724,8 +729,18 @@ export const LevelSelect: React.FC<LevelSelectProps> = ({
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <span>历史最佳</span>
+                    <span className="flex items-center gap-1">
+                      <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                      <span>最少步数（4★）</span>
+                    </span>
                     <span className="font-bold font-mono text-amber-700">
+                      {getStarThresholds(selectedPreviewLevel).par} 步
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <span>历史最佳</span>
+                    <span className="font-bold font-mono text-teal-800">
                       {bestSteps[selectedPreviewLevel.id] !== undefined
                         ? `${bestSteps[selectedPreviewLevel.id]} 步`
                         : '尚未点亮'}
@@ -735,7 +750,7 @@ export const LevelSelect: React.FC<LevelSelectProps> = ({
                   <div className="flex items-center justify-between pt-1 border-t border-[#edf2e8]">
                     <span>星级评价</span>
                     <div className="flex items-center gap-0.5">
-                      {[1, 2, 3].map((starNum) => {
+                      {[1, 2, 3, 4].map((starNum) => {
                         const earned = getLevelStars(
                           selectedPreviewLevel,
                           clearedLevels.includes(selectedPreviewLevel.id),

@@ -140,3 +140,187 @@ html, body {
   color: #1a3629;
 }
 
+/* ========================================================
+   能量管道乐园 · 竖屏游戏界面
+   ======================================================== */
+.energy-screen {
+  --energy-cream: #fff5e9;
+  --energy-ink: #5a1d2b;
+  --energy-purple: #7d3de7;
+  position: relative;
+  width: auto;
+  height: min(100%, 1000px);
+  max-width: 100%;
+  min-height: 0;
+  aspect-ratio: 9 / 20;
+  margin: 0 auto;
+  overflow: hidden;
+  color: var(--energy-ink);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  isolation: isolate;
+  font-family: "Trebuchet MS", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.energy-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(22, 26, 100, 0.04), rgba(152, 72, 193, 0.16));
+}
+
+.energy-hud {
+  position: absolute;
+  inset: max(10px, env(safe-area-inset-top)) 12px auto;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.energy-avatar {
+  position: relative;
+  width: 66px;
+  height: 66px;
+  padding: 0;
+  flex: 0 0 66px;
+  border: 3px solid #ffd96c;
+  border-radius: 50%;
+  background: linear-gradient(#fff5d0, #ffc85b);
+  box-shadow: 0 3px 0 #a73662, 0 0 14px rgba(255, 222, 120, .75);
+  overflow: hidden;
+}
+
+.energy-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center bottom; }
+.energy-avatar span { position: absolute; bottom: -1px; left: 50%; transform: translateX(-50%); min-width: 44px; padding: 1px 5px; color: #fff; font-size: 11px; font-weight: 800; border-radius: 8px; background: #7133a5; }
+
+.energy-hud-counters { display: flex; flex: 1; gap: 4px; min-width: 0; }
+.energy-hud-item { display: flex; align-items: center; min-width: 0; flex: 1; height: 30px; padding: 2px 4px 2px 2px; color: #fff; font-size: 14px; font-weight: 800; text-shadow: 0 1px 2px #632a81; border: 2px solid rgba(255, 235, 174, .94); border-radius: 16px; background: rgba(67, 36, 147, .78); box-shadow: inset 0 1px 0 rgba(255,255,255,.45); }
+.energy-hud-item img { width: 26px; height: 26px; object-fit: contain; flex: 0 0 26px; }
+.energy-hud-item span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.energy-hud-plus, .energy-hud-settings { display: grid; place-items: center; width: 23px; height: 23px; margin-left: auto; padding: 0; color: #7b2e30; border: 2px solid #fff2a8; border-radius: 50%; background: #ffbf2f; box-shadow: 0 1px 0 #b65d2e; }
+.energy-hud-plus svg { width: 14px; height: 14px; }
+.energy-hud-settings { width: 34px; height: 34px; flex: 0 0 34px; color: #fff; font-size: 21px; border-radius: 12px; background: #7133b1; }
+
+.energy-home-title { position: absolute; top: 96px; left: 12px; right: 12px; z-index: 3; text-align: center; }
+.energy-home-title h1 { margin: 0; color: #fff5ae; font-size: clamp(28px, 8.3vw, 40px); font-weight: 900; letter-spacing: 1px; text-shadow: 0 3px 0 #8c2b44, 0 0 10px #ffc87f; }
+.energy-home-title h1 span { color: #ffca3e; font-size: .85em; }
+.energy-home-title div { display: inline-block; margin-top: 4px; padding: 5px 20px; color: #763225; font-size: 15px; font-weight: 900; background: #ffe3a3; border: 2px solid #fff3b8; border-radius: 8px; box-shadow: 0 2px 0 #b95f3b; }
+
+.energy-home-characters { position: absolute; inset: 40% 0 auto; height: 170px; z-index: 2; pointer-events: none; }
+.energy-home-characters img { position: absolute; object-fit: contain; filter: drop-shadow(0 5px 4px rgba(87, 24, 106, .3)); }
+.energy-character-xingya { left: -2%; bottom: 0; width: 32%; }
+.energy-character-boling { left: 35%; bottom: 8px; width: 27%; }
+.energy-character-yunrong { right: 0; bottom: 0; width: 27%; }
+
+.energy-panel { position: relative; padding: 18px; background-position: center; background-size: 100% 100%; background-repeat: no-repeat; }
+.energy-panel-card { min-height: 120px; }
+.energy-panel-smallCard { min-height: 80px; }
+.energy-panel-status { min-height: 72px; }
+
+.energy-home-progress { position: absolute; left: 6%; right: 6%; bottom: 132px; z-index: 4; padding: 15px 18px 13px; }
+.energy-home-progress-heading { display: flex; justify-content: space-between; align-items: center; color: #6e214a; font-size: 18px; font-weight: 900; }
+.energy-home-progress-heading strong { font-size: 18px; }
+.energy-progress-track { height: 13px; margin: 10px 0 10px; overflow: hidden; border: 2px solid #d4a2ab; border-radius: 999px; background: rgba(193, 130, 162, .35); }
+.energy-progress-track span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #68d12d, #b9ef39); box-shadow: inset 0 2px 0 rgba(255,255,255,.7); }
+.energy-home-goal { display: flex; align-items: center; width: 100%; min-height: 54px; padding: 3px 5px; color: #571b32; text-align: left; border: 0; border-radius: 14px; background: rgba(255, 249, 239, .66); }
+.energy-home-goal img { width: 58px; height: 49px; object-fit: contain; flex: 0 0 58px; }
+.energy-home-goal span { flex: 1; font-size: 15px; font-weight: 900; line-height: 1.25; }
+.energy-home-goal small { font-size: 12px; }
+.energy-goal-arrow { flex: 0 0 auto !important; color: #ff9d1e; font-size: 34px !important; line-height: 1; }
+.energy-home-continue { position: absolute; left: 12%; right: 12%; bottom: 66px; z-index: 5; white-space: nowrap; font-size: clamp(16px, 4.8vw, 22px); }
+
+.energy-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 8px 22px; color: #6a1a23; font-weight: 900; font-size: 19px; border: 0; background-position: center; background-size: 100% 100%; background-repeat: no-repeat; filter: drop-shadow(0 3px 2px rgba(88, 36, 112, .28)); transition: transform .15s ease, filter .15s ease; }
+.energy-button:hover { filter: brightness(1.05) drop-shadow(0 4px 3px rgba(88, 36, 112, .33)); }
+.energy-button:active { transform: translateY(2px) scale(.98); }
+.energy-button-large { min-height: 60px; font-size: 22px; }
+.energy-button > span { white-space: nowrap; }
+.energy-button-small { min-height: 38px; padding-inline: 14px; font-size: 15px; }
+.energy-button:disabled { opacity: .5; filter: grayscale(.5); }
+
+.energy-bottom-nav { position: absolute; inset: auto 0 0; z-index: 8; display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; padding: 7px 5px max(6px, env(safe-area-inset-bottom)); background: rgba(255, 231, 215, .93); border-top: 2px solid #fff4d2; }
+.energy-bottom-nav button { display: flex; min-width: 0; min-height: 55px; align-items: center; justify-content: center; flex-direction: column; gap: 1px; padding: 2px; color: #5f2446; font-size: 12px; font-weight: 900; border: 0; border-radius: 14px; background: transparent; }
+.energy-bottom-nav button svg { color: #6f38bb; }
+.energy-bottom-nav button img { width: 30px; height: 30px; object-fit: contain; }
+.energy-bottom-nav button.is-active { color: #fff; background: linear-gradient(#ffcf4b, #ff8d17); box-shadow: inset 0 0 0 2px #fff0a0, 0 2px 0 #a75174; }
+
+.energy-puzzle-screen { padding: 12px 12px max(12px, env(safe-area-inset-bottom)); display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.energy-puzzle-header { display: flex; align-items: center; justify-content: space-between; width: 100%; z-index: 3; }
+.energy-round-button { display: grid; place-items: center; width: 48px; height: 48px; padding: 0; color: #fff; border: 3px solid #ffd5f5; border-radius: 50%; background: linear-gradient(#be74fb, #7237bb); box-shadow: 0 3px 0 #7a315c, 0 0 12px rgba(255,255,255,.5); }
+.energy-level-cloud { min-width: 170px; padding: 6px 18px 5px; text-align: center; border: 3px solid #ffd9a0; border-radius: 36px 36px 28px 28px; background: linear-gradient(#fff9f3, #ffe8ef); box-shadow: 0 3px 0 #ce8c49; }
+.energy-level-cloud strong { display: block; color: #5e1931; font-size: 24px; font-weight: 900; }
+.energy-stars, .energy-stars-inline { display: flex; justify-content: center; gap: 3px; }
+.energy-stars img, .energy-stars-inline img { width: 27px; height: 27px; object-fit: contain; opacity: .42; filter: grayscale(.6); }
+.energy-stars img.is-earned, .energy-stars-inline img.is-earned { opacity: 1; filter: none; }
+.energy-puzzle-instruction { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 72px; padding: 7px 13px; z-index: 2; }
+.energy-puzzle-instruction img { width: 56px; height: 53px; object-fit: contain; }
+.energy-puzzle-instruction p { flex: 1; margin: 0 6px; color: #541931; text-align: center; font-size: 16px; font-weight: 900; line-height: 1.25; }
+.energy-puzzle-board-wrap { display: flex; flex: 1; align-items: center; justify-content: center; width: 100%; min-height: 0; z-index: 2; }
+
+.energy-board-shell { position: relative; width: min(100%, 420px); aspect-ratio: 1; }
+.energy-board-frame { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: fill; pointer-events: none; }
+.energy-board-grid { position: absolute; inset: 5.5%; z-index: 1; display: grid; gap: 1.2%; padding: 0; }
+.energy-board-empty { aspect-ratio: 1; }
+.energy-tile { position: relative; width: 100%; aspect-ratio: 1; padding: 0; border: 0; background: transparent; overflow: visible; }
+.energy-tile-art { position: absolute; inset: 0; z-index: 2; display: block; background-position: center; background-size: contain; background-repeat: no-repeat; transition: transform .16s ease, filter .16s ease; }
+.energy-tile-rotatable:active .energy-tile-art { filter: brightness(1.12); }
+.energy-tile-peek::after { content: ""; position: absolute; inset: 11%; border: 2px dashed rgba(255,255,255,.86); border-radius: 14px; pointer-events: none; }
+.energy-tile-powered .energy-tile-art { filter: drop-shadow(0 0 8px rgba(84, 221, 255, .48)); }
+.energy-board-complete-glow { position: absolute; inset: 2%; border-radius: 10%; box-shadow: 0 0 34px rgba(255, 217, 84, .82); pointer-events: none; animation: energyCompletePulse 1.5s ease-in-out infinite; }
+@keyframes energyCompletePulse { 0%,100% { opacity: .45; transform: scale(.98); } 50% { opacity: .9; transform: scale(1.01); } }
+
+.energy-puzzle-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; width: 100%; z-index: 3; }
+.energy-puzzle-stats > div { display: flex; align-items: center; justify-content: center; min-height: 38px; padding: 4px; color: #5e1d36; font-size: 14px; font-weight: 900; border: 2px solid #ffd8c7; border-radius: 20px; background: rgba(255, 246, 239, .93); box-shadow: inset 0 1px 0 #fff; }
+.energy-puzzle-stats > div img { width: 25px; height: 25px; object-fit: contain; margin-right: 2px; }
+.energy-puzzle-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 90%; z-index: 3; }
+.energy-puzzle-hint { display: flex; align-items: center; justify-content: space-between; width: 92%; padding: 8px 12px; color: #60213b; font-size: 13px; font-weight: 800; border: 2px solid #ffd49b; border-radius: 14px; background: rgba(255, 248, 223, .96); z-index: 4; }
+.energy-puzzle-hint button { padding: 0 4px; color: #8d3b5b; font-size: 22px; line-height: 1; border: 0; background: transparent; }
+.energy-action-button { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 62px; padding: 5px; color: #5d233f; font-size: 13px; font-weight: 900; border: 3px solid #ffe8a2; border-radius: 28px; background: linear-gradient(#fff9c9, #ffb53b); box-shadow: 0 3px 0 #b56043; }
+.energy-action-button:disabled { opacity: .45; }
+.energy-action-button b { position: absolute; right: -3px; top: -7px; display: grid; place-items: center; width: 24px; height: 24px; color: #fff; border: 2px solid #fff; border-radius: 50%; background: #ef4055; }
+.energy-puzzle-characters { position: absolute; inset: auto 0 0; height: 120px; z-index: 1; pointer-events: none; }
+.energy-puzzle-characters img { position: absolute; bottom: -8px; object-fit: contain; filter: drop-shadow(0 5px 4px rgba(88, 34, 112, .25)); }
+.energy-puzzle-characters img:nth-child(1) { left: -3%; width: 35%; }
+.energy-puzzle-characters img:nth-child(2) { left: 37%; width: 27%; bottom: 2px; }
+.energy-puzzle-characters img:nth-child(3) { right: -1%; width: 27%; }
+
+.energy-restoration-screen { padding: 12px 12px max(12px, env(safe-area-inset-bottom)); display: flex; flex-direction: column; align-items: center; gap: 7px; }
+.energy-restoration-title { margin-top: 37px; padding: 8px 34px; color: #fff3a1; font-size: 34px; font-weight: 900; letter-spacing: 3px; text-shadow: 0 3px 0 #8a2b3f, 0 0 12px #fff; border: 4px solid #ffc94d; border-radius: 30px 30px 16px 16px; background: linear-gradient(#a93928, #702329); box-shadow: 0 4px 0 #6a234d; }
+.energy-restoration-facility { width: 70%; height: 190px; display: grid; place-items: center; z-index: 2; }
+.energy-restoration-facility img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 15px rgba(255, 229, 119, .85)); }
+.energy-restoration-characters { display: flex; align-items: end; justify-content: space-around; width: 100%; height: 105px; margin-top: -7px; z-index: 2; }
+.energy-restoration-characters img { width: 28%; max-height: 115px; object-fit: contain; filter: drop-shadow(0 5px 4px rgba(88, 34, 112, .28)); }
+.energy-restoration-card { width: 100%; padding: 13px 15px; z-index: 3; }
+.energy-restoration-card h2 { margin: 0 0 8px; color: #5d1d32; text-align: center; font-size: 19px; font-weight: 900; }
+.energy-restoration-card ul { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; color: #5b1f35; font-size: 15px; font-weight: 900; }
+.energy-restoration-card li { display: flex; align-items: center; gap: 7px; }
+.energy-restoration-card li svg { color: #48af2c; fill: #eaffc7; stroke-width: 3; }
+.energy-restoration-before-after { display: flex; align-items: center; justify-content: center; gap: 7px; margin-top: 5px; }
+.energy-restoration-before-after img { width: 28%; max-height: 56px; object-fit: contain; }
+.energy-restoration-before-after svg { color: #ff9e14; stroke-width: 3; }
+.energy-reward-card { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; width: 100%; padding: 26px 12px 9px; z-index: 3; }
+.energy-reward-card h3 { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); margin: 0; padding: 5px 27px; color: #fff1a2; white-space: nowrap; font-size: 18px; font-weight: 900; border: 3px solid #ffd557; border-radius: 14px; background: #a43b2b; box-shadow: 0 2px 0 #6b2946; }
+.energy-reward-card > div { display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1px; color: #651d37; font-size: 15px; font-weight: 900; }
+.energy-reward-card > div img { width: 42px; height: 42px; object-fit: contain; }
+.energy-reward-card small { grid-column: 1 / -1; color: #8a4562; text-align: center; font-size: 11px; }
+.energy-restoration-actions { display: flex; justify-content: space-between; gap: 8px; width: 100%; margin-top: auto; z-index: 3; }
+.energy-restoration-actions .energy-button { flex: 1; min-width: 0; padding-inline: 8px; font-size: 18px; }
+
+@media (min-width: 700px) {
+  .energy-screen { height: min(100%, 1000px); border-radius: 24px; box-shadow: 0 20px 60px rgba(27, 12, 89, .35); }
+  body { background: #241b62; }
+}
+
+@media (max-height: 760px) {
+  .energy-home-title { top: 84px; }
+  .energy-home-progress { bottom: 112px; }
+  .energy-home-continue { bottom: 55px; }
+  .energy-puzzle-actions { gap: 9px; }
+  .energy-puzzle-characters { height: 84px; }
+  .energy-restoration-facility { height: 145px; }
+  .energy-restoration-characters { height: 75px; }
+}
+
