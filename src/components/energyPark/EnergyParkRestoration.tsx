@@ -26,6 +26,7 @@ export const EnergyParkRestoration: React.FC<EnergyParkRestorationProps> = ({
       <img className="energy-restoration-title" src={energyPark.generated.restorationBanner} alt="" aria-hidden="true" />
       <span>设施复苏!</span>
     </div>
+    <img className="energy-restoration-firework" src={energyPark.effects.celebrationFirework} alt="" aria-hidden="true" />
     <div className="energy-restoration-facility">
       <img src={energyPark.facilities.carouselActive} alt="旋转木马已复苏" />
     </div>

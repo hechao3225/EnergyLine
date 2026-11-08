@@ -2,7 +2,7 @@
   "project": "Energy Pipeline Amusement Park",
   "version": "1.0",
   "concept_status": "prototype ready, requires final polish",
-  "asset_count": 95,
+  "asset_count": 100,
   "assets": [
     {
       "file": "02_characters/xingya_main.png",
@@ -952,6 +952,56 @@
       ],
       "category": "ui",
       "note": "透明生成 UI 圆形操作按钮底图，三按钮横向精灵图",
+      "alpha": true
+    },
+    {
+      "file": "10_generated_complete/nav_level_icon.png",
+      "size": [
+        1562,
+        1072
+      ],
+      "category": "navigation",
+      "note": "完整透明导航图标：关卡",
+      "alpha": true
+    },
+    {
+      "file": "10_generated_complete/nav_flora_icon.png",
+      "size": [
+        1568,
+        1047
+      ],
+      "category": "navigation",
+      "note": "完整透明导航图标：图鉴",
+      "alpha": true
+    },
+    {
+      "file": "10_generated_complete/nav_achievement_icon.png",
+      "size": [
+        1566,
+        1037
+      ],
+      "category": "navigation",
+      "note": "完整透明导航图标：成就",
+      "alpha": true
+    },
+    {
+      "file": "10_generated_complete/nav_settings_icon.png",
+      "size": [
+        1489,
+        1072
+      ],
+      "category": "navigation",
+      "note": "完整透明导航图标：设置",
+      "alpha": true
+    },
+    {
+      "file": "10_generated_complete/celebration_firework.png",
+      "size": [
+        1638,
+        1126
+      ],
+      "category": "effect",
+      "note": "完整透明庆典烟花效果",
       "alpha": true
     }
   ]

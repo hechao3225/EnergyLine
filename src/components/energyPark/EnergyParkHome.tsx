@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Map, Play, Settings, Trophy } from 'lucide-react';
+import { Play } from 'lucide-react';
 import { LevelConfig } from '../../types/game';
 import { energyPark } from '../../assets/energyPark';
 import { EnergyParkButton } from './EnergyParkButton';
@@ -65,10 +65,10 @@ export const EnergyParkHome: React.FC<EnergyParkHomeProps> = ({
 
       <nav className="energy-bottom-nav" aria-label="乐园导航">
         <button type="button" className="is-active" onClick={onContinue}><img src={energyPark.facilities.carouselActive} alt="" /><span>乐园</span></button>
-        <button type="button" onClick={onOpenLevelSelect}><Map size={28} /><span>关卡</span></button>
-        <button type="button" onClick={onOpenFlora}><BookOpen size={28} /><span>图鉴</span></button>
-        <button type="button" onClick={onOpenProfile}><Trophy size={28} /><span>成就</span></button>
-        <button type="button" onClick={onOpenSettings}><Settings size={28} /><span>设置</span></button>
+        <button type="button" onClick={onOpenLevelSelect}><img src={energyPark.navigation.level} alt="" /><span>关卡</span></button>
+        <button type="button" onClick={onOpenFlora}><img src={energyPark.navigation.flora} alt="" /><span>图鉴</span></button>
+        <button type="button" onClick={onOpenProfile}><img src={energyPark.navigation.achievement} alt="" /><span>成就</span></button>
+        <button type="button" onClick={onOpenSettings}><img src={energyPark.navigation.settings} alt="" /><span>设置</span></button>
       </nav>
     </section>
   );

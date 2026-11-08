@@ -26,6 +26,8 @@ export const EnergyParkHud: React.FC<EnergyParkHudProps> = ({ onOpenProfile, onO
       <HudItem icon={energyPark.icons.coin} value="3200" />
       <HudItem icon={energyPark.icons.crystal} value="86" />
     </div>
-    <button type="button" className="energy-hud-settings" onClick={onOpenSettings} aria-label="打开设置">⚙</button>
+    <button type="button" className="energy-hud-settings" onClick={onOpenSettings} aria-label="打开设置">
+      <img src={energyPark.navigation.settings} alt="" />
+    </button>
   </div>
 );

@@ -26,11 +26,10 @@ export const EnergyParkTile: React.FC<EnergyParkTileProps> = ({
   const lastTouchAtRef = React.useRef(0);
   const longPressTriggeredRef = React.useRef(false);
   const suppressClickRef = React.useRef(0);
-  const isRotatable = interactive && !tile.locked && tile.type !== 'empty' && tile.type !== 'blocked';
+  const isRotatable = interactive && !tile.locked && tile.type !== 'empty';
   const assetType = tile.type as EnergyTileAssetType;
   const tileAsset = useMemo(() => {
     if (tile.type === 'empty') return energyPark.tiles.empty;
-    if (tile.type === 'blocked') return energyPark.tiles.blocked;
     const pair = energyPark.tiles[assetType] as { idle: string; powered: string };
     return pair[isPowered ? 'powered' : 'idle'];
   }, [assetType, isPowered, tile.type]);

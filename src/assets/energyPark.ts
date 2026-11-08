@@ -52,12 +52,15 @@ import coin from '../../assets/energy_park_art_pack_v1/06_icons_and_fx/icon_coin
 import crystal from '../../assets/energy_park_art_pack_v1/06_icons_and_fx/icon_crystal.png';
 import heart from '../../assets/energy_park_art_pack_v1/06_icons_and_fx/icon_heart.png';
 import energy from '../../assets/energy_park_art_pack_v1/06_icons_and_fx/icon_energy.png';
-import sparkle from '../../assets/energy_park_art_pack_v1/06_icons_and_fx/sparkles_transparent.png';
-import fireworks from '../../assets/energy_park_art_pack_v1/06_icons_and_fx/fx_firework_pink.png';
 import energyParkLogo from '../../assets/energy_park_art_pack_v1/09_generated_ui/energy_park_logo.png';
 import puzzleHeaderCloud from '../../assets/energy_park_art_pack_v1/09_generated_ui/puzzle_header_cloud.png';
 import restorationBanner from '../../assets/energy_park_art_pack_v1/09_generated_ui/restoration_banner.png';
 import actionButtonsSprite from '../../assets/energy_park_art_pack_v1/09_generated_ui/action_buttons_sprite.png';
+import navLevelIcon from '../../assets/energy_park_art_pack_v1/10_generated_complete/nav_level_icon.png';
+import navFloraIcon from '../../assets/energy_park_art_pack_v1/10_generated_complete/nav_flora_icon.png';
+import navAchievementIcon from '../../assets/energy_park_art_pack_v1/10_generated_complete/nav_achievement_icon.png';
+import navSettingsIcon from '../../assets/energy_park_art_pack_v1/10_generated_complete/nav_settings_icon.png';
+import celebrationFirework from '../../assets/energy_park_art_pack_v1/10_generated_complete/celebration_firework.png';
 
 export const energyPark = {
   scenes: {
@@ -88,7 +91,14 @@ export const energyPark = {
     cream: { medium: buttonCreamMedium },
   },
   progress: { empty: progress0, full: progress100 },
-  icons: { star, coin, crystal, heart, energy, sparkle, fireworks },
+  icons: { star, coin, crystal, heart, energy },
+  navigation: {
+    level: navLevelIcon,
+    flora: navFloraIcon,
+    achievement: navAchievementIcon,
+    settings: navSettingsIcon,
+  },
+  effects: { celebrationFirework },
   generated: { energyParkLogo, puzzleHeaderCloud, restorationBanner, actionButtonsSprite },
 } as const;
 
