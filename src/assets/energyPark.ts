@@ -54,6 +54,10 @@ import heart from '../../assets/energy_park_art_pack_v1/06_icons_and_fx/icon_hea
 import energy from '../../assets/energy_park_art_pack_v1/06_icons_and_fx/icon_energy.png';
 import sparkle from '../../assets/energy_park_art_pack_v1/06_icons_and_fx/sparkles_transparent.png';
 import fireworks from '../../assets/energy_park_art_pack_v1/06_icons_and_fx/fx_firework_pink.png';
+import energyParkLogo from '../../assets/energy_park_art_pack_v1/09_generated_ui/energy_park_logo.png';
+import puzzleHeaderCloud from '../../assets/energy_park_art_pack_v1/09_generated_ui/puzzle_header_cloud.png';
+import restorationBanner from '../../assets/energy_park_art_pack_v1/09_generated_ui/restoration_banner.png';
+import actionButtonsSprite from '../../assets/energy_park_art_pack_v1/09_generated_ui/action_buttons_sprite.png';
 
 export const energyPark = {
   scenes: {
@@ -85,6 +89,7 @@ export const energyPark = {
   },
   progress: { empty: progress0, full: progress100 },
   icons: { star, coin, crystal, heart, energy, sparkle, fireworks },
+  generated: { energyParkLogo, puzzleHeaderCloud, restorationBanner, actionButtonsSprite },
 } as const;
 
 export type EnergyTileAssetType = keyof typeof energyPark.tiles;

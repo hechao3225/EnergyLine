@@ -34,7 +34,7 @@ export const EnergyParkHome: React.FC<EnergyParkHomeProps> = ({
       <EnergyParkHud onOpenProfile={onOpenProfile} onOpenSettings={onOpenSettings} />
 
       <div className="energy-home-title">
-        <h1><span aria-hidden="true">⚙</span> 能量管道乐园</h1>
+        <img className="energy-home-logo" src={energyPark.generated.energyParkLogo} alt="能量管道乐园" />
         <div>第1章 · 失落乐园（1-99关）</div>
       </div>
 

@@ -22,7 +22,10 @@ export const EnergyParkRestoration: React.FC<EnergyParkRestorationProps> = ({
   onNext,
 }) => (
   <section className="energy-screen energy-restoration-screen" style={{ backgroundImage: `url(${energyPark.scenes.restoration})` }}>
-    <div className="energy-restoration-title">设施复苏!</div>
+    <div className="energy-restoration-title-wrap">
+      <img className="energy-restoration-title" src={energyPark.generated.restorationBanner} alt="" aria-hidden="true" />
+      <span>设施复苏!</span>
+    </div>
     <div className="energy-restoration-facility">
       <img src={energyPark.facilities.carouselActive} alt="旋转木马已复苏" />
     </div>

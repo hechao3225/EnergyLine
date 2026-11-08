@@ -206,8 +206,7 @@ html, body {
 .energy-hud-settings { width: 34px; height: 34px; flex: 0 0 34px; color: #fff; font-size: 21px; border-radius: 12px; background: #7133b1; }
 
 .energy-home-title { position: absolute; top: 96px; left: 12px; right: 12px; z-index: 3; text-align: center; }
-.energy-home-title h1 { margin: 0; color: #fff5ae; font-size: clamp(28px, 8.3vw, 40px); font-weight: 900; letter-spacing: 1px; text-shadow: 0 3px 0 #8c2b44, 0 0 10px #ffc87f; }
-.energy-home-title h1 span { color: #ffca3e; font-size: .85em; }
+.energy-home-logo { display: block; width: min(86%, 400px); height: auto; margin: 0 auto -3px; filter: drop-shadow(0 4px 4px rgba(72, 20, 76, .38)); }
 .energy-home-title div { display: inline-block; margin-top: 4px; padding: 5px 20px; color: #763225; font-size: 15px; font-weight: 900; background: #ffe3a3; border: 2px solid #fff3b8; border-radius: 8px; box-shadow: 0 2px 0 #b95f3b; }
 
 .energy-home-characters { position: absolute; inset: 40% 0 auto; height: 170px; z-index: 2; pointer-events: none; }
@@ -250,9 +249,11 @@ html, body {
 .energy-puzzle-screen { padding: 12px 12px max(12px, env(safe-area-inset-bottom)); display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .energy-puzzle-header { display: flex; align-items: center; justify-content: space-between; width: 100%; z-index: 3; }
 .energy-round-button { display: grid; place-items: center; width: 48px; height: 48px; padding: 0; color: #fff; border: 3px solid #ffd5f5; border-radius: 50%; background: linear-gradient(#be74fb, #7237bb); box-shadow: 0 3px 0 #7a315c, 0 0 12px rgba(255,255,255,.5); }
-.energy-level-cloud { min-width: 170px; padding: 6px 18px 5px; text-align: center; border: 3px solid #ffd9a0; border-radius: 36px 36px 28px 28px; background: linear-gradient(#fff9f3, #ffe8ef); box-shadow: 0 3px 0 #ce8c49; }
-.energy-level-cloud strong { display: block; color: #5e1931; font-size: 24px; font-weight: 900; }
+.energy-level-cloud { position: relative; width: 220px; height: 92px; min-width: 0; padding: 15px 12px 5px; text-align: center; }
+.energy-level-cloud-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; pointer-events: none; }
+.energy-level-cloud strong { position: relative; z-index: 1; display: block; color: #5e1931; font-size: 23px; font-weight: 900; }
 .energy-stars, .energy-stars-inline { display: flex; justify-content: center; gap: 3px; }
+.energy-stars { position: relative; z-index: 1; margin-top: 4px; }
 .energy-stars img, .energy-stars-inline img { width: 27px; height: 27px; object-fit: contain; opacity: .42; filter: grayscale(.6); }
 .energy-stars img.is-earned, .energy-stars-inline img.is-earned { opacity: 1; filter: none; }
 .energy-puzzle-instruction { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 72px; padding: 7px 13px; z-index: 2; }
@@ -274,11 +275,15 @@ html, body {
 
 .energy-puzzle-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; width: 100%; z-index: 3; }
 .energy-puzzle-stats > div { display: flex; align-items: center; justify-content: center; min-height: 38px; padding: 4px; color: #5e1d36; font-size: 14px; font-weight: 900; border: 2px solid #ffd8c7; border-radius: 20px; background: rgba(255, 246, 239, .93); box-shadow: inset 0 1px 0 #fff; }
+.energy-puzzle-stats > div svg { color: #7c3fb9; margin-right: 3px; }
 .energy-puzzle-stats > div img { width: 25px; height: 25px; object-fit: contain; margin-right: 2px; }
 .energy-puzzle-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 90%; z-index: 3; }
 .energy-puzzle-hint { display: flex; align-items: center; justify-content: space-between; width: 92%; padding: 8px 12px; color: #60213b; font-size: 13px; font-weight: 800; border: 2px solid #ffd49b; border-radius: 14px; background: rgba(255, 248, 223, .96); z-index: 4; }
 .energy-puzzle-hint button { padding: 0 4px; color: #8d3b5b; font-size: 22px; line-height: 1; border: 0; background: transparent; }
-.energy-action-button { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 62px; padding: 5px; color: #5d233f; font-size: 13px; font-weight: 900; border: 3px solid #ffe8a2; border-radius: 28px; background: linear-gradient(#fff9c9, #ffb53b); box-shadow: 0 3px 0 #b56043; }
+.energy-action-button { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 72px; padding: 5px; color: #5d233f; font-size: 13px; font-weight: 900; border: 0; border-radius: 50%; background-position: center; background-repeat: no-repeat; background-size: 300% 100%; filter: drop-shadow(0 3px 2px rgba(88, 36, 112, .28)); }
+.energy-action-undo { background-position: left center; }
+.energy-action-reset { background-position: center center; }
+.energy-action-hint { background-position: right center; }
 .energy-action-button:disabled { opacity: .45; }
 .energy-action-button b { position: absolute; right: -3px; top: -7px; display: grid; place-items: center; width: 24px; height: 24px; color: #fff; border: 2px solid #fff; border-radius: 50%; background: #ef4055; }
 .energy-puzzle-characters { position: absolute; inset: auto 0 0; height: 120px; z-index: 1; pointer-events: none; }
@@ -288,7 +293,9 @@ html, body {
 .energy-puzzle-characters img:nth-child(3) { right: -1%; width: 27%; }
 
 .energy-restoration-screen { padding: 12px 12px max(12px, env(safe-area-inset-bottom)); display: flex; flex-direction: column; align-items: center; gap: 7px; }
-.energy-restoration-title { margin-top: 37px; padding: 8px 34px; color: #fff3a1; font-size: 34px; font-weight: 900; letter-spacing: 3px; text-shadow: 0 3px 0 #8a2b3f, 0 0 12px #fff; border: 4px solid #ffc94d; border-radius: 30px 30px 16px 16px; background: linear-gradient(#a93928, #702329); box-shadow: 0 4px 0 #6a234d; }
+.energy-restoration-title-wrap { position: relative; width: 82%; margin-top: 32px; }
+.energy-restoration-title { display: block; width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 4px 3px rgba(86, 25, 71, .35)); }
+.energy-restoration-title-wrap > span { position: absolute; inset: 25% 12% auto; color: #fff3a1; text-align: center; font-size: clamp(22px, 6.4vw, 34px); font-weight: 900; letter-spacing: 3px; text-shadow: 0 3px 0 #8a2b3f, 0 0 12px #fff; }
 .energy-restoration-facility { width: 70%; height: 190px; display: grid; place-items: center; z-index: 2; }
 .energy-restoration-facility img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 15px rgba(255, 229, 119, .85)); }
 .energy-restoration-characters { display: flex; align-items: end; justify-content: space-around; width: 100%; height: 105px; margin-top: -7px; z-index: 2; }

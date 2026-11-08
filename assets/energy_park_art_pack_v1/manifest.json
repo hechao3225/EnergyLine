@@ -1,0 +1,958 @@
+{
+  "project": "Energy Pipeline Amusement Park",
+  "version": "1.0",
+  "concept_status": "prototype ready, requires final polish",
+  "asset_count": 95,
+  "assets": [
+    {
+      "file": "02_characters/xingya_main.png",
+      "size": [
+        480,
+        333
+      ],
+      "category": "character",
+      "note": "基于三角色母版的透明抠图；适用于UI立绘",
+      "alpha": true
+    },
+    {
+      "file": "02_characters/boling_main.png",
+      "size": [
+        480,
+        446
+      ],
+      "category": "character",
+      "note": "基于三角色母版的透明抠图；适用于UI立绘",
+      "alpha": true
+    },
+    {
+      "file": "02_characters/yunrong_main.png",
+      "size": [
+        480,
+        480
+      ],
+      "category": "character",
+      "note": "基于三角色母版的透明抠图；适用于UI立绘",
+      "alpha": true
+    },
+    {
+      "file": "02_characters/expressions/xingya_happy.png",
+      "size": [
+        144,
+        100
+      ],
+      "category": "expression",
+      "note": "小尺寸表情头像，供提示气泡或弹窗使用",
+      "alpha": true
+    },
+    {
+      "file": "02_characters/expressions/xingya_wink.png",
+      "size": [
+        144,
+        119
+      ],
+      "category": "expression",
+      "note": "小尺寸表情头像，供提示气泡或弹窗使用",
+      "alpha": true
+    },
+    {
+      "file": "02_characters/expressions/xingya_sleep.png",
+      "size": [
+        144,
+        123
+      ],
+      "category": "expression",
+      "note": "小尺寸表情头像，供提示气泡或弹窗使用",
+      "alpha": true
+    },
+    {
+      "file": "02_characters/expressions/boling_happy.png",
+      "size": [
+        144,
+        136
+      ],
+      "category": "expression",
+      "note": "小尺寸表情头像，供提示气泡或弹窗使用",
+      "alpha": true
+    },
+    {
+      "file": "02_characters/expressions/boling_wink.png",
+      "size": [
+        144,
+        133
+      ],
+      "category": "expression",
+      "note": "小尺寸表情头像，供提示气泡或弹窗使用",
+      "alpha": true
+    },
+    {
+      "file": "02_characters/expressions/boling_sleep.png",
+      "size": [
+        144,
+        130
+      ],
+      "category": "expression",
+      "note": "小尺寸表情头像，供提示气泡或弹窗使用",
+      "alpha": true
+    },
+    {
+      "file": "02_characters/expressions/yunrong_happy.png",
+      "size": [
+        144,
+        132
+      ],
+      "category": "expression",
+      "note": "小尺寸表情头像，供提示气泡或弹窗使用",
+      "alpha": true
+    },
+    {
+      "file": "02_characters/expressions/yunrong_wink.png",
+      "size": [
+        144,
+        153
+      ],
+      "category": "expression",
+      "note": "小尺寸表情头像，供提示气泡或弹窗使用",
+      "alpha": true
+    },
+    {
+      "file": "02_characters/expressions/yunrong_sleep.png",
+      "size": [
+        144,
+        153
+      ],
+      "category": "expression",
+      "note": "小尺寸表情头像，供提示气泡或弹窗使用",
+      "alpha": true
+    },
+    {
+      "file": "03_facilities/carousel_broken.png",
+      "size": [
+        574,
+        533
+      ],
+      "category": "facility",
+      "note": "高清主体源自已确认设施复苏设计图；三状态使用相同形状，供原型搭建；需再精修磨损细节",
+      "alpha": true
+    },
+    {
+      "file": "03_facilities/carousel_restoring.png",
+      "size": [
+        574,
+        533
+      ],
+      "category": "facility",
+      "note": "高清主体源自已确认设施复苏设计图；三状态使用相同形状，供原型搭建；需再精修磨损细节",
+      "alpha": true
+    },
+    {
+      "file": "03_facilities/carousel_active.png",
+      "size": [
+        574,
+        533
+      ],
+      "category": "facility",
+      "note": "高清主体源自已确认设施复苏设计图；三状态使用相同形状，供原型搭建；需再精修磨损细节",
+      "alpha": true
+    },
+    {
+      "file": "03_facilities/ferris_wheel_broken.png",
+      "size": [
+        320,
+        316
+      ],
+      "category": "facility",
+      "note": "ferris_wheel：broken，来自同一素材图；仅演示状态",
+      "alpha": true
+    },
+    {
+      "file": "03_facilities/ferris_wheel_restoring.png",
+      "size": [
+        320,
+        316
+      ],
+      "category": "facility",
+      "note": "ferris_wheel：restoring，来自同一素材图；仅演示状态",
+      "alpha": true
+    },
+    {
+      "file": "03_facilities/ferris_wheel_active.png",
+      "size": [
+        320,
+        282
+      ],
+      "category": "facility",
+      "note": "ferris_wheel：active，来自同一素材图；仅演示状态",
+      "alpha": true
+    },
+    {
+      "file": "03_facilities/castle_broken.png",
+      "size": [
+        320,
+        293
+      ],
+      "category": "facility",
+      "note": "castle：broken，来自同一素材图；仅演示状态",
+      "alpha": true
+    },
+    {
+      "file": "03_facilities/castle_restoring.png",
+      "size": [
+        320,
+        285
+      ],
+      "category": "facility",
+      "note": "castle：restoring，来自同一素材图；仅演示状态",
+      "alpha": true
+    },
+    {
+      "file": "03_facilities/castle_active.png",
+      "size": [
+        320,
+        274
+      ],
+      "category": "facility",
+      "note": "castle：active，来自同一素材图；仅演示状态",
+      "alpha": true
+    },
+    {
+      "file": "03_facilities/entrance_gate_broken.png",
+      "size": [
+        320,
+        273
+      ],
+      "category": "facility",
+      "note": "entrance_gate：broken，来自同一素材图；仅演示状态",
+      "alpha": true
+    },
+    {
+      "file": "03_facilities/entrance_gate_restoring.png",
+      "size": [
+        320,
+        313
+      ],
+      "category": "facility",
+      "note": "entrance_gate：restoring，来自同一素材图；仅演示状态",
+      "alpha": true
+    },
+    {
+      "file": "03_facilities/entrance_gate_active.png",
+      "size": [
+        320,
+        303
+      ],
+      "category": "facility",
+      "note": "entrance_gate：active，来自同一素材图；仅演示状态",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/line_idle.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256，高分辨率，可绕中心按90°旋转",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/line_powered.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256，高分辨率，可绕中心按90°旋转",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/corner_idle.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256，高分辨率，可绕中心按90°旋转",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/corner_powered.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256，高分辨率，可绕中心按90°旋转",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/tee_idle.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256，高分辨率，可绕中心按90°旋转",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/tee_powered.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256，高分辨率，可绕中心按90°旋转",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/cross_idle.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256，高分辨率，可绕中心按90°旋转",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/cross_powered.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256，高分辨率，可绕中心按90°旋转",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/end_idle.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256，高分辨率，可绕中心按90°旋转",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/end_powered.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256，高分辨率，可绕中心按90°旋转",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/source_idle.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256，可旋转；状态与逻辑以程序为准",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/source_powered.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256，可旋转；状态与逻辑以程序为准",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/target_idle.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256，可旋转；状态与逻辑以程序为准",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/target_powered.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256，可旋转；状态与逻辑以程序为准",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/switch_idle.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256，可旋转；状态与逻辑以程序为准",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/switch_powered.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256，可旋转；状态与逻辑以程序为准",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/diode_idle.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256，可旋转；状态与逻辑以程序为准",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/diode_powered.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256，可旋转；状态与逻辑以程序为准",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/empty.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/blocked.png",
+      "size": [
+        256,
+        256
+      ],
+      "category": "tile",
+      "note": "256×256",
+      "alpha": true
+    },
+    {
+      "file": "04_puzzle_tiles/board_6x6_900.png",
+      "size": [
+        900,
+        900
+      ],
+      "category": "board",
+      "note": "严格6×6，900×900；格子129-130px，外边距约45px",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/button_primary_large.png",
+      "size": [
+        640,
+        170
+      ],
+      "category": "ui",
+      "note": "无文字按钮底图，便于本地化",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/button_primary_medium.png",
+      "size": [
+        410,
+        116
+      ],
+      "category": "ui",
+      "note": "无文字按钮底图，便于本地化",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/button_primary_small.png",
+      "size": [
+        210,
+        88
+      ],
+      "category": "ui",
+      "note": "无文字按钮底图，便于本地化",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/button_secondary_large.png",
+      "size": [
+        640,
+        170
+      ],
+      "category": "ui",
+      "note": "无文字按钮底图，便于本地化",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/button_secondary_medium.png",
+      "size": [
+        410,
+        116
+      ],
+      "category": "ui",
+      "note": "无文字按钮底图，便于本地化",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/button_secondary_small.png",
+      "size": [
+        210,
+        88
+      ],
+      "category": "ui",
+      "note": "无文字按钮底图，便于本地化",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/button_success_large.png",
+      "size": [
+        640,
+        170
+      ],
+      "category": "ui",
+      "note": "无文字按钮底图，便于本地化",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/button_success_medium.png",
+      "size": [
+        410,
+        116
+      ],
+      "category": "ui",
+      "note": "无文字按钮底图，便于本地化",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/button_success_small.png",
+      "size": [
+        210,
+        88
+      ],
+      "category": "ui",
+      "note": "无文字按钮底图，便于本地化",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/button_cream_large.png",
+      "size": [
+        640,
+        170
+      ],
+      "category": "ui",
+      "note": "无文字按钮底图，便于本地化",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/button_cream_medium.png",
+      "size": [
+        410,
+        116
+      ],
+      "category": "ui",
+      "note": "无文字按钮底图，便于本地化",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/button_cream_small.png",
+      "size": [
+        210,
+        88
+      ],
+      "category": "ui",
+      "note": "无文字按钮底图，便于本地化",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/panel_modal.png",
+      "size": [
+        760,
+        560
+      ],
+      "category": "ui",
+      "note": "透明外边缘的奶油粉玻璃卡片",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/panel_status.png",
+      "size": [
+        760,
+        230
+      ],
+      "category": "ui",
+      "note": "透明外边缘的奶油粉玻璃卡片",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/panel_card.png",
+      "size": [
+        620,
+        280
+      ],
+      "category": "ui",
+      "note": "透明外边缘的奶油粉玻璃卡片",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/panel_small_card.png",
+      "size": [
+        420,
+        160
+      ],
+      "category": "ui",
+      "note": "透明外边缘的奶油粉玻璃卡片",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/progress_0.png",
+      "size": [
+        640,
+        78
+      ],
+      "category": "ui",
+      "note": "不同恢复进度状态示意；实际游戏可动态绘制",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/progress_25.png",
+      "size": [
+        640,
+        78
+      ],
+      "category": "ui",
+      "note": "不同恢复进度状态示意；实际游戏可动态绘制",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/progress_40.png",
+      "size": [
+        640,
+        78
+      ],
+      "category": "ui",
+      "note": "不同恢复进度状态示意；实际游戏可动态绘制",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/progress_60.png",
+      "size": [
+        640,
+        78
+      ],
+      "category": "ui",
+      "note": "不同恢复进度状态示意；实际游戏可动态绘制",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/progress_80.png",
+      "size": [
+        640,
+        78
+      ],
+      "category": "ui",
+      "note": "不同恢复进度状态示意；实际游戏可动态绘制",
+      "alpha": true
+    },
+    {
+      "file": "05_ui_components/progress_100.png",
+      "size": [
+        640,
+        78
+      ],
+      "category": "ui",
+      "note": "不同恢复进度状态示意；实际游戏可动态绘制",
+      "alpha": true
+    },
+    {
+      "file": "01_scenes/park_master_restored_1092x720.png",
+      "size": [
+        1092,
+        720
+      ],
+      "category": "scene",
+      "note": "包含完整乐园，矩形场景画稿；统一透视、不可逐设施独立移动",
+      "alpha": true
+    },
+    {
+      "file": "01_scenes/sky_starfield_9x20.png",
+      "size": [
+        900,
+        2000
+      ],
+      "category": "scene",
+      "note": "独立9:20星空云海背景，可复用",
+      "alpha": true
+    },
+    {
+      "file": "01_scenes/home_background_9x20.png",
+      "size": [
+        900,
+        2000
+      ],
+      "category": "scene",
+      "note": "完整9:20纯背景，保留界面空位，不含控件",
+      "alpha": true
+    },
+    {
+      "file": "01_scenes/puzzle_background_9x20.png",
+      "size": [
+        900,
+        2000
+      ],
+      "category": "scene",
+      "note": "关卡背景，中部留空以叠加6×6棋盘",
+      "alpha": true
+    },
+    {
+      "file": "01_scenes/restoration_background_9x20.png",
+      "size": [
+        900,
+        2000
+      ],
+      "category": "scene",
+      "note": "修复成功演出背景，留出设施与奖励卡叠放空间",
+      "alpha": true
+    },
+    {
+      "file": "06_icons_and_fx/fx_energy_arc.png",
+      "size": [
+        320,
+        176
+      ],
+      "category": "effect",
+      "note": "透明光效切片，视觉特效参考/叠加",
+      "alpha": true
+    },
+    {
+      "file": "06_icons_and_fx/fx_energy_ring.png",
+      "size": [
+        320,
+        147
+      ],
+      "category": "effect",
+      "note": "透明光效切片，视觉特效参考/叠加",
+      "alpha": true
+    },
+    {
+      "file": "06_icons_and_fx/fx_firework_pink.png",
+      "size": [
+        320,
+        240
+      ],
+      "category": "effect",
+      "note": "透明光效切片，视觉特效参考/叠加",
+      "alpha": true
+    },
+    {
+      "file": "06_icons_and_fx/fx_firework_blue.png",
+      "size": [
+        320,
+        265
+      ],
+      "category": "effect",
+      "note": "透明光效切片，视觉特效参考/叠加",
+      "alpha": true
+    },
+    {
+      "file": "06_icons_and_fx/beam_transparent.png",
+      "size": [
+        640,
+        180
+      ],
+      "category": "effect",
+      "note": "独立透明叠加特效",
+      "alpha": true
+    },
+    {
+      "file": "06_icons_and_fx/sparkles_transparent.png",
+      "size": [
+        640,
+        180
+      ],
+      "category": "effect",
+      "note": "独立透明叠加特效",
+      "alpha": true
+    },
+    {
+      "file": "06_icons_and_fx/icon_star.png",
+      "size": [
+        160,
+        156
+      ],
+      "category": "icon",
+      "note": "透明功能图标，设计稿图形",
+      "alpha": true
+    },
+    {
+      "file": "06_icons_and_fx/icon_coin.png",
+      "size": [
+        160,
+        162
+      ],
+      "category": "icon",
+      "note": "透明功能图标，设计稿图形",
+      "alpha": true
+    },
+    {
+      "file": "06_icons_and_fx/icon_crystal.png",
+      "size": [
+        160,
+        184
+      ],
+      "category": "icon",
+      "note": "透明功能图标，设计稿图形",
+      "alpha": true
+    },
+    {
+      "file": "06_icons_and_fx/icon_gift.png",
+      "size": [
+        160,
+        171
+      ],
+      "category": "icon",
+      "note": "透明功能图标，设计稿图形",
+      "alpha": true
+    },
+    {
+      "file": "06_icons_and_fx/icon_energy.png",
+      "size": [
+        160,
+        208
+      ],
+      "category": "icon",
+      "note": "透明功能图标，设计稿图形",
+      "alpha": true
+    },
+    {
+      "file": "06_icons_and_fx/icon_heart.png",
+      "size": [
+        160,
+        155
+      ],
+      "category": "icon",
+      "note": "透明功能图标，设计稿图形",
+      "alpha": true
+    },
+    {
+      "file": "06_icons_and_fx/icon_badge.png",
+      "size": [
+        160,
+        167
+      ],
+      "category": "icon",
+      "note": "透明功能图标，设计稿图形",
+      "alpha": true
+    },
+    {
+      "file": "06_icons_and_fx/icon_key.png",
+      "size": [
+        160,
+        213
+      ],
+      "category": "icon",
+      "note": "透明功能图标，设计稿图形",
+      "alpha": true
+    },
+    {
+      "file": "06_icons_and_fx/icon_potion.png",
+      "size": [
+        160,
+        176
+      ],
+      "category": "icon",
+      "note": "透明功能图标，设计稿图形",
+      "alpha": true
+    },
+    {
+      "file": "06_icons_and_fx/icon_leaf.png",
+      "size": [
+        160,
+        155
+      ],
+      "category": "icon",
+      "note": "透明功能图标，设计稿图形",
+      "alpha": true
+    },
+    {
+      "file": "07_previews/home_assembly_preview.png",
+      "size": [
+        900,
+        2000
+      ],
+      "category": "preview",
+      "note": "由独立素材组合的布局预览，非正式游戏截屏",
+      "alpha": true
+    },
+    {
+      "file": "07_previews/puzzle_assembly_preview.png",
+      "size": [
+        900,
+        2000
+      ],
+      "category": "preview",
+      "note": "由独立素材组合的布局预览，非正式游戏截屏",
+      "alpha": true
+    },
+    {
+      "file": "07_previews/restoration_assembly_preview.png",
+      "size": [
+        900,
+        2000
+      ],
+      "category": "preview",
+      "note": "由独立素材组合的布局预览，非正式游戏截屏",
+      "alpha": true
+    },
+    {
+      "file": "09_generated_ui/energy_park_logo.png",
+      "size": [
+        2172,
+        724
+      ],
+      "category": "ui",
+      "note": "透明生成 UI 字标，用于主页标题",
+      "alpha": true
+    },
+    {
+      "file": "09_generated_ui/puzzle_header_cloud.png",
+      "size": [
+        1939,
+        811
+      ],
+      "category": "ui",
+      "note": "透明生成 UI 关卡云朵牌，运行时叠加关卡号和星级",
+      "alpha": true
+    },
+    {
+      "file": "09_generated_ui/restoration_banner.png",
+      "size": [
+        2172,
+        724
+      ],
+      "category": "ui",
+      "note": "透明生成 UI 复苏横幅，运行时叠加标题文字",
+      "alpha": true
+    },
+    {
+      "file": "09_generated_ui/action_buttons_sprite.png",
+      "size": [
+        2172,
+        724
+      ],
+      "category": "ui",
+      "note": "透明生成 UI 圆形操作按钮底图，三按钮横向精灵图",
+      "alpha": true
+    }
+  ]
+}
