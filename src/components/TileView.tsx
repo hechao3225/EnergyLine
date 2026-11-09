@@ -9,11 +9,11 @@ import { getTilePorts } from '../utils/circuit';
 import { FlowerIcon } from './FlowerIcon';
 import { getFlowerForLevel } from '../data/flowers';
 import { haptics } from '../utils/haptics';
-import springSourceImg from '../assets/spring_source.png';
-import bulbUnlitImg from '../assets/bulb_unlit.png';
-import bulbLitImg from '../assets/bulb_lit.png';
-import valveSwitchImg from '../assets/valve_switch.png';
-import valveDiodeImg from '../assets/valve_diode.png';
+import springSourceImg from '../assets/spring_source.webp';
+import bulbUnlitImg from '../assets/bulb_unlit.webp';
+import bulbLitImg from '../assets/bulb_lit.webp';
+import valveSwitchImg from '../assets/valve_switch.webp';
+import valveDiodeImg from '../assets/valve_diode.webp';
 
 interface TileViewProps {
   tile: Tile;
@@ -43,12 +43,35 @@ export const TileView: React.FC<TileViewProps> = ({
 
   const longPressTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const isLongPressTriggered = React.useRef<boolean>(false);
+  // 触摸后浏览器会补发 mousedown/mouseup/click。合成 mousedown 会重置长按标记，
+  // 紧随其后的 click 于是又触发一次操作（水闸被切换两次、白扣 2 步）。
+  const lastTouchAtRef = React.useRef<number>(0);
+  // 长按已经消费了一次操作，用来吞掉同一次手势末尾的那一次 click
+  const suppressClickCountRef = React.useRef<number>(0);
 
-  const startPress = () => {
+  const isSyntheticMouseEvent = (e: React.SyntheticEvent) =>
+    e.type.startsWith('mouse') && Date.now() - lastTouchAtRef.current < 700;
+
+  const consumeSuppressedClick = () => {
+    if (suppressClickCountRef.current > 0) {
+      suppressClickCountRef.current -= 1;
+      return true;
+    }
+    return false;
+  };
+
+  const startPress = (e: React.SyntheticEvent) => {
+    // 触摸手势产生的合成鼠标事件：忽略，避免清掉长按状态
+    if (isSyntheticMouseEvent(e)) return;
+    if (e.type === 'touchstart') lastTouchAtRef.current = Date.now();
+    // 新的手势开始，清掉上一次可能残留的抑制计数
+    suppressClickCountRef.current = 0;
     isLongPressTriggered.current = false;
     if (longPressTimerRef.current) clearTimeout(longPressTimerRef.current);
     longPressTimerRef.current = setTimeout(() => {
       isLongPressTriggered.current = true;
+      // 长按已完成操作，同一次手势的收尾 click 必须被吞掉
+      suppressClickCountRef.current = 1;
       if (tile.type === 'switch' && interactive && !tile.locked) {
         haptics.tapHeavy();
         onClick(tile, 'toggle-switch');
@@ -58,7 +81,9 @@ export const TileView: React.FC<TileViewProps> = ({
     }, 400);
   };
 
-  const endPress = () => {
+  const endPress = (e: React.SyntheticEvent) => {
+    if (e.type.startsWith('touch')) lastTouchAtRef.current = Date.now();
+    if (isSyntheticMouseEvent(e)) return;
     if (longPressTimerRef.current) {
       clearTimeout(longPressTimerRef.current);
       longPressTimerRef.current = null;
@@ -69,6 +94,7 @@ export const TileView: React.FC<TileViewProps> = ({
   };
 
   const handleClick = () => {
+    if (consumeSuppressedClick()) return;
     if (isLongPressTriggered.current) {
       isLongPressTriggered.current = false;
       return;
@@ -454,6 +480,7 @@ export const TileView: React.FC<TileViewProps> = ({
           <div
             onClick={(e) => {
               e.stopPropagation();
+              if (consumeSuppressedClick()) return;
               if (interactive && !tile.locked) {
                 haptics.tapHeavy();
                 onClick(tile, 'toggle-switch');
@@ -479,12 +506,13 @@ export const TileView: React.FC<TileViewProps> = ({
           <div
             onClick={(e) => {
               e.stopPropagation();
+              if (consumeSuppressedClick()) return;
               if (interactive && !tile.locked) {
                 haptics.tapLight();
                 onClick(tile, 'rotate');
               }
             }}
-            className="absolute -top-1 -right-1 z-20 w-5 h-5 rounded-full bg-[#1b3a2b] hover:bg-[#124231] border border-emerald-400/70 text-emerald-200 flex items-center justify-center text-[10px] cursor-pointer shadow-sm active:scale-85 transition-all select-none"
+            className="absolute -top-1.5 -right-1.5 z-30 w-7 h-7 rounded-full bg-[#1b3a2b] hover:bg-[#124231] border border-emerald-400/70 text-emerald-200 flex items-center justify-center text-[13px] leading-none cursor-pointer shadow-md active:scale-90 transition-all select-none"
             title="点击顺时针旋转90°"
           >
             ↻
