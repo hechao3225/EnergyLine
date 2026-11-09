@@ -5,12 +5,12 @@
 
 import React, { useMemo } from 'react';
 import { getFlowerForLevel } from '../data/flowers';
-import bulbLitImg from '../assets/bulb_lit.png';
-import chapterBadge1 from '../assets/chapter_badge_1.png';
-import chapterBadge2 from '../assets/chapter_badge_2.png';
-import chapterBadge3 from '../assets/chapter_badge_3.png';
-import chapterBadge4 from '../assets/chapter_badge_4.png';
-import chapterBadge5 from '../assets/chapter_badge_5.png';
+import bulbLitImg from '../assets/bulb_lit.webp';
+import chapterBadge1 from '../assets/chapter_badge_1.webp';
+import chapterBadge2 from '../assets/chapter_badge_2.webp';
+import chapterBadge3 from '../assets/chapter_badge_3.webp';
+import chapterBadge4 from '../assets/chapter_badge_4.webp';
+import chapterBadge5 from '../assets/chapter_badge_5.webp';
 
 interface SacredTreeBranchWidgetProps {
   clearedCount: number;
