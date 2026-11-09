@@ -9,12 +9,13 @@ import { Achievement } from '../types/achievement';
 import { AchievementIcon, RARITY_STYLES } from './AchievementIcon';
 import { getFlowerForLevel } from '../data/flowers';
 import { FlowerIcon } from './FlowerIcon';
-import bulbLitImg from '../assets/bulb_lit.png';
-import chapterBadge1 from '../assets/chapter_badge_1.png';
-import chapterBadge2 from '../assets/chapter_badge_2.png';
-import chapterBadge3 from '../assets/chapter_badge_3.png';
-import chapterBadge4 from '../assets/chapter_badge_4.png';
-import chapterBadge5 from '../assets/chapter_badge_5.png';
+import { getStarThresholds, getStarsForSteps, MAX_STARS } from '../utils/rating';
+import bulbLitImg from '../assets/bulb_lit.webp';
+import chapterBadge1 from '../assets/chapter_badge_1.webp';
+import chapterBadge2 from '../assets/chapter_badge_2.webp';
+import chapterBadge3 from '../assets/chapter_badge_3.webp';
+import chapterBadge4 from '../assets/chapter_badge_4.webp';
+import chapterBadge5 from '../assets/chapter_badge_5.webp';
 
 const CHAPTER_BADGES: Record<number, string> = {
   1: chapterBadge1,
@@ -30,6 +31,7 @@ interface VictoryModalProps {
   remainingSteps: number;
   maxSteps: number;
   bestSteps?: number;
+  parSteps?: number;
   previousBest?: number | null;
   isNewRecord?: boolean;
   unlockedAchievements?: Achievement[];
@@ -49,6 +51,7 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
   remainingSteps,
   maxSteps,
   bestSteps,
+  parSteps,
   previousBest,
   isNewRecord = false,
   unlockedAchievements = [],
@@ -61,14 +64,15 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
   levelId = 1,
   onOpenFloraCompendium,
 }) => {
-  // Star calculation
-  const ratio = remainingSteps / maxSteps;
-  const stars = ratio >= 0.4 ? 3 : ratio >= 0.15 ? 2 : 1;
+  // Star calculation (4-star rating, 4th star requires the minimum step count)
+  const thresholds = getStarThresholds({ maxSteps, parSteps });
+  const stars = getStarsForSteps(stepsUsed, { maxSteps, parSteps });
+  const isPerfect = stars === MAX_STARS;
   const effectiveBest = bestSteps ?? stepsUsed;
   const flower = getFlowerForLevel(levelId);
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/55 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 select-none">
+    <div className="fixed inset-0 z-[60] bg-black/55 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 select-none">
       <div className="w-full max-w-sm sm:max-w-md max-h-[96dvh] bg-[#f7faf4] border border-[#dce3d5] rounded-3xl p-4 sm:p-5 shadow-2xl text-center animate-in fade-in zoom-in-95 duration-150 flex flex-col justify-between overflow-y-auto">
         <div>
           {/* Glowing Lotus / Flower & Chapter Emblem */}
@@ -115,18 +119,42 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
           )}
 
           {/* Stars */}
-          <div className="flex items-center justify-center gap-1.5 mb-3">
-            {[1, 2, 3].map((starIdx) => (
-              <Star
-                key={starIdx}
-                className={`w-7 h-7 transition-all ${
-                  starIdx <= stars
-                    ? 'text-amber-500 fill-amber-400 drop-shadow-sm scale-105'
-                    : 'text-[#d0ded0] fill-[#edf2e7]'
-                }`}
-              />
-            ))}
+          <div className="flex items-center justify-center gap-1 mb-1">
+            {[1, 2, 3, 4].map((starIdx) => {
+              const earned = starIdx <= stars;
+              const isFourth = starIdx === 4;
+              return (
+                <div key={starIdx} className="relative flex items-center justify-center">
+                  {isFourth && earned && (
+                    <span className="absolute inset-0 rounded-full bg-amber-300/50 blur-md animate-pulse" />
+                  )}
+                  <Star
+                    className={`relative transition-all ${
+                      earned
+                        ? isFourth
+                          ? 'w-9 h-9 text-amber-500 fill-amber-300 drop-shadow-[0_0_6px_rgba(251,191,36,0.75)] scale-110'
+                          : 'w-7 h-7 text-amber-500 fill-amber-400 drop-shadow-sm scale-105'
+                        : isFourth
+                        ? 'w-8 h-8 text-[#d0ded0] fill-[#edf2e7]'
+                        : 'w-7 h-7 text-[#d0ded0] fill-[#edf2e7]'
+                    }`}
+                  />
+                </div>
+              );
+            })}
           </div>
+          <p
+            className={`text-[11px] font-bold mb-3 ${
+              isPerfect ? 'text-amber-700' : 'text-[#5f7469]'
+            }`}
+          >
+            {isPerfect
+              ? `满星通关 · 仅用 ${stepsUsed} 步，正好是最少步数`
+              : `4★ 目标 ≤ ${thresholds.par} 步 · 本次多用了 ${Math.max(
+                  0,
+                  stepsUsed - thresholds.par
+                )} 步`}
+          </p>
 
           {/* Unlocked Flower Handbook Card */}
           <div className="p-2.5 mb-2.5 rounded-2xl bg-gradient-to-r from-[#eef8f4] to-[#f4faf7] border border-emerald-300/80 shadow-xs text-left flex items-center gap-3">
@@ -200,7 +228,13 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
             </div>
           </div>
 
-          {/* Contextual Note about Record */}
+          {/* Par (4-star) budget */}
+          <div className="flex items-center justify-between px-2.5 mb-2 py-1 rounded-xl bg-amber-50/70 border border-amber-200/80">
+            <span className="text-[10px] font-semibold text-amber-900">本关最少步数（4★线）</span>
+            <span className="text-[11px] font-mono font-bold text-amber-800">
+              {thresholds.par} 步
+            </span>
+          </div>
           <div className="mb-3">
             {isNewRecord ? (
               previousBest !== null && previousBest !== undefined ? (
@@ -217,9 +251,17 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
             ) : (
               bestSteps !== undefined && (
                 <p className="text-[11px] text-[#52665e] bg-[#f0f4ee] py-1 px-2.5 rounded-xl border border-[#e2ebd0] inline-block">
-                  距离最佳记录还有{' '}
-                  <strong className="text-teal-800 font-semibold">{stepsUsed - bestSteps}</strong>{' '}
-                  步差距，继续加油！
+                  {stepsUsed === bestSteps ? (
+                    <>已追平历史最佳记录，继续冲刺 4★！</>
+                  ) : (
+                    <>
+                      距离最佳记录还有{' '}
+                      <strong className="text-teal-800 font-semibold">
+                        {stepsUsed - bestSteps}
+                      </strong>{' '}
+                      步差距，继续加油！
+                    </>
+                  )}
                 </p>
               )
             )}

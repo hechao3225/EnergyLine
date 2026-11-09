@@ -4,7 +4,8 @@
  */
 
 import React from 'react';
-import { RotateCcw, Home, ArrowRight, Grid, Plus, Trophy } from 'lucide-react';
+import { RotateCcw, Home, ArrowRight, Grid, Plus, Trophy, Star } from 'lucide-react';
+import { getStarThresholds, getStarsForSteps } from '../utils/rating';
 
 interface StatusPanelProps {
   currentLevelIndex: number;
@@ -16,7 +17,9 @@ interface StatusPanelProps {
   isAllLit: boolean;
   hintText: string;
   winText: string;
+  maxSteps: number;
   bestSteps?: number;
+  parSteps?: number;
   onNextLevel: () => void;
   onRestart: () => void;
   onHome: () => void;
@@ -35,7 +38,9 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
   isAllLit,
   hintText,
   winText,
+  maxSteps,
   bestSteps,
+  parSteps,
   onNextLevel,
   onRestart,
   onHome,
@@ -46,6 +51,9 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
   const isOutOfSteps = remainingSteps <= 0 && !isAllLit;
   const formattedIndex = String(currentLevelIndex).padStart(2, '0');
   const formattedTotal = String(totalLevels).padStart(2, '0');
+  const thresholds = getStarThresholds({ maxSteps, parSteps });
+  const earnedStars =
+    bestSteps !== undefined ? getStarsForSteps(bestSteps, { maxSteps, parSteps }) : 0;
 
   return (
     <div className="w-full max-w-sm bg-[#f7faf4] border border-[#dce3d5] rounded-[28px] p-6 sm:p-7 shadow-[0_4px_24px_rgba(30,45,35,0.03)] flex flex-col justify-between">
@@ -83,14 +91,36 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
             </span>
           </div>
 
-          {/* Best Steps (if recorded) */}
-          {bestSteps !== undefined && (
+          {/* Best Steps (if recorded) / 4-star target */}
+          {bestSteps !== undefined ? (
             <div className="flex items-center justify-between text-xs text-[#52665e] py-1 px-2.5 rounded-xl bg-white/70 border border-[#e2ebd0]">
               <span className="flex items-center gap-1.5 font-medium text-[#3b4e45]">
                 <Trophy className="w-3.5 h-3.5 text-amber-500" />
                 <span>历史最佳</span>
               </span>
-              <span className="font-mono font-bold text-teal-800">{bestSteps} 步</span>
+              <span className="flex items-center gap-1.5">
+                <span className="flex items-center gap-0.5">
+                  {[1, 2, 3, 4].map((n) => (
+                    <Star
+                      key={n}
+                      className={`w-3 h-3 ${
+                        n <= earnedStars
+                          ? 'fill-amber-400 text-amber-400'
+                          : 'text-[#d3dfcd]'
+                      }`}
+                    />
+                  ))}
+                </span>
+                <span className="font-mono font-bold text-teal-800">{bestSteps} 步</span>
+              </span>
+            </div>
+          ) : (
+            <div className="flex items-center justify-between text-xs text-[#52665e] py-1 px-2.5 rounded-xl bg-amber-50/70 border border-amber-200/80">
+              <span className="flex items-center gap-1.5 font-medium text-amber-900">
+                <Star className="w-3.5 h-3.5 text-amber-500" />
+                <span>满星目标（4★）</span>
+              </span>
+              <span className="font-mono font-bold text-amber-800">≤ {thresholds.par} 步</span>
             </div>
           )}
 

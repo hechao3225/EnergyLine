@@ -5,6 +5,7 @@
 
 import { Achievement, PlayerStats, AchievementProgressInfo } from '../types/achievement';
 import { sound } from './audio';
+import { getStarsForSteps } from './rating';
 
 const ACHIEVEMENTS_STORAGE_KEY = 'honeycomb_achievements_v1';
 const STATS_STORAGE_KEY = 'honeycomb_player_stats_v1';
@@ -31,11 +32,11 @@ export const ALL_ACHIEVEMENTS: Achievement[] = [
   {
     id: 'consecutive_perfect',
     title: '连续完美通关',
-    description: '连续 3 个关卡以三星（剩余步数≥40%）高评价成功通关',
+    description: '连续 3 个关卡拿到 3 星及以上评价，步步精省',
     category: 'skill',
     icon: 'Flame',
     rarity: 'epic',
-    hint: '保持高水准，连续三局三星完胜',
+    hint: '保持高水准，连续三局拿下三星以上评价',
   },
   {
     id: 'first_spark',
@@ -94,20 +95,20 @@ export const ALL_ACHIEVEMENTS: Achievement[] = [
   {
     id: 'speed_optimizer',
     title: '算无遗策',
-    description: '通关时剩余步数仍保留在 60% 以上，极度节省能量',
+    description: '以本关最少步数通关，点亮闪耀的第 4 颗星',
     category: 'efficiency',
     icon: 'Star',
     rarity: 'rare',
-    hint: '以极少动作完成点亮，节约大半步数',
+    hint: '把每一步都用在刀刃上，直取 4 星',
   },
   {
     id: 'perfectionist',
     title: '完美主义者',
-    description: '在至少 5 个不同关卡中获得三星最高评级',
+    description: '在至少 5 个不同关卡中获得 3 星及以上评价',
     category: 'efficiency',
     icon: 'StarHalf',
     rarity: 'epic',
-    hint: '精益求精，在 5 关获得满星',
+    hint: '精益求精，在 5 关拿下高星评价',
   },
   {
     id: 'endless_scout',
@@ -344,6 +345,8 @@ export interface VictoryCheckContext {
   stepsUsed: number;
   remainingSteps: number;
   maxSteps: number;
+  /** Minimum (4-star) step budget of the level, when known */
+  parSteps?: number;
   isEndless?: boolean;
   endlessStreak?: number;
   levelUndosUsed: number;
@@ -361,8 +364,13 @@ export function checkVictoryAchievements(ctx: VictoryCheckContext): {
   const newlyUnlocked: Achievement[] = [];
   const now = Date.now();
 
-  const isThreeStar = ctx.remainingSteps / ctx.maxSteps >= 0.4;
-  const isSpeedRun = ctx.remainingSteps / ctx.maxSteps >= 0.6;
+  // Rating is driven by the same 4-star model shown to the player
+  const stars = getStarsForSteps(ctx.stepsUsed, {
+    maxSteps: ctx.maxSteps,
+    parSteps: ctx.parSteps,
+  });
+  const isThreeStar = stars >= 3;
+  const isSpeedRun = stars >= 4;
 
   // Update stats
   if (!ctx.isEndless) {
@@ -450,12 +458,12 @@ export function checkVictoryAchievements(ctx: VictoryCheckContext): {
     unlockCandidate('time_traveler');
   }
 
-  // 10. 算无遗策 (Remaining steps >= 60%)
+  // 10. 算无遗策 (4-star / minimum-step clear)
   if (isSpeedRun) {
     unlockCandidate('speed_optimizer');
   }
 
-  // 11. 完美主义者 (3-star in >= 5 distinct levels)
+  // 11. 完美主义者 (3+ stars in >= 5 distinct levels)
   if (stats.threeStarLevelIds.length >= 5) {
     unlockCandidate('perfectionist');
   }
