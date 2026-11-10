@@ -89,6 +89,36 @@ html, body {
   flex-direction: column;
 }
 
+/* Candy-fantasy UI 2.0 shell */
+.candy-shell { height: 100%; width: 100%; background: #21145a; color: #fff; overflow: hidden; }
+.candy-stage { position: relative; height: 100%; width: 100%; max-width: 540px; margin: 0 auto; overflow: hidden; background: #21145a; }
+.candy-screen { position: absolute; inset: 0; overflow: hidden; }
+.candy-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; pointer-events: none; }
+.candy-home-stats { display: none; position: absolute; top: 1.1%; left: 2%; right: 2%; align-items: center; gap: 7px; z-index: 2; font-weight: 900; font-size: clamp(11px, 2.5vw, 16px); text-shadow: 0 2px 2px #3b1b8f; }
+.candy-avatar { width: clamp(34px, 10vw, 50px); height: clamp(34px, 10vw, 50px); border-radius: 50%; border: 3px solid #ffe36f; background: #fcd7ff; box-shadow: 0 0 0 2px #ff9bde, 0 3px 8px #2c0f71; font-size: 22px; }
+.candy-stat { border-radius: 999px; padding: 4px 8px; background: #5d38bcaa; border: 1px solid #ffe886; white-space: nowrap; }
+.candy-stat-star { color: #d9f9ff; }.candy-stat-coin { color: #fff0a2; }.candy-stat-gem { color: #f1d4ff; }
+.candy-home-actions, .candy-play, .candy-victory { z-index: 2; }
+.candy-hit { position: absolute; border: 0; background: transparent; color: transparent; cursor: pointer; }
+.candy-hit-settings { top: 10%; right: 2%; width: 14%; height: 7%; }
+.candy-hit-message { top: 16%; left: 2%; width: 14%; height: 8%; }.candy-hit-gift { top: 24%; left: 2%; width: 14%; height: 8%; }.candy-hit-task { top: 32%; left: 2%; width: 14%; height: 8%; }.candy-hit-progress { top: 60%; left: 8%; right: 8%; height: 12%; }
+.candy-hit-continue { left: 22%; right: 22%; bottom: 12%; height: 8%; color: transparent; font-size: 1px; font-weight: 900; text-shadow: none; }
+.candy-hit-levels, .candy-hit-tasks, .candy-hit-bag, .candy-hit-shop { bottom: 1%; height: 8%; width: 18%; color: transparent; }.candy-hit-levels { left: 4%; }.candy-hit-tasks { left: 24%; }.candy-hit-bag { left: 56%; }.candy-hit-shop { right: 4%; }
+.candy-progress-label { display: none; }
+.candy-hit-back { top: 2%; left: 2%; width: 16%; height: 9%; font-size: 42px; color: #fff; text-shadow: 0 2px 3px #7d2e9d; }.candy-hit-help { top: 2%; right: 2%; width: 16%; height: 9%; font-size: 32px; color: #fff; text-shadow: 0 2px 3px #7d2e9d; }
+.candy-play-status { position: absolute; top: 17%; right: 4%; width: 28%; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 5px 4px; border-radius: 10px; background: #43177caa; color: #fff; font-size: clamp(9px, 2.2vw, 13px); font-weight: 800; text-shadow: 0 1px 2px #2c0c5d; pointer-events: none; }
+.candy-play-status strong { font-size: clamp(13px, 3vw, 18px); color: #ffe9ff; text-shadow: 0 2px 4px #7b247b; }
+.candy-board-layer { position: absolute; top: 27%; left: 5%; right: 5%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
+.candy-hit-grid { display: grid; width: 84%; height: 84%; position: relative; }
+.candy-tile-hit { min-width: 0; min-height: 0; border: 0; border-radius: 10px; background: transparent; cursor: pointer; }
+.candy-tile-hit:disabled { cursor: default; }
+.candy-play-actions { position: absolute; bottom: 5%; left: 13%; right: 13%; display: flex; justify-content: space-between; gap: 8px; }
+.candy-play-actions button { flex: 1; border: 0; border-radius: 24px; background: transparent; color: transparent; font-size: 18px; font-weight: 900; padding: 8px 2px; box-shadow: none; }.candy-play-actions span { display: block; font-size: 1px; }
+.candy-hit-home, .candy-hit-next { bottom: 7%; height: 9%; color: transparent; font-size: 1px; font-weight: 900; text-shadow: none; }.candy-hit-home { left: 7%; width: 42%; }.candy-hit-next { right: 7%; width: 42%; }
+.candy-reward-live { display: none; }
+.candy-overlay { position: absolute; inset: 0; z-index: 20; display: flex; align-items: center; justify-content: center; padding: 24px; background: #281263a8; backdrop-filter: blur(8px); }.candy-overlay-card { position: relative; width: min(92%, 390px); padding: 24px 20px 20px; border-radius: 28px; border: 3px solid #ffd67c; background: linear-gradient(160deg, #fff1ff, #e6d6ff); color: #5d205e; box-shadow: 0 12px 40px #15052f99; text-align: center; }.candy-overlay-card h2 { margin: 4px 0 10px; font-size: 28px; }.candy-overlay-card p { margin: 10px 0 18px; font-weight: 700; }.candy-overlay-card button:not(.candy-overlay-close) { border: 0; border-radius: 999px; padding: 10px 24px; background: linear-gradient(#ffe76e, #ff9e19); color: #7b3211; font-size: 18px; font-weight: 900; box-shadow: 0 4px 0 #d77819; }.candy-overlay-close { position: absolute; top: 8px; right: 12px; border: 0; background: transparent; color: #8c297d; font-size: 30px; }.candy-overlay-mascots { width: 100%; height: 110px; object-fit: contain; object-position: center top; margin-top: -42px; filter: drop-shadow(0 6px 8px #8339aa66); }
+@media (min-aspect-ratio: 10/16) { .candy-art { object-fit: cover; } }
+
 /* ========================================================
    国风青玉金丝统一装饰体系 (统一全界面区域面板与边框)
    ======================================================== */

@@ -27,6 +27,7 @@ import { FloraCompendiumModal } from './components/FloraCompendiumModal';
 import { SacredTreeSproutOverlay, SproutEvent } from './components/SacredTreeSproutOverlay';
 import { SacredTreeBranchWidget } from './components/SacredTreeBranchWidget';
 import { AndroidAppModal } from './components/AndroidAppModal';
+import { CandyThemeShell } from './components/CandyThemeShell';
 import { getFlowerForLevel } from './data/flowers';
 import { Achievement } from './types/achievement';
 import { haptics } from './utils/haptics';
@@ -62,6 +63,7 @@ function getTileActionDescription(tile: Tile, action: 'rotate' | 'switch'): stri
 
 export default function App() {
   const [currentView, setCurrentView] = useState<GameView>('story');
+  const [candyScreen, setCandyScreen] = useState<'home' | 'play'>('home');
   const [levelIndex, setLevelIndex] = useState<number>(24); // Defaults to Level 24 (断脉之桥)
   const [customLevel, setCustomLevel] = useState<LevelConfig | null>(null);
   const [isLevelSelectOpen, setIsLevelSelectOpen] = useState<boolean>(false);
@@ -296,7 +298,6 @@ export default function App() {
     activeLevelConfig.maxSteps,
     customLevel,
     remainingSteps,
-    bestStepsRecord,
   ]);
 
   // Monitor clearedLevels changes: trigger global "灵泉注入" animation & tree visual growth
@@ -505,434 +506,76 @@ export default function App() {
   }, [activeLevelConfig, handleUndo, handleRedo]);
 
   return (
-    <div
-      className="h-[100dvh] max-h-[100dvh] overflow-hidden overscroll-none select-none text-[#172a23] flex flex-col justify-between selection:bg-teal-200 relative bg-[#eef3eb]"
-      style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(245,248,242,0.55) 0%, rgba(240,246,238,0.65) 50%, rgba(225,236,220,0.78) 100%), url(${bgMainImg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
-      {/* Top Header */}
-      <GameHeader
-        currentView={currentView}
-        onSelectView={(v) => {
-          setCurrentView(v);
-          setCustomLevel(null);
-        }}
-        isMuted={isMuted}
-        onToggleMute={handleToggleMute}
-        unlockedCount={unlockedCount}
-        totalCount={14}
-        onOpenProfile={() => setIsProfileOpen(true)}
-        onOpenRules={() => setIsRulesOpen(true)}
-        onOpenStory={() => setIsStoryOpen(true)}
-        onOpenFloraCompendium={() => setIsFloraOpen(true)}
-        isFullscreen={isFullscreen}
-        onToggleFullscreen={handleToggleFullscreen}
-      />
-
-      {/* Main Content Area based on Current View */}
-      <main className="flex-1 flex flex-col justify-center overflow-hidden min-h-0 w-full">
-        {currentView === 'story' && (
-          <>
-            {/* Mobile Dedicated 20:9 Zero-Scroll Layout (< lg) */}
-            <div className="lg:hidden flex flex-col justify-between items-center h-full w-full px-2.5 pt-1 pb-[max(0.5rem,env(safe-area-inset-bottom,0px))] overflow-hidden select-none gap-1.5">
-              {/* Top Quick Status Bar - Jade Panel */}
-              <div className="w-full max-w-[420px] flex items-center justify-between gap-1.5 px-3 py-1.5 jade-panel shrink-0">
-                {/* Level selector trigger */}
-                <button
-                  onClick={() => setIsLevelSelectOpen(true)}
-                  className="flex items-center gap-2 text-left group cursor-pointer min-w-0"
-                >
-                  <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-[#1b5e46] to-[#124533] text-white flex items-center justify-center font-bold text-xs shadow-xs border border-[#0f392a] shrink-0">
-                    {activeLevelConfig.id}
-                  </div>
-                  <div className="flex flex-col min-w-0">
-                    <span className="text-xs font-bold text-[#0e2a1d] truncate max-w-[110px] leading-tight">
-                      {activeLevelConfig.title}
-                    </span>
-                    <span className="text-[10px] text-[#4b6757] leading-tight">
-                      {bestStepsRecord[activeLevelConfig.id]
-                        ? `最佳 ${bestStepsRecord[activeLevelConfig.id]} 步`
-                        : '未完成'}
-                    </span>
-                  </div>
-                </button>
-
-                {/* Center counters */}
-                <div className="flex items-center gap-1.5 shrink-0">
-                  <div
-                    className={`px-2 py-0.5 rounded-lg text-xs font-bold border ${
-                      remainingSteps <= 3
-                        ? 'bg-red-50 text-red-700 border-red-300 animate-pulse'
-                        : 'jade-pill'
-                    }`}
-                  >
-                    步数 {remainingSteps}
-                  </div>
-                  <div
-                    className={`px-2 py-0.5 rounded-lg text-xs font-bold border flex items-center gap-1 ${
-                      simulation.isAllLit
-                        ? 'bg-emerald-100 text-emerald-900 border-emerald-400'
-                        : 'jade-pill text-emerald-800'
-                    }`}
-                  >
-                    <span>🌸</span>
-                    <span>
-                      {simulation.litCount}/{simulation.totalBulbs}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Actions: Rules, Peek, Restart */}
-                <div className="flex items-center gap-1 shrink-0">
-                  <button
-                    onClick={() => setIsRulesOpen(true)}
-                    title="规则说明"
-                    className="w-7 h-7 rounded-xl jade-button flex items-center justify-center cursor-pointer"
-                  >
-                    <BookOpen className="w-3.5 h-3.5 text-emerald-800" />
-                  </button>
-                  <button
-                    onClick={() => setIsPeekActive(!isPeekActive)}
-                    title="透视水渠端口"
-                    className={`w-7 h-7 rounded-xl flex items-center justify-center cursor-pointer transition-colors border ${
-                      isPeekActive
-                        ? 'jade-button-active'
-                        : 'jade-button'
-                    }`}
-                  >
-                    <Eye className="w-3.5 h-3.5 text-emerald-800" />
-                  </button>
-                  <button
-                    onClick={handleRestart}
-                    title="重置关卡"
-                    className="w-7 h-7 rounded-xl jade-button flex items-center justify-center cursor-pointer"
-                  >
-                    <RotateCcw className="w-3.5 h-3.5 text-emerald-800" />
-                  </button>
-                </div>
-              </div>
-
-              {/* Sacred Tree Branch Growth Banner on Mobile */}
-              <div className="w-full max-w-[420px] shrink-0">
-                <SacredTreeBranchWidget
-                  clearedCount={clearedLevels.length}
-                  latestLevelId={clearedLevels[clearedLevels.length - 1] || 1}
-                  isSprouting={Boolean(treeSproutEvent)}
-                  onClickTree={() => setIsLevelSelectOpen(true)}
-                />
-              </div>
-
-              {/* Center 6x6 Circuit Board - Maximized for 20:9 Ratio */}
-              <div className="flex-1 flex items-center justify-center w-full min-h-0 py-0.5">
-                <GameBoard
-                  tiles={tiles}
-                  gridRows={activeLevelConfig.gridRows}
-                  gridCols={activeLevelConfig.gridCols}
-                  simulation={simulation}
-                  isPeekActive={isPeekActive}
-                  onTileClick={handleTileClick}
-                  onLongPressStart={() => setIsPeekActive(true)}
-                  onLongPressEnd={() => setIsPeekActive(false)}
-                  levelId={activeLevelConfig.id}
-                />
-              </div>
-
-              {/* Bottom Section: Compact Timeline & Quick Navigation */}
-              <div className="w-full max-w-[420px] flex flex-col gap-1.5 shrink-0">
-                <UndoHistoryTimeline
-                  timeline={historyTimeline}
-                  currentIndex={historyIndex}
-                  onUndo={handleUndo}
-                  onRedo={handleRedo}
-                  onJumpToStep={handleJumpToStep}
-                  onResetToStart={handleResetToStart}
-                  compact={true}
-                />
-
-                {/* Bottom Navigation Buttons - Jade Panel */}
-                <div className="flex items-center justify-between gap-1.5 px-3 py-1.5 jade-panel">
-                  <button
-                    onClick={() => setIsLevelSelectOpen(true)}
-                    className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold jade-button rounded-lg transition-colors cursor-pointer"
-                  >
-                    <Grid className="w-3.5 h-3.5 text-emerald-800" />
-                    <span>选关 (1-99)</span>
-                  </button>
-
-                  <button
-                    onClick={() => setShowMobileHint(!showMobileHint)}
-                    className={`flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-lg transition-colors cursor-pointer ${
-                      showMobileHint ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'jade-button'
-                    }`}
-                  >
-                    <Lightbulb className="w-3.5 h-3.5 text-amber-600" />
-                    <span>提示</span>
-                  </button>
-
-                  {remainingSteps <= 0 && !simulation.isAllLit ? (
-                    <button
-                      onClick={() => setRemainingSteps((s) => s + 10)}
-                      className="flex items-center gap-1 px-2.5 py-1 text-xs font-bold text-red-800 bg-red-100 hover:bg-red-200 border border-red-300 rounded-lg transition-colors cursor-pointer animate-bounce"
-                    >
-                      <Plus className="w-3.5 h-3.5" />
-                      <span>+10步</span>
-                    </button>
-                  ) : simulation.isAllLit ? (
-                    <button
-                      onClick={handleNextLevel}
-                      className="flex items-center gap-1 px-3 py-1 text-xs font-bold jade-button-active rounded-lg transition-colors cursor-pointer"
-                    >
-                      <span>下一关</span>
-                      <ChevronRight className="w-3.5 h-3.5" />
-                    </button>
-                  ) : (
-                    <span className="text-[11px] text-[#4b6757] font-medium px-1 truncate max-w-[130px]">
-                      {activeLevelConfig.gridRows}×{activeLevelConfig.gridCols} 灵脉
-                    </span>
-                  )}
-                </div>
-
-                {/* Mobile Hint Popup bar if toggled */}
-                {showMobileHint && (
-                  <div className="px-3 py-1.5 jade-panel border-amber-300 bg-amber-50/95 text-xs text-amber-900 flex items-center justify-between">
-                    <span className="truncate">{activeLevelConfig.hintText}</span>
-                    <button
-                      onClick={() => setShowMobileHint(false)}
-                      className="text-amber-800 font-bold ml-2 text-xs cursor-pointer p-0.5"
-                    >
-                      ✕
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Desktop 3-Column Layout (>= lg) */}
-            <div className="hidden lg:block w-full max-w-6xl mx-auto px-4 my-auto">
-              <div className="grid grid-cols-12 gap-5 sm:gap-6 items-stretch">
-                {/* Left Column: Rule Panel */}
-                <div className="col-span-3 flex justify-center">
-                  <RulePanel
-                    isPeekActive={isPeekActive}
-                    onTogglePeek={() => setIsPeekActive(!isPeekActive)}
-                    isMuted={isMuted}
-                    onToggleMute={handleToggleMute}
-                    canUndo={historyIndex > 0}
-                    onUndo={handleUndo}
-                    canRedo={historyIndex < historyTimeline.length - 1}
-                    onRedo={handleRedo}
-                    historyCount={historyIndex}
-                  />
-                </div>
-
-                {/* Center Column: 6x6 Game Board & Visual Undo History Timeline */}
-                <div className="col-span-6 flex flex-col justify-center items-center">
-                  <div className="w-full max-w-[420px] mb-2.5">
-                    <SacredTreeBranchWidget
-                      clearedCount={clearedLevels.length}
-                      latestLevelId={clearedLevels[clearedLevels.length - 1] || 1}
-                      isSprouting={Boolean(treeSproutEvent)}
-                      onClickTree={() => setIsLevelSelectOpen(true)}
-                    />
-                  </div>
-
-                  <GameBoard
-                    tiles={tiles}
-                    gridRows={activeLevelConfig.gridRows}
-                    gridCols={activeLevelConfig.gridCols}
-                    simulation={simulation}
-                    isPeekActive={isPeekActive}
-                    onTileClick={handleTileClick}
-                    onLongPressStart={() => setIsPeekActive(true)}
-                    onLongPressEnd={() => setIsPeekActive(false)}
-                    levelId={activeLevelConfig.id}
-                  />
-
-                  {/* Visual Undo Operation History Timeline */}
-                  <UndoHistoryTimeline
-                    timeline={historyTimeline}
-                    currentIndex={historyIndex}
-                    onUndo={handleUndo}
-                    onRedo={handleRedo}
-                    onJumpToStep={handleJumpToStep}
-                    onResetToStart={handleResetToStart}
-                  />
-                </div>
-
-                {/* Right Column: Status & Level Stats */}
-                <div className="col-span-3 flex justify-center">
-                  <StatusPanel
-                    currentLevelIndex={activeLevelConfig.id}
-                    totalLevels={activeLevelConfig.totalLevels || 3}
-                    levelTitle={activeLevelConfig.title}
-                    remainingSteps={remainingSteps}
-                    litCount={simulation.litCount}
-                    totalBulbs={simulation.totalBulbs}
-                    isAllLit={simulation.isAllLit}
-                    hintText={activeLevelConfig.hintText}
-                    winText={activeLevelConfig.winText}
-                    bestSteps={!customLevel ? bestStepsRecord[activeLevelConfig.id] : undefined}
-                    onNextLevel={handleNextLevel}
-                    onRestart={handleRestart}
-                    onHome={() => setIsLevelSelectOpen(true)}
-                    onAddSteps={() => setRemainingSteps((s) => s + 10)}
-                    onOpenLevelSelect={() => setIsLevelSelectOpen(true)}
-                    hasNextLevel={activeLevelConfig.id < DEFAULT_LEVELS.length || Boolean(customLevel)}
-                  />
-                </div>
-              </div>
-            </div>
-          </>
-        )}
-
-        {currentView === 'endless' && (
-          <ErrorBoundary fallbackTitle="无尽挑战模式">
-            <EndlessMode
-              onHome={() => setCurrentView('story')}
-              isMuted={isMuted}
-              onToggleMute={handleToggleMute}
-              onAchievementUnlocked={(ach) => {
-                setActiveToastAchievement(ach);
-                setUnlockedCount(Object.keys(loadUnlockedAchievements()).length);
-              }}
-            />
-          </ErrorBoundary>
-        )}
-
-        {currentView === 'editor' && (
-          <div className="h-full overflow-y-auto">
-            <LevelEditor
-              onPlayCustomLevel={(cfg) => {
-                setCustomLevel(cfg);
-                setCurrentView('story');
-              }}
-              onBack={() => setCurrentView('story')}
-            />
-          </div>
-        )}
-      </main>
-
-      {/* Desktop only footer */}
-      <footer className="hidden lg:block w-full text-center py-2 text-xs text-[#526c5f] border-t border-[#dce3d5]/70 shrink-0">
-        <span>神树灵泉 · 旋转翡翠水渠灌溉灵木百花 · 99重通天神树</span>
-      </footer>
-
-      {/* Level Select Modal */}
-      {isLevelSelectOpen && (
-        <LevelSelect
+      <>
+        <CandyThemeShell
+          screen={showVictoryModal ? 'victory' : candyScreen}
+          level={activeLevelConfig}
           levels={DEFAULT_LEVELS}
-          currentLevelIndex={levelIndex}
+          tiles={tiles}
+          simulation={simulation}
+          remainingSteps={remainingSteps}
           clearedLevels={clearedLevels}
           bestSteps={bestStepsRecord}
-          onSelectLevel={(id) => {
-            setLevelIndex(id);
-            setCustomLevel(null);
-            setCurrentView('story');
-          }}
-          onClose={() => setIsLevelSelectOpen(false)}
-          onOpenFloraCompendium={() => {
+          levelSelectOpen={isLevelSelectOpen}
+          isPeekActive={isPeekActive}
+          onStartLevel={() => {
+            setShowVictoryModal(false);
             setIsLevelSelectOpen(false);
-            setIsFloraOpen(true);
+            setCandyScreen('play');
           }}
-        />
-      )}
-
-      {/* Victory Celebration Modal */}
-      {showVictoryModal && (
-        <VictoryModal
-          levelTitle={activeLevelConfig.title}
-          levelId={activeLevelConfig.id}
-          stepsUsed={victoryStats ? victoryStats.stepsUsed : activeLevelConfig.maxSteps - remainingSteps}
-          remainingSteps={victoryStats ? victoryStats.remainingSteps : remainingSteps}
-          maxSteps={activeLevelConfig.maxSteps}
-          bestSteps={victoryStats ? victoryStats.bestSteps : bestStepsRecord[activeLevelConfig.id]}
-          previousBest={victoryStats?.previousBest}
-          isNewRecord={victoryStats?.isNewRecord}
-          unlockedAchievements={newlyUnlockedInVictory}
-          totalUnlockedCount={unlockedCount}
-          onOpenAchievements={() => {
+          onBackHome={() => {
             setShowVictoryModal(false);
-            setIsProfileOpen(true);
-          }}
-          onOpenFloraCompendium={() => {
-            setShowVictoryModal(false);
-            setIsFloraOpen(true);
+            setIsLevelSelectOpen(false);
+            setCandyScreen('home');
           }}
           onNextLevel={() => {
             setShowVictoryModal(false);
+            setIsLevelSelectOpen(false);
             handleNextLevel();
+            setCandyScreen('play');
           }}
-          onRestart={() => {
+          onRestart={handleRestart}
+          onUndo={handleUndo}
+          onHint={() => setShowMobileHint(true)}
+          onTileClick={handleTileClick}
+          onOpenLevels={() => setIsLevelSelectOpen(true)}
+          onCloseLevels={() => setIsLevelSelectOpen(false)}
+          onSelectLevel={(id) => {
+            setLevelIndex(id);
+            setCustomLevel(null);
             setShowVictoryModal(false);
-            handleRestart();
+            setIsLevelSelectOpen(false);
+            setCandyScreen('play');
           }}
-          onOpenLevelSelect={() => {
-            setShowVictoryModal(false);
-            setIsLevelSelectOpen(true);
-          }}
-          hasNextLevel={activeLevelConfig.id < DEFAULT_LEVELS.length}
+          onOpenProfile={() => setIsProfileOpen(true)}
+          onOpenRules={() => setIsRulesOpen(true)}
+          onOpenFlora={() => setIsFloraOpen(true)}
         />
-      )}
-
-      {/* Story Prologue Cutscene Modal */}
-      <StoryPrologueModal
-        isOpen={isStoryOpen}
-        onClose={() => setIsStoryOpen(false)}
-        onStartGame={() => setIsStoryOpen(false)}
-      />
-
-      {/* Flora Compendium (百花图鉴) Modal */}
-      <FloraCompendiumModal
-        isOpen={isFloraOpen}
-        onClose={() => setIsFloraOpen(false)}
-        clearedLevels={clearedLevels}
-        bestStepsRecord={bestStepsRecord}
-        onSelectLevel={(id) => {
-          setLevelIndex(id);
-          setCustomLevel(null);
-          setCurrentView('story');
-        }}
-      />
-
-      {/* Profile & Achievement Trophy Cabinet Modal */}
-      <ProfileModal
-        isOpen={isProfileOpen}
-        onClose={() => setIsProfileOpen(false)}
-      />
-
-      {/* Rules & Pipe Guide Modal */}
-      <RulesModal
-        isOpen={isRulesOpen}
-        onClose={() => setIsRulesOpen(false)}
-      />
-
-      {/* Non-intrusive Achievement Unlock Toast Banner */}
-      <AchievementToast
-        achievement={activeToastAchievement}
-        onDismiss={() => setActiveToastAchievement(null)}
-        onOpenCabinet={() => setIsProfileOpen(true)}
-      />
-
-      {/* Global Sacred Tree Spring Infusion Sprouting Overlay */}
-      <SacredTreeSproutOverlay
-        event={treeSproutEvent}
-        clearedCount={clearedLevels.length}
-        onAnimationEnd={() => setTreeSproutEvent(null)}
-      />
-
-      {/* Android Native WebAPK & PWA Settings Modal */}
-      <AndroidAppModal
-        isOpen={isAndroidModalOpen}
-        onClose={() => setIsAndroidModalOpen(false)}
-        isFullscreen={isFullscreen}
-        onToggleFullscreen={handleToggleFullscreen}
-        isHapticsEnabled={isHapticsEnabled}
-        onToggleHaptics={handleToggleHaptics}
-      />
-    </div>
+        <StoryPrologueModal isOpen={isStoryOpen} onClose={() => setIsStoryOpen(false)} onStartGame={() => setIsStoryOpen(false)} />
+        <FloraCompendiumModal
+          isOpen={isFloraOpen}
+          onClose={() => setIsFloraOpen(false)}
+          clearedLevels={clearedLevels}
+          bestStepsRecord={bestStepsRecord}
+          onSelectLevel={(id) => {
+            setLevelIndex(id);
+            setCustomLevel(null);
+            setIsFloraOpen(false);
+            setCandyScreen('play');
+          }}
+        />
+        <ProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
+        <RulesModal isOpen={isRulesOpen} onClose={() => setIsRulesOpen(false)} />
+        <AchievementToast achievement={activeToastAchievement} onDismiss={() => setActiveToastAchievement(null)} onOpenCabinet={() => setIsProfileOpen(true)} />
+        <SacredTreeSproutOverlay event={treeSproutEvent} clearedCount={clearedLevels.length} onAnimationEnd={() => setTreeSproutEvent(null)} />
+        <AndroidAppModal
+          isOpen={isAndroidModalOpen}
+          onClose={() => setIsAndroidModalOpen(false)}
+          isFullscreen={isFullscreen}
+          onToggleFullscreen={handleToggleFullscreen}
+          isHapticsEnabled={isHapticsEnabled}
+          onToggleHaptics={handleToggleHaptics}
+        />
+      </>
   );
 }
