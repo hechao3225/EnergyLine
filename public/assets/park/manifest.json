@@ -134,14 +134,14 @@
     ],
     "rotation_ccw": 0,
     "size": [
-      317,
-      317
+      512,
+      512
     ],
     "alpha_bbox": [
-      8,
-      93,
-      309,
-      224
+      0,
+      147,
+      512,
+      365
     ],
     "corner_alpha": [
       0,
@@ -149,10 +149,31 @@
       0,
       0
     ],
-    "sha256": "6af6f4e6d5d759078bed0d2e619d3898ea9610e080bae1584b5d0b81c6024e06",
-    "bytes": 11444,
+    "sha256": "6a44010345aebecd6ed4ba71f18499c7f55aedbc17eeb2d7a98427f55d656ee0",
+    "bytes": 26674,
     "route": "image_gen built-in",
-    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "port_geometry": {
+      "canvas": [
+        512,
+        512
+      ],
+      "pivot": [
+        256.0,
+        256.0
+      ],
+      "mouth_diameter": 216,
+      "ports": {
+        "left": [
+          0,
+          256.0
+        ],
+        "right": [
+          512,
+          256.0
+        ]
+      }
+    }
   },
   {
     "name": "pipe-corner-off",
@@ -166,14 +187,14 @@
     ],
     "rotation_ccw": 90,
     "size": [
-      268,
-      268
+      512,
+      512
     ],
     "alpha_bbox": [
-      11,
-      8,
-      256,
-      260
+      148,
+      147,
+      512,
+      512
     ],
     "corner_alpha": [
       0,
@@ -181,10 +202,31 @@
       0,
       0
     ],
-    "sha256": "ebf26916e1429e3295e59c5903c04e09584fcc650738d4a90445315d8f858e1f",
-    "bytes": 14254,
+    "sha256": "327a5f621bb342acc494e4732e887566f21b4130f4cb259e84adcf2c303081c1",
+    "bytes": 29716,
     "route": "image_gen built-in",
-    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "port_geometry": {
+      "canvas": [
+        512,
+        512
+      ],
+      "pivot": [
+        256.0,
+        256.0
+      ],
+      "mouth_diameter": 216,
+      "ports": {
+        "right": [
+          512,
+          256.0
+        ],
+        "bottom": [
+          256.0,
+          512
+        ]
+      }
+    }
   },
   {
     "name": "pipe-t_shape-off",
@@ -198,14 +240,14 @@
     ],
     "rotation_ccw": 0,
     "size": [
-      324,
-      324
+      512,
+      512
     ],
     "alpha_bbox": [
-      8,
-      53,
-      316,
-      270
+      0,
+      147,
+      512,
+      512
     ],
     "corner_alpha": [
       0,
@@ -213,10 +255,35 @@
       0,
       0
     ],
-    "sha256": "82b681ab88fca9e6fdbbb80e316759938ad0069f1f6be8bc602a89cf68bbe8d5",
-    "bytes": 15284,
+    "sha256": "9c18fe5d7d36d3d3fc688706aa52a8de676fea68f2e3364b7548272f7dc5d409",
+    "bytes": 36262,
     "route": "image_gen built-in",
-    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "port_geometry": {
+      "canvas": [
+        512,
+        512
+      ],
+      "pivot": [
+        256.0,
+        256.0
+      ],
+      "mouth_diameter": 216,
+      "ports": {
+        "left": [
+          0,
+          256.0
+        ],
+        "right": [
+          512,
+          256.0
+        ],
+        "bottom": [
+          256.0,
+          512
+        ]
+      }
+    }
   },
   {
     "name": "pipe-cross-off",
@@ -230,14 +297,14 @@
     ],
     "rotation_ccw": 0,
     "size": [
-      333,
-      333
+      512,
+      512
     ],
     "alpha_bbox": [
-      15,
-      8,
-      317,
-      325
+      0,
+      0,
+      512,
+      512
     ],
     "corner_alpha": [
       0,
@@ -245,10 +312,39 @@
       0,
       0
     ],
-    "sha256": "d01c343ebd1add800a429fac326ac3c2a82dc41b0246fdcbf88e9820dc4e7486",
-    "bytes": 19372,
+    "sha256": "4efe79163e0e6c6c6678c99f427f68fc83e71ac6218d4a130468edd6a89b37a6",
+    "bytes": 44874,
     "route": "image_gen built-in",
-    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "port_geometry": {
+      "canvas": [
+        512,
+        512
+      ],
+      "pivot": [
+        256.0,
+        256.0
+      ],
+      "mouth_diameter": 216,
+      "ports": {
+        "top": [
+          256.0,
+          0
+        ],
+        "right": [
+          512,
+          256.0
+        ],
+        "bottom": [
+          256.0,
+          512
+        ],
+        "left": [
+          0,
+          256.0
+        ]
+      }
+    }
   },
   {
     "name": "pipe-line-on",
@@ -262,14 +358,14 @@
     ],
     "rotation_ccw": 0,
     "size": [
-      317,
-      317
+      512,
+      512
     ],
     "alpha_bbox": [
-      8,
-      93,
-      309,
-      223
+      0,
+      147,
+      512,
+      365
     ],
     "corner_alpha": [
       0,
@@ -277,10 +373,31 @@
       0,
       0
     ],
-    "sha256": "9fdbcd75d4ddcfc7b02a717f6bb0c5d5cc070704f5a8fc51491b81f83772a801",
-    "bytes": 13804,
+    "sha256": "95016c3a469796a2bb1a76a80ba90a42a92089834fc68663f0c2a4c39e8a0da4",
+    "bytes": 31064,
     "route": "image_gen built-in",
-    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "port_geometry": {
+      "canvas": [
+        512,
+        512
+      ],
+      "pivot": [
+        256.0,
+        256.0
+      ],
+      "mouth_diameter": 216,
+      "ports": {
+        "left": [
+          0,
+          256.0
+        ],
+        "right": [
+          512,
+          256.0
+        ]
+      }
+    }
   },
   {
     "name": "pipe-corner-on",
@@ -294,14 +411,14 @@
     ],
     "rotation_ccw": 90,
     "size": [
-      268,
-      268
+      512,
+      512
     ],
     "alpha_bbox": [
-      11,
-      8,
-      257,
-      260
+      148,
+      147,
+      512,
+      512
     ],
     "corner_alpha": [
       0,
@@ -309,10 +426,31 @@
       0,
       0
     ],
-    "sha256": "9e2c6be2379d875926f3d9c9ab56d4a2d1be531b33f3a99d1552073cdaadea8c",
-    "bytes": 18012,
+    "sha256": "18d4375c74dffd4d47ce7e84e293a052f9f23fbcdf6aa675805f520369bc74ff",
+    "bytes": 34242,
     "route": "image_gen built-in",
-    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "port_geometry": {
+      "canvas": [
+        512,
+        512
+      ],
+      "pivot": [
+        256.0,
+        256.0
+      ],
+      "mouth_diameter": 216,
+      "ports": {
+        "right": [
+          512,
+          256.0
+        ],
+        "bottom": [
+          256.0,
+          512
+        ]
+      }
+    }
   },
   {
     "name": "pipe-t_shape-on",
@@ -326,14 +464,14 @@
     ],
     "rotation_ccw": 0,
     "size": [
-      325,
-      325
+      512,
+      512
     ],
     "alpha_bbox": [
-      8,
-      54,
-      317,
-      271
+      0,
+      147,
+      512,
+      512
     ],
     "corner_alpha": [
       0,
@@ -341,10 +479,35 @@
       0,
       0
     ],
-    "sha256": "cfc67a65ed020b3b414bbca492bb50e27547c403a2890323109a1717c7b3775f",
-    "bytes": 20406,
+    "sha256": "033a47c50a0da9618b45d27cb8791aa3230639d0fe00a3331edd9c5f58f1d203",
+    "bytes": 46592,
     "route": "image_gen built-in",
-    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "port_geometry": {
+      "canvas": [
+        512,
+        512
+      ],
+      "pivot": [
+        256.0,
+        256.0
+      ],
+      "mouth_diameter": 216,
+      "ports": {
+        "left": [
+          0,
+          256.0
+        ],
+        "right": [
+          512,
+          256.0
+        ],
+        "bottom": [
+          256.0,
+          512
+        ]
+      }
+    }
   },
   {
     "name": "pipe-cross-on",
@@ -358,14 +521,14 @@
     ],
     "rotation_ccw": 0,
     "size": [
-      331,
-      331
+      512,
+      512
     ],
     "alpha_bbox": [
-      14,
-      8,
-      316,
-      323
+      0,
+      0,
+      512,
+      512
     ],
     "corner_alpha": [
       0,
@@ -373,10 +536,39 @@
       0,
       0
     ],
-    "sha256": "8fa353e154480f6fa5321d3353626e52516964983ad1b627087a8bf813f2e56b",
-    "bytes": 25046,
+    "sha256": "934d1a6529bb219ca0426e1bb067eec2fe6dd6c269ddd57a14876c036d3ae2cd",
+    "bytes": 56580,
     "route": "image_gen built-in",
-    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "port_geometry": {
+      "canvas": [
+        512,
+        512
+      ],
+      "pivot": [
+        256.0,
+        256.0
+      ],
+      "mouth_diameter": 216,
+      "ports": {
+        "top": [
+          256.0,
+          0
+        ],
+        "right": [
+          512,
+          256.0
+        ],
+        "bottom": [
+          256.0,
+          512
+        ],
+        "left": [
+          0,
+          256.0
+        ]
+      }
+    }
   },
   {
     "name": "pipe-switch-on",
@@ -390,14 +582,14 @@
     ],
     "rotation_ccw": 0,
     "size": [
-      324,
-      324
+      512,
+      512
     ],
     "alpha_bbox": [
-      8,
-      58,
-      316,
-      266
+      0,
+      0,
+      512,
+      383
     ],
     "corner_alpha": [
       0,
@@ -405,10 +597,31 @@
       0,
       0
     ],
-    "sha256": "08f60918a82d2e4d1e401e26213bde8932e497794bf23000b448f8b80912a723",
-    "bytes": 24870,
+    "sha256": "1240af7841c4e18102915558c407c44836a8212c6a421d67c20897e8847dbe6a",
+    "bytes": 56988,
     "route": "image_gen built-in",
-    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "port_geometry": {
+      "canvas": [
+        512,
+        512
+      ],
+      "pivot": [
+        256.0,
+        256.0
+      ],
+      "mouth_diameter": 216,
+      "ports": {
+        "left": [
+          0,
+          256.0
+        ],
+        "right": [
+          512,
+          256.0
+        ]
+      }
+    }
   },
   {
     "name": "pipe-switch-off",
@@ -422,14 +635,14 @@
     ],
     "rotation_ccw": 0,
     "size": [
-      325,
-      325
+      512,
+      512
     ],
     "alpha_bbox": [
-      8,
-      58,
-      317,
-      266
+      0,
+      0,
+      512,
+      382
     ],
     "corner_alpha": [
       0,
@@ -437,10 +650,31 @@
       0,
       0
     ],
-    "sha256": "684a7ba059557fba55b4b7bcd11a1937fb7f9125f8c74bd4e528358cdaa801fd",
-    "bytes": 26536,
+    "sha256": "c0108a61327ea376a54385fdda1f70a2fdcde1145e8664a8826583bb7be1ffdc",
+    "bytes": 61386,
     "route": "image_gen built-in",
-    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "port_geometry": {
+      "canvas": [
+        512,
+        512
+      ],
+      "pivot": [
+        256.0,
+        256.0
+      ],
+      "mouth_diameter": 216,
+      "ports": {
+        "left": [
+          0,
+          256.0
+        ],
+        "right": [
+          512,
+          256.0
+        ]
+      }
+    }
   },
   {
     "name": "pipe-diode",
@@ -454,14 +688,14 @@
     ],
     "rotation_ccw": 0,
     "size": [
-      327,
-      327
+      512,
+      512
     ],
     "alpha_bbox": [
-      8,
-      98,
-      319,
-      228
+      0,
+      147,
+      512,
+      365
     ],
     "corner_alpha": [
       0,
@@ -469,10 +703,31 @@
       0,
       0
     ],
-    "sha256": "85cb35e897db4e9ea24feb92a410760be47a7fb55ccd0be09edc36826591b649",
-    "bytes": 13354,
+    "sha256": "1910134b6463a0f858c59025939c24e383f6f20e6acf5160ab225cd25dbeff6c",
+    "bytes": 28494,
     "route": "image_gen built-in",
-    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "port_geometry": {
+      "canvas": [
+        512,
+        512
+      ],
+      "pivot": [
+        256.0,
+        256.0
+      ],
+      "mouth_diameter": 216,
+      "ports": {
+        "left": [
+          0,
+          256.0
+        ],
+        "right": [
+          512,
+          256.0
+        ]
+      }
+    }
   },
   {
     "name": "icon-star",
@@ -1906,14 +2161,14 @@
     "crop": null,
     "rotation_ccw": 0,
     "size": [
-      400,
-      273
+      512,
+      512
     ],
     "alpha_bbox": [
-      3,
-      3,
-      397,
-      270
+      4,
+      85,
+      512,
+      426
     ],
     "corner_alpha": [
       0,
@@ -1921,10 +2176,27 @@
       0,
       0
     ],
-    "sha256": "fc84e8509408c74d1f61b6f54340f6be574f4b463fc32b9853bcc4fc5310fb30",
-    "bytes": 28992,
+    "sha256": "72f871753be77d590e002ac15d0cad0444bb9a3b593c723256459a2700718680",
+    "bytes": 49094,
     "route": "image_gen built-in",
-    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "port_geometry": {
+      "canvas": [
+        512,
+        512
+      ],
+      "pivot": [
+        256.0,
+        256.0
+      ],
+      "mouth_diameter": 216,
+      "ports": {
+        "right": [
+          512,
+          256.0
+        ]
+      }
+    }
   },
   {
     "name": "reward-ribbon",

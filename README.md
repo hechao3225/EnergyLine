@@ -42,6 +42,8 @@ npm run preview -- --host 127.0.0.1 --port 4173
 ```powershell
 $env:PARK_TEST_URL='http://127.0.0.1:4173'
 npm run test:ui
+# 管件端口的素材像素与真实游玩专项
+npm run test:pipes
 python scripts/audit_park_delivery.py
 ```
 

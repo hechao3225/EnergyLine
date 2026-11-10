@@ -66,10 +66,16 @@ export const TileView: React.FC<TileViewProps> = ({
         onClick={() => onClick(tile, "rotate")}
         aria-label={`${tile.row + 1}行${tile.col + 1}列${TILE_NAMES[tile.type]}${tile.locked ? "固定" : "旋转"}`}
       >
+        {isGoal && (
+          <Art
+            name={`pipe-cross-${isLit ? "on" : "off"}`}
+            className="park-pipe park-goal-inlets"
+          />
+        )}
         {tile.type !== "empty" && (
           <Art
             name={artName}
-            className={`park-pipe ${isGoal && !isLit ? "sleeping" : ""}`}
+            className={`park-pipe ${isGoal ? "park-facility-art" : ""} ${isGoal && !isLit ? "sleeping" : ""}`}
             style={{
               transform: `rotate(${isGoal ? 0 : tile.rotation + offset}deg)`,
             }}

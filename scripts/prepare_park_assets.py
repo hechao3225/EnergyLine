@@ -2,6 +2,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 import json, hashlib, shutil
 import numpy as np
+from park_pipe_geometry import normalize_pipe, normalize_source, port_metadata, standardize_couplers
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = Path(r'C:/Users/Admin/.codex/generated_images/01a1c543-32fd-7f61-8468-80427f89b210')
@@ -16,7 +17,7 @@ overrides={item['name'] for item in extra_sources}
 manifest=[]
 def asset(image,name,source,rect=None,trim=True,square=False,rotate=0):
     manifest[:]=[item for item in manifest if item['name']!=name]
-    if name in previous and (DEST/f'{name}.webp').exists() and name != 'background' and previous[name]['source']==source and tuple(previous[name]['crop'] or ()) == tuple(rect or ()):
+    if name in previous and (DEST/f'{name}.webp').exists() and name != 'background' and not name.startswith('pipe-') and previous[name]['source']==source and tuple(previous[name]['crop'] or ()) == tuple(rect or ()):
         manifest.append(previous[name]); return
     im=image.convert('RGBA')
     if rect: im=im.crop(rect)
@@ -31,12 +32,17 @@ def asset(image,name,source,rect=None,trim=True,square=False,rotate=0):
         canvas=Image.new('RGBA',(max(im.size),)*2)
         canvas.alpha_composite(im,((canvas.width-im.width)//2,(canvas.height-im.height)//2))
         im=canvas
-    limit=1100 if name in ['island','carousel','logo'] else 1800 if name=='background' else 400
+    if name.startswith('pipe-'):
+        im = normalize_source(im, Image.open(DEST/'pipe-line-on.webp').convert('RGBA')) if name=='pipe-source' else normalize_pipe(im,name)
+    limit=512 if name.startswith('pipe-') else 1100 if name in ['island','carousel','logo'] else 1800 if name=='background' else 400
     im.thumbnail((limit,limit),Image.Resampling.LANCZOS)
     path=DEST/f'{name}.webp'
     im.save(path,'WEBP',quality=92,method=4)
     alpha=im.getchannel('A'); visible=alpha.point(lambda v:255 if v>28 else 0).getbbox()
     manifest.append({'name':name,'file':str(path.relative_to(ROOT)).replace('\\','/'),'source':source,'crop':rect,'rotation_ccw':rotate,'size':im.size,'alpha_bbox':visible,'corner_alpha':[alpha.getpixel(x) for x in [(0,0),(im.width-1,0),(0,im.height-1),(im.width-1,im.height-1)]],'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'bytes':path.stat().st_size,'route':'image_gen built-in','processing':'alpha-aware atlas slicing; alpha <=4 cleared; original retained'})
+    if name.startswith('pipe-'):
+        manifest[-1]['port_geometry'] = port_metadata(name)
+        manifest[-1]['processing'] = '保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样'
 
 def source(filename,label):
     dest=ORIGINAL/f'{label}.png'
@@ -91,6 +97,7 @@ if extra_sources:
     for item in extra_sources:
         im=source(item['file'],item['name'])
         if im:asset(im,item['name'],item['name']+'.png')
+standardize_couplers(DEST,manifest)
 # 补充加工脚本拥有的正式资产也保留在统一清单中。
 manifest.extend(item for name,item in previous.items() if name not in {entry['name'] for entry in manifest})
 (DEST/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')

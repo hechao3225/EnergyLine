@@ -1,0 +1,140 @@
+[
+  {
+    "name": "line-on",
+    "before_size": [
+      317,
+      317
+    ],
+    "before_bbox": [
+      6,
+      89,
+      314,
+      225
+    ],
+    "after_size": [
+      512,
+      512
+    ],
+    "after_bbox": [
+      0,
+      140,
+      512,
+      372
+    ]
+  },
+  {
+    "name": "corner-on",
+    "before_size": [
+      268,
+      268
+    ],
+    "before_bbox": [
+      9,
+      6,
+      259,
+      262
+    ],
+    "after_size": [
+      512,
+      512
+    ],
+    "after_bbox": [
+      145,
+      140,
+      512,
+      512
+    ]
+  },
+  {
+    "name": "t_shape-on",
+    "before_size": [
+      325,
+      325
+    ],
+    "before_bbox": [
+      6,
+      52,
+      320,
+      273
+    ],
+    "after_size": [
+      512,
+      512
+    ],
+    "after_bbox": [
+      0,
+      140,
+      512,
+      512
+    ]
+  },
+  {
+    "name": "cross-on",
+    "before_size": [
+      331,
+      331
+    ],
+    "before_bbox": [
+      10,
+      6,
+      318,
+      325
+    ],
+    "after_size": [
+      512,
+      512
+    ],
+    "after_bbox": [
+      0,
+      0,
+      512,
+      512
+    ]
+  },
+  {
+    "name": "switch-on",
+    "before_size": [
+      324,
+      324
+    ],
+    "before_bbox": [
+      6,
+      56,
+      318,
+      268
+    ],
+    "after_size": [
+      512,
+      512
+    ],
+    "after_bbox": [
+      0,
+      0,
+      512,
+      387
+    ]
+  },
+  {
+    "name": "source",
+    "before_size": [
+      400,
+      273
+    ],
+    "before_bbox": [
+      1,
+      1,
+      399,
+      272
+    ],
+    "after_size": [
+      512,
+      512
+    ],
+    "after_bbox": [
+      1,
+      82,
+      512,
+      429
+    ]
+  }
+]
