@@ -20,6 +20,7 @@ import {
   ChevronDown,
 } from 'lucide-react';
 import { sound } from '../utils/audio';
+import { getStars } from '../utils/parkProgress';
 import { getFlowerForLevel } from '../data/flowers';
 import { FlowerIcon } from './FlowerIcon';
 import chapterBadge1 from '../assets/chapter_badge_1.png';
@@ -82,10 +83,7 @@ function getLevelStars(level: LevelConfig, isCleared: boolean, bestStep?: number
   if (!isCleared) return 0;
   if (bestStep === undefined) return 3;
   const remainingEst = Math.max(0, level.maxSteps - bestStep);
-  const ratio = remainingEst / level.maxSteps;
-  if (ratio >= 0.4) return 3;
-  if (ratio >= 0.15) return 2;
-  return 1;
+  return getStars(remainingEst, level.maxSteps);
 }
 
 export const LevelSelect: React.FC<LevelSelectProps> = ({

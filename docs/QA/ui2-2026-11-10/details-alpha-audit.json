@@ -1,0 +1,194 @@
+[
+  {
+    "name": "reward-ribbon",
+    "file": "public/assets/park/reward-ribbon.webp",
+    "source": "wide-panels-v2.png",
+    "crop": [
+      0,
+      650,
+      1536,
+      1024
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      768,
+      125
+    ],
+    "alpha_bbox": [
+      3,
+      2,
+      765,
+      123
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "9fa353ed895409eb6127a81d9a6999aa65ed379dd0b388a56345060d390d2df2",
+    "bytes": 30002,
+    "route": "images_api / gpt-image-2",
+    "processing": "u2netp background removal, alpha-aware trim, 6px transparent margin, proportional resize"
+  },
+  {
+    "name": "repair-sign",
+    "file": "public/assets/park/repair-sign.webp",
+    "source": "wide-panels-v2.png",
+    "crop": [
+      0,
+      330,
+      1536,
+      635
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      768,
+      104
+    ],
+    "alpha_bbox": [
+      3,
+      2,
+      765,
+      103
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "5c5a60c25c3407c36d717c740794d6c7f01da5ae0525c3df3658b6c6169ae672",
+    "bytes": 21406,
+    "route": "images_api / gpt-image-2",
+    "processing": "u2netp background removal, alpha-aware trim, 6px transparent margin, proportional resize"
+  },
+  {
+    "name": "icon-shop",
+    "file": "public/assets/park/icon-shop.webp",
+    "source": "ui-details-v2.png",
+    "crop": [
+      90,
+      245,
+      690,
+      695
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      466,
+      466
+    ],
+    "alpha_bbox": [
+      6,
+      19,
+      460,
+      447
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "1d90d97d3f782c66c58dc28f905b85ec63729ea4ea45a3eabb0662d6f581b18b",
+    "bytes": 50966,
+    "route": "images_api / gpt-image-2",
+    "processing": "u2netp background removal, alpha-aware trim, 6px transparent margin, proportional resize"
+  },
+  {
+    "name": "settings-button",
+    "file": "public/assets/park/settings-button.webp",
+    "source": "ui-details-v2.png",
+    "crop": [
+      940,
+      285,
+      1380,
+      690
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      378,
+      378
+    ],
+    "alpha_bbox": [
+      6,
+      9,
+      372,
+      368
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "1cecc0629c8de25f2c11cd0fc9a28ed43b922506a8a1a98253ebb0d5b9cb2b71",
+    "bytes": 37872,
+    "route": "images_api / gpt-image-2",
+    "processing": "u2netp background removal, alpha-aware trim, 6px transparent margin, proportional resize"
+  },
+  {
+    "name": "facility-frame",
+    "file": "public/assets/park/facility-frame.webp",
+    "source": "ui-details-v2.png",
+    "crop": [
+      0,
+      695,
+      768,
+      1024
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      700,
+      275
+    ],
+    "alpha_bbox": [
+      6,
+      6,
+      694,
+      269
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "30a7933837e246f59609e142e38df64976df3a5ad09d9a0c4f4a9564504c0966",
+    "bytes": 31734,
+    "route": "images_api / gpt-image-2",
+    "processing": "u2netp background removal, alpha-aware trim, 6px transparent margin, proportional resize"
+  },
+  {
+    "name": "status-panel",
+    "file": "public/assets/park/status-panel.webp",
+    "source": "wide-panels-v2.png",
+    "crop": [
+      0,
+      0,
+      1536,
+      325
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      768,
+      106
+    ],
+    "alpha_bbox": [
+      3,
+      2,
+      765,
+      104
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "e8f49b964d3b8b7c3947a17ee387478395b64f20e3ee8830d2d15f71eef057ca",
+    "bytes": 13578,
+    "route": "images_api / gpt-image-2",
+    "processing": "u2netp background removal, alpha-aware trim, 6px transparent margin, proportional resize"
+  }
+]

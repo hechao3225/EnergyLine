@@ -1,0 +1,2121 @@
+[
+  {
+    "name": "background",
+    "file": "public/assets/park/background.webp",
+    "source": "background.png",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      941,
+      1672
+    ],
+    "alpha_bbox": [
+      0,
+      0,
+      941,
+      1672
+    ],
+    "corner_alpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "sha256": "d74f13c040cd73166554a7174c70b613ee076291231086b6bae3f03cc35ecc60",
+    "bytes": 120106,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "sheep",
+    "file": "public/assets/park/sheep.webp",
+    "source": "characters.png",
+    "crop": [
+      887,
+      0,
+      1774,
+      443
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      375,
+      400
+    ],
+    "alpha_bbox": [
+      8,
+      8,
+      368,
+      392
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "ebc267ff9092014e87a6126a6ab4f2b5fea6cb3c8f48f6a9b9911dddd603a118",
+    "bytes": 54246,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "rabbit",
+    "file": "public/assets/park/rabbit.webp",
+    "source": "characters.png",
+    "crop": [
+      0,
+      443,
+      887,
+      887
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      282,
+      400
+    ],
+    "alpha_bbox": [
+      7,
+      7,
+      275,
+      393
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "a56e06dedcc8d95619e07aaef464543fa3df29ea1db5e4027893de93f00096f0",
+    "bytes": 27628,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "spirit",
+    "file": "public/assets/park/spirit.webp",
+    "source": "characters.png",
+    "crop": [
+      887,
+      443,
+      1774,
+      887
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      400,
+      393
+    ],
+    "alpha_bbox": [
+      8,
+      7,
+      392,
+      385
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "2e2687d432ed41d96749102f174c328b483f8825dd386adae481e74ae5bfc1fc",
+    "bytes": 41304,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "pipe-line-off",
+    "file": "public/assets/park/pipe-line-off.webp",
+    "source": "pipes.png",
+    "crop": [
+      0,
+      0,
+      362,
+      362
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      317,
+      317
+    ],
+    "alpha_bbox": [
+      8,
+      93,
+      309,
+      224
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "6af6f4e6d5d759078bed0d2e619d3898ea9610e080bae1584b5d0b81c6024e06",
+    "bytes": 11444,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "pipe-corner-off",
+    "file": "public/assets/park/pipe-corner-off.webp",
+    "source": "pipes.png",
+    "crop": [
+      362,
+      0,
+      724,
+      362
+    ],
+    "rotation_ccw": 90,
+    "size": [
+      268,
+      268
+    ],
+    "alpha_bbox": [
+      11,
+      8,
+      256,
+      260
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "ebf26916e1429e3295e59c5903c04e09584fcc650738d4a90445315d8f858e1f",
+    "bytes": 14254,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "pipe-t_shape-off",
+    "file": "public/assets/park/pipe-t_shape-off.webp",
+    "source": "pipes.png",
+    "crop": [
+      724,
+      0,
+      1086,
+      362
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      324,
+      324
+    ],
+    "alpha_bbox": [
+      8,
+      53,
+      316,
+      270
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "82b681ab88fca9e6fdbbb80e316759938ad0069f1f6be8bc602a89cf68bbe8d5",
+    "bytes": 15284,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "pipe-cross-off",
+    "file": "public/assets/park/pipe-cross-off.webp",
+    "source": "pipes.png",
+    "crop": [
+      1086,
+      0,
+      1448,
+      362
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      333,
+      333
+    ],
+    "alpha_bbox": [
+      15,
+      8,
+      317,
+      325
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "d01c343ebd1add800a429fac326ac3c2a82dc41b0246fdcbf88e9820dc4e7486",
+    "bytes": 19372,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "pipe-line-on",
+    "file": "public/assets/park/pipe-line-on.webp",
+    "source": "pipes.png",
+    "crop": [
+      0,
+      362,
+      362,
+      724
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      317,
+      317
+    ],
+    "alpha_bbox": [
+      8,
+      93,
+      309,
+      223
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "9fdbcd75d4ddcfc7b02a717f6bb0c5d5cc070704f5a8fc51491b81f83772a801",
+    "bytes": 13804,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "pipe-corner-on",
+    "file": "public/assets/park/pipe-corner-on.webp",
+    "source": "pipes.png",
+    "crop": [
+      362,
+      362,
+      724,
+      724
+    ],
+    "rotation_ccw": 90,
+    "size": [
+      268,
+      268
+    ],
+    "alpha_bbox": [
+      11,
+      8,
+      257,
+      260
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "9e2c6be2379d875926f3d9c9ab56d4a2d1be531b33f3a99d1552073cdaadea8c",
+    "bytes": 18012,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "pipe-t_shape-on",
+    "file": "public/assets/park/pipe-t_shape-on.webp",
+    "source": "pipes.png",
+    "crop": [
+      724,
+      362,
+      1086,
+      724
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      325,
+      325
+    ],
+    "alpha_bbox": [
+      8,
+      54,
+      317,
+      271
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "cfc67a65ed020b3b414bbca492bb50e27547c403a2890323109a1717c7b3775f",
+    "bytes": 20406,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "pipe-cross-on",
+    "file": "public/assets/park/pipe-cross-on.webp",
+    "source": "pipes.png",
+    "crop": [
+      1086,
+      362,
+      1448,
+      724
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      331,
+      331
+    ],
+    "alpha_bbox": [
+      14,
+      8,
+      316,
+      323
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "8fa353e154480f6fa5321d3353626e52516964983ad1b627087a8bf813f2e56b",
+    "bytes": 25046,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "pipe-switch-on",
+    "file": "public/assets/park/pipe-switch-on.webp",
+    "source": "pipes.png",
+    "crop": [
+      362,
+      724,
+      724,
+      1086
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      324,
+      324
+    ],
+    "alpha_bbox": [
+      8,
+      58,
+      316,
+      266
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "08f60918a82d2e4d1e401e26213bde8932e497794bf23000b448f8b80912a723",
+    "bytes": 24870,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "pipe-switch-off",
+    "file": "public/assets/park/pipe-switch-off.webp",
+    "source": "pipes.png",
+    "crop": [
+      724,
+      724,
+      1086,
+      1086
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      325,
+      325
+    ],
+    "alpha_bbox": [
+      8,
+      58,
+      317,
+      266
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "684a7ba059557fba55b4b7bcd11a1937fb7f9125f8c74bd4e528358cdaa801fd",
+    "bytes": 26536,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "pipe-diode",
+    "file": "public/assets/park/pipe-diode.webp",
+    "source": "pipes.png",
+    "crop": [
+      1086,
+      724,
+      1448,
+      1086
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      327,
+      327
+    ],
+    "alpha_bbox": [
+      8,
+      98,
+      319,
+      228
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "85cb35e897db4e9ea24feb92a410760be47a7fb55ccd0be09edc36826591b649",
+    "bytes": 13354,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-star",
+    "file": "public/assets/park/icon-star.webp",
+    "source": "icons.png",
+    "crop": [
+      0,
+      0,
+      315,
+      311
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      249,
+      249
+    ],
+    "alpha_bbox": [
+      8,
+      15,
+      241,
+      234
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "bfad414edc232bb7218b1c54dee081e2c7734c72617973637d6985401537fc55",
+    "bytes": 15462,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-coin",
+    "file": "public/assets/park/icon-coin.webp",
+    "source": "icons.png",
+    "crop": [
+      315,
+      0,
+      630,
+      311
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      240,
+      240
+    ],
+    "alpha_bbox": [
+      10,
+      8,
+      229,
+      232
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "1c85593e18f33f7bce7bd98cfe411beb6e6e6844c4c648846750e9711ada2e1b",
+    "bytes": 16046,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-gem",
+    "file": "public/assets/park/icon-gem.webp",
+    "source": "icons.png",
+    "crop": [
+      630,
+      0,
+      945,
+      311
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      254,
+      254
+    ],
+    "alpha_bbox": [
+      8,
+      26,
+      246,
+      228
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "559da1e2b8b991af634378c58c0befe8652543f1d26dc6e6be98fbdedcc921ec",
+    "bytes": 13244,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-gift",
+    "file": "public/assets/park/icon-gift.webp",
+    "source": "icons.png",
+    "crop": [
+      945,
+      0,
+      1261,
+      311
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      254,
+      254
+    ],
+    "alpha_bbox": [
+      18,
+      8,
+      236,
+      246
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "dcac2c67d42086e38ed87560c31748060400383200c77545a486d0b366319ea5",
+    "bytes": 16852,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-settings",
+    "file": "public/assets/park/icon-settings.webp",
+    "source": "icons.png",
+    "crop": [
+      0,
+      311,
+      315,
+      623
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      253,
+      253
+    ],
+    "alpha_bbox": [
+      8,
+      10,
+      245,
+      242
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "e86994a3373b7a0d568f8bcda7c0e023cb653a78443cff1fd6deb053a305b728",
+    "bytes": 18912,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-mail",
+    "file": "public/assets/park/icon-mail.webp",
+    "source": "icons.png",
+    "crop": [
+      315,
+      311,
+      630,
+      623
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      239,
+      239
+    ],
+    "alpha_bbox": [
+      8,
+      33,
+      231,
+      206
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "b08f7acc7b2233899e0a4968524089c6478e6f7f01f2f62170e93a2df4fba38a",
+    "bytes": 11732,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-task",
+    "file": "public/assets/park/icon-task.webp",
+    "source": "icons.png",
+    "crop": [
+      630,
+      311,
+      945,
+      623
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      249,
+      249
+    ],
+    "alpha_bbox": [
+      21,
+      8,
+      227,
+      241
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "69e851c3f69425ff4acaeedcbdcf7f657ff353fa6f1a02a2b9f04513f99b09a0",
+    "bytes": 13832,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-bag",
+    "file": "public/assets/park/icon-bag.webp",
+    "source": "icons.png",
+    "crop": [
+      945,
+      311,
+      1261,
+      623
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      244,
+      244
+    ],
+    "alpha_bbox": [
+      8,
+      10,
+      236,
+      234
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "dd1914c0ef8b15e620a43bf614a601980adacb87f70c6238ff6ff7a9f84cf22d",
+    "bytes": 17598,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-castle",
+    "file": "public/assets/park/icon-castle.webp",
+    "source": "icons.png",
+    "crop": [
+      0,
+      623,
+      315,
+      935
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      265,
+      265
+    ],
+    "alpha_bbox": [
+      12,
+      8,
+      253,
+      257
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "bae71b4a3972bbb2a27151bd7998efce22974688c74c09051534421dbf1d5ad1",
+    "bytes": 22430,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-map",
+    "file": "public/assets/park/icon-map.webp",
+    "source": "icons.png",
+    "crop": [
+      315,
+      623,
+      630,
+      935
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      273,
+      273
+    ],
+    "alpha_bbox": [
+      8,
+      41,
+      265,
+      232
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "21ac2481ce906d8ffc317f18540386780558aec50e4d06cbfec9517b77070b0f",
+    "bytes": 20158,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-hint",
+    "file": "public/assets/park/icon-hint.webp",
+    "source": "icons.png",
+    "crop": [
+      630,
+      623,
+      945,
+      935
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      272,
+      272
+    ],
+    "alpha_bbox": [
+      16,
+      8,
+      256,
+      264
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "f177a49cd8f9fdd93ea89a76bb8469caf4d4112408456144c3fc47d5f215a45d",
+    "bytes": 17134,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-undo",
+    "file": "public/assets/park/icon-undo.webp",
+    "source": "icons.png",
+    "crop": [
+      945,
+      623,
+      1261,
+      935
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      242,
+      242
+    ],
+    "alpha_bbox": [
+      8,
+      16,
+      234,
+      225
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "de227305135f09210f79c1307866eaf76d1caaeb033d7bfc344244bb1e46f5b9",
+    "bytes": 14590,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-reset",
+    "file": "public/assets/park/icon-reset.webp",
+    "source": "icons.png",
+    "crop": [
+      0,
+      935,
+      315,
+      1247
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      241,
+      241
+    ],
+    "alpha_bbox": [
+      8,
+      8,
+      233,
+      232
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "084087d14323484663ffbcc4d317ae26063d00815effa921d2a78669fda7789c",
+    "bytes": 19798,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-play",
+    "file": "public/assets/park/icon-play.webp",
+    "source": "icons.png",
+    "crop": [
+      315,
+      935,
+      630,
+      1247
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      229,
+      229
+    ],
+    "alpha_bbox": [
+      19,
+      8,
+      209,
+      221
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "5940dbd551a3a5cbd5f6b850c65ca7019adab82314eed5f29f8df483bde0401d",
+    "bytes": 11426,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-crown",
+    "file": "public/assets/park/icon-crown.webp",
+    "source": "icons.png",
+    "crop": [
+      630,
+      935,
+      945,
+      1247
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      263,
+      263
+    ],
+    "alpha_bbox": [
+      8,
+      21,
+      255,
+      241
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "ee226be4cacbf234e25847cd0ef003bffa4b3c6cf403d12645b01831c4d46e3b",
+    "bytes": 19420,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-lock",
+    "file": "public/assets/park/icon-lock.webp",
+    "source": "icons.png",
+    "crop": [
+      945,
+      935,
+      1261,
+      1247
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      247,
+      247
+    ],
+    "alpha_bbox": [
+      20,
+      8,
+      226,
+      239
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "1c632abb81032ce77f5308e85f5f6cb61975ba69317a20da09c9254f18570115",
+    "bytes": 14912,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "carousel",
+    "file": "public/assets/park/carousel.webp",
+    "source": "carousel.png",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      1040,
+      1100
+    ],
+    "alpha_bbox": [
+      8,
+      8,
+      1032,
+      1093
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "2064b4c9b75bb6f6aaac56531cc16ae26ac9427aa5615754ea89c4a02bcae2f0",
+    "bytes": 251928,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "button-gold",
+    "file": "public/assets/park/button-gold.webp",
+    "source": "materials.png",
+    "crop": [
+      0,
+      0,
+      768,
+      303
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      400,
+      134
+    ],
+    "alpha_bbox": [
+      4,
+      4,
+      395,
+      129
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "fe8c53ad1b78d614be8e521b7c5bc8b840972f0c837aa92dbdc328d9c5e816b7",
+    "bytes": 13250,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "button-purple",
+    "file": "public/assets/park/button-purple.webp",
+    "source": "materials.png",
+    "crop": [
+      768,
+      0,
+      1536,
+      303
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      400,
+      134
+    ],
+    "alpha_bbox": [
+      5,
+      4,
+      396,
+      129
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "c3e0208c34c23126739bfe4c5a18a29b04c2803e732e4a42c146489fbb98ea55",
+    "bytes": 12994,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "info-card",
+    "file": "public/assets/park/info-card.webp",
+    "source": "materials.png",
+    "crop": [
+      0,
+      341,
+      768,
+      682
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      400,
+      169
+    ],
+    "alpha_bbox": [
+      4,
+      4,
+      395,
+      165
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "d34e433261fe640472a87115eba8d59c316f8b7755f8158006661bf00dbe34e0",
+    "bytes": 10824,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "level-sign",
+    "file": "public/assets/park/level-sign.webp",
+    "source": "materials.png",
+    "crop": [
+      768,
+      303,
+      1536,
+      683
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      400,
+      185
+    ],
+    "alpha_bbox": [
+      4,
+      4,
+      396,
+      181
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "4ff6924b6898c981cb3f7c84d209397f31ff6713a67355bdb98e301ea4694bde",
+    "bytes": 16816,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "celebration-sign",
+    "file": "public/assets/park/celebration-sign.webp",
+    "source": "materials.png",
+    "crop": [
+      0,
+      682,
+      768,
+      1024
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      400,
+      122
+    ],
+    "alpha_bbox": [
+      4,
+      4,
+      396,
+      118
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "943494f6cc84d9bab9219ad98fb7c062db596efcfb66af1dafc286ac11f0f377",
+    "bytes": 19852,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "tile",
+    "file": "public/assets/park/tile.webp",
+    "source": "materials.png",
+    "crop": [
+      768,
+      682,
+      1536,
+      1024
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      310,
+      302
+    ],
+    "alpha_bbox": [
+      8,
+      8,
+      302,
+      294
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "666b4d4670f937d91e7db967510e1787deb01aa91cf7aef413aa5dd03454d56d",
+    "bytes": 14250,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "sheep-cheer",
+    "file": "public/assets/park/sheep-cheer.webp",
+    "source": "celebrate.png",
+    "crop": [
+      0,
+      0,
+      887,
+      887
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      358,
+      400
+    ],
+    "alpha_bbox": [
+      4,
+      4,
+      354,
+      396
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "a434a3bd0c6b7f1b351c9cf31f69329f4b4889b305e03ef4ce459b68031826fd",
+    "bytes": 52902,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "spirit-cheer",
+    "file": "public/assets/park/spirit-cheer.webp",
+    "source": "celebrate.png",
+    "crop": [
+      887,
+      0,
+      1774,
+      887
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      400,
+      358
+    ],
+    "alpha_bbox": [
+      4,
+      4,
+      396,
+      354
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "0e0216ae67249e451b2cea7862f4d64f445655c4e83558a1bf61d052c4c82502",
+    "bytes": 45882,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "tool-ivory",
+    "file": "public/assets/park/tool-ivory.webp",
+    "source": "tools.png",
+    "crop": [
+      0,
+      0,
+      512,
+      512
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      400,
+      239
+    ],
+    "alpha_bbox": [
+      7,
+      7,
+      393,
+      232
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "83b61394e555778b61e13b6b435fe0727a087822b31d0d4ce58bd071bce4f7cf",
+    "bytes": 18812,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "tool-gold",
+    "file": "public/assets/park/tool-gold.webp",
+    "source": "tools.png",
+    "crop": [
+      512,
+      0,
+      1024,
+      512
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      400,
+      238
+    ],
+    "alpha_bbox": [
+      7,
+      7,
+      393,
+      231
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "2c0dff6a3941db7d3d8cf81863f65b2c2c3dbf05af673157de882346fc976a75",
+    "bytes": 19856,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-paw",
+    "file": "public/assets/park/icon-paw.webp",
+    "source": "tools.png",
+    "crop": [
+      0,
+      512,
+      512,
+      1024
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      337,
+      330
+    ],
+    "alpha_bbox": [
+      8,
+      8,
+      329,
+      322
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "45435baeabed9dbfe70e20ef6d7303cb92902736e991ad0e1b3b509160af0618",
+    "bytes": 19060,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-back",
+    "file": "public/assets/park/icon-back.webp",
+    "source": "tools.png",
+    "crop": [
+      512,
+      512,
+      1024,
+      1024
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      377,
+      305
+    ],
+    "alpha_bbox": [
+      8,
+      8,
+      369,
+      297
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "5dcafc9df018776b44e798fc08c330d0c24efd4a6c629d8c1d8cfcac1a941c32",
+    "bytes": 17220,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "icon-check",
+    "file": "public/assets/park/icon-check.webp",
+    "source": "tools.png",
+    "crop": [
+      65,
+      1103,
+      407,
+      1445
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      332,
+      332
+    ],
+    "alpha_bbox": [
+      8,
+      8,
+      324,
+      324
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "269ea52222fb87a60643aa1724eae90fee963ed2fa5dcc92b1f4644e505347ae",
+    "bytes": 24562,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "chapter-ribbon",
+    "file": "public/assets/park/chapter-ribbon.webp",
+    "source": "tools.png",
+    "crop": [
+      466,
+      1154,
+      1000,
+      1390
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      400,
+      173
+    ],
+    "alpha_bbox": [
+      6,
+      6,
+      394,
+      167
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "0cdf6377549692dc0717862e2e7e3a27a6208f6007041b268f2f22033aedfdc8",
+    "bytes": 21010,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "flower-0",
+    "file": "public/assets/park/flower-0.webp",
+    "source": "flowers.png",
+    "crop": [
+      0,
+      0,
+      362,
+      362
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      344,
+      344
+    ],
+    "alpha_bbox": [
+      8,
+      12,
+      336,
+      331
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "f2b182b855fce57bb27e7c97cc0301442a4d7403c809c4fb9307fbd6ded1094a",
+    "bytes": 43934,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "flower-1",
+    "file": "public/assets/park/flower-1.webp",
+    "source": "flowers.png",
+    "crop": [
+      362,
+      0,
+      724,
+      362
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      341,
+      341
+    ],
+    "alpha_bbox": [
+      8,
+      10,
+      333,
+      331
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "1c9a251f43bee8e1d6dea04f77104ac3074ac735f1d9822a264580a8b912c33b",
+    "bytes": 47736,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "flower-2",
+    "file": "public/assets/park/flower-2.webp",
+    "source": "flowers.png",
+    "crop": [
+      724,
+      0,
+      1086,
+      362
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      347,
+      347
+    ],
+    "alpha_bbox": [
+      8,
+      14,
+      339,
+      332
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "daafbe60a872a38d1de21165762ca124b402b7f01d2ccbb58efb1505ba146023",
+    "bytes": 43034,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "flower-3",
+    "file": "public/assets/park/flower-3.webp",
+    "source": "flowers.png",
+    "crop": [
+      1086,
+      0,
+      1448,
+      362
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      347,
+      347
+    ],
+    "alpha_bbox": [
+      8,
+      16,
+      339,
+      331
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "306be0c50d3278926b19acc3e917c6aa44274a6476617610a7909699204bbf30",
+    "bytes": 43504,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "flower-4",
+    "file": "public/assets/park/flower-4.webp",
+    "source": "flowers.png",
+    "crop": [
+      0,
+      362,
+      362,
+      724
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      357,
+      357
+    ],
+    "alpha_bbox": [
+      8,
+      18,
+      349,
+      338
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "5161a8a9be4b28560dafaaad4ea5130e2dfd2df8285d6e7e8dc7bf453875b585",
+    "bytes": 51862,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "flower-5",
+    "file": "public/assets/park/flower-5.webp",
+    "source": "flowers.png",
+    "crop": [
+      362,
+      362,
+      724,
+      724
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      346,
+      346
+    ],
+    "alpha_bbox": [
+      8,
+      16,
+      338,
+      329
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "fb43c1805633c7f836b6bf0daedadaecdbd9b3c929787ab36f8fc6fa0ccc1c64",
+    "bytes": 49732,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "flower-6",
+    "file": "public/assets/park/flower-6.webp",
+    "source": "flowers.png",
+    "crop": [
+      724,
+      362,
+      1086,
+      724
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      342,
+      342
+    ],
+    "alpha_bbox": [
+      8,
+      3,
+      334,
+      332
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "4f3800e226a79b9bbf8316b7361acf2b61f190892679147a9082048941ee8685",
+    "bytes": 51676,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "flower-7",
+    "file": "public/assets/park/flower-7.webp",
+    "source": "flowers.png",
+    "crop": [
+      1086,
+      362,
+      1448,
+      724
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      359,
+      359
+    ],
+    "alpha_bbox": [
+      5,
+      22,
+      351,
+      336
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "e21bdb61b33c86d401400150f0836ee6a66ed0d660419e1253224489e8e1d0fd",
+    "bytes": 42026,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "flower-8",
+    "file": "public/assets/park/flower-8.webp",
+    "source": "flowers.png",
+    "crop": [
+      0,
+      724,
+      362,
+      1086
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      349,
+      349
+    ],
+    "alpha_bbox": [
+      8,
+      13,
+      341,
+      335
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "d561aaa8e1359f39390615a6707d386948609f7ddb7034c06be58dea0f94ee34",
+    "bytes": 60904,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "flower-9",
+    "file": "public/assets/park/flower-9.webp",
+    "source": "flowers.png",
+    "crop": [
+      362,
+      724,
+      724,
+      1086
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      341,
+      341
+    ],
+    "alpha_bbox": [
+      3,
+      5,
+      333,
+      331
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "83e24565a75891131403eb7728ce74f744776e7e1661928cf13b61fbfae12be4",
+    "bytes": 50472,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "flower-10",
+    "file": "public/assets/park/flower-10.webp",
+    "source": "flowers.png",
+    "crop": [
+      724,
+      724,
+      1086,
+      1086
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      337,
+      337
+    ],
+    "alpha_bbox": [
+      8,
+      6,
+      329,
+      326
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "aa9a7932db5bc7e7525162a7060a6b76edbfb89a56d832bca2b0b9fe6134a7a6",
+    "bytes": 53098,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "flower-11",
+    "file": "public/assets/park/flower-11.webp",
+    "source": "flowers.png",
+    "crop": [
+      1086,
+      724,
+      1448,
+      1086
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      357,
+      357
+    ],
+    "alpha_bbox": [
+      5,
+      19,
+      349,
+      336
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "f23bdcc248d00bf74913e6fa71b3727f306508a2947b7dd0480316865a567e26",
+    "bytes": 45720,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "island",
+    "file": "public/assets/park/island.webp",
+    "source": "island.png",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      1100,
+      844
+    ],
+    "alpha_bbox": [
+      7,
+      7,
+      1093,
+      837
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "b5569219fa4fe29d631b980203718b6fbc3c9a2ee3e89c359a3cdb45d47de476",
+    "bytes": 305688,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "logo",
+    "file": "public/assets/park/logo.webp",
+    "source": "logo.png",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      1100,
+      344
+    ],
+    "alpha_bbox": [
+      4,
+      4,
+      1096,
+      340
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "ee3b97446491be9413e44a0b157434aafde3dc6d96292fd9334799702a2eaaf2",
+    "bytes": 117760,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "pipe-source",
+    "file": "public/assets/park/pipe-source.webp",
+    "source": "pipe-source.png",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      400,
+      273
+    ],
+    "alpha_bbox": [
+      3,
+      3,
+      397,
+      270
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "fc84e8509408c74d1f61b6f54340f6be574f4b463fc32b9853bcc4fc5310fb30",
+    "bytes": 28992,
+    "route": "image_gen built-in",
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+  },
+  {
+    "name": "reward-ribbon",
+    "file": "public/assets/park/reward-ribbon.webp",
+    "source": "wide-panels-v2.png",
+    "crop": [
+      0,
+      650,
+      1536,
+      1024
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      768,
+      125
+    ],
+    "alpha_bbox": [
+      3,
+      2,
+      765,
+      123
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "9fa353ed895409eb6127a81d9a6999aa65ed379dd0b388a56345060d390d2df2",
+    "bytes": 30002,
+    "route": "images_api / gpt-image-2",
+    "processing": "u2netp background removal, alpha-aware trim, 6px transparent margin, proportional resize"
+  },
+  {
+    "name": "repair-sign",
+    "file": "public/assets/park/repair-sign.webp",
+    "source": "wide-panels-v2.png",
+    "crop": [
+      0,
+      330,
+      1536,
+      635
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      768,
+      104
+    ],
+    "alpha_bbox": [
+      3,
+      2,
+      765,
+      103
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "5c5a60c25c3407c36d717c740794d6c7f01da5ae0525c3df3658b6c6169ae672",
+    "bytes": 21406,
+    "route": "images_api / gpt-image-2",
+    "processing": "u2netp background removal, alpha-aware trim, 6px transparent margin, proportional resize"
+  },
+  {
+    "name": "icon-shop",
+    "file": "public/assets/park/icon-shop.webp",
+    "source": "ui-details-v2.png",
+    "crop": [
+      90,
+      245,
+      690,
+      695
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      466,
+      466
+    ],
+    "alpha_bbox": [
+      6,
+      19,
+      460,
+      447
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "1d90d97d3f782c66c58dc28f905b85ec63729ea4ea45a3eabb0662d6f581b18b",
+    "bytes": 50966,
+    "route": "images_api / gpt-image-2",
+    "processing": "u2netp background removal, alpha-aware trim, 6px transparent margin, proportional resize"
+  },
+  {
+    "name": "settings-button",
+    "file": "public/assets/park/settings-button.webp",
+    "source": "ui-details-v2.png",
+    "crop": [
+      940,
+      285,
+      1380,
+      690
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      378,
+      378
+    ],
+    "alpha_bbox": [
+      6,
+      9,
+      372,
+      368
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "1cecc0629c8de25f2c11cd0fc9a28ed43b922506a8a1a98253ebb0d5b9cb2b71",
+    "bytes": 37872,
+    "route": "images_api / gpt-image-2",
+    "processing": "u2netp background removal, alpha-aware trim, 6px transparent margin, proportional resize"
+  },
+  {
+    "name": "facility-frame",
+    "file": "public/assets/park/facility-frame.webp",
+    "source": "ui-details-v2.png",
+    "crop": [
+      0,
+      695,
+      768,
+      1024
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      700,
+      275
+    ],
+    "alpha_bbox": [
+      6,
+      6,
+      694,
+      269
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "30a7933837e246f59609e142e38df64976df3a5ad09d9a0c4f4a9564504c0966",
+    "bytes": 31734,
+    "route": "images_api / gpt-image-2",
+    "processing": "u2netp background removal, alpha-aware trim, 6px transparent margin, proportional resize"
+  },
+  {
+    "name": "status-panel",
+    "file": "public/assets/park/status-panel.webp",
+    "source": "wide-panels-v2.png",
+    "crop": [
+      0,
+      0,
+      1536,
+      325
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      768,
+      106
+    ],
+    "alpha_bbox": [
+      3,
+      2,
+      765,
+      104
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "e8f49b964d3b8b7c3947a17ee387478395b64f20e3ee8830d2d15f71eef057ca",
+    "bytes": 13578,
+    "route": "images_api / gpt-image-2",
+    "processing": "u2netp background removal, alpha-aware trim, 6px transparent margin, proportional resize"
+  }
+]

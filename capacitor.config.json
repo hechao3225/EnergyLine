@@ -1,13 +1,13 @@
 {
   "appId": "com.sacredtree.waterflow",
-  "appName": "神树灵泉",
+  "appName": "能量管道乐园",
   "webDir": "dist",
   "server": {
     "androidScheme": "https"
   },
   "android": {
     "allowMixedContent": true,
-    "backgroundColor": "#064e3b",
+    "backgroundColor": "#874edd",
     "buildOptions": {
       "releaseType": "APK"
     }

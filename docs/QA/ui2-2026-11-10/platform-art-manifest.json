@@ -1,0 +1,242 @@
+[
+  {
+    "file": "public/pwa-192x192.png",
+    "source": "sheep.webp",
+    "size": [
+      192,
+      192
+    ]
+  },
+  {
+    "file": "public/pwa-512x512.png",
+    "source": "sheep.webp",
+    "size": [
+      512,
+      512
+    ]
+  },
+  {
+    "file": "public/pwa-maskable-512x512.png",
+    "source": "sheep.webp",
+    "size": [
+      512,
+      512
+    ]
+  },
+  {
+    "file": "public/apple-touch-icon.png",
+    "source": "sheep.webp",
+    "size": [
+      180,
+      180
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/drawable/splash.png",
+    "source": "background.webp + logo.webp + island.webp",
+    "size": [
+      480,
+      320
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/drawable-land-hdpi/splash.png",
+    "source": "background.webp + logo.webp + island.webp",
+    "size": [
+      800,
+      480
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/drawable-land-mdpi/splash.png",
+    "source": "background.webp + logo.webp + island.webp",
+    "size": [
+      480,
+      320
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/drawable-land-xhdpi/splash.png",
+    "source": "background.webp + logo.webp + island.webp",
+    "size": [
+      1280,
+      720
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/drawable-land-xxhdpi/splash.png",
+    "source": "background.webp + logo.webp + island.webp",
+    "size": [
+      1600,
+      960
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/drawable-land-xxxhdpi/splash.png",
+    "source": "background.webp + logo.webp + island.webp",
+    "size": [
+      1920,
+      1280
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/drawable-port-hdpi/splash.png",
+    "source": "background.webp + logo.webp + island.webp",
+    "size": [
+      480,
+      800
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/drawable-port-mdpi/splash.png",
+    "source": "background.webp + logo.webp + island.webp",
+    "size": [
+      320,
+      480
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/drawable-port-xhdpi/splash.png",
+    "source": "background.webp + logo.webp + island.webp",
+    "size": [
+      720,
+      1280
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/drawable-port-xxhdpi/splash.png",
+    "source": "background.webp + logo.webp + island.webp",
+    "size": [
+      960,
+      1600
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/drawable-port-xxxhdpi/splash.png",
+    "source": "background.webp + logo.webp + island.webp",
+    "size": [
+      1280,
+      1920
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/mipmap-hdpi/ic_launcher.png",
+    "source": "sheep.webp",
+    "size": [
+      72,
+      72
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png",
+    "source": "sheep.webp",
+    "size": [
+      162,
+      162
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png",
+    "source": "sheep.webp",
+    "size": [
+      72,
+      72
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/mipmap-mdpi/ic_launcher.png",
+    "source": "sheep.webp",
+    "size": [
+      48,
+      48
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png",
+    "source": "sheep.webp",
+    "size": [
+      108,
+      108
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png",
+    "source": "sheep.webp",
+    "size": [
+      48,
+      48
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/mipmap-xhdpi/ic_launcher.png",
+    "source": "sheep.webp",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png",
+    "source": "sheep.webp",
+    "size": [
+      216,
+      216
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png",
+    "source": "sheep.webp",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png",
+    "source": "sheep.webp",
+    "size": [
+      144,
+      144
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png",
+    "source": "sheep.webp",
+    "size": [
+      324,
+      324
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png",
+    "source": "sheep.webp",
+    "size": [
+      144,
+      144
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+    "source": "sheep.webp",
+    "size": [
+      192,
+      192
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png",
+    "source": "sheep.webp",
+    "size": [
+      432,
+      432
+    ]
+  },
+  {
+    "file": "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png",
+    "source": "sheep.webp",
+    "size": [
+      192,
+      192
+    ]
+  }
+]

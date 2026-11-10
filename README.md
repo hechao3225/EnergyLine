@@ -1,135 +1,68 @@
-# 🌸 神树灵泉 (EnergyLine)
+# 能量管道乐园
 
-> **仙侠国风益智连通解谜游戏 · 经典 99 关通天神木奇遇**  
-> *引古老灵泉之活水，经经纬玉渠与灵玉水闸，滋养百花仙草，唤醒通天建木！*
+以星空云海与梦幻乐园为主题的 99 关管道解谜游戏。旋转管道，将能量源接入所有设施，唤醒乐园与伴生花。
 
-[![React](https://img.shields.io/badge/React-19.0-61dafb.svg?logo=react)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue.svg?logo=typescript)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-8.3-646CFF.svg?logo=vite)](https://vitejs.dev/)
-[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-v4-38bdf8.svg?logo=tailwindcss)](https://tailwindcss.com/)
-[![Capacitor](https://img.shields.io/badge/Capacitor-Android-119EFF.svg?logo=capacitor)](https://capacitorjs.com/)
+## UI 2.0
 
----
+设计参考为 `docs/UI设计稿2.0/1.png`、`2.png`、`3.png`。首页、真实管道棋盘、设施复苏结算以及选关、图鉴、成就、规则、设置、任务、背包、商店、无尽挑战与关卡工坊使用统一主题。
 
-## 📖 游戏背景与世界观
+- 99 关数据、连通仿真、旋转、能量闸通断、单向管、多源多目标继续使用现有玩法。
+- 新玩家从第 1 关进入；通关、最佳步数与既有成就记录继续读取旧存档。
+- 星级按剩余步数比例计算：40% 及以上为三星，15% 及以上为二星，其余成功通关为一星。
+- 每关首次通关获得 100 金币和 10 钻石，重玩提升星级时只显示新增星星。
+- 每日本地自然日完成任意一关，可领取一次 100 金币任务奖励。
+- 初始提供 3 个提示灯泡；商店每 50 金币兑换 1 个，挑战中使用时消耗 1 个。
+- 提示显示关卡说明；撤销、重做与操作足迹可用于重新规划通路。
+- 无尽挑战提供 2、3、4 设施难度；关卡工坊支持绘制、导出、导入和试玩。
 
-上古通天神木沉眠，大地灵脉断绝，百花仙卉凋零。  
-玩家化身引泉仙使，需旋转与调整地脉玉渠管道，引导碧波灵泉注入沉寂的花蕾。  
-随着一重重水脉贯通，神树自根系节节攀升，拔地参天，唤醒封印在九十九重天境中的伴生仙花与神兽图腾！
+## 本地运行
 
----
+Web 开发需要 Node.js 20.20 或更新版本；Capacitor CLI 需要 Node.js 22 或更新版本。
 
-## ✨ 核心特色与玩法
-
-### 1. 经典 99 关深度重构与梯级心流
-游戏拥有精心设计的 **全量 99 关阶梯式关卡体系**，彻底解决早期关卡难度跳跃与千篇一律问题：
-- **第一卷 · 地脉之根 (1 ~ 20 关)**：引导单灵泉、基础直弯管、四向十字立交（Cross）、暗礁迷径（锁定死路）。关底大考：【寒潭墨雪】。
-- **第二卷 · 巨木之干 (21 ~ 40 关)**：可点击通断的【灵玉水闸】（Switch）、多支路灌溉、双灵泉源头初现（L25）。关底大考：【九霄玉兰】。
-- **第三卷 · 苍翠繁枝 (41 ~ 60 关)**：引入【单向逆止导流管】（Diode 二极管）、极性门禁、错位逆流机制。关底大考：【碧落仙荷】。
-- **第四卷 · 云海天桥 (61 ~ 80 关)**：全要素机关综合大挑战（十字立交 + 水闸 + 二极管联动）、高空天堑。关底大考：【赤血金凤】。
-- **第五卷 · 神树之巅 (81 ~ 99 关)**：三灵泉并辔而发（天地人三才灵泉）、六花蕾全屏大阵。终极大圆满：【混沌鸿蒙】。
-
-> 📘 **完整设计书**：详见 [docs/DESIGN-BOOK-99-LEVELS.md](docs/DESIGN-BOOK-99-LEVELS.md) 与同内容独立仙侠排版 HTML [docs/DESIGN-BOOK-99-LEVELS.html](docs/DESIGN-BOOK-99-LEVELS.html)。
-
-### 2. 双重视图自由选关
-- **通天神树天梯视图**：沿垂直藤蔓画卷平滑滚动探索 99 个生长节点，生动展示当前解锁与三星通关状态。
-- **精选电路网格视图**：紧凑五大篇章九宫格布局，随时定位并演练任意心仪关卡。
-
-### 3. 百花仙草图鉴系统
-每打通一关，即可在【神木花谱】中唤醒一株专属伴生仙花（如青玉幽兰、寒潭墨雪、碧落仙荷、赤血金凤等），收录花名、品阶与形态。
-
-### 4. 极致视听与交互反馈
-- 灵泉流光波纹特效（支持单/双/三灵泉同屏水纹涟漪粒子动画）。
-- 完整操作历史时间线与无损步数撤销系统。
-- 灵动清脆的仙石玉器音效与国风氛围。
-
----
-
-## 🛠️ 技术架构
-
-- **前端架构**：React 19 + TypeScript + Vite 8 + TailwindCSS v4
-- **移动端跨平台**：Capacitor Android (SDK 34 / 36, Java 17, Gradle 8.14)
-- **电路求解与仿真核心**：广度优先图搜索（BFS）双向连通性算法，保证关卡 100% 具备合法解
-- **PWA 支持**：集成 `vite-plugin-pwa`，支持离线运行与移动端原生体验
-
----
-
-## 🚀 本地开发与运行
-
-### 环境要求
-- Node.js >= 20.0.0
-- npm / bun
-
-### 1. 安装依赖
-```bash
+```powershell
 npm install --legacy-peer-deps
-```
-
-### 2. 启动开发服务器
-```bash
 npm run dev
 ```
-启动后在浏览器中打开控制台输出的本地服务地址（如 `http://localhost:5173`）。
 
-### 3. 运行关卡仿真验证脚本
-```bash
-npx tsx scripts/generate-99-levels.ts
-```
-该脚本将利用拓扑图生成算法对全部 99 关进行实时求解测试，并同步更新 `src/data/defaultLevels.ts`。
+默认打开 `http://localhost:3000`。
 
----
-
-## 📱 Android 打包与构建
-
-### 前置环境
-- Android SDK (API 33+)
-- JDK 17 (Adoptium / OpenJDK)
-
-### 1. 构建 Web 资源并同步至 Android 工程
-```bash
+```powershell
+npm run lint
+npm test
 npm run build
+npm run preview -- --host 127.0.0.1 --port 4173
+```
+
+生产产物在 `dist`。PWA 预缓存覆盖当前主题的真实资源。
+
+## 玩家路径测试
+
+需要已安装的 Chrome。测试在独立浏览器上下文运行，通过真实按钮与棋盘点击验证，不修改游戏运行状态。
+
+```powershell
+$env:PARK_TEST_URL='http://127.0.0.1:4173'
+npm run test:ui
+python scripts/audit_park_delivery.py
+```
+
+报告入口为 `docs/QA/ui2-2026-11-10/visual_validation_report.md`，包含实际截图、设计稿对照、资产检查、玩家路径与未覆盖范围。
+
+## 美术与字体
+
+- 原始生成图：`docs/UI设计稿2.0/generated-sources/`。
+- 运行资产及清单：`public/assets/park/`。
+- 资产处理：`python scripts/prepare_park_assets.py`，保留原图，执行透明裁切、朝向归一、切片和图标派生。
+- 补充图标与牌匾：`python scripts/prepare_park_details.py`，使用 rembg 去底并输出深浅底审查图；完整原件保存在仓库。
+- 字体：Noto Sans SC，采用 SIL Open Font License 1.1；许可位于 `src/assets/park-font-LICENSE.txt` 和发行目录的 `assets/park/font-license.txt`。
+- 字体子集：`python scripts/prepare_park_font.py --source <本地NotoSansSC字体文件>`；省略 source 时从 Google Fonts 官方仓库读取。
+
+## Android
+
+包名保持 `com.sacredtree.waterflow`，保留应用数据。应用名称、图标、启动画面与 WebView 界面使用新主题。
+
+```powershell
 npx cap sync android
+./android/gradlew.bat -p android assembleDebug
 ```
 
-### 2. 编译生成 Debug APK
-```bash
-cd android
-./gradlew assembleDebug
-```
-产物 APK 路径：`android/app/build/outputs/apk/debug/app-debug.apk`。
-
-### 3. 安装到 Android 手机或模拟器
-```bash
-adb install -r android/app/build/outputs/apk/debug/app-debug.apk
-```
-
----
-
-## 📂 目录结构
-
-```
-EnergyLine/
-├── android/                 # Capacitor Android 原生项目工程
-├── docs/                    # 关卡设计书、HTML 报告与实机测试截图
-│   ├── DESIGN-BOOK-99-LEVELS.md
-│   └── DESIGN-BOOK-99-LEVELS.html
-├── public/                  # 静态公共资源与音频音效
-├── scripts/                 # 99 关算法生成器与 HTML 渲染脚本
-│   ├── generate-99-levels.ts
-│   └── render-design-book-html.cjs
-├── src/                     # React 游戏源码
-│   ├── components/          # 棋盘、神树、选关、花谱、时间线等 UI 组件
-│   ├── data/                # 99 关数据与仙花图鉴数据
-│   ├── utils/               # 电路仿真算法、音频合成、成就系统等
-│   ├── App.tsx              # 游戏主入口
-│   └── main.tsx
-├── capacitor.config.json    # Capacitor 移动端配置
-├── package.json
-└── vite.config.ts           # Vite 构建配置
-```
-
----
-
-## 📜 许可证
-
-本项目开源发布，遵循 MIT 许可证。
+没有在线设备时，编译或浏览器截图不能代替真机安装、触控、震动与听感验收。

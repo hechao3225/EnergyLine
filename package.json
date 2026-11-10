@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
-    "test": "tsx scripts/test_circuits.ts"
+    "test": "tsx scripts/test_circuits.ts && tsx scripts/test_park_progress.ts",
+    "test:ui": "tsx scripts/test_park_ui.ts && tsx scripts/test_park_star_upgrade.ts && tsx scripts/test_park_victory_layout.ts"
   },
   "dependencies": {
     "@capacitor/android": "^8.5.3",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@capacitor/cli": "^8.5.3",
+    "@playwright/test": "^1.65.0",
     "@types/canvas-confetti": "^1.9.0",
     "@types/express": "^4.17.21",
     "@types/node": "^22.14.0",

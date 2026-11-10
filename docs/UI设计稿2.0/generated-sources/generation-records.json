@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-10",
+  "historical_batch": {
+    "sources": ["background.png", "characters.png", "pipes.png", "icons.png", "carousel.png", "materials.png", "celebrate.png", "tools.png", "flowers.png", "island.png", "logo.png", "pipe-source.png"],
+    "route": "既有资产清单记录为 image_gen built-in",
+    "note": "本轮接续已有生图原件；旧批次的完整提示词未保存在仓库，未补造历史记录。"
+  },
+  "current_batch": [
+    {
+      "file": "ui-details-v2.png",
+      "route": "images_api",
+      "model": "gpt-image-2",
+      "size": [1536, 1024],
+      "prompt": "Commercial mobile puzzle game UI sprite atlas, plush fantasy candy amusement park style, glossy dimensional pink ivory lavender and luminous gold metal, match ornate pearl gold interface with purple starry sky and adorable carousel. Pure white background RGB 255 255 255, no shadow on background. Exactly six isolated complete objects arranged in strict 2 columns and 3 rows, huge empty margins between objects. Top left: horizontal small red rounded enamel reward title banner with thick layered sculpted gold border, short gold ribbon tails to left and right and little gold corner studs, absolutely NO letters or symbols, wide 3.5 to 1. Top right: wide horizontal red enamel repair title plaque, layered ornate gold border, tiny gold star at each end, NO text, wide 5 to 1. Middle left: cute shop building icon with pink cream striped awning, purple rounded store body, tiny glowing gold star above, toy game navigation icon, isometric front view. Middle right: round purple game settings button with gold outer ring and ivory gold cogwheel inset, glossy. Bottom left: horizontal rounded lavender facility preview card frame, sculpted gold double rim white pearl highlights, transparent-looking purple glass center but fill lavender, rectangular 1.5 to 1. Bottom right: broad ivory pink pill shaped status bar panel with triple gold outer rim, pearly glossy highlights, NO text NO icons. Consistent polished 3D casual game illustration, detailed soft studio lighting, saturated rich gold edges. Each object whole and unclipped, no text no labels no grid lines."
+    },
+    {
+      "file": "wide-panels-v2.png",
+      "route": "images_api",
+      "model": "gpt-image-2",
+      "size": [1536, 1024],
+      "prompt": "Game UI atlas. Exactly THREE very wide horizontal UI banners stacked vertically, one per row, on a pure white background, canvas 1536 by 1024 pixels. Leave white vertical gaps between rows. This is for a polished 3D glossy gold pearl and lavender fantasy casual mobile amusement park game. No text, letters, numbers or icons. TOP ROW y=60 to 240: a long pill-shaped ivory pale pink status bar, width 1440px height 180px, exact 8:1 aspect, with ornate three-layer luminous pale gold and white pearl edge, soft shiny ivory center, both ends semicircular. MIDDLE ROW y=400 to 570: a long red enamel repair plaque, width 1440px height 170px, exact 8.5:1 aspect, gently curved sculpted gold border, small golden stud at both tips, generous red center space for long Chinese title. BOTTOM ROW y=730 to 950: a long red enamel reward plaque with golden ribbon tails on both sides, width 1400px height 220px, exact 6.4:1 aspect, gold beaded border. Do NOT make short squat badges. All THREE must be very wide and very short, each spanning almost the entire canvas width. Preserve complete golden rims. Rich gold dimensional toy material, delicate pearl highlights, subtle pink shadows within the enamel, polished professional casual game style. All background flat white with no floor shadows. No text no labels."
+    }
+  ]
+}

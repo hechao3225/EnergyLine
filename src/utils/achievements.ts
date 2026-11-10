@@ -5,6 +5,7 @@
 
 import { Achievement, PlayerStats, AchievementProgressInfo } from '../types/achievement';
 import { sound } from './audio';
+import { getStars } from './parkProgress';
 
 const ACHIEVEMENTS_STORAGE_KEY = 'honeycomb_achievements_v1';
 const STATS_STORAGE_KEY = 'honeycomb_player_stats_v1';
@@ -361,7 +362,7 @@ export function checkVictoryAchievements(ctx: VictoryCheckContext): {
   const newlyUnlocked: Achievement[] = [];
   const now = Date.now();
 
-  const isThreeStar = ctx.remainingSteps / ctx.maxSteps >= 0.4;
+  const isThreeStar = getStars(ctx.remainingSteps, ctx.maxSteps) === 3;
   const isSpeedRun = ctx.remainingSteps / ctx.maxSteps >= 0.6;
 
   // Update stats

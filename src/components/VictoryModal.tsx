@@ -9,6 +9,7 @@ import { Achievement } from '../types/achievement';
 import { AchievementIcon, RARITY_STYLES } from './AchievementIcon';
 import { getFlowerForLevel } from '../data/flowers';
 import { FlowerIcon } from './FlowerIcon';
+import { getStars } from '../utils/parkProgress';
 import bulbLitImg from '../assets/bulb_lit.png';
 import chapterBadge1 from '../assets/chapter_badge_1.png';
 import chapterBadge2 from '../assets/chapter_badge_2.png';
@@ -62,8 +63,7 @@ export const VictoryModal: React.FC<VictoryModalProps> = ({
   onOpenFloraCompendium,
 }) => {
   // Star calculation
-  const ratio = remainingSteps / maxSteps;
-  const stars = ratio >= 0.4 ? 3 : ratio >= 0.15 ? 2 : 1;
+  const stars = getStars(remainingSteps, maxSteps);
   const effectiveBest = bestSteps ?? stepsUsed;
   const flower = getFlowerForLevel(levelId);
 

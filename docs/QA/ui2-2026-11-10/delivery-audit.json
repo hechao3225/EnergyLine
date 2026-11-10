@@ -1,0 +1,1174 @@
+{
+  "captured_at": "2026-11-10T15:45:35.500674+00:00",
+  "asset_count": 67,
+  "asset_bytes": 2490126,
+  "assets": [
+    {
+      "name": "background",
+      "size": [
+        941,
+        1672
+      ],
+      "sha256": "d74f13c040cd73166554a7174c70b613ee076291231086b6bae3f03cc35ecc60"
+    },
+    {
+      "name": "sheep",
+      "size": [
+        375,
+        400
+      ],
+      "sha256": "ebc267ff9092014e87a6126a6ab4f2b5fea6cb3c8f48f6a9b9911dddd603a118"
+    },
+    {
+      "name": "rabbit",
+      "size": [
+        282,
+        400
+      ],
+      "sha256": "a56e06dedcc8d95619e07aaef464543fa3df29ea1db5e4027893de93f00096f0"
+    },
+    {
+      "name": "spirit",
+      "size": [
+        400,
+        393
+      ],
+      "sha256": "2e2687d432ed41d96749102f174c328b483f8825dd386adae481e74ae5bfc1fc"
+    },
+    {
+      "name": "pipe-line-off",
+      "size": [
+        317,
+        317
+      ],
+      "sha256": "6af6f4e6d5d759078bed0d2e619d3898ea9610e080bae1584b5d0b81c6024e06"
+    },
+    {
+      "name": "pipe-corner-off",
+      "size": [
+        268,
+        268
+      ],
+      "sha256": "ebf26916e1429e3295e59c5903c04e09584fcc650738d4a90445315d8f858e1f"
+    },
+    {
+      "name": "pipe-t_shape-off",
+      "size": [
+        324,
+        324
+      ],
+      "sha256": "82b681ab88fca9e6fdbbb80e316759938ad0069f1f6be8bc602a89cf68bbe8d5"
+    },
+    {
+      "name": "pipe-cross-off",
+      "size": [
+        333,
+        333
+      ],
+      "sha256": "d01c343ebd1add800a429fac326ac3c2a82dc41b0246fdcbf88e9820dc4e7486"
+    },
+    {
+      "name": "pipe-line-on",
+      "size": [
+        317,
+        317
+      ],
+      "sha256": "9fdbcd75d4ddcfc7b02a717f6bb0c5d5cc070704f5a8fc51491b81f83772a801"
+    },
+    {
+      "name": "pipe-corner-on",
+      "size": [
+        268,
+        268
+      ],
+      "sha256": "9e2c6be2379d875926f3d9c9ab56d4a2d1be531b33f3a99d1552073cdaadea8c"
+    },
+    {
+      "name": "pipe-t_shape-on",
+      "size": [
+        325,
+        325
+      ],
+      "sha256": "cfc67a65ed020b3b414bbca492bb50e27547c403a2890323109a1717c7b3775f"
+    },
+    {
+      "name": "pipe-cross-on",
+      "size": [
+        331,
+        331
+      ],
+      "sha256": "8fa353e154480f6fa5321d3353626e52516964983ad1b627087a8bf813f2e56b"
+    },
+    {
+      "name": "pipe-switch-on",
+      "size": [
+        324,
+        324
+      ],
+      "sha256": "08f60918a82d2e4d1e401e26213bde8932e497794bf23000b448f8b80912a723"
+    },
+    {
+      "name": "pipe-switch-off",
+      "size": [
+        325,
+        325
+      ],
+      "sha256": "684a7ba059557fba55b4b7bcd11a1937fb7f9125f8c74bd4e528358cdaa801fd"
+    },
+    {
+      "name": "pipe-diode",
+      "size": [
+        327,
+        327
+      ],
+      "sha256": "85cb35e897db4e9ea24feb92a410760be47a7fb55ccd0be09edc36826591b649"
+    },
+    {
+      "name": "icon-star",
+      "size": [
+        249,
+        249
+      ],
+      "sha256": "bfad414edc232bb7218b1c54dee081e2c7734c72617973637d6985401537fc55"
+    },
+    {
+      "name": "icon-coin",
+      "size": [
+        240,
+        240
+      ],
+      "sha256": "1c85593e18f33f7bce7bd98cfe411beb6e6e6844c4c648846750e9711ada2e1b"
+    },
+    {
+      "name": "icon-gem",
+      "size": [
+        254,
+        254
+      ],
+      "sha256": "559da1e2b8b991af634378c58c0befe8652543f1d26dc6e6be98fbdedcc921ec"
+    },
+    {
+      "name": "icon-gift",
+      "size": [
+        254,
+        254
+      ],
+      "sha256": "dcac2c67d42086e38ed87560c31748060400383200c77545a486d0b366319ea5"
+    },
+    {
+      "name": "icon-settings",
+      "size": [
+        253,
+        253
+      ],
+      "sha256": "e86994a3373b7a0d568f8bcda7c0e023cb653a78443cff1fd6deb053a305b728"
+    },
+    {
+      "name": "icon-mail",
+      "size": [
+        239,
+        239
+      ],
+      "sha256": "b08f7acc7b2233899e0a4968524089c6478e6f7f01f2f62170e93a2df4fba38a"
+    },
+    {
+      "name": "icon-task",
+      "size": [
+        249,
+        249
+      ],
+      "sha256": "69e851c3f69425ff4acaeedcbdcf7f657ff353fa6f1a02a2b9f04513f99b09a0"
+    },
+    {
+      "name": "icon-bag",
+      "size": [
+        244,
+        244
+      ],
+      "sha256": "dd1914c0ef8b15e620a43bf614a601980adacb87f70c6238ff6ff7a9f84cf22d"
+    },
+    {
+      "name": "icon-castle",
+      "size": [
+        265,
+        265
+      ],
+      "sha256": "bae71b4a3972bbb2a27151bd7998efce22974688c74c09051534421dbf1d5ad1"
+    },
+    {
+      "name": "icon-map",
+      "size": [
+        273,
+        273
+      ],
+      "sha256": "21ac2481ce906d8ffc317f18540386780558aec50e4d06cbfec9517b77070b0f"
+    },
+    {
+      "name": "icon-hint",
+      "size": [
+        272,
+        272
+      ],
+      "sha256": "f177a49cd8f9fdd93ea89a76bb8469caf4d4112408456144c3fc47d5f215a45d"
+    },
+    {
+      "name": "icon-undo",
+      "size": [
+        242,
+        242
+      ],
+      "sha256": "de227305135f09210f79c1307866eaf76d1caaeb033d7bfc344244bb1e46f5b9"
+    },
+    {
+      "name": "icon-reset",
+      "size": [
+        241,
+        241
+      ],
+      "sha256": "084087d14323484663ffbcc4d317ae26063d00815effa921d2a78669fda7789c"
+    },
+    {
+      "name": "icon-play",
+      "size": [
+        229,
+        229
+      ],
+      "sha256": "5940dbd551a3a5cbd5f6b850c65ca7019adab82314eed5f29f8df483bde0401d"
+    },
+    {
+      "name": "icon-crown",
+      "size": [
+        263,
+        263
+      ],
+      "sha256": "ee226be4cacbf234e25847cd0ef003bffa4b3c6cf403d12645b01831c4d46e3b"
+    },
+    {
+      "name": "icon-lock",
+      "size": [
+        247,
+        247
+      ],
+      "sha256": "1c632abb81032ce77f5308e85f5f6cb61975ba69317a20da09c9254f18570115"
+    },
+    {
+      "name": "carousel",
+      "size": [
+        1040,
+        1100
+      ],
+      "sha256": "2064b4c9b75bb6f6aaac56531cc16ae26ac9427aa5615754ea89c4a02bcae2f0"
+    },
+    {
+      "name": "button-gold",
+      "size": [
+        400,
+        134
+      ],
+      "sha256": "fe8c53ad1b78d614be8e521b7c5bc8b840972f0c837aa92dbdc328d9c5e816b7"
+    },
+    {
+      "name": "button-purple",
+      "size": [
+        400,
+        134
+      ],
+      "sha256": "c3e0208c34c23126739bfe4c5a18a29b04c2803e732e4a42c146489fbb98ea55"
+    },
+    {
+      "name": "info-card",
+      "size": [
+        400,
+        169
+      ],
+      "sha256": "d34e433261fe640472a87115eba8d59c316f8b7755f8158006661bf00dbe34e0"
+    },
+    {
+      "name": "level-sign",
+      "size": [
+        400,
+        185
+      ],
+      "sha256": "4ff6924b6898c981cb3f7c84d209397f31ff6713a67355bdb98e301ea4694bde"
+    },
+    {
+      "name": "celebration-sign",
+      "size": [
+        400,
+        122
+      ],
+      "sha256": "943494f6cc84d9bab9219ad98fb7c062db596efcfb66af1dafc286ac11f0f377"
+    },
+    {
+      "name": "tile",
+      "size": [
+        310,
+        302
+      ],
+      "sha256": "666b4d4670f937d91e7db967510e1787deb01aa91cf7aef413aa5dd03454d56d"
+    },
+    {
+      "name": "sheep-cheer",
+      "size": [
+        358,
+        400
+      ],
+      "sha256": "a434a3bd0c6b7f1b351c9cf31f69329f4b4889b305e03ef4ce459b68031826fd"
+    },
+    {
+      "name": "spirit-cheer",
+      "size": [
+        400,
+        358
+      ],
+      "sha256": "0e0216ae67249e451b2cea7862f4d64f445655c4e83558a1bf61d052c4c82502"
+    },
+    {
+      "name": "tool-ivory",
+      "size": [
+        400,
+        239
+      ],
+      "sha256": "83b61394e555778b61e13b6b435fe0727a087822b31d0d4ce58bd071bce4f7cf"
+    },
+    {
+      "name": "tool-gold",
+      "size": [
+        400,
+        238
+      ],
+      "sha256": "2c0dff6a3941db7d3d8cf81863f65b2c2c3dbf05af673157de882346fc976a75"
+    },
+    {
+      "name": "icon-paw",
+      "size": [
+        337,
+        330
+      ],
+      "sha256": "45435baeabed9dbfe70e20ef6d7303cb92902736e991ad0e1b3b509160af0618"
+    },
+    {
+      "name": "icon-back",
+      "size": [
+        377,
+        305
+      ],
+      "sha256": "5dcafc9df018776b44e798fc08c330d0c24efd4a6c629d8c1d8cfcac1a941c32"
+    },
+    {
+      "name": "icon-check",
+      "size": [
+        332,
+        332
+      ],
+      "sha256": "269ea52222fb87a60643aa1724eae90fee963ed2fa5dcc92b1f4644e505347ae"
+    },
+    {
+      "name": "chapter-ribbon",
+      "size": [
+        400,
+        173
+      ],
+      "sha256": "0cdf6377549692dc0717862e2e7e3a27a6208f6007041b268f2f22033aedfdc8"
+    },
+    {
+      "name": "flower-0",
+      "size": [
+        344,
+        344
+      ],
+      "sha256": "f2b182b855fce57bb27e7c97cc0301442a4d7403c809c4fb9307fbd6ded1094a"
+    },
+    {
+      "name": "flower-1",
+      "size": [
+        341,
+        341
+      ],
+      "sha256": "1c9a251f43bee8e1d6dea04f77104ac3074ac735f1d9822a264580a8b912c33b"
+    },
+    {
+      "name": "flower-2",
+      "size": [
+        347,
+        347
+      ],
+      "sha256": "daafbe60a872a38d1de21165762ca124b402b7f01d2ccbb58efb1505ba146023"
+    },
+    {
+      "name": "flower-3",
+      "size": [
+        347,
+        347
+      ],
+      "sha256": "306be0c50d3278926b19acc3e917c6aa44274a6476617610a7909699204bbf30"
+    },
+    {
+      "name": "flower-4",
+      "size": [
+        357,
+        357
+      ],
+      "sha256": "5161a8a9be4b28560dafaaad4ea5130e2dfd2df8285d6e7e8dc7bf453875b585"
+    },
+    {
+      "name": "flower-5",
+      "size": [
+        346,
+        346
+      ],
+      "sha256": "fb43c1805633c7f836b6bf0daedadaecdbd9b3c929787ab36f8fc6fa0ccc1c64"
+    },
+    {
+      "name": "flower-6",
+      "size": [
+        342,
+        342
+      ],
+      "sha256": "4f3800e226a79b9bbf8316b7361acf2b61f190892679147a9082048941ee8685"
+    },
+    {
+      "name": "flower-7",
+      "size": [
+        359,
+        359
+      ],
+      "sha256": "e21bdb61b33c86d401400150f0836ee6a66ed0d660419e1253224489e8e1d0fd"
+    },
+    {
+      "name": "flower-8",
+      "size": [
+        349,
+        349
+      ],
+      "sha256": "d561aaa8e1359f39390615a6707d386948609f7ddb7034c06be58dea0f94ee34"
+    },
+    {
+      "name": "flower-9",
+      "size": [
+        341,
+        341
+      ],
+      "sha256": "83e24565a75891131403eb7728ce74f744776e7e1661928cf13b61fbfae12be4"
+    },
+    {
+      "name": "flower-10",
+      "size": [
+        337,
+        337
+      ],
+      "sha256": "aa9a7932db5bc7e7525162a7060a6b76edbfb89a56d832bca2b0b9fe6134a7a6"
+    },
+    {
+      "name": "flower-11",
+      "size": [
+        357,
+        357
+      ],
+      "sha256": "f23bdcc248d00bf74913e6fa71b3727f306508a2947b7dd0480316865a567e26"
+    },
+    {
+      "name": "island",
+      "size": [
+        1100,
+        844
+      ],
+      "sha256": "b5569219fa4fe29d631b980203718b6fbc3c9a2ee3e89c359a3cdb45d47de476"
+    },
+    {
+      "name": "logo",
+      "size": [
+        1100,
+        344
+      ],
+      "sha256": "ee3b97446491be9413e44a0b157434aafde3dc6d96292fd9334799702a2eaaf2"
+    },
+    {
+      "name": "pipe-source",
+      "size": [
+        400,
+        273
+      ],
+      "sha256": "fc84e8509408c74d1f61b6f54340f6be574f4b463fc32b9853bcc4fc5310fb30"
+    },
+    {
+      "name": "reward-ribbon",
+      "size": [
+        768,
+        125
+      ],
+      "sha256": "9fa353ed895409eb6127a81d9a6999aa65ed379dd0b388a56345060d390d2df2"
+    },
+    {
+      "name": "repair-sign",
+      "size": [
+        768,
+        104
+      ],
+      "sha256": "5c5a60c25c3407c36d717c740794d6c7f01da5ae0525c3df3658b6c6169ae672"
+    },
+    {
+      "name": "icon-shop",
+      "size": [
+        466,
+        466
+      ],
+      "sha256": "1d90d97d3f782c66c58dc28f905b85ec63729ea4ea45a3eabb0662d6f581b18b"
+    },
+    {
+      "name": "settings-button",
+      "size": [
+        378,
+        378
+      ],
+      "sha256": "1cecc0629c8de25f2c11cd0fc9a28ed43b922506a8a1a98253ebb0d5b9cb2b71"
+    },
+    {
+      "name": "facility-frame",
+      "size": [
+        700,
+        275
+      ],
+      "sha256": "30a7933837e246f59609e142e38df64976df3a5ad09d9a0c4f4a9564504c0966"
+    },
+    {
+      "name": "status-panel",
+      "size": [
+        768,
+        106
+      ],
+      "sha256": "e8f49b964d3b8b7c3947a17ee387478395b64f20e3ee8830d2d15f71eef057ca"
+    }
+  ],
+  "comparisons": [
+    {
+      "page": "home",
+      "reference": "1.png",
+      "runtime": "home-361x727.png",
+      "size": [
+        361,
+        727
+      ],
+      "mean_absolute_channel_error": 56.855,
+      "note": "同尺寸像素差只定位差异；真实关卡、资源、步数、字体和重新生成的插画均产生差异，不作为还原率。"
+    },
+    {
+      "page": "play",
+      "reference": "2.png",
+      "runtime": "play-897x1752.png",
+      "size": [
+        897,
+        1752
+      ],
+      "mean_absolute_channel_error": 53.866,
+      "note": "同尺寸像素差只定位差异；真实关卡、资源、步数、字体和重新生成的插画均产生差异，不作为还原率。"
+    },
+    {
+      "page": "victory",
+      "reference": "3.png",
+      "runtime": "victory-897x1754.png",
+      "size": [
+        897,
+        1754
+      ],
+      "mean_absolute_channel_error": 66.286,
+      "note": "同尺寸像素差只定位差异；真实关卡、资源、步数、字体和重新生成的插画均产生差异，不作为还原率。"
+    }
+  ],
+  "screens": [
+    {
+      "file": "bag-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "7e6f2337134a39ef0cda88bf3b3780203fadcfd9bfa9aaf941a0125a6e2858f6"
+    },
+    {
+      "file": "editor-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "287bbeb4a4dac5a74c0049c21c946f444d15f664e02f913d9e69a6b7bc4f0094"
+    },
+    {
+      "file": "editor-connected-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "f30b65f5876932309e2ccc367c1761347c44f44969bdd630effa16911d0ea8ea"
+    },
+    {
+      "file": "editor-victory-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "f129ac9a723abbce33daae0bc18274dd0daaac8da86295f8796cb359925fd584"
+    },
+    {
+      "file": "endless-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "aa2c1e070102787a81e57e05ffa3b9658f8d9e732e8ea2a2c32b485a910f14d4"
+    },
+    {
+      "file": "endless-select-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "779cca03f2d4506490462cf5e184e2c1714655998cdd67169c3a515b537dfcda"
+    },
+    {
+      "file": "flora-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "9c0552a0c2f248af8f4c4ffa9a09187c7ccf132af5d92c025e2c1e72be7996fe"
+    },
+    {
+      "file": "flow-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "272987beddc88d71250b97fb5079e15b399586a9a8a5b55023a74c4789deccd4"
+    },
+    {
+      "file": "flower-detail-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "6d3766eef98b5acc2de8152296d98f4aefd6b5ad54bc1e004d402a8cc5fdd17e"
+    },
+    {
+      "file": "hint-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "960f1b9deaee18f29cf355dd5b768d857afb16becae5023a0086ee180e67b725"
+    },
+    {
+      "file": "history-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "deaa019ca4b74e7f51254e18a808dc7b8f279d77c0506acd90870ca35a59f6ac"
+    },
+    {
+      "file": "home-360x640.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "sha256": "7ee58edd36264abb21f25fdfbe61ee6135e4f5d5ca4859d81bc53e1aa34710e7"
+    },
+    {
+      "file": "home-360x800.png",
+      "size": [
+        1080,
+        2400
+      ],
+      "sha256": "56a9aa4ce7c45218d6116a0ec4f79198c3082abf4d5c94786775165de31f471f"
+    },
+    {
+      "file": "home-361x727.png",
+      "size": [
+        361,
+        727
+      ],
+      "sha256": "2891f906991d72209c006b9fc025d7459188e3aa024f9aaee7dc76ad0987e920"
+    },
+    {
+      "file": "home-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "a03966d1775dffec572034d95366275ebd49851e61b0c207ff6c7fbfc479d594"
+    },
+    {
+      "file": "home-720x1280.png",
+      "size": [
+        720,
+        1280
+      ],
+      "sha256": "60200bc6c0c7dfc33314ddf1918c07038bbdbdd798c604228fbd36da20c1d2ef"
+    },
+    {
+      "file": "home-897x1752.png",
+      "size": [
+        897,
+        1752
+      ],
+      "sha256": "7b9da7cf60674001025da8f99f682fb399c7bbfaeebb8a991ab0567246b1fc68"
+    },
+    {
+      "file": "home-897x1754.png",
+      "size": [
+        897,
+        1754
+      ],
+      "sha256": "c9c4cd8739d4b765ce8cd3224f495d1d174a34007cf80a1767ce9a104b37e8d0"
+    },
+    {
+      "file": "home-progress-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "a33a76432ead4ae1d297384dd5f132c0fb1221188a32f46973da1aa4ed688133"
+    },
+    {
+      "file": "level24-branches-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "2b347aba8b6ec26baa08a676e39502141025ee27eeb1ee08f4260a56237b3534"
+    },
+    {
+      "file": "level24-powered-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "ac42ff13e448ae3ebb87fd3acbf671ea21773b6265227464d5df6787dcfbfb58"
+    },
+    {
+      "file": "level24-start-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "1854ae827ce272be9ba2ffc0624604cfca1009db499967d144c4b16e5eee6973"
+    },
+    {
+      "file": "level41-diode-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "b09bc940537a4223b833558bb0e1b4cb99c2feb9317179d3bb869084f8c50a6d"
+    },
+    {
+      "file": "level41-start-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "f8ed77572dd368edb9ad5f37a8de5c6fa1b930912e42c7e7f1dcaf9d4ee853f2"
+    },
+    {
+      "file": "level61-powered-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "6591a092201d04f8b1aea4317fbb9e47aa921a4a0764792bc8aba7460097cb6c"
+    },
+    {
+      "file": "level61-start-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "1667e8dabc0b833ad109916c689db264f0c0a9b5311cdc8bf00b340be9ad41d2"
+    },
+    {
+      "file": "level81-powered-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "a4d4090eb28f8d0befe4426499ac49305a9978ca242005d47ab499c32bba58b0"
+    },
+    {
+      "file": "level81-start-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "2f0bbfee38971a5a714da3f22ddc1d46d2d9feb9586f65566659fde67703c8e2"
+    },
+    {
+      "file": "levels-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "371e0106b14c247e554d0c405d5e55173a998ffee3fad25e811f0666bbb1dc06"
+    },
+    {
+      "file": "mail-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "2d01fdf22a8263b5c47ace21ba7a13f06d28157f44948ed1ee923e91512dc6e8"
+    },
+    {
+      "file": "out-of-steps-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "64def993a046c92426d422391288d9572d8687fd628f189e153f2bcb003e2b48"
+    },
+    {
+      "file": "play-360x640.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "sha256": "4573b80a0f3039865d766ec064059c1cbe16d73dc17eb8a7fb3001a4554ccb9a"
+    },
+    {
+      "file": "play-360x800.png",
+      "size": [
+        1080,
+        2400
+      ],
+      "sha256": "2c429098192e729f68bfb42a1bff782236c6f8f51bbe9ca4ba82a18a94c86c69"
+    },
+    {
+      "file": "play-361x727.png",
+      "size": [
+        361,
+        727
+      ],
+      "sha256": "f4b31ecafba77abed5e2c0c890af35d058015bbc7e96b9a5c397a6498bc71b60"
+    },
+    {
+      "file": "play-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "bb0485814c4be9c058ed6c94c03bd3fed78bf408d6a8eb6d9b3f23d4a81d2e02"
+    },
+    {
+      "file": "play-720x1280.png",
+      "size": [
+        720,
+        1280
+      ],
+      "sha256": "05830ca03148be877ada6b239bcbf0dcbbb1e0280466bb3b8a228ca4a8156863"
+    },
+    {
+      "file": "play-897x1752.png",
+      "size": [
+        897,
+        1752
+      ],
+      "sha256": "064ca44cff47aff90f80879254d87e7d23e51ba1687491cfbc3c706e007de4fe"
+    },
+    {
+      "file": "play-897x1754.png",
+      "size": [
+        897,
+        1754
+      ],
+      "sha256": "a139442eac58f2b94e2db8386d24d40870242d37d293f9029e446fb8595a5193"
+    },
+    {
+      "file": "profile-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "877e1f533983c987dc6db8db85fc02e4bc8df1c73817b25bd2d7a7dd012f1bf5"
+    },
+    {
+      "file": "rules-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "fac787bbb850f470692c0e0fbff6f5834f778acefeec1c5f653211485adcb3cb"
+    },
+    {
+      "file": "settings-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "e6398f33b45ab0020de90889d2a046e13d4ff4c3ff2e60d800fea3ecfff435fd"
+    },
+    {
+      "file": "shop-purchased-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "a3c999b9a2d61ce69fa8cb5319161a515c37989920d8e0cc4719f4e95506e93b"
+    },
+    {
+      "file": "story-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "46b0140998f85a3b7b3814191eaf2f32441b3b3149315561f9414279dd79874d"
+    },
+    {
+      "file": "tasks-ready-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "97c7f33fb229f8f41c106ad5ef2e2a09fc5222c5abc52434a85b35c0cd636100"
+    },
+    {
+      "file": "victory-360x640.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "sha256": "48daefa80923b078c5f45b0314fbbff53ca00e58f3100fa88b75de4e8410288a"
+    },
+    {
+      "file": "victory-360x800.png",
+      "size": [
+        1080,
+        2400
+      ],
+      "sha256": "e2e80af2d8e09bb8faf4b0a830a3f14cd6816ef9139c30e49d910eb1f6e60043"
+    },
+    {
+      "file": "victory-361x727.png",
+      "size": [
+        361,
+        727
+      ],
+      "sha256": "da53f2f689fad389108c30b209f11dc3d5a1ef2c1ce4799efb0c5eb7e5ab142a"
+    },
+    {
+      "file": "victory-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "4ce4cc6d597e3bf7a470c2b5e7dcbdc30e1e97634b00aa0de7c83c4cffc1c301"
+    },
+    {
+      "file": "victory-720x1280.png",
+      "size": [
+        720,
+        1280
+      ],
+      "sha256": "c058914e6cc8fb504224623d07f6b5fa10a38c9b5e6bd405da16bba8cf8a03ef"
+    },
+    {
+      "file": "victory-897x1752.png",
+      "size": [
+        897,
+        1752
+      ],
+      "sha256": "1e2dac18cb43fe691595e93f3f565b904151b08bd9f99f10133ce8d04e847082"
+    },
+    {
+      "file": "victory-897x1754.png",
+      "size": [
+        897,
+        1754
+      ],
+      "sha256": "36ffc49ba75ae9433a038502c5df4e46261fb618cf864131911c780deb0233c2"
+    },
+    {
+      "file": "victory-one-star.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "d15a9fb1c59fb19ebf2c628f029871be333104f7d3b6928502b827e2e8cb0eef"
+    },
+    {
+      "file": "victory-star-upgrade.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "f979acb401a8817583161ae58cab130a4a8382f7b1145eef4c10e51dda6f3136"
+    }
+  ],
+  "source_snapshot": {
+    "src/App.tsx": "483cc25f8a6bde9d6eb32665b70ff4fc133bffae96a4b2dd7dd8ba3cc0aae714",
+    "src/assets/aistudio/5de42e2d9de483e77b7991d8fb59daf0_1f6990a5.png": "1f6990a55ddb7c09cd2080e328314087fee1c6924c5c061f8f3678bedf3018a0",
+    "src/assets/aistudio/e77cc400fd86c982a40f9ec088839047_f9e9fb08.png": "f9e9fb082ce008de77dca08315ca8f5c5e855015e0b661bfb0eaecd21b1fa093",
+    "src/assets/aistudio/image_c4409f7d.png": "c4409f7db18173c17175980196783da52b2714b498c21521769bd295702c4c71",
+    "src/assets/aistudio/image_d09c60be.png": "d09c60bea5d363b00040d5790c14a946955516437088b57ab5cd4ec3ee32b45c",
+    "src/assets/app_icon.jpg": "0c52101fff17c6520ee2fc0348f2f38d5c362770252863eeafb4ca09a03b1f9e",
+    "src/assets/bg_main.jpg": "cb00c8382edb8955338a60a72e9904396810c4ac640c9a495021db2adc5215ac",
+    "src/assets/board_altar.png": "b2d4ac0ea1673bef3da2e300b50510170a8aaf428468a9daab4aca5abbcba0a2",
+    "src/assets/board_frame.png": "97168ea4b590bc5851dac73b4e15b9681c4ef6b8ce0d9fcffbc699fe3440bf8f",
+    "src/assets/bulb_lit.png": "27a416f4a94ab484fd6cacbf6d4ce3e52ac7acf1690e8eb25b401c2821a5f93b",
+    "src/assets/bulb_unlit.png": "2de9332848e0b333ae1a8f0c209d57d7527dabf0e2bfe0531d162a7353141ba1",
+    "src/assets/chapter_badge_1.png": "3109ebe990a7b28be2f4c94341bde53db4b47c8e2a9df8aefdf43a62e85e58ea",
+    "src/assets/chapter_badge_2.png": "149ac5cfe5f98a336cfa5f9655c301de5ddcf72c1685d1e95375dc1f951132fd",
+    "src/assets/chapter_badge_3.png": "4165e57df0812d465673ab1205950835c55cd82c7bdc784f244139abeca604a5",
+    "src/assets/chapter_badge_4.png": "514643c58eade06f7259bcc1e149ceec7b5ec9b809fe476b5a62d6dd722c55be",
+    "src/assets/chapter_badge_5.png": "3eb3af9f7d1a0baf6594ac72b62692ca26ae5487ebd3e8b5f5597c9e265e7c8e",
+    "src/assets/park-font-LICENSE.txt": "7accca2f29220c9ab44e4950799b821f36ebf5bbe6b5fb5342724b32228a8daf",
+    "src/assets/park-font.woff2": "23059293a24c4c3d1ef08546859609ef4637fe7373f3f44bec34881763f9f847",
+    "src/assets/spring_source.png": "005e2088e348aff403ef4802ccfdd9b0381909f674382c9a8a414d1e0e5cf088",
+    "src/assets/valve_diode.png": "53d3233430810aa7df6e68ab281c6e840ed25df8cf773d67295c361520f94aae",
+    "src/assets/valve_switch.png": "eea65d43bbbe0bfd785ba1db14a533c2382543a3c3e4e18112b3c68f9e2ae3b8",
+    "src/components/AchievementCard.tsx": "be4f659e9c0567a68fb8496a74ee55dd9026a1b65966adf3e485e399229ed170",
+    "src/components/AchievementIcon.tsx": "13f4f152207ba72b50def2a4ea57fd5dfe1d8b6dd92a90ff2bb88d230bec8b42",
+    "src/components/AchievementToast.tsx": "575ccf62f26f0a53716b453254272cd55566df2d33909095e550ef61c820c45f",
+    "src/components/AndroidAppModal.tsx": "5cdae3b5279893e10c5b1afd1bf3893a6e9627ce5aa11a885d072041ebc13b9b",
+    "src/components/CandyThemeShell.tsx": "8ad09e0f1c828e9b964d8b7b0fa6de7661ea4e0ff2c89f3ec43d81da2a07b173",
+    "src/components/CircularProgress.tsx": "064063dae1c65d34b6bdf6a8616ccb686c89d7e1699bbaa4beaa9037f13bd93b",
+    "src/components/EndlessMode.tsx": "38b9b3595c9bb46d15b9844db1ed463764f0f44d5142fee1ad4336ebf8d2f97a",
+    "src/components/ErrorBoundary.tsx": "6440bd3c8a42b8cd2b8d43b763ce346bc1a9142bd19093991d1eed34437a8cbf",
+    "src/components/FloraCompendiumModal.tsx": "9b11ae9decc92e0fa58d3c0d9c56ef4b868fe5746ed62e4c8519a4496c6d96b5",
+    "src/components/FlowerIcon.tsx": "2132e3f446bc47a8003a2996ac21123595f89271d812f49e04e885988ee15e29",
+    "src/components/GameBoard.tsx": "d149e65529597d3c46b4921ea0a904549e5354b49afd967ae4057634c945e068",
+    "src/components/GameHeader.tsx": "69671a75012de7d52577f2f129b1ec2e5f4c14443e903db91e88f54032b7c105",
+    "src/components/LevelEditor.tsx": "314c659a4c41fd9ca2f4a63a7de9a89ea3219d47a452ce60744c6e4adedc5e2b",
+    "src/components/LevelSelect.tsx": "d51d106df69e8783b102dc8bc2468a83978488d7b39b356a9a9274c1264085e6",
+    "src/components/ParkArt.tsx": "f244a708ee7c94edc116bf9a5ebc2f27fab1784ba60220a1aea5c7be7cf15add",
+    "src/components/ProfileModal.tsx": "238df88181d02a9a97ded53710c2b3b56fba5e1db4a6aadd88a3122dd76af394",
+    "src/components/RulePanel.tsx": "76cacedc1923c67aa02d11f20a94d9f579a6afdfd1bda3bec5d011640dc5af94",
+    "src/components/RulesModal.tsx": "f1b105b13688ddd82c0d5b8b148583f0519b230b4ace7ac6c86fd8ab72c76aae",
+    "src/components/SacredTreeBranchWidget.tsx": "a5b69bd1a1c07b4db29fdfe826a4b4028c602f083be84391339e577b4ff42852",
+    "src/components/SacredTreeSproutOverlay.tsx": "b3586ba29954818996856e06c0194ecdf22894638758be05a7d133b749968234",
+    "src/components/StatusPanel.tsx": "9443f60072920324a7a89052bba141bcb211bbb78ecaf849dba08a4e0332a09f",
+    "src/components/StoryPrologueModal.tsx": "bfd2939c8a8355f63e72be2409ffd09d072eaaa3d3c2b1c17b15d5b4a40115e8",
+    "src/components/TileView.tsx": "b1487059a7deff5e1ccff0e4c2662ad8e573ad45160683842a4377095e39152e",
+    "src/components/UndoHistoryTimeline.tsx": "ea17217b5b9be4e9468de9060ca2a31a1c01f20517f6d9353a244b6af5e2fdff",
+    "src/components/VictoryModal.tsx": "bdb6ce337610f334b7ef6186610aed21d5fc096bf8f4dd59d764012ce3822701",
+    "src/data/defaultLevels.ts": "ae081246993b46df40333d2afdd1cd90d1a6786390847c00a013538dfa1ac3c5",
+    "src/data/flowers.ts": "165e196518d02e74a8b2c8987abf78460dc094bb82d4d0ce10f5f9cab51309de",
+    "src/index.css": "19cb6196cbd04e0b43ef856439c835ff9e7442e8d0a78607d090daec80245645",
+    "src/main.tsx": "30d02ee59cb6576973dea4368093b2dcae692a40668f288fdbc66a114873fcd3",
+    "src/types/achievement.ts": "78f7a9be4b09f29b03c2c91c48012a08236989277436a95fddb95a4f5918cfed",
+    "src/types/flower.ts": "3d0b824e1d5c37b61fb9b9cd32b98b68375d142e2a76b9aa2eee211a9de9d7c7",
+    "src/types/game.ts": "c675078379d41cf44f06a09833347d42f6b2ce06cfc59150ef80294d23cbeeff",
+    "src/utils/achievements.ts": "272d40c3e768fa6783bb7a008a18dea6ca6b8d39ace162ee78c18649a1fd2cf2",
+    "src/utils/audio.ts": "42f1cd06ec32185ddbf02cc83df4634301eef4ce2568a8306c6af277c9f2bb7d",
+    "src/utils/circuit.ts": "dcf8cf146e110b49ca16df2a86061b031b80f2ae2dc273dd5d47ce19a00d273f",
+    "src/utils/confetti.ts": "f4f213434e3ceb3444308bfa48e4dfa8fea0f436909f767c438430b94076ed30",
+    "src/utils/flowPaths.ts": "7b0913824a424061da5f60d2eaad63ecdf611368a8f51e1887eda6c07f121db2",
+    "src/utils/haptics.ts": "f14ced1d232acd71b458102086f4b40f922b714436c23b49873479c4d336fe86",
+    "src/utils/parkProgress.ts": "fcafae82bdda2295dee6c017cd0c4fc5a1d5958ed743e50816820ecb56366bb3",
+    "src/utils/usePWAInstall.ts": "4ee130b97a24c3ff236ec47dbb0b9be048981ac4cc5720550b65ad89f690c4ed"
+  },
+  "build_snapshot": {
+    "dist/.nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "dist/apple-touch-icon.png": "e65bccb492dd0dc38041b7e7ea9d4141e90ac39bef9b022f26bae73afe84896a",
+    "dist/assets/aistudio/5de42e2d9de483e77b7991d8fb59daf0_1f6990a5.png": "1f6990a55ddb7c09cd2080e328314087fee1c6924c5c061f8f3678bedf3018a0",
+    "dist/assets/aistudio/e77cc400fd86c982a40f9ec088839047_f9e9fb08.png": "f9e9fb082ce008de77dca08315ca8f5c5e855015e0b661bfb0eaecd21b1fa093",
+    "dist/assets/aistudio/image_c4409f7d.png": "c4409f7db18173c17175980196783da52b2714b498c21521769bd295702c4c71",
+    "dist/assets/aistudio/image_d09c60be.png": "d09c60bea5d363b00040d5790c14a946955516437088b57ab5cd4ec3ee32b45c",
+    "dist/assets/app_icon.jpg": "0c52101fff17c6520ee2fc0348f2f38d5c362770252863eeafb4ca09a03b1f9e",
+    "dist/assets/bg_main.jpg": "cb00c8382edb8955338a60a72e9904396810c4ac640c9a495021db2adc5215ac",
+    "dist/assets/board_altar.png": "b2d4ac0ea1673bef3da2e300b50510170a8aaf428468a9daab4aca5abbcba0a2",
+    "dist/assets/board_frame.png": "97168ea4b590bc5851dac73b4e15b9681c4ef6b8ce0d9fcffbc699fe3440bf8f",
+    "dist/assets/bulb_lit.png": "27a416f4a94ab484fd6cacbf6d4ce3e52ac7acf1690e8eb25b401c2821a5f93b",
+    "dist/assets/bulb_unlit.png": "2de9332848e0b333ae1a8f0c209d57d7527dabf0e2bfe0531d162a7353141ba1",
+    "dist/assets/chapter_badge_1.png": "3109ebe990a7b28be2f4c94341bde53db4b47c8e2a9df8aefdf43a62e85e58ea",
+    "dist/assets/chapter_badge_2.png": "149ac5cfe5f98a336cfa5f9655c301de5ddcf72c1685d1e95375dc1f951132fd",
+    "dist/assets/chapter_badge_3.png": "4165e57df0812d465673ab1205950835c55cd82c7bdc784f244139abeca604a5",
+    "dist/assets/chapter_badge_4.png": "514643c58eade06f7259bcc1e149ceec7b5ec9b809fe476b5a62d6dd722c55be",
+    "dist/assets/chapter_badge_5.png": "3eb3af9f7d1a0baf6594ac72b62692ca26ae5487ebd3e8b5f5597c9e265e7c8e",
+    "dist/assets/index-CmLScJbf.js": "e455f53720c143154deda0dc664fa54423ae4ccdd19d1476552c9dd857395658",
+    "dist/assets/index-CuXuuPfw.css": "c02b2963776bab90ea126efbc075bc424710c68cbfd3d70710e791a141697c32",
+    "dist/assets/park/background.webp": "d74f13c040cd73166554a7174c70b613ee076291231086b6bae3f03cc35ecc60",
+    "dist/assets/park/button-gold.webp": "fe8c53ad1b78d614be8e521b7c5bc8b840972f0c837aa92dbdc328d9c5e816b7",
+    "dist/assets/park/button-purple.webp": "c3e0208c34c23126739bfe4c5a18a29b04c2803e732e4a42c146489fbb98ea55",
+    "dist/assets/park/carousel.webp": "2064b4c9b75bb6f6aaac56531cc16ae26ac9427aa5615754ea89c4a02bcae2f0",
+    "dist/assets/park/celebration-sign.webp": "943494f6cc84d9bab9219ad98fb7c062db596efcfb66af1dafc286ac11f0f377",
+    "dist/assets/park/chapter-ribbon.webp": "0cdf6377549692dc0717862e2e7e3a27a6208f6007041b268f2f22033aedfdc8",
+    "dist/assets/park/facility-frame.webp": "30a7933837e246f59609e142e38df64976df3a5ad09d9a0c4f4a9564504c0966",
+    "dist/assets/park/flower-0.webp": "f2b182b855fce57bb27e7c97cc0301442a4d7403c809c4fb9307fbd6ded1094a",
+    "dist/assets/park/flower-1.webp": "1c9a251f43bee8e1d6dea04f77104ac3074ac735f1d9822a264580a8b912c33b",
+    "dist/assets/park/flower-10.webp": "aa9a7932db5bc7e7525162a7060a6b76edbfb89a56d832bca2b0b9fe6134a7a6",
+    "dist/assets/park/flower-11.webp": "f23bdcc248d00bf74913e6fa71b3727f306508a2947b7dd0480316865a567e26",
+    "dist/assets/park/flower-2.webp": "daafbe60a872a38d1de21165762ca124b402b7f01d2ccbb58efb1505ba146023",
+    "dist/assets/park/flower-3.webp": "306be0c50d3278926b19acc3e917c6aa44274a6476617610a7909699204bbf30",
+    "dist/assets/park/flower-4.webp": "5161a8a9be4b28560dafaaad4ea5130e2dfd2df8285d6e7e8dc7bf453875b585",
+    "dist/assets/park/flower-5.webp": "fb43c1805633c7f836b6bf0daedadaecdbd9b3c929787ab36f8fc6fa0ccc1c64",
+    "dist/assets/park/flower-6.webp": "4f3800e226a79b9bbf8316b7361acf2b61f190892679147a9082048941ee8685",
+    "dist/assets/park/flower-7.webp": "e21bdb61b33c86d401400150f0836ee6a66ed0d660419e1253224489e8e1d0fd",
+    "dist/assets/park/flower-8.webp": "d561aaa8e1359f39390615a6707d386948609f7ddb7034c06be58dea0f94ee34",
+    "dist/assets/park/flower-9.webp": "83e24565a75891131403eb7728ce74f744776e7e1661928cf13b61fbfae12be4",
+    "dist/assets/park/font-license.txt": "7accca2f29220c9ab44e4950799b821f36ebf5bbe6b5fb5342724b32228a8daf",
+    "dist/assets/park/icon-back.webp": "5dcafc9df018776b44e798fc08c330d0c24efd4a6c629d8c1d8cfcac1a941c32",
+    "dist/assets/park/icon-bag.webp": "dd1914c0ef8b15e620a43bf614a601980adacb87f70c6238ff6ff7a9f84cf22d",
+    "dist/assets/park/icon-castle.webp": "bae71b4a3972bbb2a27151bd7998efce22974688c74c09051534421dbf1d5ad1",
+    "dist/assets/park/icon-check.webp": "269ea52222fb87a60643aa1724eae90fee963ed2fa5dcc92b1f4644e505347ae",
+    "dist/assets/park/icon-coin.webp": "1c85593e18f33f7bce7bd98cfe411beb6e6e6844c4c648846750e9711ada2e1b",
+    "dist/assets/park/icon-crown.webp": "ee226be4cacbf234e25847cd0ef003bffa4b3c6cf403d12645b01831c4d46e3b",
+    "dist/assets/park/icon-gem.webp": "559da1e2b8b991af634378c58c0befe8652543f1d26dc6e6be98fbdedcc921ec",
+    "dist/assets/park/icon-gift.webp": "dcac2c67d42086e38ed87560c31748060400383200c77545a486d0b366319ea5",
+    "dist/assets/park/icon-hint.webp": "f177a49cd8f9fdd93ea89a76bb8469caf4d4112408456144c3fc47d5f215a45d",
+    "dist/assets/park/icon-lock.webp": "1c632abb81032ce77f5308e85f5f6cb61975ba69317a20da09c9254f18570115",
+    "dist/assets/park/icon-mail.webp": "b08f7acc7b2233899e0a4968524089c6478e6f7f01f2f62170e93a2df4fba38a",
+    "dist/assets/park/icon-map.webp": "21ac2481ce906d8ffc317f18540386780558aec50e4d06cbfec9517b77070b0f",
+    "dist/assets/park/icon-paw.webp": "45435baeabed9dbfe70e20ef6d7303cb92902736e991ad0e1b3b509160af0618",
+    "dist/assets/park/icon-play.webp": "5940dbd551a3a5cbd5f6b850c65ca7019adab82314eed5f29f8df483bde0401d",
+    "dist/assets/park/icon-reset.webp": "084087d14323484663ffbcc4d317ae26063d00815effa921d2a78669fda7789c",
+    "dist/assets/park/icon-settings.webp": "e86994a3373b7a0d568f8bcda7c0e023cb653a78443cff1fd6deb053a305b728",
+    "dist/assets/park/icon-shop.webp": "1d90d97d3f782c66c58dc28f905b85ec63729ea4ea45a3eabb0662d6f581b18b",
+    "dist/assets/park/icon-star.webp": "bfad414edc232bb7218b1c54dee081e2c7734c72617973637d6985401537fc55",
+    "dist/assets/park/icon-task.webp": "69e851c3f69425ff4acaeedcbdcf7f657ff353fa6f1a02a2b9f04513f99b09a0",
+    "dist/assets/park/icon-undo.webp": "de227305135f09210f79c1307866eaf76d1caaeb033d7bfc344244bb1e46f5b9",
+    "dist/assets/park/info-card.webp": "d34e433261fe640472a87115eba8d59c316f8b7755f8158006661bf00dbe34e0",
+    "dist/assets/park/island.webp": "b5569219fa4fe29d631b980203718b6fbc3c9a2ee3e89c359a3cdb45d47de476",
+    "dist/assets/park/level-sign.webp": "4ff6924b6898c981cb3f7c84d209397f31ff6713a67355bdb98e301ea4694bde",
+    "dist/assets/park/logo.webp": "ee3b97446491be9413e44a0b157434aafde3dc6d96292fd9334799702a2eaaf2",
+    "dist/assets/park/manifest.json": "8028e328434f03445f5a46f9b4a700cd3c44297b5b3dd364e025042932bb5023",
+    "dist/assets/park/pipe-corner-off.webp": "ebf26916e1429e3295e59c5903c04e09584fcc650738d4a90445315d8f858e1f",
+    "dist/assets/park/pipe-corner-on.webp": "9e2c6be2379d875926f3d9c9ab56d4a2d1be531b33f3a99d1552073cdaadea8c",
+    "dist/assets/park/pipe-cross-off.webp": "d01c343ebd1add800a429fac326ac3c2a82dc41b0246fdcbf88e9820dc4e7486",
+    "dist/assets/park/pipe-cross-on.webp": "8fa353e154480f6fa5321d3353626e52516964983ad1b627087a8bf813f2e56b",
+    "dist/assets/park/pipe-diode.webp": "85cb35e897db4e9ea24feb92a410760be47a7fb55ccd0be09edc36826591b649",
+    "dist/assets/park/pipe-line-off.webp": "6af6f4e6d5d759078bed0d2e619d3898ea9610e080bae1584b5d0b81c6024e06",
+    "dist/assets/park/pipe-line-on.webp": "9fdbcd75d4ddcfc7b02a717f6bb0c5d5cc070704f5a8fc51491b81f83772a801",
+    "dist/assets/park/pipe-source.webp": "fc84e8509408c74d1f61b6f54340f6be574f4b463fc32b9853bcc4fc5310fb30",
+    "dist/assets/park/pipe-switch-off.webp": "684a7ba059557fba55b4b7bcd11a1937fb7f9125f8c74bd4e528358cdaa801fd",
+    "dist/assets/park/pipe-switch-on.webp": "08f60918a82d2e4d1e401e26213bde8932e497794bf23000b448f8b80912a723",
+    "dist/assets/park/pipe-t_shape-off.webp": "82b681ab88fca9e6fdbbb80e316759938ad0069f1f6be8bc602a89cf68bbe8d5",
+    "dist/assets/park/pipe-t_shape-on.webp": "cfc67a65ed020b3b414bbca492bb50e27547c403a2890323109a1717c7b3775f",
+    "dist/assets/park/rabbit.webp": "a56e06dedcc8d95619e07aaef464543fa3df29ea1db5e4027893de93f00096f0",
+    "dist/assets/park/repair-sign.webp": "5c5a60c25c3407c36d717c740794d6c7f01da5ae0525c3df3658b6c6169ae672",
+    "dist/assets/park/reward-ribbon.webp": "9fa353ed895409eb6127a81d9a6999aa65ed379dd0b388a56345060d390d2df2",
+    "dist/assets/park/settings-button.webp": "1cecc0629c8de25f2c11cd0fc9a28ed43b922506a8a1a98253ebb0d5b9cb2b71",
+    "dist/assets/park/sheep-cheer.webp": "a434a3bd0c6b7f1b351c9cf31f69329f4b4889b305e03ef4ce459b68031826fd",
+    "dist/assets/park/sheep.webp": "ebc267ff9092014e87a6126a6ab4f2b5fea6cb3c8f48f6a9b9911dddd603a118",
+    "dist/assets/park/spirit-cheer.webp": "0e0216ae67249e451b2cea7862f4d64f445655c4e83558a1bf61d052c4c82502",
+    "dist/assets/park/spirit.webp": "2e2687d432ed41d96749102f174c328b483f8825dd386adae481e74ae5bfc1fc",
+    "dist/assets/park/status-panel.webp": "e8f49b964d3b8b7c3947a17ee387478395b64f20e3ee8830d2d15f71eef057ca",
+    "dist/assets/park/tile.webp": "666b4d4670f937d91e7db967510e1787deb01aa91cf7aef413aa5dd03454d56d",
+    "dist/assets/park/tool-gold.webp": "2c0dff6a3941db7d3d8cf81863f65b2c2c3dbf05af673157de882346fc976a75",
+    "dist/assets/park/tool-ivory.webp": "83b61394e555778b61e13b6b435fe0727a087822b31d0d4ce58bd071bce4f7cf",
+    "dist/assets/park-font-BFx4nY0a.woff2": "23059293a24c4c3d1ef08546859609ef4637fe7373f3f44bec34881763f9f847",
+    "dist/assets/spring_source.png": "005e2088e348aff403ef4802ccfdd9b0381909f674382c9a8a414d1e0e5cf088",
+    "dist/assets/ui2-home.png": "b8a41db17791d6fb46b9ee0503002e6aa5af88acdd5748313d43ab6cc70affde",
+    "dist/assets/ui2-mascots.webp": "ea7917b877d7f0a1a010ba65f36809b46d090d03856d0dc290938284fb90478b",
+    "dist/assets/ui2-play.jpg": "a262ddca7aec22ac5d229ff7a1eb0fb0bab506c9039566ea6e02acb1b7de9b12",
+    "dist/assets/ui2-victory.jpg": "f55d207086b063d790bd09623a944d3c3f600440b2c60e38ea35205ecea72555",
+    "dist/assets/valve_diode.png": "53d3233430810aa7df6e68ab281c6e840ed25df8cf773d67295c361520f94aae",
+    "dist/assets/valve_switch.png": "eea65d43bbbe0bfd785ba1db14a533c2382543a3c3e4e18112b3c68f9e2ae3b8",
+    "dist/icon.svg": "bfdb432d13ce5916e82e9aa319cd237e9767fbf23c391cdcace72c34ed278027",
+    "dist/index.html": "9c23f779a6d05c128746112c43283236c7e9452dd69de42e671ba95658f698f9",
+    "dist/manifest.webmanifest": "d3df9c2a79d54e294861804656129177642f78ca37c221369ae9a07ec711df88",
+    "dist/pwa-192x192.png": "582ff89ef383b2c185267febc2cf3ba4982198422559a524bb0c9b8557932a27",
+    "dist/pwa-512x512.png": "df91d3cd899bcc6b945c7f3edae0cd6e5113cfa7a421fbfab87cf8197353c77a",
+    "dist/pwa-maskable-512x512.png": "df91d3cd899bcc6b945c7f3edae0cd6e5113cfa7a421fbfab87cf8197353c77a",
+    "dist/registerSW.js": "e12c8db54e3cc247034427f2b661b305a78fea7e7cdec1eac179fecec3da0fc7",
+    "dist/sw.js": "b940fae1c027ad043d4a2be30dc9444e15907e138b04e54f1989e06d06d3150b",
+    "dist/workbox-9c191d2f.js": "04b086f1b2f4215ee4b659a7bc9c76162894abdb43fa876247bc7c0bd6fd1c37"
+  }
+}
