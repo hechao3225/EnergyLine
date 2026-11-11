@@ -1,5 +1,6 @@
 import React from "react";
 import type { FlowerEntry } from "../types/flower";
+import { MAX_STARS } from "../utils/rating";
 export const ART_ROOT = `${import.meta.env.BASE_URL}assets/park/`;
 export type IconName =
   | "star"
@@ -87,7 +88,7 @@ export function Stars({
 }) {
   return (
     <span className={`park-stars ${className}`} aria-label={`${value}星`}>
-      {[1, 2, 3].map((i) => (
+      {Array.from({ length: MAX_STARS }, (_, index) => index + 1).map((i) => (
         <Icon key={i} name="star" className={i > value ? "unearned" : ""} />
       ))}
     </span>

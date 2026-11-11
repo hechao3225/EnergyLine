@@ -1,11 +1,12 @@
 """从发行贴图像素测量实际端口，核对管径、明暗状态和四个旋转方向。"""
 from pathlib import Path
 import json
+import os
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
-REPORT = ROOT / 'docs/QA/pipe-alignment-2026-11-10'
+REPORT = ROOT / os.environ.get('PARK_PIPE_QA_DIR', 'docs/QA/pipe-alignment-2026-11-11')
 REPORT.mkdir(parents=True, exist_ok=True)
 EXPECTED = {
     'line-off': ('left', 'right'), 'line-on': ('left', 'right'),

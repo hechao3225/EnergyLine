@@ -18,23 +18,18 @@ import {
 } from "./utils/achievements";
 import {
   completeParkLevel,
-  getStars,
+  getBestStars,
   localDate,
   PARK_STORAGE_KEY,
   readParkProgress,
   resumeLevel,
+  readStoryProgress,
+  PROGRESS_VERSION,
+  PROGRESS_VERSION_KEY,
 } from "./utils/parkProgress";
+import { getStarsForSteps } from "./utils/rating";
 
 type Mode = "story" | "endless" | "editor";
-function readSaved<T>(key: string, fallback: T): T {
-  const saved = localStorage.getItem(key);
-  if (!saved) return fallback;
-  try {
-    return JSON.parse(saved);
-  } catch {
-    return fallback;
-  }
-}
 function snapshot(
   level: LevelConfig,
   tiles: Tile[],
@@ -48,6 +43,7 @@ function snapshot(
     stepNumber: step,
     tiles: tiles.map((tile) => ({ ...tile })),
     remainingSteps: remaining,
+    stepsUsed: step,
     litCount: sim.litCount,
     totalBulbs: sim.totalBulbs,
     description,
@@ -55,12 +51,9 @@ function snapshot(
 }
 
 export default function App() {
-  const [clearedLevels, setClearedLevels] = useState(() =>
-    readSaved<number[]>("honeycomb_cleared_levels", []),
-  );
-  const [bestSteps, setBestSteps] = useState(() =>
-    readSaved<Record<number, number>>("honeycomb_best_steps", {}),
-  );
+  const [savedProgress] = useState(() => readStoryProgress(localStorage, DEFAULT_LEVELS));
+  const [clearedLevels, setClearedLevels] = useState(savedProgress.cleared);
+  const [bestSteps, setBestSteps] = useState(savedProgress.best);
   const [levelId, setLevelId] = useState(() => resumeLevel(clearedLevels));
   const [mode, setMode] = useState<Mode>("story");
   const [customLevel, setCustomLevel] = useState<LevelConfig | null>(null);
@@ -75,6 +68,10 @@ export default function App() {
     snapshot(level, level.tiles, level.maxSteps, 0, "初始状态"),
   ]);
   const [historyIndex, setHistoryIndex] = useState(0);
+  const [rewinds, setRewinds] = useState(3);
+  const attempt = useRef({ tiles, remaining, history, index: historyIndex, rewinds });
+  attempt.current = { tiles, remaining, history, index: historyIndex, rewinds };
+  const stepsUsed = history[historyIndex].stepsUsed ?? history[historyIndex].stepNumber;
   const [levelsOpen, setLevelsOpen] = useState(false);
   const [peek, setPeek] = useState(false);
   const [victoryReward, setVictoryReward] = useState({
@@ -100,6 +97,9 @@ export default function App() {
       snapshot(config, config.tiles, config.maxSteps, 0, "初始状态"),
     ]);
     setHistoryIndex(0);
+    setRewinds(3);
+    attempt.current = { tiles: config.tiles.map((tile) => ({ ...tile })), remaining: config.maxSteps,
+      history: [snapshot(config, config.tiles, config.maxSteps, 0, "初始状态")], index: 0, rewinds: 3 };
     stats.current = { undos: 0, jumped: false, switched: false };
     setPeek(false);
     setScreen("play");
@@ -110,22 +110,24 @@ export default function App() {
     },
     [],
   );
+  useEffect(() => {
+    localStorage.setItem("honeycomb_best_steps", JSON.stringify(savedProgress.best));
+    localStorage.setItem(PROGRESS_VERSION_KEY, PROGRESS_VERSION);
+  }, []);
 
   // 在实际接通时结算并落盘，界面切换只负责呈现结果。
-  const complete = (nextRemaining: number) => {
+  const complete = (nextRemaining: number, completedSteps: number) => {
     if (winProcessed.current) return;
     winProcessed.current = true;
-    const stepsUsed = level.maxSteps - nextRemaining;
+    const stepsUsed = completedSteps;
     if (mode === "story") {
       const progress = readParkProgress(localStorage);
       const firstReward = !progress.rewardedLevels.includes(level.id);
-      const previousStars = clearedLevels.includes(level.id)
-        ? getStars(level.maxSteps - (bestSteps[level.id] ?? 0), level.maxSteps)
-        : 0;
+      const previousStars = getBestStars(level, clearedLevels, bestSteps);
       setVictoryReward({
         stars: Math.max(
           0,
-          getStars(nextRemaining, level.maxSteps) - previousStars,
+          getStarsForSteps(stepsUsed, level) - previousStars,
         ),
         coins: firstReward ? 100 : 0,
         gems: firstReward ? 10 : 0,
@@ -153,6 +155,7 @@ export default function App() {
         stepsUsed,
         remainingSteps: nextRemaining,
         maxSteps: level.maxSteps,
+        parSteps: level.parSteps,
         levelUndosUsed: stats.current.undos,
         hasUsedTimelineJump: stats.current.jumped,
         hasToggledSwitch: stats.current.switched,
@@ -168,32 +171,35 @@ export default function App() {
     clicked: Tile,
     action: "rotate" | "toggle-switch" = "rotate",
   ) => {
+    const current = attempt.current;
     if (
       clicked.locked ||
       clicked.type === "empty" ||
-      remaining === 0 ||
+      current.remaining === 0 ||
       winProcessed.current
     )
       return;
     const toggle = clicked.type === "switch" && action === "toggle-switch";
-    const nextTiles = tiles.map((tile) =>
+    const nextTiles = current.tiles.map((tile) =>
       tile.id === clicked.id
         ? toggle
           ? { ...tile, switchClosed: !tile.switchClosed }
           : { ...tile, rotation: tile.rotation + 90 }
         : tile,
     );
-    const nextRemaining = remaining - 1;
+    const nextRemaining = current.remaining - 1;
+    const nextSteps = (current.history[current.index].stepsUsed ?? current.history[current.index].stepNumber) + 1;
     const nextHistory = [
-      ...history.slice(0, historyIndex + 1),
+      ...current.history.slice(0, current.index + 1),
       snapshot(
         level,
         nextTiles,
         nextRemaining,
-        history[historyIndex].stepNumber + 1,
+        nextSteps,
         `${toggle ? "切换能量闸" : "旋转管道"} (${clicked.row + 1}, ${clicked.col + 1})`,
       ),
     ];
+    attempt.current = { ...current, tiles: nextTiles, remaining: nextRemaining, history: nextHistory, index: nextHistory.length - 1 };
     setTiles(nextTiles);
     setRemaining(nextRemaining);
     setHistory(nextHistory);
@@ -207,7 +213,7 @@ export default function App() {
       haptics.tapLight();
     }
     const nextSim = simulateCircuit(nextTiles, level.gridRows, level.gridCols);
-    if (nextSim.isAllLit) complete(nextRemaining);
+    if (nextSim.isAllLit) complete(nextRemaining, nextSteps);
     else if (nextRemaining === 0) {
       sound.playFail();
       haptics.outOfSteps();
@@ -215,17 +221,23 @@ export default function App() {
   };
   useEffect(() => {
     if (screen === "play" && simulation.isAllLit && !winProcessed.current)
-      complete(remaining);
+      complete(remaining, stepsUsed);
   }, [screen, level, simulation.isAllLit]);
   const travel = useCallback(
     (index: number, jump = false) => {
-      const item = history[index];
-      if (!item || index === historyIndex || winProcessed.current) return;
+      const current = attempt.current;
+      const item = current.history[index];
+      if (!item || index === current.index || winProcessed.current) return;
+      const backtrack = jump || index < current.index;
+      if (backtrack && current.rewinds === 0) return;
+      const nextRewinds = current.rewinds - (backtrack ? 1 : 0);
+      attempt.current = { ...current, tiles: item.tiles.map((tile) => ({ ...tile })), remaining: item.remainingSteps, index, rewinds: nextRewinds };
+      setRewinds(nextRewinds);
       setTiles(item.tiles.map((tile) => ({ ...tile })));
       setRemaining(item.remainingSteps);
       setHistoryIndex(index);
       if (jump) stats.current.jumped = true;
-      if (index < historyIndex) {
+      if (index < current.index) {
         stats.current.undos += 1;
         trackUndoOperation();
       }
@@ -287,6 +299,7 @@ export default function App() {
         snapshot(config, config.tiles, config.maxSteps, 0, "初始状态"),
       ]);
       setHistoryIndex(0);
+      setRewinds(3);
     }
   };
   useEffect(() => {
@@ -328,6 +341,8 @@ export default function App() {
       tiles={tiles}
       simulation={simulation}
       remainingSteps={remaining}
+      stepsUsed={stepsUsed}
+      rewinds={rewinds}
       clearedLevels={clearedLevels}
       bestSteps={bestSteps}
       levelSelectOpen={levelsOpen}

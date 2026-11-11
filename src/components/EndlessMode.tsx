@@ -539,6 +539,7 @@ export const EndlessMode: React.FC<EndlessModeProps> = ({
               isAllLit={simulation.isAllLit}
               hintText={hintText}
               winText="无尽回路已闭合！继续下一挑战。"
+              maxSteps={maxSteps}
               onNextLevel={handleNextLevel}
               onRestart={handleRestart}
               onHome={onHome}

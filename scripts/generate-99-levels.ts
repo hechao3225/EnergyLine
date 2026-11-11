@@ -6,7 +6,8 @@
 import fs from 'fs';
 import path from 'path';
 import { Direction, LevelConfig, Tile, TileType } from '../src/types/game';
-import { getDefaultBasePorts, rotatePorts, simulateCircuit } from '../src/utils/circuit';
+import { getDefaultBasePorts, getTilePorts, rotatePorts, simulateCircuit } from '../src/utils/circuit';
+import { solveMinTaps } from './solve-min-par';
 
 // Helper to create empty 6x6 grid
 function createEmptyGrid(): Tile[] {
@@ -73,7 +74,113 @@ function getMinRotateMoves(initial: number, solved: number, type: TileType): num
   return steps === 3 ? 1 : steps; // clockwise or counterclockwise shortest
 }
 
-// Scramble a solved layout into an engaging, non-trivial puzzle
+/**
+ * The game only allows CLOCKWISE 90° taps, so the true minimum cost is not the
+ * bidirectional distance above. This is the par (4-star) value.
+ */
+function getClockwiseRotateSteps(initial: number, solved: number, type: TileType): number {
+  if (type === 'cross' || type === 'empty' || type === 'battery' || type === 'bulb') {
+    return 0;
+  }
+  if (type === 'line' || type === 'switch') {
+    // 2-fold symmetry: 0°≡180° (horizontal), 90°≡270° (vertical) -> at most one tap
+    const normInit = ((Math.round(initial) % 180) + 180) % 180;
+    const normSol = ((Math.round(solved) % 180) + 180) % 180;
+    return normInit === normSol ? 0 : 1;
+  }
+  const normInit = ((Math.round(initial) % 360) + 360) % 360;
+  const normSol = ((Math.round(solved) % 360) + 360) % 360;
+  return Math.floor((((normSol - normInit) % 360) + 360) % 360 / 90);
+}
+
+/**
+ * 顺时针点击次数：把当前盘面「还原成设计图」需要几下手。
+ * 这只是一个可行解的步数，不是本关最少步数（真实最少步数更小是常态），
+ * 因此它现在只用作可解性交叉校验，写进 parSteps 的必须是 solveMinTaps() 的结果。
+ */
+function computeParSteps(solved: Tile[], initial: Tile[]): number {
+  const byId = new Map(initial.map((t) => [t.id, t]));
+  let steps = 0;
+  for (const st of solved) {
+    const it = byId.get(st.id);
+    if (!it || it.locked || st.type === 'empty') continue;
+    steps += getClockwiseRotateSteps(it.rotation, st.rotation, st.type);
+    if (st.type === 'switch' && it.switchClosed === false && st.switchClosed !== false) {
+      steps += 1; // opening the sluice gate costs one tap as well
+    }
+  }
+  return steps;
+}
+
+/** Minimal LevelConfig wrapper so the DP solver can run on a bare tile layout. */
+function layoutAsLevel(id: number, tiles: Tile[]): LevelConfig {
+  return {
+    id,
+    code: String(id).padStart(2, '0'),
+    totalLevels: 99,
+    title: '',
+    subtitle: '',
+    hintText: '',
+    winText: '',
+    maxSteps: 9999,
+    parSteps: 0,
+    gridRows: 6,
+    gridCols: 6,
+    tiles,
+  };
+}
+
+/**
+ * 真正承载水流的格子：solved 布局上覆盖全部花蕾的最优树（DP 解 usedCells）。
+ *
+ * 树之外的瓦片是死支路装饰，转它对通关毫无帮助。旧生成器照样把它们打乱，
+ * 于是「还原设计图」的步数比真实最优高出约 9 步（中位值，88% 的关卡偏高），
+ * 结算界面才会出现「本次 10 步 / 最少 13 步」这种自相矛盾。
+ */
+function requiredCellsOf(id: number, solvedTiles: Tile[]): Set<string> {
+  try {
+    const res = solveMinTaps(layoutAsLevel(id, solvedTiles));
+    return new Set(res.usedCells);
+  } catch {
+    // 求解失败时退回全量打乱，交给调用方的精确校验兜底
+    return new Set(solvedTiles.map((t) => t.id));
+  }
+}
+
+/** 单次点击能把每种瓦片累计转多少步（line 二重对称，最多 1 步） */
+const TAP_CAP: Partial<Record<TileType, number>> = {
+  line: 1,
+  corner: 3,
+  t_shape: 3,
+  diode: 3,
+  switch: 2, // 1 次旋转 + 1 次合闸
+};
+
+/** solveMinTaps 在极少数多源布局上会回溯失败，包一层避免整条生成线中断 */
+function safeSolvePar(level: LevelConfig): number | null {
+  try {
+    return solveMinTaps(level).par;
+  } catch {
+    return null;
+  }
+}
+
+interface ScrambleOptions {
+  /** 期望 4★ 线（真实最少点击次数）；不可达时收敛到可达范围 */
+  targetPar?: number;
+  /** 通关必经的格子；缺省时用 solved 布局的最优树 */
+  requiredCells?: Set<string>;
+}
+
+/**
+ * 把设计好的布局打散成一道题。
+ *
+ * 只打乱「通关必经」且可旋转的瓦片，其余保持设计角度——它们本来就是死支路，
+ * 转不转都通不了关。这样 par = 每片分配到的点击步数之和，天然等于真实最优，
+ * 不再出现「还原设计图 13 步、实际 1 步」的偏差。
+ *
+ * 每片至少 1 步（保证它确实需要转），剩余步数按目标 par 随机摊到还有余量的片上。
+ */
 function createScrambledLevel(
   id: number,
   title: string,
@@ -81,70 +188,68 @@ function createScrambledLevel(
   hintText: string,
   winText: string,
   solvedTiles: Tile[],
-  seedModifier: number = 42
+  seedModifier: number = 42,
+  opts: ScrambleOptions = {}
 ): { solved: Tile[]; level: LevelConfig } {
   const rand = makePrng(id * 7919 + seedModifier);
-  const scrambledTiles: Tile[] = [];
-  let minMoves = 0;
+  const required = opts.requiredCells ?? requiredCellsOf(id, solvedTiles);
 
-  for (const st of solvedTiles) {
-    if (st.locked || st.type === 'empty' || st.type === 'battery' || st.type === 'bulb') {
-      scrambledTiles.push({ ...st });
-      continue;
-    }
+  const movable = solvedTiles.filter(
+    (t) => !t.locked && required.has(t.id) && TAP_CAP[t.type] !== undefined
+  );
+  const caps = movable.map((t) => TAP_CAP[t.type]!);
+  const minTotal = movable.length;
+  const maxTotal = caps.reduce((a, b) => a + b, 0);
 
-    if (st.type === 'switch') {
-      // Switches start open and rotated perpendicularly
-      const scrambleSteps = 1 + (Math.floor(rand() * 2)); // 1 or 2 steps
-      const scrambledRot = ((st.rotation + scrambleSteps * 90) % 360) as 0 | 90 | 180 | 270;
-      minMoves += getMinRotateMoves(scrambledRot, st.rotation, 'switch') + 1; // +1 for closing switch
-      scrambledTiles.push({
-        ...st,
-        rotation: scrambledRot,
-        switchClosed: false, // Must be closed by player
-      });
-      continue;
-    }
+  const wanted = opts.targetPar ?? Math.round(minTotal * 1.6);
+  const target = Math.max(minTotal, Math.min(maxTotal, Math.round(wanted)));
 
-    if (st.type === 'cross') {
-      // Cross doesn't need rotation, but keep as is
-      scrambledTiles.push({ ...st });
-      continue;
-    }
-
-    // Line, Corner, T-Shape, Diode
-    let scrambleSteps = 1;
-    if (st.type === 'line') {
-      scrambleSteps = 1; // perpendicular
-    } else {
-      scrambleSteps = 1 + Math.floor(rand() * 3); // 1, 2, or 3
-    }
-
-    const scrambledRot = ((st.rotation + scrambleSteps * 90) % 360) as 0 | 90 | 180 | 270;
-    minMoves += getMinRotateMoves(scrambledRot, st.rotation, st.type);
-    scrambledTiles.push({
-      ...st,
-      rotation: scrambledRot,
-    });
+  const taps = new Array<number>(movable.length).fill(1);
+  let extra = target - minTotal;
+  while (extra > 0) {
+    const open: number[] = [];
+    for (let i = 0; i < taps.length; i++) if (taps[i] < caps[i]) open.push(i);
+    if (open.length === 0) break;
+    taps[open[Math.floor(rand() * open.length)]] += 1;
+    extra -= 1;
   }
 
-  const code = String(id).padStart(2, '0');
-  const maxSteps = Math.max(16, minMoves * 2 + 6);
+  const tapById = new Map<string, number>();
+  movable.forEach((t, i) => tapById.set(t.id, taps[i]));
+
+  const finalTiles = solvedTiles.map((st) => {
+    const k = tapById.get(st.id);
+    if (k === undefined) return { ...st };
+    if (st.type === 'switch') {
+      return {
+        ...st,
+        rotation: (k >= 2 ? (st.rotation + 90) % 360 : st.rotation) as 0 | 90 | 180 | 270,
+        switchClosed: false, // 玩家必须合闸，占 1 步
+      };
+    }
+    return { ...st, rotation: ((st.rotation + 90 * k) % 360) as 0 | 90 | 180 | 270 };
+  });
+
+  const parSteps = taps.reduce((a, b) => a + b, 0);
+  // 预算 = par 的 1.5 倍（至少 +5）。旧公式 max(16, par*2+6) 让低 par 关卡的
+  // 容错高达 20 倍，「随便点也通关」。
+  const maxSteps = Math.max(parSteps + 5, Math.ceil(parSteps * 1.5));
 
   return {
     solved: solvedTiles,
     level: {
       id,
-      code,
+      code: String(id).padStart(2, '0'),
       totalLevels: 99,
       title,
       subtitle,
       hintText,
       winText,
       maxSteps,
+      parSteps,
       gridRows: 6,
       gridCols: 6,
-      tiles: scrambledTiles,
+      tiles: finalTiles,
     },
   };
 }
@@ -241,44 +346,42 @@ function makeLevel2(): { solved: Tile[]; level: LevelConfig } {
 
 // Level 3: 三盏归巢 (Preserved multi-branch with decoys)
 function makeLevel3(): { solved: Tile[]; level: LevelConfig } {
+  // Difficulty pass: the old board needed 22 clockwise taps on level 3, a 3x
+  // jump from level 2. Branches are shorter now (par ~14) while still teaching
+  // "three branches + decoys".
   const solved = createEmptyGrid();
   setTile(solved, 2, 0, 'battery', 0, true);
   setTile(solved, 2, 1, 't_shape', 0);   // LEFT, RIGHT, DOWN
   setTile(solved, 2, 2, 't_shape', 180); // LEFT, RIGHT, UP
-  // Top branch
+  // Top branch (short)
   setTile(solved, 1, 2, 'corner', 0);   // DOWN & RIGHT
   setTile(solved, 1, 3, 'line', 0);
   setTile(solved, 1, 4, 'corner', 180); // UP & LEFT
-  setTile(solved, 0, 4, 'corner', 0);   // DOWN & RIGHT
-  setTile(solved, 0, 5, 'bulb', 0, true);
-  // Mid branch
-  setTile(solved, 2, 3, 'line', 0);
-  setTile(solved, 2, 4, 'line', 0);
-  setTile(solved, 2, 5, 'bulb', 0, true);
-  // Bottom branch
+  setTile(solved, 0, 4, 'bulb', 0, true);
+  // Mid branch (straight out)
+  setTile(solved, 2, 3, 'bulb', 0, true);
+  // Bottom branch (short)
   setTile(solved, 3, 1, 'line', 90);    // vertical
   setTile(solved, 4, 1, 'corner', 270); // UP & RIGHT
   setTile(solved, 4, 2, 'line', 0);
-  setTile(solved, 4, 3, 'line', 0);
-  setTile(solved, 4, 4, 'corner', 90);  // DOWN & LEFT
-  setTile(solved, 5, 4, 'corner', 270); // UP & RIGHT
-  setTile(solved, 5, 5, 'bulb', 0, true);
-  // Decoy tiles
-  setTile(solved, 3, 2, 'line', 90);
-  setTile(solved, 3, 3, 'corner', 180);
+  setTile(solved, 4, 3, 'corner', 90);  // DOWN & LEFT
+  setTile(solved, 5, 3, 'bulb', 0, true);
+  // Decoy tiles (dead pipes)
+  setTile(solved, 3, 2, 'corner', 180);
+  setTile(solved, 3, 3, 'line', 90);
 
   const initial = solved.map(t => ({ ...t }));
-  initial.find(t => t.row === 2 && t.col === 1)!.rotation = 90;
-  initial.find(t => t.row === 2 && t.col === 2)!.rotation = 270;
-  initial.find(t => t.row === 1 && t.col === 2)!.rotation = 90;
-  initial.find(t => t.row === 1 && t.col === 4)!.rotation = 270;
-  initial.find(t => t.row === 0 && t.col === 4)!.rotation = 90;
-  initial.find(t => t.row === 2 && t.col === 3)!.rotation = 90;
-  initial.find(t => t.row === 2 && t.col === 4)!.rotation = 90;
+  initial.find(t => t.row === 2 && t.col === 1)!.rotation = 270;
+  initial.find(t => t.row === 2 && t.col === 2)!.rotation = 90;
+  initial.find(t => t.row === 1 && t.col === 2)!.rotation = 270;
+  initial.find(t => t.row === 1 && t.col === 3)!.rotation = 90;
+  initial.find(t => t.row === 1 && t.col === 4)!.rotation = 0;
   initial.find(t => t.row === 3 && t.col === 1)!.rotation = 0;
   initial.find(t => t.row === 4 && t.col === 1)!.rotation = 180;
-  initial.find(t => t.row === 4 && t.col === 4)!.rotation = 0;
-  initial.find(t => t.row === 5 && t.col === 4)!.rotation = 90;
+  initial.find(t => t.row === 4 && t.col === 2)!.rotation = 180;
+  initial.find(t => t.row === 4 && t.col === 3)!.rotation = 270;
+  initial.find(t => t.row === 3 && t.col === 2)!.rotation = 0;
+  initial.find(t => t.row === 3 && t.col === 3)!.rotation = 0;
 
   return {
     solved,
@@ -287,10 +390,10 @@ function makeLevel3(): { solved: Tile[]; level: LevelConfig } {
       code: '03',
       totalLevels: 99,
       title: '三盏归巢',
-      subtitle: '地脉之根 · 多级支路与甄别诱饵',
+      subtitle: '地脉之根 · 三条支路与诱饵甄别',
       hintText: '规划上中下三路，避开无效诱饵管道。',
       winText: '三朵仙花璀璨盛开！水网运转如意。',
-      maxSteps: 35,
+      maxSteps: 22,
       gridRows: 6,
       gridCols: 6,
       tiles: initial,
@@ -387,7 +490,12 @@ function makeLevel6(): { solved: Tile[]; level: LevelConfig } {
   });
 
   // North branch -> (0,2) bulb
-  setTile(solved, 1, 2, 'line', 90);
+  // 绕一格而不是直连：直线管道只能转 1 步（二重对称），四面全直线时
+  // 本关 par 上限只有 5，会变成整条曲线的最低点。绕行后这条支路有 3 片
+  // 弯管，最多 9 步，与其他三条支路合计 7~13 步。
+  setTile(solved, 1, 2, 'corner', 90); // DOWN & LEFT
+  setTile(solved, 1, 1, 'corner', 270); // RIGHT & UP
+  setTile(solved, 0, 1, 'corner', 0); // DOWN & RIGHT
   setTile(solved, 0, 2, 'bulb', 0, true);
 
   // East branch -> (2,5) bulb
@@ -404,8 +512,7 @@ function makeLevel6(): { solved: Tile[]; level: LevelConfig } {
   setTile(solved, 2, 1, 'line', 0);
   setTile(solved, 2, 0, 'bulb', 0, true);
 
-  // Decoys in four quadrants
-  setTile(solved, 1, 1, 'corner', 0);
+  // Decoys in the remaining quadrants (1,1 is now part of the north branch)
   setTile(solved, 1, 3, 'corner', 90);
   setTile(solved, 3, 1, 'corner', 270);
   setTile(solved, 3, 3, 'corner', 180);
@@ -833,6 +940,24 @@ interface ChapterConfig {
   allowDiode: boolean;
   allowCross: boolean;
   lockedObstacles: number;
+  /** How many sluice gates per level (default 1 when allowed). */
+  switchCount?: number;
+  /** How many one-way diodes per level (default 1 when allowed). */
+  diodeCount?: number;
+  /**
+   * Only place a gate every N levels instead of on every level. Used to keep a
+   * mechanic "alive" in chapters that are not centred on it.
+   */
+  switchEvery?: number;
+  /**
+   * Target band for par (4-star line), linearly interpolated across the chapter
+   * range. The generator re-scrambles a layout until par lands inside it, which
+   * is what gives the 99 levels an actual difficulty ramp instead of a flat
+   * random walk. Keep in sync with scripts/audit-difficulty.ts.
+   */
+  parRange: [number, number];
+  /** Hard lower bound used by the audit (par below this = "too easy for its chapter"). */
+  parFloor: number;
   titles: string[];
 }
 
@@ -840,6 +965,8 @@ const CHAPTER_RULES: ChapterConfig[] = [
   {
     range: [7, 19],
     chapterName: '地脉之根',
+    parRange: [8, 11],
+    parFloor: 7,
     minSources: 1,
     maxSources: 1,
     minBulbs: 2,
@@ -857,6 +984,8 @@ const CHAPTER_RULES: ChapterConfig[] = [
   {
     range: [21, 39],
     chapterName: '巨木之干',
+    parRange: [10, 13],
+    parFloor: 10,
     minSources: 1,
     maxSources: 2,
     minBulbs: 2,
@@ -875,6 +1004,8 @@ const CHAPTER_RULES: ChapterConfig[] = [
   {
     range: [41, 59],
     chapterName: '苍翠繁枝',
+    parRange: [12, 15],
+    parFloor: 11,
     minSources: 1,
     maxSources: 2,
     minBulbs: 3,
@@ -883,6 +1014,9 @@ const CHAPTER_RULES: ChapterConfig[] = [
     allowDiode: true,
     allowCross: true,
     lockedObstacles: 3,
+    // Gates are not this chapter's focus, but dropping them for 19 levels made
+    // players forget the mechanic entirely. Keep roughly one gate per 3 levels.
+    switchEvery: 3,
     titles: [
       '顺水推舟', '逆流止步', '枝头分向', '单向环流', '双向并轨',
       '繁枝分桠', '二极立交', '逆水行舟', '双源对流', '琼枝玉叶',
@@ -893,6 +1027,8 @@ const CHAPTER_RULES: ChapterConfig[] = [
   {
     range: [61, 79],
     chapterName: '云海天桥',
+    parRange: [13, 17],
+    parFloor: 13,
     minSources: 2,
     maxSources: 2,
     minBulbs: 3,
@@ -911,14 +1047,20 @@ const CHAPTER_RULES: ChapterConfig[] = [
   {
     range: [81, 98],
     chapterName: '神树之巅',
+    parRange: [15, 19],
+    parFloor: 15,
     minSources: 2,
     maxSources: 3,
     minBulbs: 4,
-    maxBulbs: 5,
+    maxBulbs: 6,
     allowSwitch: true,
     allowDiode: true,
     allowCross: true,
     lockedObstacles: 4,
+    // Final chapter must feel heavier than the previous one: two gates and two
+    // diodes per board instead of the previous 1+1.
+    switchCount: 2,
+    diodeCount: 2,
     titles: [
       '太古乾坤', '三生万物', '极光玄枢', '天地逆旅', '八卦玄阵',
       '九曜贯日', '万化归一', '混沌初开', '虚实相生', '玄天青莲',
@@ -928,12 +1070,24 @@ const CHAPTER_RULES: ChapterConfig[] = [
   },
 ];
 
+/** A solvable board layout before scrambling (initial rotations are chosen later). */
+interface LevelLayout {
+  solved: Tile[];
+  title: string;
+  subtitle: string;
+  hintText: string;
+  winText: string;
+}
+
 // Algorithmic Solvable Level Generator
-function generateAlgorithmLevel(
+function generateAlgorithmLayout(
   levelId: number,
-  config: ChapterConfig
-): { solved: Tile[]; level: LevelConfig } {
-  const rand = makePrng(levelId * 7919 + 888);
+  config: ChapterConfig,
+  variant = 0
+): LevelLayout {
+  // `variant` reshuffles the layout (different branches / bulb spots) so the
+  // difficulty targeting pass has more than one board to aim at par with.
+  const rand = makePrng(levelId * 7919 + 888 + variant * 104729);
   const rows = 6;
   const cols = 6;
 
@@ -1177,33 +1331,40 @@ function generateAlgorithmLevel(
       }
     }
 
-    // Insert Switches if configured
-    if (config.allowSwitch && straightCoords.length > 0) {
+    // Insert switches and diodes alternately: consuming the straight-pipe pool
+    // with all gates first starved the diodes (final chapter fell to 0.9/level).
+    const switchSlots = config.switchEvery
+      ? (levelId - config.range[0]) % config.switchEvery === 0
+        ? 1
+        : 0
+      : config.allowSwitch
+        ? config.switchCount ?? 1
+        : 0;
+    const diodeSlots = config.allowDiode ? config.diodeCount ?? 1 : 0;
+    const insertTile = (kind: 'switch' | 'diode') => {
+      if (straightCoords.length === 0) return;
       const pick = straightCoords.pop()!;
       const idx = solvedTiles.findIndex(t => t.row === pick.r && t.col === pick.c);
-      if (idx !== -1) {
-        solvedTiles[idx] = {
-          ...solvedTiles[idx],
-          type: 'switch',
-          basePorts: getDefaultBasePorts('switch'),
-          rotation: pick.rot,
-          switchClosed: true,
-        };
-      }
-    }
-
-    // Insert Diodes if configured
-    if (config.allowDiode && straightCoords.length > 0) {
-      const pick = straightCoords.pop()!;
-      const idx = solvedTiles.findIndex(t => t.row === pick.r && t.col === pick.c);
-      if (idx !== -1) {
-        solvedTiles[idx] = {
-          ...solvedTiles[idx],
-          type: 'diode',
-          basePorts: getDefaultBasePorts('diode'),
-          rotation: pick.rot,
-        };
-      }
+      if (idx === -1) return;
+      solvedTiles[idx] =
+        kind === 'switch'
+          ? {
+              ...solvedTiles[idx],
+              type: 'switch',
+              basePorts: getDefaultBasePorts('switch'),
+              rotation: pick.rot,
+              switchClosed: true,
+            }
+          : {
+              ...solvedTiles[idx],
+              type: 'diode',
+              basePorts: getDefaultBasePorts('diode'),
+              rotation: pick.rot,
+            };
+    };
+    for (let i = 0; i < Math.max(switchSlots, diodeSlots); i++) {
+      if (i < switchSlots) insertTile('switch');
+      if (i < diodeSlots) insertTile('diode');
     }
 
     // Lock obstacles if configured
@@ -1230,18 +1391,166 @@ function generateAlgorithmLevel(
       : '规划各条支路水脉，避开断路与死管。';
     const winText = `第 ${levelId} 关已通关！甘霖已顺利滋润仙蕾。`;
 
-    return createScrambledLevel(
-      levelId,
-      title,
-      subtitle,
-      hintText,
-      winText,
-      solvedTiles,
-      levelId * 37
-    );
+    return { solved: solvedTiles, title, subtitle, hintText, winText };
   }
 
   throw new Error(`Failed to generate level ${levelId} after 500 attempts`);
+}
+
+// ============ Difficulty targeting ============
+
+function median(values: number[]): number {
+  if (values.length === 0) return 0;
+  const sorted = [...values].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+}
+
+/** Target par for a level: linearly interpolated across its chapter's band. */
+function targetPar(id: number, config: ChapterConfig): number {
+  const [a, b] = config.range;
+  const [lo, hi] = config.parRange;
+  const t = b > a ? Math.min(1, Math.max(0, (id - a) / (b - a))) : 1;
+  return lo + (hi - lo) * t;
+}
+
+/**
+ * How far a candidate par is from "the right difficulty here".
+ * Combines the chapter ramp, local smoothness (no saw-tooth), the chapter floor
+ * and the 1.8x cliff limit used by scripts/audit-difficulty.ts.
+ */
+function parCost(par: number, id: number, config: ChapterConfig, prevPars: number[]): number {
+  const target = targetPar(id, config);
+  const devTarget = Math.abs(par - target) / target;
+
+  const recent = prevPars.slice(-2);
+  const ref = recent.length ? median(recent) : target;
+  const devLocal = Math.abs(par - ref) / ref;
+
+  const prev1 = prevPars[prevPars.length - 1];
+  const jump = prev1 ? Math.max(par / prev1, prev1 / par) : 1;
+
+  const floorGap = par < config.parFloor ? (config.parFloor - par) / config.parFloor : 0;
+
+  return (
+    devTarget +
+    1.4 * Math.max(0, devLocal - 0.24) +
+    1.5 * floorGap +
+    0.9 * Math.max(0, jump - 1.75)
+  );
+}
+
+interface Candidate {
+  solved: Tile[];
+  level: LevelConfig;
+  par: number;
+  cost: number;
+}
+
+/**
+ * Re-scramble the same solved layout with several seeds and keep the one whose
+ * par best fits the difficulty target. The layout is untouched, only the
+ * starting rotations change, so the puzzle stays exactly as designed.
+ */
+function pickScramble(
+  id: number,
+  config: ChapterConfig,
+  layout: LevelLayout,
+  baseSeed: number,
+  prevPars: number[],
+  seedCount = 8
+): Candidate {
+  const required = requiredCellsOf(id, layout.solved);
+  const desired = targetPar(id, config);
+  let best: Candidate | null = null;
+  let fallback: Candidate | null = null;
+  for (let k = 0; k < seedCount; k++) {
+    const built = createScrambledLevel(
+      id,
+      layout.title,
+      layout.subtitle,
+      layout.hintText,
+      layout.winText,
+      layout.solved,
+      baseSeed + k * 1013,
+      { targetPar: desired, requiredCells: required }
+    );
+    // 构造出的 par 只是设计值：盘面若存在「绕开被打乱瓦片」的替代通路，
+    // 真实最优会更短。用 DP 求解器复核，难度评估必须基于真实值。
+    const par = safeSolvePar(built.level);
+    if (par === null) {
+      // 求解器崩掉的候选保留作兜底，代价给最大，只在全崩时使用
+      if (!fallback) {
+        fallback = { solved: built.solved, level: built.level, par: built.level.parSteps!, cost: 99 };
+      }
+      continue;
+    }
+    built.level.parSteps = par;
+    const cost = parCost(par, id, config, prevPars);
+    if (!best || cost < best.cost) {
+      best = { solved: built.solved, level: built.level, par, cost };
+    }
+    if (cost <= 0.02) break;
+  }
+  return (best ?? fallback)!;
+}
+
+/**
+ * Handcrafted anchors keep their designed board, but their starting rotations
+ * can be re-rolled so they stop being outliers (L20 used to be par 9 right
+ * before a 21-step level). Adjustment is capped at roughly ±65% of the
+ * designer's original par so the intended feel survives.
+ */
+function tuneHandcrafted(
+  id: number,
+  config: ChapterConfig,
+  data: { solved: Tile[]; level: LevelConfig },
+  prevPars: number[]
+): Candidate {
+  const origPar = data.level.parSteps ?? 0;
+  let best: Candidate = {
+    solved: data.solved,
+    level: data.level,
+    par: origPar,
+    cost: parCost(origPar, id, config, prevPars),
+  };
+  if (id <= 3 || origPar <= 0) return best; // 前三关保留作者设计（7/12/10 步）
+
+  const required = requiredCellsOf(id, data.solved);
+  const desired = targetPar(id, config);
+  // 手工关只换起手旋转、不动棋盘。下限定在目标带 80%，避免 L4（原 2 步）
+  // 这类「开局几乎已通」的关留在曲线上。
+  const lo = Math.max(config.parFloor, Math.round(desired * 0.8));
+  const hi = Math.max(lo + 2, Math.round(desired * 1.2));
+  const { title, hintText, winText } = data.level;
+  const subtitle = data.level.subtitle ?? '';
+
+  for (let k = 1; k <= 14; k++) {
+    const built = createScrambledLevel(id, title, subtitle, hintText, winText, data.solved, id * 137 + k * 1013, {
+      targetPar: desired,
+      requiredCells: required,
+    });
+    const par = safeSolvePar(built.level);
+    if (par === null || par < lo || par > hi) continue;
+    built.level.parSteps = par;
+    const cost = parCost(par, id, config, prevPars);
+    if (cost < best.cost) {
+      best = { solved: built.solved, level: built.level, par, cost };
+    }
+  }
+  return best;
+}
+
+/** Build one level, searching layout variants + scramble seeds for the target par. */
+function buildLevel(id: number, config: ChapterConfig, prevPars: number[]): Candidate {
+  let best: Candidate | null = null;
+  for (let variant = 0; variant < 8; variant++) {
+    const layout = generateAlgorithmLayout(id, config, variant);
+    const candidate = pickScramble(id, config, layout, id * 37 + variant * 7919, prevPars);
+    if (!best || candidate.cost < best.cost) best = candidate;
+    if (best.cost <= 0.05) break;
+  }
+  return best!;
 }
 
 // Master Level Generator
@@ -1268,15 +1577,17 @@ export function generateAll99Levels(): LevelConfig[] {
     99: makeLevel99,
   };
 
+  const chosenPars: number[] = [];
+  const floorViolations: string[] = [];
   for (let id = 1; id <= 99; id++) {
-    let levelData: { solved: Tile[]; level: LevelConfig };
-
-    if (handcraftedMap[id]) {
-      levelData = handcraftedMap[id]();
-    } else {
-      const chapterCfg = CHAPTER_RULES.find(c => id >= c.range[0] && id <= c.range[1])!;
-      levelData = generateAlgorithmLevel(id, chapterCfg);
-    }
+    const chapterCfg = CHAPTER_RULES[Math.min(5, Math.ceil(id / 20)) - 1];
+    const candidate = handcraftedMap[id]
+      ? tuneHandcrafted(id, chapterCfg, handcraftedMap[id](), chosenPars)
+      : buildLevel(id, chapterCfg, chosenPars);
+    const levelData: { solved: Tile[]; level: LevelConfig } = {
+      solved: candidate.solved,
+      level: candidate.level,
+    };
 
     // Strictly verify solved layout
     const simSolved = simulateCircuit(levelData.solved, 6, 6);
@@ -1290,10 +1601,63 @@ export function generateAll99Levels(): LevelConfig[] {
       throw new Error(`Level ${id} (${levelData.level.title}) Initial Layout is ALREADY SOLVED! Must be scrambled.`);
     }
 
-    console.log(`✓ Level ${levelData.level.code} [${levelData.level.title}] - PASSED (Goals: ${simSolved.totalBulbs}, MaxSteps: ${levelData.level.maxSteps})`);
+    // 4★ 线 = 本关「真实」最少步数。
+    // 注意：设计图还原步数（computeParSteps）只是众多可行解之一，通常比真实最少步数大，
+    // 用它当 par 会让结算界面出现「仅用 10 步，正好是最少步数 / 本关最少步数 13 步」的矛盾，
+    // 所以这里用精确求解器重算，并把设计图还原步数只当作「可解性上界」的交叉校验。
+    const designPar = computeParSteps(levelData.solved, levelData.level.tiles);
+    if (designPar <= 0) {
+      throw new Error(`Level ${id} design par computed as ${designPar}, expected > 0`);
+    }
+    const exactPar = safeSolvePar(levelData.level);
+    const parSteps = exactPar ?? designPar;
+    if (parSteps > designPar) {
+      throw new Error(
+        `Level ${id} 精确最少步数 ${parSteps} 大于设计图还原步数 ${designPar}，求解器与生成器不一致`
+      );
+    }
+    // 低于下限先记录：99 关里可能有个别布局的「必经瓦片」天生不够，
+    // 统一收集后在收尾处报告并逐个处理，避免中途中断看不到全貌。
+    if (parSteps < chapterCfg.parFloor) {
+      floorViolations.push(`L${id} ${levelData.level.title}: par ${parSteps} < 下限 ${chapterCfg.parFloor}`);
+    }
+    // 预算 = par 的 1.5 倍且至少留 5 步容错。旧公式 max(16, par*2+6) 在低 par
+    // 关卡上把容错拉到 20 倍，玩家怎么点都不会失败。
+    levelData.level.parSteps = parSteps;
+    levelData.level.maxSteps = Math.max(parSteps + 5, Math.ceil(parSteps * 1.5));
+
+    // Replay the par solution as real clockwise taps and make sure it wins
+    const replayTiles = levelData.level.tiles.map((t) => {
+      const solvedTile = levelData.solved.find((s) => s.id === t.id);
+      if (!solvedTile || t.locked || t.type === 'empty') return { ...t };
+      const taps = getClockwiseRotateSteps(t.rotation, solvedTile.rotation, t.type);
+      return {
+        ...t,
+        rotation: t.rotation + taps * 90,
+        switchClosed: t.type === 'switch' ? true : t.switchClosed,
+      };
+    });
+    const simReplay = simulateCircuit(replayTiles, 6, 6);
+    if (!simReplay.isAllLit) {
+      throw new Error(
+        `Level ${id} par replay FAILED! lit ${simReplay.litCount}/${simReplay.totalBulbs} (par ${parSteps})`
+      );
+    }
+
+    const target = targetPar(id, chapterCfg);
+    console.log(
+      `✓ Level ${levelData.level.code} [${levelData.level.title}] - PASSED ` +
+        `(Goals: ${simSolved.totalBulbs}, MaxSteps: ${levelData.level.maxSteps}, ` +
+        `Par: ${parSteps} / target ${target.toFixed(1)})`
+    );
     result.push(levelData.level);
+    chosenPars.push(parSteps);
   }
 
+  if (floorViolations.length) {
+    console.log(`\n⚠️ 低于章节下限的关卡（${floorViolations.length}）：`);
+    floorViolations.forEach((r) => console.log('  ' + r));
+  }
   console.log('\n🎉 ALL 99 LEVELS SUCCESSFULLY REBUILT AND VERIFIED 100% SOLVABLE!\n');
   return result;
 }

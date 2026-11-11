@@ -1,4 +1,5 @@
 import type { LevelConfig } from "../types/game";
+import { getStarsForRecord } from "./rating";
 
 export interface ParkProgress {
   coins: number;
@@ -15,18 +16,33 @@ export const PARK_STORAGE_KEY = "energy_park_progress_v2";
 export function localDate(date = new Date()): string {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 }
-export function getStars(remaining: number, maximum: number): number {
-  const ratio = remaining / maximum;
-  return ratio >= 0.4 ? 3 : ratio >= 0.15 ? 2 : 1;
-}
 export function getBestStars(
   level: LevelConfig,
   cleared: number[],
   best: Record<number, number>,
 ): number {
-  return cleared.includes(level.id)
-    ? getStars(level.maxSteps - (best[level.id] ?? 0), level.maxSteps)
-    : 0;
+  return getStarsForRecord(best[level.id], level, cleared.includes(level.id));
+}
+export const PROGRESS_VERSION_KEY = "honeycomb_progress_version";
+export const PROGRESS_VERSION = "4";
+function readStored<T>(storage: StorageReader, key: string, fallback: T): T {
+  try {
+    return JSON.parse(storage.getItem(key) ?? "null") ?? fallback;
+  } catch {
+    return fallback;
+  }
+}
+export function readStoryProgress(storage: StorageReader, levels: LevelConfig[]) {
+  const ids = readStored<unknown>(storage, "honeycomb_cleared_levels", []);
+  const cleared: number[] = Array.isArray(ids) ? [...new Set(ids.filter(id => typeof id === "number" && levels.some(level => level.id === id)))] : [];
+  const saved: Record<number, number> = storage.getItem(PROGRESS_VERSION_KEY) === PROGRESS_VERSION
+    ? readStored(storage, "honeycomb_best_steps", {}) : {};
+  const best = Object.fromEntries(Object.entries(saved).filter(([id, value]) => {
+    const level = levels.find((item) => item.id === Number(id));
+    return level && cleared.includes(level.id) && Number.isInteger(value) && value >= (level.parSteps ?? 1);
+  }));
+  // 保留已完成的自由演练关卡；新版初始盘面变化后，只迁移对应版本的步数成绩。
+  return { cleared, best };
 }
 export function readParkProgress(storage: StorageReader): ParkProgress {
   const saved = storage.getItem(PARK_STORAGE_KEY);

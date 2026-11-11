@@ -40,7 +40,7 @@ export const AchievementToast: React.FC<AchievementToastProps> = ({
 
   return (
     <div
-      className={`fixed top-4 right-4 z-50 max-w-sm w-full transition-all duration-300 transform pointer-events-auto ${
+      className={`fixed top-24 right-4 z-50 max-w-sm w-full transition-all duration-300 transform pointer-events-auto ${
         isVisible ? 'translate-y-0 opacity-100 scale-100' : '-translate-y-5 opacity-0 scale-95'
       }`}
     >

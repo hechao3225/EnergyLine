@@ -9,3 +9,9 @@ coverage/
 *.bak
 .aistudio/
 
+# Local archive of unused/superseded art (recoverable from git history)
+docs/_archive/
+
+# Local tooling artifacts (WorkBuddy / app scaffold)
+.workbuddy/
+.wbapp_*.genie

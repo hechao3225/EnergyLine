@@ -242,7 +242,7 @@
 <li><strong>灵脉闸阀互锁 (Switch Logic Interlocking)</strong>：多开关联动，控制关键分流支路；</li>
 <li><strong>极向二极管 (Diode Anti-Backflow)</strong>：防止回路倒灌短路与死锁；</li>
 <li><strong>固定地脉石 (Locked Natural Obstacles)</strong>：分割战术区域，形成天然回廊迷宫；</li>
-<p>  4. <strong>严苛的步数预算体系 (Par Steps)</strong>：建立三星最优解评价模型，给玩家极致的心流推理反馈。</p>
+<p>  4. <strong>严苛的步数预算体系 (Par Steps)</strong>：建立「最少步数 = 4★」的最优解评价模型，给玩家极致的心流推理反馈。</p>
 </ul>
 <pre><code class="language-mermaid">flowchart LR
     A["第一卷：地脉之根&lt;br/&gt;(L1-L20 基础与立交)"] --&gt; B["第二卷：巨木之干&lt;br/&gt;(L21-L40 灵闸与双源)"]
@@ -1529,17 +1529,88 @@
 <p>2. <strong>开关元件（Switches）</strong>：初始状态统一强制设为断开 (<code>switchClosed: false</code>)；</p>
 <p>3. <strong>单向阀元件（Diodes）</strong>：偏转 <span class="math"><em>+180^\circ</em></span>（反向）或 <span class="math"><em>+90^\circ</em></span>（切向），形成明显的视觉障碍；</p>
 <p>4. <strong>随机种子（PRNG）</strong>：采用 <code>LevelId * 7919 + Salt</code> 伪随机数发生器，确保每一次构建生成完全确定、稳定可重现。</p>
-<h3 id="5-5-步数预算与星级难度公式-par-step-scoring-model">5.5 步数预算与星级难度公式 (Par Step & Scoring Model)</h3>
-<p>为关卡建立精准的最优步数模型：</p>
-<p>$<span class="math"><em>S_{min} = \sum_{T \in \text{Rotatable}} \text{MinSteps}(\theta_{\text{initial}}, \theta_{\text{solved}}) + \sum_{S \in \text{Switches}} (\text{if } S \text{ needs toggle then } 1 \text{ else } 0)</em></span>$</p>
+<h3 id="5-5-步数预算与四星难度公式-par-step-4-star-scoring-model">5.5 步数预算与四星难度公式 (Par Step & 4-Star Scoring Model)</h3>
+<p>为关卡建立精准的最优步数模型（游戏只允许<strong>顺时针</strong> 90° 旋转，故 <span class="math"><em>S_{min}</em></span> 必须按顺时针累计）：</p>
+<p>$<span class="math"><em>S_{min} = \sum_{T \in \text{Rotatable}} \text{ClockwiseSteps}(\theta_{\text{initial}}, \theta_{\text{solved}}) + \sum_{S \in \text{Switches}} (\text{if } S \text{ needs toggle then } 1 \text{ else } 0)</em></span>$</p>
+<p>其中直管/水闸具二重对称，顺时针最多 1 步；弯管/三通/单向灵梭按 <span class="math"><em>\frac{\Delta\theta \bmod 360^\circ}{90^\circ}</em></span> 计 0–3 步。</p>
 <ul>
-<li><strong>最优步数（Par Step）</strong>：<span class="math"><em>S_{min}</em></span></li>
-<li><strong>三星评价（⭐⭐⭐）</strong>：实际步数 <span class="math"><em>\le S_{min} + 2</em></span></li>
-<li><strong>二星评价（⭐⭐）</strong>：<span class="math"><em>S_{min} + 2 < \text{实际步数} \le \text{Round}(S_{min} \times 1.5)</em></span></li>
-<li><strong>一星通过（⭐）</strong>：<span class="math"><em>\text{Round}(S_{min} \times 1.5) < \text{实际步数} \le \text{MaxSteps}</em></span></li>
-<li><strong>最大容错步数（MaxSteps）</strong>：</li>
-<p>  $<span class="math"><em>\text{MaxSteps} = S_{min} \times 2 + 6</em></span>$</p>
+<li><strong>最优步数（Par Step，4★ 线）</strong>：<span class="math"><em>S_{min}</em></span>，写入关卡数据 <code>parSteps</code></li>
+<li><strong>四星满星（⭐⭐⭐⭐）</strong>：实际步数 <span class="math"><em>\le S_{min}</em></span></li>
+<li><strong>三星（⭐⭐⭐）</strong>：<span class="math"><em>\le S_{min} + \text{Round}((Max - S_{min}) \times 0.34)</em></span></li>
+<li><strong>二星（⭐⭐）</strong>：<span class="math"><em>\le S_{min} + \text{Round}((Max - S_{min}) \times 0.68)</em></span></li>
+<li><strong>一星通过（⭐）</strong>：通关即可（实际步数 <span class="math"><em>\le Max</em></span>）</li>
+<li><strong>最大容错步数（MaxSteps）</strong>：沿用生成器 <span class="math"><em>\max(16, S_{min}^{\text{双向}} \times 2 + 6)</em></span>，并保证严格大于 <span class="math"><em>S_{min}</em></span></li>
 </ul>
+<p>各章 par 目标带（生成器 <code>ChapterConfig.parRange</code> 线性插值到每一关，<code>parFloor</code> 为审计下限）：</p>
+<div class="table-container"><table>
+<thead><tr>
+<th>章节</th>
+<th>关卡</th>
+<th>par 目标带</th>
+<th>下限</th>
+<th>实测 par 均值</th>
+<th>设计意图</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>1 地脉之根</td>
+<td>1–20</td>
+<td>8 → 11</td>
+<td>7</td>
+<td>11.2</td>
+<td>基本「一转即通」，只教读图</td>
+</tr>
+<tr>
+<td>2 巨木之干</td>
+<td>21–40</td>
+<td>10 → 13</td>
+<td>10</td>
+<td>12.8</td>
+<td>引入水闸，开始需要盘算时序</td>
+</tr>
+<tr>
+<td>3 苍翠繁枝</td>
+<td>41–60</td>
+<td>12 → 15</td>
+<td>11</td>
+<td>14.2</td>
+<td>灵梭单向，逆向即断</td>
+</tr>
+<tr>
+<td>4 云海天桥</td>
+<td>61–80</td>
+<td>13 → 17</td>
+<td>13</td>
+<td>15.0</td>
+<td>双机关叠加，支路更多</td>
+</tr>
+<tr>
+<td>5 神树之巅</td>
+<td>81–99</td>
+<td>15 → 19</td>
+<td>15</td>
+<td>17.9</td>
+<td>多源多花，接近终局强度</td>
+</tr>
+</tbody></table></div>
+<blockquote>目标带的上限由 6×6 棋盘的物理容量决定：一张盘面上「通关必经」的可旋转瓦片</blockquote>
+<blockquote>通常 12–16 片，直管二重对称最多 1 步、弯管/三通/灵梭最多 3 步，因此单关真实</blockquote>
+<blockquote>最优步数的可达范围约 7–30。</blockquote>
+<p>生成期约束：<code>parSteps</code> 一律由 DP 求解器 <code>solveMinTaps()</code> 计算<strong>真实最少点击次数</strong>，</p>
+<p>写入数据前逐关复核（99/99 一致）。相邻两关比值、相对前两关中位数的偏离、章节下限</p>
+<p>任一不满足就换种子/布局重试（同一张布局最多 8 个种子 × 8 个布局变体）。</p>
+<h3 id="5-6-打乱策略-只打乱-必经瓦片">5.6 打乱策略：只打乱「必经瓦片」</h3>
+<p>旧生成器会把棋盘上<strong>每一片可旋转瓦片</strong>都打乱，再按「还原设计图」的步数记 par。</p>
+<p>但通关只需要让所有花蕾连通，死支路怎么转都不影响结果——于是 par 系统性虚高</p>
+<p>（实测 88% 的关卡偏高，中位 +9 步），结算界面出现「本次 10 步 / 最少 13 步」。</p>
+<p>现在改为：</p>
+<p>1. 用 DP 在 solved 布局上求覆盖全部花蕾的最优树，树上格子即「必经瓦片」；</p>
+<p>2. 只打乱这些瓦片，其余保持设计角度（视觉上仍是管道，只是走不通）；</p>
+<p>3. 每片至少分配 1 步，剩余步数按目标 par 随机摊到还有余量的片上；</p>
+<p>4. par = 分配到的点击步数之和，天然等于真实最优。</p>
+<p>这样「最少步数」既准确又不依赖事后修正，且不会出现「开局已点亮一朵花、再点一下</p>
+<p>就通关」的塌陷关。</p>
+<blockquote>关键约束：步数一律按<strong>真实点击次数</strong>统计，额外补给（+10 步）不会降低已用步数，因此最佳纪录与星级不可被刷低。</blockquote>
 <hr />
 <h2 id="6-ui-ux-操作反馈与动效时序">6. UI/UX、操作反馈与动效时序</h2>
 <h3 id="6-1-视觉层级与移动端画幅适配">6.1 视觉层级与移动端画幅适配</h3>
@@ -1607,25 +1678,23 @@
 <li><strong>目标花 A</strong>：位于 <code>(1,5)</code>，仙品【双泉玉蕊 A】；</li>
 <li><strong>目标花 B</strong>：位于 <code>(4,5)</code>，仙品【双泉玉蕊 B】；</li>
 <li><strong>地脉锁石</strong>：位于 <code>(2,2)</code> 与 <code>(3,2)</code>，彻底封死两源纵向互通的可能；</li>
-<li><strong>关键可操作元件</strong>：</li>
-<li><code>(1,1)</code> 直管（初始垂直 90°，正解水平 0°，需 1 步）；</li>
-<li><code>(1,2)</code> 弯管（初始 0°，正解 90°，需 1 步）；</li>
-<li><code>(0,2)</code> 弯管（初始 180°，正解 0°，需 2 步）；</li>
-<li><code>(0,3)</code> 直管（初始 90°，正解 0°，需 1 步）；</li>
-<li><code>(0,4)</code> 弯管（初始 90°，正解 90°，需 0 步）；</li>
-<li><code>(1,4)</code> 弯管（初始 270°，正解 180°，需 3 步 = 逆转 1 步）；</li>
-<li>南路同理布置 6 个元件，总计初始状态需逆向操作 12 步。</li>
+<li><strong>可操作元件（当前数据实况）</strong>：北线 <code>(1,1)</code> 直管、<code>(1,2)</code> 弯管、<code>(2,2)</code> 弯管、<code>(2,3)</code> 直管、<code>(2,4)</code> 弯管、<code>(1,4)</code> 弯管；南线 <code>(4,1)</code> 直管、<code>(4,2)</code> 弯管、<code>(3,2)</code> 弯管、<code>(3,3)</code> 直管、<code>(3,4)</code> 弯管、<code>(4,4)</code> 弯管；</li>
+<li><strong>锁石</strong>：<code>(2,1)</code>、<code>(3,1)</code> 两条直管被锁死，彻底封死两源纵向互通的可能；</li>
+<li>两路共 12 片可旋转瓦片，顺时针最少 <strong>17 步</strong>（<code>parSteps = 17</code>）。</li>
 </ul>
+<blockquote>逐片的初始角度由生成器的打乱种子决定，会随难度调参变化，因此设计文档只记录</blockquote>
+<blockquote>「类型 / 坐标 / par」这类稳定事实；具体角度以 <code>src/data/defaultLevels.ts</code> 为准。</blockquote>
 <h3 id="7-2-算例对账与步数判定">7.2 算例对账与步数判定</h3>
 <ul>
-<li><strong>Par 最优步数</strong>：<span class="math"><em>S_{min} = 12</em></span> 步；</li>
-<li><strong>三星评价</strong>：<span class="math"><em>\le 14</em></span> 步；</li>
-<li><strong>二星评价</strong>：<span class="math"><em>15 \sim 18</em></span> 步；</li>
-<li><strong>容错上限（MaxSteps）</strong>：<span class="math"><em>12 \times 2 + 6 = 30</em></span> 步；</li>
+<li><strong>Par 最优步数（4★ 线）</strong>：<span class="math"><em>S_{min} = 17</em></span> 步（数据中 <code>parSteps = 17</code>）；</li>
+<li><strong>四星满星</strong>：<span class="math"><em>\le 17</em></span> 步；</li>
+<li><strong>三星评价</strong>：<span class="math"><em>\le 23</em></span> 步（<span class="math"><em>17 + \text{Round}((36-17) \times 0.34)</em></span>）；</li>
+<li><strong>二星评价</strong>：<span class="math"><em>\le 30</em></span> 步；</li>
+<li><strong>容错上限（MaxSteps）</strong>：36 步（容错 2.1×，手滑两次仍可通关）；</li>
 <li><strong>玩家行为路线对比</strong>：</li>
-<li><em>路线 1（神级推演）</em>：从两朵花反向推导，只旋转真正通路上的 10 个元件，花费 12 步，达成 ⭐⭐⭐ 卓越评级；</li>
-<li><em>路线 2（盲目试错）</em>：误以为中间可以纵向连通，在无效区域点击了 5 次，随后修正并连通，总耗费 17 步，达成 ⭐⭐ 良好评级；</li>
-<li><em>路线 3（步数耗尽失败）</em>：在第 30 步仍未接通南路，触发步数耗尽弹窗，提供“撤销上一步”或“复位重做”选项，保护玩家挫败感。</li>
+<li><em>路线 1（神级推演）</em>：从两朵花反向推导，只旋转真正通路上的元件，恰好 17 步，达成 ⭐⭐⭐⭐ 满星；</li>
+<li><em>路线 2（盲目试错）</em>：误以为中间可以纵向连通，在无效区域多点了几次，随后修正并连通，总耗费 24 步，达成 ⭐⭐⭐ 良好评级；</li>
+<li><em>路线 3（步数耗尽失败）</em>：在第 36 步仍未接通南路，触发步数耗尽弹窗，提供“+10 步”“撤销上一步”或“复位重做”选项，保护玩家挫败感。</li>
 </ul>
 <hr />
 <h2 id="8-验收-回归测试与-qa-自动化规范">8. 验收、回归测试与 QA 自动化规范</h2>

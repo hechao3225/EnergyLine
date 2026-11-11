@@ -8,6 +8,8 @@ import type {
 import { Art, Icon, IconName, ParkButton, Stars, ParkFlower } from "./ParkArt";
 import { GameBoard } from "./GameBoard";
 import { LevelEditor } from "./LevelEditor";
+import { OnboardingGuide } from "./OnboardingGuide";
+import { getParSteps, getStarThresholds, getStarsForSteps } from "../utils/rating";
 import { getFlowerForLevel } from "../data/flowers";
 import {
   ALL_ACHIEVEMENTS,
@@ -23,7 +25,6 @@ import {
   chapterIndex,
   consumeHint,
   getBestStars,
-  getStars,
   localDate,
   PARK_STORAGE_KEY,
   ParkProgress,
@@ -43,6 +44,7 @@ type Modal =
   | "flora"
   | "mail"
   | "story"
+  | "onboarding"
   | "history"
   | "editor"
   | "endless";
@@ -53,6 +55,8 @@ interface Props {
   tiles: Tile[];
   simulation: SimulationResult;
   remainingSteps: number;
+  stepsUsed: number;
+  rewinds: number;
   clearedLevels: number[];
   bestSteps: Record<number, number>;
   levelSelectOpen: boolean;
@@ -87,13 +91,14 @@ const TITLES: Record<Exclude<Modal, "none">, string> = {
   flora: "百花图鉴",
   mail: "乐园来信",
   story: "乐园的故事",
+  onboarding: "星光修复指南",
   history: "操作足迹",
   editor: "关卡工坊",
   endless: "无尽挑战",
 };
 
 export function CandyThemeShell(p: Props) {
-  const [modal, setModal] = useState<Modal>("none");
+  const [modal, setModal] = useState<Modal>(() => localStorage.getItem("honeycomb_story_seen_v1") === "1" ? "none" : "story");
   const [progress, setProgress] = useState(
     readParkProgress.bind(null, localStorage),
   );
@@ -109,10 +114,14 @@ export function CandyThemeShell(p: Props) {
     (sum, level) => sum + getBestStars(level, p.clearedLevels, p.bestSteps),
     0,
   );
-  const currentStars = getStars(p.remainingSteps, p.level.maxSteps);
+  const currentStars = getStarsForSteps(p.stepsUsed, p.level);
+  const starThresholds = getStarThresholds(p.level);
+  const canUndo = p.historyIndex > 0 && p.rewinds > 0;
   const today = localDate();
   const activeModal = p.levelSelectOpen ? "levels" : modal;
   const close = () => {
+    if (modal === "story") localStorage.setItem("honeycomb_story_seen_v1", "1");
+    if (modal === "onboarding") localStorage.setItem("honeycomb_onboarding_v1", "1");
     p.onCloseLevels();
     setModal("none");
     setFlowerId(null);
@@ -146,6 +155,9 @@ export function CandyThemeShell(p: Props) {
   useEffect(() => {
     if (p.levelSelectOpen) setChapter(chapterIndex(p.level.id));
   }, [p.levelSelectOpen]);
+  useEffect(() => {
+    if (p.screen === "play" && p.gameMode === "story" && p.level.id === 1 && !p.clearedLevels.includes(1) && localStorage.getItem("honeycomb_onboarding_v1") !== "1") setModal("onboarding");
+  }, [p.screen, p.gameMode, p.level.id]);
   const useHint = () => {
     if (p.screen !== "play") {
       flash("进入关卡后可使用提示");
@@ -388,7 +400,7 @@ export function CandyThemeShell(p: Props) {
                 <div className="park-out-of-steps">
                   <h2>能量步数用完啦</h2>
                   <p>撤销上一步，或重新规划通路</p>
-                  <ParkButton onClick={p.onUndo} purple>
+                  <ParkButton onClick={p.onUndo} purple disabled={!canUndo}>
                     撤销一步
                   </ParkButton>
                   <ParkButton onClick={p.onRestart}>重新挑战</ParkButton>
@@ -408,7 +420,7 @@ export function CandyThemeShell(p: Props) {
               <ParkButton
                 purple
                 onClick={p.onUndo}
-                disabled={p.historyIndex === 0}
+                disabled={!canUndo}
                 label="撤销"
               >
                 <Icon name="undo" />
@@ -428,7 +440,7 @@ export function CandyThemeShell(p: Props) {
               className="park-history-link"
               onClick={() => open("history")}
             >
-              操作足迹 · {p.history[p.historyIndex]?.stepNumber ?? 0} 步
+              操作足迹 · {p.stepsUsed} 步 · 回溯 {p.rewinds}/3
             </button>
           </main>
         )}
@@ -480,7 +492,7 @@ export function CandyThemeShell(p: Props) {
               <div className="park-result-score">
                 <Stars value={currentStars} />
                 <span>
-                  已用 {p.level.maxSteps - p.remainingSteps} 步
+                  已用 {p.stepsUsed} 步
                   {p.gameMode === "story"
                     ? ` · 最佳 ${p.bestSteps[p.level.id] ?? 0} 步`
                     : ""}
@@ -746,11 +758,15 @@ export function CandyThemeShell(p: Props) {
                       ))}
                     </div>
                     <p>
-                      剩余步数达到总步数的 40% 可获三星，达到 15%
-                      可获二星。步数耗尽后可撤销或重试。
+                      本关 {getParSteps(p.level)} 步以内获得四星，{starThresholds.three} 步以内三星，
+                      {starThresholds.two} 步以内二星，通关至少一星。每次挑战可回溯 3 次，重试后补满。
                     </p>
                     <ParkButton onClick={close}>开始连接</ParkButton>
                   </>
+                )}
+                {activeModal === "onboarding" && (
+                  <OnboardingGuide isOpen levelTitle={p.level.title} maxSteps={p.level.maxSteps}
+                    parSteps={p.level.parSteps} onClose={close} onOpenRules={() => { close(); open("rules"); }} />
                 )}
                 {activeModal === "settings" && (
                   <>
@@ -939,6 +955,7 @@ export function CandyThemeShell(p: Props) {
                         <button
                           className={index === p.historyIndex ? "selected" : ""}
                           key={snapshot.id}
+                          disabled={index !== p.historyIndex && p.rewinds === 0}
                           onClick={() => {
                             p.onJumpToStep(index);
                             close();

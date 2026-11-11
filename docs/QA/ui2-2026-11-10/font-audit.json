@@ -1,6 +1,8 @@
 {
-  "source": "https://github.com/google/fonts/tree/main/ofl/notosanssc",
+  "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssc/NotoSansSC%5Bwght%5D.ttf",
+  "source_sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
   "license": "SIL Open Font License 1.1",
-  "chinese_characters": 1052,
-  "missing": []
+  "chinese_characters": 1061,
+  "missing": [],
+  "output_bytes": 305256
 }

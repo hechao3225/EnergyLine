@@ -11,7 +11,8 @@
     "lint": "tsc --noEmit",
     "test": "tsx scripts/test_circuits.ts && tsx scripts/test_park_progress.ts",
     "test:ui": "tsx scripts/test_park_ui.ts && tsx scripts/test_park_star_upgrade.ts && tsx scripts/test_park_victory_layout.ts",
-    "test:pipes": "python scripts/audit_pipe_ports.py && tsx scripts/test_pipe_alignment.ts"
+    "test:pipes": "python scripts/audit_pipe_ports.py && tsx scripts/test_pipe_alignment.ts",
+    "test:merge": "tsx scripts/test_master_merge.ts"
   },
   "dependencies": {
     "@capacitor/android": "^8.5.3",

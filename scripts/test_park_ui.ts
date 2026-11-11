@@ -2,7 +2,10 @@ import { chromium, expect, type Page } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 import assert from "node:assert/strict";
-const ROOT = path.resolve("docs/QA/ui2-2026-11-10");
+import { DEFAULT_LEVELS } from "../src/data/defaultLevels";
+import { openFreshHome, finishFirstGuide, solveThroughInput } from "./park_test_player";
+const FIRST_BUDGET = DEFAULT_LEVELS[0].maxSteps;
+const ROOT = path.resolve(process.env.PARK_QA_DIR || "docs/QA/ui2-2026-11-10");
 const SCREENS = path.join(ROOT, "screens");
 fs.mkdirSync(SCREENS, { recursive: true });
 const results: { name: string; status: string; details?: unknown }[] = [];
@@ -80,23 +83,24 @@ const page = await context.newPage();
 page.on("pageerror", (error) => errors.push(error.message));
 try {
   await test("新玩家首页到玩法、旋转通能、撤销、足迹与重置", async () => {
-    await page.goto(base);
+    await openFreshHome(page, base);
     await expect(
       page.getByRole("button", { name: "金币 0", exact: true }),
     ).toBeVisible();
     await capture(page, "home-390x844");
     await page.getByRole("button", { name: "开始挑战", exact: true }).click();
+    await finishFirstGuide(page, async step => capture(page, `onboarding-${step}-390x844`));
     await expect(page.locator(".park-level-sign")).toHaveText("第 1 关");
-    await expect(page.getByTestId("remaining-steps")).toHaveText("15");
+    await expect(page.getByTestId("remaining-steps")).toHaveText(String(FIRST_BUDGET));
     await capture(page, "play-390x844");
     await rotate(page, "t-2-2");
-    await expect(page.getByTestId("remaining-steps")).toHaveText("14");
+    await expect(page.getByTestId("remaining-steps")).toHaveText(String(FIRST_BUDGET - 1));
     await expect(page.locator('[data-tile-id="t-2-2"]')).toHaveAttribute(
       "data-powered",
       "true",
     );
     await page.getByRole("button", { name: "撤销", exact: true }).click();
-    await expect(page.getByTestId("remaining-steps")).toHaveText("15");
+    await expect(page.getByTestId("remaining-steps")).toHaveText(String(FIRST_BUDGET));
     await expect(page.locator('[data-tile-id="t-2-2"]')).toHaveAttribute(
       "data-rotation",
       "90",
@@ -105,7 +109,7 @@ try {
     await page.getByRole("button", { name: /操作足迹/ }).click();
     await capture(page, "history-390x844");
     await page.getByRole("button", { name: /起点/ }).click();
-    await expect(page.getByTestId("remaining-steps")).toHaveText("15");
+    await expect(page.getByTestId("remaining-steps")).toHaveText(String(FIRST_BUDGET));
     await page.getByRole("button", { name: "重置", exact: true }).click();
     await rotate(page, "t-2-2");
     await rotate(page, "t-2-3", 3);
@@ -184,7 +188,7 @@ try {
   });
   await test("步数耗尽后撤销和重新挑战恢复", async () => {
     await selectLevel(page, 1);
-    for (let i = 0; i < 15; i++) await rotate(page, "t-2-2");
+    for (let i = 0; i < FIRST_BUDGET; i++) await rotate(page, "t-2-2");
     await expect(
       page.getByText("能量步数用完啦", { exact: true }),
     ).toBeVisible();
@@ -192,87 +196,29 @@ try {
     await page.getByRole("button", { name: "撤销一步", exact: true }).click();
     await expect(page.getByTestId("remaining-steps")).toHaveText("1");
     await page.getByRole("button", { name: "重置", exact: true }).click();
-    await expect(page.getByTestId("remaining-steps")).toHaveText("15");
+    await expect(page.getByTestId("remaining-steps")).toHaveText(String(FIRST_BUDGET));
   });
-  await test("第24关水闸旋转、通断、十字分流和四目标通关", async () => {
-    await selectLevel(page, 24);
-    await capture(page, "level24-start-390x844");
-    const sw = page.locator('[data-tile-id="t-4-4"]');
-    await rotate(page, "t-4-4");
-    await expect(sw).toHaveAttribute("data-rotation", "270");
-    await expect(sw).toHaveAttribute("data-switch", "false");
-    await page.locator('[data-tile-id="t-4-4"] .park-switch-toggle').click();
-    await expect(sw).toHaveAttribute("data-switch", "true");
-    await rotate(page, "t-3-1");
-    await rotate(page, "t-2-4");
-    await rotate(page, "t-1-4", 2);
-    await capture(page, "level24-branches-390x844");
-    await rotate(page, "t-5-4", 2);
-    await expect(page.getByTestId("target-count")).toHaveText("4/4");
-    await capture(page, "level24-powered-390x844");
-    await page.locator(".park-victory").waitFor();
-  });
-  await test("第41关单向管方向与双目标供能", async () => {
-    await selectLevel(page, 41);
-    await capture(page, "level41-start-390x844");
-    await rotate(page, "t-2-1");
-    await expect(page.locator('[data-tile-id="t-2-2"]')).toHaveAttribute(
-      "data-powered",
-      "false",
-    );
-    await rotate(page, "t-2-2");
-    await expect(page.locator('[data-tile-id="t-2-2"]')).toHaveAttribute(
-      "data-powered",
-      "true",
-    );
-    await capture(page, "level41-diode-390x844");
-    await rotate(page, "t-2-3");
-    await rotate(page, "t-1-3", 3);
-    await rotate(page, "t-1-4");
-    await rotate(page, "t-3-4");
-    await rotate(page, "t-3-3", 3);
-    await expect(page.getByTestId("target-count")).toHaveText("2/2");
-    await page.locator(".park-victory").waitFor();
-  });
-  await test("第61关双能量源、开关与四目标联通", async () => {
-    await selectLevel(page, 61);
-    await capture(page, "level61-start-390x844");
-    for (const [id, n] of [
-      ["t-0-1", 3],
-      ["t-1-1", 1],
-      ["t-1-2", 3],
-      ["t-2-2", 1],
-      ["t-1-4", 3],
-      ["t-3-4", 3],
-      ["t-4-4", 3],
-      ["t-4-5", 3],
-      ["t-4-1", 1],
-    ] as const)
-      await rotate(page, id, n);
-    await page.locator('[data-tile-id="t-2-3"] .park-switch-toggle').click();
-    await expect(page.getByTestId("target-count")).toHaveText("4/4");
-    await capture(page, "level61-powered-390x844");
-    await page.locator(".park-victory").waitFor();
-  });
-  await test("第81关双源、单向管、能量闸与四目标联动", async () => {
-    await selectLevel(page, 81);
-    await capture(page, "level81-start-390x844");
-    for (const [id, n] of [
-      ["t-1-1", 1],
-      ["t-1-4", 2],
-      ["t-0-4", 3],
-      ["t-4-1", 3],
-      ["t-5-1", 3],
-      ["t-5-2", 2],
-      ["t-5-4", 2],
-      ["t-4-4", 2],
-    ] as const)
-      await rotate(page, id, n);
-    await page.locator('[data-tile-id="t-5-3"] .park-switch-toggle').click();
-    await expect(page.getByTestId("target-count")).toHaveText("4/4");
-    await capture(page, "level81-powered-390x844");
-    await page.locator(".park-victory").waitFor();
-  });
+  for (const id of [24, 41, 61, 81]) {
+    await test(`第${id}关沿用主干新版关卡，通过旋转与通断实际完成`, async () => {
+      await selectLevel(page, id);
+      await capture(page, `level${id}-start-390x844`);
+      const level = DEFAULT_LEVELS[id - 1];
+      const special = level.tiles.find(tile => !tile.locked && (tile.type === "switch" || tile.type === "diode"));
+      if (special) {
+        const cell = page.locator(`[data-tile-id="${special.id}"]`);
+        await rotate(page, special.id);
+        await expect(cell).toHaveAttribute("data-rotation", String((special.rotation + 90) % 360));
+        await page.getByRole("button", { name: "撤销", exact: true }).click();
+        await expect(cell).toHaveAttribute("data-rotation", String(special.rotation % 360));
+        if (special.type === "switch") {
+          await cell.locator(".park-switch-toggle").click();
+          await expect(cell).toHaveAttribute("data-switch", String(!(special.switchClosed !== false)));
+          await page.getByRole("button", { name: "撤销", exact: true }).click();
+        }
+      }
+      await solveThroughInput(page, id, () => capture(page, `level${id}-powered-390x844`));
+    });
+  }
   await test("设置、规则、个人成就、图鉴与收集物详情", async () => {
     await page
       .locator(".park-victory-actions")
@@ -359,10 +305,11 @@ try {
       });
       const tab = await ctx.newPage();
       tab.on("pageerror", (error) => errors.push(error.message));
-      await tab.goto(base);
+      await openFreshHome(tab, base);
       const label = viewport.label;
       await capture(tab, `home-${label}`);
       await tab.getByRole("button", { name: "开始挑战", exact: true }).click();
+      await finishFirstGuide(tab);
       await capture(tab, `play-${label}`);
       await solveFirst(tab);
       await capture(tab, `victory-${label}`);

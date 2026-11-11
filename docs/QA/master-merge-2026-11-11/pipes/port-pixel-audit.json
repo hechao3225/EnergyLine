@@ -1,0 +1,767 @@
+{
+  "status": "通过",
+  "cases": 48,
+  "canvas": [
+    512,
+    512
+  ],
+  "diameter_range": [
+    139,
+    139
+  ],
+  "max_center_error_px": 0.5,
+  "observations": [
+    {
+      "name": "line-off",
+      "rotation": 0,
+      "ports": {
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "line-off",
+      "rotation": 90,
+      "ports": {
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "line-off",
+      "rotation": 180,
+      "ports": {
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "line-off",
+      "rotation": 270,
+      "ports": {
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "line-on",
+      "rotation": 0,
+      "ports": {
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "line-on",
+      "rotation": 90,
+      "ports": {
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "line-on",
+      "rotation": 180,
+      "ports": {
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "line-on",
+      "rotation": 270,
+      "ports": {
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "corner-off",
+      "rotation": 0,
+      "ports": {
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "corner-off",
+      "rotation": 90,
+      "ports": {
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "corner-off",
+      "rotation": 180,
+      "ports": {
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "corner-off",
+      "rotation": 270,
+      "ports": {
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "corner-on",
+      "rotation": 0,
+      "ports": {
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "corner-on",
+      "rotation": 90,
+      "ports": {
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "corner-on",
+      "rotation": 180,
+      "ports": {
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "corner-on",
+      "rotation": 270,
+      "ports": {
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "t_shape-off",
+      "rotation": 0,
+      "ports": {
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "t_shape-off",
+      "rotation": 90,
+      "ports": {
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "t_shape-off",
+      "rotation": 180,
+      "ports": {
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "t_shape-off",
+      "rotation": 270,
+      "ports": {
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "t_shape-on",
+      "rotation": 0,
+      "ports": {
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "t_shape-on",
+      "rotation": 90,
+      "ports": {
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "t_shape-on",
+      "rotation": 180,
+      "ports": {
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "t_shape-on",
+      "rotation": 270,
+      "ports": {
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "cross-off",
+      "rotation": 0,
+      "ports": {
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "cross-off",
+      "rotation": 90,
+      "ports": {
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "cross-off",
+      "rotation": 180,
+      "ports": {
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "cross-off",
+      "rotation": 270,
+      "ports": {
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "cross-on",
+      "rotation": 0,
+      "ports": {
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "cross-on",
+      "rotation": 90,
+      "ports": {
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "cross-on",
+      "rotation": 180,
+      "ports": {
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "cross-on",
+      "rotation": 270,
+      "ports": {
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "switch-on",
+      "rotation": 0,
+      "ports": {
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "switch-on",
+      "rotation": 90,
+      "ports": {
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "switch-on",
+      "rotation": 180,
+      "ports": {
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "switch-on",
+      "rotation": 270,
+      "ports": {
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "switch-off",
+      "rotation": 0,
+      "ports": {
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "switch-off",
+      "rotation": 90,
+      "ports": {
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "switch-off",
+      "rotation": 180,
+      "ports": {
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "switch-off",
+      "rotation": 270,
+      "ports": {
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "diode",
+      "rotation": 0,
+      "ports": {
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "diode",
+      "rotation": 90,
+      "ports": {
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "diode",
+      "rotation": 180,
+      "ports": {
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        },
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "diode",
+      "rotation": 270,
+      "ports": {
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        },
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "source",
+      "rotation": 0,
+      "ports": {
+        "right": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "source",
+      "rotation": 90,
+      "ports": {
+        "bottom": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "source",
+      "rotation": 180,
+      "ports": {
+        "left": {
+          "center_px": 255.0,
+          "diameter_px": 139
+        }
+      }
+    },
+    {
+      "name": "source",
+      "rotation": 270,
+      "ports": {
+        "top": {
+          "center_px": 256.0,
+          "diameter_px": 139
+        }
+      }
+    }
+  ]
+}

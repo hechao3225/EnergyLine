@@ -53,6 +53,13 @@ export interface LevelConfig {
   hintText: string;        // e.g. "规划上下支路，把电送到两盏灯。"
   winText: string;         // e.g. "本关已点亮！准备好下一次分流了吗？"
   maxSteps: number;
+  /**
+   * The true minimum number of taps (rotations + switch toggles) that can clear
+   * the level — any legal solution, not just the designed layout. Computed by
+   * scripts/solve-min-par.ts (exact Steiner-tree search), so the value shown as
+   *「本关最少步数」and the 4-star threshold always match what players can achieve.
+   */
+  parSteps?: number;
   gridRows: number;
   gridCols: number;
   tiles: Tile[];
@@ -63,6 +70,8 @@ export interface HistorySnapshot {
   stepNumber: number;
   tiles: Tile[];
   remainingSteps: number;
+  /** Real number of player taps spent so far (not affected by +10 step top-ups) */
+  stepsUsed?: number;
   litCount: number;
   totalBulbs: number;
   description: string;

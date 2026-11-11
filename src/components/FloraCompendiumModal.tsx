@@ -3,18 +3,18 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { getAllFlowers, getFlowerForLevel } from '../data/flowers';
 import { FlowerEntry, FlowerRarity } from '../types/flower';
 import { FlowerIcon } from './FlowerIcon';
 import { X, Sparkles, Droplets, Trophy, Lock, ChevronLeft, ChevronRight, BookOpen } from 'lucide-react';
-import bulbLitImg from '../assets/bulb_lit.png';
-import bulbUnlitImg from '../assets/bulb_unlit.png';
-import chapterBadge1 from '../assets/chapter_badge_1.png';
-import chapterBadge2 from '../assets/chapter_badge_2.png';
-import chapterBadge3 from '../assets/chapter_badge_3.png';
-import chapterBadge4 from '../assets/chapter_badge_4.png';
-import chapterBadge5 from '../assets/chapter_badge_5.png';
+import bulbLitImg from '../assets/bulb_lit.webp';
+import bulbUnlitImg from '../assets/bulb_unlit.webp';
+import chapterBadge1 from '../assets/chapter_badge_1.webp';
+import chapterBadge2 from '../assets/chapter_badge_2.webp';
+import chapterBadge3 from '../assets/chapter_badge_3.webp';
+import chapterBadge4 from '../assets/chapter_badge_4.webp';
+import chapterBadge5 from '../assets/chapter_badge_5.webp';
 
 const CHAPTER_BADGES: Record<number, string> = {
   1: chapterBadge1,
@@ -72,6 +72,15 @@ export const FloraCompendiumModal: React.FC<FloraCompendiumModalProps> = ({
   }, [allFlowers, clearedSet]);
 
   const progressPercent = Math.round((unlockedTotal / 99) * 100);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -342,9 +351,9 @@ export const FloraCompendiumModal: React.FC<FloraCompendiumModalProps> = ({
               {onSelectLevel && (
                 <button
                   onClick={() => {
-                    onSelectLevel(activeFlower.id);
                     setActiveFlower(null);
                     onClose();
+                    onSelectLevel(activeFlower.id);
                   }}
                   className="mt-4 w-full py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-bold text-xs shadow-md shadow-emerald-500/20 flex items-center justify-center gap-1.5 cursor-pointer"
                 >

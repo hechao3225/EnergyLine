@@ -3,8 +3,9 @@ import fs from "node:fs";
 import assert from "node:assert/strict";
 import { DEFAULT_LEVELS } from "../src/data/defaultLevels";
 import { simulateCircuit } from "../src/utils/circuit";
+import {openFreshHome,finishFirstGuide,solveThroughInput} from "./park_test_player";
 
-const ROOT = "docs/QA/pipe-alignment-2026-11-10";
+const ROOT = process.env.PARK_PIPE_QA_DIR || "docs/QA/pipe-alignment-2026-11-11";
 fs.mkdirSync(ROOT, { recursive: true });
 const pixelAudit = JSON.parse(fs.readFileSync(`${ROOT}/port-pixel-audit.json`, "utf8"));
 const base = process.env.PARK_TEST_URL || "http://127.0.0.1:4173";
@@ -79,8 +80,9 @@ try {
     const context = await browser.newContext({ viewport });
     const page = await context.newPage();
     page.on("pageerror", (error) => errors.push(error.message));
-    await page.goto(base);
+    await openFreshHome(page,base);
     await page.getByRole("button", { name: "开始挑战", exact: true }).click();
+    await finishFirstGuide(page);
     await rotate(page, "t-2-2"); await rotate(page, "t-2-3", 3); await rotate(page, "t-3-3");
     await measure(page, 1, `flow-${viewport.width}x${viewport.height}`);
     await rotate(page, "t-4-3", 2);
@@ -89,19 +91,9 @@ try {
     await page.locator(".park-victory").waitFor();
     if (viewport.width === 390) {
       await select(page, 24);
-      await rotate(page, "t-3-1");
-      await rotate(page, "t-4-4");
-      await measure(page, 24, "switch-rotated-closed");
-      await page.locator('[data-tile-id="t-4-4"] .park-switch-toggle').click();
-      await rotate(page, "t-2-4"); await rotate(page, "t-1-4", 2);
-      await measure(page, 24, "switch-on-and-branches");
-      await rotate(page, "t-5-4", 2);
-      await expect(page.getByTestId("target-count")).toHaveText("4/4");
-      await measure(page, 24, "four-targets-connected");
-      await page.locator(".park-victory").waitFor();
+      await solveThroughInput(page, 24, () => measure(page, 24, "switch-and-branches-connected"));
       await select(page, 41);
-      await rotate(page, "t-2-1"); await rotate(page, "t-2-2");
-      await measure(page, 41, "diode-on");
+      await solveThroughInput(page, 41, () => measure(page, 41, "diode-connected"));
     }
     await context.close();
   }

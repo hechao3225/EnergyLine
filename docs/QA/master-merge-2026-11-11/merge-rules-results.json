@@ -1,0 +1,11 @@
+{
+  "status": "通过",
+  "singleTouchSteps": 1,
+  "doubleClickSteps": 2,
+  "freeBacktracks": 3,
+  "limitEnforced": true,
+  "resetRestores": true,
+  "fourStarClear": true,
+  "starPersistence": true,
+  "onboardingPersistence": true
+}
