@@ -22,9 +22,11 @@ async function measure(page: Page, levelId: number, label: string) {
     const e = element as HTMLElement;
     const image = e.querySelector("img.park-pipe:not(.park-facility-art)") as HTMLImageElement | null;
     const r = image?.getBoundingClientRect();
+    const box = e.getBoundingClientRect();
     return {
       id: e.dataset.tileId!, rotation: Number(e.dataset.rotation), type: e.dataset.type,
       closed: e.dataset.switch, powered: e.dataset.powered,
+      rect: { x: box.x, y: box.y, width: box.width, height: box.height },
       image: image ? { name: image.src.split("/").pop()!.replace("pipe-", "").replace(".webp", ""),
         angle: Number(image.style.transform.match(/rotate\((-?[\d.]+)deg\)/)?.[1] ?? 0),
         x: r!.x, y: r!.y, width: r!.width, height: r!.height } : null,
@@ -49,8 +51,15 @@ async function measure(page: Page, levelId: number, label: string) {
     const opposite = { top: "bottom", right: "left", bottom: "top", left: "right" }[direction];
     const points: number[][] = [];
     for (const [cell, port] of [[a, direction], [b, opposite]] as const) {
-      const image = cell.image!;
-      // 设施的四个入口使用十字接头，装饰主体独立于通路。
+      if (!cell.image) {
+        // 设施格已不再叠十字进管：进料口就是格子边界中点。
+        const box = cell.rect;
+        points.push(port === "left" ? [box.x, box.y + .5 * box.height] :
+          port === "right" ? [box.x + box.width, box.y + .5 * box.height] :
+            port === "top" ? [box.x + .5 * box.width, box.y] : [box.x + .5 * box.width, box.y + box.height]);
+        continue;
+      }
+      const image = cell.image;
       const rotation = ((Math.round(image.angle / 90) * 90) % 360 + 360) % 360;
       const audit = pixelAudit.observations.find((item: any) => item.name === image.name && item.rotation === rotation);
       const mouth = audit.ports[port];

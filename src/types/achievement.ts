@@ -31,6 +31,8 @@ export interface PlayerStats {
   clearedLevelIds: number[];
   threeStarLevelIds: number[];
   consecutivePerfect: number; // consecutive 3-star clears in story mode
+  /** 当前连续三星的关卡 id，重复刷同一关不增加 */
+  consecutivePerfectLevelIds: number[];
   maxConsecutivePerfect: number;
   totalUndos: number;
   maxEndlessStreak: number;

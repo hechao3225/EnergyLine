@@ -15,6 +15,15 @@
 - 提示显示关卡说明；撤销与历史跳转共用每轮 3 次回溯，重试后补满；重做可恢复已有操作。
 - 无尽挑战提供 2、3、4 设施难度；关卡工坊支持绘制、导出、导入和试玩。
 
+## 乐园宇宙（主题重构第一轮）
+
+主线世界观已从「神树灵泉」切换为「能量管道乐园」：现有 99 关 = **乐园中心**（失落乐园 / 星光花园 / 云端奇境 / 虹彩天桥 / 梦幻之巅 5 个分区）；图片上的 10 个主题区（云上飞行岛、魔法植物园、海底奇境馆、星空天文台、奇趣玩具工坊、甜梦美食街、时光放映厅、机械动物园、梦境游乐场、节日庆典岛）作为后续扩展，每区 9 关。
+
+- 世界观、区域、词表、99 关文案与 99 件藏品在 `src/content/`。
+- 关卡布局/par 在 `src/data/defaultLevels.ts`，只保留布局字段；展示文案不再写回关卡数据。
+- `npm run test:theme` 校验 99 条文案/99 件藏品/11 个区域/14 个成就与布局指纹；`npm run audit:theme` 禁止旧世界观词回流。
+- 第一轮状态：中心文案、图鉴、成就、世界地图已接入；12 个展品图标暂用旋转木马占位，后续用生图工具生成后把 `ParkArt.tsx` 的 `EXHIBIT_ART_READY` 打开。
+
 ## 本地运行
 
 Web 开发需要 Node.js 20.20 或更新版本；Capacitor CLI 需要 Node.js 22 或更新版本。
@@ -29,6 +38,7 @@ npm run dev
 ```powershell
 npm run lint
 npm test
+npm run test:theme
 npm run build
 npm run preview -- --host 127.0.0.1 --port 4173
 ```
@@ -60,7 +70,7 @@ python scripts/audit_park_delivery.py
 
 - 原始生成图：`docs/UI设计稿2.0/generated-sources/`。
 - 运行资产及清单：`public/assets/park/`。
-- 资产处理：`python scripts/prepare_park_assets.py`，保留原图，执行透明裁切、朝向归一、切片和图标派生。
+- 资产处理：`python scripts/prepare_park_assets.py`，保留原图，执行透明裁切、朝向归一、切片和图标派生。管件在管线内统一做 B1 调色（香槟金 + 暖白，`scripts/park_pipe_geometry.py` 的 `grade_b1`），只重出管件用 `python scripts/prepare_pipe_restyle.py`；记录见 `docs/QA/pipe-restyle-2026-11-12/`。
 - 补充图标与牌匾：`python scripts/prepare_park_details.py`，使用 rembg 去底并输出深浅底审查图；完整原件保存在仓库。
 - 字体：Noto Sans SC，采用 SIL Open Font License 1.1；许可位于 `src/assets/park-font-LICENSE.txt` 和发行目录的 `assets/park/font-license.txt`。
 - 字体子集：`python scripts/prepare_park_font.py --source <本地NotoSansSC字体文件>`；省略 source 时从 Google Fonts 官方仓库读取。

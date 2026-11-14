@@ -3,6 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import type { ZoneId } from './content';
+
 // Bitmask for port directions
 export const enum Direction {
   NONE = 0,
@@ -48,10 +50,13 @@ export interface LevelConfig {
   id: number;
   code: string;            // e.g. "02"
   totalLevels: number;     // e.g. 7
-  title: string;           // e.g. "双路分流"
+  /** 展示文案来自 src/content/levels.ts；自定义/无尽关卡可回退到这里 */
+  title?: string;           // e.g. "双路分流"
   subtitle?: string;
-  hintText: string;        // e.g. "规划上下支路，把电送到两盏灯。"
-  winText: string;         // e.g. "本关已点亮！准备好下一次分流了吗？"
+  hintText?: string;        // e.g. "规划上下支路，把电送到两盏灯。"
+  winText?: string;         // e.g. "本关已点亮！准备好下一次分流了吗？"
+  /** 所属主题区；中心关卡为 center */
+  zoneId?: ZoneId;
   maxSteps: number;
   /**
    * The true minimum number of taps (rotations + switch toggles) that can clear

@@ -18,6 +18,7 @@
 
 import { DEFAULT_LEVELS } from '../src/data/defaultLevels';
 import { simulateCircuit } from '../src/utils/circuit';
+import { getLevelContent } from '../src/content';
 
 interface Row {
   id: number;
@@ -37,11 +38,11 @@ interface Row {
 
 const CHAPTER_FLOOR: Record<number, number> = { 1: 7, 2: 10, 3: 11, 4: 13, 5: 15 };
 const CHAPTER_NAMES: Record<number, string> = {
-  1: '地脉之根',
-  2: '巨木之干',
-  3: '苍翠繁枝',
-  4: '云海天桥',
-  5: '神树之巅',
+  1: '失落乐园',
+  2: '星光花园',
+  3: '云端奇境',
+  4: '虹彩天桥',
+  5: '梦幻之巅',
 };
 
 function chapterOf(id: number): number {
@@ -65,7 +66,7 @@ function buildRows(): Row[] {
     const prevPar = index > 0 ? DEFAULT_LEVELS[index - 1].parSteps || 0 : 0;
     return {
       id: level.id,
-      title: level.title,
+      title: getLevelContent(level.id)?.title ?? `L${level.id}`,
       par,
       max: level.maxSteps,
       ratio: par > 0 ? level.maxSteps / par : 0,
@@ -111,7 +112,7 @@ function main() {
 
   if (asMarkdown) {
     const lines: string[] = [];
-    lines.push('| 关 | 标题 | par | 预算 | 容错 | 花 | 初始亮 | 水闸 | 灵梭 | 邻域偏差 |');
+    lines.push('| 关 | 标题 | par | 预算 | 容错 | 花 | 初始亮 | 能量闸 | 单向阀 | 邻域偏差 |');
     lines.push('|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|');
     for (const r of rows) {
       const dev = `${r.deviation >= 0 ? '+' : ''}${Math.round(r.deviation * 100)}%`;
@@ -134,7 +135,7 @@ function main() {
     const avgLit = seg.reduce((s, r) => s + r.lit0, 0) / seg.length;
     console.log(
       `第${c}章 ${CHAPTER_NAMES[c]}\t关数 ${seg.length}\t平均 par ${avgPar.toFixed(1)}\t` +
-        `平均容错 ${avgRatio.toFixed(2)}×\t水闸关 ${withSwitch}\t灵梭关 ${withDiode}\t初始点亮 ${avgLit.toFixed(2)}`
+        `平均容错 ${avgRatio.toFixed(2)}×\t能量闸关 ${withSwitch}\t单向阀关 ${withDiode}\t初始点亮 ${avgLit.toFixed(2)}`
     );
   }
 

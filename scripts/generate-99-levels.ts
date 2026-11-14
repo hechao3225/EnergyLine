@@ -1522,7 +1522,9 @@ function tuneHandcrafted(
   // 这类「开局几乎已通」的关留在曲线上。
   const lo = Math.max(config.parFloor, Math.round(desired * 0.8));
   const hi = Math.max(lo + 2, Math.round(desired * 1.2));
-  const { title, hintText, winText } = data.level;
+  const title = data.level.title ?? `L${id}`;
+  const hintText = data.level.hintText ?? '';
+  const winText = data.level.winText ?? '';
   const subtitle = data.level.subtitle ?? '';
 
   for (let k = 1; k <= 14; k++) {
@@ -1664,14 +1666,28 @@ export function generateAll99Levels(): LevelConfig[] {
 
 // Run directly
 const levels = generateAll99Levels();
+// 展示文案统一放在 src/content/levels.ts；这里只写布局与步数。
+const layoutLevels = levels.map((level) => ({
+  id: level.id,
+  code: level.code,
+  totalLevels: level.totalLevels,
+  gridRows: level.gridRows,
+  gridCols: level.gridCols,
+  maxSteps: level.maxSteps,
+  parSteps: level.parSteps,
+  tiles: level.tiles,
+}));
 const fileContent = `/**
  * @license
  * SPDX-License-Identifier: Apache-2.0
+ *
+ * 关卡布局与步数数据。展示文案在 src/content/levels.ts。
+ * 由 scripts/generate-99-levels.ts 生成。
  */
 
 import { LevelConfig } from '../types/game';
 
-export const DEFAULT_LEVELS: LevelConfig[] = ${JSON.stringify(levels, null, 2)};
+export const DEFAULT_LEVELS: LevelConfig[] = ${JSON.stringify(layoutLevels, null, 2)};
 `;
 
 const targetPath = path.resolve(process.cwd(), 'src/data/defaultLevels.ts');

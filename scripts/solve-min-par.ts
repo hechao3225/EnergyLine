@@ -29,6 +29,7 @@ import path from 'path';
 import { DEFAULT_LEVELS } from '../src/data/defaultLevels';
 import { Direction, LevelConfig, Tile } from '../src/types/game';
 import { getDefaultBasePorts, rotatePorts, simulateCircuit } from '../src/utils/circuit';
+import { getLevelContent } from '../src/content';
 
 const INF = 1 << 24;
 const P_COUNT = 5; // 0 = 无父端口（树根），1..4 = 父端口方向
@@ -440,7 +441,7 @@ async function main() {
       res = solveMinTaps(level);
     } catch (e) {
       failed++;
-      rows.push(`❌ L${level.id} ${level.title} 求解异常：${(e as Error).message}`);
+      rows.push(`❌ L${level.id} ${(getLevelContent(level.id)?.title ?? `L${level.id}`)} 求解异常：${(e as Error).message}`);
       continue;
     }
     const applied = applyPlan(level, res.plan);
@@ -453,7 +454,7 @@ async function main() {
     if (!ok) {
       failed++;
       rows.push(
-        `❌ L${level.id} ${level.title} 复核失败：方案点击 ${applied.taps} 步（声明 ${res.par}），点亮 ${applied.lit}/${applied.total}`
+        `❌ L${level.id} ${(getLevelContent(level.id)?.title ?? `L${level.id}`)} 复核失败：方案点击 ${applied.taps} 步（声明 ${res.par}），点亮 ${applied.lit}/${applied.total}`
       );
       continue;
     }
@@ -461,9 +462,9 @@ async function main() {
     if (res.par === oldPar) continue;
     changed++;
     const delta = oldPar - res.par;
-    if (delta < 0) bigger.push(`L${level.id} ${level.title}: ${oldPar} → ${res.par}`);
+    if (delta < 0) bigger.push(`L${level.id} ${(getLevelContent(level.id)?.title ?? `L${level.id}`)}: ${oldPar} → ${res.par}`);
     rows.push(
-      `L${String(level.id).padStart(2, '0')} ${level.title}  旧 par ${oldPar} → 新 par ${res.par}  (${delta > 0 ? '-' : '+'}${Math.abs(delta)} 步)`
+      `L${String(level.id).padStart(2, '0')} ${(getLevelContent(level.id)?.title ?? `L${level.id}`)}  旧 par ${oldPar} → 新 par ${res.par}  (${delta > 0 ? '-' : '+'}${Math.abs(delta)} 步)`
     );
   }
 

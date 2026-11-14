@@ -18,7 +18,7 @@ export default defineConfig(() => {
           name: "能量管道乐园",
           short_name: "能量管道乐园",
           lang: "zh-CN",
-          description: "连接能量管道，修复梦幻乐园，唤醒九十九朵伴生花。",
+          description: "连接能量管道，修复 99 处乐园设施，探索乐园宇宙。",
           theme_color: "#874edd",
           background_color: "#874edd",
           display: "standalone",

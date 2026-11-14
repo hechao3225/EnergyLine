@@ -15,3 +15,6 @@ docs/_archive/
 # Local tooling artifacts (WorkBuddy / app scaffold)
 .workbuddy/
 .wbapp_*.genie
+
+# Python 脚本缓存
+__pycache__/

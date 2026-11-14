@@ -51,13 +51,13 @@ for (const lvl of DEFAULT_LEVELS) {
   totalTiles += lvl.tiles.length;
 }
 console.log(
-  `[PASS] 99 重关卡结构完整，包含 ${totalTiles} 枚水渠瓦片，全部包含合法泉眼与仙花，par 与预算匹配。`
+  `[PASS] 99 重关卡结构完整，包含 ${totalTiles} 枚管道瓦片，全部包含能量源与设施，par 与预算匹配。`
 );
 
 console.log('=== 2. 验证 第 1 关“单线启明”旋转导通与胜利逻辑 ===');
 const lvl1 = DEFAULT_LEVELS[0];
 let sim1 = simulateCircuit(lvl1.tiles, lvl1.gridRows, lvl1.gridCols);
-console.log(`[PASS] 初始打乱态：点亮花朵数 = ${sim1.litBulbIds.size} / ${sim1.totalBulbs}，通关状态 = ${sim1.isAllLit}`);
+console.log(`[PASS] 初始打乱态：点亮设施数 = ${sim1.litBulbIds.size} / ${sim1.totalBulbs}，通关状态 = ${sim1.isAllLit}`);
 
 // 教学关的坐标是手工固定的，可以安全硬编码
 const tiles1_solved = lvl1.tiles.map((t) => {
@@ -68,10 +68,10 @@ const tiles1_solved = lvl1.tiles.map((t) => {
   return t;
 });
 sim1 = simulateCircuit(tiles1_solved, lvl1.gridRows, lvl1.gridCols);
-console.log(`[PASS] 正确对齐水脉后：点亮花朵数 = ${sim1.litBulbIds.size} / ${sim1.totalBulbs}，通关状态 = ${sim1.isAllLit}`);
+console.log(`[PASS] 正确对齐管道后：点亮设施数 = ${sim1.litBulbIds.size} / ${sim1.totalBulbs}，通关状态 = ${sim1.isAllLit}`);
 if (!sim1.isAllLit) throw new Error('第 1 关导通后应判定胜利！');
 
-console.log('=== 3. 验证灵玉水闸：可旋转 + 需开启才通水 ===');
+console.log('=== 3. 验证能量闸：可旋转 + 需接通才导通 ===');
 // 泉眼 ─ 水闸 ─ 仙花
 const switchRow: Tile[] = [
   tile(0, 0, 'battery', 0, { locked: true }),
@@ -83,11 +83,11 @@ const swOpened = simulateCircuit(replaceType(switchRow, 'switch', { switchClosed
 const swRotated = simulateCircuit(replaceType(switchRow, 'switch', { rotation: 90, switchClosed: true }), 1, 3);
 
 console.log(
-  `[PASS] 水闸闭合点亮 = ${swClosed.litCount}，开启后点亮 = ${swOpened.litCount}，` +
+  `[PASS] 能量闸断开点亮 = ${swClosed.litCount}，接通后点亮 = ${swOpened.litCount}，` +
     `旋转成竖向后点亮 = ${swRotated.litCount}`
 );
-if (swClosed.litCount !== 0) throw new Error('水闸闭合时不应通水！');
-if (swOpened.litCount !== 1) throw new Error('水闸开启后应通水点亮仙花！');
+if (swClosed.litCount !== 0) throw new Error('能量闸断开时不应导通！');
+if (swOpened.litCount !== 1) throw new Error('能量闸接通后应导通点亮设施！');
 if (swRotated.litCount !== 0) throw new Error('水闸旋转成竖向后应与横向水渠断开！');
 // 转回水平仍然导通（证明水闸可以被玩家自由旋转，不会形成死局）
 const swRotatedBack = simulateCircuit(
@@ -97,7 +97,7 @@ const swRotatedBack = simulateCircuit(
 );
 if (swRotatedBack.litCount !== 1) throw new Error('水闸转回水平后应恢复导通！');
 
-console.log('=== 4. 验证单向灵梭的顺逆流机制 ===');
+console.log('=== 4. 验证单向阀的顺逆流机制 ===');
 const diodeRow: Tile[] = [
   tile(0, 0, 'battery', 0, { locked: true }),
   tile(0, 1, 'diode', 0),
@@ -106,12 +106,12 @@ const diodeRow: Tile[] = [
 const diForward = simulateCircuit(diodeRow, 1, 3);
 const diReverse = simulateCircuit(replaceType(diodeRow, 'diode', { rotation: 180 }), 1, 3);
 console.log(
-  `[PASS] 单向顺流点亮 = ${diForward.litCount}，逆向阻水点亮 = ${diReverse.litCount}`
+  `[PASS] 单向顺流点亮 = ${diForward.litCount}，逆向阻断点亮 = ${diReverse.litCount}`
 );
-if (diForward.litCount !== 1) throw new Error('灵梭顺流应通水点亮！');
-if (diReverse.litCount !== 0) throw new Error('灵梭逆向应阻断水流！');
+if (diForward.litCount !== 1) throw new Error('单向阀顺流应导通点亮！');
+if (diReverse.litCount !== 0) throw new Error('单向阀逆向应阻断能量！');
 
-console.log('=== 5. 验证“水闸 + 三通分流”多花同时点亮 ===');
+console.log('=== 5. 验证“能量闸 + 三通分流”多设施同时点亮 ===');
 // 泉眼 ─ 水闸 ─ 三通 ─┬─ 上花
 //                     ├─ 下花
 //                     └─ 右花
@@ -127,9 +127,9 @@ const branchBoard: Tile[] = [
 const branchOpen = simulateCircuit(replaceType(branchBoard, 'switch', { switchClosed: true }), 3, 4);
 const branchClosed = simulateCircuit(branchBoard, 3, 4);
 console.log(
-  `[PASS] 三花棋盘：水闸开启点亮 ${branchOpen.litCount}/${branchOpen.totalBulbs}，闭合点亮 ${branchClosed.litCount}/${branchClosed.totalBulbs}`
+  `[PASS] 三设施棋盘：能量闸接通点亮 ${branchOpen.litCount}/${branchOpen.totalBulbs}，断开点亮 ${branchClosed.litCount}/${branchClosed.totalBulbs}`
 );
-if (!branchOpen.isAllLit) throw new Error('水闸开启后三朵花应全部点亮！');
-if (branchClosed.litCount !== 0) throw new Error('水闸闭合时不应点亮任何花朵！');
+if (!branchOpen.isAllLit) throw new Error('能量闸接通后三处设施应全部点亮！');
+if (branchClosed.litCount !== 0) throw new Error('能量闸断开时不应点亮任何设施！');
 
 console.log('=== 全部测试通过 (5/5 PASS) ===');

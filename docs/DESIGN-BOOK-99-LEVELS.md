@@ -1,4 +1,8 @@
 # 《神树灵泉 · 唤醒百花》经典 99 关全关卡重构设计书
+
+> **历史文档**：本文档写于「神树灵泉」时期。当前世界观、区域与内容层见 [乐园宇宙设定](superpowers/specs/2026-11-12-park-universe-theme-design.md) 与 `src/content/`。
+
+
 ## （99-Level Master Game Design & Algorithmic Blueprint）
 
 > **文档版本**：v2.0.0 (Master Production Edition)  

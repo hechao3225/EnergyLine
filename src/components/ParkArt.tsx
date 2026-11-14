@@ -1,7 +1,9 @@
 import React from "react";
-import type { FlowerEntry } from "../types/flower";
+import type { CollectionEntry } from "../types/content";
 import { MAX_STARS } from "../utils/rating";
-export const ART_ROOT = `${import.meta.env.BASE_URL}assets/park/`;
+const BASE_URL =
+  (import.meta as ImportMeta & { env?: { BASE_URL?: string } }).env?.BASE_URL ?? "/";
+export const ART_ROOT = `${BASE_URL}assets/park/`;
 export type IconName =
   | "star"
   | "coin"
@@ -94,32 +96,31 @@ export function Stars({
     </span>
   );
 }
-export function ParkFlower({
-  flower,
+
+/**
+ * 12 类展品图标还没生成前，统一回退到现有的旋转木马图；
+ * 生成 public/assets/park/exhibit-*.webp 后把 EXHIBIT_ART_READY 改成 true 即可。
+ */
+export const EXHIBIT_ART_READY = true;
+
+export function getExhibitArt(entry: CollectionEntry): string {
+  return EXHIBIT_ART_READY ? entry.artKey : "carousel";
+}
+
+export function ParkExhibit({
+  entry,
   unlocked,
   large = false,
 }: {
-  flower: FlowerEntry;
+  entry: CollectionEntry;
   unlocked: boolean;
   large?: boolean;
 }) {
-  const family = {
-    lotus: 0,
-    orchid: 1,
-    plum: 2,
-    rose: 4,
-    peony: 4,
-    camellia: 11,
-    jasmine: 3,
-    chrysanthemum: 8,
-    crystal: 6,
-    celestial: 7,
-  }[flower.shape];
   return (
     <Art
-      name={`flower-${family}`}
+      name={getExhibitArt(entry)}
       className={`park-collection-flower ${large ? "large" : ""} ${unlocked ? "" : "sleeping"}`}
-      alt={unlocked ? flower.name : "尚未唤醒的花"}
+      alt={unlocked ? entry.name : "尚未修复的藏品"}
     />
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import type { Tile } from "../types/game";
-import { Art, Icon } from "./ParkArt";
+import { Art, Icon, getExhibitArt } from "./ParkArt";
+import { getCollectionEntry } from "../content";
 import { getDefaultBasePorts, rotatePorts } from "../utils/circuit";
 interface TileViewProps {
   tile: Tile;
@@ -16,7 +17,7 @@ interface TileViewProps {
 const TILE_NAMES: Record<Tile["type"], string> = {
   empty: "空格",
   battery: "能量源",
-  bulb: "旋转木马",
+  bulb: "设施",
   line: "直管",
   corner: "弯管",
   t_shape: "三通",
@@ -31,9 +32,11 @@ export const TileView: React.FC<TileViewProps> = ({
   isPeekActive,
   onClick,
   interactive = true,
+  levelId,
 }) => {
   const isGoal = tile.type === "bulb",
     isSource = tile.type === "battery";
+  const goalEntry = isGoal && levelId ? getCollectionEntry(levelId) : null;
   const locked = interactive && (tile.locked || tile.type === "empty");
   const base = getDefaultBasePorts(tile.type);
   const offset =
@@ -41,7 +44,7 @@ export const TileView: React.FC<TileViewProps> = ({
       (angle) => rotatePorts(base, angle) === tile.basePorts,
     ) ?? 0;
   const artName = isGoal
-    ? "carousel"
+    ? (goalEntry ? getExhibitArt(goalEntry) : "carousel")
     : isSource
       ? "pipe-source"
       : tile.type === "switch"
@@ -66,12 +69,6 @@ export const TileView: React.FC<TileViewProps> = ({
         onClick={() => onClick(tile, "rotate")}
         aria-label={`${tile.row + 1}行${tile.col + 1}列${TILE_NAMES[tile.type]}${tile.locked ? "固定" : "旋转"}`}
       >
-        {isGoal && (
-          <Art
-            name={`pipe-cross-${isLit ? "on" : "off"}`}
-            className="park-pipe park-goal-inlets"
-          />
-        )}
         {tile.type !== "empty" && (
           <Art
             name={artName}

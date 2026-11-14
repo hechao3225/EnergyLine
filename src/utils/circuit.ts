@@ -421,7 +421,7 @@ export function generateEndlessLevel(
       continue; // Try again to guarantee 100% solvability
     }
 
-    const titleList = ['脉冲回响', '电网蔓生', '流光矩阵', '双生回路', '星火漫溢', '蜂巢深处'];
+    const titleList = ['脉冲回响', '星光蔓生', '流光矩阵', '双生回路', '星火漫溢', '乐园深处'];
     const title = titleList[(levelIndex - 1) % titleList.length] + ` #${levelIndex}`;
     // Generous step budget to avoid frustrating artificial lockouts
     const maxSteps = Math.max(35, minMoves * 2 + 15);
@@ -430,7 +430,7 @@ export function generateEndlessLevel(
       tiles: scrambledTiles,
       maxSteps,
       title,
-      hintText: `寻找通往 ${actualBulbCount} 盏灯的最佳回路，点亮蜂巢。`,
+      hintText: `接通 ${actualBulbCount} 处设施，完成这次无尽挑战。`,
     };
   }
 
@@ -477,7 +477,7 @@ export function generateEndlessLevel(
   return {
     tiles: fallbackTiles,
     maxSteps: 35,
-    title: `蜂巢矩阵 #${levelIndex}`,
-    hintText: `寻找通往 2 盏灯的回路。`,
+    title: `星光矩阵 #${levelIndex}`,
+    hintText: `接通 2 处设施，完成这次无尽挑战。`,
   };
 }

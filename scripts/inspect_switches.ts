@@ -1,4 +1,5 @@
 import { DEFAULT_LEVELS } from '../src/data/defaultLevels';
+import { getLevelContent } from '../src/content';
 
 const switchLevels = [];
 for (const lvl of DEFAULT_LEVELS) {
@@ -6,7 +7,7 @@ for (const lvl of DEFAULT_LEVELS) {
   if (sws.length > 0) {
     switchLevels.push({
       id: lvl.id,
-      title: lvl.title,
+      title: getLevelContent(lvl.id)?.title ?? `L${lvl.id}`,
       switches: sws.map(s => ({
         row: s.row,
         col: s.col,

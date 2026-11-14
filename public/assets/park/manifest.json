@@ -149,10 +149,10 @@
       0,
       0
     ],
-    "sha256": "6a44010345aebecd6ed4ba71f18499c7f55aedbc17eeb2d7a98427f55d656ee0",
-    "bytes": 26674,
+    "sha256": "c62d9c12f433d30dacb1e40754314ce62a3492e67db7455ffefca557dd256290",
+    "bytes": 26846,
     "route": "image_gen built-in",
-    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00",
     "port_geometry": {
       "canvas": [
         512,
@@ -202,10 +202,10 @@
       0,
       0
     ],
-    "sha256": "327a5f621bb342acc494e4732e887566f21b4130f4cb259e84adcf2c303081c1",
-    "bytes": 29716,
+    "sha256": "75f136df125347ccc68ee0d1cb32b8f6f33b173cb6e2a253d980c6d6dff6bca5",
+    "bytes": 30242,
     "route": "image_gen built-in",
-    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00",
     "port_geometry": {
       "canvas": [
         512,
@@ -255,10 +255,10 @@
       0,
       0
     ],
-    "sha256": "9c18fe5d7d36d3d3fc688706aa52a8de676fea68f2e3364b7548272f7dc5d409",
-    "bytes": 36262,
+    "sha256": "1944572d13d84aa0c864b03abf87b3236fe8e27cb28b87007d5ebb5622b88be0",
+    "bytes": 36534,
     "route": "image_gen built-in",
-    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00",
     "port_geometry": {
       "canvas": [
         512,
@@ -312,10 +312,10 @@
       0,
       0
     ],
-    "sha256": "4efe79163e0e6c6c6678c99f427f68fc83e71ac6218d4a130468edd6a89b37a6",
-    "bytes": 44874,
+    "sha256": "02290a1a974cf9c0b476586f55d13905147d65559ada267d133e8bcb117db73f",
+    "bytes": 44740,
     "route": "image_gen built-in",
-    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00",
     "port_geometry": {
       "canvas": [
         512,
@@ -373,10 +373,10 @@
       0,
       0
     ],
-    "sha256": "95016c3a469796a2bb1a76a80ba90a42a92089834fc68663f0c2a4c39e8a0da4",
-    "bytes": 31064,
+    "sha256": "07421df3a61853f6cd765ba072e60000287090839d62fc4ffbd69832528acfdf",
+    "bytes": 31160,
     "route": "image_gen built-in",
-    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00",
     "port_geometry": {
       "canvas": [
         512,
@@ -426,10 +426,10 @@
       0,
       0
     ],
-    "sha256": "18d4375c74dffd4d47ce7e84e293a052f9f23fbcdf6aa675805f520369bc74ff",
-    "bytes": 34242,
+    "sha256": "577d702ad8e61522ea1e233d64b985b7a79ceccdfa5327d42028ca38a43139ff",
+    "bytes": 34678,
     "route": "image_gen built-in",
-    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00",
     "port_geometry": {
       "canvas": [
         512,
@@ -479,10 +479,10 @@
       0,
       0
     ],
-    "sha256": "033a47c50a0da9618b45d27cb8791aa3230639d0fe00a3331edd9c5f58f1d203",
-    "bytes": 46592,
+    "sha256": "58b509f5dd24679f048caf2f56bf03c2bc19f711616f96b885feabfe1e39a413",
+    "bytes": 46750,
     "route": "image_gen built-in",
-    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00",
     "port_geometry": {
       "canvas": [
         512,
@@ -536,10 +536,10 @@
       0,
       0
     ],
-    "sha256": "934d1a6529bb219ca0426e1bb067eec2fe6dd6c269ddd57a14876c036d3ae2cd",
-    "bytes": 56580,
+    "sha256": "238d60d5b565d1626e05d1c385e67f2ed5c5d2b2b05a32ee1bfe71c41ff57cdb",
+    "bytes": 55812,
     "route": "image_gen built-in",
-    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00",
     "port_geometry": {
       "canvas": [
         512,
@@ -587,7 +587,7 @@
     ],
     "alpha_bbox": [
       0,
-      0,
+      7,
       512,
       383
     ],
@@ -597,10 +597,10 @@
       0,
       0
     ],
-    "sha256": "1240af7841c4e18102915558c407c44836a8212c6a421d67c20897e8847dbe6a",
-    "bytes": 56988,
+    "sha256": "ec4f8c1d211667c2fad7d87116998088cdb43b6c2519e39375330bb03b10a6e1",
+    "bytes": 56326,
     "route": "image_gen built-in",
-    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00",
     "port_geometry": {
       "canvas": [
         512,
@@ -640,7 +640,7 @@
     ],
     "alpha_bbox": [
       0,
-      0,
+      6,
       512,
       382
     ],
@@ -650,10 +650,10 @@
       0,
       0
     ],
-    "sha256": "c0108a61327ea376a54385fdda1f70a2fdcde1145e8664a8826583bb7be1ffdc",
-    "bytes": 61386,
+    "sha256": "e0a0a97fac82f1d258ab61e4fa75c2df2e5a6f0b90303694e5a74d7a701d9a46",
+    "bytes": 62182,
     "route": "image_gen built-in",
-    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00",
     "port_geometry": {
       "canvas": [
         512,
@@ -703,10 +703,10 @@
       0,
       0
     ],
-    "sha256": "1910134b6463a0f858c59025939c24e383f6f20e6acf5160ab225cd25dbeff6c",
-    "bytes": 28494,
+    "sha256": "32216a87987115cd52d290259118dc43f4d8e666df2cd18a445855069d2db8b9",
+    "bytes": 28782,
     "route": "image_gen built-in",
-    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00",
     "port_geometry": {
       "canvas": [
         512,
@@ -1455,8 +1455,8 @@
       0,
       0
     ],
-    "sha256": "666b4d4670f937d91e7db967510e1787deb01aa91cf7aef413aa5dd03454d56d",
-    "bytes": 14250,
+    "sha256": "4aef2efb94d714efbb19cf88152f6f5c515dcfe63b4de5c7c828d96be4dc7829",
+    "bytes": 14722,
     "route": "image_gen built-in",
     "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
   },
@@ -2176,10 +2176,10 @@
       0,
       0
     ],
-    "sha256": "72f871753be77d590e002ac15d0cad0444bb9a3b593c723256459a2700718680",
-    "bytes": 49094,
+    "sha256": "07e0b6f1d74b5fed4b75280a908b4e01a548318ef3b471031f005451bba55f5c",
+    "bytes": 47118,
     "route": "image_gen built-in",
-    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；全管型与明暗状态共用金属端口",
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00",
     "port_geometry": {
       "canvas": [
         512,
@@ -2389,5 +2389,3113 @@
     "bytes": 13578,
     "route": "images_api / gpt-image-2",
     "processing": "u2netp background removal, alpha-aware trim, 6px transparent margin, proportional resize"
+  },
+  {
+    "name": "exhibit-carousel",
+    "file": "public/assets/park/exhibit-carousel.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-carousel.png",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      84,
+      41,
+      427,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "7d6ee151fc5948c9f7cda08e0325b61989cf04087c9c16fd66148b3055316c88",
+    "bytes": 43130,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-wheel",
+    "file": "public/assets/park/exhibit-wheel.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-wheel.png",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      95,
+      41,
+      416,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "cd8fcb7292ae0bb9979980d4246ef5e91f3accb48754b13ecd4115b31f45f56f",
+    "bytes": 50280,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-fountain",
+    "file": "public/assets/park/exhibit-fountain.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-fountain.png",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      94,
+      41,
+      418,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "2295d60a2093a3f29670dd658aa2aae98dc45c812c55392635e6314989c9b073",
+    "bytes": 36074,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-arch",
+    "file": "public/assets/park/exhibit-arch.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-arch.png",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      55,
+      41,
+      457,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "cfa0a3261fbf71dc86543f8899e37720dd84ea7494f55f8d7b7b9333d422f64b",
+    "bytes": 37262,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-lamp",
+    "file": "public/assets/park/exhibit-lamp.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-lamp.png",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      176,
+      41,
+      335,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "0996f0c0522a9d2bedf48298d39584bea1879280fb45aaac53ff92390490c687",
+    "bytes": 19592,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-stage",
+    "file": "public/assets/park/exhibit-stage.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-stage.png",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      55,
+      41,
+      457,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "ddfa9a993a8a91e1dcf64ef7cc9eab6802d47ef05b04433685707265fff8e0ec",
+    "bytes": 39732,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-balloon",
+    "file": "public/assets/park/exhibit-balloon.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-balloon.png",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      96,
+      41,
+      415,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "2fe6c0d693c42100020c62d8be95fb7f59538d7d0d096749304b87a5f691b16a",
+    "bytes": 30200,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-train",
+    "file": "public/assets/park/exhibit-train.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-train.png",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      81,
+      471,
+      430
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "bab5d77e60a7eb38915399c7898aee2d1507928f948351fc34e354bf1b878983",
+    "bytes": 29804,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-aquarium",
+    "file": "public/assets/park/exhibit-aquarium.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-aquarium.png",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      105,
+      41,
+      407,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "2f0e1f611a2898a042ecbd183e30b823291ad3e9e02dc421be57d291b30815ee",
+    "bytes": 33852,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-telescope",
+    "file": "public/assets/park/exhibit-telescope.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-telescope.png",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      73,
+      41,
+      438,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "72fa1a5b89b7460a8580ea4f389afc5f4630ce660d620bd0efc97a711d52ab8b",
+    "bytes": 33480,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-toy",
+    "file": "public/assets/park/exhibit-toy.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-toy.png",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      90,
+      41,
+      422,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "363a10fd6266d73c944d27ea0c3a16bb8c6ce246576b0b55706d59ada173c96a",
+    "bytes": 35436,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-clock",
+    "file": "public/assets/park/exhibit-clock.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-clock.png",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      141,
+      41,
+      370,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "a110a2a4b63deec5a0d0bdcc003037e9b16708dbdcb15478451fcf05a7ea3fb4",
+    "bytes": 31584,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-001",
+    "file": "public/assets/park/exhibit-001.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-001.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      49,
+      471,
+      462
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "5f3fa13edaf67330555391d9b89ab8a8f8c01be665c4d080132bc4cab5a49849",
+    "bytes": 42130,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-002",
+    "file": "public/assets/park/exhibit-002.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-002.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      177,
+      41,
+      334,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "f283397bbbb03778fe7e8646e14fa182d4932ea5b7674c1123665430801d5edf",
+    "bytes": 17252,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-003",
+    "file": "public/assets/park/exhibit-003.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-003.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      92,
+      41,
+      419,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "cd7b81f6bb6290f3daf19605960c5840e7c5720fd5584e44c54025b645f0b6b3",
+    "bytes": 27584,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-004",
+    "file": "public/assets/park/exhibit-004.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-004.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      67,
+      41,
+      444,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "37522ea8fc2e217d4c8454ca3ee6e71ca150d21faf5cfcbb7733da72c5d50b97",
+    "bytes": 40724,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-005",
+    "file": "public/assets/park/exhibit-005.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-005.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      70,
+      41,
+      442,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "fc9446cce2954414293ed2644ec18e3551ab52af3ce46e352fae4f38b6fa2557",
+    "bytes": 44002,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-006",
+    "file": "public/assets/park/exhibit-006.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-006.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      61,
+      471,
+      450
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "8d23690b055c2df746d24f7cb621d93969c3a6a48fd3f32ea98c487f921998dc",
+    "bytes": 38166,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-007",
+    "file": "public/assets/park/exhibit-007.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-007.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      71,
+      471,
+      441
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "4245c859346f5bd6ab7e2562af223316a240dc4c6ede86635ad87daad11c465b",
+    "bytes": 45432,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-008",
+    "file": "public/assets/park/exhibit-008.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-008.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      111,
+      41,
+      400,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "68413ab494e71f942be9f60a8d4e3b2bd4b836cb1925d471f206830aff0d844a",
+    "bytes": 34250,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-009",
+    "file": "public/assets/park/exhibit-009.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-009.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      85,
+      41,
+      427,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "3ae7cafd751b19fffa0e40636bcf9327e2142ee523040591a8e4326348237508",
+    "bytes": 45340,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-010",
+    "file": "public/assets/park/exhibit-010.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-010.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      42,
+      41,
+      470,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "c836a843fa57ee19c075feade69ef248544d8ffcfa2133908ba81123b9bd5e22",
+    "bytes": 46072,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-011",
+    "file": "public/assets/park/exhibit-011.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-011.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      121,
+      41,
+      390,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "82c3521b3d98a9c16f90fdfce4637f59ade2b903e4f17e2522c2386f4428da2c",
+    "bytes": 34862,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-012",
+    "file": "public/assets/park/exhibit-012.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-012.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      109,
+      41,
+      403,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "c6254da019a3b759a84bf5f3b5b39e20c3ee664674c623502ad506b928cd114a",
+    "bytes": 26994,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-013",
+    "file": "public/assets/park/exhibit-013.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-013.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      46,
+      41,
+      466,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "33306ada03dee66171979d6b8e8f9eec1e68dad89df22749813cc44e72def3e8",
+    "bytes": 38058,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-014",
+    "file": "public/assets/park/exhibit-014.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-014.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      74,
+      41,
+      438,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "26578ea49091fba98c726ecb4cf775293393340e180d0765d8703d811d05b106",
+    "bytes": 32600,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-015",
+    "file": "public/assets/park/exhibit-015.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-015.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      93,
+      41,
+      419,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "c8d36db4bb5404db1fd59372919cbe61f1d75996c6d17bb9c1c3c71a7704bb4d",
+    "bytes": 28368,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-016",
+    "file": "public/assets/park/exhibit-016.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-016.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      90,
+      41,
+      421,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "17581054425142161e08faaff20c781b15118a53e13634b89a404a9088cd7509",
+    "bytes": 36334,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-017",
+    "file": "public/assets/park/exhibit-017.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-017.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      94,
+      41,
+      418,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "2ae294720dd9b0d9ef39d84b6d0b4e0deae204bb2598eb13ba7fa9da8909fbfd",
+    "bytes": 26426,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-018",
+    "file": "public/assets/park/exhibit-018.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-018.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      92,
+      41,
+      420,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "add8d5556e699ef8501172c2f59a8b10f423579b0cca3f261ee943f03c17a160",
+    "bytes": 38274,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-019",
+    "file": "public/assets/park/exhibit-019.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-019.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      46,
+      41,
+      466,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "0fcf0bf7e2dd39d2444f9974c3fe59729f7769ab115fb514006e0d9db0b41bf1",
+    "bytes": 42642,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-020",
+    "file": "public/assets/park/exhibit-020.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-020.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      53,
+      471,
+      458
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "9c0dcc9b8d829e20c08c32adc7d107696be65e1c5c7b9b2e382ad900b02141ee",
+    "bytes": 37686,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-021",
+    "file": "public/assets/park/exhibit-021.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-021.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      84,
+      41,
+      427,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "9aa53efd87b8b2c7d2bac241ec02f9f5fe7797d7dba42ce56e7743bd5f6e0363",
+    "bytes": 42778,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-022",
+    "file": "public/assets/park/exhibit-022.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-022.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      55,
+      41,
+      457,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "a66c7931cc97f5399a1faf9c14b224d440f0fac79c66dd0f7abba17ee5dee17f",
+    "bytes": 43674,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-023",
+    "file": "public/assets/park/exhibit-023.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-023.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      45,
+      471,
+      466
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "7e39a0dd4bf182ca9c3ba3cd28ab73892c5a9cdfb5efdbcf3d3975afc49bd7a7",
+    "bytes": 33418,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-024",
+    "file": "public/assets/park/exhibit-024.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-024.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      81,
+      41,
+      430,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "f902bde4eaa1284f57416d2b0836e9b9a434fae4b866a5a8ed5131471ea3dc3f",
+    "bytes": 54502,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-025",
+    "file": "public/assets/park/exhibit-025.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-025.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      68,
+      41,
+      444,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "380973e9ab7b25fce3196eafa30a70c3a018bd877bc710522e9a5ab1175a15a9",
+    "bytes": 43850,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-026",
+    "file": "public/assets/park/exhibit-026.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-026.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      64,
+      41,
+      448,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "a45f2f16072c6283b30a9fdafcecac4a06637b4e4ea1c9291f78565997efa030",
+    "bytes": 49546,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-027",
+    "file": "public/assets/park/exhibit-027.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-027.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      52,
+      41,
+      459,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "cb344e1860ac77aaa43d22953e53f1fc642e202526445a18bf5e3feb3cf2e52b",
+    "bytes": 61088,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-028",
+    "file": "public/assets/park/exhibit-028.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-028.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      60,
+      41,
+      451,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "3b097906432dc183e504348d2c29521857cf20b6497bce4851828a0668bc5300",
+    "bytes": 35694,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-029",
+    "file": "public/assets/park/exhibit-029.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-029.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      61,
+      471,
+      450
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "945e7cb8b04eb795e72cff7b4ba5147e25175f00e838748fab7c55a352e0908c",
+    "bytes": 49586,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-030",
+    "file": "public/assets/park/exhibit-030.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-030.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      83,
+      41,
+      428,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "b25005d6be1f394e4cb792374519e5a0e7b6ccbb7ba44e2e9bbe678e489f68f4",
+    "bytes": 59778,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-031",
+    "file": "public/assets/park/exhibit-031.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-031.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      93,
+      41,
+      419,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "03764621e3873ad75a798ff4e9f3431d670ecd5acee3dfedf86b958baa214060",
+    "bytes": 36248,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-032",
+    "file": "public/assets/park/exhibit-032.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-032.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      52,
+      41,
+      460,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "62e317d7d5f14c44a6b61c08b4abd407018236aabcb7f1d0094d05ee4b30f9a9",
+    "bytes": 44416,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-033",
+    "file": "public/assets/park/exhibit-033.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-033.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      75,
+      41,
+      436,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "9e5fc8cdbc608a57b5c11008787d79847a2e95917a3131d3e8cb3f8db4a73663",
+    "bytes": 60524,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-034",
+    "file": "public/assets/park/exhibit-034.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-034.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      58,
+      41,
+      454,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "c63ab4488849f1d4d52eb0c6b81f0ba9cdab6d24baca379a4d524df0cead5597",
+    "bytes": 34054,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-035",
+    "file": "public/assets/park/exhibit-035.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-035.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      75,
+      41,
+      437,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "78fd8f218d266aae2c1d019d23adaa8bbd633a3c4d21d6fb48423decbdb0fd6c",
+    "bytes": 40898,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-036",
+    "file": "public/assets/park/exhibit-036.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-036.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      43,
+      41,
+      469,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "3a78ab7058759eeaf303ab1c8eef3457583c69a40e4d8932ddc13f1880c0e111",
+    "bytes": 50202,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-037",
+    "file": "public/assets/park/exhibit-037.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-037.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      58,
+      471,
+      453
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "9dec055658cb673c1a49266f3f50ed8944162f300ec161bef20c8bcff6f2f9ef",
+    "bytes": 56022,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-038",
+    "file": "public/assets/park/exhibit-038.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-038.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      52,
+      471,
+      460
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "c99ad9dc7339f2e8bc61b009b0664cd57ba777642b6922dd85f9b85da9c68eb0",
+    "bytes": 44446,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-039",
+    "file": "public/assets/park/exhibit-039.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-039.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      57,
+      41,
+      455,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "0d134d48f3d41b10343f148c787acbbd5688ad4c4143f0e9a3e2755eefe8a1d8",
+    "bytes": 38136,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-040",
+    "file": "public/assets/park/exhibit-040.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-040.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      52,
+      471,
+      459
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "110da4343dfdd70c7a3a9804cb67ba604fa6670d5055b9ea95e19dadb93266e1",
+    "bytes": 42748,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-041",
+    "file": "public/assets/park/exhibit-041.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-041.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      92,
+      41,
+      419,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "480e3efb2fd4d15df45cc2168214d54504c8083e8b0e14e1b2bb2c7b454c8555",
+    "bytes": 46698,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-042",
+    "file": "public/assets/park/exhibit-042.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-042.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      56,
+      471,
+      455
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "ea8c8677344d4ec94ebeb7fdfd82b34f5f6606df6f11a268acd9ceebd4c9ac0e",
+    "bytes": 30226,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-043",
+    "file": "public/assets/park/exhibit-043.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-043.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      91,
+      471,
+      421
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "f54613bd9b8ea70c375b58078a2c797168b49d2db327b6c46d10aa0ec33888c2",
+    "bytes": 33104,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-044",
+    "file": "public/assets/park/exhibit-044.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-044.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      100,
+      41,
+      412,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "36bc27cc2ca79c7e7172243ff989ee40c6c211dbe90861bd954fbd50b8489637",
+    "bytes": 33630,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-045",
+    "file": "public/assets/park/exhibit-045.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-045.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      84,
+      471,
+      428
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "4d6fcbe25a0bf030aa76a5abe9347ab8360d37e98c996d14ff7dad251f28bc1b",
+    "bytes": 35590,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-046",
+    "file": "public/assets/park/exhibit-046.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-046.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      91,
+      41,
+      421,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "ca14300b3f363cb7f178b20bc167f4eff261884bdd0f31c070167f39cd62eb25",
+    "bytes": 27504,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-047",
+    "file": "public/assets/park/exhibit-047.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-047.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      77,
+      471,
+      434
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "31de4fbf97d4c7ef06d0282038064e21deb85a65ec55369df56675720bee3b21",
+    "bytes": 35502,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-048",
+    "file": "public/assets/park/exhibit-048.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-048.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      61,
+      41,
+      451,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "8071d6f89d1cf3722b6fdcf008062d025824b252a2bfe71fe29f80257ba4b33b",
+    "bytes": 35898,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-049",
+    "file": "public/assets/park/exhibit-049.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-049.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      156,
+      41,
+      355,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "40d08edd01e0459df069e16d7a200d9a1812181b40fe909f4a6d89a711e7e46d",
+    "bytes": 42670,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-050",
+    "file": "public/assets/park/exhibit-050.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-050.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      89,
+      471,
+      422
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "62ad17e7c225950175f9ad913601dad7ff4aff9f4defc4fc3429bef55400d3f9",
+    "bytes": 28854,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-051",
+    "file": "public/assets/park/exhibit-051.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-051.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      54,
+      41,
+      458,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "5ac05e13e5245181d552f382ee4ec087e8a857cf1e94135922e140180cb58b31",
+    "bytes": 45142,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-052",
+    "file": "public/assets/park/exhibit-052.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-052.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      109,
+      41,
+      403,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "184be05445607cb24a688d23179703f9dde859090fdfe428705bf4b03bab873d",
+    "bytes": 33014,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-053",
+    "file": "public/assets/park/exhibit-053.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-053.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      53,
+      471,
+      458
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "ea95cb8123e0f1d8e9ff70539c632bb904e20d4b513a078ca916ca185f7eec9e",
+    "bytes": 35478,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-054",
+    "file": "public/assets/park/exhibit-054.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-054.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      59,
+      471,
+      452
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "b45ca169895823cdef3110387bbc31be2157416580c49f5abfa753ee13255bb0",
+    "bytes": 34340,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-055",
+    "file": "public/assets/park/exhibit-055.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-055.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      90,
+      41,
+      422,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "6bbf5d1a1626b41fae6f749969451f37a84de589d605dd4e64ab6e48920d74e3",
+    "bytes": 39776,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-056",
+    "file": "public/assets/park/exhibit-056.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-056.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      54,
+      41,
+      457,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "c8a7daed5ffc41384bbc0da0f01eebc2c5b77d2452fb036a9d4141b7fe910113",
+    "bytes": 29296,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-057",
+    "file": "public/assets/park/exhibit-057.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-057.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      106,
+      41,
+      405,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "816a97910c7a5071c23f449ba057e6587f26c370a69f441655b2f9f74a85abbd",
+    "bytes": 23474,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-058",
+    "file": "public/assets/park/exhibit-058.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-058.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      96,
+      471,
+      416
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "717145d7c29c75dc80475fb49a0bc4e157667d573fcdb0201899199ae45cf30d",
+    "bytes": 30320,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-059",
+    "file": "public/assets/park/exhibit-059.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-059.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      93,
+      471,
+      419
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "bd0ea3fda50d6edbf719088d744e677fa1176902481f540aec76a793a52e5705",
+    "bytes": 42748,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-060",
+    "file": "public/assets/park/exhibit-060.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-060.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      63,
+      41,
+      449,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "3d2949ceff134af0d8d35a95827520f860f70637d4e5cda6fbf92994c05efa49",
+    "bytes": 29580,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-061",
+    "file": "public/assets/park/exhibit-061.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-061.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      117,
+      471,
+      395
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "a6d3968b8f4e14fc6ae3b2b9e5b1c65b32493f898f97b329a3c36995822fc7e4",
+    "bytes": 27418,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-062",
+    "file": "public/assets/park/exhibit-062.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-062.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      75,
+      41,
+      437,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "764d6758975bf58bcb37159e0ebc6d3566a9457a9111c3e7c5583a10deb77994",
+    "bytes": 35056,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-063",
+    "file": "public/assets/park/exhibit-063.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-063.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      123,
+      41,
+      388,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "fd516f6cc7eff4254937cfe2239ec8391e2933b3d744439bf53924f90f3aee3c",
+    "bytes": 28576,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-064",
+    "file": "public/assets/park/exhibit-064.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-064.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      125,
+      471,
+      387
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "c158f1a3fa2e727dad1a78d35c7cba860dec429b0b3730cc1479cbf586c70cce",
+    "bytes": 35486,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-065",
+    "file": "public/assets/park/exhibit-065.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-065.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      76,
+      471,
+      436
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "726ca09ad19a260d161c31ae17940189e9ec70e2d9e85f2417b0401720753433",
+    "bytes": 37146,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-066",
+    "file": "public/assets/park/exhibit-066.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-066.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      52,
+      41,
+      460,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "aac35d9655ecb45f16634c6c22572a6c81d9d4eaf8815e8b4a42d6652bd026fc",
+    "bytes": 33284,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-067",
+    "file": "public/assets/park/exhibit-067.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-067.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      60,
+      471,
+      451
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "c0e36e0010b381fff8a3548db87d621ac1679795b09a564145d15e15fdc2733f",
+    "bytes": 30044,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-068",
+    "file": "public/assets/park/exhibit-068.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-068.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      66,
+      41,
+      446,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "5e79fec249e8cdac0a8b4d71188925b4eecee4fa5916a4007ccbd6828d4fc7db",
+    "bytes": 43274,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-069",
+    "file": "public/assets/park/exhibit-069.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-069.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      81,
+      471,
+      430
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "891590d0ca375bd8c65f669c551c72cec08c6f2822fb050ab8aaed3c130e413a",
+    "bytes": 35070,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-070",
+    "file": "public/assets/park/exhibit-070.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-070.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      94,
+      41,
+      417,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "fbf0376d467eb388e7c24de83e85b9a81aa4a6b5448b2fec3fe61ea030f7802d",
+    "bytes": 32820,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-071",
+    "file": "public/assets/park/exhibit-071.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-071.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      85,
+      41,
+      426,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "4a77d6a57a285c74a1b3e14a5fd6cab3ce3a10ec430218a312e181a95b59bfd3",
+    "bytes": 42954,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-072",
+    "file": "public/assets/park/exhibit-072.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-072.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      66,
+      41,
+      446,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "ec9eb15bc2f987d453b84c017e3ee2e885dd0915a18f316a271c5c140b67b0a3",
+    "bytes": 48990,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-073",
+    "file": "public/assets/park/exhibit-073.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-073.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      79,
+      41,
+      432,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "f6ed8b072fb8f0fa17eabbf1dfa7d3cade2e32e17894769245fbbd6222d1d602",
+    "bytes": 45298,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-074",
+    "file": "public/assets/park/exhibit-074.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-074.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      86,
+      41,
+      426,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "64c255e1a05eee677cf6eeef01bb7eafeef630759b0d92fa701497ce0e700c56",
+    "bytes": 37926,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-075",
+    "file": "public/assets/park/exhibit-075.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-075.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      100,
+      471,
+      411
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "3e31be1a3be10ae9795218ecd49424a308df302f662f7e1445bf97b20eba9e29",
+    "bytes": 30510,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-076",
+    "file": "public/assets/park/exhibit-076.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-076.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      103,
+      471,
+      408
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "a292ebb54dbed37647cdeecf0a996cf4d20d65e13d7a19960bfb823e488c1575",
+    "bytes": 34492,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-077",
+    "file": "public/assets/park/exhibit-077.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-077.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      55,
+      471,
+      456
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "5a06c0d19bd2d48a841b994d10d3ecc38de43907178c14ba88a358635acda876",
+    "bytes": 38956,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-078",
+    "file": "public/assets/park/exhibit-078.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-078.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      48,
+      471,
+      464
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "1ce369b30eb2c5efcaa77181e6afe15e2baa82ebb8fd5f185de74796cba903a2",
+    "bytes": 51780,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-079",
+    "file": "public/assets/park/exhibit-079.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-079.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      62,
+      41,
+      450,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "ad19f6b49c922b912590ed73db4376cadffe0c71dd7c1ceba82341f6d693c828",
+    "bytes": 36492,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-080",
+    "file": "public/assets/park/exhibit-080.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-080.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      43,
+      471,
+      468
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "9ab5bae9870caac9769df3cf6d6249b1d378390d6a0d14fedc5a01cd7e6cbea6",
+    "bytes": 39320,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-081",
+    "file": "public/assets/park/exhibit-081.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-081.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      76,
+      41,
+      435,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "d9c85728a3e9a8ca0800cc52eb68f9b7b7205c5eccf027586aaa4fabcb143275",
+    "bytes": 36664,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-082",
+    "file": "public/assets/park/exhibit-082.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-082.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      67,
+      471,
+      444
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "3c34f248490d9b2ed1e809c3d6f82e813ffe3b459f3902b3ed9a324ed1f1a563",
+    "bytes": 35128,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-083",
+    "file": "public/assets/park/exhibit-083.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-083.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      51,
+      471,
+      461
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "3afaf647cb19db98cd8b6b842fa61a247afc77e348095469d6f290ea4d356408",
+    "bytes": 39650,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-084",
+    "file": "public/assets/park/exhibit-084.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-084.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      90,
+      41,
+      422,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "9c7e2fba9e726a6c8697c2fee71bc77b83afc7ca2ad92aa8b8ff874eb2afee77",
+    "bytes": 37814,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-085",
+    "file": "public/assets/park/exhibit-085.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-085.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      89,
+      41,
+      422,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "b2c5ed1ad112f5992f9ae9b6b05f166cc2e6b6a07733082ded08ee58f16e5bcc",
+    "bytes": 33218,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-086",
+    "file": "public/assets/park/exhibit-086.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-086.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      135,
+      41,
+      376,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "9a151c9bcc4268333f0db97c39668b567b6273e2fb07272e92d05a2e90f92fca",
+    "bytes": 30132,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-087",
+    "file": "public/assets/park/exhibit-087.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-087.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      141,
+      41,
+      371,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "3e8101cecfb0e78b23bb879559aba28d8829548d624c55fb9445281cd6077435",
+    "bytes": 28378,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-088",
+    "file": "public/assets/park/exhibit-088.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-088.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      74,
+      41,
+      438,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "b28c3ab2476072d58653585705f78037c714d1125975e0847597a81d4a4a0b46",
+    "bytes": 36802,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-089",
+    "file": "public/assets/park/exhibit-089.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-089.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      67,
+      41,
+      445,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "96364e22ba486fc832ef896a82f97009362373434f71ff88eb21fb62f06a9388",
+    "bytes": 41740,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-090",
+    "file": "public/assets/park/exhibit-090.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-090.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      63,
+      471,
+      448
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "86210aa19e3706a54331e7cb41ebe33a1686a7bd14a8de28a753b90977fa029d",
+    "bytes": 36030,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-091",
+    "file": "public/assets/park/exhibit-091.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-091.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      77,
+      471,
+      434
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "a8a8b552516e679e93a8ed76088dbac6a81d28587b22ce90ceaf2f0bd7bc526c",
+    "bytes": 33468,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-092",
+    "file": "public/assets/park/exhibit-092.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-092.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      51,
+      471,
+      460
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "370e13aa2ca2f9a14e6688695b8dbcb7c8df751026a91b5e31df0f3b6327c4f3",
+    "bytes": 40012,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-093",
+    "file": "public/assets/park/exhibit-093.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-093.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      80,
+      41,
+      432,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "3c2853d910d9c3f635d79e43863aa4bf417a88bd4a4c367dcf4ef5515ecc5712",
+    "bytes": 41192,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-094",
+    "file": "public/assets/park/exhibit-094.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-094.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      72,
+      41,
+      440,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "d88e8902d24a37cd1cd8603d175a89ac79191bcf0a91258f87386b4891f5c67e",
+    "bytes": 49028,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-095",
+    "file": "public/assets/park/exhibit-095.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-095.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      149,
+      41,
+      362,
+      471
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "6f46d5f9da9bc91c91167ade75026d5689cd59b78a9aaf94a94da26f428c22de",
+    "bytes": 23296,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-096",
+    "file": "public/assets/park/exhibit-096.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-096.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      63,
+      471,
+      448
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "74a3a2053fd32b4da018e8223b739ad41e7394920b3b464cb0d6866e408518c5",
+    "bytes": 38978,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-097",
+    "file": "public/assets/park/exhibit-097.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-097.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      52,
+      471,
+      460
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "8eef4a988712a10b262faba8eb6e6cbf08ccaea9e495035461d0ad439697bac5",
+    "bytes": 30752,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-098",
+    "file": "public/assets/park/exhibit-098.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-098.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      108,
+      471,
+      403
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "4ba995ccddbacdecdc3c3562b1bf85c6537e983e032387ccf3d0923ee9069a2b",
+    "bytes": 29242,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "exhibit-099",
+    "file": "public/assets/park/exhibit-099.webp",
+    "source": "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-099.webp",
+    "crop": null,
+    "rotation_ccw": 0,
+    "size": [
+      512,
+      512
+    ],
+    "alpha_bbox": [
+      41,
+      84,
+      471,
+      427
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "b7e091d605aec37703d8f6f45248a01c5ac9bd44308d23407e26be13d4b5c8d6",
+    "bytes": 39628,
+    "route": "images_api",
+    "model": "gpt-image-2-1k",
+    "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
   }
 ]

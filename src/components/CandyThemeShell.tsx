@@ -5,12 +5,13 @@ import type {
   Tile,
   HistorySnapshot,
 } from "../types/game";
-import { Art, Icon, IconName, ParkButton, Stars, ParkFlower } from "./ParkArt";
+import { Art, Icon, IconName, ParkButton, Stars, ParkExhibit, getExhibitArt } from "./ParkArt";
 import { GameBoard } from "./GameBoard";
 import { LevelEditor } from "./LevelEditor";
 import { OnboardingGuide } from "./OnboardingGuide";
 import { getParSteps, getStarThresholds, getStarsForSteps } from "../utils/rating";
-import { getFlowerForLevel } from "../data/flowers";
+import { CENTER_DISTRICTS, getCollectionEntry, getLevelContent, WORLD } from "../content";
+import { WorldMapModal } from "./WorldMapModal";
 import {
   ALL_ACHIEVEMENTS,
   loadUnlockedAchievements,
@@ -47,7 +48,8 @@ type Modal =
   | "onboarding"
   | "history"
   | "editor"
-  | "endless";
+  | "endless"
+  | "world";
 interface Props {
   screen: "home" | "play" | "victory";
   level: LevelConfig;
@@ -80,21 +82,22 @@ interface Props {
   victoryReward: { stars: number; coins: number; gems: number };
 }
 const TITLES: Record<Exclude<Modal, "none">, string> = {
-  levels: "星光关卡",
+  levels: "乐园关卡",
   tasks: "每日任务",
   bag: "我的背包",
-  shop: "星光商店",
-  hint: "能量提示",
+  shop: "乐园商店",
+  hint: "通路提示",
   rules: "乐园指南",
   settings: "乐园设置",
-  profile: "冒险手册",
-  flora: "百花图鉴",
+  profile: "修复手册",
+  flora: "乐园图鉴",
   mail: "乐园来信",
   story: "乐园的故事",
-  onboarding: "星光修复指南",
+  onboarding: "修复指南",
   history: "操作足迹",
   editor: "关卡工坊",
   endless: "无尽挑战",
+  world: "乐园宇宙",
 };
 
 export function CandyThemeShell(p: Props) {
@@ -107,7 +110,7 @@ export function CandyThemeShell(p: Props) {
   const [vibration, setVibration] = useState(haptics.isEnabled());
   const [chapter, setChapter] = useState(chapterIndex(p.level.id));
   const [collectionPage, setCollectionPage] = useState(0);
-  const [flowerId, setFlowerId] = useState<number | null>(null);
+  const [exhibitId, setExhibitId] = useState<number | null>(null);
   const reward = p.victoryReward;
   const noticeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const totalStars = p.levels.reduce(
@@ -124,7 +127,7 @@ export function CandyThemeShell(p: Props) {
     if (modal === "onboarding") localStorage.setItem("honeycomb_onboarding_v1", "1");
     p.onCloseLevels();
     setModal("none");
-    setFlowerId(null);
+    setExhibitId(null);
   };
   const open = (name: Modal) => {
     if (name === "settings") {
@@ -132,7 +135,7 @@ export function CandyThemeShell(p: Props) {
       setVibration(haptics.isEnabled());
     }
     setModal(name);
-    setFlowerId(null);
+    setExhibitId(null);
   };
   const flash = (message: string) => {
     setNotice(message);
@@ -177,10 +180,17 @@ export function CandyThemeShell(p: Props) {
   };
   const unlocked = loadUnlockedAchievements();
   const completed = p.clearedLevels.length;
+  const district = CENTER_DISTRICTS[chapter] ?? CENTER_DISTRICTS[0];
+  const districtCleared = p.clearedLevels.filter(
+    (id) => id >= district.range[0] && id <= district.range[1],
+  ).length;
+  const districtTotal = district.range[1] - district.range[0] + 1;
   const lastLevel = p.gameMode === "story" && p.level.id === 99;
+  const levelContent = getLevelContent(p.level.id);
+  const collection = getCollectionEntry(p.level.id);
   const hasSwitch = p.tiles.some((t) => t.type === "switch");
   const hasDiode = p.tiles.some((t) => t.type === "diode");
-  const flower = flowerId == null ? null : getFlowerForLevel(flowerId);
+  const exhibit = exhibitId == null ? null : getCollectionEntry(exhibitId);
 
   const navigation: { icon: IconName; text: string; action: () => void }[] = [
     { icon: "castle", text: "乐园", action: p.onBackHome },
@@ -198,7 +208,7 @@ export function CandyThemeShell(p: Props) {
               <button
                 className="park-avatar"
                 onClick={() => open("profile")}
-                aria-label="冒险手册"
+                aria-label="修复手册"
               >
                 <Art name="sheep" />
               </button>
@@ -239,9 +249,9 @@ export function CandyThemeShell(p: Props) {
               {(
                 [
                   { icon: "mail", label: "乐园来信", modal: "mail" },
-                  { icon: "gift", label: "每日礼物", modal: "tasks" },
+                  { icon: "map", label: "乐园宇宙", modal: "world" },
                   { icon: "task", label: "每日任务", modal: "tasks" },
-                  { icon: "map", label: "百花图鉴", modal: "flora" },
+                  { icon: "gem", label: "乐园图鉴", modal: "flora" },
                 ] as const
               ).map((item) => (
                 <button
@@ -267,7 +277,7 @@ export function CandyThemeShell(p: Props) {
             </div>
             <section
               className="park-home-progress"
-              aria-label={`已修复 ${completed} / 99`}
+              aria-label={`已修复 ${completed} / 99 处设施`}
             >
               <Icon name="star" />
               <div className="park-progress-track">
@@ -287,25 +297,24 @@ export function CandyThemeShell(p: Props) {
               >
                 ‹
               </button>
-              {[
-                p.level.id > 1 ? p.level.id - 1 : 2,
-                p.level.id,
-                p.level.id < 98
-                  ? p.level.id + (p.level.id === 1 ? 2 : 1)
-                  : p.level.id === 98
-                    ? 99
-                    : 97,
-              ].map((id, index) => {
+              {(() => {
+                const first = Math.min(Math.max(p.level.id - 1, 1), 97);
+                return [first, first + 1, first + 2];
+              })().map((id, index) => {
                 const card = p.levels.find((level) => level.id === id)!;
+                const content = getLevelContent(id);
+                const entry = getCollectionEntry(id);
                 return (
                   <button
                     key={index}
-                    className={`park-facility ${index === 1 ? "is-selected" : ""} ${p.clearedLevels.includes(id) ? "is-restored" : "is-unrestored"}`}
+                    className={`park-facility ${id === p.level.id ? "is-selected" : ""} ${p.clearedLevels.includes(id) ? "is-restored" : "is-unrestored"}`}
                     onClick={() => select(id)}
-                    aria-label={`挑战第${id}关`}
+                    aria-label={`修复第${id}处设施`}
                   >
-                    <Art name="carousel" />
-                    <span className="park-preview-level">第 {id} 关</span>
+                    <Art name={entry ? getExhibitArt(entry) : "carousel"} />
+                    <span className="park-preview-level">
+                      {content?.title ?? `第 ${id} 关`}
+                    </span>
                     <Stars
                       value={getBestStars(card, p.clearedLevels, p.bestSteps)}
                     />
@@ -323,7 +332,7 @@ export function CandyThemeShell(p: Props) {
             </div>
             <ParkButton className="park-continue" onClick={p.onStartLevel}>
               <Icon name="play" />
-              {completed === 0 ? "开始挑战" : "继续挑战"}
+              {completed === 0 ? "开始修复" : "继续修复"}
             </ParkButton>
             <nav className="park-nav" aria-label="乐园导航">
               {navigation.map((item, i) => (
@@ -341,7 +350,7 @@ export function CandyThemeShell(p: Props) {
         )}
 
         {p.screen === "play" && (
-          <main className="park-play" aria-label={`第${p.level.id}关玩法`}>
+          <main className="park-play" aria-label={`第${p.level.id}关修复`}>
             <header className="park-play-header">
               <button
                 className="park-round"
@@ -368,8 +377,8 @@ export function CandyThemeShell(p: Props) {
             <section className="park-guide">
               <Art name="sheep" className="park-guide-sheep" />
               <div className="park-guide-card">
-                <strong>连接能量管道</strong>
-                <strong>为旋转木马供能！</strong>
+                <strong>{levelContent?.title ?? "接通能量管道"}</strong>
+                <strong>修复{collection?.name ?? "设施"}！</strong>
               </div>
               <Art name="spirit" className="park-guide-spirit" />
             </section>
@@ -395,10 +404,11 @@ export function CandyThemeShell(p: Props) {
                 simulation={p.simulation}
                 isPeekActive={p.isPeekActive}
                 onTileClick={p.onTileClick}
+                levelId={p.level.id}
               />
               {p.remainingSteps === 0 && !p.simulation.isAllLit && (
                 <div className="park-out-of-steps">
-                  <h2>能量步数用完啦</h2>
+                  <h2>修复步数用完啦</h2>
                   <p>撤销上一步，或重新规划通路</p>
                   <ParkButton onClick={p.onUndo} purple disabled={!canUndo}>
                     撤销一步
@@ -411,7 +421,7 @@ export function CandyThemeShell(p: Props) {
               {p.simulation.isAllLit
                 ? "能量已接通，设施正在苏醒！"
                 : hasSwitch
-                  ? "点击旋转 · 轻点闸门角标切换通断"
+                  ? "点击旋转 · 轻点角标切换通/断"
                   : hasDiode
                     ? "点击旋转 · 能量沿箭头方向流动"
                     : "点击旋转管道，让能量流向设施"}
@@ -446,12 +456,12 @@ export function CandyThemeShell(p: Props) {
         )}
 
         {p.screen === "victory" && (
-          <main className="park-victory" aria-label="设施复苏结算">
-            <h1 className="park-victory-title">设施复苏！</h1>
+          <main className="park-victory" aria-label="设施修复结算">
+            <h1 className="park-victory-title">设施修复！</h1>
             <div className="park-victory-showcase">
               <div className="park-sunrays" />
               <Art name="island" className="park-victory-island" />
-              <Art name="carousel" className="park-victory-carousel" />
+              <Art name={collection ? getExhibitArt(collection) : "carousel"} className="park-victory-carousel" />
               <div className="park-victory-friends">
                 <Art name="sheep-cheer" />
                 <Art name="spirit-cheer" />
@@ -459,21 +469,21 @@ export function CandyThemeShell(p: Props) {
               </div>
             </div>
             <section className="park-victory-panel">
-              <h2 className="park-red-sign">旋转木马 · 成功修复</h2>
+              <h2 className="park-red-sign">{collection?.name ?? "设施"} · 修复完成</h2>
               <div className="park-repair-detail">
                 <ul>
                   <li>连接能量管道</li>
-                  <li>为旋转木马供能</li>
+                  <li>为{collection?.name ?? "设施"}供能</li>
                   <li>设施重新运转</li>
                 </ul>
                 <div className="park-before-after">
-                  <Art name="carousel" className="sleeping" />
+                  <Art name={collection ? getExhibitArt(collection) : "carousel"} className="sleeping" />
                   <span>➜</span>
-                  <Art name="carousel" />
+                  <Art name={collection ? getExhibitArt(collection) : "carousel"} />
                 </div>
               </div>
               <h3 className="park-reward-title">
-                {p.gameMode === "story" ? "通关奖励" : "挑战完成"}
+                {p.gameMode === "story" ? "修复奖励" : "挑战完成"}
               </h3>
               <div className="park-rewards">
                 {(
@@ -521,7 +531,7 @@ export function CandyThemeShell(p: Props) {
 
         {activeModal !== "none" && (
           <div
-            className={`park-modal-backdrop ${activeModal === "levels" || activeModal === "flora" || activeModal === "profile" || activeModal === "editor" ? "is-large" : ""}`}
+            className={`park-modal-backdrop ${activeModal === "levels" || activeModal === "flora" || activeModal === "profile" || activeModal === "editor" || activeModal === "world" ? "is-large" : ""}`}
           >
             <section
               className={`park-modal park-modal-${activeModal}`}
@@ -555,7 +565,7 @@ export function CandyThemeShell(p: Props) {
                     </div>
                     <h3 className="park-section-heading">
                       {CHAPTERS[chapter]}
-                      <span>{completed}/99 已修复</span>
+                      <span>{districtCleared}/{districtTotal} 处设施</span>
                     </h3>
                     <div className="park-level-grid">
                       {p.levels
@@ -565,7 +575,8 @@ export function CandyThemeShell(p: Props) {
                             key={level.id}
                             className={`park-level-card ${p.level.id === level.id ? "current" : ""} ${p.clearedLevels.includes(level.id) ? "cleared" : ""}`}
                             onClick={() => select(level.id)}
-                            aria-label={`进入第${level.id}关`}
+                            aria-label={`修复第${level.id}处设施`}
+                            title={p.bestSteps[level.id] == null ? "尚未修复" : `最佳 ${p.bestSteps[level.id]} 步`}
                           >
                             <b>{level.id}</b>
                             <Stars
@@ -575,11 +586,7 @@ export function CandyThemeShell(p: Props) {
                                 p.bestSteps,
                               )}
                             />
-                            <small>
-                              {p.bestSteps[level.id] == null
-                                ? "尚未修复"
-                                : `最佳 ${p.bestSteps[level.id]} 步`}
-                            </small>
+                            <small>{getLevelContent(level.id)?.title.split("·")[0] ?? "尚未修复"}</small>
                           </button>
                         ))}
                     </div>
@@ -607,10 +614,19 @@ export function CandyThemeShell(p: Props) {
                       className="park-text-link"
                       onClick={() => {
                         p.onCloseLevels();
+                        open("world");
+                      }}
+                    >
+                      世界地图
+                    </button>
+                    <button
+                      className="park-text-link"
+                      onClick={() => {
+                        p.onCloseLevels();
                         open("flora");
                       }}
                     >
-                      查看百花图鉴
+                      查看乐园图鉴
                     </button>
                   </>
                 )}
@@ -621,7 +637,7 @@ export function CandyThemeShell(p: Props) {
                       <Icon name="task" />
                       <div>
                         <h3>每日修复计划</h3>
-                        <p>今日完成任意一关</p>
+                        <p>今日修复任意一处设施</p>
                         <strong>
                           {progress.completedDate === today ? "1" : "0"}/1
                         </strong>
@@ -645,7 +661,7 @@ export function CandyThemeShell(p: Props) {
                         ? "今日已领取"
                         : progress.completedDate === today
                           ? "领取奖励"
-                          : "完成关卡后领取"}
+                          : "完成修复后领取"}
                     </ParkButton>
                   </>
                 )}
@@ -666,7 +682,7 @@ export function CandyThemeShell(p: Props) {
                       使用提示
                     </ParkButton>
                     <p className="park-fine-print">
-                      在挑战中使用，每次消耗 1 个灯泡
+                      在修复中使用，每次消耗 1 个灯泡
                     </p>
                     <ParkButton purple onClick={() => open("shop")}>
                       前往商店
@@ -685,7 +701,7 @@ export function CandyThemeShell(p: Props) {
                       <Icon name="hint" />
                       <div>
                         <h3>提示灯泡 × 1</h3>
-                        <p>为下一次灵感做好准备</p>
+                        <p>为下一次修复做好准备</p>
                       </div>
                       <span className="park-item-price">
                         <Icon name="coin" />
@@ -709,13 +725,17 @@ export function CandyThemeShell(p: Props) {
                 {activeModal === "hint" && (
                   <>
                     <Art name="spirit" className="park-modal-mascot" />
-                    <h3>第 {p.level.id} 关 · 通路提示</h3>
+                    <h3>
+                      {p.gameMode === "story"
+                        ? `第 ${p.level.id} 关 · ${levelContent?.title ?? "通路提示"}`
+                        : p.gameMode === "endless"
+                          ? "无尽挑战 · 通路提示"
+                          : "工坊试玩 · 通路提示"}
+                    </h3>
                     <p className="park-hint-copy">
-                      {p.level.hintText
-                        .replaceAll("水脉", "能量管道")
-                        .replaceAll("灵泉", "能量")
-                        .replaceAll("仙花", "设施")
-                        .replaceAll("花蕾", "设施")}
+                      {p.gameMode === "story"
+                        ? levelContent?.hint ?? "先接主干，再补支路。"
+                        : "先接通主干，再把能量分到每一处设施。"}
                     </p>
                     <ParkButton onClick={close}>继续挑战</ParkButton>
                   </>
@@ -723,7 +743,7 @@ export function CandyThemeShell(p: Props) {
                 {activeModal === "rules" && (
                   <>
                     <p className="park-lead">
-                      转动管道，连接星星能量源与所有设施。
+                      转动管道，连接星光能量源与所有设施。
                     </p>
                     <div className="park-rule-list">
                       {[
@@ -735,17 +755,22 @@ export function CandyThemeShell(p: Props) {
                         {
                           art: "pipe-switch-on",
                           title: "能量闸",
-                          text: "点击管身旋转；点击角标切换通断，每次操作消耗 1 步。",
+                          text: "点击管身旋转；点击角标切换通/断，每次操作消耗 1 步。",
                         },
                         {
                           art: "pipe-diode",
-                          title: "单向管",
+                          title: "单向阀",
                           text: "能量沿箭头流动，反向进入会被阻挡。",
                         },
                         {
                           art: "pipe-cross-off",
                           title: "十字管",
-                          text: "四个方向均可连接，规划好各条支路。",
+                          text: "四个方向均可连接；它四向对称，旋转不会改变接法。",
+                        },
+                        {
+                          art: "pipe-line-off",
+                          title: "固定管道",
+                          text: "带锁标记的管道不能旋转，只能按它现在的方向规划。",
                         },
                       ].map((rule) => (
                         <div key={rule.title}>
@@ -761,11 +786,11 @@ export function CandyThemeShell(p: Props) {
                       本关 {getParSteps(p.level)} 步以内获得四星，{starThresholds.three} 步以内三星，
                       {starThresholds.two} 步以内二星，通关至少一星。每次挑战可回溯 3 次，重试后补满。
                     </p>
-                    <ParkButton onClick={close}>开始连接</ParkButton>
+                    <ParkButton onClick={close}>开始修复</ParkButton>
                   </>
                 )}
                 {activeModal === "onboarding" && (
-                  <OnboardingGuide isOpen levelTitle={p.level.title} maxSteps={p.level.maxSteps}
+                  <OnboardingGuide isOpen levelTitle={levelContent?.title ?? p.level.title ?? ''} maxSteps={p.level.maxSteps}
                     parSteps={p.level.parSteps} onClose={close} onOpenRules={() => { close(); open("rules"); }} />
                 )}
                 {activeModal === "settings" && (
@@ -806,8 +831,8 @@ export function CandyThemeShell(p: Props) {
                     <div className="park-profile-intro">
                       <Art name="sheep" />
                       <div>
-                        <h3>星光修复师</h3>
-                        <p>已修复 {completed} 座设施</p>
+                        <h3>乐园修复师</h3>
+                        <p>已修复 {completed} 处设施</p>
                         <p>收集星星 {totalStars} 颗</p>
                         <p>
                           成就 {Object.keys(unlocked).length}/
@@ -841,33 +866,33 @@ export function CandyThemeShell(p: Props) {
                 )}
                 {activeModal === "flora" && (
                   <>
-                    {flower ? (
+                    {exhibit ? (
                       <div className="park-flower-detail">
-                        <ParkFlower
-                          flower={flower}
-                          unlocked={p.clearedLevels.includes(flowerId!)}
+                        <ParkExhibit
+                          entry={exhibit}
+                          unlocked={p.clearedLevels.includes(exhibitId!)}
                           large
                         />
-                        <h3>{flower.name}</h3>
-                        <p>{flower.alias}</p>
+                        <h3>{exhibit.name}</h3>
+                        <p>{exhibit.alias}</p>
                         <p>
-                          {p.clearedLevels.includes(flowerId!)
-                            ? flower.lore
-                            : `完成第 ${flowerId} 关，唤醒这朵花`}
+                          {p.clearedLevels.includes(exhibitId!)
+                            ? exhibit.lore
+                            : `完成第 ${exhibitId} 关，修复这件藏品`}
                         </p>
-                        <ParkButton onClick={() => select(flowerId!)}>
-                          前往第 {flowerId} 关
+                        <ParkButton onClick={() => select(exhibitId!)}>
+                          前往第 {exhibitId} 关
                         </ParkButton>
                         <button
                           className="park-text-link"
-                          onClick={() => setFlowerId(null)}
+                          onClick={() => setExhibitId(null)}
                         >
                           返回图鉴
                         </button>
                       </div>
                     ) : (
                       <>
-                        <p>修复乐园，唤醒 99 朵伴生花。已收集 {completed}/99</p>
+                        <p>修复乐园，收集 99 件乐园藏品。已收集 {completed}/99</p>
                         <div className="park-flower-grid">
                           {p.levels
                             .slice(
@@ -875,14 +900,15 @@ export function CandyThemeShell(p: Props) {
                               collectionPage * 20 + 20,
                             )
                             .map((level) => {
-                              const entry = getFlowerForLevel(level.id);
+                              const entry = getCollectionEntry(level.id);
+                              if (!entry) return null;
                               return (
                                 <button
                                   key={level.id}
-                                  onClick={() => setFlowerId(level.id)}
+                                  onClick={() => setExhibitId(level.id)}
                                 >
-                                  <ParkFlower
-                                    flower={entry}
+                                  <ParkExhibit
+                                    entry={entry}
                                     unlocked={p.clearedLevels.includes(
                                       level.id,
                                     )}
@@ -920,9 +946,7 @@ export function CandyThemeShell(p: Props) {
                   <>
                     <Art name="rabbit" className="park-modal-mascot" />
                     <h3>欢迎来到能量管道乐园</h3>
-                    <p className="park-hint-copy">
-                      星光暂时熄灭，旋转木马也停下了脚步。与小羊、白兔和能量精灵一起，连接散落的管道，让乐园重新闪耀。
-                    </p>
+                    <p className="park-hint-copy">{WORLD.mail}</p>
                     <ParkButton onClick={() => open("story")}>
                       阅读乐园故事
                     </ParkButton>
@@ -931,12 +955,9 @@ export function CandyThemeShell(p: Props) {
                 {activeModal === "story" && (
                   <>
                     <Art name="island" className="park-story-island" />
-                    <p>
-                      云海深处，曾有一座由星光驱动的乐园。一次流星雨打乱了能量管道，设施渐渐沉睡，伴生花也合拢了花瓣。
-                    </p>
-                    <p>
-                      带上护目镜，跟随能量精灵。从第一束星光开始，转动管道，修复设施，让九十九朵花再次盛开。
-                    </p>
+                    {WORLD.intro.map((text, index) => (
+                      <p key={index}>{text}</p>
+                    ))}
                     <ParkButton
                       onClick={() => {
                         close();
@@ -967,7 +988,7 @@ export function CandyThemeShell(p: Props) {
                               : `第 ${snapshot.stepNumber} 步`}
                           </strong>
                           <span>
-                            {snapshot.description.replaceAll("水渠", "管道")}
+                            {snapshot.description}
                           </span>
                           <small>
                             {snapshot.litCount}/{snapshot.totalBulbs} 设施 ·
@@ -1004,10 +1025,19 @@ export function CandyThemeShell(p: Props) {
                           p.onStartEndless(mode.goals);
                         }}
                       >
-                        {mode.name} · {mode.goals} 座设施
+                        {mode.name} · {mode.goals} 处设施
                       </ParkButton>
                     ))}
                   </>
+                )}
+                {activeModal === "world" && (
+                  <WorldMapModal
+                    cleared={p.clearedLevels}
+                    onEnterCenter={() => {
+                      close();
+                      p.onOpenLevels();
+                    }}
+                  />
                 )}
                 {activeModal === "editor" && (
                   <div>

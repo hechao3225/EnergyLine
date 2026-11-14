@@ -17,8 +17,8 @@ export function OnboardingGuide(p: OnboardingGuideProps) {
   const slides = [
     { title: "点一下管道，旋转 90°", art: "pipe-corner-off",
       copy: "每次旋转消耗 1 步。把相邻接头对齐，让能量继续前进。", note: "每次挑战可回溯 3 次，重试后重新补满。" },
-    { title: "把能量送到每一座设施", art: "pipe-source",
-      copy: "从星星能量源出发，连接所有灰色设施。设施全部亮起即可通关。", note: "先连主干，再处理支路。能量闸的管身可以旋转，角标切换通断。" },
+    { title: "把能量送到每一处设施", art: "pipe-source",
+      copy: "从星光能量源出发，连接所有灰色设施。设施全部亮起即可完成修复。", note: "先接主干，再处理支路。能量闸的管身可以旋转，角标切换通断。" },
     { title: "用最少步数点亮第四颗星", art: "icon-star",
       copy: `本关最多 ${p.maxSteps} 步，最少 ${getParSteps(p)} 步。达到最少步数即可获得四星。`, note: "通关至少一星；越接近最少步数，获得的星星越多。" },
   ];
@@ -32,7 +32,7 @@ export function OnboardingGuide(p: OnboardingGuideProps) {
     <p>{current.note}</p>
     <div className="park-mode-links">
       <ParkButton purple disabled={slide === 0} onClick={() => setSlide(slide - 1)}>上一步</ParkButton>
-      <ParkButton onClick={() => slide === 2 ? p.onClose() : setSlide(slide + 1)}>{slide === 2 ? "开始连接" : "下一步"}</ParkButton>
+      <ParkButton onClick={() => slide === 2 ? p.onClose() : setSlide(slide + 1)}>{slide === 2 ? "开始修复" : "下一步"}</ParkButton>
     </div>
     <button className="park-text-link" onClick={p.onClose}>跳过引导</button>
     <button className="park-text-link" onClick={p.onOpenRules}>查看完整规则</button>

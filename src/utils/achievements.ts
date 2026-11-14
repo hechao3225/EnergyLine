@@ -13,129 +13,129 @@ const STATS_STORAGE_KEY = 'honeycomb_player_stats_v1';
 export const ALL_ACHIEVEMENTS: Achievement[] = [
   {
     id: 'ten_steps_clear',
-    title: '十步内过关',
-    description: '单关在 10 步及以内成功点亮全网并通关',
+    title: '极速修复',
+    description: '单关在 10 步及以内完成一次设施修复',
     category: 'efficiency',
     icon: 'Zap',
     rarity: 'rare',
-    hint: '精简操作，10 步之内直捣黄龙',
+    hint: '精简操作，10 步之内接通全部设施',
   },
   {
     id: 'undo_master',
-    title: '撤销达人',
-    description: '单关中多次回溯推演（≥3次撤销）仍成功破局，或累计撤销超过 15 次',
+    title: '回溯专家',
+    description: '单关中 3 次回溯后仍完成修复，或累计回溯超过 15 次',
     category: 'skill',
     icon: 'Undo2',
     rarity: 'rare',
-    hint: '善用回溯尝试各种拓扑可能性',
+    hint: '善用回溯尝试不同的接法',
   },
   {
     id: 'consecutive_perfect',
-    title: '连续完美通关',
-    description: '连续 3 个关卡拿到 3 星及以上评价，步步精省',
+    title: '连续完美',
+    description: '连续 3 个不同关卡拿到 3 星及以上评价',
     category: 'skill',
     icon: 'Flame',
     rarity: 'epic',
-    hint: '保持高水准，连续三局拿下三星以上评价',
+    hint: '连续三处设施都拿到三星以上',
   },
   {
     id: 'first_spark',
-    title: '初次启明',
-    description: '成功点亮任意第 1 个关卡的所有灯泡',
+    title: '第一束星光',
+    description: '首次完成任意一处设施的修复',
     category: 'progress',
     icon: 'Sparkles',
     rarity: 'common',
-    hint: '点亮第一颗灯泡的起点',
+    hint: '点亮第一处设施',
   },
   {
     id: 'circuit_adept',
-    title: '闭合先锋',
-    description: '成功攻克第 5 关，掌握双路分流技巧',
+    title: '乐园学徒',
+    description: '完成第 5 关，掌握双路分流',
     category: 'progress',
     icon: 'Cpu',
     rarity: 'common',
-    hint: '在经典关卡中顺利推进至第 5 关',
+    hint: '推进到第 5 关',
   },
   {
     id: 'master_engineer',
-    title: '蜂巢工程师',
-    description: '成功通过经典关卡第 10 关，驾驭复杂网格拓扑',
+    title: '设施工程师',
+    description: '完成第 10 关，驾驭更复杂的管道网络',
     category: 'progress',
     icon: 'Award',
     rarity: 'rare',
-    hint: '通过第 10 关展现工程才华',
+    hint: '通过第 10 关',
   },
   {
     id: 'circuit_grandmaster',
-    title: '特级电气师',
-    description: '累计攻克 20 个及以上经典关卡',
+    title: '乐园大师',
+    description: '累计完成 20 个关卡',
     category: 'progress',
     icon: 'Trophy',
     rarity: 'epic',
-    hint: '持续探索蜂巢深度供能网络',
+    hint: '持续修复乐园里的设施',
   },
   {
     id: 'switch_operator',
-    title: '通断掌控',
-    description: '在包含可切换开关的关卡中调整开关状态并通关',
+    title: '闸门掌控',
+    description: '操作能量闸并完成一次修复',
     category: 'skill',
     icon: 'Shield',
     rarity: 'common',
-    hint: '通过切换开关调控分支电流',
+    hint: '扳动能量闸，接通断开的回路',
   },
   {
     id: 'time_traveler',
-    title: '时空跃迁',
-    description: '在时间轴面板中直接点击历史节点回溯并最终完成电路',
+    title: '时光回溯',
+    description: '用操作足迹跳转后完成修复',
     category: 'skill',
     icon: 'RotateCcw',
     rarity: 'rare',
-    hint: '点击历史时间轴上的任意卡片进行大跨度跃迁',
+    hint: '跳到之前的步骤，再完成修复',
   },
   {
     id: 'speed_optimizer',
-    title: '算无遗策',
-    description: '以本关最少步数通关，点亮闪耀的第 4 颗星',
+    title: '完美回路',
+    description: '以本关最少步数完成修复，点亮第四颗星',
     category: 'efficiency',
     icon: 'Star',
     rarity: 'rare',
-    hint: '把每一步都用在刀刃上，直取 4 星',
+    hint: '每一步都用在刀刃上',
   },
   {
     id: 'perfectionist',
     title: '完美主义者',
-    description: '在至少 5 个不同关卡中获得 3 星及以上评价',
+    description: '在至少 5 个不同关卡拿到 3 星及以上评价',
     category: 'efficiency',
     icon: 'StarHalf',
     rarity: 'epic',
-    hint: '精益求精，在 5 关拿下高星评价',
+    hint: '精益求精，在 5 关拿下高星',
   },
   {
     id: 'endless_scout',
     title: '无尽探险家',
-    description: '在无尽挑战模式中取得 3 关连胜',
+    description: '在无尽挑战中取得 3 关连胜',
     category: 'endless',
     icon: 'Compass',
     rarity: 'rare',
-    hint: '在随机生成的无尽关卡中连过 3 关',
+    hint: '在无尽挑战中连过 3 关',
   },
   {
     id: 'endless_champion',
     title: '无尽领航者',
-    description: '在无尽挑战模式中达成 7 关连胜壮举',
+    description: '在无尽挑战中达成 7 关连胜',
     category: 'endless',
     icon: 'Crown',
     rarity: 'epic',
-    hint: '在无尽随机挑战中一鼓作气达成 7 连胜',
+    hint: '一鼓作气达成 7 连胜',
   },
   {
     id: 'hall_of_fame',
-    title: '荣誉大满贯',
-    description: '累计解锁其他至少 8 个成就，步入蜂巢荣誉殿堂',
+    title: '乐园荣誉',
+    description: '累计解锁其他至少 8 个成就',
     category: 'progress',
     icon: 'Medal',
     rarity: 'legendary',
-    hint: '收集丰硕的奖杯与成就勋章',
+    hint: '收集丰硕的乐园勋章',
   },
 ];
 
@@ -165,6 +165,7 @@ export function loadPlayerStats(): PlayerStats {
     clearedLevelIds: [],
     threeStarLevelIds: [],
     consecutivePerfect: 0,
+    consecutivePerfectLevelIds: [],
     maxConsecutivePerfect: 0,
     totalUndos: 0,
     maxEndlessStreak: 0,
@@ -180,6 +181,7 @@ export function loadPlayerStats(): PlayerStats {
       ...parsed,
       clearedLevelIds: Array.isArray(parsed.clearedLevelIds) ? parsed.clearedLevelIds : [],
       threeStarLevelIds: Array.isArray(parsed.threeStarLevelIds) ? parsed.threeStarLevelIds : [],
+      consecutivePerfectLevelIds: Array.isArray(parsed.consecutivePerfectLevelIds) ? parsed.consecutivePerfectLevelIds : [],
     };
   } catch {
     return defaultStats;
@@ -383,13 +385,18 @@ export function checkVictoryAchievements(ctx: VictoryCheckContext): {
       if (!stats.threeStarLevelIds.includes(ctx.levelId)) {
         stats.threeStarLevelIds.push(ctx.levelId);
       }
-      stats.consecutivePerfect += 1;
-      if (stats.consecutivePerfect > stats.maxConsecutivePerfect) {
-        stats.maxConsecutivePerfect = stats.consecutivePerfect;
+      const streakIds = stats.consecutivePerfectLevelIds;
+      if (!streakIds.includes(ctx.levelId)) {
+        streakIds.push(ctx.levelId);
+        stats.consecutivePerfect = streakIds.length;
+        if (stats.consecutivePerfect > stats.maxConsecutivePerfect) {
+          stats.maxConsecutivePerfect = stats.consecutivePerfect;
+        }
       }
     } else {
       // Broken streak
       stats.consecutivePerfect = 0;
+      stats.consecutivePerfectLevelIds = [];
     }
 
     if (ctx.stepsUsed <= 10) {
@@ -434,12 +441,12 @@ export function checkVictoryAchievements(ctx: VictoryCheckContext): {
   }
 
   // 5. 闭合先锋 (Level 5+)
-  if (!ctx.isEndless && (ctx.levelId >= 5 || stats.clearedLevelIds.includes(5))) {
+  if (!ctx.isEndless && stats.clearedLevelIds.includes(5)) {
     unlockCandidate('circuit_adept');
   }
 
-  // 6. 蜂巢工程师 (Level 10+)
-  if (!ctx.isEndless && (ctx.levelId >= 10 || stats.clearedLevelIds.includes(10))) {
+  // 6. 设施工程师 (Level 10+)
+  if (!ctx.isEndless && stats.clearedLevelIds.includes(10)) {
     unlockCandidate('master_engineer');
   }
 

@@ -44,7 +44,7 @@ export function LevelEditor({ onPlayCustomLevel }: Props) {
   const [tiles, setTiles] = useState(initialTiles);
   const [brush, setBrush] = useState<TileType>("line");
   const [rotation, setRotation] = useState(0);
-  const [title, setTitle] = useState("我的星光乐园");
+  const [title, setTitle] = useState("我的乐园展区");
   const [maxSteps, setMaxSteps] = useState(30);
   const [code, setCode] = useState("");
   const [message, setMessage] = useState("");
@@ -54,9 +54,9 @@ export function LevelEditor({ onPlayCustomLevel }: Props) {
     id: 999,
     code: "DIY",
     totalLevels: 1,
-    title: title.trim() || "我的星光乐园",
+    title: title.trim() || "我的乐园展区",
     hintText: "转动管道，让能量抵达每一座设施。",
-    winText: "星光乐园修复成功！",
+    winText: "展区修复成功！",
     maxSteps,
     gridRows: 6,
     gridCols: 6,
@@ -108,7 +108,7 @@ export function LevelEditor({ onPlayCustomLevel }: Props) {
       )
         throw new Error("invalid");
       setTiles(imported.tiles);
-      setTitle(imported.title);
+      setTitle(imported.title ?? '我的乐园展区');
       setMaxSteps(imported.maxSteps);
       setShareOpen(false);
       setMessage("关卡已导入");

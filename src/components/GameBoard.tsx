@@ -21,6 +21,7 @@ export function GameBoard({
   isPeekActive,
   onTileClick,
   interactive = true,
+  levelId,
 }: GameBoardProps) {
   const cells = new Map(tiles.map((tile) => [`${tile.row},${tile.col}`, tile]));
   return (
@@ -47,6 +48,7 @@ export function GameBoard({
               isPeekActive={isPeekActive}
               onClick={onTileClick}
               interactive={interactive}
+              levelId={levelId}
             />
           ) : (
             <div className="park-tile" key={`space-${i}`} />

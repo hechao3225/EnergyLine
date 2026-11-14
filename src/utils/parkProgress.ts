@@ -1,5 +1,6 @@
 import type { LevelConfig } from "../types/game";
 import { getStarsForRecord } from "./rating";
+import { CENTER_DISTRICTS } from "../content/zones";
 
 export interface ParkProgress {
   coins: number;
@@ -92,13 +93,7 @@ export function consumeHint(progress: ParkProgress): ParkProgress {
     ? { ...progress, hints: progress.hints - 1 }
     : progress;
 }
-export const CHAPTERS = [
-  "失落乐园",
-  "星光花园",
-  "云端奇境",
-  "虹彩天桥",
-  "梦幻之巅",
-];
+export const CHAPTERS = CENTER_DISTRICTS.map((district) => district.name);
 export function chapterIndex(id: number): number {
   return Math.min(4, Math.floor((id - 1) / 20));
 }

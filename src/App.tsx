@@ -267,8 +267,8 @@ export default function App() {
       id: -index,
       code: `∞${index}`,
       totalLevels: 0,
-      title: `星光谜题 ${index}`,
-      winText: "又一束星光被唤醒！",
+      title: `无尽挑战 ${index}`,
+      winText: "又一束星光被接通！",
       gridRows: 6,
       gridCols: 6,
     };
