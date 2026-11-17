@@ -1,0 +1,67 @@
+{
+  "results": {
+    "t1": {
+      "seams": 4,
+      "board": "true",
+      "caption": "环面：边界相接——从右边出去，会从左边回来",
+      "steps": "2",
+      "seamRects": [
+        {
+          "x": 93,
+          "y": 235,
+          "width": 26,
+          "height": 12
+        },
+        {
+          "x": 93,
+          "y": 588,
+          "width": 26,
+          "height": 12
+        },
+        {
+          "x": 12,
+          "y": 492,
+          "width": 12,
+          "height": 26
+        },
+        {
+          "x": 365,
+          "y": 492,
+          "width": 12,
+          "height": 26
+        }
+      ]
+    },
+    "weld": {
+      "captured": true,
+      "marks": 8,
+      "caption": "焊死：先修远端，通电后立即锁定",
+      "lockedButtonDisabled": true
+    },
+    "colors": {
+      "symbols": [
+        "◆",
+        "◆",
+        "●",
+        "●"
+      ],
+      "tileWidth": 59,
+      "caption": "双色 + 焊死：分色接通，通电即锁",
+      "captionFont": "14.82px",
+      "symbolFont": "12.09px",
+      "overflowX": false,
+      "clippedText": []
+    },
+    "wrapWeld": {
+      "seams": 4,
+      "welded": 12,
+      "caption": "环面 + 焊死：远端起手，跨缝接通即锁"
+    },
+    "compact": {
+      "bodyOverflowX": false,
+      "tileWidth": 54,
+      "captionHeight": 16
+    }
+  },
+  "errors": []
+}

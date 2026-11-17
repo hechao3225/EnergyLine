@@ -295,7 +295,20 @@ export function solveMinTaps(
     : Math.max(1, Math.min(bulbCount, level.goal ?? bulbCount));
   const batteryIdx = cells.map((t, i) => (t.type === 'battery' ? i : -1)).filter((i) => i >= 0);
 
-  const costOf = (b: number, s: number) => R[board.idx(b, 0, s)];
+  const allowedMaskFor = (b: number) => {
+    if (!level.rules?.colors || level.rules.colors < 2) return S_COUNT - 1;
+    const sourceColor = cells[b].color ?? 0;
+    let allowed = 0;
+    for (const [cellIndex, bit] of board.bulbBit) {
+      if ((cells[cellIndex].color ?? 0) === sourceColor) allowed |= bit;
+    }
+    return allowed;
+  };
+
+  const costOf = (b: number, s: number) => {
+    if (s & ~allowedMaskFor(b)) return INF;
+    return R[board.idx(b, 0, s)];
+  };
 
   // 多电池 = Steiner 森林：把设施集合划分给各电池
   const choicePrev: Int16Array[] = [];
@@ -413,6 +426,6 @@ export function applyPlan(level: LevelConfig, plan: SolveResult['plan']) {
       switchClosed: p.toggle ? true : t.switchClosed,
     };
   });
-  const sim = simulateCircuit(tiles, level.gridRows, level.gridCols);
+  const sim = simulateCircuit(tiles, level.gridRows, level.gridCols, level.rules);
   return { tiles, taps, isAllLit: sim.isAllLit, lit: sim.litCount, total: sim.totalBulbs };
 }

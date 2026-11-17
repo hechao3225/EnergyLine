@@ -8,42 +8,43 @@
  */
 
 import { DEFAULT_LEVELS } from '../src/data/defaultLevels';
-import { findHint, describeHint, supportsHintEngine } from '../src/utils/hint-engine';
+import {
+  applyHintAction,
+  findHint,
+  describeHint,
+  supportsHintEngine,
+} from '../src/utils/hint-engine';
 import { LAB_LEVELS } from '../src/data/labLevels';
 import type { HintMove } from '../src/utils/hint-engine';
-import { solveMinTaps } from '../src/utils/hint-solver';
+import { solveRuleLevel } from '../src/utils/rule-solver';
 import type { LevelConfig, Tile } from '../src/types/game';
 
-function applyMove(tiles: Tile[], move: HintMove): Tile[] {
-  return tiles.map((tile) => {
-    if (tile.id !== move.tileId) return tile;
-    if (move.toggle) return { ...tile, switchClosed: true };
-    return { ...tile, rotation: tile.rotation + 90 };
-  });
-}
-
 function expectOptimalStep(level: LevelConfig, tiles: Tile[], where: string) {
-  const before = solveMinTaps({ ...level, tiles }).par;
+  const before = solveRuleLevel({ ...level, tiles })?.par;
+  if (before === undefined) throw new Error(`${where} 没有规则解`);
   const move = findHint(level, tiles, level.maxSteps);
   if (!move) throw new Error(`${where} 没有给出提示`);
   if (move.stepsNeeded !== before) {
     throw new Error(`${where} 提示的剩余步数 ${move.stepsNeeded} 与最优解 ${before} 不一致`);
   }
-  const after = solveMinTaps({ ...level, tiles: applyMove(tiles, move) }).par;
+  const after = solveRuleLevel({
+    ...level,
+    tiles: applyHintAction(level, tiles, move),
+  })?.par;
   if (after !== before - 1) {
     throw new Error(`${where} 提示的那一步不在最优解上（${before} → ${after}）：${describeHint(move)}`);
   }
   return move;
 }
 
-console.log('=== 1. 全部 99 关：提示都落在最优解上（新机制关走文案） ===');
+console.log('=== 1. 全部 99 关：提示都落在最优解上 ===');
 let engineLevels = 0;
 for (const level of DEFAULT_LEVELS) {
   if (!supportsHintEngine(level)) continue;
   expectOptimalStep(level, level.tiles, `L${level.id}`);
   engineLevels++;
 }
-console.log(`[PASS] ${engineLevels} 关逐步验证通过（${DEFAULT_LEVELS.length - engineLevels} 关新机制退回文案）`);
+console.log(`[PASS] ${engineLevels} 关逐步验证通过`);
 
 console.log('=== 2. 乱盘：玩家偏离最优解后，提示仍然对应当前盘面 ===');
 const scrambles: [number, number][] = [[5, 1], [10, 2], [30, 3]];
@@ -65,12 +66,14 @@ const shortMove = findHint(tight, tight.tiles, 0);
 if (!shortMove || shortMove.reachable) throw new Error('剩余 0 步时不应判定为可达');
 console.log(`[PASS] 剩余 0 步：提示说明还差 ${shortMove.stepsNeeded} 步，且不判定可达`);
 
-console.log('=== 4. 新机制关卡自动退回文案提示 ===');
+console.log('=== 4. 规则关与联动轴进入提示引擎 ===');
 const axisLevel = LAB_LEVELS.find((level) => level.tiles.some((tile) => tile.axis));
-if (axisLevel && supportsHintEngine(axisLevel)) throw new Error('联动轴关卡不该走提示引擎：求解器不认整组同转');
+if (!axisLevel || !supportsHintEngine(axisLevel)) throw new Error('联动轴关卡应支持提示引擎');
 const ruleLevel = LAB_LEVELS.find((level) => level.rules);
-if (ruleLevel && supportsHintEngine(ruleLevel)) throw new Error('带 rules 的关卡不该走提示引擎：求解器不认双色/禁环');
+if (!ruleLevel || !supportsHintEngine(ruleLevel)) throw new Error('规则关卡应支持提示引擎');
 if (!supportsHintEngine(DEFAULT_LEVELS[0])) throw new Error('主线关卡应当支持提示引擎');
-console.log('[PASS] 联动轴/双色/禁环关退回文案，其余主线关走引擎');
+expectOptimalStep(axisLevel, axisLevel.tiles, axisLevel.code);
+expectOptimalStep(ruleLevel, ruleLevel.tiles, ruleLevel.code);
+console.log('[PASS] 联动轴与规则关都能给出可执行最优提示');
 
 console.log('=== 提示引擎测试通过 ===');

@@ -103,25 +103,36 @@ const P3: Put[] = [
 ];
 
 /**
- * C1 双色 · 不能混：红源(3,0) 走上面一行，蓝源(5,0) 走下面一行，
- * 中间 (4,3) 那节直管把两条路连在一起——一接上就串色，两个设施都不亮。
- * 解法是把两侧的三通拧开，让它们各自闭口。
+ * C1 / C2 双色基准：红蓝两条独立主路，中间一格竖起来就会把两色接通。
+ * 正确解只修两条主路，额外那格保持横向断路。C2 再叠加焊死，
+ * 必须从远端往源头修，避免第一条已通电的管子提前锁住。
  */
-const COLOR1: Put[] = [
-  [3, 0, "battery", 0, { locked: true, color: 0 }],
-  [3, 1, "line", 270],
-  [3, 2, "line", 270],
-  [3, 3, "t_shape", 0],
-  [3, 4, "line", 270],
-  [3, 5, "bulb", 0, { locked: true, color: 0 }],
+const COLOR_WELD: Put[] = [
+  [2, 0, "battery", 0, { locked: true, color: 0 }],
+  [2, 1, "line", 90],
+  [2, 2, "line", 90],
+  [2, 3, "line", 90],
+  [2, 4, "line", 90],
+  [2, 5, "bulb", 0, { locked: true, color: 0 }],
+  [4, 0, "battery", 0, { locked: true, color: 1 }],
+  [4, 1, "line", 90],
+  [4, 2, "line", 90],
   [4, 3, "line", 90],
-  [5, 3, "t_shape", 180],
-  [5, 4, "line", 270],
-  [5, 5, "bulb", 0, { locked: true, color: 1 }],
-  [5, 0, "battery", 0, { locked: true, color: 1 }],
-  [5, 1, "line", 270],
-  [5, 2, "line", 270],
+  [4, 4, "line", 90],
+  [4, 5, "bulb", 0, { locked: true, color: 1 }],
+  [3, 2, "line", 0],
 ];
+
+const WRAP_WELD_LEVEL: LevelConfig = {
+  ...TORUS_TEST_LEVELS[0],
+  id: 934,
+  code: "W-1",
+  title: "组合 · 跨缝后焊死",
+  subtitle: "组合探针",
+  hintText: "先判断哪一段要跨缝，再从远端往近端修；通电后的管子会立刻锁住。",
+  winText: "试验通过：跨缝接通，顺序也没有焊错。",
+  rules: { wrap: true, weld: true },
+};
 
 /**
  * S1 / S2 取舍关：一根轴同时挂着红路和蓝路的一格。
@@ -277,14 +288,14 @@ export const LAB_LEVELS: LevelConfig[] = [
     totalLevels: 99,
     title: "双色 · 不能混",
     subtitle: "双色",
-    hintText: "红源只喂红灯，蓝源只喂蓝灯；两色走进同一根管子，两边都会灭。",
+    hintText: "红源只喂红灯，蓝源只喂蓝灯；中间那格竖起来会把两种能量串在一起。",
     winText: "试验通过：两条颜色各走各的。",
-    parSteps: 10,
+    parSteps: 8,
     maxSteps: 12,
     gridRows: 6,
     gridCols: 6,
     rules: { colors: 2 },
-    tiles: board(COLOR1),
+    tiles: board(COLOR_WELD),
   },
   {
     id: 905,
@@ -357,12 +368,27 @@ export const LAB_LEVELS: LevelConfig[] = [
     subtitle: "禁环",
     hintText: "中间那节管子接上两边就会闭成一个环，整段过载——让它空着。",
     winText: "试验通过：知道什么时候不接。",
-    parSteps: 9,
+    parSteps: 4,
     maxSteps: 9,
     gridRows: 6,
     gridCols: 6,
     rules: { noCycle: true },
     tiles: board(X1),
+  },
+  {
+    id: 910,
+    code: "C2",
+    totalLevels: 99,
+    title: "组合 · 串色后焊死",
+    subtitle: "组合探针",
+    hintText: "两条颜色各走各的；先修远端，再往回接，通电的管子会立刻锁住。",
+    winText: "试验通过：分色接通，也没有焊错顺序。",
+    parSteps: 8,
+    maxSteps: 12,
+    gridRows: 6,
+    gridCols: 6,
+    rules: { colors: 2, weld: true },
+    tiles: board(COLOR_WELD),
   },
   // 齿轮咬合试验（scripts/gear-gen.ts 生成）：G1–G3，id 911–913
   ...GEAR_TEST_LEVELS,
@@ -372,4 +398,5 @@ export const LAB_LEVELS: LevelConfig[] = [
   ...WELD_TEST_LEVELS,
   // 齿轮 + 焊死组合（scripts/gear-weld-gen.ts 生成）：K1–K3，id 941–943
   ...GEAR_WELD_LEVELS,
+  WRAP_WELD_LEVEL,
 ];

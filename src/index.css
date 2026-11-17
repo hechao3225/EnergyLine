@@ -850,6 +850,23 @@ img {
   mix-blend-mode: screen;
   box-shadow: inset 0 0 1.4cqw #fff6;
 }
+.park-color-mark::after {
+  content: attr(data-symbol);
+  position: absolute;
+  right: 5%;
+  top: 3%;
+  min-width: 31%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fffdf2;
+  color: #23151b;
+  font-size: 3.1cqw;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: 0 0 0.7cqw #fff8;
+}
 /* 双色能量：整格底色就是能量色，串色变紫 */
 .park-tile.color-1::before {
   background: url("/assets/park/tile.webp") center/100% 100%,
@@ -1264,6 +1281,45 @@ img {
   box-shadow: 0 0 0.7cqw #d8f0fa99;
 }
 .park-tile.is-welded .park-tile-rotate { cursor: default; }
+.park-tile:has(.park-weld-flash)::after {
+  content: "";
+  position: absolute;
+  inset: -7%;
+  border-radius: 22%;
+  border: 0.6cqw solid #eefcff;
+  box-shadow:
+    0 0 2.2cqw #a8efff,
+    inset 0 0 1.4cqw #ffffff;
+  animation: weldFlash 0.76s ease-out both;
+  pointer-events: none;
+  z-index: 6;
+}
+.park-weld-flash {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 7;
+  padding: 0.8cqw 1.6cqw;
+  border-radius: 999px;
+  background: #16313bd9;
+  color: #f2fdff;
+  font-size: 2.8cqw;
+  font-weight: 900;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  animation: weldLabel 0.76s ease-out both;
+  pointer-events: none;
+}
+@keyframes weldFlash {
+  0% { opacity: 0; transform: scale(0.72); }
+  28% { opacity: 1; transform: scale(1.08); }
+  100% { opacity: 0; transform: scale(1.18); }
+}
+@keyframes weldLabel {
+  0% { opacity: 0; transform: translate(-50%, -28%) scale(0.8); }
+  32% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -78%) scale(0.96); }
+}
 
 /* 环面：边上这一格会从对面折回来（外缘刻线） */
 .park-wrap-tick {
@@ -1283,6 +1339,53 @@ img {
 .park-board.is-wrap {
   outline: 0.4cqw dashed #7ef6ff66;
   outline-offset: 0.3cqw;
+}
+.park-wrap-ghosts {
+  position: absolute;
+  inset: 1.8%;
+  z-index: 6;
+  pointer-events: none;
+}
+.park-wrap-ghost {
+  position: absolute;
+  display: block;
+  background: linear-gradient(90deg, #fff7ae, #7ef6ff 48%, #ffffff);
+  border-radius: 999px;
+  box-shadow:
+    0 0 1.1cqw #7ef6ff,
+    0 0 2cqw #fff19b;
+  animation: seamGhost 1.05s ease-in-out infinite alternate;
+}
+.park-wrap-ghost::after {
+  content: "";
+  position: absolute;
+  width: 1.7cqw;
+  height: 1.7cqw;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 1cqw #fff;
+}
+.park-wrap-ghost.is-left,
+.park-wrap-ghost.is-right {
+  width: 3.5%;
+  transform: translate(0, -50%);
+}
+.park-wrap-ghost.is-left { left: -1.7%; }
+.park-wrap-ghost.is-right { right: -1.7%; }
+.park-wrap-ghost.is-up,
+.park-wrap-ghost.is-down {
+  height: 3.5%;
+  transform: translate(-50%, 0);
+}
+.park-wrap-ghost.is-up { top: -1.7%; }
+.park-wrap-ghost.is-down { bottom: -1.7%; }
+.park-wrap-ghost.is-left::after { right: -0.8cqw; top: 50%; transform: translateY(-50%); }
+.park-wrap-ghost.is-right::after { left: -0.8cqw; top: 50%; transform: translateY(-50%); }
+.park-wrap-ghost.is-up::after { left: 50%; bottom: -0.8cqw; transform: translateX(-50%); }
+.park-wrap-ghost.is-down::after { left: 50%; top: -0.8cqw; transform: translateX(-50%); }
+@keyframes seamGhost {
+  from { opacity: 0.55; filter: brightness(0.95); }
+  to { opacity: 1; filter: brightness(1.18); }
 }
 @keyframes wrapPulse {
   0%, 100% { opacity: 0.35; }
@@ -2198,7 +2301,13 @@ img {
   font-size: 3.5cqw;
 }
 
-.park-play-caption,
+.park-play-caption {
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 3.8cqw;
+  line-height: 1.2;
+}
 .park-history-link {
   font-size: 3.5cqw;
 }

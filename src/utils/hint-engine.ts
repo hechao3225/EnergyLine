@@ -1,5 +1,5 @@
 import type { LevelConfig, Tile } from '../types/game';
-import { solveMinTaps } from './hint-solver';
+import { solveRuleLevel } from './rule-solver';
 
 /** 提示引擎覆盖到第几关（主线 1–99 全部）。 */
 export const HINT_ENGINE_MAX_LEVEL = 99;
@@ -7,19 +7,22 @@ export const HINT_ENGINE_MAX_LEVEL = 99;
 /**
  * 这一关能不能用引擎求解。
  *
- * 求解器只管「旋转 + 扳闸」，还不认识联动轴（点一格整组转）和双色/禁环规则，
- * 遇到这类关卡必须退回文案提示——给出错误的一步比不给提示更伤。
+ * 统一求解器认识联动轴、环面、双色、禁环、达标关和焊死顺序。
+ * 只对超过四个独立联动组的盘面退回文案，避免指数枚举拖慢手机。
  */
 export function supportsHintEngine(level: LevelConfig): boolean {
-  if (level.rules) return false;
-  return !level.tiles.some((tile) => tile.axis);
+  const groups = new Set(level.tiles.map((tile) => tile.axis).filter(Boolean));
+  return groups.size <= 4;
 }
+
+export type HintAction = 'rotate' | 'toggle-switch' | 'rotate-axis';
 
 export interface HintMove {
   tileId: string;
   row: number;
   col: number;
   label: string;
+  action: HintAction;
   /** 这一格还需要转几下（整关最优解里） */
   taps: number;
   /** 需要扳闸而不是旋转 */
@@ -57,33 +60,59 @@ export function findHint(
 ): HintMove | null {
   let result;
   try {
-    result = solveMinTaps({ ...level, tiles });
+    result = solveRuleLevel({ ...level, tiles });
   } catch {
     return null;
   }
-  const step = result.plan.find((item) => item.toggle || item.rotateTaps > 0);
-  if (!step) return null;
-  const tile = tiles.find((item) => item.id === step.id);
+  const step = result?.orderedSteps[0];
+  if (!result || !step) return null;
+  const tile = step.axis
+    ? [...tiles]
+        .filter((item) => item.axis === step.axis)
+        .sort((a, b) => a.row - b.row || a.col - b.col)[0]
+    : tiles.find((item) => item.id === step.id);
   if (!tile) return null;
   const stepsNeeded = result.par;
+  const action: HintAction = step.axis
+    ? 'rotate-axis'
+    : step.toggle
+      ? 'toggle-switch'
+      : 'rotate';
   return {
     tileId: tile.id,
     row: tile.row,
     col: tile.col,
-    label: LABELS[tile.type],
-    taps: step.rotateTaps,
-    toggle: step.toggle,
+    label: step.axis ? '联动轴' : LABELS[tile.type],
+    action,
+    taps: step.taps,
+    toggle: Boolean(step.toggle),
     stepsNeeded,
     reachable: stepsNeeded <= remainingSteps,
   };
+}
+
+export function applyHintAction(level: LevelConfig, tiles: Tile[], move: HintMove): Tile[] {
+  const clicked = tiles.find((tile) => tile.id === move.tileId);
+  const axis = move.action === 'rotate-axis' ? clicked?.axis : undefined;
+  return tiles.map((tile) => {
+    if (axis && tile.axis === axis) {
+      return { ...tile, rotation: tile.rotation + 90 * (tile.axisDir ?? 1) };
+    }
+    if (tile.id !== move.tileId) return tile;
+    if (move.action === 'toggle-switch') {
+      return { ...tile, switchClosed: tile.switchClosed === false };
+    }
+    return { ...tile, rotation: tile.rotation + 90 };
+  });
 }
 
 /** 提示文案：怎么点、点几次 */
 export function describeHint(move: HintMove): string {
   const where = `第 ${move.row + 1} 行第 ${move.col + 1} 列`;
   const actions: string[] = [];
-  if (move.toggle) actions.push("点角标扳通");
-  if (move.taps > 0) actions.push(`转 ${move.taps} 次`);
+  if (move.action === 'toggle-switch') actions.push("点角标扳通");
+  if (move.action === 'rotate-axis') actions.push("点这一组任意一格，联动转 1 次");
+  if (move.action === 'rotate' && move.taps > 0) actions.push(`转 ${move.taps} 次`);
   if (actions.length === 0) return `${where} 的${move.label}：先不用动`;
   return `${where} 的${move.label}：${actions.join("，")}`;
 }

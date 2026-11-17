@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import type { Tile } from "../types/game";
 import { Art, Icon, getExhibitArt } from "./ParkArt";
 import { getCollectionEntry } from "../content";
@@ -54,6 +54,21 @@ export const TileView: React.FC<TileViewProps> = ({
 }) => {
   const isGoal = tile.type === "bulb",
     isSource = tile.type === "battery";
+  const wasWelded = useRef(false);
+  const weldTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [justWelded, setJustWelded] = useState(false);
+  useEffect(() => {
+    if (weldLocked && !wasWelded.current) {
+      setJustWelded(true);
+      if (weldTimer.current) clearTimeout(weldTimer.current);
+      weldTimer.current = setTimeout(() => setJustWelded(false), 760);
+    }
+    if (!weldLocked) setJustWelded(false);
+    wasWelded.current = weldLocked;
+    return () => {
+      if (weldTimer.current) clearTimeout(weldTimer.current);
+    };
+  }, [weldLocked]);
   /** 双色关：未通电时也要能看出源/设施要什么颜色 */
   const staticColor = tile.color === undefined ? 0 : tile.color === 0 ? 1 : 2;
   const shownColor = colorMask || staticColor;
@@ -111,6 +126,7 @@ export const TileView: React.FC<TileViewProps> = ({
         {shownColor > 0 && (
           <span
             className="park-color-mark"
+            data-symbol={shownColor === 3 ? "×" : shownColor === 2 ? "●" : "◆"}
             style={{ background: shownColor === 3 ? "#a855f7" : shownColor === 2 ? "#2f8bff" : "#ff3b21" }}
           />
         )}
@@ -126,6 +142,11 @@ export const TileView: React.FC<TileViewProps> = ({
         {weldLocked && (
           <span className="park-weld-mark" aria-hidden="true">
             焊
+          </span>
+        )}
+        {justWelded && (
+          <span className="park-weld-flash" aria-hidden="true">
+            焊死
           </span>
         )}
 

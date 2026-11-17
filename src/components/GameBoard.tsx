@@ -38,6 +38,54 @@ export function GameBoard({
   weld = false,
 }: GameBoardProps) {
   const cells = new Map(tiles.map((tile) => [`${tile.row},${tile.col}`, tile]));
+  const wrapLinks = useMemo(() => {
+    if (!wrap) return [];
+    const links = new Map<
+      string,
+      {
+        key: string;
+        fromSide: "up" | "down" | "left" | "right";
+        toSide: "up" | "down" | "left" | "right";
+        fromRow: number;
+        fromCol: number;
+        toRow: number;
+        toCol: number;
+      }
+    >();
+    for (const edge of simulation.poweredEdges) {
+      const [from, to] = edge.split("->");
+      const [fromRow, fromCol] = from.split(",").map(Number);
+      const [toRow, toCol] = to.split(",").map(Number);
+      let fromSide: "up" | "down" | "left" | "right" | null = null;
+      let toSide: "up" | "down" | "left" | "right" | null = null;
+      if (fromCol === gridCols - 1 && toCol === 0) {
+        fromSide = "right";
+        toSide = "left";
+      } else if (fromCol === 0 && toCol === gridCols - 1) {
+        fromSide = "left";
+        toSide = "right";
+      } else if (fromRow === gridRows - 1 && toRow === 0) {
+        fromSide = "down";
+        toSide = "up";
+      } else if (fromRow === 0 && toRow === gridRows - 1) {
+        fromSide = "up";
+        toSide = "down";
+      }
+      if (!fromSide || !toSide) continue;
+      const pairKey =
+        from < to ? `${from}|${to}` : `${to}|${from}`;
+      links.set(pairKey, {
+        key: pairKey,
+        fromSide,
+        toSide,
+        fromRow,
+        fromCol,
+        toRow,
+        toCol,
+      });
+    }
+    return [...links.values()];
+  }, [gridCols, gridRows, simulation.poweredEdges, wrap]);
   // 焊死：齿轮组只要有一格通电，整组锁住
   const weldedAxes = new Set<string>();
   if (weld) {
@@ -126,6 +174,47 @@ export function GameBoard({
           );
         })}
       </div>
+      {wrapLinks.length > 0 && (
+        <div className="park-wrap-ghosts" aria-hidden="true">
+          {wrapLinks.map((link) => {
+            const fromVertical =
+              link.fromSide === "left" || link.fromSide === "right";
+            const toVertical = link.toSide === "left" || link.toSide === "right";
+            return (
+              <React.Fragment key={link.key}>
+                <span
+                  className={`park-wrap-ghost is-${link.fromSide}`}
+                  style={
+                    fromVertical
+                      ? {
+                          top: `${((link.fromRow + 0.5) / gridRows) * 100}%`,
+                          height: `${45 / gridRows}%`,
+                        }
+                      : {
+                          left: `${((link.fromCol + 0.5) / gridCols) * 100}%`,
+                          width: `${45 / gridCols}%`,
+                        }
+                  }
+                />
+                <span
+                  className={`park-wrap-ghost is-${link.toSide}`}
+                  style={
+                    toVertical
+                      ? {
+                          top: `${((link.toRow + 0.5) / gridRows) * 100}%`,
+                          height: `${45 / gridRows}%`,
+                        }
+                      : {
+                          left: `${((link.toCol + 0.5) / gridCols) * 100}%`,
+                          width: `${45 / gridCols}%`,
+                        }
+                  }
+                />
+              </React.Fragment>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

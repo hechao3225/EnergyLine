@@ -432,7 +432,8 @@ export function CandyThemeShell(p: Props) {
                   code.startsWith("G") ||
                   code.startsWith("T") ||
                   code.startsWith("W") ||
-                  code.startsWith("K");
+                  code.startsWith("K") ||
+                  code === "C2";
                 const ordered = [
                   ...entries.filter(({ lab }) => isNew(lab.code)),
                   ...entries.filter(({ lab }) => !isNew(lab.code)),
@@ -444,7 +445,10 @@ export function CandyThemeShell(p: Props) {
                       const isGear = lab.code.startsWith("G");
                       const isTorus = lab.code.startsWith("T");
                       const isWeld = lab.code.startsWith("W");
-                      const isCombo = lab.code.startsWith("K");
+                      const isCombo =
+                        lab.code.startsWith("K") ||
+                        lab.code === "W-1" ||
+                        lab.code === "C2";
                       return (
                         <button
                           key={lab.id}
@@ -453,7 +457,15 @@ export function CandyThemeShell(p: Props) {
                           onClick={() => p.onStartLab?.(index)}
                           aria-label={`实验关 ${lab.code} ${lab.title}`}
                         >
-                          {isGear ? "齿轮 " : isTorus ? "环面 " : isWeld ? "焊死 " : isCombo ? "齿焊 " : "实验关 "}
+                          {isCombo
+                            ? "组合 "
+                            : isGear
+                              ? "齿轮 "
+                              : isTorus
+                                ? "环面 "
+                                : isWeld
+                                  ? "焊死 "
+                                  : "实验关 "}
                           {lab.code}
                           <i>{lab.subtitle ?? lab.title}</i>
                           {(isGear || isTorus || isWeld || isCombo) && <b className="park-lab-new">新</b>}
@@ -600,8 +612,12 @@ export function CandyThemeShell(p: Props) {
             <div className="park-play-caption">
               {p.simulation.overloaded
                 ? "回路过载！能量在环里打转，整段熄灭 —— 通路不能连成圈"
+                : p.level.rules?.wrap && p.level.rules?.weld
+                  ? "环面 + 焊死：远端起手，跨缝接通即锁"
+                  : p.level.rules?.colors && p.level.rules?.weld
+                    ? "双色 + 焊死：分色接通，通电即锁"
                 : p.level.rules?.weld
-                  ? "焊死：通电的管子会锁住——先修最远的那盏，再往回接"
+                  ? "焊死：先修远端，通电后立即锁定"
                   : p.level.rules?.wrap
                   ? "环面：边界相接——从右边出去，会从左边回来"
                   : hasGear
