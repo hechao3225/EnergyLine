@@ -156,3 +156,11 @@
 - `tsc --noEmit`：无新增错误
 - 首页三张设施卡标题显示正常；`售票亭·开窗` 未溢出
 - `test_theme_content.ts` 的术语断言已从旧的“锁”同步为“固定管道”，避免测试继续锁定旧词
+
+### winText / subtitle 收尾（2026-11-14）
+
+- 删除 `LevelContent.winText` / `LevelContent.subtitle`，以及 99 条 `levels.ts` 里的对应字段。
+- `generate_theme_content.ts` 不再生成这两个字段；`test_theme_content.ts` 的旧断言同步移除。
+- 删除 `App.tsx` 无尽关卡兜底里未被读取的 `winText` 字面量。
+- 保留 `CenterDistrict.subtitle` / `ZoneDef.subtitle`（世界地图/区域标签，真实 UI 数据）和 `LevelConfig.winText?`（编辑器/旧关卡兜底，不属于 99 条展示文案）。
+- UI 行为不变；`test_theme_content`、`audit_theme`、`test_circuits`、`test_park_progress`、`tsc` 全部通过。
