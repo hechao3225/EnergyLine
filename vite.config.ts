@@ -11,6 +11,9 @@ export default defineConfig(() => {
       react(),
       tailwindcss(),
       VitePWA({
+        // PWA_OFF=1 时生成"自毁" Service Worker：注册后自动注销并清空旧缓存。
+        // 预览/试玩构建用，正式发版不要带这个环境变量。
+        selfDestroying: process.env.PWA_OFF === "1",
         registerType: "autoUpdate",
         includeAssets: ["favicon.ico", "apple-touch-icon.png", "icon.svg"],
         manifest: {

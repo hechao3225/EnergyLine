@@ -416,26 +416,33 @@ img {
   width: 16cqw;
   height: 16cqw;
 }
+/* 左右箭头原来是 6% 宽的细缝（实测 23px），手机上很难点中。
+   改成固定 44px 的可点列，卡片自适应剩余宽度。 */
 .park-facility-cards {
   position: absolute;
   top: 72.1%;
   left: 2%;
   right: 2%;
   height: 10%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 44px 1fr 1fr 1fr 44px;
+  gap: 1.5cqw;
   align-items: center;
-  justify-content: space-between;
-  gap: 2cqw;
+}
+.park-facility-cards .park-facility,
+.park-facility-cards .park-facility.is-selected {
+  width: auto;
 }
 .park-arrow {
-  font-size: 15cqw;
+  width: 100%;
+  height: 100%;
+  font-size: 13cqw;
   color: #ffe574;
   background: none;
   text-shadow:
     0 0 2px white,
     0 2px #db8b3e;
   line-height: 1;
-  width: 6%;
   padding: 0;
 }
 .park-facility {
@@ -552,6 +559,11 @@ img {
   justify-content: space-between;
   align-items: center;
 }
+.park-play-tools {
+  display: flex;
+  align-items: center;
+  gap: 2cqw;
+}
 .park-play-header > .park-round:first-child {
   transform: rotate(180deg);
   font-size: 8cqw;
@@ -632,12 +644,22 @@ img {
   font-weight: 800;
   font-size: 3.7cqw;
 }
-.park-play-status > .park-stars {
+.park-play-status > .park-par {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8cqw;
+  /* 四星线 / 当前星级两种文案宽度不同，锁死最小宽度避免状态切换时顶栏跳动 */
+  min-width: 25cqw;
   padding-right: 1.4cqw;
+  white-space: nowrap;
 }
-.park-play-status .park-stars .park-icon {
+.park-play-status > .park-par .park-icon {
   width: 5.8cqw;
   height: 5.8cqw;
+}
+.park-play-status > .park-par.is-over {
+  opacity: 0.58;
 }
 .park-steps,
 .park-target {
@@ -649,7 +671,8 @@ img {
   padding-left: 2cqw;
 }
 .park-steps b,
-.park-target b {
+.park-target b,
+.park-par b {
   font-size: 5.2cqw;
 }
 .park-paw {
@@ -713,6 +736,66 @@ img {
   filter: saturate(0.65);
   z-index: -1;
 }
+/* 联动轴：同轴三格共享一根转轴 */
+.park-tile.has-axis::before {
+  box-shadow:
+    inset 0 0 0 0.5cqw #7ef6ff,
+    inset 1px 2px 2px #f8ecffa0,
+    inset -1px -2px 3px #493274,
+    0 0 1.4cqw #7ef6ff70;
+  opacity: 0.92;
+  filter: saturate(0.8);
+}
+.park-tile.has-axis .park-tile-rotate::after {
+  content: "";
+  position: absolute;
+  inset: 7%;
+  border-radius: 13%;
+  border: 0.3cqw dashed #a9f9ff;
+  pointer-events: none;
+  z-index: 3;
+  animation: axisPulse 2.4s ease-in-out infinite;
+}
+.park-axis-mark {
+  position: absolute;
+  left: 3%;
+  top: 3%;
+  width: 26%;
+  height: 26%;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #dcfeff, #4fd8ef 62%, #1a8fb0);
+  color: #04303a;
+  font-size: 2.4cqw;
+  font-weight: 800;
+  line-height: 1;
+  z-index: 4;
+  pointer-events: none;
+  box-shadow: 0 0 0.7cqw #7ef6ffb0;
+}
+@keyframes axisPulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.9; }
+}
+.park-hint-move {
+  margin: 0 0 1.2cqw;
+  padding: 1.4cqw 2.4cqw;
+  border-radius: 999px;
+  background: #fff3c4;
+  color: #6b2c00;
+  font-size: 3.6cqw;
+  font-weight: 800;
+  text-align: center;
+}
+@keyframes hintPulse {
+  0%, 100% { box-shadow: inset 0 0 0 0.5cqw #ffd166; }
+  50% { box-shadow: inset 0 0 0 1.2cqw #ffe9a8; }
+}
+.park-tile.is-hint .park-tile-rotate {
+  animation: hintPulse 1.1s ease-in-out infinite;
+  border-radius: inherit;
+}
 .park-tile-rotate {
   position: absolute;
   inset: 0;
@@ -757,6 +840,50 @@ img {
 .park-tile.is-lit .park-pipe {
   filter: drop-shadow(0 0 2cqw #fff079);
 }
+.park-color-mark {
+  position: absolute;
+  inset: 6%;
+  border-radius: 14%;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0.38;
+  mix-blend-mode: screen;
+  box-shadow: inset 0 0 1.4cqw #fff6;
+}
+/* 双色能量：整格底色就是能量色，串色变紫 */
+.park-tile.color-1::before {
+  background: url("/assets/park/tile.webp") center/100% 100%,
+    linear-gradient(135deg, #ffb497, #dc3316 45%, #ff8a63);
+  filter: saturate(1.05);
+  opacity: 0.96;
+}
+.park-tile.color-2::before {
+  background: url("/assets/park/tile.webp") center/100% 100%,
+    linear-gradient(135deg, #a8d8ff, #1452c8 45%, #6fb6ff);
+  filter: saturate(1.05);
+  opacity: 0.96;
+}
+.park-tile.color-3::before {
+  background: url("/assets/park/tile.webp") center/100% 100%,
+    linear-gradient(135deg, #c9c4d6, #55505f 45%, #948fa3);
+  filter: saturate(0.18) brightness(0.92);
+  opacity: 0.96;
+}
+.park-tile.color-3 .park-pipe {
+  filter: saturate(0.12) brightness(0.82) !important;
+}
+.park-tile.color-3 .park-facility-art {
+  filter: saturate(0.1) brightness(0.75) !important;
+}
+.park-tile.color-1 .park-pipe {
+  filter: drop-shadow(0 0 1cqw #ff6a4d);
+}
+.park-tile.color-2 .park-pipe {
+  filter: drop-shadow(0 0 1cqw #4fa8ff);
+}
+.park-tile.color-3 .park-pipe {
+  filter: drop-shadow(0 0 1cqw #b26bff);
+}
 .park-tile.is-powered::after {
   content: "";
   position: absolute;
@@ -785,8 +912,8 @@ img {
   position: absolute;
   right: 0;
   bottom: 0;
-  min-width: 44%;
-  min-height: 39%;
+  min-width: 58%;
+  min-height: 50%;
   padding: 0 0.4cqw;
   border-radius: 1.5cqw 0 1.5cqw 0;
   background: #a7f1ba;
@@ -875,12 +1002,12 @@ img {
 }
 .park-out-of-steps {
   position: absolute;
-  inset: 15% 7%;
+  inset: 11% 6%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 3cqw;
-  padding: 6cqw;
+  gap: 2.2cqw;
+  padding: 5cqw;
   background: #fff4efed;
   border-radius: 5cqw;
   box-shadow:
@@ -898,7 +1025,280 @@ img {
   margin: 0;
 }
 .park-out-of-steps .park-button {
-  font-size: 4.8cqw;
+  font-size: 4.4cqw;
+}
+/* 玩法实验关入口（切片验证，可移除） */
+.park-hell-badge {
+  display: inline-block;
+  margin-left: 1.2cqw;
+  padding: 0.2cqw 1.4cqw;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ff5a5a, #b40000);
+  color: #fff2d0;
+  font-size: 2.4cqw;
+  font-style: normal;
+  font-weight: 800;
+  vertical-align: middle;
+  box-shadow: 0 0 1.4cqw #ff2a2a80;
+}
+.park-level-card {
+  position: relative;
+}
+.park-level-card .park-hell-badge {
+  position: absolute;
+  top: 0.8cqw;
+  right: 0.8cqw;
+  margin-left: 0;
+  font-size: 2cqw;
+  padding: 0.15cqw 1cqw;
+}
+.park-chapter-tabs .is-locked {
+  opacity: 0.45;
+}
+.park-unlock-toggle {
+  display: block;
+  margin: 1.5cqw auto 2cqw;
+  padding: 0.8cqw 2.6cqw;
+  border-radius: 999px;
+  border: 0.25cqw dashed #b98cff;
+  background: #4a2a7acc;
+  color: #e8d6ff;
+  font-size: 2.6cqw;
+  font-weight: 700;
+}
+.park-unlock-toggle.is-on {
+  border-color: #ffd166;
+  background: #6a4a00dd;
+  color: #ffe9a8;
+}
+.park-locked-hint {
+  margin: 6cqw auto;
+  padding: 5cqw;
+  max-width: 70cqw;
+  border-radius: 3cqw;
+  background: #2a1440cc;
+  color: #ffe9a8;
+  text-align: center;
+}
+.park-locked-hint strong {
+  display: block;
+  font-size: 4cqw;
+  margin-bottom: 1.5cqw;
+}
+.park-locked-hint p {
+  margin: 0;
+  font-size: 3cqw;
+  opacity: 0.85;
+}
+.park-board.is-overloaded {
+  box-shadow:
+    0 0 0 0.5cqw #ff3b3b,
+    0 0 0 1cqw #ffb3b3,
+    0 0 4cqw 1.5cqw #ff2a2a99,
+    inset 0 0 3cqw #ff6b6b;
+  animation: overloadPulse 0.9s ease-in-out infinite alternate;
+}
+@keyframes overloadPulse {
+  from { filter: brightness(0.92); }
+  to { filter: brightness(1.12); }
+}
+.park-settle {
+  padding: 1.1cqw 3.4cqw;
+  z-index: 8;
+  border-radius: 999px;
+  border: 0.4cqw solid #8a5a00;
+  background: linear-gradient(180deg, #ffe27a, #ffb326);
+  color: #5b2b00;
+  font-size: 3.4cqw;
+  font-weight: 800;
+  box-shadow: 0 0.8cqw 2cqw #3a1d0090;
+}
+.park-settle:active {
+  transform: scale(0.96);
+}
+.park-build-tag {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0.6cqw;
+  text-align: center;
+  font-size: 2.1cqw;
+  color: #ffffff90;
+  pointer-events: none;
+  z-index: 40;
+}
+.park-goal-entry {
+  position: fixed;
+  left: 3cqw;
+  bottom: 17cqw;
+  z-index: 30;
+  padding: 1.1cqw 2.6cqw;
+  border-radius: 999px;
+  border: 0.32cqw dashed #ffd166;
+  background: #3a2a05e6;
+  color: #ffe9a8;
+  font-size: 2.9cqw;
+  font-weight: 700;
+}
+/* 实验关入口：原来贴着底部往上堆，9 个入口一路盖住轮播和「开始修复」。
+   改成贴在右侧艺术图区域、可滚动的窄列，不碰任何可点控件。 */
+.park-lab-head {
+  align-self: flex-end;
+  font-size: 2.1cqw;
+  font-weight: 800;
+  letter-spacing: 0.25cqw;
+  color: #9fe8ffcc;
+  text-shadow: 0 0 0.6cqw #0a2a36;
+}
+.park-lab-entries {
+  position: fixed;
+  right: 2.5cqw;
+  top: 30%;
+  max-height: 40vh;
+  overflow-y: auto;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.9cqw;
+}
+.park-lab-entry {
+  padding: 0.7cqw 2.2cqw;
+  border-radius: 999px;
+  border: 0.32cqw dashed #7ef6ff;
+  background: #052b36e0;
+  color: #c4f8ff;
+  font-size: 2.4cqw;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.park-lab-entry:active {
+  transform: scale(0.96);
+}
+.park-lab-entry i {
+  margin-left: 0.8cqw;
+  font-style: normal;
+  font-size: 2cqw;
+  opacity: 0.72;
+}
+/* 齿轮试验：金色，和旧的青色联动轴区分开 */
+.park-lab-entry.is-gear {
+  border-color: #ffcf4d;
+  background: #3a2a05e6;
+  color: #ffe9a8;
+  box-shadow: 0 0 1.2cqw #ffcf4d55;
+}
+.park-lab-entry.is-torus {
+  border-color: #5ff0c8;
+  background: #04322de6;
+  color: #c8fff1;
+  box-shadow: 0 0 1.2cqw #5ff0c855;
+}
+.park-lab-entry.is-weld {
+  border-color: #b7d8e8;
+  background: #0b2430e6;
+  color: #dff2fb;
+  box-shadow: 0 0 1.2cqw #b7d8e855;
+}
+.park-lab-entry.is-combo {
+  border-color: #b28dff;
+  background: #200f3de6;
+  color: #ecdcff;
+  box-shadow: 0 0 1.2cqw #b28dff55;
+}
+.park-lab-new {
+  margin-left: 0.8cqw;
+  padding: 0 0.7cqw;
+  border-radius: 999px;
+  background: #ff4d6d;
+  color: #fff;
+  font-size: 1.8cqw;
+  line-height: 1.6;
+}
+/* 齿轮：同色 = 同一组；转动带一点机械回弹，两格同步起转 */
+.park-tile[data-gear-index="1"] { --gear: #ffc53d; }
+.park-tile[data-gear-index="2"] { --gear: #5ff0c8; }
+.park-tile[data-gear-index="3"] { --gear: #ff8ad0; }
+.park-tile[data-gear-index="4"] { --gear: #7fd4ff; }
+.park-tile[data-gear-index]::before {
+  opacity: 0.94;
+  filter: saturate(0.85);
+  box-shadow:
+    inset 0 0 0 0.42cqw var(--gear),
+    inset 1px 2px 2px #f8ecffa0,
+    inset -1px -2px 3px #493274,
+    0 0 1.2cqw var(--gear);
+}
+.park-tile[data-gear-index] .park-tile-rotate::after {
+  border: 0.32cqw dashed var(--gear);
+  animation: gearRingPulse 1.9s ease-in-out infinite;
+}
+.park-tile[data-gear-index] .park-pipe {
+  transition:
+    transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.2s;
+}
+.park-axis-mark.is-gear {
+  background: radial-gradient(circle at 35% 30%, #fffdf2, var(--gear) 62%, #6b4400);
+  color: #2b1500;
+  box-shadow: 0 0 0.8cqw var(--gear);
+  font-size: 3.1cqw;
+}
+/* 焊死：通电的格子锁住，右下角挂一枚「焊」章 */
+.park-weld-mark {
+  position: absolute;
+  right: 4%;
+  bottom: 4%;
+  width: 26%;
+  height: 26%;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f2fbff, #9cc4d6 60%, #34505f);
+  color: #10232c;
+  font-size: 2.2cqw;
+  font-weight: 800;
+  line-height: 1;
+  z-index: 5;
+  pointer-events: none;
+  box-shadow: 0 0 0.7cqw #d8f0fa99;
+}
+.park-tile.is-welded .park-tile-rotate { cursor: default; }
+
+/* 环面：边上这一格会从对面折回来（外缘刻线） */
+.park-wrap-tick {
+  position: absolute;
+  z-index: 5;
+  background: #7ef6ff;
+  border-radius: 999px;
+  box-shadow: 0 0 1cqw #7ef6ff;
+  opacity: 0.5;
+  pointer-events: none;
+  animation: wrapPulse 2.6s ease-in-out infinite;
+}
+.park-wrap-tick.is-left { left: 1.5%; top: 24%; width: 4%; height: 52%; }
+.park-wrap-tick.is-right { right: 1.5%; top: 24%; width: 4%; height: 52%; }
+.park-wrap-tick.is-up { top: 1.5%; left: 24%; height: 4%; width: 52%; }
+.park-wrap-tick.is-down { bottom: 1.5%; left: 24%; height: 4%; width: 52%; }
+.park-board.is-wrap {
+  outline: 0.4cqw dashed #7ef6ff66;
+  outline-offset: 0.3cqw;
+}
+@keyframes wrapPulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.9; }
+}
+@keyframes gearRingPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+.park-axis-mark.is-pop {
+  animation: gearBadgePop 0.26s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes gearBadgePop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.3); }
+  100% { transform: scale(1); }
 }
 /* 设施复苏 */
 .park-victory-title {
@@ -1628,12 +2028,12 @@ img {
     top: 82%;
   }
   .park-victory-panel {
-    height: 28%;
-    top: 51%;
+    height: 29%;
+    top: 52%;
   }
   .park-victory-showcase {
-    top: 14%;
-    height: 36%;
+    top: 5%;
+    height: 48%;
   }
 }
 .park-collection-flower {

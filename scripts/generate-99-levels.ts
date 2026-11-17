@@ -961,7 +961,7 @@ interface ChapterConfig {
   titles: string[];
 }
 
-const CHAPTER_RULES: ChapterConfig[] = [
+export const CHAPTER_RULES: ChapterConfig[] = [
   {
     range: [7, 19],
     chapterName: '地脉之根',
@@ -1080,7 +1080,7 @@ interface LevelLayout {
 }
 
 // Algorithmic Solvable Level Generator
-function generateAlgorithmLayout(
+export function generateAlgorithmLayout(
   levelId: number,
   config: ChapterConfig,
   variant = 0
@@ -1664,7 +1664,9 @@ export function generateAll99Levels(): LevelConfig[] {
   return result;
 }
 
-// Run directly
+// Run directly（被其他脚本 import 时不要执行，否则会重写整个 defaultLevels.ts）
+const isDirectRun = (process.argv[1] ?? '').includes('generate-99-levels');
+if (isDirectRun) {
 const levels = generateAll99Levels();
 // 展示文案统一放在 src/content/levels.ts；这里只写布局与步数。
 const layoutLevels = levels.map((level) => ({
@@ -1693,3 +1695,4 @@ export const DEFAULT_LEVELS: LevelConfig[] = ${JSON.stringify(layoutLevels, null
 const targetPath = path.resolve(process.cwd(), 'src/data/defaultLevels.ts');
 fs.writeFileSync(targetPath, fileContent, 'utf8');
 console.log(`Successfully written 99 levels to ${targetPath}`);
+}

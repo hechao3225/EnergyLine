@@ -9,12 +9,18 @@
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
-    "test": "tsx scripts/test_circuits.ts && tsx scripts/test_park_progress.ts && tsx scripts/test_theme_content.ts && tsx scripts/audit_theme.ts",
+    "test": "tsx scripts/test_circuits.ts && tsx scripts/test_park_progress.ts && tsx scripts/test_theme_content.ts && tsx scripts/audit_theme.ts && tsx scripts/test_hint_engine.ts && tsx scripts/audit-rules.ts",
     "test:ui": "tsx scripts/test_park_ui.ts && tsx scripts/test_park_star_upgrade.ts && tsx scripts/test_park_victory_layout.ts",
     "test:pipes": "python scripts/audit_pipe_ports.py && tsx scripts/test_pipe_alignment.ts",
     "test:merge": "tsx scripts/test_master_merge.ts",
     "test:theme": "tsx scripts/test_theme_content.ts && tsx scripts/audit_theme.ts",
-    "audit:theme": "tsx scripts/audit_theme.ts"
+    "lab:par": "tsx scripts/lab-par.ts",
+    "lab:play": "node scripts/lab-playthrough.mjs",
+    "lab:gear": "tsx scripts/gear-gen.ts",
+    "audit:theme": "tsx scripts/audit_theme.ts",
+    "audit:levels": "tsx scripts/solve-min-par.ts && tsx scripts/audit-difficulty.ts",
+    "audit:rules": "tsx scripts/audit-rules.ts",
+    "baseline:levels": "tsx scripts/baseline-level-layout.ts"
   },
   "dependencies": {
     "@capacitor/android": "^8.5.3",

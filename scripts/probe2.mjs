@@ -1,0 +1,11 @@
+const list = await (await fetch('http://127.0.0.1:9224/json/list')).json();
+const ws = new WebSocket(list.find((t) => t.type === 'page').webSocketDebuggerUrl);
+await new Promise((res, rej) => { ws.onopen = res; ws.onerror = rej; });
+let id = 0; const pending = new Map();
+ws.onmessage = (e) => { const m = JSON.parse(e.data); if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } };
+const send = (method, params = {}) => new Promise((res) => { const mid = ++id; pending.set(mid, res); ws.send(JSON.stringify({ id: mid, method, params })); });
+const ev = async (x) => (await send('Runtime.evaluate', { expression: x, awaitPromise: true, returnByValue: true })).result?.result?.value;
+await send('Runtime.enable');
+const out = await ev("(() => { const t = document.querySelector('.park-tile.color-3'); if (!t) return 'no-color-tile'; const p = t.querySelector('.park-pipe'); return String(t.className) + ' || ' + String(p ? getComputedStyle(p).filter : 'no-pipe'); })()");
+console.log(String(out));
+ws.close();

@@ -13,7 +13,8 @@ import {
   PROGRESS_VERSION,
   PROGRESS_VERSION_KEY,
 } from "../src/utils/parkProgress";
-import { getStarsForSteps } from "../src/utils/rating";
+import { getStarsForLights, getStarsForSteps } from "../src/utils/rating";
+import { HINT_PRICE } from "../src/utils/parkProgress";
 import { DEFAULT_LEVELS } from "../src/data/defaultLevels";
 const store = (entries: Record<string, string>) => ({
   getItem: (key: string) => entries[key] ?? null,
@@ -29,7 +30,6 @@ test("新玩家从首关进入，余额真实为零，并获得三个初始提�
   const p = fresh();
   assert.equal(resumeLevel([]), 1);
   assert.equal(p.coins, 0);
-  assert.equal(p.gems, 0);
   assert.equal(p.hints, 3);
   assert.equal(resumeLevel([1, 2, 3]), 4);
 });
@@ -42,19 +42,17 @@ test("旧货币、道具与已发奖励记录延续", () => {
       energy_reward_1: "1",
     }),
   );
-  assert.equal(p.coins, 730);
-  assert.equal(p.gems, 40);
+  // 旧存档的 40 钻按 10 钻 = 100 币折算进金币
+  assert.equal(p.coins, 1130);
   assert.equal(p.hints, 2);
   assert.deepEqual(p.rewardedLevels, [1]);
-  assert.equal(completeParkLevel(p, 1, "2026-11-10").coins, 730);
+  assert.equal(completeParkLevel(p, 1, "2026-11-10").coins, 1130);
 });
 test("首次通关奖励只发一次，重玩不能重复领取", () => {
   const p = completeParkLevel(fresh(), 1, "2026-11-10");
   assert.equal(p.coins, 100);
-  assert.equal(p.gems, 10);
   const again = completeParkLevel(p, 1, "2026-11-10");
   assert.equal(again.coins, 100);
-  assert.equal(again.gems, 10);
 });
 test("未完成每日任务时无法领取；完成后当天只领取一次", () => {
   const start = fresh();
@@ -73,9 +71,11 @@ test("未完成每日任务时无法领取；完成后当天只领取一次", ()
 test("兑换同时扣金币并增加库存；使用扣一个；余额不足不会变动", () => {
   const start = fresh();
   assert.equal(buyHint(start), start);
-  const earned = completeParkLevel(start, 1, "2026-11-10");
-  const bought = buyHint(earned);
-  assert.equal(bought.coins, 50);
+  const broke = completeParkLevel(start, 1, "2026-11-10");
+  assert.equal(buyHint(broke), broke, "首通 100 金币不够买 120 的灯泡");
+  const rich = { ...start, coins: 500 };
+  const bought = buyHint(rich);
+  assert.equal(bought.coins, 500 - HINT_PRICE);
   assert.equal(bought.hints, 4);
   assert.equal(consumeHint(bought).hints, 3);
   const empty = { ...start, hints: 0 };
@@ -98,6 +98,15 @@ test("四星最少步数与三星、二星、一星边界遵循主干评分规�
   assert.equal(getStarsForSteps(11, level), 2);
   assert.equal(getStarsForSteps(15, level), 2);
   assert.equal(getStarsForSteps(16, level), 1);
+});
+
+test("达标关通过即四星，未达标不给星", () => {
+  // 达标关的预算就是最优解，通过即满星；没达到目标就是没通过
+  assert.equal(getStarsForLights(2, 3, 1), 0);
+  assert.equal(getStarsForLights(2, 3, 2), 4);
+  assert.equal(getStarsForLights(2, 3, 3), 4);
+  assert.equal(getStarsForLights(4, 5, 4), 4);
+  assert.equal(getStarsForLights(4, 5, 5), 4);
   assert.equal(getBestStars(DEFAULT_LEVELS[0], [], {}), 0);
 });
 test("每日任务使用本地自然日而非UTC日期", () => {

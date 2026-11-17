@@ -36,6 +36,8 @@ interface Row {
   jump: number;
 }
 
+const HARD = new Set([10, 20, 30, 40, 50, 60, 70, 80, 90, 99]);
+
 const CHAPTER_FLOOR: Record<number, number> = { 1: 7, 2: 10, 3: 11, 4: 13, 5: 15 };
 const CHAPTER_NAMES: Record<number, string> = {
   1: '失落乐园',
@@ -103,12 +105,13 @@ function main() {
   const rows = buildRows();
   const fit = trend(rows);
 
-  const budgetViolations = rows.filter((r) => r.ratio < 1.3);
-  const floorViolations = rows.filter((r) => r.par > 0 && r.par < CHAPTER_FLOOR[r.chapter]);
-  const cliffs = rows.filter((r) => r.jump >= 2.0);
+  // 硬关（取舍/全亮/地狱）是刻意的零容错设计，不参与容错、下限、毛刺与断崖判定。
+  const budgetViolations = rows.filter((r) => !HARD.has(r.id) && r.ratio < 1.3);
+  const floorViolations = rows.filter((r) => !HARD.has(r.id) && r.par > 0 && r.par < CHAPTER_FLOOR[r.chapter]);
+  const cliffs = rows.filter((r) => !HARD.has(r.id) && r.jump >= 2.0);
   // L1 has no meaningful neighbourhood (there is nothing before it), so it is
   // excluded from the spike check by design.
-  const spikes = rows.filter((r) => r.id > 1 && Math.abs(r.deviation) >= 0.35);
+  const spikes = rows.filter((r) => r.id > 1 && !HARD.has(r.id) && Math.abs(r.deviation) >= 0.35);
 
   if (asMarkdown) {
     const lines: string[] = [];

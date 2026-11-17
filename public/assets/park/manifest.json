@@ -756,8 +756,8 @@
       0,
       0
     ],
-    "sha256": "bfad414edc232bb7218b1c54dee081e2c7734c72617973637d6985401537fc55",
-    "bytes": 15462,
+    "sha256": "0a99a2a0087a090969e413002145c41831310009abc48c5f9ee067427869a516",
+    "bytes": 16010,
     "route": "image_gen built-in",
     "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
   },
@@ -788,8 +788,8 @@
       0,
       0
     ],
-    "sha256": "1c85593e18f33f7bce7bd98cfe411beb6e6e6844c4c648846750e9711ada2e1b",
-    "bytes": 16046,
+    "sha256": "6534e31198d4a89d5912b068ff98f3047e094d3ea50fa7d069a5fab09a4c28e1",
+    "bytes": 16538,
     "route": "image_gen built-in",
     "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
   },
@@ -820,8 +820,8 @@
       0,
       0
     ],
-    "sha256": "559da1e2b8b991af634378c58c0befe8652543f1d26dc6e6be98fbdedcc921ec",
-    "bytes": 13244,
+    "sha256": "c4ba5f593c187429ee6873147fe5f392d28da806a88283f4a7e6cecf7d44ecf1",
+    "bytes": 13666,
     "route": "image_gen built-in",
     "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
   },

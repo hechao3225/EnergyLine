@@ -15,7 +15,8 @@ try {
     await page.screenshot({ path: `${ROOT}/screens/final-onboarding-${step}.png` });
   });
   await page.screenshot({ path: `${ROOT}/screens/final-play.png` });
-  await expect(page.locator(".park-play-status .park-stars img")).toHaveCount(4);
+  await expect(page.getByTestId("par-steps")).toContainText(`最少 ${DEFAULT_LEVELS[0].parSteps} 步`);
+  await expect(page.locator(".park-play-status .park-stars")).toHaveCount(0);
   const tile = page.locator('[data-tile-id="t-2-2"] .park-tile-rotate');
   for (let left = 2; left >= 0; left--) {
     await tile.tap();

@@ -19,6 +19,40 @@ const BRUSHES: { type: TileType; label: string; art: string }[] = [
   { type: "bulb", label: "设施", art: "carousel" },
   { type: "empty", label: "擦除", art: "icon-reset" },
 ];
+/**
+ * 只看格子相邻关系（不看朝向）的连通性检查：设施必须与能量源同处一片非空格。
+ * 用它挡住「设施和电池之间一条管道都没有」这类必然打不通的工坊关卡。
+ */
+function reachableFromBatteries(tiles: Tile[], rows: number, cols: number): Set<string> {
+  const map = new Map(tiles.map((tile) => [`${tile.row},${tile.col}`, tile]));
+  const seen = new Set<string>();
+  const queue: Tile[] = [];
+  for (const tile of tiles) {
+    if (tile.type !== "battery") continue;
+    seen.add(`${tile.row},${tile.col}`);
+    queue.push(tile);
+  }
+  while (queue.length > 0) {
+    const current = queue.shift()!;
+    for (const [dr, dc] of [
+      [-1, 0],
+      [1, 0],
+      [0, -1],
+      [0, 1],
+    ] as const) {
+      const row = current.row + dr;
+      const col = current.col + dc;
+      if (row < 0 || row >= rows || col < 0 || col >= cols) continue;
+      const key = `${row},${col}`;
+      if (seen.has(key)) continue;
+      const next = map.get(key);
+      if (!next || next.type === "empty") continue;
+      seen.add(key);
+      queue.push(next);
+    }
+  }
+  return seen;
+}
 function initialTiles(): Tile[] {
   return Array.from({ length: 36 }, (_, i) => {
     const row = Math.floor(i / 6),
@@ -62,6 +96,18 @@ export function LevelEditor({ onPlayCustomLevel }: Props) {
     gridCols: 6,
     tiles,
   });
+  const playTrial = () => {
+    const reachable = reachableFromBatteries(tiles, 6, 6);
+    const orphans = tiles.filter(
+      (tile) => tile.type === "bulb" && !reachable.has(`${tile.row},${tile.col}`),
+    );
+    if (orphans.length > 0) {
+      setMessage(`还有 ${orphans.length} 处设施没有连到能量源，先在它们之间铺一条管道`);
+      return;
+    }
+    setMessage("");
+    onPlayCustomLevel(config());
+  };
   const draw = (target: Tile) => {
     sound.playRotate();
     setTiles((current) =>
@@ -171,10 +217,10 @@ export function LevelEditor({ onPlayCustomLevel }: Props) {
         interactive={false}
       />
       <p className="park-fine-print">
-        选择笔刷后点击棋盘放置，再次点击同类管件可旋转。
+        选择笔刷后点击棋盘放置，再次点击同类管件可旋转；进入试玩前会检查设施是否已连到能量源。
       </p>
       <ParkButton
-        onClick={() => onPlayCustomLevel(config())}
+        onClick={playTrial}
         disabled={
           !tiles.some((tile) => tile.type === "battery") ||
           simulation.totalBulbs === 0

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Direction, SimulationResult, Tile, TileType } from '../types/game';
+import { Direction, LevelRules, SimulationResult, Tile, TileType } from '../types/game';
 
 // Rotate bitmask ports clockwise by rotation angle in degrees
 export function rotatePorts(ports: number, rotation: number): number {
@@ -63,6 +63,18 @@ export function getTilePorts(tile: Tile): number {
   return rotatePorts(tile.basePorts, tile.rotation);
 }
 
+/**
+ * 旋转这一格会不会改变接法。
+ *
+ * 十字管四面同形，转 90° 端口掩码完全一样；点它既不会让能量多走一步，
+ * 也不该扣掉一点步数预算。判定按「口位在 90° 下是否不变」而不是写死类型，
+ * 这样以后加入新的对称管件也自动成立。
+ */
+export function isRotationNoop(tile: Tile): boolean {
+  if (tile.type === 'empty') return true;
+  return rotatePorts(tile.basePorts, 90) === tile.basePorts;
+}
+
 // Opposite direction helper
 export function getOppositeDirection(dir: Direction): Direction {
   switch (dir) {
@@ -91,7 +103,8 @@ const NEIGHBORS: [number, number, Direction, Direction][] = [
 export function simulateCircuit(
   tiles: Tile[],
   gridRows: number = 6,
-  gridCols: number = 6
+  gridCols: number = 6,
+  rules?: LevelRules
 ): SimulationResult {
   // Index tiles by "row,col"
   const tileMap = new Map<string, Tile>();
@@ -103,6 +116,11 @@ export function simulateCircuit(
     if (t.type === 'battery') batteries.push(t);
     if (t.type === 'bulb') bulbs.push(t);
   }
+
+  // 环面：把越界的邻居折回对面一列/一行
+  const wrap = rules?.wrap === true;
+  const normRow = (value: number) => ((value % gridRows) + gridRows) % gridRows;
+  const normCol = (value: number) => ((value % gridCols) + gridCols) % gridCols;
 
   const poweredTileIds = new Set<string>();
   const litBulbIds = new Set<string>();
@@ -129,9 +147,9 @@ export function simulateCircuit(
       // Check if current tile has a port facing this direction
       if (!(curPorts & outDir)) continue;
 
-      const nRow = current.row + dr;
-      const nCol = current.col + dc;
-      if (nRow < 0 || nRow >= gridRows || nCol < 0 || nCol >= gridCols) continue;
+      const nRow = wrap ? normRow(current.row + dr) : current.row + dr;
+      const nCol = wrap ? normCol(current.col + dc) : current.col + dc;
+      if (!wrap && (nRow < 0 || nRow >= gridRows || nCol < 0 || nCol >= gridCols)) continue;
 
       const neighbor = tileMap.get(`${nRow},${nCol}`);
       if (!neighbor || neighbor.type === 'empty') continue;
@@ -171,12 +189,104 @@ export function simulateCircuit(
     }
   }
 
-  const isAllLit = bulbs.length > 0 && litBulbIds.size === bulbs.length;
+  let isAllLit = bulbs.length > 0 && litBulbIds.size === bulbs.length;
+  let overloaded = false;
+  if (rules?.noCycle && poweredEdges.size > 0) {
+    // 并查集找回路：同一段通电网络里出现环 → 整段过载
+    const parent = new Map<string, string>();
+    const find = (x: string): string => {
+      let p = parent.get(x);
+      if (p === undefined) {
+        parent.set(x, x);
+        return x;
+      }
+      if (p !== x) {
+        p = find(p);
+        parent.set(x, p);
+      }
+      return p;
+    };
+    const seenPair = new Set<string>();
+    for (const key of poweredEdges) {
+      const [a, b] = key.split("->");
+      const pairKey = a < b ? `${a}|${b}` : `${b}|${a}`;
+      if (seenPair.has(pairKey)) continue;
+      seenPair.add(pairKey);
+      const ra = find(a);
+      const rb = find(b);
+      if (ra === rb) {
+        overloaded = true;
+        break;
+      }
+      parent.set(ra, rb);
+    }
+    if (overloaded) {
+      // 过载 = 整段能量短路，所有设施熄灭
+      isAllLit = false;
+      litBulbIds.clear();
+    }
+  }
+
+  if (rules?.colors && rules.colors > 1) {
+    // 双色：每格记一个颜色掩码；设施只有收到"恰好自己那种色"才亮，串色即灭
+    const masks = new Map<string, number>();
+    const edges = new Set<string>();
+    const seen = new Set<string>();
+    const queue: { tile: Tile; color: number }[] = [];
+    for (const b of batteries) {
+      const color = b.color ?? 0;
+      masks.set(b.id, (masks.get(b.id) ?? 0) | (1 << color));
+      queue.push({ tile: b, color });
+    }
+    while (queue.length > 0) {
+      const { tile: current, color } = queue.shift()!;
+      const key = `${current.id}:${color}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      if (current.type === 'switch' && current.switchClosed === false) continue;
+      const curPorts = getTilePorts(current);
+      for (const [dr, dc, outDir, inDir] of NEIGHBORS) {
+        if (!(curPorts & outDir)) continue;
+        const nRow = wrap ? normRow(current.row + dr) : current.row + dr;
+        const nCol = wrap ? normCol(current.col + dc) : current.col + dc;
+        if (!wrap && (nRow < 0 || nRow >= gridRows || nCol < 0 || nCol >= gridCols)) continue;
+        const neighbor = tileMap.get(`${nRow},${nCol}`);
+        if (!neighbor || neighbor.type === 'empty') continue;
+        if (!(getTilePorts(neighbor) & inDir)) continue;
+        if (neighbor.type === 'diode') {
+          const allowedInDir = rotatePorts(Direction.LEFT, neighbor.rotation);
+          if (inDir !== allowedInDir) continue;
+        }
+        edges.add(`${current.row},${current.col}->${nRow},${nCol}`);
+        const bit = 1 << color;
+        if (!((masks.get(neighbor.id) ?? 0) & bit)) {
+          masks.set(neighbor.id, (masks.get(neighbor.id) ?? 0) | bit);
+        }
+        if (neighbor.type !== 'bulb' && neighbor.type !== 'battery') {
+          queue.push({ tile: neighbor, color });
+        }
+      }
+    }
+    const lit = new Set<string>();
+    for (const b of bulbs) {
+      if ((masks.get(b.id) ?? 0) === 1 << (b.color ?? 0)) lit.add(b.id);
+    }
+    return {
+      poweredTileIds: new Set(masks.keys()),
+      litBulbIds: lit,
+      poweredEdges: edges,
+      isAllLit: bulbs.length > 0 && lit.size === bulbs.length,
+      totalBulbs: bulbs.length,
+      litCount: lit.size,
+      tileColors: masks,
+    };
+  }
 
   return {
     poweredTileIds,
     litBulbIds,
     poweredEdges,
+    overloaded,
     isAllLit,
     totalBulbs: bulbs.length,
     litCount: litBulbIds.size,

@@ -61,11 +61,9 @@ const ART_KEYS = new Set([
 for (const entry of LEVEL_CONTENT) {
   check(entry.title.length <= 16, `L${entry.levelId} 标题过长：${entry.title}`);
   check(entry.hint.length <= 80, `L${entry.levelId} 提示过长：${entry.hint.length} 字`);
-  check(entry.winText.length <= 40, `L${entry.levelId} 胜利语过长`);
   for (const term of BANNED_TERMS) {
     check(!entry.title.includes(term), `L${entry.levelId} 标题含禁用词 ${term}`);
     check(!entry.hint.includes(term), `L${entry.levelId} 提示含禁用词 ${term}`);
-    check(!entry.winText.includes(term), `L${entry.levelId} 胜利语含禁用词 ${term}`);
   }
 }
 
@@ -127,7 +125,10 @@ if (fs.existsSync(fixturePath)) {
   const fixture = JSON.parse(fs.readFileSync(fixturePath, 'utf8')) as Record<string, string>;
   check(DEFAULT_LEVELS.length === 99, `关卡布局应为 99 关，实际 ${DEFAULT_LEVELS.length}`);
   for (const level of DEFAULT_LEVELS) {
-    check(layoutHash(level) === fixture[String(level.id)], `L${level.id} 布局与迁移前不一致`);
+    check(
+      layoutHash(level) === fixture[String(level.id)],
+      `L${level.id} 布局与基线不一致（有意改动请跑 npm run baseline:levels）`,
+    );
     for (const key of ['title', 'subtitle', 'hintText', 'winText']) {
       check(!(key in level), `L${level.id} 仍带展示字段 ${key}，应放在 src/content/levels.ts`);
     }

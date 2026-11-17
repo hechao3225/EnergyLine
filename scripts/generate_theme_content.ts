@@ -382,17 +382,13 @@ for (const level of DEFAULT_LEVELS) {
   if (!entry) throw new Error(`缺少设施词条：L${level.id}`);
   const state = TITLE_ACTIONS[level.id] ?? stateFor(entry.facility, level.id);
   const title = `${entry.facility}·${state}`;
-  const subtitle = `${entry.district} · ${entry.facility}`;
-  const winText = `${entry.facility}恢复运转，${entry.district}的星光更亮了。`;
   const hint = hintFor(level, entry.facility, level.id);
   levels.push({
     levelId: level.id,
     zoneId: 'center',
     district: entry.district,
     title,
-    subtitle,
     hint,
-    winText,
   });
   collection.push({
     id: level.id,

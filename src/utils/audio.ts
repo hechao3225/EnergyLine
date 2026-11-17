@@ -77,6 +77,34 @@ class SoundSystem {
     }
   }
 
+  // 齿轮咬合：两段短促的金属咔哒（先低后高，像齿牙互相拨过）
+  public playGear() {
+    if (this.muted) return;
+    this.initCtx();
+    if (!this.ctx) return;
+
+    try {
+      const now = this.ctx.currentTime;
+      const clack = (freq: number, start: number, dur: number, level: number, type: OscillatorType) => {
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, now + start);
+        gain.gain.setValueAtTime(level, now + start);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + start + dur);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now + start);
+        osc.stop(now + start + dur);
+      };
+      clack(260, 0, 0.035, 0.2, 'square');
+      clack(1180, 0.012, 0.02, 0.06, 'triangle');
+    } catch {
+      // ignore
+    }
+  }
+
   // Electrical current connection pulse
   public playConnect() {
     if (this.muted) return;

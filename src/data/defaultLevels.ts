@@ -320,8 +320,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 18,
-    "parSteps": 12,
+    "maxSteps": 14,
+    "parSteps": 9,
     "tiles": [
       {
         "id": "t-0-0",
@@ -440,7 +440,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 2,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -494,7 +494,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 2,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -543,7 +543,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 2,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -1888,8 +1888,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 18,
-    "parSteps": 12,
+    "maxSteps": 17,
+    "parSteps": 11,
     "tiles": [
       {
         "id": "t-0-0",
@@ -2012,7 +2012,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 2,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -2063,7 +2063,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 2,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -2131,7 +2131,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -2200,8 +2200,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 13,
-    "parSteps": 8,
+    "maxSteps": 15,
+    "parSteps": 10,
     "tiles": [
       {
         "id": "t-0-0",
@@ -2288,7 +2288,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -2393,7 +2393,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 14,
         "locked": false
       },
@@ -2820,8 +2820,9 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 33,
-    "parSteps": 22,
+    "goal": 2,
+    "maxSteps": 14,
+    "parSteps": 14,
     "tiles": [
       {
         "id": "t-0-0",
@@ -3450,8 +3451,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 20,
-    "parSteps": 13,
+    "maxSteps": 18,
+    "parSteps": 12,
     "tiles": [
       {
         "id": "t-0-0",
@@ -3540,7 +3541,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -3617,7 +3618,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 1,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -3694,7 +3695,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -4700,8 +4701,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 13,
-    "parSteps": 8,
+    "maxSteps": 17,
+    "parSteps": 11,
     "tiles": [
       {
         "id": "t-0-0",
@@ -4741,7 +4742,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -4894,7 +4895,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 14,
         "locked": false
       },
@@ -5945,7 +5946,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 27,
+    "maxSteps": 19,
     "parSteps": 18,
     "tiles": [
       {
@@ -6268,8 +6269,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 17,
-    "parSteps": 11,
+    "maxSteps": 18,
+    "parSteps": 12,
     "tiles": [
       {
         "id": "t-0-0",
@@ -6361,7 +6362,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -6460,7 +6461,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -6505,7 +6506,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -6565,7 +6566,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6
       },
       {
@@ -6573,7 +6574,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 5,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6
       }
     ]
@@ -6584,8 +6585,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 15,
-    "parSteps": 10,
+    "maxSteps": 18,
+    "parSteps": 12,
     "tiles": [
       {
         "id": "t-0-0",
@@ -6767,7 +6768,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -6777,7 +6778,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 180,
         "basePorts": 14,
         "locked": false
       },
@@ -6829,7 +6830,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -6898,8 +6899,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 15,
-    "parSteps": 10,
+    "maxSteps": 18,
+    "parSteps": 12,
     "tiles": [
       {
         "id": "t-0-0",
@@ -7114,7 +7115,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 1,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -7190,7 +7191,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -7212,8 +7213,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 17,
-    "parSteps": 11,
+    "maxSteps": 20,
+    "parSteps": 13,
     "tiles": [
       {
         "id": "t-0-0",
@@ -7253,7 +7254,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -7307,7 +7308,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "t_shape",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 14,
         "locked": false
       },
@@ -7356,7 +7357,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "switch",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -7406,7 +7407,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -7456,7 +7457,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -7527,8 +7528,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 32,
-    "parSteps": 21,
+    "maxSteps": 21,
+    "parSteps": 14,
     "tiles": [
       {
         "id": "t-0-0",
@@ -7618,7 +7619,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -7653,7 +7654,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 2,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -7671,7 +7672,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -7705,7 +7706,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 2,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -7723,7 +7724,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -7758,7 +7759,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 2,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -7775,7 +7776,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -9099,17 +9100,17 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 18,
+    "goal": 3,
+    "maxSteps": 12,
     "parSteps": 12,
     "tiles": [
       {
         "id": "t-0-0",
         "row": 0,
         "col": 0,
-        "type": "line",
-        "rotation": 270,
-        "basePorts": 10,
-        "locked": true
+        "type": "empty",
+        "rotation": 0,
+        "basePorts": 0
       },
       {
         "id": "t-0-1",
@@ -9123,36 +9124,33 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-0-2",
         "row": 0,
         "col": 2,
-        "type": "corner",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 6
+        "basePorts": 0
       },
       {
         "id": "t-0-3",
         "row": 0,
         "col": 3,
-        "type": "line",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 10,
-        "locked": true
+        "basePorts": 0
       },
       {
         "id": "t-0-4",
         "row": 0,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
-        "basePorts": 6,
-        "locked": false
+        "rotation": 270,
+        "basePorts": 6
       },
       {
         "id": "t-0-5",
         "row": 0,
         "col": 5,
-        "type": "bulb",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 15,
-        "locked": true
+        "basePorts": 0
       },
       {
         "id": "t-1-0",
@@ -9166,9 +9164,9 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-1-1",
         "row": 1,
         "col": 1,
-        "type": "empty",
+        "type": "corner",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 6
       },
       {
         "id": "t-1-2",
@@ -9182,27 +9180,27 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-1-3",
         "row": 1,
         "col": 3,
-        "type": "line",
+        "type": "corner",
         "rotation": 270,
-        "basePorts": 10,
-        "locked": true
+        "basePorts": 6
       },
       {
         "id": "t-1-4",
         "row": 1,
         "col": 4,
-        "type": "line",
-        "rotation": 180,
-        "basePorts": 10,
+        "type": "corner",
+        "rotation": 270,
+        "basePorts": 6,
         "locked": false
       },
       {
         "id": "t-1-5",
         "row": 1,
         "col": 5,
-        "type": "empty",
+        "type": "bulb",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 15,
+        "locked": true
       },
       {
         "id": "t-2-0",
@@ -9224,25 +9222,27 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-2-2",
         "row": 2,
         "col": 2,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
+        "type": "line",
+        "rotation": 180,
+        "basePorts": 10,
+        "locked": true
       },
       {
         "id": "t-2-3",
         "row": 2,
         "col": 3,
-        "type": "line",
+        "type": "corner",
         "rotation": 180,
-        "basePorts": 10
+        "basePorts": 6,
+        "locked": false
       },
       {
         "id": "t-2-4",
         "row": 2,
         "col": 4,
-        "type": "t_shape",
+        "type": "cross",
         "rotation": 0,
-        "basePorts": 14,
+        "basePorts": 15,
         "locked": false
       },
       {
@@ -9258,46 +9258,43 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-3-0",
         "row": 3,
         "col": 0,
-        "type": "battery",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 2,
-        "locked": true
+        "basePorts": 0
       },
       {
         "id": "t-3-1",
         "row": 3,
         "col": 1,
-        "type": "line",
-        "rotation": 90,
-        "basePorts": 10,
-        "locked": false
+        "type": "empty",
+        "rotation": 0,
+        "basePorts": 0
       },
       {
         "id": "t-3-2",
         "row": 3,
         "col": 2,
-        "type": "line",
+        "type": "corner",
         "rotation": 90,
-        "basePorts": 10,
+        "basePorts": 6,
         "locked": false
       },
       {
         "id": "t-3-3",
         "row": 3,
         "col": 3,
-        "type": "switch",
+        "type": "corner",
         "rotation": 0,
-        "basePorts": 10,
-        "locked": false,
-        "switchClosed": false
+        "basePorts": 6,
+        "locked": false
       },
       {
         "id": "t-3-4",
         "row": 3,
         "col": 4,
-        "type": "cross",
-        "rotation": 0,
-        "basePorts": 15,
+        "type": "t_shape",
+        "rotation": 180,
+        "basePorts": 14,
         "locked": false
       },
       {
@@ -9313,25 +9310,28 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-4-0",
         "row": 4,
         "col": 0,
-        "type": "line",
-        "rotation": 180,
-        "basePorts": 10
+        "type": "battery",
+        "rotation": 0,
+        "basePorts": 2,
+        "locked": true
       },
       {
         "id": "t-4-1",
         "row": 4,
         "col": 1,
-        "type": "corner",
-        "rotation": 0,
-        "basePorts": 6
+        "type": "line",
+        "rotation": 270,
+        "basePorts": 10,
+        "locked": false
       },
       {
         "id": "t-4-2",
         "row": 4,
         "col": 2,
-        "type": "line",
-        "rotation": 0,
-        "basePorts": 10
+        "type": "corner",
+        "rotation": 270,
+        "basePorts": 6,
+        "locked": false
       },
       {
         "id": "t-4-3",
@@ -9345,19 +9345,19 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-4-4",
         "row": 4,
         "col": 4,
-        "type": "corner",
+        "type": "switch",
         "rotation": 90,
-        "basePorts": 6,
-        "locked": false
+        "basePorts": 10,
+        "locked": false,
+        "switchClosed": true
       },
       {
         "id": "t-4-5",
         "row": 4,
         "col": 5,
-        "type": "corner",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 6,
-        "locked": false
+        "basePorts": 0
       },
       {
         "id": "t-5-0",
@@ -9372,7 +9372,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 1,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 6
       },
       {
@@ -9395,9 +9395,10 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-5-4",
         "row": 5,
         "col": 4,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
+        "type": "corner",
+        "rotation": 270,
+        "basePorts": 6,
+        "locked": false
       },
       {
         "id": "t-5-5",
@@ -11305,8 +11306,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 17,
-    "parSteps": 11,
+    "maxSteps": 23,
+    "parSteps": 15,
     "tiles": [
       {
         "id": "t-0-0",
@@ -11456,7 +11457,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 5,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -11497,7 +11498,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -11542,7 +11543,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 3,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -11552,7 +11553,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 14,
         "locked": false
       },
@@ -11621,8 +11622,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 20,
-    "parSteps": 13,
+    "maxSteps": 23,
+    "parSteps": 15,
     "tiles": [
       {
         "id": "t-0-0",
@@ -11772,7 +11773,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 5,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -11797,7 +11798,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 2,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -11806,7 +11807,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 3,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -11852,7 +11853,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 2,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -11936,8 +11937,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 20,
-    "parSteps": 13,
+    "maxSteps": 24,
+    "parSteps": 16,
     "tiles": [
       {
         "id": "t-0-0",
@@ -12102,7 +12103,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 1,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -12157,7 +12158,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 1,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -12182,7 +12183,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -12191,7 +12192,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 5,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -12252,8 +12253,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 30,
-    "parSteps": 20,
+    "maxSteps": 22,
+    "parSteps": 21,
     "tiles": [
       {
         "id": "t-0-0",
@@ -12278,7 +12279,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 2,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -12288,7 +12289,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 3,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -12337,7 +12338,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 3,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -12441,7 +12442,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 3,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -12492,7 +12493,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 3,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -12547,7 +12548,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 3,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -12575,8 +12576,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 17,
-    "parSteps": 11,
+    "maxSteps": 21,
+    "parSteps": 14,
     "tiles": [
       {
         "id": "t-0-0",
@@ -12655,7 +12656,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 3,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -12700,7 +12701,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 2,
         "type": "diode",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -12709,7 +12710,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 3,
         "type": "t_shape",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 14,
         "locked": false
       },
@@ -12884,8 +12885,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 18,
-    "parSteps": 12,
+    "maxSteps": 23,
+    "parSteps": 15,
     "tiles": [
       {
         "id": "t-0-0",
@@ -12974,7 +12975,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -13078,7 +13079,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 14,
         "locked": false
       },
@@ -13087,7 +13088,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 5,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -13136,7 +13137,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 5,
         "type": "diode",
-        "rotation": 0,
+        "rotation": 180,
         "basePorts": 10,
         "locked": false
       },
@@ -13197,8 +13198,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 18,
-    "parSteps": 12,
+    "maxSteps": 23,
+    "parSteps": 15,
     "tiles": [
       {
         "id": "t-0-0",
@@ -13265,7 +13266,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 1,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -13283,7 +13284,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 3,
         "type": "diode",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -13343,7 +13344,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -13394,7 +13395,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -13513,8 +13514,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 20,
-    "parSteps": 13,
+    "maxSteps": 24,
+    "parSteps": 16,
     "tiles": [
       {
         "id": "t-0-0",
@@ -13530,7 +13531,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 1,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -13579,7 +13580,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 1,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -13606,7 +13607,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "t_shape",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -13798,7 +13799,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 3,
         "type": "diode",
-        "rotation": 90,
+        "rotation": 180,
         "basePorts": 10,
         "locked": false
       },
@@ -13807,7 +13808,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -13829,8 +13830,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 20,
-    "parSteps": 13,
+    "maxSteps": 24,
+    "parSteps": 16,
     "tiles": [
       {
         "id": "t-0-0",
@@ -13968,7 +13969,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -14012,7 +14013,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 3,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -14073,7 +14074,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -14144,8 +14145,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 20,
-    "parSteps": 13,
+    "maxSteps": 26,
+    "parSteps": 17,
     "tiles": [
       {
         "id": "t-0-0",
@@ -14161,7 +14162,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 1,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -14237,7 +14238,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -14246,7 +14247,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 5,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -14263,7 +14264,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 1,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -14340,7 +14341,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 10,
         "locked": false
       },
@@ -14389,7 +14390,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -14460,8 +14461,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 20,
-    "parSteps": 13,
+    "maxSteps": 26,
+    "parSteps": 17,
     "tiles": [
       {
         "id": "t-0-0",
@@ -14502,7 +14503,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -14627,7 +14628,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 1,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -14681,7 +14682,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 1,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 180,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -14707,7 +14708,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -14778,8 +14779,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 20,
-    "parSteps": 13,
+    "maxSteps": 26,
+    "parSteps": 17,
     "tiles": [
       {
         "id": "t-0-0",
@@ -14927,7 +14928,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 5,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -15064,7 +15065,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 3,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 10,
         "locked": false
       },
@@ -15073,7 +15074,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -15094,8 +15095,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 23,
-    "parSteps": 15,
+    "maxSteps": 24,
+    "parSteps": 16,
     "tiles": [
       {
         "id": "t-0-0",
@@ -15285,7 +15286,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -15335,7 +15336,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -15380,7 +15381,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 3,
         "type": "diode",
-        "rotation": 90,
+        "rotation": 180,
         "basePorts": 10,
         "locked": false
       },
@@ -15410,8 +15411,9 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 21,
-    "parSteps": 14,
+    "goal": 2,
+    "maxSteps": 15,
+    "parSteps": 15,
     "tiles": [
       {
         "id": "t-0-0",
@@ -15478,7 +15480,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 1,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -15504,7 +15506,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 180,
         "basePorts": 14,
         "locked": false
       },
@@ -15539,7 +15541,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 2,
         "type": "diode",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -15548,7 +15550,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 3,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -15558,7 +15560,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 14,
         "locked": false
       },
@@ -15764,7 +15766,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -15806,7 +15808,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 3,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 6
       },
       {
@@ -15814,7 +15816,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -15857,7 +15859,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 3,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 180,
         "basePorts": 6
       },
       {
@@ -15865,7 +15867,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 14,
         "locked": false
       },
@@ -15908,7 +15910,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 3,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -15917,7 +15919,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -15952,7 +15954,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 2,
         "type": "diode",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false
       },
@@ -15961,7 +15963,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 3,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -16038,8 +16040,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 21,
-    "parSteps": 14,
+    "maxSteps": 23,
+    "parSteps": 15,
     "tiles": [
       {
         "id": "t-0-0",
@@ -16055,7 +16057,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 1,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -16104,7 +16106,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 1,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -16130,7 +16132,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -16164,7 +16166,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 2,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -16173,7 +16175,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 3,
         "type": "diode",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -16233,7 +16235,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -16354,8 +16356,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 21,
-    "parSteps": 14,
+    "maxSteps": 24,
+    "parSteps": 16,
     "tiles": [
       {
         "id": "t-0-0",
@@ -16394,7 +16396,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -16444,7 +16446,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -16495,7 +16497,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 180,
         "basePorts": 14,
         "locked": false
       },
@@ -16582,7 +16584,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 2,
         "type": "diode",
-        "rotation": 90,
+        "rotation": 180,
         "basePorts": 10,
         "locked": false
       },
@@ -16591,7 +16593,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 3,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -16601,7 +16603,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 14,
         "locked": false
       },
@@ -16670,8 +16672,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 21,
-    "parSteps": 14,
+    "maxSteps": 24,
+    "parSteps": 16,
     "tiles": [
       {
         "id": "t-0-0",
@@ -16710,7 +16712,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -16813,7 +16815,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -16888,7 +16890,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 1,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -16967,7 +16969,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -16988,8 +16990,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 21,
-    "parSteps": 14,
+    "maxSteps": 26,
+    "parSteps": 17,
     "tiles": [
       {
         "id": "t-0-0",
@@ -17130,7 +17132,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -17233,7 +17235,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 14,
         "locked": false
       },
@@ -17304,8 +17306,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 23,
-    "parSteps": 15,
+    "maxSteps": 29,
+    "parSteps": 19,
     "tiles": [
       {
         "id": "t-0-0",
@@ -17344,7 +17346,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -17371,7 +17373,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 1,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -17448,7 +17450,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -17483,7 +17485,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 2,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -17492,7 +17494,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -17623,8 +17625,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 26,
-    "parSteps": 17,
+    "maxSteps": 27,
+    "parSteps": 18,
     "tiles": [
       {
         "id": "t-0-0",
@@ -17712,7 +17714,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -17739,7 +17741,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 1,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -17766,7 +17768,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "t_shape",
-        "rotation": 270,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -17816,7 +17818,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -17891,7 +17893,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 1,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -17982,7 +17984,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 180,
         "basePorts": 14,
         "locked": false
       },
@@ -18018,7 +18020,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 2,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -18035,7 +18037,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -18085,7 +18087,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 0,
         "basePorts": 10,
         "locked": false
       },
@@ -18134,7 +18136,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -18185,7 +18187,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -18254,8 +18256,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 23,
-    "parSteps": 15,
+    "maxSteps": 26,
+    "parSteps": 17,
     "tiles": [
       {
         "id": "t-0-0",
@@ -18271,7 +18273,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 1,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -18298,7 +18300,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -18324,7 +18326,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 1,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -18350,7 +18352,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -18394,7 +18396,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -18454,7 +18456,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -18573,8 +18575,9 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 33,
-    "parSteps": 22,
+    "tier": "hell",
+    "maxSteps": 24,
+    "parSteps": 24,
     "tiles": [
       {
         "id": "t-0-0",
@@ -18597,7 +18600,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 2,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -18642,7 +18645,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 1,
         "type": "diode",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false
       },
@@ -18651,7 +18654,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 2,
         "type": "t_shape",
-        "rotation": 270,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -18711,7 +18714,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 3,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 0,
         "basePorts": 10,
         "locked": false
       },
@@ -18796,7 +18799,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 1,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -18805,7 +18808,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 2,
         "type": "t_shape",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -18896,8 +18899,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 20,
-    "parSteps": 13,
+    "maxSteps": 24,
+    "parSteps": 16,
     "tiles": [
       {
         "id": "t-0-0",
@@ -18989,7 +18992,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "diode",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -19122,7 +19125,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 2,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -19139,7 +19142,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -19182,7 +19185,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -19192,7 +19195,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 14,
         "locked": false
       },
@@ -19213,8 +19216,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 20,
-    "parSteps": 13,
+    "maxSteps": 24,
+    "parSteps": 16,
     "tiles": [
       {
         "id": "t-0-0",
@@ -19403,7 +19406,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -19438,7 +19441,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 2,
         "type": "diode",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false
       },
@@ -19447,7 +19450,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -19457,7 +19460,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 14,
         "locked": false
       },
@@ -19528,8 +19531,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 20,
-    "parSteps": 13,
+    "maxSteps": 26,
+    "parSteps": 17,
     "tiles": [
       {
         "id": "t-0-0",
@@ -19572,7 +19575,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -19705,7 +19708,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 2,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -19714,7 +19717,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -19724,7 +19727,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 14,
         "locked": false
       },
@@ -19760,7 +19763,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 2,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -19845,8 +19848,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 21,
-    "parSteps": 14,
+    "maxSteps": 24,
+    "parSteps": 16,
     "tiles": [
       {
         "id": "t-0-0",
@@ -19988,7 +19991,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -20088,7 +20091,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -20133,7 +20136,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 3,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -20143,7 +20146,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "t_shape",
-        "rotation": 270,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -20164,8 +20167,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 21,
-    "parSteps": 14,
+    "maxSteps": 27,
+    "parSteps": 18,
     "tiles": [
       {
         "id": "t-0-0",
@@ -20258,7 +20261,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -20441,7 +20444,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 2,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -20450,7 +20453,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 3,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -20459,7 +20462,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -20481,8 +20484,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 21,
-    "parSteps": 14,
+    "maxSteps": 29,
+    "parSteps": 19,
     "tiles": [
       {
         "id": "t-0-0",
@@ -20507,7 +20510,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 2,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -20516,7 +20519,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -20576,7 +20579,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -20677,7 +20680,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -20798,8 +20801,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 21,
-    "parSteps": 14,
+    "maxSteps": 27,
+    "parSteps": 18,
     "tiles": [
       {
         "id": "t-0-0",
@@ -20824,7 +20827,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 2,
         "type": "diode",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -20843,7 +20846,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 14,
         "locked": false
       },
@@ -20894,7 +20897,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -20944,7 +20947,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -21047,7 +21050,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -21118,8 +21121,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 23,
-    "parSteps": 15,
+    "maxSteps": 29,
+    "parSteps": 19,
     "tiles": [
       {
         "id": "t-0-0",
@@ -21135,7 +21138,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 1,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -21263,7 +21266,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -21406,7 +21409,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 3,
         "type": "diode",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -21415,7 +21418,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -21437,8 +21440,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 23,
-    "parSteps": 15,
+    "maxSteps": 32,
+    "parSteps": 21,
     "tiles": [
       {
         "id": "t-0-0",
@@ -21454,7 +21457,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 1,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -21479,7 +21482,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -21634,7 +21637,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -21727,7 +21730,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 3,
         "type": "diode",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -21736,7 +21739,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -21758,8 +21761,9 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 23,
-    "parSteps": 15,
+    "goal": 4,
+    "maxSteps": 18,
+    "parSteps": 18,
     "tiles": [
       {
         "id": "t-0-0",
@@ -21825,7 +21829,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 1,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -21850,7 +21854,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -21926,7 +21930,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 1,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -21935,7 +21939,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 2,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -21944,7 +21948,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -22005,7 +22009,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -22078,8 +22082,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 23,
-    "parSteps": 15,
+    "maxSteps": 29,
+    "parSteps": 19,
     "tiles": [
       {
         "id": "t-0-0",
@@ -22094,7 +22098,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 1,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -22148,7 +22152,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 1,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -22294,7 +22298,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 1,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -22303,7 +22307,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 2,
         "type": "diode",
-        "rotation": 90,
+        "rotation": 180,
         "basePorts": 10,
         "locked": false
       },
@@ -22312,7 +22316,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -22395,8 +22399,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 23,
-    "parSteps": 15,
+    "maxSteps": 29,
+    "parSteps": 19,
     "tiles": [
       {
         "id": "t-0-0",
@@ -22439,7 +22443,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -22589,7 +22593,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -22632,7 +22636,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -22716,8 +22720,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 24,
-    "parSteps": 16,
+    "maxSteps": 30,
+    "parSteps": 20,
     "tiles": [
       {
         "id": "t-0-0",
@@ -22726,7 +22730,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "type": "battery",
         "rotation": 0,
         "basePorts": 2,
-        "locked": true
+        "locked": true,
+        "color": 0
       },
       {
         "id": "t-0-1",
@@ -22760,7 +22765,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "t_shape",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -22771,7 +22776,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "type": "bulb",
         "rotation": 0,
         "basePorts": 15,
-        "locked": true
+        "locked": true,
+        "color": 0
       },
       {
         "id": "t-1-0",
@@ -22810,7 +22816,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -22821,7 +22827,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "type": "bulb",
         "rotation": 0,
         "basePorts": 15,
-        "locked": true
+        "locked": true,
+        "color": 0
       },
       {
         "id": "t-2-0",
@@ -22919,7 +22926,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "type": "bulb",
         "rotation": 0,
         "basePorts": 15,
-        "locked": true
+        "locked": true,
+        "color": 1
       },
       {
         "id": "t-4-0",
@@ -22935,7 +22943,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 1,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -22944,7 +22952,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 2,
         "type": "diode",
-        "rotation": 90,
+        "rotation": 180,
         "basePorts": 10,
         "locked": false
       },
@@ -22953,7 +22961,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -22963,7 +22971,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -22974,7 +22982,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "type": "bulb",
         "rotation": 0,
         "basePorts": 15,
-        "locked": true
+        "locked": true,
+        "color": 1
       },
       {
         "id": "t-5-0",
@@ -22983,14 +22992,15 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "type": "battery",
         "rotation": 0,
         "basePorts": 2,
-        "locked": true
+        "locked": true,
+        "color": 1
       },
       {
         "id": "t-5-1",
         "row": 5,
         "col": 1,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -23027,7 +23037,10 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "rotation": 270,
         "basePorts": 6
       }
-    ]
+    ],
+    "rules": {
+      "colors": 2
+    }
   },
   {
     "id": 74,
@@ -23035,8 +23048,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 24,
-    "parSteps": 16,
+    "maxSteps": 27,
+    "parSteps": 18,
     "tiles": [
       {
         "id": "t-0-0",
@@ -23061,7 +23074,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 2,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -23078,7 +23091,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -23112,7 +23125,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 2,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -23130,7 +23143,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "t_shape",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 14,
         "locked": false
       },
@@ -23320,7 +23333,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 3,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 10,
         "locked": false
       },
@@ -23351,8 +23364,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 24,
-    "parSteps": 16,
+    "maxSteps": 30,
+    "parSteps": 20,
     "tiles": [
       {
         "id": "t-0-0",
@@ -23395,7 +23408,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -23543,7 +23556,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -23552,7 +23565,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 5,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -23630,7 +23643,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 2,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -23670,8 +23683,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 24,
-    "parSteps": 16,
+    "maxSteps": 27,
+    "parSteps": 18,
     "tiles": [
       {
         "id": "t-0-0",
@@ -23711,7 +23724,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -23738,7 +23751,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 1,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -23798,7 +23811,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 2,
         "type": "diode",
-        "rotation": 90,
+        "rotation": 180,
         "basePorts": 10,
         "locked": false
       },
@@ -23807,7 +23820,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 3,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -23868,7 +23881,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 180,
         "basePorts": 14,
         "locked": false
       },
@@ -23918,7 +23931,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -23927,7 +23940,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 5,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -23990,8 +24003,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 23,
-    "parSteps": 15,
+    "maxSteps": 30,
+    "parSteps": 20,
     "tiles": [
       {
         "id": "t-0-0",
@@ -24184,7 +24197,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -24269,7 +24282,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 2,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -24278,7 +24291,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 3,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -24287,7 +24300,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -24309,8 +24322,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 26,
-    "parSteps": 17,
+    "maxSteps": 33,
+    "parSteps": 22,
     "tiles": [
       {
         "id": "t-0-0",
@@ -24335,7 +24348,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 2,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -24394,7 +24407,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 3,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -24403,7 +24416,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -24445,7 +24458,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 3,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -24506,7 +24519,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -24599,7 +24612,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 3,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -24608,7 +24621,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -24630,8 +24643,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 26,
-    "parSteps": 17,
+    "maxSteps": 32,
+    "parSteps": 21,
     "tiles": [
       {
         "id": "t-0-0",
@@ -24722,7 +24735,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -24731,7 +24744,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 5,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -24850,7 +24863,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 1,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -24859,7 +24872,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 2,
         "type": "diode",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -24868,7 +24881,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 3,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -24905,7 +24918,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 1,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 6,
         "locked": false
       },
@@ -24938,7 +24951,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 5,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6
       }
     ]
@@ -24949,53 +24962,49 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 26,
-    "parSteps": 17,
+    "tier": "hell",
+    "maxSteps": 24,
+    "parSteps": 24,
     "tiles": [
       {
         "id": "t-0-0",
         "row": 0,
         "col": 0,
-        "type": "battery",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 2,
-        "locked": true
+        "basePorts": 0
       },
       {
         "id": "t-0-1",
         "row": 0,
         "col": 1,
-        "type": "switch",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 10,
-        "locked": false,
-        "switchClosed": true
+        "basePorts": 0
       },
       {
         "id": "t-0-2",
         "row": 0,
         "col": 2,
-        "type": "cross",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 15,
-        "locked": false
+        "basePorts": 0
       },
       {
         "id": "t-0-3",
         "row": 0,
         "col": 3,
-        "type": "diode",
-        "rotation": 90,
-        "basePorts": 10,
-        "locked": false
+        "type": "corner",
+        "rotation": 270,
+        "basePorts": 6
       },
       {
         "id": "t-0-4",
         "row": 0,
         "col": 4,
-        "type": "line",
+        "type": "corner",
         "rotation": 90,
-        "basePorts": 10,
+        "basePorts": 6,
         "locked": false
       },
       {
@@ -25011,26 +25020,28 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-1-0",
         "row": 1,
         "col": 0,
-        "type": "empty",
+        "type": "battery",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 2,
+        "locked": true
       },
       {
         "id": "t-1-1",
         "row": 1,
         "col": 1,
-        "type": "empty",
+        "type": "line",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 10,
+        "locked": false
       },
       {
         "id": "t-1-2",
         "row": 1,
         "col": 2,
         "type": "line",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 10,
-        "locked": false
+        "locked": true
       },
       {
         "id": "t-1-3",
@@ -25044,17 +25055,19 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-1-4",
         "row": 1,
         "col": 4,
-        "type": "empty",
+        "type": "t_shape",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 14,
+        "locked": false
       },
       {
         "id": "t-1-5",
         "row": 1,
         "col": 5,
-        "type": "empty",
+        "type": "bulb",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 15,
+        "locked": true
       },
       {
         "id": "t-2-0",
@@ -25068,35 +25081,35 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-2-1",
         "row": 2,
         "col": 1,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
+        "type": "line",
+        "rotation": 90,
+        "basePorts": 10,
+        "locked": true
       },
       {
         "id": "t-2-2",
         "row": 2,
         "col": 2,
-        "type": "t_shape",
-        "rotation": 0,
-        "basePorts": 14,
-        "locked": false
+        "type": "corner",
+        "rotation": 180,
+        "basePorts": 6
       },
       {
         "id": "t-2-3",
         "row": 2,
         "col": 3,
         "type": "line",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
-        "locked": false
+        "locked": true
       },
       {
         "id": "t-2-4",
         "row": 2,
         "col": 4,
-        "type": "line",
+        "type": "t_shape",
         "rotation": 90,
-        "basePorts": 10,
+        "basePorts": 14,
         "locked": false
       },
       {
@@ -25120,35 +25133,37 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-3-1",
         "row": 3,
         "col": 1,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
+        "type": "corner",
+        "rotation": 90,
+        "basePorts": 6,
+        "locked": false
       },
       {
         "id": "t-3-2",
         "row": 3,
         "col": 2,
-        "type": "t_shape",
-        "rotation": 0,
-        "basePorts": 14,
+        "type": "diode",
+        "rotation": 180,
+        "basePorts": 10,
         "locked": false
       },
       {
         "id": "t-3-3",
         "row": 3,
         "col": 3,
-        "type": "line",
+        "type": "switch",
         "rotation": 90,
         "basePorts": 10,
-        "locked": false
+        "locked": false,
+        "switchClosed": false
       },
       {
         "id": "t-3-4",
         "row": 3,
         "col": 4,
-        "type": "line",
-        "rotation": 90,
-        "basePorts": 10,
+        "type": "cross",
+        "rotation": 0,
+        "basePorts": 15,
         "locked": false
       },
       {
@@ -25164,99 +25179,94 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-4-0",
         "row": 4,
         "col": 0,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
-      },
-      {
-        "id": "t-4-1",
-        "row": 4,
-        "col": 1,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
-      },
-      {
-        "id": "t-4-2",
-        "row": 4,
-        "col": 2,
-        "type": "cross",
-        "rotation": 0,
-        "basePorts": 15,
-        "locked": false
-      },
-      {
-        "id": "t-4-3",
-        "row": 4,
-        "col": 3,
-        "type": "line",
-        "rotation": 90,
-        "basePorts": 10,
-        "locked": false
-      },
-      {
-        "id": "t-4-4",
-        "row": 4,
-        "col": 4,
-        "type": "line",
-        "rotation": 90,
-        "basePorts": 10,
-        "locked": false
-      },
-      {
-        "id": "t-4-5",
-        "row": 4,
-        "col": 5,
-        "type": "bulb",
-        "rotation": 0,
-        "basePorts": 15,
-        "locked": true
-      },
-      {
-        "id": "t-5-0",
-        "row": 5,
-        "col": 0,
         "type": "battery",
         "rotation": 0,
         "basePorts": 2,
         "locked": true
       },
       {
+        "id": "t-4-1",
+        "row": 4,
+        "col": 1,
+        "type": "corner",
+        "rotation": 270,
+        "basePorts": 6,
+        "locked": false
+      },
+      {
+        "id": "t-4-2",
+        "row": 4,
+        "col": 2,
+        "type": "empty",
+        "rotation": 0,
+        "basePorts": 0
+      },
+      {
+        "id": "t-4-3",
+        "row": 4,
+        "col": 3,
+        "type": "empty",
+        "rotation": 0,
+        "basePorts": 0
+      },
+      {
+        "id": "t-4-4",
+        "row": 4,
+        "col": 4,
+        "type": "corner",
+        "rotation": 0,
+        "basePorts": 6,
+        "locked": false
+      },
+      {
+        "id": "t-4-5",
+        "row": 4,
+        "col": 5,
+        "type": "corner",
+        "rotation": 180,
+        "basePorts": 6,
+        "locked": false
+      },
+      {
+        "id": "t-5-0",
+        "row": 5,
+        "col": 0,
+        "type": "empty",
+        "rotation": 0,
+        "basePorts": 0
+      },
+      {
         "id": "t-5-1",
         "row": 5,
         "col": 1,
-        "type": "switch",
-        "rotation": 90,
+        "type": "line",
+        "rotation": 180,
         "basePorts": 10,
-        "locked": false,
-        "switchClosed": false
+        "locked": true
       },
       {
         "id": "t-5-2",
         "row": 5,
         "col": 2,
-        "type": "cross",
-        "rotation": 0,
-        "basePorts": 15,
-        "locked": false
+        "type": "corner",
+        "rotation": 270,
+        "basePorts": 6
       },
       {
         "id": "t-5-3",
         "row": 5,
         "col": 3,
-        "type": "diode",
-        "rotation": 270,
-        "basePorts": 10,
-        "locked": false
+        "type": "empty",
+        "rotation": 0,
+        "basePorts": 0
       },
       {
         "id": "t-5-4",
         "row": 5,
         "col": 4,
         "type": "line",
-        "rotation": 90,
-        "basePorts": 10,
-        "locked": false
+        "rotation": 180,
+        "basePorts": 10
       },
       {
         "id": "t-5-5",
@@ -25275,8 +25285,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 23,
-    "parSteps": 15,
+    "maxSteps": 29,
+    "parSteps": 19,
     "tiles": [
       {
         "id": "t-0-0",
@@ -25292,7 +25302,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 1,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -25343,7 +25353,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 1,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -25352,7 +25362,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 2,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -25361,7 +25371,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -25371,7 +25381,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 14,
         "locked": false
       },
@@ -25423,7 +25433,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -25524,7 +25534,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -25596,8 +25606,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 26,
-    "parSteps": 17,
+    "maxSteps": 27,
+    "parSteps": 18,
     "tiles": [
       {
         "id": "t-0-0",
@@ -25784,7 +25794,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 3,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -25916,8 +25926,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 23,
-    "parSteps": 15,
+    "maxSteps": 30,
+    "parSteps": 20,
     "tiles": [
       {
         "id": "t-0-0",
@@ -26002,7 +26012,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 3,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -26063,7 +26073,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -26114,7 +26124,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -26217,7 +26227,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -26238,8 +26248,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 24,
-    "parSteps": 16,
+    "maxSteps": 29,
+    "parSteps": 19,
     "tiles": [
       {
         "id": "t-0-0",
@@ -26332,7 +26342,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -26383,7 +26393,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 180,
         "basePorts": 14,
         "locked": false
       },
@@ -26426,7 +26436,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -26489,7 +26499,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -26540,7 +26550,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -26561,8 +26571,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 24,
-    "parSteps": 16,
+    "maxSteps": 32,
+    "parSteps": 21,
     "tiles": [
       {
         "id": "t-0-0",
@@ -26578,7 +26588,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 1,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -26603,7 +26613,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -26638,7 +26648,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 2,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 10,
         "locked": false
       },
@@ -26647,7 +26657,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 3,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -26709,7 +26719,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -26881,63 +26891,59 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 24,
-    "parSteps": 16,
+    "maxSteps": 32,
+    "parSteps": 21,
     "tiles": [
       {
         "id": "t-0-0",
         "row": 0,
         "col": 0,
-        "type": "battery",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 2,
+        "basePorts": 0
+      },
+      {
+        "id": "0,1",
+        "row": 0,
+        "col": 1,
+        "type": "bulb",
+        "rotation": 0,
+        "basePorts": 15,
         "locked": true
       },
       {
-        "id": "t-0-1",
-        "row": 0,
-        "col": 1,
-        "type": "line",
-        "rotation": 90,
-        "basePorts": 10,
-        "locked": false
-      },
-      {
-        "id": "t-0-2",
+        "id": "0,2",
         "row": 0,
         "col": 2,
-        "type": "diode",
-        "rotation": 270,
-        "basePorts": 10,
-        "locked": false
+        "type": "bulb",
+        "rotation": 0,
+        "basePorts": 15,
+        "locked": true
       },
       {
-        "id": "t-0-3",
+        "id": "0,3",
         "row": 0,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 10,
-        "locked": false,
         "switchClosed": false
       },
       {
-        "id": "t-0-4",
+        "id": "0,4",
         "row": 0,
         "col": 4,
-        "type": "t_shape",
-        "rotation": 90,
-        "basePorts": 14,
-        "locked": false
+        "type": "corner",
+        "rotation": 0,
+        "basePorts": 6
       },
       {
         "id": "t-0-5",
         "row": 0,
         "col": 5,
-        "type": "bulb",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 15,
-        "locked": true
+        "basePorts": 0
       },
       {
         "id": "t-1-0",
@@ -26948,98 +26954,95 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "basePorts": 0
       },
       {
-        "id": "t-1-1",
+        "id": "1,1",
         "row": 1,
         "col": 1,
-        "type": "empty",
+        "type": "switch",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 10,
+        "switchClosed": false
       },
       {
-        "id": "t-1-2",
+        "id": "1,2",
         "row": 1,
         "col": 2,
-        "type": "empty",
+        "type": "corner",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 6
       },
       {
-        "id": "t-1-3",
+        "id": "1,3",
         "row": 1,
         "col": 3,
-        "type": "empty",
+        "type": "line",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 10
       },
       {
-        "id": "t-1-4",
+        "id": "1,4",
         "row": 1,
         "col": 4,
-        "type": "t_shape",
-        "rotation": 180,
-        "basePorts": 14,
-        "locked": false
+        "type": "cross",
+        "rotation": 0,
+        "basePorts": 15
       },
       {
         "id": "t-1-5",
         "row": 1,
         "col": 5,
-        "type": "bulb",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 15,
-        "locked": true
+        "basePorts": 0
       },
       {
-        "id": "t-2-0",
+        "id": "2,0",
         "row": 2,
         "col": 0,
-        "type": "line",
-        "rotation": 180,
-        "basePorts": 10,
+        "type": "battery",
+        "rotation": 0,
+        "basePorts": 2,
         "locked": true
       },
       {
-        "id": "t-2-1",
+        "id": "2,1",
         "row": 2,
         "col": 1,
-        "type": "empty",
+        "type": "cross",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 15
       },
       {
-        "id": "t-2-2",
+        "id": "2,2",
         "row": 2,
         "col": 2,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
-      },
-      {
-        "id": "t-2-3",
-        "row": 2,
-        "col": 3,
-        "type": "line",
-        "rotation": 270,
-        "basePorts": 10,
-        "locked": true
-      },
-      {
-        "id": "t-2-4",
-        "row": 2,
-        "col": 4,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
+      },
+      {
+        "id": "2,3",
+        "row": 2,
+        "col": 3,
+        "type": "t_shape",
+        "rotation": 90,
+        "basePorts": 14
+      },
+      {
+        "id": "2,4",
+        "row": 2,
+        "col": 4,
+        "type": "cross",
+        "rotation": 0,
+        "basePorts": 15
       },
       {
         "id": "t-2-5",
         "row": 2,
         "col": 5,
-        "type": "bulb",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 15,
-        "locked": true
+        "basePorts": 0
       },
       {
         "id": "t-3-0",
@@ -27050,65 +27053,62 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "basePorts": 0
       },
       {
-        "id": "t-3-1",
+        "id": "3,1",
         "row": 3,
         "col": 1,
-        "type": "line",
-        "rotation": 90,
-        "basePorts": 10,
-        "locked": true
+        "type": "diode",
+        "rotation": 0,
+        "basePorts": 10
       },
       {
         "id": "t-3-2",
         "row": 3,
         "col": 2,
-        "type": "line",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 10,
-        "locked": true
+        "basePorts": 0
       },
       {
-        "id": "t-3-3",
+        "id": "3,3",
         "row": 3,
         "col": 3,
-        "type": "line",
+        "type": "switch",
         "rotation": 0,
-        "basePorts": 10
+        "basePorts": 10,
+        "switchClosed": false
       },
       {
-        "id": "t-3-4",
+        "id": "3,4",
         "row": 3,
         "col": 4,
-        "type": "t_shape",
-        "rotation": 0,
-        "basePorts": 14,
-        "locked": false
+        "type": "switch",
+        "rotation": 90,
+        "basePorts": 10,
+        "switchClosed": false
       },
       {
         "id": "t-3-5",
         "row": 3,
         "col": 5,
-        "type": "bulb",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 15,
-        "locked": true
+        "basePorts": 0
       },
       {
-        "id": "t-4-0",
+        "id": "4,0",
         "row": 4,
         "col": 0,
-        "type": "battery",
-        "rotation": 0,
-        "basePorts": 2,
-        "locked": true
+        "type": "corner",
+        "rotation": 180,
+        "basePorts": 6
       },
       {
-        "id": "t-4-1",
+        "id": "4,1",
         "row": 4,
         "col": 1,
-        "type": "line",
+        "type": "t_shape",
         "rotation": 0,
-        "basePorts": 10,
+        "basePorts": 14,
         "locked": false
       },
       {
@@ -27120,54 +27120,54 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "basePorts": 0
       },
       {
-        "id": "t-4-3",
+        "id": "4,3",
         "row": 4,
         "col": 3,
-        "type": "empty",
+        "type": "bulb",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 15,
+        "locked": true
       },
       {
-        "id": "t-4-4",
+        "id": "4,4",
         "row": 4,
         "col": 4,
-        "type": "corner",
+        "type": "line",
         "rotation": 0,
-        "basePorts": 6,
-        "locked": false
+        "basePorts": 10
       },
       {
         "id": "t-4-5",
         "row": 4,
         "col": 5,
-        "type": "corner",
-        "rotation": 270,
-        "basePorts": 6,
-        "locked": false
+        "type": "empty",
+        "rotation": 0,
+        "basePorts": 0
       },
       {
-        "id": "t-5-0",
+        "id": "5,0",
         "row": 5,
         "col": 0,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
+        "type": "corner",
+        "rotation": 180,
+        "basePorts": 6
       },
       {
-        "id": "t-5-1",
+        "id": "5,1",
         "row": 5,
         "col": 1,
-        "type": "empty",
+        "type": "cross",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 15
       },
       {
-        "id": "t-5-2",
+        "id": "5,2",
         "row": 5,
         "col": 2,
-        "type": "empty",
+        "type": "bulb",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 15,
+        "locked": true
       },
       {
         "id": "t-5-3",
@@ -27178,23 +27178,26 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "basePorts": 0
       },
       {
-        "id": "t-5-4",
+        "id": "5,4",
         "row": 5,
         "col": 4,
-        "type": "line",
-        "rotation": 90,
-        "basePorts": 10
+        "type": "bulb",
+        "rotation": 0,
+        "basePorts": 15,
+        "locked": true
       },
       {
         "id": "t-5-5",
         "row": 5,
         "col": 5,
-        "type": "bulb",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 15,
-        "locked": true
+        "basePorts": 0
       }
-    ]
+    ],
+    "rules": {
+      "noCycle": true
+    }
   },
   {
     "id": 87,
@@ -27202,8 +27205,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 24,
-    "parSteps": 16,
+    "maxSteps": 33,
+    "parSteps": 22,
     "tiles": [
       {
         "id": "t-0-0",
@@ -27295,7 +27298,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -27322,7 +27325,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 1,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -27347,7 +27350,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -27373,7 +27376,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 1,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -27382,7 +27385,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 2,
         "type": "diode",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -27451,7 +27454,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -27503,7 +27506,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -27524,8 +27527,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 26,
-    "parSteps": 17,
+    "maxSteps": 29,
+    "parSteps": 19,
     "tiles": [
       {
         "id": "t-0-0",
@@ -27670,7 +27673,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -27722,7 +27725,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -27817,7 +27820,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 3,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -27827,7 +27830,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 14,
         "locked": false
       },
@@ -27848,8 +27851,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 26,
-    "parSteps": 17,
+    "maxSteps": 29,
+    "parSteps": 19,
     "tiles": [
       {
         "id": "t-0-0",
@@ -27883,7 +27886,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -27944,7 +27947,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -28093,7 +28096,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -28129,7 +28132,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 2,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 10,
         "locked": false
       },
@@ -28138,7 +28141,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 3,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -28169,8 +28172,9 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 26,
-    "parSteps": 17,
+    "goal": 4,
+    "maxSteps": 19,
+    "parSteps": 19,
     "tiles": [
       {
         "id": "t-0-0",
@@ -28185,37 +28189,35 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-0-1",
         "row": 0,
         "col": 1,
-        "type": "line",
-        "rotation": 90,
-        "basePorts": 10,
+        "type": "corner",
+        "rotation": 180,
+        "basePorts": 6,
         "locked": false
       },
       {
         "id": "t-0-2",
         "row": 0,
         "col": 2,
-        "type": "diode",
-        "rotation": 90,
+        "type": "line",
+        "rotation": 180,
         "basePorts": 10,
-        "locked": false
+        "locked": true
       },
       {
         "id": "t-0-3",
         "row": 0,
         "col": 3,
-        "type": "switch",
-        "rotation": 90,
-        "basePorts": 10,
-        "locked": false,
-        "switchClosed": false
+        "type": "empty",
+        "rotation": 0,
+        "basePorts": 0
       },
       {
         "id": "t-0-4",
         "row": 0,
         "col": 4,
-        "type": "t_shape",
-        "rotation": 180,
-        "basePorts": 14,
+        "type": "corner",
+        "rotation": 270,
+        "basePorts": 6,
         "locked": false
       },
       {
@@ -28232,7 +28234,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 0,
         "type": "line",
-        "rotation": 270,
+        "rotation": 0,
         "basePorts": 10,
         "locked": true
       },
@@ -28242,40 +28244,45 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "col": 1,
         "type": "corner",
         "rotation": 0,
-        "basePorts": 6
+        "basePorts": 6,
+        "locked": false
       },
       {
         "id": "t-1-2",
         "row": 1,
         "col": 2,
-        "type": "corner",
+        "type": "diode",
         "rotation": 180,
-        "basePorts": 6
+        "basePorts": 10,
+        "locked": false
       },
       {
         "id": "t-1-3",
         "row": 1,
         "col": 3,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
+        "type": "switch",
+        "rotation": 90,
+        "basePorts": 10,
+        "locked": false,
+        "switchClosed": false
       },
       {
         "id": "t-1-4",
         "row": 1,
         "col": 4,
-        "type": "diode",
+        "type": "cross",
         "rotation": 0,
-        "basePorts": 10,
+        "basePorts": 15,
         "locked": false
       },
       {
         "id": "t-1-5",
         "row": 1,
         "col": 5,
-        "type": "empty",
+        "type": "bulb",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 15,
+        "locked": true
       },
       {
         "id": "t-2-0",
@@ -28300,36 +28307,35 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 2,
         "type": "line",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 10,
-        "locked": true
+        "locked": false
       },
       {
         "id": "t-2-3",
         "row": 2,
         "col": 3,
-        "type": "line",
+        "type": "corner",
         "rotation": 180,
-        "basePorts": 10,
-        "locked": true
+        "basePorts": 6
       },
       {
         "id": "t-2-4",
         "row": 2,
         "col": 4,
-        "type": "switch",
+        "type": "corner",
         "rotation": 180,
-        "basePorts": 10,
-        "locked": false,
-        "switchClosed": false
+        "basePorts": 6,
+        "locked": false
       },
       {
         "id": "t-2-5",
         "row": 2,
         "col": 5,
-        "type": "empty",
+        "type": "bulb",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 15,
+        "locked": true
       },
       {
         "id": "t-3-0",
@@ -28343,9 +28349,9 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-3-1",
         "row": 3,
         "col": 1,
-        "type": "corner",
-        "rotation": 270,
-        "basePorts": 6
+        "type": "empty",
+        "rotation": 0,
+        "basePorts": 0
       },
       {
         "id": "t-3-2",
@@ -28359,36 +28365,33 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-3-3",
         "row": 3,
         "col": 3,
-        "type": "line",
-        "rotation": 180,
-        "basePorts": 10,
-        "locked": true
+        "type": "empty",
+        "rotation": 0,
+        "basePorts": 0
       },
       {
         "id": "t-3-4",
         "row": 3,
         "col": 4,
-        "type": "t_shape",
-        "rotation": 90,
-        "basePorts": 14,
-        "locked": false
+        "type": "corner",
+        "rotation": 0,
+        "basePorts": 6
       },
       {
         "id": "t-3-5",
         "row": 3,
         "col": 5,
-        "type": "bulb",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 15,
-        "locked": true
+        "basePorts": 0
       },
       {
         "id": "t-4-0",
         "row": 4,
         "col": 0,
-        "type": "line",
-        "rotation": 90,
-        "basePorts": 10
+        "type": "corner",
+        "rotation": 0,
+        "basePorts": 6
       },
       {
         "id": "t-4-1",
@@ -28402,9 +28405,9 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-4-2",
         "row": 4,
         "col": 2,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
+        "type": "corner",
+        "rotation": 270,
+        "basePorts": 6
       },
       {
         "id": "t-4-3",
@@ -28418,9 +28421,9 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-4-4",
         "row": 4,
         "col": 4,
-        "type": "t_shape",
-        "rotation": 90,
-        "basePorts": 14,
+        "type": "corner",
+        "rotation": 270,
+        "basePorts": 6,
         "locked": false
       },
       {
@@ -28446,7 +28449,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 1,
         "type": "line",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false
       },
@@ -28454,25 +28457,28 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "id": "t-5-2",
         "row": 5,
         "col": 2,
-        "type": "corner",
-        "rotation": 0,
-        "basePorts": 6
+        "type": "diode",
+        "rotation": 90,
+        "basePorts": 10,
+        "locked": false
       },
       {
         "id": "t-5-3",
         "row": 5,
         "col": 3,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
+        "type": "switch",
+        "rotation": 90,
+        "basePorts": 10,
+        "locked": false,
+        "switchClosed": false
       },
       {
         "id": "t-5-4",
         "row": 5,
         "col": 4,
-        "type": "corner",
+        "type": "t_shape",
         "rotation": 90,
-        "basePorts": 6,
+        "basePorts": 14,
         "locked": false
       },
       {
@@ -28492,8 +28498,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 26,
-    "parSteps": 17,
+    "maxSteps": 27,
+    "parSteps": 18,
     "tiles": [
       {
         "id": "t-0-0",
@@ -28585,7 +28591,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -28688,7 +28694,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -28715,7 +28721,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 1,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -28816,8 +28822,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 27,
-    "parSteps": 18,
+    "maxSteps": 32,
+    "parSteps": 21,
     "tiles": [
       {
         "id": "t-0-0",
@@ -28858,7 +28864,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -28945,7 +28951,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 2,
         "type": "diode",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -28954,7 +28960,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 3,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -28991,7 +28997,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 1,
         "type": "corner",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -29068,7 +29074,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -29120,7 +29126,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -29141,8 +29147,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 27,
-    "parSteps": 18,
+    "maxSteps": 33,
+    "parSteps": 22,
     "tiles": [
       {
         "id": "t-0-0",
@@ -29176,7 +29182,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 3,
         "type": "diode",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -29335,7 +29341,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -29386,7 +29392,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -29441,7 +29447,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "t_shape",
-        "rotation": 270,
+        "rotation": 0,
         "basePorts": 14,
         "locked": false
       },
@@ -29462,8 +29468,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 30,
-    "parSteps": 20,
+    "maxSteps": 33,
+    "parSteps": 22,
     "tiles": [
       {
         "id": "t-0-0",
@@ -29554,7 +29560,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -29599,7 +29605,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 3,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -29746,7 +29752,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 2,
         "type": "diode",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -29755,7 +29761,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -29765,7 +29771,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 14,
         "locked": false
       },
@@ -29786,8 +29792,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 27,
-    "parSteps": 18,
+    "maxSteps": 33,
+    "parSteps": 22,
     "tiles": [
       {
         "id": "t-0-0",
@@ -29812,7 +29818,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 2,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -29821,7 +29827,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -29831,7 +29837,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 180,
         "basePorts": 14,
         "locked": false
       },
@@ -29882,7 +29888,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -29932,7 +29938,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -29968,7 +29974,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 2,
         "type": "diode",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false
       },
@@ -29977,7 +29983,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -30038,7 +30044,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -30111,8 +30117,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 29,
-    "parSteps": 19,
+    "maxSteps": 35,
+    "parSteps": 23,
     "tiles": [
       {
         "id": "t-0-0",
@@ -30146,7 +30152,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -30156,7 +30162,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "t_shape",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -30300,7 +30306,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 3,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -30360,7 +30366,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -30433,8 +30439,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 29,
-    "parSteps": 19,
+    "maxSteps": 35,
+    "parSteps": 23,
     "tiles": [
       {
         "id": "t-0-0",
@@ -30450,7 +30456,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 1,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -30475,7 +30481,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -30511,7 +30517,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 2,
         "type": "diode",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false
       },
@@ -30520,7 +30526,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -30581,7 +30587,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -30681,7 +30687,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -30717,7 +30723,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 2,
         "type": "diode",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false
       },
@@ -30726,7 +30732,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -30736,7 +30742,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 14,
         "locked": false
       },
@@ -30757,8 +30763,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 29,
-    "parSteps": 19,
+    "maxSteps": 36,
+    "parSteps": 24,
     "tiles": [
       {
         "id": "t-0-0",
@@ -30792,7 +30798,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 3,
         "type": "switch",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -30802,7 +30808,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -30903,7 +30909,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 6,
         "locked": false
       },
@@ -30948,7 +30954,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 3,
         "type": "switch",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 10,
         "locked": false,
         "switchClosed": false
@@ -31008,7 +31014,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "t_shape",
-        "rotation": 180,
+        "rotation": 90,
         "basePorts": 14,
         "locked": false
       },
@@ -31061,7 +31067,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 4,
         "type": "corner",
-        "rotation": 90,
+        "rotation": 0,
         "basePorts": 6,
         "locked": false
       },
@@ -31082,7 +31088,8 @@ export const DEFAULT_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 45,
+    "tier": "hell",
+    "maxSteps": 30,
     "parSteps": 30,
     "tiles": [
       {

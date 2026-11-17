@@ -354,6 +354,8 @@ export interface VictoryCheckContext {
   levelUndosUsed: number;
   hasUsedTimelineJump: boolean;
   hasToggledSwitch: boolean;
+  /** 本次通关实际拿到的星级（达标关按“保住几处”算，不能再用步数推） */
+  stars?: number;
 }
 
 // Check and award achievements upon level victory
@@ -367,10 +369,12 @@ export function checkVictoryAchievements(ctx: VictoryCheckContext): {
   const now = Date.now();
 
   // Rating is driven by the same 4-star model shown to the player
-  const stars = getStarsForSteps(ctx.stepsUsed, {
-    maxSteps: ctx.maxSteps,
-    parSteps: ctx.parSteps,
-  });
+  const stars =
+    ctx.stars ??
+    getStarsForSteps(ctx.stepsUsed, {
+      maxSteps: ctx.maxSteps,
+      parSteps: ctx.parSteps,
+    });
   const isThreeStar = stars >= 3;
   const isSpeedRun = stars >= 4;
 

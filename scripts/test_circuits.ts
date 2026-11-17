@@ -15,7 +15,7 @@
  */
 
 import { DEFAULT_LEVELS } from '../src/data/defaultLevels';
-import { getDefaultBasePorts, simulateCircuit } from '../src/utils/circuit';
+import { getDefaultBasePorts, isRotationNoop, simulateCircuit } from '../src/utils/circuit';
 import { Tile, TileType } from '../src/types/game';
 
 function tile(row: number, col: number, type: TileType, rotation = 0, extra: Partial<Tile> = {}): Tile {
@@ -42,7 +42,8 @@ for (const lvl of DEFAULT_LEVELS) {
   if (bats.length === 0) throw new Error(`关卡 #${lvl.id} 缺少泉眼源头`);
   if (bulbs.length === 0) throw new Error(`关卡 #${lvl.id} 缺少仙花终点`);
   if (!lvl.parSteps || lvl.parSteps <= 0) throw new Error(`关卡 #${lvl.id} 缺少 par（最少步数）`);
-  const minBudget = Math.ceil(lvl.parSteps * 1.3);
+  // 现在有意存在“零容错”关卡（取舍关、高难关），预算下限只保证 >= par
+  const minBudget = lvl.parSteps;
   if (lvl.maxSteps < minBudget) {
     throw new Error(`关卡 #${lvl.id} 预算 ${lvl.maxSteps} 小于 1.3×par（${lvl.parSteps} → 至少 ${minBudget}）`);
   }
@@ -132,4 +133,17 @@ console.log(
 if (!branchOpen.isAllLit) throw new Error('能量闸接通后三处设施应全部点亮！');
 if (branchClosed.litCount !== 0) throw new Error('能量闸断开时不应点亮任何设施！');
 
-console.log('=== 全部测试通过 (5/5 PASS) ===');
+console.log('=== 6. 验证“旋转不改变接法”的格子不扣步 ===');
+// 十字管四向同形：转 90° 端口掩码不变，点它不该吃掉一点步数预算。
+// 直管/弯管/三通旋转都会改变接法，必须照常收费。
+const crossTile = tile(0, 0, 'cross', 0);
+const lineTile = tile(0, 1, 'line', 0);
+const cornerTile = tile(0, 2, 'corner', 0);
+console.log(
+  `[PASS] 无效旋转判定：十字管 ${isRotationNoop(crossTile)}，直管 ${isRotationNoop(lineTile)}，弯管 ${isRotationNoop(cornerTile)}`
+);
+if (!isRotationNoop(crossTile)) throw new Error('十字管四向对称，旋转不应被算作一步！');
+if (isRotationNoop(lineTile)) throw new Error('直管旋转会改变接法，不能判定为无效操作！');
+if (isRotationNoop(cornerTile)) throw new Error('弯管旋转会改变接法，不能判定为无效操作！');
+
+console.log('=== 全部测试通过 (6/6 PASS) ===');

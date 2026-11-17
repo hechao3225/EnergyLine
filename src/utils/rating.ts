@@ -66,6 +66,22 @@ export function getStarsForSteps(
  * A cleared level without a trustworthy step record only earns 1 star
  * (we never invent a rating we have no evidence for).
  */
+/**
+ * 达标关的星级：通过即满星。
+ *
+ * 这几关的预算就是「达标所需的最少步数」，能过就说明已经打到最优，
+ * 所以不给中间档：过 = 四星，没过 = 重来（局内还有 3 次回溯兜底）。
+ * 星级在这里衡量的是「有没有解出最优解」，不是「保住了几处」。
+ */
+export function getStarsForLights(
+  goal: number | undefined,
+  _total: number,
+  lit: number,
+): StarLevel {
+  if (goal === undefined) return 0;
+  return lit >= goal ? MAX_STARS : 0;
+}
+
 export function getStarsForRecord(
   bestSteps: number | undefined | null,
   level: Pick<LevelConfig, 'maxSteps' | 'parSteps'>,

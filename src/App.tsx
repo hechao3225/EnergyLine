@@ -7,8 +7,10 @@ import React, {
 } from "react";
 import { CandyThemeShell } from "./components/CandyThemeShell";
 import { DEFAULT_LEVELS } from "./data/defaultLevels";
+import { LAB_LEVELS } from "./data/labLevels";
+import { AXIS_TRIAL_LEVELS } from "./data/axisTrialLevels";
 import type { HistorySnapshot, LevelConfig, Tile } from "./types/game";
-import { generateEndlessLevel, simulateCircuit } from "./utils/circuit";
+import { generateEndlessLevel, isRotationNoop, simulateCircuit } from "./utils/circuit";
 import { sound } from "./utils/audio";
 import { haptics } from "./utils/haptics";
 import { triggerConfetti } from "./utils/confetti";
@@ -23,13 +25,35 @@ import {
   PARK_STORAGE_KEY,
   readParkProgress,
   resumeLevel,
+  FIRST_CLEAR_COINS,
+  HELL_CLEAR_COINS,
   readStoryProgress,
   PROGRESS_VERSION,
   PROGRESS_VERSION_KEY,
 } from "./utils/parkProgress";
-import { getStarsForSteps } from "./utils/rating";
+import { getStarsForLights, getStarsForSteps } from "./utils/rating";
 
-type Mode = "story" | "endless" | "editor";
+const BEST_LIGHTS_KEY = "honeycomb_best_lights";
+const bulbsOf = (level: LevelConfig) => level.tiles.filter((t) => t.type === "bulb").length;
+
+type Mode = "story" | "endless" | "editor" | "lab";
+/** 获胜需要的设施数：显式 goal 或全部 */
+export const goalOf = (level: LevelConfig) =>
+  level.goal ?? level.tiles.filter((t) => t.type === "bulb").length;
+const TRIAL_AXIS =
+  typeof window !== "undefined" &&
+  new URLSearchParams(window.location.search).get("trial") === "axis";
+const TRIAL_START = 41;
+
+// 主线 41–43 用前三张手写板；44–50 用生成的板。LAB_LEVELS 里第 4 张（双色）不进主线。
+const TRIAL_SEQUENCE = [LAB_LEVELS[0], LAB_LEVELS[1], LAB_LEVELS[2], ...AXIS_TRIAL_LEVELS];
+function levelById(id: number): LevelConfig {
+  if (TRIAL_AXIS) {
+    const trial = TRIAL_SEQUENCE[id - TRIAL_START];
+    if (trial) return { ...trial, id, code: String(id) };
+  }
+  return DEFAULT_LEVELS.find((item) => item.id === id)!;
+}
 function snapshot(
   level: LevelConfig,
   tiles: Tile[],
@@ -37,7 +61,7 @@ function snapshot(
   step: number,
   description: string,
 ): HistorySnapshot {
-  const sim = simulateCircuit(tiles, level.gridRows, level.gridCols);
+  const sim = simulateCircuit(tiles, level.gridRows, level.gridCols, level.rules);
   return {
     id: `step-${Date.now()}-${step}`,
     stepNumber: step,
@@ -54,11 +78,18 @@ export default function App() {
   const [savedProgress] = useState(() => readStoryProgress(localStorage, DEFAULT_LEVELS));
   const [clearedLevels, setClearedLevels] = useState(savedProgress.cleared);
   const [bestSteps, setBestSteps] = useState(savedProgress.best);
+  const [bestLights, setBestLights] = useState<Record<number, number>>(() => {
+    try {
+      return JSON.parse(localStorage.getItem(BEST_LIGHTS_KEY) ?? "{}");
+    } catch {
+      return {};
+    }
+  });
   const [levelId, setLevelId] = useState(() => resumeLevel(clearedLevels));
   const [mode, setMode] = useState<Mode>("story");
   const [customLevel, setCustomLevel] = useState<LevelConfig | null>(null);
-  const level =
-    customLevel ?? DEFAULT_LEVELS.find((item) => item.id === levelId)!;
+  // 玩法试玩：?trial=axis 时把主线 41–43 临时换成三张联动轴实验板（不改任何数据/存档字段）
+  const level = customLevel ?? levelById(levelId);
   const [screen, setScreen] = useState<"home" | "play" | "victory">("home");
   const [tiles, setTiles] = useState(() =>
     level.tiles.map((tile) => ({ ...tile })),
@@ -77,14 +108,13 @@ export default function App() {
   const [victoryReward, setVictoryReward] = useState({
     stars: 0,
     coins: 0,
-    gems: 0,
   });
   const winProcessed = useRef(false);
   const winTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const stats = useRef({ undos: 0, jumped: false, switched: false });
   const endless = useRef({ targets: 3, index: 1, streak: 0 });
   const simulation = useMemo(
-    () => simulateCircuit(tiles, level.gridRows, level.gridCols),
+    () => simulateCircuit(tiles, level.gridRows, level.gridCols, level.rules),
     [tiles, level],
   );
 
@@ -116,25 +146,41 @@ export default function App() {
   }, []);
 
   // 在实际接通时结算并落盘，界面切换只负责呈现结果。
-  const complete = (nextRemaining: number, completedSteps: number) => {
+  const complete = (nextRemaining: number, completedSteps: number, litCount: number) => {
     if (winProcessed.current) return;
     winProcessed.current = true;
     const stepsUsed = completedSteps;
+    let earnedStars = 0;
     if (mode === "story") {
       const progress = readParkProgress(localStorage);
       const firstReward = !progress.rewardedLevels.includes(level.id);
-      const previousStars = getBestStars(level, clearedLevels, bestSteps);
+      const totalBulbs = bulbsOf(level);
+      const previousStars =
+        level.goal !== undefined
+          ? getStarsForLights(
+              level.goal,
+              totalBulbs,
+              // 老存档没有 bestLights 记录：已通关就按达标算，避免重玩时倒扣星星
+              bestLights[level.id] ?? (clearedLevels.includes(level.id) ? level.goal : 0),
+            )
+          : getBestStars(level, clearedLevels, bestSteps);
+      earnedStars =
+        level.goal !== undefined
+          ? getStarsForLights(level.goal, totalBulbs, litCount)
+          : getStarsForSteps(stepsUsed, level);
+      if (level.goal !== undefined && litCount > (bestLights[level.id] ?? 0)) {
+        const nextLights = { ...bestLights, [level.id]: litCount };
+        setBestLights(nextLights);
+        localStorage.setItem(BEST_LIGHTS_KEY, JSON.stringify(nextLights));
+      }
+      const clearCoins = level.tier === "hell" ? HELL_CLEAR_COINS : FIRST_CLEAR_COINS;
       setVictoryReward({
-        stars: Math.max(
-          0,
-          getStarsForSteps(stepsUsed, level) - previousStars,
-        ),
-        coins: firstReward ? 100 : 0,
-        gems: firstReward ? 10 : 0,
+        stars: Math.max(0, earnedStars - previousStars),
+        coins: firstReward ? clearCoins : 0,
       });
       localStorage.setItem(
         PARK_STORAGE_KEY,
-        JSON.stringify(completeParkLevel(progress, level.id, localDate())),
+        JSON.stringify(completeParkLevel(progress, level.id, localDate(), clearCoins)),
       );
       const cleared = clearedLevels.includes(level.id)
         ? clearedLevels
@@ -147,9 +193,9 @@ export default function App() {
       localStorage.setItem("honeycomb_best_steps", JSON.stringify(best));
       setClearedLevels(cleared);
       setBestSteps(best);
-    } else setVictoryReward({ stars: 0, coins: 0, gems: 0 });
+    } else setVictoryReward({ stars: 0, coins: 0 });
     if (mode === "endless") endless.current.streak += 1;
-    if (mode !== "editor")
+    if (mode !== "editor" && mode !== "lab")
       checkVictoryAchievements({
         levelId: level.id,
         stepsUsed,
@@ -159,6 +205,7 @@ export default function App() {
         levelUndosUsed: stats.current.undos,
         hasUsedTimelineJump: stats.current.jumped,
         hasToggledSwitch: stats.current.switched,
+        stars: earnedStars,
         isEndless: mode === "endless",
         endlessStreak: endless.current.streak,
       });
@@ -179,14 +226,27 @@ export default function App() {
       winProcessed.current
     )
       return;
+    // 十字管这类 90° 对称的格子：转与不转接法一模一样，点它不该扣步。
+    // 带 axis 的格子例外——点一下整组同转，别把联动组挡掉。
+    if (!clicked.axis && isRotationNoop(clicked)) return;
     const toggle = clicked.type === "switch" && action === "toggle-switch";
-    const nextTiles = current.tiles.map((tile) =>
-      tile.id === clicked.id
-        ? toggle
-          ? { ...tile, switchClosed: !tile.switchClosed }
-          : { ...tile, rotation: tile.rotation + 90 }
-        : tile,
-    );
+    // 联动轴：整组一起转，仍然只算 1 步
+    const axis = toggle ? undefined : clicked.axis;
+    // 焊死：已经通电的格子（或整组）不能再转
+    if (level.rules?.weld && !toggle) {
+      const welded = axis
+        ? current.tiles.some((tile) => tile.axis === axis && simulation.poweredTileIds.has(tile.id))
+        : simulation.poweredTileIds.has(clicked.id);
+      if (welded) return;
+    }
+    const nextTiles = current.tiles.map((tile) => {
+      if (axis && tile.axis === axis)
+        return { ...tile, rotation: tile.rotation + 90 * (tile.axisDir ?? 1) };
+      if (tile.id !== clicked.id) return tile;
+      return toggle
+        ? { ...tile, switchClosed: !tile.switchClosed }
+        : { ...tile, rotation: tile.rotation + 90 };
+    });
     const nextRemaining = current.remaining - 1;
     const nextSteps = (current.history[current.index].stepsUsed ?? current.history[current.index].stepNumber) + 1;
     const nextHistory = [
@@ -196,7 +256,7 @@ export default function App() {
         nextTiles,
         nextRemaining,
         nextSteps,
-        `${toggle ? "切换能量闸" : "旋转管道"} (${clicked.row + 1}, ${clicked.col + 1})`,
+        `${toggle ? "切换能量闸" : axis ? "联动旋转" : "旋转管道"} (${clicked.row + 1}, ${clicked.col + 1})`,
       ),
     ];
     attempt.current = { ...current, tiles: nextTiles, remaining: nextRemaining, history: nextHistory, index: nextHistory.length - 1 };
@@ -208,21 +268,45 @@ export default function App() {
       stats.current.switched = true;
       sound.playSwitch();
       haptics.tapHeavy();
+    } else if (axis && clicked.axisDir) {
+      sound.playGear();
+      haptics.tapLight();
     } else {
       sound.playRotate();
       haptics.tapLight();
     }
-    const nextSim = simulateCircuit(nextTiles, level.gridRows, level.gridCols);
-    if (nextSim.isAllLit) complete(nextRemaining, nextSteps);
+    const nextSim = simulateCircuit(nextTiles, level.gridRows, level.gridCols, level.rules);
+    const reached = nextSim.litCount >= goalOf(level);
+    if (level.goal !== undefined) {
+      // 达标关：预算就是达标所需的最少步数，达标即最优——立刻结算
+      if (reached) complete(nextRemaining, nextSteps, nextSim.litCount);
+      else if (nextRemaining === 0) {
+        sound.playFail();
+        haptics.outOfSteps();
+      }
+    } else if (nextSim.isAllLit) complete(nextRemaining, nextSteps, nextSim.litCount);
     else if (nextRemaining === 0) {
       sound.playFail();
       haptics.outOfSteps();
     }
   };
   useEffect(() => {
-    if (screen === "play" && simulation.isAllLit && !winProcessed.current)
-      complete(remaining, stepsUsed);
+    if (
+      screen === "play" &&
+      level.goal === undefined &&
+      simulation.isAllLit &&
+      !winProcessed.current
+    )
+      complete(remaining, stepsUsed, simulation.litCount);
   }, [screen, level, simulation.isAllLit]);
+  /** 达标关：玩家满意了就收工结算 */
+  const settle = () => {
+    const current = attempt.current;
+    if (winProcessed.current || level.goal === undefined) return;
+    const sim = simulateCircuit(current.tiles, level.gridRows, level.gridCols, level.rules);
+    if (sim.litCount < goalOf(level)) return;
+    complete(current.remaining, current.history[current.index].stepsUsed ?? 0, sim.litCount);
+  };
   const travel = useCallback(
     (index: number, jump = false) => {
       const current = attempt.current;
@@ -247,12 +331,30 @@ export default function App() {
     [history, historyIndex],
   );
   const selectLevel = (id: number) => {
-    const config = DEFAULT_LEVELS.find((item) => item.id === id)!;
+    const config = levelById(id);
     setLevelId(id);
     setCustomLevel(null);
     setMode("story");
     setLevelsOpen(false);
     reset(config);
+  };
+  const startLab = (index = 0) => {
+    const config = LAB_LEVELS[index] ?? LAB_LEVELS[0];
+    setCustomLevel(config);
+    setLevelId(config.id);
+    setMode("lab");
+    setLevelsOpen(false);
+    reset(config);
+  };
+  // 道具：步数用尽后补 3 步（切片里先免费发放，看手感再定经济）
+  const addSteps = () => {
+    const current = attempt.current;
+    if (winProcessed.current || current.remaining > 0) return;
+    const nextRemaining = current.remaining + 3;
+    attempt.current = { ...current, remaining: nextRemaining };
+    setRemaining(nextRemaining);
+    sound.playSwitch();
+    haptics.tapHeavy();
   };
   const startEndless = (targets: number, next = false) => {
     const index = next ? endless.current.index + 1 : 1;
@@ -268,7 +370,6 @@ export default function App() {
       code: `∞${index}`,
       totalLevels: 0,
       title: `无尽挑战 ${index}`,
-      winText: "又一束星光被接通！",
       gridRows: 6,
       gridCols: 6,
     };
@@ -278,7 +379,7 @@ export default function App() {
   };
   const next = () => {
     if (mode === "endless") startEndless(endless.current.targets, true);
-    else if (mode === "editor") reset(level);
+    else if (mode === "editor" || mode === "lab") reset(level);
     else if (level.id < 99) selectLevel(level.id + 1);
     else setLevelsOpen(true);
   };
@@ -288,7 +389,7 @@ export default function App() {
     setLevelsOpen(false);
     if (mode !== "story" || winProcessed.current) {
       const id = resumeLevel(clearedLevels);
-      const config = DEFAULT_LEVELS.find((item) => item.id === id)!;
+      const config = levelById(id);
       setLevelId(id);
       setMode("story");
       setCustomLevel(null);
@@ -345,6 +446,7 @@ export default function App() {
       rewinds={rewinds}
       clearedLevels={clearedLevels}
       bestSteps={bestSteps}
+      bestLights={bestLights}
       levelSelectOpen={levelsOpen}
       isPeekActive={peek}
       onStartLevel={() => {
@@ -372,6 +474,9 @@ export default function App() {
         reset(config);
       }}
       onStartEndless={startEndless}
+      onSettle={settle}
+      onStartLab={startLab}
+      onAddSteps={addSteps}
       gameMode={mode}
       victoryReward={victoryReward}
     />

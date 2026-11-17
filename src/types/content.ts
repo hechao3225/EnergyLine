@@ -24,9 +24,9 @@ export type CollectionRarity = 'common' | 'rare' | 'epic' | 'legendary';
 export interface CenterDistrict {
   id: string;
   name: string;
+  subtitle: string;
   /** 中心关卡区间，1-based，闭区间 */
   range: [number, number];
-  subtitle: string;
   description: string;
 }
 
@@ -58,9 +58,7 @@ export interface LevelContent {
   zoneId: ZoneId;
   district: string;
   title: string;
-  subtitle: string;
   hint: string;
-  winText: string;
 }
 
 export interface CollectionEntry {

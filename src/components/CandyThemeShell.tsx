@@ -7,9 +7,12 @@ import type {
 } from "../types/game";
 import { Art, Icon, IconName, ParkButton, Stars, ParkExhibit, getExhibitArt } from "./ParkArt";
 import { GameBoard } from "./GameBoard";
+import { BUILD_TAG } from "../buildTag";
+import { LAB_LEVELS } from "../data/labLevels";
 import { LevelEditor } from "./LevelEditor";
 import { OnboardingGuide } from "./OnboardingGuide";
-import { getParSteps, getStarThresholds, getStarsForSteps } from "../utils/rating";
+import { MAX_STARS, getParSteps, getStarThresholds, getStarsForLights, getStarsForSteps } from "../utils/rating";
+import { describeHint, findHint, HINT_ENGINE_MAX_LEVEL, supportsHintEngine, type HintMove } from "../utils/hint-engine";
 import { CENTER_DISTRICTS, getCollectionEntry, getLevelContent, WORLD } from "../content";
 import { WorldMapModal } from "./WorldMapModal";
 import {
@@ -21,6 +24,7 @@ import { sound } from "../utils/audio";
 import { haptics } from "../utils/haptics";
 import {
   buyHint,
+  HINT_PRICE,
   claimDailyTask,
   CHAPTERS,
   chapterIndex,
@@ -30,6 +34,7 @@ import {
   PARK_STORAGE_KEY,
   ParkProgress,
   readParkProgress,
+  resetParkProgress,
 } from "../utils/parkProgress";
 
 type Modal =
@@ -61,6 +66,8 @@ interface Props {
   rewinds: number;
   clearedLevels: number[];
   bestSteps: Record<number, number>;
+  /** 达标关：每关历史最好“保住几处设施” */
+  bestLights: Record<number, number>;
   levelSelectOpen: boolean;
   isPeekActive: boolean;
   onStartLevel: () => void;
@@ -78,8 +85,14 @@ interface Props {
   onRedo: () => void;
   onPlayCustom: (level: LevelConfig) => void;
   onStartEndless: (difficulty: number) => void;
-  gameMode: "story" | "endless" | "editor";
-  victoryReward: { stars: number; coins: number; gems: number };
+  /** 玩法实验关入口（纵向切片验证用，可移除） */
+  onStartLab?: (index: number) => void;
+  /** 道具：步数用尽后补 3 步 */
+  onAddSteps?: () => void;
+  /** 达标关：提前结算（拿当前星数） */
+  onSettle?: () => void;
+  gameMode: "story" | "endless" | "editor" | "lab";
+  victoryReward: { stars: number; coins: number };
 }
 const TITLES: Record<Exclude<Modal, "none">, string> = {
   levels: "乐园关卡",
@@ -106,19 +119,40 @@ export function CandyThemeShell(p: Props) {
     readParkProgress.bind(null, localStorage),
   );
   const [notice, setNotice] = useState("");
+  /** 提示引擎算出的下一步，同时用来高亮棋盘格子 */
+  const [hintMove, setHintMove] = useState<HintMove | null>(null);
+  // 换关、重开、切页时上一次的高亮必须消失，否则会指向新盘面上的同一格
+  useEffect(() => {
+    setHintMove(null);
+  }, [p.screen, p.level.id]);
   const [muted, setMuted] = useState(sound.isMuted());
   const [vibration, setVibration] = useState(haptics.isEnabled());
   const [chapter, setChapter] = useState(chapterIndex(p.level.id));
   const [collectionPage, setCollectionPage] = useState(0);
   const [exhibitId, setExhibitId] = useState<number | null>(null);
   const reward = p.victoryReward;
+  const hasNewReward = reward.stars + reward.coins > 0;
   const noticeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const totalStars = p.levels.reduce(
-    (sum, level) => sum + getBestStars(level, p.clearedLevels, p.bestSteps),
-    0,
-  );
-  const currentStars = getStarsForSteps(p.stepsUsed, p.level);
+  const candlesOf = (lv: LevelConfig) => lv.tiles.filter((t) => t.type === "bulb").length;
+  /** 达标关按“保住几处”给星，其余关按步数给星 */
+  const starsOf = (lv: LevelConfig) =>
+    lv.goal !== undefined
+      ? getStarsForLights(
+          lv.goal,
+          candlesOf(lv),
+          // 老存档只记了"通关"没记"保住几处"：按达标算，别让人看到 0 星
+          p.bestLights[lv.id] ?? (p.clearedLevels.includes(lv.id) ? lv.goal : 0),
+        )
+      : getBestStars(lv, p.clearedLevels, p.bestSteps);
+  const totalStars = p.levels.reduce((sum, level) => sum + starsOf(level), 0);
+  const currentStars =
+    p.level.goal !== undefined
+      ? getStarsForLights(p.level.goal, candlesOf(p.level), p.simulation.litCount)
+      : getStarsForSteps(p.stepsUsed, p.level);
   const starThresholds = getStarThresholds(p.level);
+  const parSteps = getParSteps(p.level);
+  /** 仍在四星线内：顶栏高亮「最少步数」，超过后改为显示当前星级 */
+  const onParPace = currentStars >= MAX_STARS;
   const canUndo = p.historyIndex > 0 && p.rewinds > 0;
   const today = localDate();
   const activeModal = p.levelSelectOpen ? "levels" : modal;
@@ -166,15 +200,71 @@ export function CandyThemeShell(p: Props) {
       flash("进入关卡后可使用提示");
       return;
     }
+    // 棋盘已经不接受操作时，提示只是一句安慰话，不该再扣灯泡
+    if (p.remainingSteps <= 0) {
+      flash("步数已经用完，重置后才能继续用提示");
+      return;
+    }
     if (progress.hints < 1) {
       open("shop");
       flash("提示灯泡已用完");
       return;
     }
+    // 提示引擎（试点 L1–10）：按当前盘面算下一步；算不出就不扣灯泡
+    if (
+      p.gameMode === "story" &&
+      p.level.id <= HINT_ENGINE_MAX_LEVEL &&
+      supportsHintEngine(p.level)
+    ) {
+      const move = findHint(p.level, p.tiles, p.remainingSteps);
+      if (!move) {
+        flash("这一步已经算不出通路了，重置后再试");
+        return;
+      }
+      if (!move.reachable) {
+        flash(`还差 ${move.stepsNeeded} 步才能接完，重置后再试`);
+        return;
+      }
+      setHintMove(move);
+    } else {
+      setHintMove(null);
+    }
     save(consumeHint(progress));
     open("hint");
   };
+  /** 局内「重置」：已经走过步数才确认，空局直接重来。 */
+  const restartWithConfirm = () => {
+    if (p.stepsUsed > 0) {
+      const ok = window.confirm(
+        `本局已经操作 ${p.stepsUsed} 步，重置会清空这一步的全部操作，确定吗？`,
+      );
+      if (!ok) return;
+    }
+    p.onRestart();
+  };
+  /** 临时"全解锁"开关：调试/试玩用，存在本地 */
+  const [unlockAll, setUnlockAll] = useState(
+    () => localStorage.getItem("honeycomb_unlock_all") === "1",
+  );
+  const toggleUnlockAll = () => {
+    const next = !unlockAll;
+    setUnlockAll(next);
+    localStorage.setItem("honeycomb_unlock_all", next ? "1" : "0");
+  };
+  /** 章节解锁：上一章关底通关（或本章已有进度）才开放 */
+  const chapterLocked = (i: number) => {
+    if (unlockAll) return false;
+    if (i === 0) return false;
+    const start = i * 20 + 1;
+    const end = Math.min(99, (i + 1) * 20);
+    const prevBoss = start - 1;
+    return (
+      !p.clearedLevels.includes(prevBoss) &&
+      !p.clearedLevels.some((id) => id >= start && id <= end)
+    );
+  };
   const select = (id: number) => {
+    if (chapterLocked(chapterIndex(id))) return;
     close();
     p.onSelectLevel(id);
   };
@@ -190,6 +280,7 @@ export function CandyThemeShell(p: Props) {
   const collection = getCollectionEntry(p.level.id);
   const hasSwitch = p.tiles.some((t) => t.type === "switch");
   const hasDiode = p.tiles.some((t) => t.type === "diode");
+  const hasGear = p.tiles.some((t) => (t.axisDir ?? 0) !== 0);
   const exhibit = exhibitId == null ? null : getCollectionEntry(exhibitId);
 
   const navigation: { icon: IconName; text: string; action: () => void }[] = [
@@ -215,15 +306,14 @@ export function CandyThemeShell(p: Props) {
               {(
                 [
                   { icon: "star", value: totalStars, action: "profile" },
-                  { icon: "coin", value: progress.coins, action: "shop" },
-                  { icon: "gem", value: progress.gems, action: "shop" },
+                  { icon: "gem", value: progress.coins, action: "shop" },
                 ] as const
               ).map((item) => (
                 <button
                   key={item.icon}
                   className="park-resource"
                   onClick={() => open(item.action)}
-                  aria-label={`${item.icon === "star" ? "星星" : item.icon === "coin" ? "金币" : "钻石"} ${item.value}`}
+                  aria-label={`${item.icon === "star" ? "星星" : "钻石"} ${item.value}`}
                 >
                   <Icon name={item.icon} />
                   <b>{item.value.toLocaleString()}</b>
@@ -249,9 +339,9 @@ export function CandyThemeShell(p: Props) {
               {(
                 [
                   { icon: "mail", label: "乐园来信", modal: "mail" },
-                  { icon: "map", label: "乐园宇宙", modal: "world" },
+                  { icon: "castle", label: "乐园宇宙", modal: "world" },
                   { icon: "task", label: "每日任务", modal: "tasks" },
-                  { icon: "gem", label: "乐园图鉴", modal: "flora" },
+                  { icon: "map", label: "乐园图鉴", modal: "flora" },
                 ] as const
               ).map((item) => (
                 <button
@@ -316,7 +406,7 @@ export function CandyThemeShell(p: Props) {
                       {content?.title ?? `第 ${id} 关`}
                     </span>
                     <Stars
-                      value={getBestStars(card, p.clearedLevels, p.bestSteps)}
+                      value={starsOf(card)}
                     />
                   </button>
                 );
@@ -334,6 +424,45 @@ export function CandyThemeShell(p: Props) {
               <Icon name="play" />
               {completed === 0 ? "开始修复" : "继续修复"}
             </ParkButton>
+            {p.onStartLab &&
+              activeModal === "none" &&
+              (() => {
+                const entries = LAB_LEVELS.map((lab, index) => ({ lab, index }));
+                const isNew = (code: string) =>
+                  code.startsWith("G") ||
+                  code.startsWith("T") ||
+                  code.startsWith("W") ||
+                  code.startsWith("K");
+                const ordered = [
+                  ...entries.filter(({ lab }) => isNew(lab.code)),
+                  ...entries.filter(({ lab }) => !isNew(lab.code)),
+                ];
+                return (
+                  <div className="park-lab-entries" aria-label="实验场">
+                    <div className="park-lab-head">实验场 · 试玩机制</div>
+                    {ordered.map(({ lab, index }) => {
+                      const isGear = lab.code.startsWith("G");
+                      const isTorus = lab.code.startsWith("T");
+                      const isWeld = lab.code.startsWith("W");
+                      const isCombo = lab.code.startsWith("K");
+                      return (
+                        <button
+                          key={lab.id}
+                          className={`park-lab-entry ${isGear ? "is-gear" : ""} ${isTorus ? "is-torus" : ""} ${isWeld ? "is-weld" : ""} ${isCombo ? "is-combo" : ""}`}
+                          type="button"
+                          onClick={() => p.onStartLab?.(index)}
+                          aria-label={`实验关 ${lab.code} ${lab.title}`}
+                        >
+                          {isGear ? "齿轮 " : isTorus ? "环面 " : isWeld ? "焊死 " : isCombo ? "齿焊 " : "实验关 "}
+                          {lab.code}
+                          <i>{lab.subtitle ?? lab.title}</i>
+                          {(isGear || isTorus || isWeld || isCombo) && <b className="park-lab-new">新</b>}
+                        </button>
+                      );
+                    })}
+                  </div>
+                );
+              })()}
             <nav className="park-nav" aria-label="乐园导航">
               {navigation.map((item, i) => (
                 <button
@@ -360,19 +489,31 @@ export function CandyThemeShell(p: Props) {
                 <Icon name="back" />
               </button>
               <h1 className="park-level-sign">
+                {p.level.tier === "hell" && <em className="park-hell-badge">地狱</em>}
                 {p.gameMode === "endless"
                   ? "无尽挑战"
-                  : p.gameMode === "editor"
-                    ? "工坊试玩"
-                    : `第 ${p.level.id} 关`}
+                  : p.gameMode === "lab"
+                    ? "实验关"
+                    : p.gameMode === "editor"
+                      ? "工坊试玩"
+                      : `第 ${p.level.id} 关`}
               </h1>
-              <button
-                className="park-round"
-                onClick={() => open("rules")}
-                aria-label="查看玩法说明"
-              >
-                ?
-              </button>
+              <div className="park-play-tools">
+                <button
+                  className="park-round"
+                  onClick={() => open("flora")}
+                  aria-label="乐园图鉴"
+                >
+                  <Icon name="map" />
+                </button>
+                <button
+                  className="park-round"
+                  onClick={() => open("rules")}
+                  aria-label="查看玩法说明"
+                >
+                  ?
+                </button>
+              </div>
             </header>
             <section className="park-guide">
               <Art name="sheep" className="park-guide-sheep" />
@@ -383,7 +524,28 @@ export function CandyThemeShell(p: Props) {
               <Art name="spirit" className="park-guide-spirit" />
             </section>
             <section className="park-play-status" aria-label="关卡状态">
-              <Stars value={currentStars} />
+              {/* 最少步数＝四星线，取代原先常驻四颗星的实时预览 */}
+              <span
+                className={`park-par ${onParPace ? "" : "is-over"}`}
+                data-testid="par-steps"
+                title={`本关最少 ${parSteps} 步四星 · ${starThresholds.three} 步三星 · ${starThresholds.two} 步二星`}
+                aria-label={
+                  onParPace
+                    ? `本关最少 ${parSteps} 步`
+                    : `已超最少步数，当前 ${currentStars} 星`
+                }
+              >
+                <Icon name="star" className={onParPace ? "" : "unearned"} />
+                {onParPace ? (
+                  <>
+                    最少 <b>{parSteps}</b> 步
+                  </>
+                ) : (
+                  <>
+                    当前 <b>{currentStars}</b> 星
+                  </>
+                )}
+              </span>
               <span className="park-steps">
                 <Icon name="paw" />
                 步数 <b data-testid="remaining-steps">{p.remainingSteps}</b>
@@ -392,7 +554,7 @@ export function CandyThemeShell(p: Props) {
                 <Icon name="crown" />
                 目标{" "}
                 <b data-testid="target-count">
-                  {p.simulation.litCount}/{p.simulation.totalBulbs}
+                  {p.simulation.litCount}/{p.level.goal ?? p.simulation.totalBulbs}
                 </b>
               </span>
             </section>
@@ -403,28 +565,60 @@ export function CandyThemeShell(p: Props) {
                 gridCols={p.level.gridCols}
                 simulation={p.simulation}
                 isPeekActive={p.isPeekActive}
-                onTileClick={p.onTileClick}
+                onTileClick={(tile, action) => {
+                  setHintMove(null);
+                  p.onTileClick(tile, action);
+                }}
+                hintTileId={hintMove?.tileId ?? null}
                 levelId={p.level.id}
+                wrap={Boolean(p.level.rules?.wrap)}
+                weld={Boolean(p.level.rules?.weld)}
               />
               {p.remainingSteps === 0 && !p.simulation.isAllLit && (
                 <div className="park-out-of-steps">
                   <h2>修复步数用完啦</h2>
-                  <p>撤销上一步，或重新规划通路</p>
-                  <ParkButton onClick={p.onUndo} purple disabled={!canUndo}>
-                    撤销一步
-                  </ParkButton>
+                  <p>
+                    还差 {(p.level.goal ?? p.simulation.totalBulbs) - p.simulation.litCount} 处设施。
+                    {canUndo
+                      ? `还能回溯 ${p.rewinds} 次，回去改一步试试。`
+                      : "回溯次数已经用完，只能重来。"}
+                  </p>
+                  {canUndo && (
+                    <ParkButton onClick={p.onUndo} purple>
+                      撤销一步
+                    </ParkButton>
+                  )}
                   <ParkButton onClick={p.onRestart}>重新挑战</ParkButton>
+                  {p.onAddSteps && p.level.goal === undefined && (
+                    <ParkButton purple onClick={p.onAddSteps}>
+                      用道具 · 补 3 步
+                    </ParkButton>
+                  )}
                 </div>
               )}
             </div>
             <div className="park-play-caption">
-              {p.simulation.isAllLit
-                ? "能量已接通，设施正在苏醒！"
-                : hasSwitch
-                  ? "点击旋转 · 轻点角标切换通/断"
-                  : hasDiode
-                    ? "点击旋转 · 能量沿箭头方向流动"
-                    : "点击旋转管道，让能量流向设施"}
+              {p.simulation.overloaded
+                ? "回路过载！能量在环里打转，整段熄灭 —— 通路不能连成圈"
+                : p.level.rules?.weld
+                  ? "焊死：通电的管子会锁住——先修最远的那盏，再往回接"
+                  : p.level.rules?.wrap
+                  ? "环面：边界相接——从右边出去，会从左边回来"
+                  : hasGear
+                  ? "同色齿轮是一组：点一下，一顺一反"
+                  : p.level.goal !== undefined
+                ? `本关要保住 ${p.level.goal} 处设施，步数刚好够——多一步就不行`
+                : p.simulation.isAllLit
+                  ? "能量已接通，设施正在苏醒！"
+                                    : p.level.rules?.colors
+                    ? "双色能量：红源只喂红灯，蓝源只喂蓝灯；同一根管子里串色，两边都会灭"
+                    : p.level.rules?.noCycle
+                      ? "禁环：通路不能连成圈，接成环整段过载"
+                      : hasSwitch
+                    ? "点击旋转 · 轻点角标切换通/断"
+                    : hasDiode
+                      ? "点击旋转 · 能量沿箭头方向流动"
+                      : "点击旋转管道，让能量流向设施"}
             </div>
             <div className="park-play-actions">
               <ParkButton
@@ -441,7 +635,7 @@ export function CandyThemeShell(p: Props) {
                 <span>提示</span>
                 <b className="park-badge">{progress.hints}</b>
               </ParkButton>
-              <ParkButton purple onClick={p.onRestart} label="重置">
+              <ParkButton purple onClick={restartWithConfirm} label="重置">
                 <Icon name="reset" />
                 <span>重置</span>
               </ParkButton>
@@ -452,6 +646,7 @@ export function CandyThemeShell(p: Props) {
             >
               操作足迹 · {p.stepsUsed} 步 · 回溯 {p.rewinds}/3
             </button>
+            <span className="park-build-tag">{BUILD_TAG}</span>
           </main>
         )}
 
@@ -483,22 +678,33 @@ export function CandyThemeShell(p: Props) {
                 </div>
               </div>
               <h3 className="park-reward-title">
-                {p.gameMode === "story" ? "修复奖励" : "挑战完成"}
+                {p.gameMode !== "story"
+                  ? "挑战完成"
+                  : hasNewReward
+                    ? "修复奖励"
+                    : "本次无新增奖励"}
               </h3>
-              <div className="park-rewards">
-                {(
-                  [
-                    { icon: "star", value: reward.stars },
-                    { icon: "coin", value: reward.coins },
-                    { icon: "gem", value: reward.gems },
-                  ] as const
-                ).map((item) => (
-                  <div key={item.icon}>
-                    <Icon name={item.icon} />
-                    <b>+{item.value}</b>
-                  </div>
-                ))}
-              </div>
+              {hasNewReward ? (
+                <div className="park-rewards">
+                  {(
+                    [
+                      { icon: "star", value: reward.stars },
+                      { icon: "gem", value: reward.coins },
+                    ] as const
+                  ).map((item) => (
+                    <div key={item.icon}>
+                      <Icon name={item.icon} />
+                      <b>+{item.value}</b>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="park-reward-empty">
+                  {p.gameMode === "story"
+                    ? "首通奖励此前已领取，本次成绩仍会记入最佳步数"
+                    : "试玩不计奖励，成绩仅用于本次挑战"}
+                </p>
+              )}
               <div className="park-result-score">
                 <Stars value={currentStars} />
                 <span>
@@ -524,7 +730,9 @@ export function CandyThemeShell(p: Props) {
               </ParkButton>
             </div>
             <button className="park-history-link" onClick={p.onRestart}>
-              再玩一次，挑战更高星级
+              {currentStars >= MAX_STARS
+                ? "再玩一次，刷新自己的步数纪录"
+                : "再玩一次，挑战更高星级"}
             </button>
           </main>
         )}
@@ -555,18 +763,31 @@ export function CandyThemeShell(p: Props) {
                     <div className="park-chapter-tabs">
                       {CHAPTERS.map((name, i) => (
                         <button
-                          className={chapter === i ? "selected" : ""}
+                          className={`${chapter === i ? "selected" : ""} ${chapterLocked(i) ? "is-locked" : ""}`}
                           key={name}
                           onClick={() => setChapter(i)}
                         >
-                          {i + 1}章
+                          {i + 1}章{chapterLocked(i) ? " 🔒" : ""}
                         </button>
                       ))}
                     </div>
+                    <button
+                      className={`park-unlock-toggle ${unlockAll ? "is-on" : ""}`}
+                      type="button"
+                      onClick={toggleUnlockAll}
+                    >
+                      {unlockAll ? "已全解锁 · 点击恢复锁定" : "章节锁定中 · 点击临时全解锁"}
+                    </button>
                     <h3 className="park-section-heading">
                       {CHAPTERS[chapter]}
                       <span>{districtCleared}/{districtTotal} 处设施</span>
                     </h3>
+                    {chapterLocked(chapter) ? (
+                      <div className="park-locked-hint">
+                        <strong>第 {chapter + 1} 章尚未解锁</strong>
+                        <p>通关第 {chapter} 章的关底（第 {chapter * 20} 关）即可开启这片区域。</p>
+                      </div>
+                    ) : (
                     <div className="park-level-grid">
                       {p.levels
                         .filter((level) => chapterIndex(level.id) === chapter)
@@ -579,17 +800,15 @@ export function CandyThemeShell(p: Props) {
                             title={p.bestSteps[level.id] == null ? "尚未修复" : `最佳 ${p.bestSteps[level.id]} 步`}
                           >
                             <b>{level.id}</b>
+                            {level.tier === "hell" && <em className="park-hell-badge">地狱</em>}
                             <Stars
-                              value={getBestStars(
-                                level,
-                                p.clearedLevels,
-                                p.bestSteps,
-                              )}
+                              value={starsOf(level)}
                             />
                             <small>{getLevelContent(level.id)?.title.split("·")[0] ?? "尚未修复"}</small>
                           </button>
                         ))}
                     </div>
+                    )}
                     <div className="park-mode-links">
                       <ParkButton
                         purple
@@ -643,7 +862,7 @@ export function CandyThemeShell(p: Props) {
                         </strong>
                       </div>
                       <span className="park-item-price">
-                        <Icon name="coin" />
+                        <Icon name="gem" />
                         100
                       </span>
                     </div>
@@ -654,7 +873,7 @@ export function CandyThemeShell(p: Props) {
                       }
                       onClick={() => {
                         save(claimDailyTask(progress, today));
-                        flash("已领取 100 金币");
+                        flash("已领取 100 钻石");
                       }}
                     >
                       {progress.claimedDate === today
@@ -692,10 +911,8 @@ export function CandyThemeShell(p: Props) {
                 {activeModal === "shop" && (
                   <>
                     <div className="park-shop-balance">
-                      <Icon name="coin" />
-                      {progress.coins.toLocaleString()}
                       <Icon name="gem" />
-                      {progress.gems.toLocaleString()}
+                      {progress.coins.toLocaleString()}
                     </div>
                     <div className="park-item-card">
                       <Icon name="hint" />
@@ -704,21 +921,21 @@ export function CandyThemeShell(p: Props) {
                         <p>为下一次修复做好准备</p>
                       </div>
                       <span className="park-item-price">
-                        <Icon name="coin" />
-                        50
+                        <Icon name="gem" />
+                        {HINT_PRICE}
                       </span>
                     </div>
                     <ParkButton
-                      disabled={progress.coins < 50}
+                      disabled={progress.coins < HINT_PRICE}
                       onClick={() => {
                         save(buyHint(progress));
                         flash("兑换成功，提示灯泡 +1");
                       }}
                     >
-                      {progress.coins < 50 ? "金币不足" : "兑换灯泡"}
+                      {progress.coins < HINT_PRICE ? "钻石不足" : "兑换灯泡"}
                     </ParkButton>
                     <p className="park-fine-print">
-                      首次修复设施可获得金币与钻石
+                      首次修复设施可获得钻石
                     </p>
                   </>
                 )}
@@ -732,10 +949,13 @@ export function CandyThemeShell(p: Props) {
                           ? "无尽挑战 · 通路提示"
                           : "工坊试玩 · 通路提示"}
                     </h3>
+                    {hintMove && (
+                      <p className="park-hint-move">{describeHint(hintMove)}</p>
+                    )}
                     <p className="park-hint-copy">
                       {p.gameMode === "story"
                         ? levelContent?.hint ?? "先接主干，再补支路。"
-                        : "先接通主干，再把能量分到每一处设施。"}
+                        : p.level.hintText ?? "先接通主干，再把能量分到每一处设施。"}
                     </p>
                     <ParkButton onClick={close}>继续挑战</ParkButton>
                   </>
@@ -765,12 +985,17 @@ export function CandyThemeShell(p: Props) {
                         {
                           art: "pipe-cross-off",
                           title: "十字管",
-                          text: "四个方向均可连接；它四向对称，旋转不会改变接法。",
+                          text: "四个方向均可连接；它四向对称，旋转不会改变接法，也不会消耗步数。",
                         },
                         {
                           art: "pipe-line-off",
                           title: "固定管道",
                           text: "带锁标记的管道不能旋转，只能按它现在的方向规划。",
+                        },
+                        {
+                          art: "icon-star",
+                          title: "取舍关",
+                          text: "章底关卡。保住目标数量的设施即算通过；预算刚好等于最优解，一步都不能浪费——通过就是四星。",
                         },
                       ].map((rule) => (
                         <div key={rule.title}>
@@ -824,6 +1049,23 @@ export function CandyThemeShell(p: Props) {
                     <ParkButton purple onClick={() => open("story")}>
                       乐园的故事
                     </ParkButton>
+                    <button
+                      className="park-text-link"
+                      onClick={() => {
+                        const ok = window.confirm(
+                          "重置会清空已修复的关卡、钻石、提示灯泡与成就记录，确定吗？",
+                        );
+                        if (!ok) return;
+                        try {
+                          resetParkProgress(window.localStorage);
+                        } catch {
+                          // 存储被禁用时仍然刷新一次，至少退出异常状态
+                        }
+                        window.location.reload();
+                      }}
+                    >
+                      重置本地存档
+                    </button>
                   </>
                 )}
                 {activeModal === "profile" && (
