@@ -1065,6 +1065,10 @@ export function CandyThemeShell(p: Props) {
                     <ParkButton purple onClick={() => open("story")}>
                       乐园的故事
                     </ParkButton>
+                    <p className="park-fine-print">
+                      重塑补偿：旧版已修复设施按每处 50 钻石一次性发放，上限
+                      4950。
+                    </p>
                     <button
                       className="park-text-link"
                       onClick={() => {

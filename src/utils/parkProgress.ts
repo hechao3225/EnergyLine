@@ -19,8 +19,12 @@ export interface ParkProgress {
 }
 export interface StorageReader {
   getItem(key: string): string | null;
+  setItem?(key: string, value: string): void;
 }
 export const PARK_STORAGE_KEY = "energy_park_progress_v2";
+export const RESHAPE_COMPENSATION_KEY = "honeycomb_reshape_compensation_v1";
+export const RESHAPE_COMPENSATION_PER_LEVEL = 50;
+export const RESHAPE_COMPENSATION_CAP = 4950;
 export function localDate(date = new Date()): string {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 }
@@ -109,17 +113,49 @@ function migrateLegacyProgress(storage: StorageReader): ParkProgress {
     ),
   });
 }
+
+function applyReshapeCompensation(
+  storage: StorageReader,
+  progress: ParkProgress,
+): ParkProgress {
+  if (storage.getItem(RESHAPE_COMPENSATION_KEY) === "1") return progress;
+
+  const cleared = readStored<unknown>(storage, "honeycomb_cleared_levels", []);
+  const clearedCount = Array.isArray(cleared)
+    ? new Set(
+        cleared.filter(
+          (id): id is number =>
+            typeof id === "number" && Number.isInteger(id) && id > 0 && id <= 99,
+        ),
+      ).size
+    : 0;
+  const compensation = Math.min(
+    clearedCount * RESHAPE_COMPENSATION_PER_LEVEL,
+    RESHAPE_COMPENSATION_CAP,
+  );
+  const next =
+    compensation > 0
+      ? { ...progress, coins: progress.coins + compensation }
+      : progress;
+
+  storage.setItem?.(RESHAPE_COMPENSATION_KEY, "1");
+  storage.setItem?.(PARK_STORAGE_KEY, JSON.stringify(next));
+  return next;
+}
+
 export function readParkProgress(storage: StorageReader): ParkProgress {
   const saved = storage.getItem(PARK_STORAGE_KEY);
   if (saved) {
     try {
       const parsed: unknown = JSON.parse(saved);
-      if (parsed && typeof parsed === "object") return sanitizeProgress(parsed);
+      if (parsed && typeof parsed === "object") {
+        return applyReshapeCompensation(storage, sanitizeProgress(parsed));
+      }
     } catch {
       // 损坏存档不能把人挡在门外：退回旧版本迁移值，后续写入会自动修复。
     }
   }
-  return migrateLegacyProgress(storage);
+  return applyReshapeCompensation(storage, migrateLegacyProgress(storage));
 }
 /** 设置页的「重置存档」：清掉所有本作键，回到新玩家状态。 */
 export function resetParkProgress(storage: Storage): void {

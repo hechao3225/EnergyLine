@@ -19,6 +19,15 @@ import { DEFAULT_LEVELS } from "../src/data/defaultLevels";
 const store = (entries: Record<string, string>) => ({
   getItem: (key: string) => entries[key] ?? null,
 });
+const memoryStore = (entries: Record<string, string>) => {
+  const data = { ...entries };
+  return {
+    getItem: (key: string) => data[key] ?? null,
+    setItem: (key: string, value: string) => {
+      data[key] = value;
+    },
+  };
+};
 let passed = 0;
 function test(name: string, run: () => void) {
   run();
@@ -113,13 +122,28 @@ test("每日任务使用本地自然日而非UTC日期", () => {
   assert.equal(localDate(new Date(2026, 10, 10, 0, 1)), "2026-11-10");
   assert.equal(localDate(new Date(2026, 10, 10, 23, 59)), "2026-11-10");
 });
-test("新版盘面成绩迁移保留已完成的自由演练关卡与独立货币记录", () => {
+test("新版盘面成绩迁移保留已完成记录并结算重塑补偿", () => {
   const data = store({ honeycomb_cleared_levels: "[1,24]", honeycomb_best_steps: '{"1":7,"24":11}',
     [PROGRESS_VERSION_KEY]: "3", energy_coins: "730" });
   assert.deepEqual(readStoryProgress(data, DEFAULT_LEVELS), { cleared: [1,24], best: {} });
-  assert.equal(readParkProgress(data).coins, 730);
+  assert.equal(readParkProgress(data).coins, 830);
   const current = readStoryProgress(store({ honeycomb_cleared_levels: "[1,24]", honeycomb_best_steps: '{"1":7,"24":1}',
     [PROGRESS_VERSION_KEY]: PROGRESS_VERSION }), DEFAULT_LEVELS);
   assert.deepEqual(current, { cleared: [1,24], best: { 1: 7 } });
+});
+test("旧版通关记录只发放一次重塑补偿", () => {
+  const data = memoryStore({
+    honeycomb_cleared_levels: "[1,2,3]",
+  });
+  assert.equal(readParkProgress(data).coins, 150);
+  assert.equal(readParkProgress(data).coins, 150);
+});
+test("重塑补偿上限为 4950 钻石", () => {
+  const data = memoryStore({
+    honeycomb_cleared_levels: JSON.stringify(
+      Array.from({ length: 99 }, (_, index) => index + 1),
+    ),
+  });
+  assert.equal(readParkProgress(data).coins, 4950);
 });
 console.log(`${passed} 项需求验证通过`);
