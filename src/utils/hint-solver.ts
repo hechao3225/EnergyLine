@@ -206,15 +206,19 @@ function buildTable(board: Board): Int32Array {
   return R;
 }
 
-/** 给定 (格子, 父端口, 设施集合, 选项)，拆出子节点分配；返回 null 表示该选项不可行 */
-function splitChildren(
+/** 给定 (格子, 父端口, 设施集合, 选项)，枚举所有可行的子节点分配（最多 512 种）。
+ *
+ * 旧实现「贪心取第一个凑得出预算的拆法」，只要同一格有多种等价拆法，
+ * 猜错就整次回溯失败；环面/组合关很容易踩到，所以改成回溯枚举。
+ */
+function splitCandidates(
   board: Board,
   R: Int32Array,
   v: number,
   p: number,
   s: number,
   opt: Opt
-): { children: { u: number; cp: number; sd: number }[]; value: number } | null {
+): { children: { u: number; cp: number; sd: number }[]; value: number }[] {
   const { cells, neighbor, bulbBit, S_COUNT, idx } = board;
   const baseBit = bulbBit.get(v) ?? 0;
   const stages: { u: number; cp: number; before: Int32Array }[] = [];
@@ -244,32 +248,37 @@ function splitChildren(
   }
 
   const value = cur[s];
-  if (value >= INF) return null;
+  if (value >= INF) return [];
 
-  const children: { u: number; cp: number; sd: number }[] = [];
-  let rest = s;
-  for (let k = stages.length - 1; k >= 0; k--) {
+  const out: { children: { u: number; cp: number; sd: number }[]; value: number }[] = [];
+  const acc: { u: number; cp: number; sd: number }[] = [];
+
+  const pick = (k: number, rest: number) => {
+    if (out.length >= 512) return;
+    if (k < 0) {
+      if (rest === baseBit) out.push({ children: acc.slice(), value });
+      return;
+    }
     const after = k === stages.length - 1 ? cur : stages[k + 1].before;
     const before = stages[k].before;
-    if (before[rest] === after[rest]) continue; // 该方向未接子节点
-    let hit = false;
+    if (before[rest] === after[rest]) {
+      pick(k - 1, rest); // 该方向未接子节点
+      return;
+    }
     for (let sd = 0; sd < S_COUNT; sd++) {
       if (sd & ~rest) continue;
       const s0 = rest & ~sd;
       if (before[s0] >= INF) continue;
       const cv = R[idx(stages[k].u, stages[k].cp, sd)];
       if (cv >= INF) continue;
-      if (before[s0] + cv === after[rest]) {
-        children.push({ u: stages[k].u, cp: stages[k].cp, sd });
-        rest = s0;
-        hit = true;
-        break;
-      }
+      if (before[s0] + cv !== after[rest]) continue;
+      acc.push({ u: stages[k].u, cp: stages[k].cp, sd });
+      pick(k - 1, s0);
+      acc.pop();
     }
-    if (!hit) return null;
-  }
-  if (rest !== baseBit) return null;
-  return { children, value };
+  };
+  pick(stages.length - 1, s);
+  return out;
 }
 
 export interface SolveResult {
@@ -353,43 +362,51 @@ export function solveMinTaps(
 
   const plan = new Map<string, { rotateTaps: number; toggle: boolean }>();
   const usedSet = new Set<number>();
-  const log: number[] = [];
+  const usedLog: number[] = [];
+  const planLog: string[] = [];
+
+  /** 回滚到快照：失败分支用过的格子和写过的方案条目一起撤掉，避免方案里混进多余点击 */
+  const rollback = (usedTo: number, planTo: number) => {
+    while (usedLog.length > usedTo) usedSet.delete(usedLog.pop()!);
+    while (planLog.length > planTo) plan.delete(planLog.pop()!);
+  };
 
   const descend = (v: number, p: number, s: number, budget: number): boolean => {
     const cell = cells[v];
     if (cell.type === 'bulb') return true;
     if (usedSet.has(v)) return false;
 
-    const snapshot = log.length;
+    const usedSnap = usedLog.length;
+    const planSnap = planLog.length;
     usedSet.add(v);
-    log.push(v);
+    usedLog.push(v);
 
     for (const opt of optLists[v]) {
       if (!optionAllowed(board, v, p, opt)) continue;
-      const split = splitChildren(board, R, v, p, s, opt);
-      if (!split) continue;
-      if (split.value + opt.cost !== budget) continue;
+      for (const split of splitCandidates(board, R, v, p, s, opt)) {
+        if (split.value + opt.cost !== budget) continue;
 
-      let ok = true;
-      for (const c of split.children) {
-        if (!descend(c.u, c.cp, c.sd, R[board.idx(c.u, c.cp, c.sd)])) {
-          ok = false;
-          break;
+        let ok = true;
+        for (const c of split.children) {
+          if (!descend(c.u, c.cp, c.sd, R[board.idx(c.u, c.cp, c.sd)])) {
+            ok = false;
+            break;
+          }
         }
+        if (!ok) {
+          // 只撤子节点，保留本格继续试下一种拆法
+          rollback(usedSnap + 1, planSnap);
+          continue;
+        }
+        if (opt.rotateTaps > 0 || opt.toggle) {
+          plan.set(cell.id, { rotateTaps: opt.rotateTaps, toggle: opt.toggle });
+          planLog.push(cell.id);
+        }
+        return true;
       }
-      if (!ok) {
-        // 回滚到本格之前（保留 v 本身，继续尝试下一个端口选项）
-        while (log.length > snapshot + 1) usedSet.delete(log.pop()!);
-        continue;
-      }
-      if (opt.rotateTaps > 0 || opt.toggle) {
-        plan.set(cell.id, { rotateTaps: opt.rotateTaps, toggle: opt.toggle });
-      }
-      return true;
     }
 
-    usedSet.delete(v);
-    log.pop();
+    rollback(usedSnap, planSnap);
     return false;
   };
 

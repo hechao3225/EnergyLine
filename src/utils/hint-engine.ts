@@ -64,31 +64,41 @@ export function findHint(
   } catch {
     return null;
   }
-  const step = result?.orderedSteps[0];
-  if (!result || !step) return null;
-  const tile = step.axis
-    ? [...tiles]
-        .filter((item) => item.axis === step.axis)
-        .sort((a, b) => a.row - b.row || a.col - b.col)[0]
-    : tiles.find((item) => item.id === step.id);
-  if (!tile) return null;
-  const stepsNeeded = result.par;
-  const action: HintAction = step.axis
-    ? 'rotate-axis'
-    : step.toggle
-      ? 'toggle-switch'
-      : 'rotate';
-  return {
-    tileId: tile.id,
-    row: tile.row,
-    col: tile.col,
-    label: step.axis ? '联动轴' : LABELS[tile.type],
-    action,
-    taps: step.taps,
-    toggle: Boolean(step.toggle),
-    stepsNeeded,
-    reachable: stepsNeeded <= remainingSteps,
+  if (!result) return null;
+
+  const moveFromStep = (step: (typeof result.orderedSteps)[number]): HintMove | null => {
+    const tile = step.axis
+      ? [...tiles]
+          .filter((item) => item.axis === step.axis)
+          .sort((a, b) => a.row - b.row || a.col - b.col)[0]
+      : tiles.find((item) => item.id === step.id);
+    if (!tile) return null;
+    const action: HintAction = step.axis
+      ? 'rotate-axis'
+      : step.toggle
+        ? 'toggle-switch'
+        : 'rotate';
+    return {
+      tileId: tile.id,
+      row: tile.row,
+      col: tile.col,
+      label: step.axis ? '联动轴' : LABELS[tile.type],
+      action,
+      taps: step.taps,
+      toggle: Boolean(step.toggle),
+      stepsNeeded: result.par,
+      reachable: result.par <= remainingSteps,
+    };
   };
+
+  for (const step of result.orderedSteps) {
+    const move = moveFromStep(step);
+    if (!move) continue;
+    const next = applyHintAction(level, tiles, move);
+    const remaining = solveRuleLevel({ ...level, tiles: next });
+    if (remaining?.par === result.par - 1) return move;
+  }
+  return null;
 }
 
 export function applyHintAction(level: LevelConfig, tiles: Tile[], move: HintMove): Tile[] {
