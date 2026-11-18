@@ -14,6 +14,7 @@
 | TypeScript / Vite build | 通过 |
 | 390×844 浏览器回放 | 通过，无控制台错误 |
 | 360×800 紧凑屏 | 通过，无横向溢出 |
+| 12 关当前 UI 点击通关 | 12/12，实际步数均等于 par |
 
 跨缝强度按最优解的通电穿边界边计数：T1 `3`、T2 `5`、T3 `12`。`W-1` 同时验证环面、焊死和 3 条穿缝边。
 
@@ -32,6 +33,10 @@
 | 环面 + 焊死跨缝亮线 | [07-wrap-weld-seams.png](./07-wrap-weld-seams.png) |
 
 360×800 紧凑屏：[08-colors-weld-360x800.png](./08-colors-weld-360x800.png)
+
+12 关真实点击矩阵：[matrix-contact-sheet.jpg](./matrix-contact-sheet.jpg)
+
+矩阵覆盖 P1、T1、T2、T3、P2、P3、S1、W1、W2、主线 L73、W-1、C-2。每关都从当前 UI 入口进入并逐次点击操作按钮，不使用注入棋盘或直接改状态；全部 `steps = par`，无横向溢出，控制台错误为 0。
 
 ## 视觉检查
 

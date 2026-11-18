@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { chromium, type Page } from "playwright";
 import { LAB_LEVELS } from "../src/data/labLevels";
+import { PHASE0_SLICES } from "../src/data/phase0Levels";
 import { solveRuleLevel } from "../src/utils/rule-solver";
 
 const BASE_URL = process.env.PHASE0_URL ?? "http://127.0.0.1:4328/";
@@ -30,6 +31,26 @@ async function openLab(page: Page, code: string) {
   await closeTransientModals(page);
 }
 
+async function openStoryLevel(page: Page, id: number) {
+  await page.goto(BASE_URL, { waitUntil: "networkidle" });
+  await closeTransientModals(page);
+  await page
+    .getByRole("navigation")
+    .getByRole("button", { name: "关卡", exact: true })
+    .click();
+  await page
+    .getByRole("button", {
+      name: `${Math.floor((id - 1) / 20) + 1}章`,
+      exact: true,
+    })
+    .click();
+  await page
+    .getByRole("button", { name: `修复第${id}处设施`, exact: true })
+    .click();
+  await page.waitForSelector(".park-play", { timeout: 8_000 });
+  await closeTransientModals(page);
+}
+
 async function screenshot(page: Page, name: string) {
   await page.screenshot({
     path: path.join(OUTPUT_DIR, name),
@@ -50,9 +71,18 @@ async function clickStep(
         .locator(`.park-tile[data-tile-id="${step.id}"] .park-switch-toggle`)
         .click();
     } else if (step.id) {
-      await page
-        .locator(`.park-tile[data-tile-id="${step.id}"] .park-tile-rotate`)
-        .click();
+      const tile = page.locator(`.park-tile[data-tile-id="${step.id}"]`);
+      const rotate = tile.locator(".park-tile-rotate");
+      if ((await tile.getAttribute("data-type")) === "switch") {
+        const box = await rotate.boundingBox();
+        await rotate.click({
+          position: box
+            ? { x: box.width * 0.25, y: box.height * 0.25 }
+            : undefined,
+        });
+      } else {
+        await rotate.click();
+      }
     }
     await page.waitForTimeout(45);
   }
@@ -198,6 +228,59 @@ results.compact = await page.evaluate(() => ({
     document.querySelector(".park-play-caption")?.getBoundingClientRect().height ?? 0,
   ),
 }));
+
+const matrix: unknown[] = [];
+for (const [index, slice] of PHASE0_SLICES.entries()) {
+  if (slice.level.id === 73) await openStoryLevel(page, 73);
+  else {
+    const uiCode =
+      slice.kind === "combo" && slice.level.code === "W-1"
+        ? "W-1"
+        : slice.sourceCode;
+    await openLab(page, uiCode);
+  }
+  await page.evaluate(() => document.fonts.ready);
+
+  const matrixName = `matrix-${String(index + 1).padStart(2, "0")}-${slice.key}.jpg`;
+  await page.screenshot({
+    path: path.join(OUTPUT_DIR, matrixName),
+    type: "jpeg",
+    quality: 82,
+    animations: "allow",
+  });
+
+  const solution = solveRuleLevel(slice.level);
+  if (!solution) throw new Error(`${slice.key} 没有规则解`);
+  for (const step of solution.orderedSteps) await clickStep(page, step);
+
+  const measured = await page.evaluate(() => {
+    const history = document.querySelector(".park-history-link")?.textContent ?? "";
+    const match = history.match(/·\s*(\d+)\s*步/);
+    return {
+      target: document.querySelector("[data-testid=target-count]")?.textContent?.trim(),
+      remaining: document.querySelector("[data-testid=remaining-steps]")?.textContent?.trim(),
+      steps: match ? Number(match[1]) : null,
+      boardTiles: document.querySelectorAll("[data-tile-id]").length,
+      tileWidth: Math.round(
+        document.querySelector("[data-tile-id]")?.getBoundingClientRect().width ?? 0,
+      ),
+      overflowX: document.body.scrollWidth > document.body.clientWidth,
+      axisMarks: document.querySelectorAll(".park-axis-mark").length,
+      weldMarks: document.querySelectorAll(".park-weld-mark").length,
+      colorSymbols: document.querySelectorAll(".park-color-mark").length,
+      seamGhosts: document.querySelectorAll(".park-wrap-ghost").length,
+    };
+  });
+  await page.locator(".park-victory").waitFor({ timeout: 4_000 });
+  matrix.push({
+    key: slice.key,
+    code: slice.level.code,
+    par: solution.par,
+    screenshot: matrixName,
+    ...measured,
+  });
+}
+results.matrix = matrix;
 
 fs.writeFileSync(
   path.join(OUTPUT_DIR, "result.json"),
