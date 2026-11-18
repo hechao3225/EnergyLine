@@ -78,7 +78,7 @@ function solvedRotation(type: TileType, want: number): number {
   throw new Error(`${type} 无法朝向 ${want}`);
 }
 
-interface Spec {
+export interface WeldGenSpec {
   id: number;
   code: string;
   title: string;
@@ -92,7 +92,7 @@ interface Spec {
   minTapped: number;
 }
 
-const SPECS: Spec[] = [
+const SPECS: WeldGenSpec[] = [
   {
     id: 931,
     code: 'W1',
@@ -134,7 +134,7 @@ const SPECS: Spec[] = [
   },
 ];
 
-function build(spec: Spec, seed: number): LevelConfig | null {
+function build(spec: WeldGenSpec, seed: number): LevelConfig | null {
   const rng = makeRng(seed);
   const tree = growTree(rng, spec.cells);
   if (tree.size < spec.cells) return null;
@@ -210,6 +210,13 @@ function build(spec: Spec, seed: number): LevelConfig | null {
   if (tapped < spec.minTapped) return null;
   if (!weldFeasible(level, sol.plan as { id: string; rotateTaps: number }[])) return null;
   return { ...level, parSteps: sol.par, maxSteps: sol.par + spec.tolerance };
+}
+
+export function generateWeldLevel(
+  spec: WeldGenSpec,
+  seed: number,
+): LevelConfig | null {
+  return build(spec, seed);
 }
 
 const out: LevelConfig[] = [];
