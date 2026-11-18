@@ -10,8 +10,8 @@ export const TORUS_TEST_LEVELS: LevelConfig[] = [
     "subtitle": "出界",
     "hintText": "盘面是卷起来的：从右边出去，会从左边回来；从上边下去，会从下边上来。别按屏幕上的距离算。",
     "winText": "试验通过：走出边界，又回来了。",
-    "parSteps": 9,
-    "maxSteps": 11,
+    "parSteps": 6,
+    "maxSteps": 8,
     "gridRows": 6,
     "gridCols": 6,
     "rules": {
@@ -23,160 +23,38 @@ export const TORUS_TEST_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 0,
         "type": "battery",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 2,
         "locked": true
       },
       {
-        "id": "t-3-1",
-        "row": 3,
-        "col": 1,
+        "id": "t-4-0",
+        "row": 4,
+        "col": 0,
         "type": "cross",
         "rotation": 0,
         "basePorts": 15
-      },
-      {
-        "id": "t-3-2",
-        "row": 3,
-        "col": 2,
-        "type": "corner",
-        "rotation": 270,
-        "basePorts": 6
       },
       {
         "id": "t-4-1",
         "row": 4,
         "col": 1,
         "type": "t_shape",
-        "rotation": 0,
+        "rotation": 90,
         "basePorts": 14
       },
       {
-        "id": "t-2-1",
-        "row": 2,
-        "col": 1,
-        "type": "corner",
-        "rotation": 180,
-        "basePorts": 6
-      },
-      {
-        "id": "t-5-1",
+        "id": "t-5-0",
         "row": 5,
-        "col": 1,
+        "col": 0,
         "type": "t_shape",
-        "rotation": 270,
+        "rotation": 90,
         "basePorts": 14
       },
       {
         "id": "t-4-2",
         "row": 4,
         "col": 2,
-        "type": "t_shape",
-        "rotation": 180,
-        "basePorts": 14
-      },
-      {
-        "id": "t-5-2",
-        "row": 5,
-        "col": 2,
-        "type": "t_shape",
-        "rotation": 180,
-        "basePorts": 14
-      },
-      {
-        "id": "t-4-3",
-        "row": 4,
-        "col": 3,
-        "type": "corner",
-        "rotation": 270,
-        "basePorts": 6
-      },
-      {
-        "id": "t-3-3",
-        "row": 3,
-        "col": 3,
-        "type": "corner",
-        "rotation": 270,
-        "basePorts": 6
-      },
-      {
-        "id": "t-0-2",
-        "row": 0,
-        "col": 2,
-        "type": "line",
-        "rotation": 0,
-        "basePorts": 10
-      },
-      {
-        "id": "t-0-1",
-        "row": 0,
-        "col": 1,
-        "type": "t_shape",
-        "rotation": 270,
-        "basePorts": 14
-      },
-      {
-        "id": "t-4-0",
-        "row": 4,
-        "col": 0,
-        "type": "line",
-        "rotation": 270,
-        "basePorts": 10
-      },
-      {
-        "id": "t-0-0",
-        "row": 0,
-        "col": 0,
-        "type": "line",
-        "rotation": 270,
-        "basePorts": 10
-      },
-      {
-        "id": "t-5-0",
-        "row": 5,
-        "col": 0,
-        "type": "bulb",
-        "rotation": 0,
-        "basePorts": 15,
-        "locked": true
-      },
-      {
-        "id": "t-5-3",
-        "row": 5,
-        "col": 3,
-        "type": "corner",
-        "rotation": 0,
-        "basePorts": 6
-      },
-      {
-        "id": "t-3-4",
-        "row": 3,
-        "col": 4,
-        "type": "bulb",
-        "rotation": 0,
-        "basePorts": 15,
-        "locked": true
-      },
-      {
-        "id": "t-1-1",
-        "row": 1,
-        "col": 1,
-        "type": "line",
-        "rotation": 90,
-        "basePorts": 10
-      },
-      {
-        "id": "t-0-3",
-        "row": 0,
-        "col": 3,
-        "type": "line",
-        "rotation": 90,
-        "basePorts": 10
-      },
-      {
-        "id": "t-2-0",
-        "row": 2,
-        "col": 0,
         "type": "line",
         "rotation": 270,
         "basePorts": 10
@@ -185,10 +63,99 @@ export const TORUS_TEST_LEVELS: LevelConfig[] = [
         "id": "t-4-5",
         "row": 4,
         "col": 5,
+        "type": "corner",
+        "rotation": 180,
+        "basePorts": 6
+      },
+      {
+        "id": "t-5-5",
+        "row": 5,
+        "col": 5,
+        "type": "corner",
+        "rotation": 0,
+        "basePorts": 6
+      },
+      {
+        "id": "t-5-1",
+        "row": 5,
+        "col": 1,
+        "type": "corner",
+        "rotation": 0,
+        "basePorts": 6
+      },
+      {
+        "id": "t-0-0",
+        "row": 0,
+        "col": 0,
+        "type": "t_shape",
+        "rotation": 270,
+        "basePorts": 14
+      },
+      {
+        "id": "t-3-1",
+        "row": 3,
+        "col": 1,
+        "type": "corner",
+        "rotation": 180,
+        "basePorts": 6
+      },
+      {
+        "id": "t-4-3",
+        "row": 4,
+        "col": 3,
         "type": "bulb",
         "rotation": 0,
         "basePorts": 15,
         "locked": true
+      },
+      {
+        "id": "t-0-5",
+        "row": 0,
+        "col": 5,
+        "type": "line",
+        "rotation": 270,
+        "basePorts": 10
+      },
+      {
+        "id": "t-5-4",
+        "row": 5,
+        "col": 4,
+        "type": "bulb",
+        "rotation": 0,
+        "basePorts": 15,
+        "locked": true
+      },
+      {
+        "id": "t-0-4",
+        "row": 0,
+        "col": 4,
+        "type": "line",
+        "rotation": 270,
+        "basePorts": 10
+      },
+      {
+        "id": "t-0-1",
+        "row": 0,
+        "col": 1,
+        "type": "line",
+        "rotation": 90,
+        "basePorts": 10
+      },
+      {
+        "id": "t-3-2",
+        "row": 3,
+        "col": 2,
+        "type": "line",
+        "rotation": 270,
+        "basePorts": 10
+      },
+      {
+        "id": "t-1-0",
+        "row": 1,
+        "col": 0,
+        "type": "line",
+        "rotation": 0,
+        "basePorts": 10
       }
     ]
   },
@@ -200,8 +167,8 @@ export const TORUS_TEST_LEVELS: LevelConfig[] = [
     "subtitle": "绕行",
     "hintText": "最短的路可能是穿过边界的那条；角落的管子常常有两套接法。",
     "winText": "试验通过：绕了一圈，反而更近。",
-    "parSteps": 12,
-    "maxSteps": 14,
+    "parSteps": 9,
+    "maxSteps": 11,
     "gridRows": 6,
     "gridCols": 6,
     "rules": {
@@ -221,78 +188,70 @@ export const TORUS_TEST_LEVELS: LevelConfig[] = [
         "id": "t-3-5",
         "row": 3,
         "col": 5,
-        "type": "cross",
-        "rotation": 0,
-        "basePorts": 15
-      },
-      {
-        "id": "t-2-5",
-        "row": 2,
-        "col": 5,
-        "type": "cross",
-        "rotation": 0,
-        "basePorts": 15
-      },
-      {
-        "id": "t-1-5",
-        "row": 1,
-        "col": 5,
-        "type": "corner",
-        "rotation": 270,
-        "basePorts": 6
-      },
-      {
-        "id": "t-3-4",
-        "row": 3,
-        "col": 4,
-        "type": "corner",
-        "rotation": 270,
-        "basePorts": 6
+        "type": "t_shape",
+        "rotation": 90,
+        "basePorts": 14
       },
       {
         "id": "t-4-5",
         "row": 4,
         "col": 5,
-        "type": "corner",
+        "type": "cross",
         "rotation": 0,
-        "basePorts": 6
-      },
-      {
-        "id": "t-1-4",
-        "row": 1,
-        "col": 4,
-        "type": "corner",
-        "rotation": 90,
-        "basePorts": 6
-      },
-      {
-        "id": "t-2-4",
-        "row": 2,
-        "col": 4,
-        "type": "line",
-        "rotation": 270,
-        "basePorts": 10
-      },
-      {
-        "id": "t-2-3",
-        "row": 2,
-        "col": 3,
-        "type": "t_shape",
-        "rotation": 0,
-        "basePorts": 14
+        "basePorts": 15
       },
       {
         "id": "t-4-0",
         "row": 4,
         "col": 0,
         "type": "t_shape",
+        "rotation": 270,
+        "basePorts": 14
+      },
+      {
+        "id": "t-2-5",
+        "row": 2,
+        "col": 5,
+        "type": "t_shape",
         "rotation": 180,
         "basePorts": 14
       },
       {
-        "id": "t-3-3",
-        "row": 3,
-        "col": 3,
+        "id": "t-2-0",
+        "row": 2,
+        "col": 0,
+        "type": "t_shape",
+        "rotation": 90,
+        "basePorts": 14
+      },
+      {
+        "id": "t-1-0",
+        "row": 1,
+        "col": 0,
+        "type": "line",
+        "rotation": 0,
+        "basePorts": 10
+      },
+      {
+        "id": "t-4-4",
+        "row": 4,
+        "col": 4,
+        "type": "line",
+        "rotation": 270,
+        "basePorts": 10
+      },
+      {
+        "id": "t-5-5",
+        "row": 5,
+        "col": 5,
+        "type": "t_shape",
+        "rotation": 0,
+        "basePorts": 14
+      },
+      {
+        "id": "t-5-0",
+        "row": 5,
+        "col": 0,
         "type": "corner",
         "rotation": 0,
         "basePorts": 6
@@ -301,100 +260,8 @@ export const TORUS_TEST_LEVELS: LevelConfig[] = [
         "id": "t-4-1",
         "row": 4,
         "col": 1,
-        "type": "corner",
-        "rotation": 90,
-        "basePorts": 6
-      },
-      {
-        "id": "t-5-0",
-        "row": 5,
-        "col": 0,
-        "type": "cross",
-        "rotation": 0,
-        "basePorts": 15
-      },
-      {
-        "id": "t-1-3",
-        "row": 1,
-        "col": 3,
-        "type": "line",
-        "rotation": 90,
-        "basePorts": 10
-      },
-      {
-        "id": "t-0-4",
-        "row": 0,
-        "col": 4,
-        "type": "corner",
-        "rotation": 180,
-        "basePorts": 6
-      },
-      {
-        "id": "t-5-1",
-        "row": 5,
-        "col": 1,
-        "type": "bulb",
-        "rotation": 0,
-        "basePorts": 15,
-        "locked": true
-      },
-      {
-        "id": "t-4-4",
-        "row": 4,
-        "col": 4,
-        "type": "bulb",
-        "rotation": 0,
-        "basePorts": 15,
-        "locked": true
-      },
-      {
-        "id": "t-5-5",
-        "row": 5,
-        "col": 5,
-        "type": "bulb",
-        "rotation": 0,
-        "basePorts": 15,
-        "locked": true
-      },
-      {
-        "id": "t-0-5",
-        "row": 0,
-        "col": 5,
-        "type": "bulb",
-        "rotation": 0,
-        "basePorts": 15,
-        "locked": true
-      },
-      {
-        "id": "t-3-2",
-        "row": 3,
-        "col": 2,
-        "type": "line",
-        "rotation": 270,
-        "basePorts": 10
-      },
-      {
-        "id": "t-0-0",
-        "row": 0,
-        "col": 0,
         "type": "line",
         "rotation": 0,
-        "basePorts": 10
-      },
-      {
-        "id": "t-2-0",
-        "row": 2,
-        "col": 0,
-        "type": "line",
-        "rotation": 270,
-        "basePorts": 10
-      },
-      {
-        "id": "t-3-1",
-        "row": 3,
-        "col": 1,
-        "type": "line",
-        "rotation": 90,
         "basePorts": 10
       },
       {
@@ -402,8 +269,75 @@ export const TORUS_TEST_LEVELS: LevelConfig[] = [
         "row": 2,
         "col": 1,
         "type": "line",
-        "rotation": 0,
+        "rotation": 270,
         "basePorts": 10
+      },
+      {
+        "id": "t-4-3",
+        "row": 4,
+        "col": 3,
+        "type": "bulb",
+        "rotation": 0,
+        "basePorts": 15,
+        "locked": true
+      },
+      {
+        "id": "t-5-4",
+        "row": 5,
+        "col": 4,
+        "type": "bulb",
+        "rotation": 0,
+        "basePorts": 15,
+        "locked": true
+      },
+      {
+        "id": "t-5-1",
+        "row": 5,
+        "col": 1,
+        "type": "t_shape",
+        "rotation": 90,
+        "basePorts": 14
+      },
+      {
+        "id": "t-0-5",
+        "row": 0,
+        "col": 5,
+        "type": "line",
+        "rotation": 90,
+        "basePorts": 10
+      },
+      {
+        "id": "t-1-5",
+        "row": 1,
+        "col": 5,
+        "type": "line",
+        "rotation": 90,
+        "basePorts": 10
+      },
+      {
+        "id": "t-0-1",
+        "row": 0,
+        "col": 1,
+        "type": "corner",
+        "rotation": 180,
+        "basePorts": 6
+      },
+      {
+        "id": "t-0-2",
+        "row": 0,
+        "col": 2,
+        "type": "line",
+        "rotation": 270,
+        "basePorts": 10
+      },
+      {
+        "id": "t-5-2",
+        "row": 5,
+        "col": 2,
+        "type": "bulb",
+        "rotation": 0,
+        "basePorts": 15,
+        "locked": true
       }
     ]
   },

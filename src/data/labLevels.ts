@@ -83,29 +83,28 @@ const P2: Put[] = [
 ];
 
 /**
- * P3 忍住不修：轴上有四格——三格必须对，第四格永远是歪的。
- * 组相位被主路锁死在 90°，那一格就必然指向墙外；玩家越想把它拧正，
- * 越会把已经通的主路弄断。这一关考的是“哪些格子就该让它歪着”。
+ * P3 忍住不修：轴上三格只能有一个相位——顾得上主路，就顾不上顶上那盏。
+ * 目标只要 2/3：顶上那盏灯看起来顺手（三通开局就朝着它），可一旦把相位拧过去，
+ * 下面两盏立刻断。预算只留 1 步富余，为它多拧三下就超预算。
+ * 这一关考的是「哪些该放弃」，而不是把每根管子都摆正。
  */
 const P3: Put[] = [
-  [3, 0, "battery", 0, { locked: true }],
-  [3, 1, "line", 180],
-  [3, 2, "cross", 0],
-  [2, 2, "line", 0],
-  [1, 2, "t_shape", 90],
-  [0, 2, "bulb", 0, { locked: true }],
-  [1, 3, "bulb", 0, { locked: true }],
-  [3, 3, "corner", 0, { axis: LAB_AXIS_ID }],
-  [4, 3, "line", 0, { axis: LAB_AXIS_ID }],
-  [5, 3, "corner", 180, { axis: LAB_AXIS_ID }],
-  [5, 2, "corner", 0, { axis: LAB_AXIS_ID }],
+  [2, 0, "battery", 0, { locked: true }],
+  [2, 1, "line", 270],
+  [1, 2, "bulb", 0, { locked: true }],
+  [2, 2, "t_shape", 180, { axis: LAB_AXIS_ID }],
+  [2, 3, "line", 270],
+  [3, 2, "corner", 90, { axis: LAB_AXIS_ID }],
+  [3, 3, "line", 180, { axis: LAB_AXIS_ID }],
+  [3, 4, "t_shape", 270],
+  [3, 5, "bulb", 0, { locked: true }],
+  [4, 4, "switch", 0, { switchClosed: false }],
   [5, 4, "bulb", 0, { locked: true }],
 ];
 
 /**
- * C1 / C2 双色基准：红蓝两条独立主路，中间一格竖起来就会把两色接通。
- * 正确解只修两条主路，额外那格保持横向断路。C2 再叠加焊死，
- * 必须从远端往源头修，避免第一条已通电的管子提前锁住。
+ * C1 双色基准：红蓝两条独立主路，中间一格竖起来就会把两色接通。
+ * 正确解只修两条主路，额外那格保持横向断路。
  */
 const COLOR_WELD: Put[] = [
   [2, 0, "battery", 0, { locked: true, color: 0 }],
@@ -123,8 +122,30 @@ const COLOR_WELD: Put[] = [
   [3, 2, "line", 0],
 ];
 
+/**
+ * C2 分色 + 焊死：两条颜色各走一个 L 形，起点都有一根「先接就锁死」的弯管。
+ * 弯管开局指向源头那一侧，看着像已经接好——但它的另一端还差 1 下才到位；
+ * 一旦先把 (2,1)/(4,1) 接上电，弯管立刻焊死，剩下的 1 下永远转不了。
+ * 正确解：先把要转的格子转到位，再接源头。
+ */
+const COLOR_WELD_COMBO: Put[] = [
+  [2, 0, "battery", 0, { locked: true, color: 0 }],
+  [2, 1, "line", 270],
+  [2, 2, "corner", 90],
+  [1, 2, "line", 0],
+  [0, 2, "corner", 270],
+  [0, 3, "line", 270],
+  [0, 4, "bulb", 0, { locked: true, color: 0 }],
+  [4, 0, "battery", 0, { locked: true, color: 1 }],
+  [4, 1, "line", 270],
+  [4, 2, "corner", 0],
+  [5, 2, "corner", 180],
+  [5, 3, "line", 270],
+  [5, 4, "bulb", 0, { locked: true, color: 1 }],
+];
+
 const WRAP_WELD_LEVEL: LevelConfig = {
-  ...TORUS_TEST_LEVELS[0],
+  ...TORUS_TEST_LEVELS[1],
   id: 934,
   code: "W-1",
   title: "组合 · 跨缝后焊死",
@@ -135,20 +156,23 @@ const WRAP_WELD_LEVEL: LevelConfig = {
 };
 
 /**
- * S1 / S2 取舍关：一根轴同时挂着红路和蓝路的一格。
- * 红格的正确朝向需要“转 1 次”，蓝格已经是“转 0 次”——轴只能选一边。
- * S1 目标 1/2（先教“不用全亮”），S2 目标 3/4（逼你算哪边多）。
+ * S1 取舍关：一个源在十字处分两路，上下两盏设施各差 4 步，
+ * 而预算只有 5 步——够修一路，不够修两路。
+ * 正确解是「先挑一路走完」，不是「两边各点两下」：各点两下谁也点不亮。
+ * S2 目标 3/4 再加一层「算哪边多」，两关是同一套取舍的递进。
  */
 const S1: Put[] = [
-  [3, 0, "battery", 0, { locked: true, color: 0 }],
-  [3, 1, "line", 270, { axis: LAB_AXIS_ID }],
-  [3, 2, "line", 270],
-  [3, 3, "line", 270],
-  [3, 4, "bulb", 0, { locked: true, color: 0 }],
-  [4, 0, "battery", 0, { locked: true, color: 1 }],
-  [4, 1, "corner", 90, { axis: LAB_AXIS_ID }],
-  [5, 1, "corner", 180],
-  [5, 2, "bulb", 0, { locked: true, color: 1 }],
+  [3, 0, "battery", 0, { locked: true }],
+  [3, 1, "line", 270],
+  [3, 2, "cross", 0],
+  [2, 2, "line", 0],
+  [1, 2, "corner", 270],
+  [1, 3, "line", 270],
+  [1, 4, "bulb", 0, { locked: true }],
+  [4, 2, "line", 0],
+  [5, 2, "corner", 180],
+  [5, 3, "line", 270],
+  [5, 4, "bulb", 0, { locked: true }],
 ];
 
 const S2: Put[] = [
@@ -274,10 +298,11 @@ export const LAB_LEVELS: LevelConfig[] = [
     totalLevels: 99,
     title: "联动轴 · 让它歪着",
     subtitle: "忍住不修",
-    hintText: "轴上有四格，只有三格在解里：多出来的那格永远对不上，别为它再拧一次。",
+    hintText: "轴上三格只能有一个相位：顾得上顶上那盏，下面就断。目标 2/3，顶上那盏就让它黑着。",
     winText: "试验通过：忍住不修，也是一种修。",
-    parSteps: 4,
-    maxSteps: 6,
+    parSteps: 6,
+    maxSteps: 7,
+    goal: 2,
     gridRows: 6,
     gridCols: 6,
     tiles: board(P3),
@@ -303,14 +328,13 @@ export const LAB_LEVELS: LevelConfig[] = [
     totalLevels: 99,
     title: "取舍 · 只保一边",
     subtitle: "取舍 1",
-    hintText: "轴只够满足一路：红灯通了，蓝灯就灭。这关不用全亮。",
-    winText: "试验通过：放弃也是一种解。",
-    parSteps: 1,
-    maxSteps: 6,
+    hintText: "两盏设施都接得通，但步数只够修一路：先挑一条，别两边都动。",
+    winText: "试验通过：只修一路，也够了。",
+    parSteps: 4,
+    maxSteps: 5,
     goal: 1,
     gridRows: 6,
     gridCols: 6,
-    rules: { colors: 2 },
     tiles: board(S1),
   },
   {
@@ -379,16 +403,16 @@ export const LAB_LEVELS: LevelConfig[] = [
     id: 910,
     code: "C2",
     totalLevels: 99,
-    title: "组合 · 串色后焊死",
+    title: "组合 · 分色 + 通电即锁",
     subtitle: "组合探针",
-    hintText: "两条颜色各走各的；先修远端，再往回接，通电的管子会立刻锁住。",
-    winText: "试验通过：分色接通，也没有焊错顺序。",
-    parSteps: 8,
+    hintText: "两条颜色各走各的；通电的管子会立刻锁住——要转的格子先转到位，再接源头。",
+    winText: "试验通过：顺序对了，两色都通。",
+    parSteps: 9,
     maxSteps: 12,
     gridRows: 6,
     gridCols: 6,
     rules: { colors: 2, weld: true },
-    tiles: board(COLOR_WELD),
+    tiles: board(COLOR_WELD_COMBO),
   },
   // 齿轮咬合试验（scripts/gear-gen.ts 生成）：G1–G3，id 911–913
   ...GEAR_TEST_LEVELS,

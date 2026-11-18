@@ -7,16 +7,10 @@
       "steps": "2",
       "seamRects": [
         {
-          "x": 93,
-          "y": 235,
-          "width": 26,
-          "height": 12
-        },
-        {
-          "x": 93,
-          "y": 588,
-          "width": 26,
-          "height": 12
+          "x": 365,
+          "y": 492,
+          "width": 12,
+          "height": 26
         },
         {
           "x": 12,
@@ -25,10 +19,16 @@
           "height": 26
         },
         {
-          "x": 365,
-          "y": 492,
-          "width": 12,
-          "height": 26
+          "x": 35,
+          "y": 235,
+          "width": 26,
+          "height": 12
+        },
+        {
+          "x": 35,
+          "y": 588,
+          "width": 26,
+          "height": 12
         }
       ]
     },
@@ -53,7 +53,7 @@
       "clippedText": []
     },
     "wrapWeld": {
-      "seams": 4,
+      "seams": 8,
       "welded": 12,
       "caption": "环面 + 焊死：远端起手，跨缝接通即锁"
     },
@@ -82,12 +82,12 @@
       {
         "key": "wrap-1",
         "code": "T1",
-        "par": 9,
+        "par": 6,
         "screenshot": "matrix-02-wrap-1.jpg",
-        "target": "3/3",
+        "target": "2/2",
         "remaining": "2",
-        "steps": 9,
-        "boardTiles": 21,
+        "steps": 6,
+        "boardTiles": 17,
         "tileWidth": 54,
         "overflowX": false,
         "axisMarks": 0,
@@ -98,18 +98,18 @@
       {
         "key": "wrap-2",
         "code": "T2",
-        "par": 12,
+        "par": 9,
         "screenshot": "matrix-03-wrap-2.jpg",
-        "target": "4/4",
+        "target": "3/3",
         "remaining": "2",
-        "steps": 12,
-        "boardTiles": 24,
+        "steps": 9,
+        "boardTiles": 20,
         "tileWidth": 54,
         "overflowX": false,
         "axisMarks": 0,
         "weldMarks": 0,
         "colorSymbols": 0,
-        "seamGhosts": 6
+        "seamGhosts": 8
       },
       {
         "key": "wrap-3",
@@ -146,15 +146,15 @@
       {
         "key": "axis-boss",
         "code": "P3",
-        "par": 4,
+        "par": 6,
         "screenshot": "matrix-06-axis-boss.jpg",
-        "target": "3/3",
-        "remaining": "2",
-        "steps": 4,
+        "target": "2/2",
+        "remaining": "1",
+        "steps": 6,
         "boardTiles": 36,
         "tileWidth": 54,
         "overflowX": false,
-        "axisMarks": 4,
+        "axisMarks": 3,
         "weldMarks": 0,
         "colorSymbols": 0,
         "seamGhosts": 0
@@ -162,17 +162,17 @@
       {
         "key": "goal",
         "code": "S1",
-        "par": 1,
+        "par": 4,
         "screenshot": "matrix-07-goal.jpg",
         "target": "1/1",
-        "remaining": "5",
-        "steps": 1,
+        "remaining": "1",
+        "steps": 4,
         "boardTiles": 36,
         "tileWidth": 54,
         "overflowX": false,
-        "axisMarks": 2,
+        "axisMarks": 0,
         "weldMarks": 0,
-        "colorSymbols": 6,
+        "colorSymbols": 0,
         "seamGhosts": 0
       },
       {
@@ -231,28 +231,28 @@
         "target": "3/3",
         "remaining": "2",
         "steps": 9,
-        "boardTiles": 21,
+        "boardTiles": 20,
         "tileWidth": 54,
         "overflowX": false,
         "axisMarks": 0,
         "weldMarks": 12,
         "colorSymbols": 0,
-        "seamGhosts": 4
+        "seamGhosts": 8
       },
       {
         "key": "colors-weld",
         "code": "C-2",
-        "par": 8,
+        "par": 9,
         "screenshot": "matrix-12-colors-weld.jpg",
         "target": "2/2",
-        "remaining": "4",
-        "steps": 8,
+        "remaining": "3",
+        "steps": 9,
         "boardTiles": 36,
         "tileWidth": 54,
         "overflowX": false,
         "axisMarks": 0,
-        "weldMarks": 8,
-        "colorSymbols": 12,
+        "weldMarks": 9,
+        "colorSymbols": 13,
         "seamGhosts": 0
       }
     ]

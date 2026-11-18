@@ -66,7 +66,7 @@ export const PHASE0_SLICES: Phase0Slice[] = [
   comboSlice(
     "wrap-weld",
     "W-1",
-    "T1",
+    "T2",
     934,
     "组合 · 跨缝后焊死",
     { wrap: true, weld: true },
