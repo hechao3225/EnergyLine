@@ -8,6 +8,7 @@
 
 import { LevelConfig } from '../types/game';
 import { CHAPTER1_LEVELS } from './chapter1Levels';
+import { CHAPTER2_LEVELS } from './chapter2Levels';
 
 export const LEGACY_LEVELS: LevelConfig[] = [
   {
@@ -31419,5 +31420,9 @@ export const LEGACY_LEVELS: LevelConfig[] = [
 ];
 
 export const DEFAULT_LEVELS: LevelConfig[] = LEGACY_LEVELS.map((level) =>
-  level.id <= 20 ? CHAPTER1_LEVELS[level.id - 1] : level,
+  level.id <= 20
+    ? CHAPTER1_LEVELS[level.id - 1]
+    : level.id <= 40
+      ? CHAPTER2_LEVELS[level.id - 21]
+      : level,
 );
