@@ -13,140 +13,140 @@ export const LEVEL_CONTENT: LevelContent[] = [
     "zoneId": "center",
     "district": "失落乐园",
     "title": "迎宾门·接通",
-    "hint": "从最近的一段管道推向迎宾门。"
+    "hint": "点一下直管，把迎宾门接到能量源。"
   },
   {
     "levelId": 2,
     "zoneId": "center",
     "district": "失落乐园",
     "title": "星灯柱·闪耀",
-    "hint": "让星灯柱先亮，再回头理岔路。"
+    "hint": "弯管朝向主路；十字管不用转，固定管道保持原方向。"
   },
   {
     "levelId": 3,
     "zoneId": "center",
     "district": "失落乐园",
     "title": "售票亭·开窗",
-    "hint": "售票亭这一段先通主路，别绕远。"
+    "hint": "三通先接主干再分支；十字管不用转，固定管道保持原方向。"
   },
   {
     "levelId": 4,
     "zoneId": "center",
     "district": "失落乐园",
     "title": "气球摊·开张",
-    "hint": "十字管不用转。留一步余量，气球摊接好后再检查支路。"
+    "hint": "十字管四面同形，转它不会改变接法。"
   },
   {
     "levelId": 5,
     "zoneId": "center",
     "district": "失落乐园",
     "title": "中央喷泉·汇聚",
-    "hint": "十字管不用转·固定管道不能转。先把中央喷泉周围的断头管清掉。"
+    "hint": "多源各接一边；十字管不用转，固定管道保持原方向。"
   },
   {
     "levelId": 6,
     "zoneId": "center",
     "district": "失落乐园",
     "title": "长椅·歇脚",
-    "hint": "十字管不用转。沿着长椅往外理，先主后次。"
+    "hint": "假路不供能；十字管不用转，固定管道保持原方向。"
   },
   {
     "levelId": 7,
     "zoneId": "center",
     "district": "失落乐园",
     "title": "花坛·开花",
-    "hint": "十字管不用转·固定管道不能转。花坛是关键，先把它接到主干上。"
+    "hint": "只修最短主干；十字管不用转，固定管道保持原方向。"
   },
   {
     "levelId": 8,
     "zoneId": "center",
     "district": "失落乐园",
     "title": "导览牌·指路",
-    "hint": "固定管道不能转。别急着转远端，先让导览牌运转。"
+    "hint": "管道到位后扳通能量闸；固定管道保持原方向。"
   },
   {
     "levelId": 9,
     "zoneId": "center",
     "district": "失落乐园",
     "title": "糖果车·出摊",
-    "hint": "固定管道不能转。糖果车接好后，再分能量给旁边。"
+    "hint": "单向阀只允许能量顺着箭头进入。"
   },
   {
     "levelId": 10,
     "zoneId": "center",
     "district": "失落乐园",
     "title": "许愿池·点亮",
-    "hint": "十字管不用转。先接许愿池，再补旁边的支路。"
+    "hint": "多源各自供能；十字管不用转，固定管道保持原方向。"
   },
   {
     "levelId": 11,
     "zoneId": "center",
     "district": "失落乐园",
     "title": "报时钟楼·报时",
-    "hint": "固定管道不能转。从最近的一段管道推向报时钟楼。"
+    "hint": "三处假路先绕开；十字管不用转。"
   },
   {
     "levelId": 12,
     "zoneId": "center",
     "district": "失落乐园",
     "title": "旗杆·升旗",
-    "hint": "十字管不用转·固定管道不能转。让旗杆先亮，再回头理岔路。"
+    "hint": "先看单向阀方向，再扳能量闸；固定管道保持原方向。"
   },
   {
     "levelId": 13,
     "zoneId": "center",
     "district": "失落乐园",
-    "title": "检票闸·开闸",
-    "hint": "固定管道不能转。检票闸这一段先通主路，别绕远。"
+    "title": "检票闸·联动",
+    "hint": "带轴心的几格一起转；先让整组对准主路。"
   },
   {
     "levelId": 14,
     "zoneId": "center",
     "district": "失落乐园",
-    "title": "小卖部·营业",
-    "hint": "固定管道不能转。留一步余量，小卖部接好后再检查支路。"
+    "title": "小卖部·同轴",
+    "hint": "同轴整组共享相位；十字管不用转。"
   },
   {
     "levelId": 15,
     "zoneId": "center",
     "district": "失落乐园",
-    "title": "照相亭·拍照",
-    "hint": "十字管不用转·固定管道不能转。先把照相亭周围的断头管清掉。"
+    "title": "照相亭·断电",
+    "hint": "轴组只能选一个相位，有些支路必须放弃。"
   },
   {
     "levelId": 16,
     "zoneId": "center",
     "district": "失落乐园",
-    "title": "音乐盒·奏响",
-    "hint": "固定管道不能转。沿着音乐盒往外理，先主后次。"
+    "title": "音乐盒·跨缝",
+    "hint": "边界相连；十字管不用转，先找穿缝主干。"
   },
   {
     "levelId": 17,
     "zoneId": "center",
     "district": "失落乐园",
-    "title": "邮筒·投递",
-    "hint": "固定管道不能转。邮筒是关键，先把它接到主干上。"
+    "title": "邮筒·双缝",
+    "hint": "两条缝都要算；十字管不用转，先找真正通路。"
   },
   {
     "levelId": 18,
     "zoneId": "center",
     "district": "失落乐园",
-    "title": "雨棚·撑开",
-    "hint": "固定管道不能转。别急着转远端，先让雨棚运转。"
+    "title": "雨棚·缝上闸",
+    "hint": "看见边界格的能量闸；十字管不用转再跨缝。"
   },
   {
     "levelId": 19,
     "zoneId": "center",
     "district": "失落乐园",
     "title": "石阶·通行",
-    "hint": "固定管道不能转。石阶接好后，再分能量给旁边。"
+    "hint": "多源各接一段；十字管不用转，固定管道保持原方向。"
   },
   {
     "levelId": 20,
     "zoneId": "center",
     "district": "失落乐园",
     "title": "星光门廊·开启",
-    "hint": "十字管不用转·固定管道不能转。先接星光门廊，再补旁边的支路。"
+    "hint": "轴相位锁定主路，再用能量闸决定最后一段是否通电。"
   },
   {
     "levelId": 21,

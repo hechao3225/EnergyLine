@@ -137,7 +137,7 @@ function layoutAsLevel(id: number, tiles: Tile[]): LevelConfig {
  * 于是「还原设计图」的步数比真实最优高出约 9 步（中位值，88% 的关卡偏高），
  * 结算界面才会出现「本次 10 步 / 最少 13 步」这种自相矛盾。
  */
-function requiredCellsOf(id: number, solvedTiles: Tile[]): Set<string> {
+export function requiredCellsOf(id: number, solvedTiles: Tile[]): Set<string> {
   try {
     const res = solveMinTaps(layoutAsLevel(id, solvedTiles));
     return new Set(res.usedCells);
@@ -181,7 +181,7 @@ interface ScrambleOptions {
  *
  * 每片至少 1 步（保证它确实需要转），剩余步数按目标 par 随机摊到还有余量的片上。
  */
-function createScrambledLevel(
+export function createScrambledLevel(
   id: number,
   title: string,
   subtitle: string,

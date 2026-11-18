@@ -58,6 +58,41 @@ export interface LevelRules {
   weld?: boolean;
 }
 
+export type MechanicTag =
+  | "basic"
+  | "cross"
+  | "multi-source"
+  | "decoy"
+  | "switch"
+  | "diode"
+  | "axis"
+  | "wrap"
+  | "goal"
+  | "weld"
+  | "gear"
+  | "colors"
+  | "noCycle"
+  | "7x7";
+
+export type QuestionType =
+  | "定位"
+  | "顺序"
+  | "取舍"
+  | "相变"
+  | "禁忌"
+  | "分区"
+  | "规模";
+
+export type LevelRole =
+  | "教"
+  | "练"
+  | "变"
+  | "回声"
+  | "谷"
+  | "考"
+  | "boss"
+  | "预演";
+
 export interface SimulationResult {
   /** 双色关卡里每格到达的颜色掩码（1=0 号色，2=1 号色，3=串色） */
   tileColors?: Map<string, number>;
@@ -97,6 +132,11 @@ export interface LevelConfig {
   /** 关卡等级标记：hell = 地狱关（零容错、首通奖励更高） */
   tier?: "hell";
   rules?: LevelRules;
+  /** 审计、教学卡与机制断言使用的关卡标签 */
+  mechanicTags?: MechanicTag[];
+  primaryMechanic?: MechanicTag;
+  questionType?: QuestionType;
+  role?: LevelRole;
   tiles: Tile[];
 }
 

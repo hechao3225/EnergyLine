@@ -4,19 +4,15 @@ import { chromium, type Page } from "playwright";
 import { LAB_LEVELS } from "../src/data/labLevels";
 import { PHASE0_SLICES } from "../src/data/phase0Levels";
 import { solveRuleLevel } from "../src/utils/rule-solver";
+import {
+  clickStep,
+  closeTransientModals,
+  openStoryLevel,
+} from "./playwright-game-actions";
 
 const BASE_URL = process.env.PHASE0_URL ?? "http://127.0.0.1:4328/";
 const OUTPUT_DIR = path.resolve("docs/QA/phase0-2026-11-17");
 fs.mkdirSync(OUTPUT_DIR, { recursive: true });
-
-async function closeTransientModals(page: Page) {
-  for (let i = 0; i < 5; i++) {
-    const close = page.locator(".park-modal .park-close").first();
-    if (!(await close.isVisible().catch(() => false))) break;
-    await close.click();
-    await page.waitForTimeout(160);
-  }
-}
 
 async function openLab(page: Page, code: string) {
   await page.goto(BASE_URL, { waitUntil: "networkidle" });
@@ -31,61 +27,11 @@ async function openLab(page: Page, code: string) {
   await closeTransientModals(page);
 }
 
-async function openStoryLevel(page: Page, id: number) {
-  await page.goto(BASE_URL, { waitUntil: "networkidle" });
-  await closeTransientModals(page);
-  await page
-    .getByRole("navigation")
-    .getByRole("button", { name: "关卡", exact: true })
-    .click();
-  await page
-    .getByRole("button", {
-      name: `${Math.floor((id - 1) / 20) + 1}章`,
-      exact: true,
-    })
-    .click();
-  await page
-    .getByRole("button", { name: `修复第${id}处设施`, exact: true })
-    .click();
-  await page.waitForSelector(".park-play", { timeout: 8_000 });
-  await closeTransientModals(page);
-}
-
 async function screenshot(page: Page, name: string) {
   await page.screenshot({
     path: path.join(OUTPUT_DIR, name),
     animations: "allow",
   });
-}
-
-async function clickStep(
-  page: Page,
-  step: { id?: string; axis?: string; toggle?: boolean; taps: number },
-) {
-  for (let tap = 0; tap < step.taps; tap++) {
-    if (step.axis) {
-      const tile = page.locator(`[data-axis="${step.axis}"]`).first();
-      await tile.locator(".park-tile-rotate").click();
-    } else if (step.id && step.toggle) {
-      await page
-        .locator(`.park-tile[data-tile-id="${step.id}"] .park-switch-toggle`)
-        .click();
-    } else if (step.id) {
-      const tile = page.locator(`.park-tile[data-tile-id="${step.id}"]`);
-      const rotate = tile.locator(".park-tile-rotate");
-      if ((await tile.getAttribute("data-type")) === "switch") {
-        const box = await rotate.boundingBox();
-        await rotate.click({
-          position: box
-            ? { x: box.width * 0.25, y: box.height * 0.25 }
-            : undefined,
-        });
-      } else {
-        await rotate.click();
-      }
-    }
-    await page.waitForTimeout(45);
-  }
 }
 
 const browser = await chromium.launch({
@@ -231,7 +177,7 @@ results.compact = await page.evaluate(() => ({
 
 const matrix: unknown[] = [];
 for (const [index, slice] of PHASE0_SLICES.entries()) {
-  if (slice.level.id === 73) await openStoryLevel(page, 73);
+  if (slice.level.id === 73) await openStoryLevel(page, BASE_URL, 73);
   else {
     const uiCode =
       slice.kind === "combo" && slice.level.code === "W-1"

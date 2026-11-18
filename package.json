@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
-    "test": "tsx scripts/test_circuits.ts && tsx scripts/test_park_progress.ts && tsx scripts/test_theme_content.ts && tsx scripts/audit_theme.ts && tsx scripts/test_hint_engine.ts && tsx scripts/audit-rules.ts && tsx scripts/test_phase0_spec.ts && tsx scripts/test_phase0_burden.ts && tsx scripts/audit-phase0.ts",
+    "test": "tsx scripts/test_circuits.ts && tsx scripts/test_park_progress.ts && tsx scripts/test_theme_content.ts && tsx scripts/audit_theme.ts && tsx scripts/test_hint_engine.ts && tsx scripts/audit-rules.ts && tsx scripts/test_phase0_spec.ts && tsx scripts/test_phase0_burden.ts && tsx scripts/audit-phase0.ts && tsx scripts/test_chapter1.ts",
     "test:ui": "tsx scripts/test_park_ui.ts && tsx scripts/test_park_star_upgrade.ts && tsx scripts/test_park_victory_layout.ts",
     "test:pipes": "python scripts/audit_pipe_ports.py && tsx scripts/test_pipe_alignment.ts",
     "test:merge": "tsx scripts/test_master_merge.ts",
@@ -21,6 +21,8 @@
     "audit:levels": "tsx scripts/solve-min-par.ts && tsx scripts/audit-difficulty.ts",
     "audit:rules": "tsx scripts/audit-rules.ts",
     "audit:phase0": "tsx scripts/audit-phase0.ts",
+    "audit:chapter1": "tsx scripts/test_chapter1.ts && tsx scripts/audit-chapter1.ts",
+    "chapter1:gen": "tsx scripts/chapter1-gen.ts --write",
     "test:phase0": "tsx scripts/test_phase0_spec.ts && tsx scripts/test_phase0_burden.ts && tsx scripts/lab-par.ts",
     "playtest:phase0": "tsx scripts/phase0-playthrough.ts",
     "baseline:levels": "tsx scripts/baseline-level-layout.ts"
