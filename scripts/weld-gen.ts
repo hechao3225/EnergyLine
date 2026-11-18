@@ -4,6 +4,7 @@
  * 校验：精确 par + 解回放 + 焊死顺序可行（无焊死最优计划本身就要能按顺序执行，par 才成立）。
  */
 import fs from 'node:fs';
+import { pathToFileURL } from 'node:url';
 import { Direction, type LevelConfig, type Tile, type TileType } from '../src/types/game';
 import { getDefaultBasePorts, rotatePorts, simulateCircuit } from '../src/utils/circuit';
 import { solveWithAxes } from './axis-solver';
@@ -219,40 +220,49 @@ export function generateWeldLevel(
   return build(spec, seed);
 }
 
-const out: LevelConfig[] = [];
-for (const spec of SPECS) {
-  let hit: LevelConfig | null = null;
-  for (let seed = 1; seed < 5000 && !hit; seed++) hit = build(spec, seed);
-  if (!hit) {
-    console.log('✗ ' + spec.code + ' 没有找到合格盘面');
-    process.exitCode = 1;
-    continue;
-  }
-  out.push(hit);
-  console.log('✓ ' + spec.code + ' ' + spec.title + ' —— par ' + hit.parSteps + ' / 预算 ' + hit.maxSteps);
-  const chars: Record<number, string> = { 1: '╵', 2: '╶', 3: '└', 4: '╷', 5: '│', 6: '┌', 7: '├', 8: '╴', 9: '┘', 10: '─', 11: '┴', 12: '┐', 13: '┤', 14: '┬', 15: '┼' };
-  for (let r = 0; r < ROWS; r++) {
-    let line = '';
-    for (let c = 0; c < COLS; c++) {
-      const t = hit.tiles.find((x) => x.row === r && x.col === c);
-      if (!t) { line += ' ·'; continue; }
-      if (t.type === 'battery') { line += ' S'; continue; }
-      if (t.type === 'bulb') { line += ' O'; continue; }
-      line += ' ' + (chars[rotatePorts(t.basePorts, t.rotation) % 16] ?? '?');
+function main() {
+  const out: LevelConfig[] = [];
+  for (const spec of SPECS) {
+    let hit: LevelConfig | null = null;
+    for (let seed = 1; seed < 5000 && !hit; seed++) hit = build(spec, seed);
+    if (!hit) {
+      console.log('✗ ' + spec.code + ' 没有找到合格盘面');
+      process.exitCode = 1;
+      continue;
     }
-    console.log(line);
+    out.push(hit);
+    console.log('✓ ' + spec.code + ' ' + spec.title + ' —— par ' + hit.parSteps + ' / 预算 ' + hit.maxSteps);
+    const chars: Record<number, string> = { 1: '╵', 2: '╶', 3: '└', 4: '╷', 5: '│', 6: '┌', 7: '├', 8: '╴', 9: '┘', 10: '─', 11: '┴', 12: '┐', 13: '┤', 14: '┬', 15: '┼' };
+    for (let r = 0; r < ROWS; r++) {
+      let line = '';
+      for (let c = 0; c < COLS; c++) {
+        const t = hit.tiles.find((x) => x.row === r && x.col === c);
+        if (!t) { line += ' ·'; continue; }
+        if (t.type === 'battery') { line += ' S'; continue; }
+        if (t.type === 'bulb') { line += ' O'; continue; }
+        line += ' ' + (chars[rotatePorts(t.basePorts, t.rotation) % 16] ?? '?');
+      }
+      console.log(line);
+    }
+  }
+
+  if (out.length === SPECS.length && !process.argv.includes('--dry')) {
+    const text =
+      '/** 由 scripts/weld-gen.ts 生成，勿手改。焊死实验关 W1–W3（id 931–933）。 */\n' +
+      'import type { LevelConfig } from "../types/game";\n\n' +
+      'export const WELD_TEST_LEVELS: LevelConfig[] = ' +
+      JSON.stringify(out, null, 2) +
+      ';\n';
+    fs.writeFileSync('src/data/weldLevels.ts', text);
+    console.log('写入 src/data/weldLevels.ts（' + out.length + ' 关）');
+  } else {
+    console.log('未写文件：' + out.length + '/' + SPECS.length);
   }
 }
 
-if (out.length === SPECS.length && !process.argv.includes('--dry')) {
-  const text =
-    '/** 由 scripts/weld-gen.ts 生成，勿手改。焊死实验关 W1–W3（id 931–933）。 */\n' +
-    'import type { LevelConfig } from "../types/game";\n\n' +
-    'export const WELD_TEST_LEVELS: LevelConfig[] = ' +
-    JSON.stringify(out, null, 2) +
-    ';\n';
-  fs.writeFileSync('src/data/weldLevels.ts', text);
-  console.log('写入 src/data/weldLevels.ts（' + out.length + ' 关）');
-} else {
-  console.log('未写文件：' + out.length + '/' + SPECS.length);
+if (
+  process.argv[1] &&
+  import.meta.url === pathToFileURL(process.argv[1]).href
+) {
+  main();
 }
