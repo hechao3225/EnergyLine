@@ -205,8 +205,8 @@ function buildChapter2(): LevelConfig[] {
           cells: 22,
           bulbs: 4,
           groups: [2, 2],
-          par: 16,
-          seed: 28,
+          par: 17,
+          seed: 8,
           gear: true,
         });
       case 33:
@@ -236,11 +236,11 @@ function buildChapter2(): LevelConfig[] {
         });
       case 38:
         return generatedAxis(spec, {
-          cells: 21,
+          cells: 18,
           bulbs: 3,
           groups: [3],
-          par: 14,
-          seed: 65,
+          par: 17,
+          seed: 8,
         });
       case 40:
         return buildBoss(spec);

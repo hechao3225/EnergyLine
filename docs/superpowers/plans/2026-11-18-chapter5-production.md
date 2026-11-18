@@ -28,7 +28,7 @@
 ```ts
 row(81, "wrap", ["wrap", "weld"], "分区", "变", 20)
 row(87, "colors", ["colors", "weld"], "分区", "变", 20)
-row(93, "7x7", ["7x7"], "规模", "变", 20)
+row(93, "7x7", ["7x7"], "规模", "变", 22)
 row(99, "wrap", ["wrap", "weld", "goal"], "取舍", "boss", 25)
 ```
 
@@ -69,10 +69,11 @@ return level;
 - [x] 更新 L81–L99 文案。
 - [x] 重建布局指纹。
 - [x] 390×844 逐关回放。
+- [x] 最终 par：`20 / 21 / 18 / 21 / 22 / 19 / 20 / 21 / 18 / 19 / 20 / 19 / 22 / 20 / 23 / 21 / 22 / 22 / 25`。
 
-### 任务 6：提交
+### 任务 6：提交（已完成）
 
-```bash
+```text
 git add src/data/chapter5Schedule.ts src/data/chapter5Levels.ts scripts/chapter5-gen.ts
 git add scripts/test_chapter5.ts scripts/audit-chapter5.ts scripts/chapter5-playthrough.ts
 git add src/content/levels.ts src/data/defaultLevels.ts scripts/fixtures/level-layout-hash.json

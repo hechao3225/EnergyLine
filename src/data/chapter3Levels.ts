@@ -639,7 +639,7 @@ export const CHAPTER3_LEVELS: LevelConfig[] = [
       "weld"
     ],
     "primaryMechanic": "weld",
-    "questionType": "顺序",
+    "questionType": "定位",
     "role": "练"
   },
   {
@@ -1281,7 +1281,7 @@ export const CHAPTER3_LEVELS: LevelConfig[] = [
       "basic"
     ],
     "primaryMechanic": "basic",
-    "questionType": "定位",
+    "questionType": "取舍",
     "role": "谷"
   },
   {
@@ -1613,51 +1613,183 @@ export const CHAPTER3_LEVELS: LevelConfig[] = [
     "id": 46,
     "code": "46",
     "totalLevels": 99,
+    "parSteps": 18,
+    "maxSteps": 20,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 16,
-    "parSteps": 14,
+    "rules": {
+      "weld": true
+    },
     "tiles": [
       {
-        "id": "t-0-0",
-        "row": 0,
+        "id": "t-3-0",
+        "row": 3,
         "col": 0,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
+        "type": "battery",
+        "rotation": 270,
+        "basePorts": 2,
+        "locked": true
       },
       {
-        "id": "t-0-1",
-        "row": 0,
-        "col": 1,
-        "type": "empty",
+        "id": "t-2-0",
+        "row": 2,
+        "col": 0,
+        "type": "line",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 10
+      },
+      {
+        "id": "t-1-0",
+        "row": 1,
+        "col": 0,
+        "type": "t_shape",
+        "rotation": 180,
+        "basePorts": 14
+      },
+      {
+        "id": "t-1-1",
+        "row": 1,
+        "col": 1,
+        "type": "cross",
+        "rotation": 0,
+        "basePorts": 15
+      },
+      {
+        "id": "t-2-1",
+        "row": 2,
+        "col": 1,
+        "type": "line",
+        "rotation": 0,
+        "basePorts": 10
+      },
+      {
+        "id": "t-1-2",
+        "row": 1,
+        "col": 2,
+        "type": "t_shape",
+        "rotation": 90,
+        "basePorts": 14
+      },
+      {
+        "id": "t-1-3",
+        "row": 1,
+        "col": 3,
+        "type": "t_shape",
+        "rotation": 180,
+        "basePorts": 14
+      },
+      {
+        "id": "t-1-4",
+        "row": 1,
+        "col": 4,
+        "type": "line",
+        "rotation": 0,
+        "basePorts": 10
+      },
+      {
+        "id": "t-2-3",
+        "row": 2,
+        "col": 3,
+        "type": "t_shape",
+        "rotation": 90,
+        "basePorts": 14
       },
       {
         "id": "t-0-2",
         "row": 0,
         "col": 2,
-        "type": "empty",
+        "type": "corner",
+        "rotation": 180,
+        "basePorts": 6
+      },
+      {
+        "id": "t-0-1",
+        "row": 0,
+        "col": 1,
+        "type": "line",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 10
+      },
+      {
+        "id": "t-2-2",
+        "row": 2,
+        "col": 2,
+        "type": "corner",
+        "rotation": 180,
+        "basePorts": 6
+      },
+      {
+        "id": "t-2-4",
+        "row": 2,
+        "col": 4,
+        "type": "corner",
+        "rotation": 270,
+        "basePorts": 6
+      },
+      {
+        "id": "t-3-4",
+        "row": 3,
+        "col": 4,
+        "type": "bulb",
+        "rotation": 0,
+        "basePorts": 15,
+        "locked": true
       },
       {
         "id": "t-0-3",
         "row": 0,
         "col": 3,
-        "type": "empty",
+        "type": "line",
+        "rotation": 270,
+        "basePorts": 10
+      },
+      {
+        "id": "t-1-5",
+        "row": 1,
+        "col": 5,
+        "type": "corner",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 6
+      },
+      {
+        "id": "t-3-2",
+        "row": 3,
+        "col": 2,
+        "type": "line",
+        "rotation": 0,
+        "basePorts": 10
+      },
+      {
+        "id": "t-4-2",
+        "row": 4,
+        "col": 2,
+        "type": "corner",
+        "rotation": 90,
+        "basePorts": 6
+      },
+      {
+        "id": "t-2-5",
+        "row": 2,
+        "col": 5,
+        "type": "line",
+        "rotation": 90,
+        "basePorts": 10
       },
       {
         "id": "t-0-4",
         "row": 0,
         "col": 4,
-        "type": "corner",
-        "rotation": 180,
-        "basePorts": 6,
-        "locked": false
+        "type": "line",
+        "rotation": 270,
+        "basePorts": 10
+      },
+      {
+        "id": "t-0-0",
+        "row": 0,
+        "col": 0,
+        "type": "line",
+        "rotation": 0,
+        "basePorts": 10
       },
       {
         "id": "t-0-5",
@@ -1669,262 +1801,24 @@ export const CHAPTER3_LEVELS: LevelConfig[] = [
         "locked": true
       },
       {
-        "id": "t-1-0",
-        "row": 1,
-        "col": 0,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
-      },
-      {
-        "id": "t-1-1",
-        "row": 1,
-        "col": 1,
-        "type": "corner",
-        "rotation": 0,
-        "basePorts": 6
-      },
-      {
-        "id": "t-1-2",
-        "row": 1,
-        "col": 2,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
-      },
-      {
-        "id": "t-1-3",
-        "row": 1,
-        "col": 3,
-        "type": "corner",
-        "rotation": 270,
-        "basePorts": 6
-      },
-      {
-        "id": "t-1-4",
-        "row": 1,
-        "col": 4,
-        "type": "t_shape",
-        "rotation": 0,
-        "basePorts": 14,
-        "locked": false
-      },
-      {
-        "id": "t-1-5",
-        "row": 1,
-        "col": 5,
-        "type": "bulb",
-        "rotation": 0,
-        "basePorts": 15,
-        "locked": true
-      },
-      {
-        "id": "t-2-0",
-        "row": 2,
-        "col": 0,
-        "type": "line",
-        "rotation": 270,
-        "basePorts": 10,
-        "locked": true
-      },
-      {
-        "id": "t-2-1",
-        "row": 2,
-        "col": 1,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
-      },
-      {
-        "id": "t-2-2",
-        "row": 2,
-        "col": 2,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
-      },
-      {
-        "id": "t-2-3",
-        "row": 2,
-        "col": 3,
-        "type": "corner",
-        "rotation": 180,
-        "basePorts": 6
-      },
-      {
-        "id": "t-2-4",
-        "row": 2,
-        "col": 4,
-        "type": "t_shape",
-        "rotation": 270,
-        "basePorts": 14,
-        "locked": false
-      },
-      {
-        "id": "t-2-5",
-        "row": 2,
-        "col": 5,
-        "type": "bulb",
-        "rotation": 0,
-        "basePorts": 15,
-        "locked": true
-      },
-      {
-        "id": "t-3-0",
-        "row": 3,
-        "col": 0,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
-      },
-      {
-        "id": "t-3-1",
-        "row": 3,
-        "col": 1,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
-      },
-      {
-        "id": "t-3-2",
-        "row": 3,
-        "col": 2,
-        "type": "line",
-        "rotation": 180,
-        "basePorts": 10,
-        "locked": true
-      },
-      {
-        "id": "t-3-3",
-        "row": 3,
-        "col": 3,
-        "type": "corner",
-        "rotation": 90,
-        "basePorts": 6,
-        "locked": false
-      },
-      {
-        "id": "t-3-4",
-        "row": 3,
-        "col": 4,
-        "type": "corner",
-        "rotation": 0,
-        "basePorts": 6,
-        "locked": false
-      },
-      {
         "id": "t-3-5",
         "row": 3,
         "col": 5,
-        "type": "corner",
-        "rotation": 270,
-        "basePorts": 6
-      },
-      {
-        "id": "t-4-0",
-        "row": 4,
-        "col": 0,
-        "type": "battery",
+        "type": "bulb",
         "rotation": 0,
-        "basePorts": 2,
+        "basePorts": 15,
         "locked": true
-      },
-      {
-        "id": "t-4-1",
-        "row": 4,
-        "col": 1,
-        "type": "line",
-        "rotation": 90,
-        "basePorts": 10,
-        "locked": false
-      },
-      {
-        "id": "t-4-2",
-        "row": 4,
-        "col": 2,
-        "type": "diode",
-        "rotation": 270,
-        "basePorts": 10,
-        "locked": false
       },
       {
         "id": "t-4-3",
         "row": 4,
         "col": 3,
-        "type": "corner",
+        "type": "bulb",
         "rotation": 0,
-        "basePorts": 6,
-        "locked": false
-      },
-      {
-        "id": "t-4-4",
-        "row": 4,
-        "col": 4,
-        "type": "corner",
-        "rotation": 0,
-        "basePorts": 6
-      },
-      {
-        "id": "t-4-5",
-        "row": 4,
-        "col": 5,
-        "type": "corner",
-        "rotation": 90,
-        "basePorts": 6
-      },
-      {
-        "id": "t-5-0",
-        "row": 5,
-        "col": 0,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
-      },
-      {
-        "id": "t-5-1",
-        "row": 5,
-        "col": 1,
-        "type": "line",
-        "rotation": 270,
-        "basePorts": 10,
+        "basePorts": 15,
         "locked": true
-      },
-      {
-        "id": "t-5-2",
-        "row": 5,
-        "col": 2,
-        "type": "corner",
-        "rotation": 270,
-        "basePorts": 6
-      },
-      {
-        "id": "t-5-3",
-        "row": 5,
-        "col": 3,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
-      },
-      {
-        "id": "t-5-4",
-        "row": 5,
-        "col": 4,
-        "type": "line",
-        "rotation": 270,
-        "basePorts": 10
-      },
-      {
-        "id": "t-5-5",
-        "row": 5,
-        "col": 5,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
       }
     ],
-    "rules": {
-      "weld": true
-    },
     "mechanicTags": [
       "weld",
       "decoy"
@@ -5412,7 +5306,7 @@ export const CHAPTER3_LEVELS: LevelConfig[] = [
     ],
     "primaryMechanic": "gear",
     "questionType": "相变",
-    "role": "回声"
+    "role": "练"
   },
   {
     "id": 59,

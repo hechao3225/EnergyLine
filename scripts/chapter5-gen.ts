@@ -492,7 +492,7 @@ function tripleLevel(spec: Chapter5Spec): LevelConfig {
 function basicLevel(spec: Chapter5Spec): LevelConfig {
   const sources: Record<number, number> = {
     86: 81,
-    89: 92,
+    89: 57,
     92: 89,
     96: 92,
     98: 93,

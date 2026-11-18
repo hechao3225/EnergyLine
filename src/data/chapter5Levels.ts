@@ -485,7 +485,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
       "weld"
     ],
     "primaryMechanic": "wrap",
-    "questionType": "分区",
+    "questionType": "顺序",
     "role": "考"
   },
   {
@@ -702,7 +702,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
       "weld"
     ],
     "primaryMechanic": "weld",
-    "questionType": "顺序",
+    "questionType": "定位",
     "role": "回声"
   },
   {
@@ -947,7 +947,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
       "wrap",
       "gear"
     ],
-    "primaryMechanic": "wrap",
+    "primaryMechanic": "gear",
     "questionType": "相变",
     "role": "变"
   },
@@ -1193,8 +1193,8 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
       "wrap",
       "gear"
     ],
-    "primaryMechanic": "wrap",
-    "questionType": "相变",
+    "primaryMechanic": "gear",
+    "questionType": "顺序",
     "role": "考"
   },
   {
@@ -1853,7 +1853,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
       "weld"
     ],
     "primaryMechanic": "colors",
-    "questionType": "分区",
+    "questionType": "顺序",
     "role": "考"
   },
   {
@@ -1862,60 +1862,57 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
     "totalLevels": 99,
     "gridRows": 6,
     "gridCols": 6,
-    "maxSteps": 23,
-    "parSteps": 21,
+    "maxSteps": 20,
+    "parSteps": 18,
     "tiles": [
       {
         "id": "t-0-0",
         "row": 0,
         "col": 0,
-        "type": "battery",
-        "rotation": 0,
-        "basePorts": 2,
+        "type": "line",
+        "rotation": 180,
+        "basePorts": 10,
         "locked": true
       },
       {
         "id": "t-0-1",
         "row": 0,
         "col": 1,
-        "type": "line",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 10,
-        "locked": false
+        "basePorts": 0
       },
       {
         "id": "t-0-2",
         "row": 0,
         "col": 2,
-        "type": "corner",
-        "rotation": 180,
-        "basePorts": 6
+        "type": "empty",
+        "rotation": 0,
+        "basePorts": 0
       },
       {
         "id": "t-0-3",
         "row": 0,
         "col": 3,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
+        "type": "corner",
+        "rotation": 90,
+        "basePorts": 6
       },
       {
         "id": "t-0-4",
         "row": 0,
         "col": 4,
         "type": "corner",
-        "rotation": 180,
-        "basePorts": 6,
-        "locked": false
+        "rotation": 90,
+        "basePorts": 6
       },
       {
         "id": "t-0-5",
         "row": 0,
         "col": 5,
-        "type": "bulb",
-        "rotation": 0,
-        "basePorts": 15,
-        "locked": true
+        "type": "corner",
+        "rotation": 270,
+        "basePorts": 6
       },
       {
         "id": "t-1-0",
@@ -1938,25 +1935,24 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 2,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 0,
         "basePorts": 6
       },
       {
         "id": "t-1-3",
         "row": 1,
         "col": 3,
-        "type": "line",
-        "rotation": 270,
-        "basePorts": 10,
-        "locked": true
+        "type": "empty",
+        "rotation": 0,
+        "basePorts": 0
       },
       {
         "id": "t-1-4",
         "row": 1,
         "col": 4,
-        "type": "t_shape",
-        "rotation": 0,
-        "basePorts": 14,
+        "type": "corner",
+        "rotation": 90,
+        "basePorts": 6,
         "locked": false
       },
       {
@@ -1972,78 +1968,23 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "id": "t-2-0",
         "row": 2,
         "col": 0,
-        "type": "line",
-        "rotation": 90,
-        "basePorts": 10,
-        "locked": true
-      },
-      {
-        "id": "t-2-1",
-        "row": 2,
-        "col": 1,
-        "type": "corner",
-        "rotation": 90,
-        "basePorts": 6,
-        "locked": false
-      },
-      {
-        "id": "t-2-2",
-        "row": 2,
-        "col": 2,
-        "type": "diode",
-        "rotation": 90,
-        "basePorts": 10,
-        "locked": false
-      },
-      {
-        "id": "t-2-3",
-        "row": 2,
-        "col": 3,
-        "type": "switch",
-        "rotation": 270,
-        "basePorts": 10,
-        "locked": false,
-        "switchClosed": false
-      },
-      {
-        "id": "t-2-4",
-        "row": 2,
-        "col": 4,
-        "type": "cross",
-        "rotation": 0,
-        "basePorts": 15,
-        "locked": false
-      },
-      {
-        "id": "t-2-5",
-        "row": 2,
-        "col": 5,
-        "type": "bulb",
-        "rotation": 0,
-        "basePorts": 15,
-        "locked": true
-      },
-      {
-        "id": "t-3-0",
-        "row": 3,
-        "col": 0,
         "type": "battery",
         "rotation": 0,
         "basePorts": 2,
         "locked": true
       },
       {
-        "id": "t-3-1",
-        "row": 3,
+        "id": "t-2-1",
+        "row": 2,
         "col": 1,
-        "type": "corner",
+        "type": "t_shape",
         "rotation": 90,
-        "basePorts": 6,
+        "basePorts": 14,
         "locked": false
       },
       {
-        "id": "t-3-2",
-        "row": 3,
+        "id": "t-2-2",
+        "row": 2,
         "col": 2,
         "type": "line",
         "rotation": 0,
@@ -2051,21 +1992,71 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "locked": true
       },
       {
-        "id": "t-3-3",
-        "row": 3,
+        "id": "t-2-3",
+        "row": 2,
         "col": 3,
+        "type": "line",
+        "rotation": 0,
+        "basePorts": 10,
+        "locked": true
+      },
+      {
+        "id": "t-2-4",
+        "row": 2,
+        "col": 4,
+        "type": "t_shape",
+        "rotation": 0,
+        "basePorts": 14,
+        "locked": false
+      },
+      {
+        "id": "t-2-5",
+        "row": 2,
+        "col": 5,
+        "type": "line",
+        "rotation": 180,
+        "basePorts": 10
+      },
+      {
+        "id": "t-3-0",
+        "row": 3,
+        "col": 0,
+        "type": "empty",
+        "rotation": 0,
+        "basePorts": 0
+      },
+      {
+        "id": "t-3-1",
+        "row": 3,
+        "col": 1,
         "type": "line",
         "rotation": 180,
         "basePorts": 10,
-        "locked": true
+        "locked": false
+      },
+      {
+        "id": "t-3-2",
+        "row": 3,
+        "col": 2,
+        "type": "corner",
+        "rotation": 270,
+        "basePorts": 6
+      },
+      {
+        "id": "t-3-3",
+        "row": 3,
+        "col": 3,
+        "type": "corner",
+        "rotation": 0,
+        "basePorts": 6
       },
       {
         "id": "t-3-4",
         "row": 3,
         "col": 4,
-        "type": "t_shape",
+        "type": "corner",
         "rotation": 90,
-        "basePorts": 14,
+        "basePorts": 6,
         "locked": false
       },
       {
@@ -2081,17 +2072,18 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "id": "t-4-0",
         "row": 4,
         "col": 0,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
+        "type": "corner",
+        "rotation": 180,
+        "basePorts": 6
       },
       {
         "id": "t-4-1",
         "row": 4,
         "col": 1,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
+        "type": "line",
+        "rotation": 180,
+        "basePorts": 10,
+        "locked": false
       },
       {
         "id": "t-4-2",
@@ -2113,61 +2105,60 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "id": "t-4-4",
         "row": 4,
         "col": 4,
-        "type": "t_shape",
-        "rotation": 90,
-        "basePorts": 14,
-        "locked": false
+        "type": "empty",
+        "rotation": 0,
+        "basePorts": 0
       },
       {
         "id": "t-4-5",
         "row": 4,
         "col": 5,
-        "type": "bulb",
+        "type": "corner",
         "rotation": 0,
-        "basePorts": 15,
-        "locked": true
+        "basePorts": 6
       },
       {
         "id": "t-5-0",
         "row": 5,
         "col": 0,
-        "type": "battery",
-        "rotation": 0,
-        "basePorts": 2,
-        "locked": true
+        "type": "corner",
+        "rotation": 90,
+        "basePorts": 6
       },
       {
         "id": "t-5-1",
         "row": 5,
         "col": 1,
-        "type": "line",
+        "type": "corner",
         "rotation": 0,
-        "basePorts": 10,
+        "basePorts": 6,
         "locked": false
       },
       {
         "id": "t-5-2",
         "row": 5,
         "col": 2,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
+        "type": "line",
+        "rotation": 90,
+        "basePorts": 10,
+        "locked": false
       },
       {
         "id": "t-5-3",
         "row": 5,
         "col": 3,
-        "type": "corner",
-        "rotation": 180,
-        "basePorts": 6
+        "type": "line",
+        "rotation": 90,
+        "basePorts": 10,
+        "locked": false
       },
       {
         "id": "t-5-4",
         "row": 5,
         "col": 4,
-        "type": "corner",
-        "rotation": 0,
-        "basePorts": 6,
+        "type": "diode",
+        "rotation": 180,
+        "basePorts": 10,
         "locked": false
       },
       {
@@ -2848,7 +2839,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
       "goal"
     ],
     "primaryMechanic": "goal",
-    "questionType": "取舍",
+    "questionType": "顺序",
     "role": "考"
   },
   {
@@ -3182,8 +3173,8 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
     "id": 93,
     "code": "93",
     "totalLevels": 99,
-    "maxSteps": 22,
-    "parSteps": 20,
+    "maxSteps": 24,
+    "parSteps": 22,
     "gridRows": 7,
     "gridCols": 7,
     "rules": {},
@@ -3202,7 +3193,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 1,
         "type": "corner",
-        "rotation": 360,
+        "rotation": 180,
         "basePorts": 6,
         "locked": false
       },
@@ -3373,7 +3364,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 0,
         "type": "corner",
-        "rotation": 360,
+        "rotation": 180,
         "basePorts": 6
       },
       {
@@ -3439,7 +3430,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 1,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 450,
         "basePorts": 6
       },
       {
@@ -3463,7 +3454,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 360,
         "basePorts": 6
       },
       {
@@ -3471,7 +3462,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 5,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 270,
         "basePorts": 6
       },
       {
@@ -3503,7 +3494,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 2,
         "type": "corner",
-        "rotation": 450,
+        "rotation": 360,
         "basePorts": 6
       },
       {
@@ -3613,8 +3604,8 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
     "id": 94,
     "code": "94",
     "totalLevels": 99,
-    "maxSteps": 23,
-    "parSteps": 21,
+    "maxSteps": 22,
+    "parSteps": 20,
     "gridRows": 7,
     "gridCols": 7,
     "rules": {
@@ -3635,7 +3626,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 1,
         "type": "corner",
-        "rotation": 180,
+        "rotation": 360,
         "basePorts": 6,
         "locked": false
       },
@@ -3660,7 +3651,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "row": 0,
         "col": 4,
         "type": "corner",
-        "rotation": 450,
+        "rotation": 540,
         "basePorts": 6
       },
       {
@@ -3693,7 +3684,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 1,
         "type": "corner",
-        "rotation": 450,
+        "rotation": 360,
         "basePorts": 6,
         "locked": false
       },
@@ -3729,7 +3720,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "row": 1,
         "col": 5,
         "type": "t_shape",
-        "rotation": 90,
+        "rotation": 270,
         "basePorts": 14,
         "locked": false
       },
@@ -3844,7 +3835,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "row": 3,
         "col": 5,
         "type": "t_shape",
-        "rotation": 540,
+        "rotation": 360,
         "basePorts": 14,
         "locked": false
       },
@@ -3894,7 +3885,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 4,
         "type": "corner",
-        "rotation": 270,
+        "rotation": 360,
         "basePorts": 6
       },
       {
@@ -3902,7 +3893,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "row": 4,
         "col": 5,
         "type": "t_shape",
-        "rotation": 450,
+        "rotation": 360,
         "basePorts": 14,
         "locked": false
       },
@@ -3946,7 +3937,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 3,
         "type": "corner",
-        "rotation": 360,
+        "rotation": 540,
         "basePorts": 6
       },
       {
@@ -3962,7 +3953,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
         "row": 5,
         "col": 5,
         "type": "t_shape",
-        "rotation": 450,
+        "rotation": 540,
         "basePorts": 14,
         "locked": false
       },
@@ -4039,7 +4030,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
       "wrap"
     ],
     "primaryMechanic": "7x7",
-    "questionType": "规模",
+    "questionType": "定位",
     "role": "考"
   },
   {
@@ -4474,9 +4465,9 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
       "wrap",
       "goal"
     ],
-    "primaryMechanic": "wrap",
+    "primaryMechanic": "goal",
     "questionType": "取舍",
-    "role": "变"
+    "role": "考"
   },
   {
     "id": 96,
@@ -5091,7 +5082,7 @@ export const CHAPTER5_LEVELS: LevelConfig[] = [
       "goal"
     ],
     "primaryMechanic": "weld",
-    "questionType": "取舍",
+    "questionType": "顺序",
     "role": "考"
   },
   {

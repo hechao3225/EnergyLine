@@ -328,7 +328,7 @@ export const LEVEL_CONTENT: LevelContent[] = [
     "zoneId": "center",
     "district": "云端奇境",
     "title": "云朵秋千·诱饵顺序",
-    "hint": "假路也会被焊住；单向阀看箭头，固定管道保持原方向。"
+    "hint": "假路也会被焊住；十字管先转到位，单向阀看箭头，固定管道保持原方向。"
   },
   {
     "levelId": 47,

@@ -159,7 +159,7 @@ function buildChapter3(): LevelConfig[] {
       case 45:
         return legacyLevel(spec, 44, { weld: true });
       case 46:
-        return legacyLevel(spec, 51, { weld: true });
+        return weldLevelTarget(spec, { cells: 24, bulbs: 4 });
       case 47:
         return legacyLevel(spec, 50, { goal: 2 });
       case 48:
