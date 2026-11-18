@@ -11,6 +11,7 @@ import { CHAPTER1_LEVELS } from './chapter1Levels';
 import { CHAPTER2_LEVELS } from './chapter2Levels';
 import { CHAPTER3_LEVELS } from './chapter3Levels';
 import { CHAPTER4_LEVELS } from './chapter4Levels';
+import { CHAPTER5_LEVELS } from './chapter5Levels';
 
 export const LEGACY_LEVELS: LevelConfig[] = [
   {
@@ -31430,5 +31431,7 @@ export const DEFAULT_LEVELS: LevelConfig[] = LEGACY_LEVELS.map((level) =>
         ? CHAPTER3_LEVELS[level.id - 41]
         : level.id <= 80
           ? CHAPTER4_LEVELS[level.id - 61]
-          : level,
+          : level.id <= 99
+            ? CHAPTER5_LEVELS[level.id - 81]
+            : level,
 );

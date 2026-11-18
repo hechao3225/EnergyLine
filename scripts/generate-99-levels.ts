@@ -932,6 +932,9 @@ function makeLevel99(): { solved: Tile[]; level: LevelConfig } {
 interface ChapterConfig {
   range: [number, number];
   chapterName: string;
+  /** Board dimensions; omitted keeps the historical 6×6 default. */
+  rows?: number;
+  cols?: number;
   minSources: number;
   maxSources: number;
   minBulbs: number;
@@ -1088,8 +1091,8 @@ export function generateAlgorithmLayout(
   // `variant` reshuffles the layout (different branches / bulb spots) so the
   // difficulty targeting pass has more than one board to aim at par with.
   const rand = makePrng(levelId * 7919 + 888 + variant * 104729);
-  const rows = 6;
-  const cols = 6;
+  const rows = config.rows ?? 6;
+  const cols = config.cols ?? 6;
 
   const titleIdx = (levelId - config.range[0]) % config.titles.length;
   const title = config.titles[titleIdx];
@@ -1110,14 +1113,14 @@ export function generateAlgorithmLayout(
     const numSources = config.minSources + Math.floor(rand() * (config.maxSources - config.minSources + 1));
     const sourceRows: number[] = [];
     if (numSources === 1) {
-      sourceRows.push(1 + Math.floor(rand() * 4));
+      sourceRows.push(1 + Math.floor(rand() * Math.max(1, rows - 2)));
     } else if (numSources === 2) {
       sourceRows.push(0 + Math.floor(rand() * 2));
-      sourceRows.push(4 + Math.floor(rand() * 2));
+      sourceRows.push(rows - 2 + Math.floor(rand() * 2));
     } else {
       sourceRows.push(0);
-      sourceRows.push(2 + Math.floor(rand() * 2));
-      sourceRows.push(5);
+      sourceRows.push(2 + Math.floor(rand() * Math.max(1, rows - 4)));
+      sourceRows.push(rows - 1);
     }
 
     for (const sr of sourceRows) {
