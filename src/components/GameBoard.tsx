@@ -3,7 +3,7 @@ import type { Tile, SimulationResult } from "../types/game";
 import { TileView } from "./TileView";
 
 /** 齿轮分组配色：同色 = 同一组；相邻两格咬合，点一下一顺一反。 */
-const GEAR_COLORS = ["#ffc53d", "#5ff0c8", "#ff8ad0", "#7fd4ff", "#c9a0ff"];
+const GEAR_COLORS = ["#d8b264", "#7fc9b4", "#d9a3bb", "#9ec4dd", "#b3a3d1"];
 
 interface GameBoardProps {
   tiles: Tile[];

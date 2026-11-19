@@ -3,7 +3,8 @@ from PIL import Image, ImageDraw
 import json, hashlib, os, shutil
 import numpy as np
 from park_pipe_geometry import (TILE_PALE, grade_b1, grade_tile, normalize_pipe,
-                                normalize_source, port_metadata, standardize_couplers)
+                                normalize_source, port_metadata, standardize_couplers,
+                                soften_energy)
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = Path(r'C:/Users/Admin/.codex/generated_images/01a1c543-32fd-7f61-8468-80427f89b210')
@@ -36,6 +37,11 @@ def asset(image,name,source,rect=None,trim=True,square=False,rotate=0):
     if name.startswith('pipe-'):
         im = normalize_source(im, Image.open(DEST/'pipe-line-on.webp').convert('RGBA')) if name=='pipe-source' else normalize_pipe(im,name)
         im = grade_b1(im, name)
+    if name == 'island':
+        im = soften_energy(im, name, sat_cap=0.52, v_scale=0.97)
+    if name in ('spirit', 'spirit-cheer'):
+        # 角色保留明亮度，只压掉荧光青的饱和度。
+        im = soften_energy(im, name, sat_cap=0.52, v_scale=0.97)
     if name == 'tile' and TILE_PALE:
         im = grade_tile(im)
     limit=512 if name.startswith('pipe-') else 1100 if name in ['island','carousel','logo'] else 1800 if name=='background' else 400

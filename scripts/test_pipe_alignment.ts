@@ -3,7 +3,7 @@ import fs from "node:fs";
 import assert from "node:assert/strict";
 import { DEFAULT_LEVELS } from "../src/data/defaultLevels";
 import { simulateCircuit } from "../src/utils/circuit";
-import {openFreshHome,finishFirstGuide,solveThroughInput} from "./park_test_player";
+import {openFreshHome,finishFirstGuide,solveThroughInput,unlockAllChapters} from "./park_test_player";
 
 const ROOT = process.env.PARK_PIPE_QA_DIR || "docs/QA/pipe-alignment-2026-11-11";
 fs.mkdirSync(ROOT, { recursive: true });
@@ -13,9 +13,6 @@ const browser = await chromium.launch({ channel: "chrome", headless: true });
 const observations: unknown[] = [];
 const errors: string[] = [];
 
-async function rotate(page: Page, id: string, count = 1) {
-  for (let i = 0; i < count; i++) await page.locator(`[data-tile-id="${id}"] .park-tile-rotate`).click();
-}
 async function measure(page: Page, levelId: number, label: string) {
   await page.waitForTimeout(250);
   const cells = await page.locator(".park-tile").evaluateAll((elements) => elements.map((element) => {
@@ -81,8 +78,12 @@ async function select(page: Page, id: number) {
   if (await page.locator(".park-victory").count()) await page.locator(".park-victory-actions").getByRole("button", { name: "返回乐园", exact: true }).click();
   else if (await page.locator(".park-play").count()) await page.getByRole("button", { name: "返回乐园", exact: true }).click();
   await page.getByRole("navigation").getByRole("button", { name: "关卡", exact: true }).click();
+  await unlockAllChapters(page);
   await page.getByRole("button", { name: `${Math.floor((id - 1) / 20) + 1}章`, exact: true }).click();
-  await page.getByRole("button", { name: `进入第${id}关`, exact: true }).click();
+  await page
+    .locator(".park-modal-levels")
+    .getByRole("button", { name: `修复第${id}处设施`, exact: true })
+    .click();
 }
 try {
   for (const viewport of [{ width: 390, height: 844 }, { width: 360, height: 640 }, { width: 360, height: 800 }]) {
@@ -90,13 +91,11 @@ try {
     const page = await context.newPage();
     page.on("pageerror", (error) => errors.push(error.message));
     await openFreshHome(page,base);
-    await page.getByRole("button", { name: "开始挑战", exact: true }).click();
+    await page.getByRole("button", { name: "开始修复", exact: true }).click();
     await finishFirstGuide(page);
-    await rotate(page, "t-2-2"); await rotate(page, "t-2-3", 3); await rotate(page, "t-3-3");
-    await measure(page, 1, `flow-${viewport.width}x${viewport.height}`);
-    await rotate(page, "t-4-3", 2);
-    await expect(page.getByTestId("target-count")).toHaveText("1/1");
-    await measure(page, 1, `connected-${viewport.width}x${viewport.height}`);
+    await solveThroughInput(page, 1, () =>
+      measure(page, 1, `connected-${viewport.width}x${viewport.height}`),
+    );
     await page.locator(".park-victory").waitFor();
     if (viewport.width === 390) {
       await select(page, 24);

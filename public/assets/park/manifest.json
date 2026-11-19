@@ -117,10 +117,10 @@
       0,
       0
     ],
-    "sha256": "2e2687d432ed41d96749102f174c328b483f8825dd386adae481e74ae5bfc1fc",
-    "bytes": 41304,
+    "sha256": "682d6137697bc8b4100577755c0b8f1720b17e76cc63dd20a4f22d4854889e82",
+    "bytes": 45048,
     "route": "image_gen built-in",
-    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained；护眼复查：荧光青能量色柔化为天青蓝（ENERGY_SOFT，只重映射色相/饱和度/明度）"
   },
   {
     "name": "pipe-line-off",
@@ -373,10 +373,10 @@
       0,
       0
     ],
-    "sha256": "07421df3a61853f6cd765ba072e60000287090839d62fc4ffbd69832528acfdf",
-    "bytes": 31160,
+    "sha256": "34c987b1b98937a5fadc28ae1b41d0a1ca4da381a1bec181b388b0506b2c1904",
+    "bytes": 31038,
     "route": "image_gen built-in",
-    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00",
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00；护眼复查：荧光青能量色柔化为天青蓝（ENERGY_SOFT，只重映射色相/饱和度/明度）",
     "port_geometry": {
       "canvas": [
         512,
@@ -426,10 +426,10 @@
       0,
       0
     ],
-    "sha256": "577d702ad8e61522ea1e233d64b985b7a79ceccdfa5327d42028ca38a43139ff",
-    "bytes": 34678,
+    "sha256": "e861d39576c915ccc695ffd5bda31a0dc9106ea502f8293a8a8d48ee342aa2ac",
+    "bytes": 34574,
     "route": "image_gen built-in",
-    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00",
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00；护眼复查：荧光青能量色柔化为天青蓝（ENERGY_SOFT，只重映射色相/饱和度/明度）",
     "port_geometry": {
       "canvas": [
         512,
@@ -479,10 +479,10 @@
       0,
       0
     ],
-    "sha256": "58b509f5dd24679f048caf2f56bf03c2bc19f711616f96b885feabfe1e39a413",
-    "bytes": 46750,
+    "sha256": "335681642e8fe653bb40f3ca5948f25ebcd2f76918828c0de1b3f08a53405883",
+    "bytes": 47818,
     "route": "image_gen built-in",
-    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00",
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00；护眼复查：荧光青能量色柔化为天青蓝（ENERGY_SOFT，只重映射色相/饱和度/明度）",
     "port_geometry": {
       "canvas": [
         512,
@@ -536,10 +536,10 @@
       0,
       0
     ],
-    "sha256": "238d60d5b565d1626e05d1c385e67f2ed5c5d2b2b05a32ee1bfe71c41ff57cdb",
-    "bytes": 55812,
+    "sha256": "8cc16eb87ac31f1db53c6a61d0deeba03b18e7a1082294015f061f10e9347289",
+    "bytes": 57292,
     "route": "image_gen built-in",
-    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00",
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00；护眼复查：荧光青能量色柔化为天青蓝（ENERGY_SOFT，只重映射色相/饱和度/明度）",
     "port_geometry": {
       "canvas": [
         512,
@@ -597,10 +597,10 @@
       0,
       0
     ],
-    "sha256": "ec4f8c1d211667c2fad7d87116998088cdb43b6c2519e39375330bb03b10a6e1",
-    "bytes": 56326,
+    "sha256": "ece3c5ea8bbd330059fe0dd1b3cf13d4f40c05738b06e203f04f42cf29ed3a7f",
+    "bytes": 55626,
     "route": "image_gen built-in",
-    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00",
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00；护眼复查：荧光青能量色柔化为天青蓝（ENERGY_SOFT，只重映射色相/饱和度/明度）",
     "port_geometry": {
       "canvas": [
         512,
@@ -1519,10 +1519,10 @@
       0,
       0
     ],
-    "sha256": "0e0216ae67249e451b2cea7862f4d64f445655c4e83558a1bf61d052c4c82502",
-    "bytes": 45882,
+    "sha256": "5b85f6d73373ab93c5ef601ee00b2928f4cbd060f0babe4c2597b2331fb08366",
+    "bytes": 48638,
     "route": "image_gen built-in",
-    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained；护眼复查：荧光青能量色柔化为天青蓝（ENERGY_SOFT，只重映射色相/饱和度/明度）"
   },
   {
     "name": "tool-ivory",
@@ -2122,10 +2122,10 @@
       0,
       0
     ],
-    "sha256": "b5569219fa4fe29d631b980203718b6fbc3c9a2ee3e89c359a3cdb45d47de476",
-    "bytes": 305688,
+    "sha256": "b355f49e281cc50299764c693a7a60345c14709aafa2fb642ef1b601f3354504",
+    "bytes": 329870,
     "route": "image_gen built-in",
-    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained；护眼复查：荧光青能量色柔化为天青蓝（ENERGY_SOFT，只重映射色相/饱和度/明度）"
   },
   {
     "name": "logo",
@@ -2176,10 +2176,10 @@
       0,
       0
     ],
-    "sha256": "07e0b6f1d74b5fed4b75280a908b4e01a548318ef3b471031f005451bba55f5c",
-    "bytes": 47118,
+    "sha256": "6069a8aa8c270bc050077da1fd3996b5fc35fbd9f03ba14df76c76c64f55b76b",
+    "bytes": 47210,
     "route": "image_gen built-in",
-    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00",
+    "processing": "保留原件；以端口中心、边界与管径标定到512方形画布；预乘alpha重采样；B1香槟金+暖白调色（色相/饱和度重映射，不新增像素形状）；全管型共用标准接头几何，开口按本管件管身色上色；端头沿端口轴收窄至 1.00；护眼复查：荧光青能量色柔化为天青蓝（ENERGY_SOFT，只重映射色相/饱和度/明度）",
     "port_geometry": {
       "canvas": [
         512,

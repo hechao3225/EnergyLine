@@ -127,7 +127,7 @@ export const TileView: React.FC<TileViewProps> = ({
           <span
             className="park-color-mark"
             data-symbol={shownColor === 3 ? "×" : shownColor === 2 ? "●" : "◆"}
-            style={{ background: shownColor === 3 ? "#a855f7" : shownColor === 2 ? "#2f8bff" : "#ff3b21" }}
+            style={{ background: shownColor === 3 ? "#9b74c4" : shownColor === 2 ? "#4f86b0" : "#c25a44" }}
           />
         )}
         {tile.axis && (

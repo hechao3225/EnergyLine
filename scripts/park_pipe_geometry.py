@@ -47,6 +47,10 @@ B1_GOLD = {'hue': 39.5, 'sat_mid': 0.90, 'sat_fade': 0.32,
 # 需要暖白时把 B1_WHITE 设为 {'hue':36.0,'sat':0.10,'lift':0.06}。
 B1_WHITE = None
 
+# 通电能量色：原图管身是高饱和小青蓝（S≈0.88 / V≈0.9），手机上呈现荧光感。
+# 保留「能量=蓝」的识别，但压到 S≈0.48、色相拉到天青蓝，并把白高光留给明度层次。
+ENERGY_SOFT = {'hue': 200.0, 'hue_pull': 0.45, 'sat_cap': 0.58, 'v_scale': 0.90}
+
 # 瓦片底图：从浓紫压成淡粉紫，保留高光/描边结构。背景靠亮度而非饱和度建立层次。
 TILE_THEME = {'hue': 308.0, 'sat_cap': 0.26, 'v_scale': 0.88, 'hue_pull': 0.25}
 # 浅色盘面方案默认关闭：发起人反馈饱和度太低，回到原深紫。置 True 可切回淡紫。
@@ -138,6 +142,29 @@ def normalize_pipe(image, name):
     return Image.fromarray(np.round(warped*255).astype(np.uint8), 'RGBA')
 
 
+def soften_energy(image, name='', sat_cap=None, v_scale=None):
+    """把荧光青能量色压成柔和能量蓝（只调色相/饱和度/明度，不动像素形状与 alpha）。
+
+    只在通电管身（*-on、pipe-source）与蓝色伴生花精上调用；金色接头不在青蓝色相窗口内，
+    不受影响。饱和上限与色相拉回值见 ENERGY_SOFT，后续要再调只改这一个常量。
+    """
+    rgba = np.asarray(image.convert('RGBA'), dtype=np.float32) / 255
+    a = rgba[..., 3]
+    h, s, v = _hsv(rgba[..., :3])
+    cool = (h >= 145) & (h <= 250) & (s > 0.10) & (a > 0.02)
+    if not cool.any():
+        return image
+    ht = (ENERGY_SOFT['hue'] + (h - 196.0) * ENERGY_SOFT['hue_pull']) % 360
+    st = np.minimum(s, sat_cap if sat_cap is not None else ENERGY_SOFT['sat_cap'])
+    vt = np.clip(v * (v_scale if v_scale is not None else ENERGY_SOFT['v_scale']), 0, 1)
+    out = rgba.copy()
+    r, g, b = _hsv_to_rgb(ht[cool], st[cool], vt[cool])
+    out[..., 0][cool], out[..., 1][cool], out[..., 2][cool] = r, g, b
+    out = np.clip(out, 0, 1)
+    out[out[..., 3] == 0, :3] = 0
+    return Image.fromarray(np.round(out * 255).astype(np.uint8), 'RGBA')
+
+
 def grade_b1(image, name=''):
     """B1 配色：金色转香槟金，断电管身转暖白。
 
@@ -176,7 +203,14 @@ def grade_b1(image, name=''):
 
     out = np.clip(out, 0, 1)
     out[out[..., 3] == 0, :3] = 0
-    return Image.fromarray(np.round(out * 255).astype(np.uint8), 'RGBA')
+    result = Image.fromarray(np.round(out * 255).astype(np.uint8), 'RGBA')
+    # 通电管身原来刻意保留原图的荧光青；手机护眼复查后统一并入柔化能量蓝。
+    if name.endswith('-on') or name == 'pipe-source':
+        result = soften_energy(result, name)
+    elif name == 'island':
+        # 首页主视觉的瀑布/水池也是同一族荧光青，压得比管身更轻一点，保留水体质感。
+        result = soften_energy(result, name, sat_cap=0.52, v_scale=0.97)
+    return result
 
 
 def grade_tile(image):

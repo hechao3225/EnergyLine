@@ -45,7 +45,7 @@ button:disabled {
   cursor: default;
 }
 button:focus-visible {
-  outline: 3px solid #26eaff;
+  outline: 3px solid #8fd0d8;
   outline-offset: 3px;
 }
 button {
@@ -330,7 +330,7 @@ img {
   width: 90%;
   height: 32.8%;
   object-fit: contain;
-  filter: drop-shadow(0 0 3cqw #fa8cfc);
+  filter: drop-shadow(0 0 2.4cqw rgba(206, 150, 208, 0.55));
 }
 .park-home-friends {
   position: absolute;
@@ -344,7 +344,7 @@ img {
   position: absolute;
   bottom: 0;
   object-fit: contain;
-  filter: drop-shadow(0 0 2cqw #ffddff);
+  filter: drop-shadow(0 0 1.6cqw rgba(236, 213, 240, 0.6));
 }
 .park-friend-sheep {
   left: 0;
@@ -394,7 +394,7 @@ img {
 }
 .park-progress-track > div {
   height: 100%;
-  background: linear-gradient(#b6ff40, #3fdf0b 55%, #119e08);
+  background: linear-gradient(#c3d98a, #7fae4f 55%, #4f7d33);
   min-width: 1%;
   transition: width 0.4s;
 }
@@ -512,10 +512,10 @@ img {
   align-items: stretch;
   border-radius: 5cqw;
   background: linear-gradient(#a975e6e8, #6323b6ed);
-  border: 0.5cqw solid #ffc5ff;
+  border: 0.5cqw solid #e6d0ee;
   box-shadow:
     inset 0 0 0 0.4cqw #9a63df,
-    0 0 2cqw #ff9ffb;
+    0 0 2cqw rgba(196, 146, 206, 0.4);
   z-index: 5;
 }
 .park-nav button {
@@ -705,10 +705,10 @@ img {
   );
   border: 0.65cqw solid #fff9e7;
   box-shadow:
-    0 0 0 0.5cqw #ffacda,
-    0 0 0 1cqw #ffedce,
-    0 0 3cqw 1cqw #f990eb,
-    inset 0 0 3cqw #f9d0ff;
+    0 0 0 0.5cqw rgba(240, 172, 205, 0.7),
+    0 0 0 1cqw rgba(255, 237, 206, 0.75),
+    0 0 2.2cqw 0.6cqw rgba(196, 128, 196, 0.3),
+    inset 0 0 3cqw rgba(249, 208, 255, 0.5);
 }
 .park-grid {
   position: relative;
@@ -730,19 +730,22 @@ img {
   position: absolute;
   inset: 2%;
   border-radius: inherit;
-  background: url("/assets/park/tile.webp") center/100% 100%, linear-gradient(135deg, #a8a1e5, #7561ac 40%, #a38ace);
-  box-shadow: inset 1px 2px 2px #f8ecffa0, inset -1px -2px 3px #493274;
-  opacity: 0.85;
-  filter: saturate(0.65);
+  background: url("/assets/park/tile.webp") center/100% 100%, linear-gradient(135deg, #7263a0, #55497b 45%, #63558c);
+  box-shadow:
+    inset 0 0 0 0.18cqw rgba(255, 255, 255, 0.07),
+    inset 1px 2px 2px rgba(232, 224, 250, 0.18),
+    inset -1px -2px 3px rgba(26, 18, 46, 0.55);
+  opacity: 0.96;
+  filter: saturate(0.56) brightness(0.94);
   z-index: -1;
 }
 /* 联动轴：同轴三格共享一根转轴 */
 .park-tile.has-axis::before {
   box-shadow:
-    inset 0 0 0 0.5cqw #7ef6ff,
+    inset 0 0 0 0.5cqw #9ccfd6,
     inset 1px 2px 2px #f8ecffa0,
     inset -1px -2px 3px #493274,
-    0 0 1.4cqw #7ef6ff70;
+    0 0 1.2cqw #9ccfd640;
   opacity: 0.92;
   filter: saturate(0.8);
 }
@@ -751,7 +754,7 @@ img {
   position: absolute;
   inset: 7%;
   border-radius: 13%;
-  border: 0.3cqw dashed #a9f9ff;
+  border: 0.3cqw dashed #c3e4e6;
   pointer-events: none;
   z-index: 3;
   animation: axisPulse 2.4s ease-in-out infinite;
@@ -765,14 +768,14 @@ img {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #dcfeff, #4fd8ef 62%, #1a8fb0);
+  background: radial-gradient(circle at 35% 30%, #eaf6f7, #93c6d2 62%, #3f6b76);
   color: #04303a;
   font-size: 2.4cqw;
   font-weight: 800;
   line-height: 1;
   z-index: 4;
   pointer-events: none;
-  box-shadow: 0 0 0.7cqw #7ef6ffb0;
+  box-shadow: 0 0 0.6cqw #9ccfd680;
 }
 @keyframes axisPulse {
   0%, 100% { opacity: 0.35; }
@@ -835,10 +838,10 @@ img {
   z-index: 2;
 }
 .park-tile.is-powered:not(.is-goal) .park-pipe {
-  filter: drop-shadow(0 0 1.2cqw #69ecff);
+  filter: drop-shadow(0 0 0.8cqw rgba(150, 206, 219, 0.55));
 }
 .park-tile.is-lit .park-pipe {
-  filter: drop-shadow(0 0 2cqw #fff079);
+  filter: drop-shadow(0 0 1.2cqw rgba(255, 233, 168, 0.6));
 }
 .park-color-mark {
   position: absolute;
@@ -870,14 +873,14 @@ img {
 /* 双色能量：整格底色就是能量色，串色变紫 */
 .park-tile.color-1::before {
   background: url("/assets/park/tile.webp") center/100% 100%,
-    linear-gradient(135deg, #ffb497, #dc3316 45%, #ff8a63);
-  filter: saturate(1.05);
+    linear-gradient(135deg, #e8b3a3, #b8574a 45%, #dc9a86);
+  filter: saturate(0.62);
   opacity: 0.96;
 }
 .park-tile.color-2::before {
   background: url("/assets/park/tile.webp") center/100% 100%,
-    linear-gradient(135deg, #a8d8ff, #1452c8 45%, #6fb6ff);
-  filter: saturate(1.05);
+    linear-gradient(135deg, #9fc4dd, #3f6f9e 45%, #86aecb);
+  filter: saturate(0.62);
   opacity: 0.96;
 }
 .park-tile.color-3::before {
@@ -893,27 +896,27 @@ img {
   filter: saturate(0.1) brightness(0.75) !important;
 }
 .park-tile.color-1 .park-pipe {
-  filter: drop-shadow(0 0 1cqw #ff6a4d);
+  filter: drop-shadow(0 0 0.9cqw rgba(224, 128, 102, 0.55));
 }
 .park-tile.color-2 .park-pipe {
-  filter: drop-shadow(0 0 1cqw #4fa8ff);
+  filter: drop-shadow(0 0 0.9cqw rgba(126, 170, 204, 0.55));
 }
 .park-tile.color-3 .park-pipe {
-  filter: drop-shadow(0 0 1cqw #b26bff);
+  filter: drop-shadow(0 0 0.9cqw rgba(166, 124, 196, 0.5));
 }
 .park-tile.is-powered::after {
   content: "";
   position: absolute;
   inset: 24%;
   border-radius: 50%;
-  background: #d5ffff;
+  background: #e6f4f3;
   opacity: 0;
   pointer-events: none;
   animation: energyPulse 1.8s infinite;
   z-index: 2;
 }
 .park-tile.is-goal.is-lit::after {
-  background: #ffea76;
+  background: #f3dc95;
   animation: energyPulse 1s infinite;
 }
 .park-empty-spark {
@@ -933,7 +936,7 @@ img {
   min-height: 50%;
   padding: 0 0.4cqw;
   border-radius: 1.5cqw 0 1.5cqw 0;
-  background: #a7f1ba;
+  background: #b0d6b8;
   color: #1b6638;
   font-size: 2.8cqw;
   line-height: 1.1;
@@ -941,7 +944,7 @@ img {
   box-shadow: inset 0 0 0 0.35cqw #ffe797;
 }
 .park-switch-toggle.off {
-  background: #ffafb9;
+  background: #e8b0b6;
   color: #9d273c;
 }
 .park-fixed-mark {
@@ -1050,13 +1053,13 @@ img {
   margin-left: 1.2cqw;
   padding: 0.2cqw 1.4cqw;
   border-radius: 999px;
-  background: linear-gradient(180deg, #ff5a5a, #b40000);
+  background: linear-gradient(180deg, #e0776f, #a83232);
   color: #fff2d0;
   font-size: 2.4cqw;
   font-style: normal;
   font-weight: 800;
   vertical-align: middle;
-  box-shadow: 0 0 1.4cqw #ff2a2a80;
+  box-shadow: 0 0 1.2cqw rgba(196, 60, 55, 0.45);
 }
 .park-level-card {
   position: relative;
@@ -1109,15 +1112,15 @@ img {
 }
 .park-board.is-overloaded {
   box-shadow:
-    0 0 0 0.5cqw #ff3b3b,
-    0 0 0 1cqw #ffb3b3,
-    0 0 4cqw 1.5cqw #ff2a2a99,
-    inset 0 0 3cqw #ff6b6b;
+    0 0 0 0.5cqw rgba(216, 88, 76, 0.85),
+    0 0 0 1cqw rgba(240, 172, 160, 0.5),
+    0 0 3cqw 1cqw rgba(200, 62, 52, 0.3),
+    inset 0 0 2.4cqw rgba(226, 118, 104, 0.4);
   animation: overloadPulse 0.9s ease-in-out infinite alternate;
 }
 @keyframes overloadPulse {
-  from { filter: brightness(0.92); }
-  to { filter: brightness(1.12); }
+  from { filter: brightness(0.96); }
+  to { filter: brightness(1.06); }
 }
 .park-settle {
   padding: 1.1cqw 3.4cqw;
@@ -1182,7 +1185,7 @@ img {
 .park-lab-entry {
   padding: 0.7cqw 2.2cqw;
   border-radius: 999px;
-  border: 0.32cqw dashed #7ef6ff;
+  border: 0.32cqw dashed #9ccfd6;
   background: #052b36e0;
   color: #c4f8ff;
   font-size: 2.4cqw;
@@ -1206,10 +1209,10 @@ img {
   box-shadow: 0 0 1.2cqw #ffcf4d55;
 }
 .park-lab-entry.is-torus {
-  border-color: #5ff0c8;
+  border-color: #7fc9b4;
   background: #04322de6;
   color: #c8fff1;
-  box-shadow: 0 0 1.2cqw #5ff0c855;
+  box-shadow: 0 0 1.2cqw #7fc9b455;
 }
 .park-lab-entry.is-weld {
   border-color: #b7d8e8;
@@ -1233,10 +1236,10 @@ img {
   line-height: 1.6;
 }
 /* 齿轮：同色 = 同一组；转动带一点机械回弹，两格同步起转 */
-.park-tile[data-gear-index="1"] { --gear: #ffc53d; }
-.park-tile[data-gear-index="2"] { --gear: #5ff0c8; }
-.park-tile[data-gear-index="3"] { --gear: #ff8ad0; }
-.park-tile[data-gear-index="4"] { --gear: #7fd4ff; }
+.park-tile[data-gear-index="1"] { --gear: #d8b264; }
+.park-tile[data-gear-index="2"] { --gear: #7fc9b4; }
+.park-tile[data-gear-index="3"] { --gear: #d9a3bb; }
+.park-tile[data-gear-index="4"] { --gear: #9ec4dd; }
 .park-tile[data-gear-index]::before {
   opacity: 0.94;
   filter: saturate(0.85);
@@ -1325,9 +1328,9 @@ img {
 .park-wrap-tick {
   position: absolute;
   z-index: 5;
-  background: #7ef6ff;
+  background: #9ccfd6;
   border-radius: 999px;
-  box-shadow: 0 0 1cqw #7ef6ff;
+  box-shadow: 0 0 1cqw rgba(156, 207, 214, 0.6);
   opacity: 0.5;
   pointer-events: none;
   animation: wrapPulse 2.6s ease-in-out infinite;
@@ -1337,7 +1340,7 @@ img {
 .park-wrap-tick.is-up { top: 1.5%; left: 24%; height: 4%; width: 52%; }
 .park-wrap-tick.is-down { bottom: 1.5%; left: 24%; height: 4%; width: 52%; }
 .park-board.is-wrap {
-  outline: 0.4cqw dashed #7ef6ff66;
+  outline: 0.4cqw dashed #9ccfd640;
   outline-offset: 0.3cqw;
 }
 .park-wrap-ghosts {
@@ -1349,11 +1352,11 @@ img {
 .park-wrap-ghost {
   position: absolute;
   display: block;
-  background: linear-gradient(90deg, #fff7ae, #7ef6ff 48%, #ffffff);
+  background: linear-gradient(90deg, #f3e6a8, #9ccfd6 48%, #ffffff);
   border-radius: 999px;
   box-shadow:
-    0 0 1.1cqw #7ef6ff,
-    0 0 2cqw #fff19b;
+    0 0 1.1cqw rgba(156, 207, 214, 0.6),
+    0 0 2cqw rgba(243, 230, 168, 0.6);
   animation: seamGhost 1.05s ease-in-out infinite alternate;
 }
 .park-wrap-ghost::after {
@@ -1673,7 +1676,7 @@ img {
   border-radius: 7cqw;
   box-shadow:
     0 0 0 0.6cqw #ffc74c,
-    0 0 6cqw #e68bff,
+    0 0 6cqw rgba(200, 138, 210, 0.4),
     0 3cqw 7cqw #1c053b;
   display: flex;
   flex-direction: column;

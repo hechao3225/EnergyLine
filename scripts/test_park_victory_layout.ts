@@ -1,10 +1,11 @@
 import { chromium, expect } from "@playwright/test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import {openFreshHome,finishFirstGuide} from "./park_test_player";
+import {openFreshHome,finishFirstGuide,solveThroughInput} from "./park_test_player";
 
 const base = process.env.PARK_TEST_URL || "http://127.0.0.1:4173";
 const root = process.env.PARK_QA_DIR || "docs/QA/ui2-2026-11-10";
+fs.mkdirSync(`${root}/screens`, { recursive: true });
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const results: unknown[] = [];
 try {
@@ -20,11 +21,9 @@ try {
     const context = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: scale });
     const page = await context.newPage();
     await openFreshHome(page,base);
-    await page.getByRole("button", { name: "开始挑战", exact: true }).click();
+    await page.getByRole("button", { name: "开始修复", exact: true }).click();
     await finishFirstGuide(page);
-    for (const [id, count] of [["t-2-2", 1], ["t-2-3", 3], ["t-3-3", 1], ["t-4-3", 2]] as const)
-      for (let i = 0; i < count; i++) await page.locator(`[data-tile-id="${id}"] .park-tile-rotate`).click();
-    await page.locator(".park-victory").waitFor();
+    await solveThroughInput(page, 1);
     await page.evaluate(() => document.fonts.ready);
     await page.screenshot({ path: `${root}/screens/victory-${label}.png` });
     const rects = await page.evaluate(() => {

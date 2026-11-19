@@ -10,7 +10,7 @@ const page = await context.newPage();
 const budget = DEFAULT_LEVELS[0].maxSteps;
 try {
   await openFreshHome(page, process.env.PARK_TEST_URL || "http://127.0.0.1:4180");
-  await page.getByRole("button", { name: "开始挑战", exact: true }).click();
+  await page.getByRole("button", { name: "开始修复", exact: true }).click();
   await finishFirstGuide(page, async step => {
     await page.screenshot({ path: `${ROOT}/screens/final-onboarding-${step}.png` });
   });

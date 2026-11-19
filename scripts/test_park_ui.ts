@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import assert from "node:assert/strict";
 import { DEFAULT_LEVELS } from "../src/data/defaultLevels";
-import { openFreshHome, finishFirstGuide, solveThroughInput } from "./park_test_player";
+import { openFreshHome, finishFirstGuide, solveThroughInput, unlockAllChapters } from "./park_test_player";
 const FIRST_BUDGET = DEFAULT_LEVELS[0].maxSteps;
 const ROOT = path.resolve(process.env.PARK_QA_DIR || "docs/QA/ui2-2026-11-10");
 const SCREENS = path.join(ROOT, "screens");
@@ -33,12 +33,7 @@ async function rotate(page: Page, id: string, count = 1) {
     await page.locator(`[data-tile-id="${id}"] .park-tile-rotate`).click();
 }
 async function solveFirst(page: Page) {
-  await rotate(page, "t-2-2");
-  await rotate(page, "t-2-3", 3);
-  await rotate(page, "t-3-3");
-  await rotate(page, "t-4-3", 2);
-  await expect(page.locator('[data-testid="target-count"]')).toHaveText("1/1");
-  await page.locator(".park-victory").waitFor();
+  await solveThroughInput(page, 1);
 }
 async function close(page: Page) {
   await page.getByRole("button", { name: "关闭", exact: true }).click();
@@ -55,6 +50,7 @@ async function selectLevel(page: Page, id: number) {
     .getByRole("navigation")
     .getByRole("button", { name: "关卡", exact: true })
     .click();
+  await unlockAllChapters(page);
   await page
     .getByRole("button", {
       name: `${Math.floor((id - 1) / 20) + 1}章`,
@@ -62,7 +58,8 @@ async function selectLevel(page: Page, id: number) {
     })
     .click();
   await page
-    .getByRole("button", { name: `进入第${id}关`, exact: true })
+    .locator(".park-modal-levels")
+    .getByRole("button", { name: `修复第${id}处设施`, exact: true })
     .click();
   await expect(page.locator(".park-level-sign")).toHaveText(`第 ${id} 关`);
 }
@@ -85,45 +82,37 @@ try {
   await test("新玩家首页到玩法、旋转通能、撤销、足迹与重置", async () => {
     await openFreshHome(page, base);
     await expect(
-      page.getByRole("button", { name: "金币 0", exact: true }),
+      page.getByRole("button", { name: "钻石 0", exact: true }),
     ).toBeVisible();
     await capture(page, "home-390x844");
-    await page.getByRole("button", { name: "开始挑战", exact: true }).click();
+    await page.getByRole("button", { name: "开始修复", exact: true }).click();
     await finishFirstGuide(page, async step => capture(page, `onboarding-${step}-390x844`));
     await expect(page.locator(".park-level-sign")).toHaveText("第 1 关");
     await expect(page.getByTestId("remaining-steps")).toHaveText(String(FIRST_BUDGET));
     await capture(page, "play-390x844");
+    const firstTile = page.locator('[data-tile-id="t-2-2"]');
+    const initialRotation = await firstTile.getAttribute("data-rotation");
     await rotate(page, "t-2-2");
     await expect(page.getByTestId("remaining-steps")).toHaveText(String(FIRST_BUDGET - 1));
-    await expect(page.locator('[data-tile-id="t-2-2"]')).toHaveAttribute(
+    await expect(firstTile).toHaveAttribute(
       "data-powered",
       "true",
     );
     await page.getByRole("button", { name: "撤销", exact: true }).click();
     await expect(page.getByTestId("remaining-steps")).toHaveText(String(FIRST_BUDGET));
-    await expect(page.locator('[data-tile-id="t-2-2"]')).toHaveAttribute(
-      "data-rotation",
-      "90",
-    );
+    await expect(firstTile).toHaveAttribute("data-rotation", initialRotation!);
     await rotate(page, "t-2-2");
     await page.getByRole("button", { name: /操作足迹/ }).click();
     await capture(page, "history-390x844");
     await page.getByRole("button", { name: /起点/ }).click();
     await expect(page.getByTestId("remaining-steps")).toHaveText(String(FIRST_BUDGET));
     await page.getByRole("button", { name: "重置", exact: true }).click();
-    await rotate(page, "t-2-2");
-    await rotate(page, "t-2-3", 3);
-    await rotate(page, "t-3-3");
-    await capture(page, "flow-390x844");
-    await rotate(page, "t-4-3", 2);
-    await expect(page.getByTestId("target-count")).toHaveText("1/1");
-    await page.locator(".park-victory").waitFor();
+    await solveThroughInput(page, 1, () => capture(page, "flow-390x844"));
     await capture(page, "victory-390x844");
     const progress = await page.evaluate(() =>
       JSON.parse(localStorage.getItem("energy_park_progress_v2")!),
     );
     assert.equal(progress.coins, 100);
-    assert.equal(progress.gems, 10);
     assert.deepEqual(progress.rewardedLevels, [1]);
   });
   await test("每日任务资格、领取、兑换、库存和重启保存", async () => {
@@ -157,10 +146,7 @@ try {
     await close(page);
     await page.reload();
     await expect(
-      page.getByRole("button", { name: "金币 150", exact: true }),
-    ).toBeVisible();
-    await expect(
-      page.getByRole("button", { name: "钻石 10", exact: true }),
+      page.getByRole("button", { name: "钻石 80", exact: true }),
     ).toBeVisible();
     await capture(page, "home-progress-390x844");
   });
@@ -170,9 +156,8 @@ try {
     const progress = await page.evaluate(() =>
       JSON.parse(localStorage.getItem("energy_park_progress_v2")!),
     );
-    assert.equal(progress.coins, 150);
-    assert.equal(progress.gems, 10);
-    await expect(page.locator(".park-rewards")).toContainText("+0");
+    assert.equal(progress.coins, 80);
+    await expect(page.getByText("本次无新增奖励", { exact: true })).toBeVisible();
     await page.getByRole("button", { name: "下一关", exact: true }).click();
     await expect(page.locator(".park-level-sign")).toHaveText("第 2 关");
     await page.getByRole("button", { name: "提示", exact: true }).click();
@@ -190,11 +175,12 @@ try {
     await selectLevel(page, 1);
     for (let i = 0; i < FIRST_BUDGET; i++) await rotate(page, "t-2-2");
     await expect(
-      page.getByText("能量步数用完啦", { exact: true }),
+      page.getByText("修复步数用完啦", { exact: true }),
     ).toBeVisible();
     await capture(page, "out-of-steps-390x844");
     await page.getByRole("button", { name: "撤销一步", exact: true }).click();
     await expect(page.getByTestId("remaining-steps")).toHaveText("1");
+    page.once("dialog", (dialog) => dialog.accept());
     await page.getByRole("button", { name: "重置", exact: true }).click();
     await expect(page.getByTestId("remaining-steps")).toHaveText(String(FIRST_BUDGET));
   });
@@ -231,10 +217,10 @@ try {
     await page.getByRole("button", { name: "乐园指南", exact: true }).click();
     await capture(page, "rules-390x844");
     await close(page);
-    await page.getByRole("button", { name: "冒险手册", exact: true }).click();
+    await page.getByRole("button", { name: "修复手册", exact: true }).click();
     await capture(page, "profile-390x844");
     await close(page);
-    await page.getByRole("button", { name: "百花图鉴", exact: true }).click();
+    await page.getByRole("button", { name: "乐园图鉴", exact: true }).click();
     await capture(page, "flora-390x844");
     await page.locator(".park-flower-grid button").first().click();
     await capture(page, "flower-detail-390x844");
@@ -256,7 +242,7 @@ try {
     await page.getByRole("button", { name: "无尽挑战", exact: true }).click();
     await capture(page, "endless-select-390x844");
     await page
-      .getByRole("button", { name: "轻松漫游 · 2 座设施", exact: true })
+      .getByRole("button", { name: "轻松漫游 · 2 处设施", exact: true })
       .click();
     await expect(page.locator(".park-level-sign")).toHaveText("无尽挑战");
     await capture(page, "endless-390x844");
@@ -308,7 +294,7 @@ try {
       await openFreshHome(tab, base);
       const label = viewport.label;
       await capture(tab, `home-${label}`);
-      await tab.getByRole("button", { name: "开始挑战", exact: true }).click();
+      await tab.getByRole("button", { name: "开始修复", exact: true }).click();
       await finishFirstGuide(tab);
       await capture(tab, `play-${label}`);
       await solveFirst(tab);

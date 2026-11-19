@@ -8,6 +8,13 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / os.environ.get('PARK_PIPE_QA_DIR', 'docs/QA/pipe-alignment-2026-11-11')
 REPORT.mkdir(parents=True, exist_ok=True)
+FONT_CANDIDATES = [
+    Path('C:/Windows/Fonts/msyh.ttc'),
+    Path('/System/Library/Fonts/Hiragino Sans GB.ttc'),
+    Path('/System/Library/Fonts/STHeiti Medium.ttc'),
+    Path('/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc'),
+    Path('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'),
+]
 EXPECTED = {
     'line-off': ('left', 'right'), 'line-on': ('left', 'right'),
     'corner-off': ('right', 'bottom'), 'corner-on': ('right', 'bottom'),
@@ -18,7 +25,8 @@ EXPECTED = {
 }
 clockwise = ['top', 'right', 'bottom', 'left']
 rows = []
-font = ImageFont.truetype('C:/Windows/Fonts/msyh.ttc', 17)
+font_path = next((candidate for candidate in FONT_CANDIDATES if candidate.exists()), None)
+font = ImageFont.truetype(str(font_path), 17) if font_path else ImageFont.load_default()
 sheet = Image.new('RGB', (1040, len(EXPECTED)*240), '#291647')
 draw = ImageDraw.Draw(sheet)
 for row, (name, ports) in enumerate(EXPECTED.items()):
