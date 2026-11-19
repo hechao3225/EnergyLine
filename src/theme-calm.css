@@ -1,0 +1,165 @@
+/**
+ * 宁静配色（?theme=calm）：只覆盖颜色与发光强度，不动任何布局。
+ * 设计目标：大面积低饱和深靛 + 暖纸阅读区，彩度预算只留给「能量(青)」和「奖励(金)」。
+ */
+html[data-theme="calm"] {
+  --park-ink: #46304f;
+  --park-gold: #f5c86a;
+  --park-violet: #5a4489;
+  --park-ivory: #fbf2e3;
+
+  --calm-deep: #151129;
+  --calm-stage: #332552;
+  --calm-frame: #2e2150;
+  --calm-tile: #7e6cb0;
+  --calm-paper: #fbf2e3;
+  --calm-paper-2: #f1e4ce;
+  --calm-gold-line: #c9a063;
+}
+
+html[data-theme="calm"] body {
+  background: var(--calm-deep);
+}
+
+html[data-theme="calm"] .park-shell {
+  background: radial-gradient(ellipse at 50% 30%, #3a2a5e, #151129 72%);
+}
+
+/* 舞台：压暗底图并统一到深靛，降低插画噪点与整屏彩度 */
+html[data-theme="calm"] .park-stage {
+  background:
+    linear-gradient(rgba(24, 19, 44, 0.6), rgba(21, 17, 41, 0.78)),
+    url("/assets/park/background.webp") center/cover var(--calm-stage);
+  box-shadow: 0 0 70px rgba(11, 8, 24, 0.5);
+}
+
+/* 棋盘：从粉紫渐变收成单色深靛 + 金细线，让盘面成为画面里最安静的区域 */
+html[data-theme="calm"] .park-board {
+  background: linear-gradient(150deg, #3a2c5e, #2a1f47 50%, #221a39);
+  border-color: #efe2c6;
+  box-shadow:
+    0 0 0 0.3cqw rgba(239, 226, 198, 0.3),
+    0 0 0 0.8cqw rgba(21, 17, 41, 0.5),
+    inset 0 0 3cqw rgba(120, 96, 168, 0.3),
+    0 2cqw 4cqw rgba(11, 8, 24, 0.4);
+}
+
+/* 格子：A 方案已进入 index.css 基线，这里只保留联动轴的青色描边 */
+html[data-theme="calm"] .park-tile.has-axis::before {
+  box-shadow:
+    inset 0 0 0 0.45cqw rgba(156, 207, 214, 0.75),
+    inset 1px 2px 2px rgba(246, 240, 255, 0.3),
+    inset -1px -2px 3px rgba(32, 22, 56, 0.5),
+    0 0 1cqw rgba(156, 207, 214, 0.2);
+}
+
+/* 弹窗与卡片：去粉调，改暖纸 */
+html[data-theme="calm"] .park-modal {
+  background: linear-gradient(160deg, var(--calm-paper), var(--calm-paper-2));
+  border-color: #e7d8bb;
+  box-shadow:
+    0 0 0 0.55cqw rgba(217, 185, 120, 0.85),
+    0 2cqw 6cqw rgba(11, 8, 24, 0.45);
+  color: var(--park-ink);
+}
+html[data-theme="calm"] .park-modal > header {
+  background: linear-gradient(#584181, #3c2c60);
+  border-bottom-color: var(--calm-gold-line);
+  color: #fdf6e6;
+  text-shadow: 0 2px rgba(24, 16, 40, 0.55);
+}
+html[data-theme="calm"] .park-close {
+  background: linear-gradient(#f3ce86, #d9a24e);
+  box-shadow: inset 0 0 0 0.5cqw rgba(255, 246, 214, 0.85);
+  color: #fffaf0;
+  text-shadow: 0 1px #8e6127;
+}
+
+html[data-theme="calm"] .park-guide-card {
+  background: linear-gradient(var(--calm-paper), var(--calm-paper-2));
+  border-color: #e7d8bb;
+  box-shadow:
+    0 0 0 0.4cqw rgba(201, 160, 99, 0.4),
+    0 0 2cqw rgba(11, 8, 24, 0.3);
+  color: var(--park-ink);
+}
+
+/* 底部页签：降亮，选中态用金而不是粉 */
+html[data-theme="calm"] .park-nav {
+  background: linear-gradient(rgba(74, 58, 115, 0.94), rgba(46, 33, 80, 0.96));
+  border-color: rgba(201, 160, 99, 0.5);
+  box-shadow:
+    inset 0 0 0 0.35cqw rgba(140, 116, 190, 0.3),
+    0 0 2cqw rgba(11, 8, 24, 0.4);
+}
+html[data-theme="calm"] .park-nav button {
+  text-shadow: 0 1px rgba(20, 14, 35, 0.85);
+}
+html[data-theme="calm"] .park-nav .is-active {
+  background: linear-gradient(rgba(245, 200, 106, 0.28), rgba(245, 200, 106, 0.1));
+  box-shadow:
+    0 0 0 0.45cqw rgba(245, 200, 106, 0.55),
+    0 0 2.4cqw rgba(245, 200, 106, 0.22);
+}
+
+/* 按钮：保留美术底图，只压硬阴影与过亮的高光 */
+html[data-theme="calm"] .park-button {
+  color: #fff7e4;
+  text-shadow: 0 2px 0 #a8651f;
+  filter: drop-shadow(0 0.8cqw 0.8cqw rgba(20, 12, 40, 0.3));
+}
+html[data-theme="calm"] .park-button.is-purple {
+  filter: saturate(0.75) brightness(0.97) drop-shadow(0 0.8cqw 0.8cqw rgba(20, 12, 40, 0.3));
+  text-shadow: 0 2px 0 #4c2a7a;
+}
+html[data-theme="calm"] .park-round {
+  background: linear-gradient(#f3ce86, #d9a24e);
+  box-shadow:
+    inset 0 0 0 0.7cqw rgba(255, 246, 214, 0.85),
+    inset 0 0 0 1.2cqw rgba(240, 190, 110, 0.9),
+    0 0.5cqw 0 rgba(58, 38, 20, 0.35);
+  text-shadow: 0 2px 0 #a8651f;
+}
+html[data-theme="calm"] .park-badge {
+  background: linear-gradient(#ee8c86, #d9605b);
+  box-shadow: 0 0.3cqw 0.8cqw rgba(20, 12, 40, 0.35);
+}
+
+/* 状态光：半径与不透明度各降一档，只表达"通电/点亮"，不参与抢眼 */
+html[data-theme="calm"] .park-tile.is-powered:not(.is-goal) .park-pipe {
+  filter: drop-shadow(0 0 0.55cqw rgba(143, 214, 222, 0.4));
+}
+html[data-theme="calm"] .park-tile.is-lit .park-pipe {
+  filter: drop-shadow(0 0 0.85cqw rgba(245, 200, 106, 0.5));
+}
+
+/* 常驻呼吸动画关掉：只保留提示脉冲，其余改成静态柔光 */
+html[data-theme="calm"] .park-tile.has-axis .park-tile-rotate::after {
+  animation: none;
+  opacity: 0.55;
+}
+html[data-theme="calm"] .park-tile.is-powered::after {
+  animation: none;
+  opacity: 0.3;
+}
+html[data-theme="calm"] .park-tile.is-goal.is-lit::after {
+  animation: none;
+  opacity: 0.5;
+}
+
+/* 结算面板：跟随暖纸，红色横幅保留为庆祝色不改 */
+html[data-theme="calm"] .park-victory-panel {
+  background: linear-gradient(150deg, var(--calm-paper), #efe2cb 62%, var(--calm-paper));
+  border-color: #efe2c6;
+  box-shadow:
+    0 0 0 0.45cqw rgba(217, 185, 120, 0.7),
+    0 1.6cqw 3cqw rgba(11, 8, 24, 0.4);
+  color: var(--park-ink);
+}
+html[data-theme="calm"] .park-rewards {
+  border-color: #e7d8bb;
+  background: linear-gradient(#efe3cc, #e7d9c0);
+  box-shadow:
+    inset 0 0 2cqw rgba(120, 96, 56, 0.12),
+    0 0 0 0.4cqw rgba(217, 185, 120, 0.45);
+}

@@ -71,6 +71,8 @@ python scripts/audit_park_delivery.py
 - 原始生成图：`docs/UI设计稿2.0/generated-sources/`。
 - 运行资产及清单：`public/assets/park/`。
 - 资产处理：`python scripts/prepare_park_assets.py`，保留原图，执行透明裁切、朝向归一、切片和图标派生。管件在管线内统一做 B1 调色（香槟金 + 暖白，`scripts/park_pipe_geometry.py` 的 `grade_b1`），只重出管件用 `python scripts/prepare_pipe_restyle.py`；记录见 `docs/QA/pipe-restyle-2026-11-12/`。
+- 护眼复查（2026-11-18）：通电管身、蓝色伴生花精与首页瀑布的荧光青由 `scripts/park_pipe_geometry.py` 的 `ENERGY_SOFT` 重映射为柔和天青蓝（管身 S≤0.58、V×0.90，只改色相/饱和度/明度，不动 alpha 与端口几何）；已生成素材用 `python scripts/soften_energy_assets.py` 一次性追平并同步 manifest。记录见 `docs/QA/eyecare-2026-11-18/`。
+- 宁静配色 A/B（2026-11-19）：访问 `?theme=calm` 可切到「深靛夜灯 + 暖纸阅读区」方案；默认主题保持不变。记录见 `docs/QA/theme-calm-2026-11-18/`。
 - 补充图标与牌匾：`python scripts/prepare_park_details.py`，使用 rembg 去底并输出深浅底审查图；完整原件保存在仓库。
 - 字体：Noto Sans SC，采用 SIL Open Font License 1.1；许可位于 `src/assets/park-font-LICENSE.txt` 和发行目录的 `assets/park/font-license.txt`。
 - 字体子集：`python scripts/prepare_park_font.py --source <本地NotoSansSC字体文件>`；省略 source 时从 Google Fonts 官方仓库读取。

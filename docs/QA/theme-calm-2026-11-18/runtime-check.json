@@ -1,0 +1,82 @@
+[
+  {
+    "theme": "default",
+    "themeValue": "default",
+    "size": "390x844",
+    "homeOverflow": false,
+    "boardOverflow": false,
+    "victoryOverflow": false,
+    "panel": {
+      "x": 11.6875,
+      "y": 417.765625,
+      "width": 366.625,
+      "height": 274.296875
+    },
+    "errors": [],
+    "paths": [
+      "docs/QA/theme-calm-2026-11-18/01-default-home-390x844.png",
+      "docs/QA/theme-calm-2026-11-18/02-default-board-390x844.png",
+      "docs/QA/theme-calm-2026-11-18/03-default-victory-390x844.png"
+    ]
+  },
+  {
+    "theme": "default",
+    "themeValue": "default",
+    "size": "360x800",
+    "homeOverflow": false,
+    "boardOverflow": false,
+    "victoryOverflow": false,
+    "panel": {
+      "x": 10.796875,
+      "y": 416,
+      "width": 338.40625,
+      "height": 232
+    },
+    "errors": [],
+    "paths": [
+      "docs/QA/theme-calm-2026-11-18/01-default-home-360x800.png",
+      "docs/QA/theme-calm-2026-11-18/02-default-board-360x800.png",
+      "docs/QA/theme-calm-2026-11-18/03-default-victory-360x800.png"
+    ]
+  },
+  {
+    "theme": "calm",
+    "themeValue": "calm",
+    "size": "390x844",
+    "homeOverflow": false,
+    "boardOverflow": false,
+    "victoryOverflow": false,
+    "panel": {
+      "x": 11.6875,
+      "y": 417.765625,
+      "width": 366.625,
+      "height": 274.296875
+    },
+    "errors": [],
+    "paths": [
+      "docs/QA/theme-calm-2026-11-18/04-calm-home-390x844.png",
+      "docs/QA/theme-calm-2026-11-18/05-calm-board-390x844.png",
+      "docs/QA/theme-calm-2026-11-18/06-calm-victory-390x844.png"
+    ]
+  },
+  {
+    "theme": "calm",
+    "themeValue": "calm",
+    "size": "360x800",
+    "homeOverflow": false,
+    "boardOverflow": false,
+    "victoryOverflow": false,
+    "panel": {
+      "x": 10.796875,
+      "y": 416,
+      "width": 338.40625,
+      "height": 232
+    },
+    "errors": [],
+    "paths": [
+      "docs/QA/theme-calm-2026-11-18/04-calm-home-360x800.png",
+      "docs/QA/theme-calm-2026-11-18/05-calm-board-360x800.png",
+      "docs/QA/theme-calm-2026-11-18/06-calm-victory-360x800.png"
+    ]
+  }
+]
