@@ -5497,5 +5497,293 @@
     "route": "images_api",
     "model": "gpt-image-2-1k",
     "processing": "chroma key #00FF00; bbox trim; 8% margin; 512x512 WebP"
+  },
+  {
+    "name": "map-path-background",
+    "file": "public/assets/park/map-path-background.webp",
+    "source": "map_ui_atlas / map_background_source",
+    "crop": [
+      0,
+      0,
+      768,
+      1376
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      768,
+      1376
+    ],
+    "alpha_bbox": [
+      0,
+      0,
+      768,
+      1376
+    ],
+    "corner_alpha": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "sha256": "11a91fc7099ecef650e58469510b6d65e4f0411db922d4a9772b26d5f8e4ed21",
+    "bytes": 290788,
+    "route": "image-generator subagent",
+    "processing": "u2netp background removal, alpha trim, Lanczos scale"
+  },
+  {
+    "name": "map-node-cleared",
+    "file": "public/assets/park/map-node-cleared.webp",
+    "source": "map_ui_atlas / map_background_source",
+    "crop": [
+      0,
+      0,
+      319,
+      331
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      319,
+      331
+    ],
+    "alpha_bbox": [
+      6,
+      6,
+      313,
+      325
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "5a6f8d4cc1bdee0c7059a03c8d9dbc54157649b1c6430004140e59ebaaab6020",
+    "bytes": 23652,
+    "route": "image-generator subagent",
+    "processing": "u2netp background removal, alpha trim, Lanczos scale"
+  },
+  {
+    "name": "map-node-current",
+    "file": "public/assets/park/map-node-current.webp",
+    "source": "map_ui_atlas / map_background_source",
+    "crop": [
+      0,
+      0,
+      379,
+      355
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      379,
+      355
+    ],
+    "alpha_bbox": [
+      6,
+      6,
+      373,
+      349
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "701d5d153db3373a459881dc835f42ffa23f2fddf056dd287e6621cbe084f3df",
+    "bytes": 31724,
+    "route": "image-generator subagent",
+    "processing": "u2netp background removal, alpha trim, Lanczos scale"
+  },
+  {
+    "name": "map-node-unlocked",
+    "file": "public/assets/park/map-node-unlocked.webp",
+    "source": "map_ui_atlas / map_background_source",
+    "crop": [
+      0,
+      0,
+      319,
+      334
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      319,
+      334
+    ],
+    "alpha_bbox": [
+      6,
+      6,
+      313,
+      328
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "dd596263acf13d4ef9ba15a915c4df7e993210a30e593949e132f0f7d9b13dbf",
+    "bytes": 21708,
+    "route": "image-generator subagent",
+    "processing": "u2netp background removal, alpha trim, Lanczos scale"
+  },
+  {
+    "name": "map-node-locked",
+    "file": "public/assets/park/map-node-locked.webp",
+    "source": "map_ui_atlas / map_background_source",
+    "crop": [
+      0,
+      0,
+      319,
+      333
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      319,
+      333
+    ],
+    "alpha_bbox": [
+      6,
+      6,
+      313,
+      327
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "d7614d68fba21bc37da3604ce80895e80f14e8e4b4517c2fb7210b9875694cab",
+    "bytes": 25276,
+    "route": "image-generator subagent",
+    "processing": "u2netp background removal, alpha trim, Lanczos scale"
+  },
+  {
+    "name": "map-btn-back",
+    "file": "public/assets/park/map-btn-back.webp",
+    "source": "map_ui_atlas / map_background_source",
+    "crop": [
+      0,
+      0,
+      319,
+      333
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      319,
+      333
+    ],
+    "alpha_bbox": [
+      6,
+      6,
+      313,
+      327
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "e4b63f28462b286ad9466568e81213384f90d1821de505c9c15ea2deaa5facd7",
+    "bytes": 23636,
+    "route": "image-generator subagent",
+    "processing": "u2netp background removal, alpha trim, Lanczos scale"
+  },
+  {
+    "name": "map-chapter-banner",
+    "file": "public/assets/park/map-chapter-banner.webp",
+    "source": "map_ui_atlas / map_background_source",
+    "crop": [
+      0,
+      0,
+      408,
+      200
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      408,
+      200
+    ],
+    "alpha_bbox": [
+      6,
+      6,
+      402,
+      194
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "98d67bd9daf202598eb47060ac108bedfeb30dded878311fd900b2f1b6e3355a",
+    "bytes": 28962,
+    "route": "image-generator subagent",
+    "processing": "u2netp background removal, alpha trim, Lanczos scale"
+  },
+  {
+    "name": "map-road-segment",
+    "file": "public/assets/park/map-road-segment.webp",
+    "source": "map_ui_atlas / map_background_source",
+    "crop": [
+      0,
+      0,
+      919,
+      295
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      919,
+      295
+    ],
+    "alpha_bbox": [
+      4,
+      4,
+      915,
+      291
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "15da2568ec6594bc3dc32b5800823345e51034498e9a1704b1f576b920b5caa6",
+    "bytes": 51572,
+    "route": "image-generator subagent",
+    "processing": "u2netp background removal, alpha trim, Lanczos scale"
+  },
+  {
+    "name": "map-chest",
+    "file": "public/assets/park/map-chest.webp",
+    "source": "map_ui_atlas / map_background_source",
+    "crop": [
+      0,
+      0,
+      469,
+      434
+    ],
+    "rotation_ccw": 0,
+    "size": [
+      469,
+      434
+    ],
+    "alpha_bbox": [
+      4,
+      4,
+      465,
+      430
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sha256": "584a7845badea9c6e2d7d9b05ae13cca1b79c760115ace52b196745e4b572a46",
+    "bytes": 69584,
+    "route": "image-generator subagent",
+    "processing": "u2netp background removal, alpha trim, Lanczos scale"
   }
 ]

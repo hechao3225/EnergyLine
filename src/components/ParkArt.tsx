@@ -8,6 +8,7 @@ export type IconName =
   | "star"
   | "coin"
   | "gem"
+  | "home"
   | "gift"
   | "settings"
   | "mail"

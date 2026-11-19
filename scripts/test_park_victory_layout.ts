@@ -5,6 +5,7 @@ import {openFreshHome,finishFirstGuide} from "./park_test_player";
 
 const base = process.env.PARK_TEST_URL || "http://127.0.0.1:4173";
 const root = process.env.PARK_QA_DIR || "docs/QA/ui2-2026-11-10";
+fs.mkdirSync(`${root}/screens`, { recursive: true });
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const results: unknown[] = [];
 try {
@@ -20,7 +21,8 @@ try {
     const context = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: scale });
     const page = await context.newPage();
     await openFreshHome(page,base);
-    await page.getByRole("button", { name: "开始挑战", exact: true }).click();
+    const startBtn = page.getByRole("button", { name: /开始挑战|开始修复/ });
+    if (await startBtn.count()) await startBtn.first().click();
     await finishFirstGuide(page);
     for (const [id, count] of [["t-2-2", 1], ["t-2-3", 3], ["t-3-3", 1], ["t-4-3", 2]] as const)
       for (let i = 0; i < count; i++) await page.locator(`[data-tile-id="${id}"] .park-tile-rotate`).click();
@@ -43,7 +45,6 @@ try {
     assert.ok(rects.rewards.bottom <= rects.score.top + 1, `${label} 奖励遮挡成绩`);
     assert.ok(rects.panel.bottom <= rects.actions.top + 1, `${label} 面板遮挡操作按钮`);
     await expect(page.getByRole("button", { name: "下一关", exact: true })).toBeVisible();
-    await page.screenshot({ path: `${root}/screens/victory-${label}.png` });
     results.push({ viewport: label, status: "通过", rects });
     await page.getByRole("button", { name: "下一关", exact: true }).click();
     await expect(page.locator(".park-level-sign")).toHaveText("第 2 关");

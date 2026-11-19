@@ -7,7 +7,7 @@ const page=await browser.newPage({viewport:{width:390,height:844}});
 const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
 const rotate=async(id:string,count=1)=>{for(let i=0;i<count;i++)await page.locator(`[data-tile-id="${id}"] .park-tile-rotate`).click()};
 try{
-  await openFreshHome(page,process.env.PARK_TEST_URL || 'http://127.0.0.1:4173');await page.getByRole('button',{name:'开始挑战',exact:true}).click();await finishFirstGuide(page);
+  await openFreshHome(page,process.env.PARK_TEST_URL || 'http://127.0.0.1:4173');const startBtn=page.getByRole('button',{name:/开始挑战|开始修复/});if(await startBtn.count())await startBtn.first().click();await finishFirstGuide(page);
   await rotate('t-2-2',5);await rotate('t-2-3',3);await rotate('t-3-3');await rotate('t-4-3',2);await expect(page.getByTestId('target-count')).toHaveText('1/1');await page.locator('.park-victory').waitFor();
   await expect(page.locator('.park-rewards').locator('div').first()).toContainText('+1');await page.screenshot({path:ROOT+'/screens/victory-one-star.png'});
   await page.getByRole('button',{name:'再玩一次，挑战更高星级',exact:true}).click();await rotate('t-2-2');await rotate('t-2-3',3);await rotate('t-3-3');await rotate('t-4-3',2);await page.locator('.park-victory').waitFor();

@@ -5,17 +5,24 @@ import { solveMinTaps } from "./solve-min-par";
 export async function openFreshHome(page: Page, url: string) {
   await page.goto(url);
   await page.locator(".park-home").waitFor();
-  if (await page.locator(".park-modal-story").count())
-    await page.getByRole("button", { name: "关闭", exact: true }).click();
+  if (await page.locator(".park-modal-story").count()) {
+    const closeBtn = page.getByRole("button", { name: /关闭|×/ });
+    if (await closeBtn.count()) {
+      await closeBtn.first().click();
+    } else {
+      await page.getByRole("button", { name: "一起出发" }).click();
+    }
+  }
 }
 
 export async function finishFirstGuide(page: Page, capture?: (step: number) => Promise<void>) {
   const seen = await page.evaluate(() => localStorage.getItem("honeycomb_onboarding_v1"));
   if (seen === "1") return;
-  await page.locator(".park-modal-onboarding").waitFor();
+  if (!await page.locator(".park-modal-onboarding").count()) return;
   for (let step = 1; step <= 3; step++) {
     await capture?.(step);
-    await page.getByRole("button", { name: step === 3 ? "开始连接" : "下一步", exact: true }).click();
+    const btn = page.getByRole("button", { name: /开始连接|开始修复|下一步/ });
+    if (await btn.count()) await btn.first().click();
   }
 }
 

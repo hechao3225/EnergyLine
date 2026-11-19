@@ -30,7 +30,7 @@ function scan(file: string) {
     for (const entry of fs.readdirSync(file)) scan(path.join(file, entry));
     return;
   }
-  const rel = path.relative(ROOT, file);
+  const rel = path.relative(ROOT, file).replace(/\\/g, '/');
   if (EXCLUDED.has(rel) || !EXTENSIONS.has(path.extname(file))) return;
   const text = fs.readFileSync(file, 'utf8');
   for (const term of BANNED_TERMS) {

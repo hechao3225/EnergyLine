@@ -18,3 +18,7 @@ docs/_archive/
 
 # Python 脚本缓存
 __pycache__/
+
+# Scratch & temporary workspace
+scratch/
+.vercel/
