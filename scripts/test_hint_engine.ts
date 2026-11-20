@@ -46,7 +46,9 @@ function expectOptimalHintSequence(
   count: number,
   where: string,
 ) {
+  const originalTiles = structuredClone(tiles);
   const sequence = findHintSequence(level, tiles, remainingSteps, count);
+  assert.deepEqual(tiles, originalTiles, `${where} 不应修改传入盘面`);
   assert.ok(sequence.length <= count, `${where} 返回了 ${sequence.length} 步，超过请求的 ${count} 步`);
   assert.ok(
     sequence.length <= remainingSteps,
@@ -57,6 +59,7 @@ function expectOptimalHintSequence(
   let expectedPar = solveRuleLevel({ ...level, tiles: currentTiles })?.par;
   assert.notEqual(expectedPar, undefined, `${where} 没有规则解`);
   for (const [index, move] of sequence.entries()) {
+    assert.equal(move.taps, 1, `${where} 第 ${index + 1} 步应只代表一次点击`);
     assert.equal(
       move.stepsNeeded,
       expectedPar,
@@ -114,9 +117,14 @@ expectOptimalStep(ruleLevel, ruleLevel.tiles, ruleLevel.code);
 console.log('[PASS] 联动轴与规则关都能给出可执行最优提示');
 
 console.log('=== 5. 连续提示按真实盘面连找最多三步 ===');
+const switchLevel = DEFAULT_LEVELS.find((level) => level.primaryMechanic === 'switch')!;
+const singleStepMove = findHint(switchLevel, switchLevel.tiles, switchLevel.maxSteps);
+assert.ok(singleStepMove, `L${switchLevel.id} 单步提示不存在`);
+assert.equal(singleStepMove.taps, 3, `L${switchLevel.id} 单步提示应保留该格剩余 taps`);
+
 const sequenceLevels = [
   DEFAULT_LEVELS.find((level) => level.id === 1)!,
-  DEFAULT_LEVELS.find((level) => level.primaryMechanic === 'switch')!,
+  switchLevel,
   DEFAULT_LEVELS.find((level) => level.primaryMechanic === 'gear')!,
 ];
 for (const level of sequenceLevels) {
@@ -128,8 +136,8 @@ for (const level of sequenceLevels) {
     3,
     `L${level.id}(${level.primaryMechanic})`,
   );
-  assert.ok(sequence.length >= 1 && sequence.length <= 3, `L${level.id} 应返回 1 到 3 步`);
-  console.log(`[PASS] L${level.id} 连续返回 ${sequence.length} 步，逐步保持最优`);
+  assert.equal(sequence.length, 3, `L${level.id} 应返回 3 步`);
+  console.log(`[PASS] L${level.id} 连续返回 3 次单次点击，逐步保持最优`);
 }
 
 console.log('=== 6. 连续提示遵守剩余步数预算 ===');

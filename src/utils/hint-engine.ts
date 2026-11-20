@@ -101,7 +101,11 @@ export function findHint(
   return null;
 }
 
-/** 从当前盘面连续找最多 count 个正确下一步，不修改传入盘面。 */
+/**
+ * 从当前盘面连续找最多 count 个正确下一步，不修改传入盘面。
+ * 序列中的每一项只代表一次点击，旋转提示的 taps 固定为 1；
+ * findHint 的单步提示仍保留该格剩余 taps。
+ */
 export function findHintSequence(
   level: LevelConfig,
   tiles: Tile[],
@@ -115,8 +119,9 @@ export function findHintSequence(
   for (let index = 0; index < count && budget > 0; index++) {
     const move = findHint(level, currentTiles, budget);
     if (!move?.reachable) break;
-    sequence.push(move);
-    currentTiles = applyHintAction(level, currentTiles, move);
+    const singleTapMove = { ...move, taps: Math.min(move.taps, 1) };
+    sequence.push(singleTapMove);
+    currentTiles = applyHintAction(level, currentTiles, singleTapMove);
     budget--;
   }
 
