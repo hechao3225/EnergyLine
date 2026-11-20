@@ -347,23 +347,25 @@ export default function App() {
     reset(config);
   };
   // 道具：步数用尽后补 3 步（切片里先免费发放，看手感再定经济）
-  const addSteps = () => {
+  const addSteps = (): boolean => {
     const current = attempt.current;
-    if (winProcessed.current || current.remaining > 0) return;
+    if (winProcessed.current || current.remaining > 0) return false;
     const nextRemaining = current.remaining + 3;
     attempt.current = { ...current, remaining: nextRemaining };
     setRemaining(nextRemaining);
     sound.playSwitch();
     haptics.tapHeavy();
+    return true;
   };
-  const addRewind = () => {
+  const addRewind = (): boolean => {
     const current = attempt.current;
-    if (winProcessed.current) return;
+    if (winProcessed.current) return false;
     const nextRewinds = current.rewinds + 1;
     attempt.current = { ...current, rewinds: nextRewinds };
     setRewinds(nextRewinds);
     sound.playSwitch();
     haptics.tapHeavy();
+    return true;
   };
   const startEndless = (targets: number, next = false) => {
     const index = next ? endless.current.index + 1 : 1;

@@ -13,7 +13,7 @@ import { LevelEditor } from "./LevelEditor";
 import { OnboardingGuide } from "./OnboardingGuide";
 import { ShopModal } from "./ShopModal";
 import { MAX_STARS, getParSteps, getStarThresholds, getStarsForLights, getStarsForSteps } from "../utils/rating";
-import { describeHint, findHint, HINT_ENGINE_MAX_LEVEL, supportsHintEngine, type HintMove } from "../utils/hint-engine";
+import { describeHint, findHint, findHintSequence, supportsHintEngine, type HintMove } from "../utils/hint-engine";
 import { CENTER_DISTRICTS, getCollectionEntry, getLevelContent, WORLD } from "../content";
 import { WorldMapModal } from "./WorldMapModal";
 import {
@@ -29,7 +29,7 @@ import {
   claimDailyTask,
   CHAPTERS,
   chapterIndex,
-  consumeHint,
+  consumeSupply,
   equipCosmetic,
   getBestStars,
   isCosmeticEquipped,
@@ -40,6 +40,7 @@ import {
   resetParkProgress,
   setHomeExhibit,
 } from "../utils/parkProgress";
+import { SUPPLY_ITEMS } from "../data/shopCatalog";
 
 type Modal =
   | "none"
@@ -92,9 +93,9 @@ interface Props {
   /** 玩法实验关入口（纵向切片验证用，可移除） */
   onStartLab?: (index: number) => void;
   /** 道具：步数用尽后补 3 步 */
-  onAddSteps?: () => void;
+  onAddSteps?: () => boolean;
   /** 道具：本局额外回溯 +1 */
-  onAddRewind?: () => void;
+  onAddRewind?: () => boolean;
   /** 达标关：提前结算（拿当前星数） */
   onSettle?: () => void;
   gameMode: "story" | "endless" | "editor" | "lab";
@@ -127,10 +128,14 @@ export function CandyThemeShell(p: Props) {
   const [notice, setNotice] = useState("");
   /** 提示引擎算出的下一步，同时用来高亮棋盘格子 */
   const [hintMove, setHintMove] = useState<HintMove | null>(null);
+  const [hintMoves, setHintMoves] = useState<HintMove[]>([]);
   // 换关、重开、切页时上一次的高亮必须消失，否则会指向新盘面上的同一格
   useEffect(() => {
     setHintMove(null);
   }, [p.screen, p.level.id]);
+  useEffect(() => {
+    setHintMoves([]);
+  }, [p.screen, p.level.id, p.stepsUsed === 0]);
   const [muted, setMuted] = useState(sound.isMuted());
   const [vibration, setVibration] = useState(haptics.isEnabled());
   const [chapter, setChapter] = useState(chapterIndex(p.level.id));
@@ -201,7 +206,7 @@ export function CandyThemeShell(p: Props) {
   useEffect(() => {
     if (p.screen === "play" && p.gameMode === "story" && p.level.id === 1 && !p.clearedLevels.includes(1) && localStorage.getItem("honeycomb_onboarding_v1") !== "1") setModal("onboarding");
   }, [p.screen, p.gameMode, p.level.id]);
-  const useHint = () => {
+  const useAdviceSupply = (id: "hint" | "lens") => {
     if (p.screen !== "play") {
       flash("进入关卡后可使用提示");
       return;
@@ -211,32 +216,51 @@ export function CandyThemeShell(p: Props) {
       flash("步数已经用完，重置后才能继续用提示");
       return;
     }
-    if (progress.hints < 1) {
-      open("shop");
-      flash("提示灯泡已用完");
+    if (p.gameMode !== "story" || !supportsHintEngine(p.level)) {
+      flash("提示道具仅用于支持提示引擎的主线关卡");
       return;
     }
-    // 提示引擎（试点 L1–10）：按当前盘面算下一步；算不出就不扣灯泡
-    if (
-      p.gameMode === "story" &&
-      p.level.id <= HINT_ENGINE_MAX_LEVEL &&
-      supportsHintEngine(p.level)
-    ) {
-      const move = findHint(p.level, p.tiles, p.remainingSteps);
-      if (!move) {
-        flash("这一步已经算不出通路了，重置后再试");
-        return;
-      }
-      if (!move.reachable) {
-        flash(`还差 ${move.stepsNeeded} 步才能接完，重置后再试`);
-        return;
-      }
-      setHintMove(move);
-    } else {
-      setHintMove(null);
+    const item = SUPPLY_ITEMS.find((supply) => supply.id === id);
+    if (!item) return;
+    if (progress[item.stockKey] < 1) {
+      open("shop");
+      flash(`${item.name}已用完`);
+      return;
     }
-    save(consumeHint(progress));
+    const moves =
+      id === "hint"
+        ? [findHint(p.level, p.tiles, p.remainingSteps)].filter(
+            (move): move is HintMove => Boolean(move),
+          )
+        : findHintSequence(p.level, p.tiles, p.remainingSteps, 3);
+    const first = moves[0];
+    if (!first) {
+      flash("这一步已经算不出通路了，重置后再试");
+      return;
+    }
+    if (!first.reachable) {
+      flash(`还差 ${first.stepsNeeded} 步才能接完，重置后再试`);
+      return;
+    }
+    save(consumeSupply(progress, id));
+    setHintMoves(moves);
+    setHintMove(first);
     open("hint");
+  };
+  const useRewindSupply = () => {
+    if (p.screen !== "play" || progress.rewindTokens < 1 || !p.onAddRewind)
+      return;
+    const ok = p.onAddRewind();
+    if (!ok) return;
+    save(consumeSupply(progress, "rewind"));
+    flash("时光回针已使用");
+  };
+  const useStepSupply = () => {
+    if (!p.onAddSteps) return;
+    const ok = p.onAddSteps();
+    if (!ok) return;
+    save(consumeSupply(progress, "step"));
+    flash("应急线圈已补回 3 步");
   };
   /** 局内「重置」：已经走过步数才确认，空局直接重来。 */
   const restartWithConfirm = () => {
@@ -519,6 +543,13 @@ export function CandyThemeShell(p: Props) {
               <div className="park-play-tools">
                 <button
                   className="park-round"
+                  onClick={() => open("bag")}
+                  aria-label="背包"
+                >
+                  <Icon name="bag" />
+                </button>
+                <button
+                  className="park-round"
                   onClick={() => open("flora")}
                   aria-label="乐园图鉴"
                 >
@@ -585,9 +616,10 @@ export function CandyThemeShell(p: Props) {
                 isPeekActive={p.isPeekActive}
                 onTileClick={(tile, action) => {
                   setHintMove(null);
+                  setHintMoves([]);
                   p.onTileClick(tile, action);
                 }}
-                hintTileId={hintMove?.tileId ?? null}
+                hintTileId={hintMove?.tileId ?? hintMoves[0]?.tileId ?? null}
                 levelId={p.level.id}
                 wrap={Boolean(p.level.rules?.wrap)}
                 weld={Boolean(p.level.rules?.weld)}
@@ -608,8 +640,14 @@ export function CandyThemeShell(p: Props) {
                   )}
                   <ParkButton onClick={p.onRestart}>重新挑战</ParkButton>
                   {p.onAddSteps && p.level.goal === undefined && (
-                    <ParkButton purple onClick={p.onAddSteps}>
-                      用道具 · 补 3 步
+                    <ParkButton
+                      purple
+                      disabled={progress.stepTokens < 1}
+                      onClick={useStepSupply}
+                    >
+                      {progress.stepTokens > 0
+                        ? `使用应急线圈 · 余 ${progress.stepTokens}`
+                        : "应急线圈不足"}
                     </ParkButton>
                   )}
                 </div>
@@ -652,7 +690,10 @@ export function CandyThemeShell(p: Props) {
                 <Icon name="undo" />
                 <span>撤销</span>
               </ParkButton>
-              <ParkButton onClick={useHint} label="提示">
+              <ParkButton
+                onClick={() => useAdviceSupply("hint")}
+                label="提示"
+              >
                 <Icon name="hint" />
                 <span>提示</span>
                 <b className="park-badge">{progress.hints}</b>
@@ -666,7 +707,7 @@ export function CandyThemeShell(p: Props) {
               className="park-history-link"
               onClick={() => open("history")}
             >
-              操作足迹 · {p.stepsUsed} 步 · 回溯 {p.rewinds}/3
+              操作足迹 · {p.stepsUsed} 步 · 回溯 {p.rewinds} 次
             </button>
             <span className="park-build-tag">{BUILD_TAG}</span>
           </main>
@@ -908,22 +949,60 @@ export function CandyThemeShell(p: Props) {
                 )}
                 {activeModal === "bag" && (
                   <>
-                    <div className="park-item-card">
-                      <Icon name="hint" />
-                      <div>
-                        <h3>提示灯泡</h3>
-                        <p>查看当前关卡的通路提示</p>
-                        <strong>已拥有 {progress.hints} 个</strong>
-                      </div>
+                    <div className="park-shop-list">
+                      {SUPPLY_ITEMS.map((item) => {
+                        const stock = progress[item.stockKey];
+                        const adviceId =
+                          item.id === "hint" || item.id === "lens"
+                            ? item.id
+                            : null;
+                        return (
+                          <article className="park-shop-card" key={item.id}>
+                            <Art
+                              name={item.iconArt}
+                              className="park-shop-card-art"
+                              alt={item.name}
+                            />
+                            <div className="park-shop-card-copy">
+                              <h3>{item.name}</h3>
+                              <p>{item.description}</p>
+                              <span>已拥有 {stock} 个</span>
+                            </div>
+                            <div className="park-shop-card-action">
+                              {adviceId ? (
+                                <ParkButton
+                                  className="park-shop-buy"
+                                  disabled={p.screen !== "play" || stock < 1}
+                                  label={`使用${item.name}`}
+                                  onClick={() => useAdviceSupply(adviceId)}
+                                >
+                                  使用
+                                </ParkButton>
+                              ) : item.id === "rewind" ? (
+                                <ParkButton
+                                  className="park-shop-buy"
+                                  disabled={
+                                    p.screen !== "play" ||
+                                    stock < 1 ||
+                                    !p.onAddRewind
+                                  }
+                                  label="使用时光回针"
+                                  onClick={useRewindSupply}
+                                >
+                                  使用回针
+                                </ParkButton>
+                              ) : (
+                                <span className="park-shop-price">
+                                  步数耗尽遮罩中使用
+                                </span>
+                              )}
+                            </div>
+                          </article>
+                        );
+                      })}
                     </div>
-                    <ParkButton
-                      disabled={p.screen !== "play" || progress.hints === 0}
-                      onClick={useHint}
-                    >
-                      使用提示
-                    </ParkButton>
                     <p className="park-fine-print">
-                      在修复中使用，每次消耗 1 个灯泡
+                      提示灯泡与火花透镜每次使用消耗 1 个，时光回针会增加本局回溯次数。
                     </p>
                     <ParkButton purple onClick={() => open("shop")}>
                       前往商店
@@ -979,14 +1058,27 @@ export function CandyThemeShell(p: Props) {
                           ? "无尽挑战 · 通路提示"
                           : "工坊试玩 · 通路提示"}
                     </h3>
-                    {hintMove && (
-                      <p className="park-hint-move">{describeHint(hintMove)}</p>
+                    {hintMoves.length > 0 ? (
+                      <div className="park-hint-moves" role="list">
+                        {hintMoves.map((move, index) => (
+                          <div
+                            className="park-hint-move"
+                            role="listitem"
+                            key={`${move.tileId}-${index}`}
+                          >
+                            <b>{index + 1}</b>
+                            <span>{describeHint(move)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="park-hint-copy">
+                        {p.gameMode === "story"
+                          ? levelContent?.hint ?? "先接主干，再补支路。"
+                          : p.level.hintText ??
+                            "先接通主干，再把能量分到每一处设施。"}
+                      </p>
                     )}
-                    <p className="park-hint-copy">
-                      {p.gameMode === "story"
-                        ? levelContent?.hint ?? "先接主干，再补支路。"
-                        : p.level.hintText ?? "先接通主干，再把能量分到每一处设施。"}
-                    </p>
                     <ParkButton onClick={close}>继续挑战</ParkButton>
                   </>
                 )}
@@ -1039,7 +1131,8 @@ export function CandyThemeShell(p: Props) {
                     </div>
                     <p>
                       本关 {getParSteps(p.level)} 步以内获得四星，{starThresholds.three} 步以内三星，
-                      {starThresholds.two} 步以内二星，通关至少一星。每次挑战可回溯 3 次，重试后补满。
+                      {starThresholds.two} 步以内二星，通关至少一星。每次挑战初始可回溯 3
+                      次，可使用时光回针增加本局次数。
                     </p>
                     <ParkButton onClick={close}>开始修复</ParkButton>
                   </>
@@ -1273,6 +1366,17 @@ export function CandyThemeShell(p: Props) {
                         </button>
                       ))}
                     </div>
+                    <ParkButton
+                      purple
+                      disabled={
+                        p.screen !== "play" ||
+                        progress.rewindTokens < 1 ||
+                        !p.onAddRewind
+                      }
+                      onClick={useRewindSupply}
+                    >
+                      使用时光回针 · 余 {progress.rewindTokens}
+                    </ParkButton>
                     <ParkButton
                       disabled={p.historyIndex >= p.history.length - 1}
                       onClick={() => {
