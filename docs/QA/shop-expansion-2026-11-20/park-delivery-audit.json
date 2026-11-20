@@ -1,0 +1,2998 @@
+{
+  "captured_at": "2026-11-20T11:32:51.226865+00:00",
+  "asset_count": 188,
+  "asset_bytes": 7736888,
+  "assets": [
+    {
+      "name": "background",
+      "size": [
+        941,
+        1672
+      ],
+      "sha256": "d74f13c040cd73166554a7174c70b613ee076291231086b6bae3f03cc35ecc60",
+      "has_alpha": false,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/background.png"
+      ]
+    },
+    {
+      "name": "sheep",
+      "size": [
+        375,
+        400
+      ],
+      "sha256": "ebc267ff9092014e87a6126a6ab4f2b5fea6cb3c8f48f6a9b9911dddd603a118",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/characters.png"
+      ]
+    },
+    {
+      "name": "rabbit",
+      "size": [
+        282,
+        400
+      ],
+      "sha256": "a56e06dedcc8d95619e07aaef464543fa3df29ea1db5e4027893de93f00096f0",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/characters.png"
+      ]
+    },
+    {
+      "name": "spirit",
+      "size": [
+        400,
+        393
+      ],
+      "sha256": "682d6137697bc8b4100577755c0b8f1720b17e76cc63dd20a4f22d4854889e82",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/characters.png"
+      ]
+    },
+    {
+      "name": "pipe-line-off",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "c62d9c12f433d30dacb1e40754314ce62a3492e67db7455ffefca557dd256290",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/pipes.png"
+      ]
+    },
+    {
+      "name": "pipe-corner-off",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "75f136df125347ccc68ee0d1cb32b8f6f33b173cb6e2a253d980c6d6dff6bca5",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/pipes.png"
+      ]
+    },
+    {
+      "name": "pipe-t_shape-off",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "1944572d13d84aa0c864b03abf87b3236fe8e27cb28b87007d5ebb5622b88be0",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/pipes.png"
+      ]
+    },
+    {
+      "name": "pipe-cross-off",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "02290a1a974cf9c0b476586f55d13905147d65559ada267d133e8bcb117db73f",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/pipes.png"
+      ]
+    },
+    {
+      "name": "pipe-line-on",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "34c987b1b98937a5fadc28ae1b41d0a1ca4da381a1bec181b388b0506b2c1904",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/pipes.png"
+      ]
+    },
+    {
+      "name": "pipe-corner-on",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "e861d39576c915ccc695ffd5bda31a0dc9106ea502f8293a8a8d48ee342aa2ac",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/pipes.png"
+      ]
+    },
+    {
+      "name": "pipe-t_shape-on",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "335681642e8fe653bb40f3ca5948f25ebcd2f76918828c0de1b3f08a53405883",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/pipes.png"
+      ]
+    },
+    {
+      "name": "pipe-cross-on",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "8cc16eb87ac31f1db53c6a61d0deeba03b18e7a1082294015f061f10e9347289",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/pipes.png"
+      ]
+    },
+    {
+      "name": "pipe-switch-on",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "ece3c5ea8bbd330059fe0dd1b3cf13d4f40c05738b06e203f04f42cf29ed3a7f",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/pipes.png"
+      ]
+    },
+    {
+      "name": "pipe-switch-off",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "e0a0a97fac82f1d258ab61e4fa75c2df2e5a6f0b90303694e5a74d7a701d9a46",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/pipes.png"
+      ]
+    },
+    {
+      "name": "pipe-diode",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "32216a87987115cd52d290259118dc43f4d8e666df2cd18a445855069d2db8b9",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/pipes.png"
+      ]
+    },
+    {
+      "name": "icon-star",
+      "size": [
+        249,
+        249
+      ],
+      "sha256": "0a99a2a0087a090969e413002145c41831310009abc48c5f9ee067427869a516",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/icons.png"
+      ]
+    },
+    {
+      "name": "icon-coin",
+      "size": [
+        240,
+        240
+      ],
+      "sha256": "6534e31198d4a89d5912b068ff98f3047e094d3ea50fa7d069a5fab09a4c28e1",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/icons.png"
+      ]
+    },
+    {
+      "name": "icon-gem",
+      "size": [
+        254,
+        254
+      ],
+      "sha256": "c4ba5f593c187429ee6873147fe5f392d28da806a88283f4a7e6cecf7d44ecf1",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/icons.png"
+      ]
+    },
+    {
+      "name": "icon-gift",
+      "size": [
+        254,
+        254
+      ],
+      "sha256": "dcac2c67d42086e38ed87560c31748060400383200c77545a486d0b366319ea5",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/icons.png"
+      ]
+    },
+    {
+      "name": "icon-settings",
+      "size": [
+        253,
+        253
+      ],
+      "sha256": "e86994a3373b7a0d568f8bcda7c0e023cb653a78443cff1fd6deb053a305b728",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/icons.png"
+      ]
+    },
+    {
+      "name": "icon-mail",
+      "size": [
+        239,
+        239
+      ],
+      "sha256": "b08f7acc7b2233899e0a4968524089c6478e6f7f01f2f62170e93a2df4fba38a",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/icons.png"
+      ]
+    },
+    {
+      "name": "icon-task",
+      "size": [
+        249,
+        249
+      ],
+      "sha256": "69e851c3f69425ff4acaeedcbdcf7f657ff353fa6f1a02a2b9f04513f99b09a0",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/icons.png"
+      ]
+    },
+    {
+      "name": "icon-bag",
+      "size": [
+        244,
+        244
+      ],
+      "sha256": "dd1914c0ef8b15e620a43bf614a601980adacb87f70c6238ff6ff7a9f84cf22d",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/icons.png"
+      ]
+    },
+    {
+      "name": "icon-castle",
+      "size": [
+        265,
+        265
+      ],
+      "sha256": "bae71b4a3972bbb2a27151bd7998efce22974688c74c09051534421dbf1d5ad1",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/icons.png"
+      ]
+    },
+    {
+      "name": "icon-map",
+      "size": [
+        273,
+        273
+      ],
+      "sha256": "21ac2481ce906d8ffc317f18540386780558aec50e4d06cbfec9517b77070b0f",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/icons.png"
+      ]
+    },
+    {
+      "name": "icon-hint",
+      "size": [
+        272,
+        272
+      ],
+      "sha256": "f177a49cd8f9fdd93ea89a76bb8469caf4d4112408456144c3fc47d5f215a45d",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/icons.png"
+      ]
+    },
+    {
+      "name": "icon-undo",
+      "size": [
+        242,
+        242
+      ],
+      "sha256": "de227305135f09210f79c1307866eaf76d1caaeb033d7bfc344244bb1e46f5b9",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/icons.png"
+      ]
+    },
+    {
+      "name": "icon-reset",
+      "size": [
+        241,
+        241
+      ],
+      "sha256": "084087d14323484663ffbcc4d317ae26063d00815effa921d2a78669fda7789c",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/icons.png"
+      ]
+    },
+    {
+      "name": "icon-play",
+      "size": [
+        229,
+        229
+      ],
+      "sha256": "5940dbd551a3a5cbd5f6b850c65ca7019adab82314eed5f29f8df483bde0401d",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/icons.png"
+      ]
+    },
+    {
+      "name": "icon-crown",
+      "size": [
+        263,
+        263
+      ],
+      "sha256": "ee226be4cacbf234e25847cd0ef003bffa4b3c6cf403d12645b01831c4d46e3b",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/icons.png"
+      ]
+    },
+    {
+      "name": "icon-lock",
+      "size": [
+        247,
+        247
+      ],
+      "sha256": "1c632abb81032ce77f5308e85f5f6cb61975ba69317a20da09c9254f18570115",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/icons.png"
+      ]
+    },
+    {
+      "name": "carousel",
+      "size": [
+        1040,
+        1100
+      ],
+      "sha256": "2064b4c9b75bb6f6aaac56531cc16ae26ac9427aa5615754ea89c4a02bcae2f0",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/carousel.png"
+      ]
+    },
+    {
+      "name": "button-gold",
+      "size": [
+        400,
+        134
+      ],
+      "sha256": "fe8c53ad1b78d614be8e521b7c5bc8b840972f0c837aa92dbdc328d9c5e816b7",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/materials.png"
+      ]
+    },
+    {
+      "name": "button-purple",
+      "size": [
+        400,
+        134
+      ],
+      "sha256": "c3e0208c34c23126739bfe4c5a18a29b04c2803e732e4a42c146489fbb98ea55",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/materials.png"
+      ]
+    },
+    {
+      "name": "info-card",
+      "size": [
+        400,
+        169
+      ],
+      "sha256": "d34e433261fe640472a87115eba8d59c316f8b7755f8158006661bf00dbe34e0",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/materials.png"
+      ]
+    },
+    {
+      "name": "level-sign",
+      "size": [
+        400,
+        185
+      ],
+      "sha256": "4ff6924b6898c981cb3f7c84d209397f31ff6713a67355bdb98e301ea4694bde",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/materials.png"
+      ]
+    },
+    {
+      "name": "celebration-sign",
+      "size": [
+        400,
+        122
+      ],
+      "sha256": "943494f6cc84d9bab9219ad98fb7c062db596efcfb66af1dafc286ac11f0f377",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/materials.png"
+      ]
+    },
+    {
+      "name": "tile",
+      "size": [
+        310,
+        302
+      ],
+      "sha256": "4aef2efb94d714efbb19cf88152f6f5c515dcfe63b4de5c7c828d96be4dc7829",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/materials.png"
+      ]
+    },
+    {
+      "name": "sheep-cheer",
+      "size": [
+        358,
+        400
+      ],
+      "sha256": "a434a3bd0c6b7f1b351c9cf31f69329f4b4889b305e03ef4ce459b68031826fd",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/celebrate.png"
+      ]
+    },
+    {
+      "name": "spirit-cheer",
+      "size": [
+        400,
+        358
+      ],
+      "sha256": "5b85f6d73373ab93c5ef601ee00b2928f4cbd060f0babe4c2597b2331fb08366",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/celebrate.png"
+      ]
+    },
+    {
+      "name": "tool-ivory",
+      "size": [
+        400,
+        239
+      ],
+      "sha256": "83b61394e555778b61e13b6b435fe0727a087822b31d0d4ce58bd071bce4f7cf",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/tools.png"
+      ]
+    },
+    {
+      "name": "tool-gold",
+      "size": [
+        400,
+        238
+      ],
+      "sha256": "2c0dff6a3941db7d3d8cf81863f65b2c2c3dbf05af673157de882346fc976a75",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/tools.png"
+      ]
+    },
+    {
+      "name": "icon-paw",
+      "size": [
+        337,
+        330
+      ],
+      "sha256": "45435baeabed9dbfe70e20ef6d7303cb92902736e991ad0e1b3b509160af0618",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/tools.png"
+      ]
+    },
+    {
+      "name": "icon-back",
+      "size": [
+        377,
+        305
+      ],
+      "sha256": "5dcafc9df018776b44e798fc08c330d0c24efd4a6c629d8c1d8cfcac1a941c32",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/tools.png"
+      ]
+    },
+    {
+      "name": "icon-check",
+      "size": [
+        332,
+        332
+      ],
+      "sha256": "269ea52222fb87a60643aa1724eae90fee963ed2fa5dcc92b1f4644e505347ae",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/tools.png"
+      ]
+    },
+    {
+      "name": "chapter-ribbon",
+      "size": [
+        400,
+        173
+      ],
+      "sha256": "0cdf6377549692dc0717862e2e7e3a27a6208f6007041b268f2f22033aedfdc8",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/tools.png"
+      ]
+    },
+    {
+      "name": "flower-0",
+      "size": [
+        344,
+        344
+      ],
+      "sha256": "f2b182b855fce57bb27e7c97cc0301442a4d7403c809c4fb9307fbd6ded1094a",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/flowers.png"
+      ]
+    },
+    {
+      "name": "flower-1",
+      "size": [
+        341,
+        341
+      ],
+      "sha256": "1c9a251f43bee8e1d6dea04f77104ac3074ac735f1d9822a264580a8b912c33b",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/flowers.png"
+      ]
+    },
+    {
+      "name": "flower-2",
+      "size": [
+        347,
+        347
+      ],
+      "sha256": "daafbe60a872a38d1de21165762ca124b402b7f01d2ccbb58efb1505ba146023",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/flowers.png"
+      ]
+    },
+    {
+      "name": "flower-3",
+      "size": [
+        347,
+        347
+      ],
+      "sha256": "306be0c50d3278926b19acc3e917c6aa44274a6476617610a7909699204bbf30",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/flowers.png"
+      ]
+    },
+    {
+      "name": "flower-4",
+      "size": [
+        357,
+        357
+      ],
+      "sha256": "5161a8a9be4b28560dafaaad4ea5130e2dfd2df8285d6e7e8dc7bf453875b585",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/flowers.png"
+      ]
+    },
+    {
+      "name": "flower-5",
+      "size": [
+        346,
+        346
+      ],
+      "sha256": "fb43c1805633c7f836b6bf0daedadaecdbd9b3c929787ab36f8fc6fa0ccc1c64",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/flowers.png"
+      ]
+    },
+    {
+      "name": "flower-6",
+      "size": [
+        342,
+        342
+      ],
+      "sha256": "4f3800e226a79b9bbf8316b7361acf2b61f190892679147a9082048941ee8685",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/flowers.png"
+      ]
+    },
+    {
+      "name": "flower-7",
+      "size": [
+        359,
+        359
+      ],
+      "sha256": "e21bdb61b33c86d401400150f0836ee6a66ed0d660419e1253224489e8e1d0fd",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/flowers.png"
+      ]
+    },
+    {
+      "name": "flower-8",
+      "size": [
+        349,
+        349
+      ],
+      "sha256": "d561aaa8e1359f39390615a6707d386948609f7ddb7034c06be58dea0f94ee34",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/flowers.png"
+      ]
+    },
+    {
+      "name": "flower-9",
+      "size": [
+        341,
+        341
+      ],
+      "sha256": "83e24565a75891131403eb7728ce74f744776e7e1661928cf13b61fbfae12be4",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/flowers.png"
+      ]
+    },
+    {
+      "name": "flower-10",
+      "size": [
+        337,
+        337
+      ],
+      "sha256": "aa9a7932db5bc7e7525162a7060a6b76edbfb89a56d832bca2b0b9fe6134a7a6",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/flowers.png"
+      ]
+    },
+    {
+      "name": "flower-11",
+      "size": [
+        357,
+        357
+      ],
+      "sha256": "f23bdcc248d00bf74913e6fa71b3727f306508a2947b7dd0480316865a567e26",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/flowers.png"
+      ]
+    },
+    {
+      "name": "island",
+      "size": [
+        1100,
+        844
+      ],
+      "sha256": "b355f49e281cc50299764c693a7a60345c14709aafa2fb642ef1b601f3354504",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/island.png"
+      ]
+    },
+    {
+      "name": "logo",
+      "size": [
+        1100,
+        344
+      ],
+      "sha256": "ee3b97446491be9413e44a0b157434aafde3dc6d96292fd9334799702a2eaaf2",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/logo.png"
+      ]
+    },
+    {
+      "name": "pipe-source",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "6069a8aa8c270bc050077da1fd3996b5fc35fbd9f03ba14df76c76c64f55b76b",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/pipe-source.png"
+      ]
+    },
+    {
+      "name": "reward-ribbon",
+      "size": [
+        768,
+        125
+      ],
+      "sha256": "9fa353ed895409eb6127a81d9a6999aa65ed379dd0b388a56345060d390d2df2",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/wide-panels-v2.png"
+      ]
+    },
+    {
+      "name": "repair-sign",
+      "size": [
+        768,
+        104
+      ],
+      "sha256": "5c5a60c25c3407c36d717c740794d6c7f01da5ae0525c3df3658b6c6169ae672",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/wide-panels-v2.png"
+      ]
+    },
+    {
+      "name": "icon-shop",
+      "size": [
+        466,
+        466
+      ],
+      "sha256": "1d90d97d3f782c66c58dc28f905b85ec63729ea4ea45a3eabb0662d6f581b18b",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/ui-details-v2.png"
+      ]
+    },
+    {
+      "name": "settings-button",
+      "size": [
+        378,
+        378
+      ],
+      "sha256": "1cecc0629c8de25f2c11cd0fc9a28ed43b922506a8a1a98253ebb0d5b9cb2b71",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/ui-details-v2.png"
+      ]
+    },
+    {
+      "name": "facility-frame",
+      "size": [
+        700,
+        275
+      ],
+      "sha256": "30a7933837e246f59609e142e38df64976df3a5ad09d9a0c4f4a9564504c0966",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/ui-details-v2.png"
+      ]
+    },
+    {
+      "name": "status-panel",
+      "size": [
+        768,
+        106
+      ],
+      "sha256": "e8f49b964d3b8b7c3947a17ee387478395b64f20e3ee8830d2d15f71eef057ca",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/wide-panels-v2.png"
+      ]
+    },
+    {
+      "name": "exhibit-carousel",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "7d6ee151fc5948c9f7cda08e0325b61989cf04087c9c16fd66148b3055316c88",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-carousel.png"
+      ]
+    },
+    {
+      "name": "exhibit-wheel",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "cd8fcb7292ae0bb9979980d4246ef5e91f3accb48754b13ecd4115b31f45f56f",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-wheel.png"
+      ]
+    },
+    {
+      "name": "exhibit-fountain",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "2295d60a2093a3f29670dd658aa2aae98dc45c812c55392635e6314989c9b073",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-fountain.png"
+      ]
+    },
+    {
+      "name": "exhibit-arch",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "cfa0a3261fbf71dc86543f8899e37720dd84ea7494f55f8d7b7b9333d422f64b",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-arch.png"
+      ]
+    },
+    {
+      "name": "exhibit-lamp",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "0996f0c0522a9d2bedf48298d39584bea1879280fb45aaac53ff92390490c687",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-lamp.png"
+      ]
+    },
+    {
+      "name": "exhibit-stage",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "ddfa9a993a8a91e1dcf64ef7cc9eab6802d47ef05b04433685707265fff8e0ec",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-stage.png"
+      ]
+    },
+    {
+      "name": "exhibit-balloon",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "2fe6c0d693c42100020c62d8be95fb7f59538d7d0d096749304b87a5f691b16a",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-balloon.png"
+      ]
+    },
+    {
+      "name": "exhibit-train",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "bab5d77e60a7eb38915399c7898aee2d1507928f948351fc34e354bf1b878983",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-train.png"
+      ]
+    },
+    {
+      "name": "exhibit-aquarium",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "2f0e1f611a2898a042ecbd183e30b823291ad3e9e02dc421be57d291b30815ee",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-aquarium.png"
+      ]
+    },
+    {
+      "name": "exhibit-telescope",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "72fa1a5b89b7460a8580ea4f389afc5f4630ce660d620bd0efc97a711d52ab8b",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-telescope.png"
+      ]
+    },
+    {
+      "name": "exhibit-toy",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "363a10fd6266d73c944d27ea0c3a16bb8c6ce246576b0b55706d59ada173c96a",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-toy.png"
+      ]
+    },
+    {
+      "name": "exhibit-clock",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "a110a2a4b63deec5a0d0bdcc003037e9b16708dbdcb15478451fcf05a7ea3fb4",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/exhibit-clock.png"
+      ]
+    },
+    {
+      "name": "exhibit-001",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "5f3fa13edaf67330555391d9b89ab8a8f8c01be665c4d080132bc4cab5a49849",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-001.webp"
+      ]
+    },
+    {
+      "name": "exhibit-002",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "f283397bbbb03778fe7e8646e14fa182d4932ea5b7674c1123665430801d5edf",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-002.webp"
+      ]
+    },
+    {
+      "name": "exhibit-003",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "cd7b81f6bb6290f3daf19605960c5840e7c5720fd5584e44c54025b645f0b6b3",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-003.webp"
+      ]
+    },
+    {
+      "name": "exhibit-004",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "37522ea8fc2e217d4c8454ca3ee6e71ca150d21faf5cfcbb7733da72c5d50b97",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-004.webp"
+      ]
+    },
+    {
+      "name": "exhibit-005",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "fc9446cce2954414293ed2644ec18e3551ab52af3ce46e352fae4f38b6fa2557",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-005.webp"
+      ]
+    },
+    {
+      "name": "exhibit-006",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "8d23690b055c2df746d24f7cb621d93969c3a6a48fd3f32ea98c487f921998dc",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-006.webp"
+      ]
+    },
+    {
+      "name": "exhibit-007",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "4245c859346f5bd6ab7e2562af223316a240dc4c6ede86635ad87daad11c465b",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-007.webp"
+      ]
+    },
+    {
+      "name": "exhibit-008",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "68413ab494e71f942be9f60a8d4e3b2bd4b836cb1925d471f206830aff0d844a",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-008.webp"
+      ]
+    },
+    {
+      "name": "exhibit-009",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "3ae7cafd751b19fffa0e40636bcf9327e2142ee523040591a8e4326348237508",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-009.webp"
+      ]
+    },
+    {
+      "name": "exhibit-010",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "c836a843fa57ee19c075feade69ef248544d8ffcfa2133908ba81123b9bd5e22",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-010.webp"
+      ]
+    },
+    {
+      "name": "exhibit-011",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "82c3521b3d98a9c16f90fdfce4637f59ade2b903e4f17e2522c2386f4428da2c",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-011.webp"
+      ]
+    },
+    {
+      "name": "exhibit-012",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "c6254da019a3b759a84bf5f3b5b39e20c3ee664674c623502ad506b928cd114a",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-012.webp"
+      ]
+    },
+    {
+      "name": "exhibit-013",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "33306ada03dee66171979d6b8e8f9eec1e68dad89df22749813cc44e72def3e8",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-013.webp"
+      ]
+    },
+    {
+      "name": "exhibit-014",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "26578ea49091fba98c726ecb4cf775293393340e180d0765d8703d811d05b106",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-014.webp"
+      ]
+    },
+    {
+      "name": "exhibit-015",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "c8d36db4bb5404db1fd59372919cbe61f1d75996c6d17bb9c1c3c71a7704bb4d",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-015.webp"
+      ]
+    },
+    {
+      "name": "exhibit-016",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "17581054425142161e08faaff20c781b15118a53e13634b89a404a9088cd7509",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-016.webp"
+      ]
+    },
+    {
+      "name": "exhibit-017",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "2ae294720dd9b0d9ef39d84b6d0b4e0deae204bb2598eb13ba7fa9da8909fbfd",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-017.webp"
+      ]
+    },
+    {
+      "name": "exhibit-018",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "add8d5556e699ef8501172c2f59a8b10f423579b0cca3f261ee943f03c17a160",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-018.webp"
+      ]
+    },
+    {
+      "name": "exhibit-019",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "0fcf0bf7e2dd39d2444f9974c3fe59729f7769ab115fb514006e0d9db0b41bf1",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-019.webp"
+      ]
+    },
+    {
+      "name": "exhibit-020",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "9c0dcc9b8d829e20c08c32adc7d107696be65e1c5c7b9b2e382ad900b02141ee",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-020.webp"
+      ]
+    },
+    {
+      "name": "exhibit-021",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "9aa53efd87b8b2c7d2bac241ec02f9f5fe7797d7dba42ce56e7743bd5f6e0363",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-021.webp"
+      ]
+    },
+    {
+      "name": "exhibit-022",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "a66c7931cc97f5399a1faf9c14b224d440f0fac79c66dd0f7abba17ee5dee17f",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-022.webp"
+      ]
+    },
+    {
+      "name": "exhibit-023",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "7e39a0dd4bf182ca9c3ba3cd28ab73892c5a9cdfb5efdbcf3d3975afc49bd7a7",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-023.webp"
+      ]
+    },
+    {
+      "name": "exhibit-024",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "f902bde4eaa1284f57416d2b0836e9b9a434fae4b866a5a8ed5131471ea3dc3f",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-024.webp"
+      ]
+    },
+    {
+      "name": "exhibit-025",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "380973e9ab7b25fce3196eafa30a70c3a018bd877bc710522e9a5ab1175a15a9",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-025.webp"
+      ]
+    },
+    {
+      "name": "exhibit-026",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "a45f2f16072c6283b30a9fdafcecac4a06637b4e4ea1c9291f78565997efa030",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-026.webp"
+      ]
+    },
+    {
+      "name": "exhibit-027",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "cb344e1860ac77aaa43d22953e53f1fc642e202526445a18bf5e3feb3cf2e52b",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-027.webp"
+      ]
+    },
+    {
+      "name": "exhibit-028",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "3b097906432dc183e504348d2c29521857cf20b6497bce4851828a0668bc5300",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-028.webp"
+      ]
+    },
+    {
+      "name": "exhibit-029",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "945e7cb8b04eb795e72cff7b4ba5147e25175f00e838748fab7c55a352e0908c",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-029.webp"
+      ]
+    },
+    {
+      "name": "exhibit-030",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "b25005d6be1f394e4cb792374519e5a0e7b6ccbb7ba44e2e9bbe678e489f68f4",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-030.webp"
+      ]
+    },
+    {
+      "name": "exhibit-031",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "03764621e3873ad75a798ff4e9f3431d670ecd5acee3dfedf86b958baa214060",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-031.webp"
+      ]
+    },
+    {
+      "name": "exhibit-032",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "62e317d7d5f14c44a6b61c08b4abd407018236aabcb7f1d0094d05ee4b30f9a9",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-032.webp"
+      ]
+    },
+    {
+      "name": "exhibit-033",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "9e5fc8cdbc608a57b5c11008787d79847a2e95917a3131d3e8cb3f8db4a73663",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-033.webp"
+      ]
+    },
+    {
+      "name": "exhibit-034",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "c63ab4488849f1d4d52eb0c6b81f0ba9cdab6d24baca379a4d524df0cead5597",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-034.webp"
+      ]
+    },
+    {
+      "name": "exhibit-035",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "78fd8f218d266aae2c1d019d23adaa8bbd633a3c4d21d6fb48423decbdb0fd6c",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-035.webp"
+      ]
+    },
+    {
+      "name": "exhibit-036",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "3a78ab7058759eeaf303ab1c8eef3457583c69a40e4d8932ddc13f1880c0e111",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-036.webp"
+      ]
+    },
+    {
+      "name": "exhibit-037",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "9dec055658cb673c1a49266f3f50ed8944162f300ec161bef20c8bcff6f2f9ef",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-037.webp"
+      ]
+    },
+    {
+      "name": "exhibit-038",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "c99ad9dc7339f2e8bc61b009b0664cd57ba777642b6922dd85f9b85da9c68eb0",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-038.webp"
+      ]
+    },
+    {
+      "name": "exhibit-039",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "0d134d48f3d41b10343f148c787acbbd5688ad4c4143f0e9a3e2755eefe8a1d8",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-039.webp"
+      ]
+    },
+    {
+      "name": "exhibit-040",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "110da4343dfdd70c7a3a9804cb67ba604fa6670d5055b9ea95e19dadb93266e1",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-040.webp"
+      ]
+    },
+    {
+      "name": "exhibit-041",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "480e3efb2fd4d15df45cc2168214d54504c8083e8b0e14e1b2bb2c7b454c8555",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-041.webp"
+      ]
+    },
+    {
+      "name": "exhibit-042",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "ea8c8677344d4ec94ebeb7fdfd82b34f5f6606df6f11a268acd9ceebd4c9ac0e",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-042.webp"
+      ]
+    },
+    {
+      "name": "exhibit-043",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "f54613bd9b8ea70c375b58078a2c797168b49d2db327b6c46d10aa0ec33888c2",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-043.webp"
+      ]
+    },
+    {
+      "name": "exhibit-044",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "36bc27cc2ca79c7e7172243ff989ee40c6c211dbe90861bd954fbd50b8489637",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-044.webp"
+      ]
+    },
+    {
+      "name": "exhibit-045",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "4d6fcbe25a0bf030aa76a5abe9347ab8360d37e98c996d14ff7dad251f28bc1b",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-045.webp"
+      ]
+    },
+    {
+      "name": "exhibit-046",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "ca14300b3f363cb7f178b20bc167f4eff261884bdd0f31c070167f39cd62eb25",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-046.webp"
+      ]
+    },
+    {
+      "name": "exhibit-047",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "31de4fbf97d4c7ef06d0282038064e21deb85a65ec55369df56675720bee3b21",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-047.webp"
+      ]
+    },
+    {
+      "name": "exhibit-048",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "8071d6f89d1cf3722b6fdcf008062d025824b252a2bfe71fe29f80257ba4b33b",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-048.webp"
+      ]
+    },
+    {
+      "name": "exhibit-049",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "40d08edd01e0459df069e16d7a200d9a1812181b40fe909f4a6d89a711e7e46d",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-049.webp"
+      ]
+    },
+    {
+      "name": "exhibit-050",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "62ad17e7c225950175f9ad913601dad7ff4aff9f4defc4fc3429bef55400d3f9",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-050.webp"
+      ]
+    },
+    {
+      "name": "exhibit-051",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "5ac05e13e5245181d552f382ee4ec087e8a857cf1e94135922e140180cb58b31",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-051.webp"
+      ]
+    },
+    {
+      "name": "exhibit-052",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "184be05445607cb24a688d23179703f9dde859090fdfe428705bf4b03bab873d",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-052.webp"
+      ]
+    },
+    {
+      "name": "exhibit-053",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "ea95cb8123e0f1d8e9ff70539c632bb904e20d4b513a078ca916ca185f7eec9e",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-053.webp"
+      ]
+    },
+    {
+      "name": "exhibit-054",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "b45ca169895823cdef3110387bbc31be2157416580c49f5abfa753ee13255bb0",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-054.webp"
+      ]
+    },
+    {
+      "name": "exhibit-055",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "6bbf5d1a1626b41fae6f749969451f37a84de589d605dd4e64ab6e48920d74e3",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-055.webp"
+      ]
+    },
+    {
+      "name": "exhibit-056",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "c8a7daed5ffc41384bbc0da0f01eebc2c5b77d2452fb036a9d4141b7fe910113",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-056.webp"
+      ]
+    },
+    {
+      "name": "exhibit-057",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "816a97910c7a5071c23f449ba057e6587f26c370a69f441655b2f9f74a85abbd",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-057.webp"
+      ]
+    },
+    {
+      "name": "exhibit-058",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "717145d7c29c75dc80475fb49a0bc4e157667d573fcdb0201899199ae45cf30d",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-058.webp"
+      ]
+    },
+    {
+      "name": "exhibit-059",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "bd0ea3fda50d6edbf719088d744e677fa1176902481f540aec76a793a52e5705",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-059.webp"
+      ]
+    },
+    {
+      "name": "exhibit-060",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "3d2949ceff134af0d8d35a95827520f860f70637d4e5cda6fbf92994c05efa49",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-060.webp"
+      ]
+    },
+    {
+      "name": "exhibit-061",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "a6d3968b8f4e14fc6ae3b2b9e5b1c65b32493f898f97b329a3c36995822fc7e4",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-061.webp"
+      ]
+    },
+    {
+      "name": "exhibit-062",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "764d6758975bf58bcb37159e0ebc6d3566a9457a9111c3e7c5583a10deb77994",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-062.webp"
+      ]
+    },
+    {
+      "name": "exhibit-063",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "fd516f6cc7eff4254937cfe2239ec8391e2933b3d744439bf53924f90f3aee3c",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-063.webp"
+      ]
+    },
+    {
+      "name": "exhibit-064",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "c158f1a3fa2e727dad1a78d35c7cba860dec429b0b3730cc1479cbf586c70cce",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-064.webp"
+      ]
+    },
+    {
+      "name": "exhibit-065",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "726ca09ad19a260d161c31ae17940189e9ec70e2d9e85f2417b0401720753433",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-065.webp"
+      ]
+    },
+    {
+      "name": "exhibit-066",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "aac35d9655ecb45f16634c6c22572a6c81d9d4eaf8815e8b4a42d6652bd026fc",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-066.webp"
+      ]
+    },
+    {
+      "name": "exhibit-067",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "c0e36e0010b381fff8a3548db87d621ac1679795b09a564145d15e15fdc2733f",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-067.webp"
+      ]
+    },
+    {
+      "name": "exhibit-068",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "5e79fec249e8cdac0a8b4d71188925b4eecee4fa5916a4007ccbd6828d4fc7db",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-068.webp"
+      ]
+    },
+    {
+      "name": "exhibit-069",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "891590d0ca375bd8c65f669c551c72cec08c6f2822fb050ab8aaed3c130e413a",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-069.webp"
+      ]
+    },
+    {
+      "name": "exhibit-070",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "fbf0376d467eb388e7c24de83e85b9a81aa4a6b5448b2fec3fe61ea030f7802d",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-070.webp"
+      ]
+    },
+    {
+      "name": "exhibit-071",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "4a77d6a57a285c74a1b3e14a5fd6cab3ce3a10ec430218a312e181a95b59bfd3",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-071.webp"
+      ]
+    },
+    {
+      "name": "exhibit-072",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "ec9eb15bc2f987d453b84c017e3ee2e885dd0915a18f316a271c5c140b67b0a3",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-072.webp"
+      ]
+    },
+    {
+      "name": "exhibit-073",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "f6ed8b072fb8f0fa17eabbf1dfa7d3cade2e32e17894769245fbbd6222d1d602",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-073.webp"
+      ]
+    },
+    {
+      "name": "exhibit-074",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "64c255e1a05eee677cf6eeef01bb7eafeef630759b0d92fa701497ce0e700c56",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-074.webp"
+      ]
+    },
+    {
+      "name": "exhibit-075",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "3e31be1a3be10ae9795218ecd49424a308df302f662f7e1445bf97b20eba9e29",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-075.webp"
+      ]
+    },
+    {
+      "name": "exhibit-076",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "a292ebb54dbed37647cdeecf0a996cf4d20d65e13d7a19960bfb823e488c1575",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-076.webp"
+      ]
+    },
+    {
+      "name": "exhibit-077",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "5a06c0d19bd2d48a841b994d10d3ecc38de43907178c14ba88a358635acda876",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-077.webp"
+      ]
+    },
+    {
+      "name": "exhibit-078",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "1ce369b30eb2c5efcaa77181e6afe15e2baa82ebb8fd5f185de74796cba903a2",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-078.webp"
+      ]
+    },
+    {
+      "name": "exhibit-079",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "ad19f6b49c922b912590ed73db4376cadffe0c71dd7c1ceba82341f6d693c828",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-079.webp"
+      ]
+    },
+    {
+      "name": "exhibit-080",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "9ab5bae9870caac9769df3cf6d6249b1d378390d6a0d14fedc5a01cd7e6cbea6",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-080.webp"
+      ]
+    },
+    {
+      "name": "exhibit-081",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "d9c85728a3e9a8ca0800cc52eb68f9b7b7205c5eccf027586aaa4fabcb143275",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-081.webp"
+      ]
+    },
+    {
+      "name": "exhibit-082",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "3c34f248490d9b2ed1e809c3d6f82e813ffe3b459f3902b3ed9a324ed1f1a563",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-082.webp"
+      ]
+    },
+    {
+      "name": "exhibit-083",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "3afaf647cb19db98cd8b6b842fa61a247afc77e348095469d6f290ea4d356408",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-083.webp"
+      ]
+    },
+    {
+      "name": "exhibit-084",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "9c7e2fba9e726a6c8697c2fee71bc77b83afc7ca2ad92aa8b8ff874eb2afee77",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-084.webp"
+      ]
+    },
+    {
+      "name": "exhibit-085",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "b2c5ed1ad112f5992f9ae9b6b05f166cc2e6b6a07733082ded08ee58f16e5bcc",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-085.webp"
+      ]
+    },
+    {
+      "name": "exhibit-086",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "9a151c9bcc4268333f0db97c39668b567b6273e2fb07272e92d05a2e90f92fca",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-086.webp"
+      ]
+    },
+    {
+      "name": "exhibit-087",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "3e8101cecfb0e78b23bb879559aba28d8829548d624c55fb9445281cd6077435",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-087.webp"
+      ]
+    },
+    {
+      "name": "exhibit-088",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "b28c3ab2476072d58653585705f78037c714d1125975e0847597a81d4a4a0b46",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-088.webp"
+      ]
+    },
+    {
+      "name": "exhibit-089",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "96364e22ba486fc832ef896a82f97009362373434f71ff88eb21fb62f06a9388",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-089.webp"
+      ]
+    },
+    {
+      "name": "exhibit-090",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "86210aa19e3706a54331e7cb41ebe33a1686a7bd14a8de28a753b90977fa029d",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-090.webp"
+      ]
+    },
+    {
+      "name": "exhibit-091",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "a8a8b552516e679e93a8ed76088dbac6a81d28587b22ce90ceaf2f0bd7bc526c",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-091.webp"
+      ]
+    },
+    {
+      "name": "exhibit-092",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "370e13aa2ca2f9a14e6688695b8dbcb7c8df751026a91b5e31df0f3b6327c4f3",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-092.webp"
+      ]
+    },
+    {
+      "name": "exhibit-093",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "3c2853d910d9c3f635d79e43863aa4bf417a88bd4a4c367dcf4ef5515ecc5712",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-093.webp"
+      ]
+    },
+    {
+      "name": "exhibit-094",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "d88e8902d24a37cd1cd8603d175a89ac79191bcf0a91258f87386b4891f5c67e",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-094.webp"
+      ]
+    },
+    {
+      "name": "exhibit-095",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "6f46d5f9da9bc91c91167ade75026d5689cd59b78a9aaf94a94da26f428c22de",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-095.webp"
+      ]
+    },
+    {
+      "name": "exhibit-096",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "74a3a2053fd32b4da018e8223b739ad41e7394920b3b464cb0d6866e408518c5",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-096.webp"
+      ]
+    },
+    {
+      "name": "exhibit-097",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "8eef4a988712a10b262faba8eb6e6cbf08ccaea9e495035461d0ad439697bac5",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-097.webp"
+      ]
+    },
+    {
+      "name": "exhibit-098",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "4ba995ccddbacdecdc3c3562b1bf85c6537e983e032387ccf3d0923ee9069a2b",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-098.webp"
+      ]
+    },
+    {
+      "name": "exhibit-099",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "b7e091d605aec37703d8f6f45248a01c5ac9bd44308d23407e26be13d4b5c8d6",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/exhibit-icons/unique-099.webp"
+      ]
+    },
+    {
+      "name": "icon-lens",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "4e5b603a6709fa455c9c5d46d197b882b4f8f7892111e841366a0036ea6aef9c",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/shop/icon-lens.png"
+      ]
+    },
+    {
+      "name": "icon-coil",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "30dbcd964a0474bbb44297fbfe5fe6c784d2e6e7f9cfe551aef913c6defbf973",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/shop/icon-coil.png"
+      ]
+    },
+    {
+      "name": "outfit-sheep-starlight",
+      "size": [
+        951,
+        1017
+      ],
+      "sha256": "5ff2fd4c46a045251147adb605543653265b914656e8475aea1d4b5de7113916",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/shop/shop-sample-sheep-starlight.png"
+      ]
+    },
+    {
+      "name": "outfit-rabbit-starlight",
+      "size": [
+        719,
+        1024
+      ],
+      "sha256": "3c02b55b59fdd96587fa367e5853cd8f23dad50d8662c2c252b12bc4a8f860c6",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/shop/shop-sample-rabbit-starlight.png"
+      ]
+    },
+    {
+      "name": "outfit-spirit-starlight",
+      "size": [
+        988,
+        1015
+      ],
+      "sha256": "7aece58210ba43f54681ea1e18e6fd8526209973a1e878e1380fa8df00a6d030",
+      "has_alpha": true,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/shop/shop-sample-spirit-starlight.png"
+      ]
+    },
+    {
+      "name": "mood-sheep-happy",
+      "size": [
+        144,
+        100
+      ],
+      "sha256": "2799fd8dd244d78e08a4a263178fd63a52a988f3f405bdcdd36ec1858753143d",
+      "has_alpha": true,
+      "sources": [
+        "assets/energy_park_art_pack_v1/02_characters/expressions/xingya_happy.png"
+      ]
+    },
+    {
+      "name": "mood-rabbit-happy",
+      "size": [
+        144,
+        132
+      ],
+      "sha256": "981ebed42878839dbcea7988f3f7383a84c8f1247ce0d46cc46f936ff52034cd",
+      "has_alpha": true,
+      "sources": [
+        "assets/energy_park_art_pack_v1/02_characters/expressions/yunrong_happy.png"
+      ]
+    },
+    {
+      "name": "mood-spirit-happy",
+      "size": [
+        144,
+        136
+      ],
+      "sha256": "bd1eb5c1799170a19f3f45c437ab674bee5e353890972e7e4fb91c6edbb4726c",
+      "has_alpha": true,
+      "sources": [
+        "assets/energy_park_art_pack_v1/02_characters/expressions/boling_happy.png"
+      ]
+    },
+    {
+      "name": "mood-joy",
+      "size": [
+        512,
+        256
+      ],
+      "sha256": "3db0cc277619899c56292470e5573f51965a960f1dea0f8e2687ca8ec526068b",
+      "has_alpha": true,
+      "sources": [
+        "assets/energy_park_art_pack_v1/02_characters/expressions/xingya_happy.png",
+        "assets/energy_park_art_pack_v1/02_characters/expressions/yunrong_happy.png",
+        "assets/energy_park_art_pack_v1/02_characters/expressions/boling_happy.png"
+      ]
+    },
+    {
+      "name": "theme-calm-preview",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "c394c59c078e5b41da2880c8eb56ea69d680617b23d9aeb9da9c22bf216db673",
+      "has_alpha": false,
+      "sources": [
+        "docs/UI设计稿2.0/generated-sources/shop/theme-calm-home-390x844.png"
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "page": "home",
+      "reference": "1.png",
+      "runtime": "home-361x727.png",
+      "size": [
+        361,
+        727
+      ],
+      "mean_absolute_channel_error": 62.994,
+      "note": "同尺寸像素差只定位差异；真实关卡、资源、步数、字体和重新生成的插画均产生差异，不作为还原率。"
+    },
+    {
+      "page": "play",
+      "reference": "2.png",
+      "runtime": "play-897x1752.png",
+      "size": [
+        897,
+        1752
+      ],
+      "mean_absolute_channel_error": 58.473,
+      "note": "同尺寸像素差只定位差异；真实关卡、资源、步数、字体和重新生成的插画均产生差异，不作为还原率。"
+    },
+    {
+      "page": "victory",
+      "reference": "3.png",
+      "runtime": "victory-897x1754.png",
+      "size": [
+        897,
+        1754
+      ],
+      "mean_absolute_channel_error": 66.628,
+      "note": "同尺寸像素差只定位差异；真实关卡、资源、步数、字体和重新生成的插画均产生差异，不作为还原率。"
+    }
+  ],
+  "screens": [
+    {
+      "file": "bag-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "d213ffa50bd96dcf8428f813d041e1872d335076440c75b3718815298d6e465b"
+    },
+    {
+      "file": "editor-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "de01004a199d8aa6022dfa1abc2f4340f1f6b6c300e28215aa24d81b8ee88992"
+    },
+    {
+      "file": "editor-connected-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "1289345f9ac0755ec35b1c66e072a201b440f2015b97162cfd9c75df24e485cf"
+    },
+    {
+      "file": "editor-victory-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "0772508cc9efbfd224314251a5fe893dc44ec41c3a9bcd597ef7cb2bf165b4c8"
+    },
+    {
+      "file": "endless-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "45d61f3005a847250560b3fc80120f8f81eec7f41e67f0de104d22b510d4e04f"
+    },
+    {
+      "file": "endless-select-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "60da3df894ef794ce1da9ecd4f3ccd4d3d92b766f913f02f9b20b2c5d0bb9761"
+    },
+    {
+      "file": "flora-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "1f32a6f122f5ca0dda9e6de6d067538ccbb4df1ba694546c8a909490d9c67e63"
+    },
+    {
+      "file": "flow-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "dd3c1ec4dc98ad44ec278bbf13ba7646f49557a4d1ade956689d4a38c2965cd9"
+    },
+    {
+      "file": "flower-detail-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "864743c9cfab532faa24c61821a02ff9105ef11353c8085e5ef1a1c6ca312bca"
+    },
+    {
+      "file": "hint-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "2d0360c97b01a5b6164ea486d8bf5a7bb2302c86a1a2bfde0f65973b84cd5281"
+    },
+    {
+      "file": "history-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "a5ce6ddc1680eb837022e620e068ed713db151a68e2c005bd6537929bc6dd44f"
+    },
+    {
+      "file": "home-360x640.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "sha256": "7c2134111047a5609773af886e9055bfad503215b968643a1dcaa32fcfd69d36"
+    },
+    {
+      "file": "home-360x800.png",
+      "size": [
+        1080,
+        2400
+      ],
+      "sha256": "1df67f70121d0e17ce8a32decb13aef225bb63ac485a586ca844c277c8d77432"
+    },
+    {
+      "file": "home-361x727.png",
+      "size": [
+        361,
+        727
+      ],
+      "sha256": "e0c09a667562424ca38bbbcefa26aa4349b29c83b5406f5a935b537f0a76e6a4"
+    },
+    {
+      "file": "home-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "bd92424a540c77bb4b6affffc135d6bdafb7537381569a926ff257b176360788"
+    },
+    {
+      "file": "home-720x1280.png",
+      "size": [
+        720,
+        1280
+      ],
+      "sha256": "cc176bfbeb4486213c811b60f86aca2668ae40f1760caac281d338a9e59f51cb"
+    },
+    {
+      "file": "home-897x1752.png",
+      "size": [
+        897,
+        1752
+      ],
+      "sha256": "dd2435d345bf0f5866ee37628cbd805faf88eac7522c7cd9795227f61b867a23"
+    },
+    {
+      "file": "home-897x1754.png",
+      "size": [
+        897,
+        1754
+      ],
+      "sha256": "e8483cc14697b71ff2468ead91b97d9b2c7890492636fcd4dc25609acba71560"
+    },
+    {
+      "file": "home-progress-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "5ade737bd31cee1add595b0b008fa076b616e0922f2b4bc67b36aa961b3a6a9a"
+    },
+    {
+      "file": "level24-powered-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "3871e38a60a1d7f5bdb7661ecb970e4ec7f40ed0ac77243b98986ecea9914a1f"
+    },
+    {
+      "file": "level24-start-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "e6e53ee4113c4fdfd433cb86b8896eafb4ff4e71f4d2aeeae5d7152a20e397fd"
+    },
+    {
+      "file": "level41-powered-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "f2d93a73a2e8838864eeece9e3b08ff5a081d89e42aaf21e19d166e0d22c02cb"
+    },
+    {
+      "file": "level41-start-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "876b20a5fc8d6926c01dce113148800be1f9dd61882cfecad686d627e40ce3b2"
+    },
+    {
+      "file": "level61-powered-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "c061dc1a884851a89faa81aabfd85dd4dda55ff899abb2e4eb91c75801759077"
+    },
+    {
+      "file": "level61-start-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "37084281938e444d17c71e71ee126e10bcebaa5293471ca241028ce27ef6ef88"
+    },
+    {
+      "file": "level81-powered-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "6b16d6c1cc63175d77055f159921129c934826543ce3e3ac99b5e5430e140007"
+    },
+    {
+      "file": "level81-start-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "b0908038b73f231189fe2eae6a8875b666ebe43a8bb0049756a3b5b80087f218"
+    },
+    {
+      "file": "levels-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "5056cbe1656cc8dce095fe3f8a544c33c6dfcd84202b35c6a237a7040031bb41"
+    },
+    {
+      "file": "mail-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "de25653949adc1210f0a68f30d39e0c99ca97ff23001add0dc87ec90ed87e52f"
+    },
+    {
+      "file": "onboarding-1-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "1462c7e5c1505cc338c086a44cf0a25bc47541aa0742c680c816624ed95072ba"
+    },
+    {
+      "file": "onboarding-2-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "a780ed1eed1a98d9abb517f4c16fb52e10b23f8b4f278519ab3629bbfd04dd08"
+    },
+    {
+      "file": "onboarding-3-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "c3bc5f08b087382db06cfb9c96e98ad0aa16130c7a59c81bfad53fd08d70c4c0"
+    },
+    {
+      "file": "out-of-steps-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "7006c0a37e4ba5cccf7232c1240a986c593285b3ef6ff7dd84cf451dc3e76139"
+    },
+    {
+      "file": "play-360x640.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "sha256": "ad8ab78c7207bce83b171d6c13295d548f43abacc5f487bcab79791f4aa2d084"
+    },
+    {
+      "file": "play-360x800.png",
+      "size": [
+        1080,
+        2400
+      ],
+      "sha256": "c5e8ddedd34ca8b685c7239c69573a49aff9a2e48d9809c824ebe243ec111ca4"
+    },
+    {
+      "file": "play-361x727.png",
+      "size": [
+        361,
+        727
+      ],
+      "sha256": "3fe88368969102416b7788d6f2a103a8605a7fb6d1eba2456afb3e705c90d0f4"
+    },
+    {
+      "file": "play-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "0607aedc03a6be148304549753a94d6c39ef5cc073e7d9af1090bcf460bc3672"
+    },
+    {
+      "file": "play-720x1280.png",
+      "size": [
+        720,
+        1280
+      ],
+      "sha256": "91f0f4d4b33e5dc7484c4549d93cd8fef799801d645c0989e33a39836a987ca3"
+    },
+    {
+      "file": "play-897x1752.png",
+      "size": [
+        897,
+        1752
+      ],
+      "sha256": "396d15c539c3861e2a8c413ce214f57796f3c459946ee8f747aed6447586928d"
+    },
+    {
+      "file": "play-897x1754.png",
+      "size": [
+        897,
+        1754
+      ],
+      "sha256": "8b166ce622c313f87d477e9b0cd4476fdf96f0f42ac9105bda478adb6b1b0625"
+    },
+    {
+      "file": "profile-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "fe74dc027e33b4d686c6edb240bfa25ba0cd96f49c8b17f3715189571e6a091f"
+    },
+    {
+      "file": "rules-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "632c36038c7b903205c00b35c87cd2dbb8a49f936379560c931872531d4ebf50"
+    },
+    {
+      "file": "settings-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "be51f0c6f3100d24fbe9b9bdb787706d0549d06e872cd24686c6bc178d27a35b"
+    },
+    {
+      "file": "shop-purchased-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "327c92d18d9bc839dca3e3378edf392eb85a17be8016b646508bdfdcdcc344be"
+    },
+    {
+      "file": "story-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "6aee3acc9666f888be033e5658b9800b1753ec0c0bae09df0942ae05ecdd4c6c"
+    },
+    {
+      "file": "tasks-ready-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "a2100903d284725a93f80e19d73e9ba2f6c129b3fb7f7c1e83dedccb4446f9e2"
+    },
+    {
+      "file": "victory-360x640.png",
+      "size": [
+        1080,
+        1920
+      ],
+      "sha256": "4c27a14a97d0463fe5aac5adb0858a42f84b4946f03b1f63ee0012c648721073"
+    },
+    {
+      "file": "victory-360x800.png",
+      "size": [
+        1080,
+        2400
+      ],
+      "sha256": "f656bc0ababc085a92adf003197ba57211d984a34a67d60c5089fce57a11462a"
+    },
+    {
+      "file": "victory-361x727.png",
+      "size": [
+        361,
+        727
+      ],
+      "sha256": "b71d08ec66a7394c01fee29b9ff7b0fc5b515f3819b5337c99bcfc0272a5f684"
+    },
+    {
+      "file": "victory-390x844.png",
+      "size": [
+        390,
+        844
+      ],
+      "sha256": "d795f3af339cc7c9082a0003d6ee0cc79730a2f3c63edac554bde363c27b9769"
+    },
+    {
+      "file": "victory-720x1280.png",
+      "size": [
+        720,
+        1280
+      ],
+      "sha256": "1b28ae21a3851d431119329d89f2b0dc6e120e71ac876e78cab5a03c3fd8daf9"
+    },
+    {
+      "file": "victory-897x1752.png",
+      "size": [
+        897,
+        1752
+      ],
+      "sha256": "f8c4cafbebcd14caa406819feb1fd958f68b33e484c2ba5254f467082abca230"
+    },
+    {
+      "file": "victory-897x1754.png",
+      "size": [
+        897,
+        1754
+      ],
+      "sha256": "f7f7ace53fb105081418a9414a06c9f46933b3a65af3b385ad4e39d5a6a7da6d"
+    }
+  ],
+  "source_snapshot": {
+    "src/App.tsx": "d546e370599d64580b2c1b5eb5670eecbd362a748bbee8746464b67a0115be19",
+    "src/assets/park-font-LICENSE.txt": "babcfe66c8a098b2fa279bc724a3a342f8124f77ce18941fbcc1bbb39823cded",
+    "src/assets/park-font.woff2": "6c9417803655f2c37936c1cf21d67d34f3279e686d90b8f7ac1d183bb4ea3775",
+    "src/buildTag.ts": "77c1fc266f92c9bb6efe7a5736bba6147702462122f8f58b11baf97816bdda36",
+    "src/components/CandyThemeShell.tsx": "a0b9f14d20186a0d3906640456952db23efdbe30c8feff7aeaf88a280a23e75a",
+    "src/components/ErrorBoundary.tsx": "8777e6ef0b055d00c3a6d4f57e257a15ddc16fe5f6e2b583b5e6ae015f044fcd",
+    "src/components/GameBoard.tsx": "5a05a8fe3252440eb8341570ec3352fddb5e2b143cde92f2a3703e311829c8d2",
+    "src/components/LevelEditor.tsx": "78f3f9c6bbd12fcedbacfface5729c1c328666a6dcf0f348cef75a42565ee3d1",
+    "src/components/OnboardingGuide.tsx": "1ee624f03876053dc2ccc7fde3f984b8c235dc76a8cd69f2787ff747570c5a5d",
+    "src/components/ParkArt.tsx": "d9acf081aae9df87a54de98eee0e6a11efba8b1cac0ffa74b4b0979cb3f6c394",
+    "src/components/ShopModal.tsx": "8359089323bf597c477e615affb34c76e5ed2f1cd32fce9db1321da14431ad44",
+    "src/components/TileView.tsx": "9e063a3bd84ff48412693cc8164ed244638272d43aa65911af900bfed8465350",
+    "src/components/WorldMapModal.tsx": "a7886be557bb22fdcb2444487761e1af016ebb6672882419448ef9f30864cdea",
+    "src/content/collection.ts": "3e5b639e1c0ba398c2b5c0ab3dda07647d6f469231e368b9728662bfe23fb027",
+    "src/content/glossary.ts": "aa21f15daa66a55186cb077033ce7793ec23299c6d06e1f229bf66060df3221b",
+    "src/content/index.ts": "3be6f62d1757926c1a2201d4ee789ccfbd2bf79f6f5173718a5ba584fde3d790",
+    "src/content/levels.ts": "7bdbfe90f21abd84de4fd9f680120d0542eb3015d6f7c0991afe9fa4d45d2832",
+    "src/content/world.ts": "d85a51a8187a3358f70be1891d9cc51ea97ed7f2c13d75151e8f026d0df9bad6",
+    "src/content/zones.ts": "5b172705cf7c2180ee46c3df530256c2bdbe8f0e9c88699742d1a1ebdc226e46",
+    "src/data/axisTrialLevels.ts": "893646041fcbf8dac6b8e4f242083ebb7b1e465079ef8f10d3406e38c0102d05",
+    "src/data/chapter1Levels.ts": "9dd7662245cbf4eecc3c5950db64dff369f9c1a6b2f1abf8dc349fc8804cac93",
+    "src/data/chapter1Schedule.ts": "262505d941503533b39cc61a5b6a29278001054760786abb0fff2a9e132e29b7",
+    "src/data/chapter2Levels.ts": "bacdf187bfec434386e59dd1606b2836f46c1596ee7e0c26fd5ac8b0e987b629",
+    "src/data/chapter2Schedule.ts": "e3f6dceae856264c5ca78d438d6813661892eacd4c4fa307ab9016cd86946379",
+    "src/data/chapter3Levels.ts": "7b4530a813dd6ad02b4c28bd400da70939acea52a7f699ab053b1f2831515c8f",
+    "src/data/chapter3Schedule.ts": "a905389c27e871b2da0688a3275adf42c7c78a6b88510b15fb3535c5766b608e",
+    "src/data/chapter4Levels.ts": "d3301402c029715d2d1a7f8114ca817c160d057af0a828bace6439607567c169",
+    "src/data/chapter4Schedule.ts": "460c1ec19c04f002d4860f18e5019a9f0313e110280faf35a2f3bc97278d5024",
+    "src/data/chapter5Levels.ts": "7ae934251db31d57cfa22b44d342f91c4883d7794632d7f05048fea00c16a96e",
+    "src/data/chapter5Schedule.ts": "ce53873eb491c3a3f713b115f49e79655a4d7545370d8b7e3304d52e5c9f8c2b",
+    "src/data/defaultLevels.ts": "7953c251d3e74c2edcbfb2242f12138a777d75e9a0dd9c23923fe0169a85674d",
+    "src/data/gearLevels.ts": "1c8ae3027904e901948d23df6d4a4bdde67c964cef28d0acc1e8950ebcf2daf9",
+    "src/data/gearWeldLevels.ts": "5f7d65e5877bed87ab93f02b30d64ff2c2e2695009a122537d2084f1a09163dc",
+    "src/data/labLevels.ts": "f452302801d965f930f222ebd77b9609662e94ff2adef1f1ddf054e2c1917850",
+    "src/data/phase0Levels.ts": "a73076c620f234191e7ecd3b89c42e0602ded2b23044bd38a6a78aac907037ed",
+    "src/data/shopCatalog.ts": "e6f0935d28d5ab06222960abf3a364708f25b90c7d614fe2e88b611e9e36b125",
+    "src/data/torusLevels.ts": "2ec4c06c01f7c49c7cc1e9b828624c58e70f8c05785327c5be6e2461ffa2e524",
+    "src/data/weldLevels.ts": "20fc394102fd6ea8b564fdff6ca4f078a2413ba9bed8de3aa18e6e02fb9060e2",
+    "src/index.css": "26f7652f7397a735d0ebc6585f047d74ae3f5ff598e3e3a3389f6617bbc6cc91",
+    "src/main.tsx": "dc5d8bb6a2740fa4ee69864885901457f133f46156a0ba7652f82200e7d3b1eb",
+    "src/theme-calm.css": "916d9cf3a88368d9ad05f3013cd1cff92b90d930c6fb3327634900365b2be484",
+    "src/types/achievement.ts": "8db3d0b199282bafa8e235c6249eb57b71ad01af1cc8b91529c5979abfa87d60",
+    "src/types/content.ts": "eae500e6dae562f31a5751d631fc73c6a93249afd5eb76c185906bb97d346f8b",
+    "src/types/game.ts": "85d50a1681d342859096f390d2f537b55881a42ba58ec2b26cf54c554e799e77",
+    "src/types/shop.ts": "59f7daaf73df3175a1630ef8c223bde9941676c1998237237ca8450150897bfe",
+    "src/utils/achievements.ts": "28fe4bcdb7c69ad224e30a2523735ecd1a0c3986eb903cd2b65df75b623bef9c",
+    "src/utils/audio.ts": "2cdf8b23f863ee590187dd86dd3a6f8bb73b3f84dd6f6e1bbfeb54d5572b301d",
+    "src/utils/burden.ts": "942f05e6e4a011e1ecbd147ba565b0ebd13e3fc99378e282834e7380a7aa9a6b",
+    "src/utils/circuit.ts": "5dd31c87bd5953098b28d35cf2214c81a540669d0eb3a48752becd14194097da",
+    "src/utils/confetti.ts": "f4f213434e3ceb3444308bfa48e4dfa8fea0f436909f767c438430b94076ed30",
+    "src/utils/haptics.ts": "f14ced1d232acd71b458102086f4b40f922b714436c23b49873479c4d336fe86",
+    "src/utils/hint-engine.ts": "db06ce9e025fd5bf8f24e1d238f55f2e53c4f80eee5395c733dd237fcedf286e",
+    "src/utils/hint-solver.ts": "a5b10ed18c34f93dd3cd9a03fd12d6795d4ce970f5171708a4cc3a0a243a112b",
+    "src/utils/parkProgress.ts": "78ea4dce61caa9f904f37eaa2dabcc98926f67d7dff7b7cfb83a2277a8409662",
+    "src/utils/parkTheme.ts": "ffe3c49dc085b2986d472b2136b48b92cb10c62c777c6986b8713bd02adb7337",
+    "src/utils/rating.ts": "c4647cf01ee757754cfe880904d35c39b7e28ad2f013c06c7eeba812d162ccca",
+    "src/utils/rule-solver.ts": "3d6e436148c962290eb5d3fcf7ae9b07620d324f5b84461de10368e3e769ff4f",
+    "src/utils/weld-order.ts": "88860b2e8bbb8b42d6ac3a098b562b87fbf622a84b048a9eb8031b2acf78fda1"
+  },
+  "build_snapshot": {
+    "dist/.nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "dist/apple-touch-icon.png": "e65bccb492dd0dc38041b7e7ea9d4141e90ac39bef9b022f26bae73afe84896a",
+    "dist/assets/index-C_CtbPFy.css": "ee66f81c9c1aaf1dd7eb4156fad8a5739ccd2e88a542170112cde763f97138ba",
+    "dist/assets/index-CeibuYac.js": "5f36531eea7ed1cc1a27f2a379a492c5ee37510d9054fba6b0207c003a149f40",
+    "dist/assets/park/_incoming/README.md": "a5b00607b680017f0e3c8dfce7ccdeb2e4117dff22d26493db86985dc7f8867a",
+    "dist/assets/park/background.webp": "d74f13c040cd73166554a7174c70b613ee076291231086b6bae3f03cc35ecc60",
+    "dist/assets/park/button-gold.webp": "fe8c53ad1b78d614be8e521b7c5bc8b840972f0c837aa92dbdc328d9c5e816b7",
+    "dist/assets/park/button-purple.webp": "c3e0208c34c23126739bfe4c5a18a29b04c2803e732e4a42c146489fbb98ea55",
+    "dist/assets/park/carousel.webp": "2064b4c9b75bb6f6aaac56531cc16ae26ac9427aa5615754ea89c4a02bcae2f0",
+    "dist/assets/park/celebration-sign.webp": "943494f6cc84d9bab9219ad98fb7c062db596efcfb66af1dafc286ac11f0f377",
+    "dist/assets/park/chapter-ribbon.webp": "0cdf6377549692dc0717862e2e7e3a27a6208f6007041b268f2f22033aedfdc8",
+    "dist/assets/park/exhibit-001.webp": "5f3fa13edaf67330555391d9b89ab8a8f8c01be665c4d080132bc4cab5a49849",
+    "dist/assets/park/exhibit-002.webp": "f283397bbbb03778fe7e8646e14fa182d4932ea5b7674c1123665430801d5edf",
+    "dist/assets/park/exhibit-003.webp": "cd7b81f6bb6290f3daf19605960c5840e7c5720fd5584e44c54025b645f0b6b3",
+    "dist/assets/park/exhibit-004.webp": "37522ea8fc2e217d4c8454ca3ee6e71ca150d21faf5cfcbb7733da72c5d50b97",
+    "dist/assets/park/exhibit-005.webp": "fc9446cce2954414293ed2644ec18e3551ab52af3ce46e352fae4f38b6fa2557",
+    "dist/assets/park/exhibit-006.webp": "8d23690b055c2df746d24f7cb621d93969c3a6a48fd3f32ea98c487f921998dc",
+    "dist/assets/park/exhibit-007.webp": "4245c859346f5bd6ab7e2562af223316a240dc4c6ede86635ad87daad11c465b",
+    "dist/assets/park/exhibit-008.webp": "68413ab494e71f942be9f60a8d4e3b2bd4b836cb1925d471f206830aff0d844a",
+    "dist/assets/park/exhibit-009.webp": "3ae7cafd751b19fffa0e40636bcf9327e2142ee523040591a8e4326348237508",
+    "dist/assets/park/exhibit-010.webp": "c836a843fa57ee19c075feade69ef248544d8ffcfa2133908ba81123b9bd5e22",
+    "dist/assets/park/exhibit-011.webp": "82c3521b3d98a9c16f90fdfce4637f59ade2b903e4f17e2522c2386f4428da2c",
+    "dist/assets/park/exhibit-012.webp": "c6254da019a3b759a84bf5f3b5b39e20c3ee664674c623502ad506b928cd114a",
+    "dist/assets/park/exhibit-013.webp": "33306ada03dee66171979d6b8e8f9eec1e68dad89df22749813cc44e72def3e8",
+    "dist/assets/park/exhibit-014.webp": "26578ea49091fba98c726ecb4cf775293393340e180d0765d8703d811d05b106",
+    "dist/assets/park/exhibit-015.webp": "c8d36db4bb5404db1fd59372919cbe61f1d75996c6d17bb9c1c3c71a7704bb4d",
+    "dist/assets/park/exhibit-016.webp": "17581054425142161e08faaff20c781b15118a53e13634b89a404a9088cd7509",
+    "dist/assets/park/exhibit-017.webp": "2ae294720dd9b0d9ef39d84b6d0b4e0deae204bb2598eb13ba7fa9da8909fbfd",
+    "dist/assets/park/exhibit-018.webp": "add8d5556e699ef8501172c2f59a8b10f423579b0cca3f261ee943f03c17a160",
+    "dist/assets/park/exhibit-019.webp": "0fcf0bf7e2dd39d2444f9974c3fe59729f7769ab115fb514006e0d9db0b41bf1",
+    "dist/assets/park/exhibit-020.webp": "9c0dcc9b8d829e20c08c32adc7d107696be65e1c5c7b9b2e382ad900b02141ee",
+    "dist/assets/park/exhibit-021.webp": "9aa53efd87b8b2c7d2bac241ec02f9f5fe7797d7dba42ce56e7743bd5f6e0363",
+    "dist/assets/park/exhibit-022.webp": "a66c7931cc97f5399a1faf9c14b224d440f0fac79c66dd0f7abba17ee5dee17f",
+    "dist/assets/park/exhibit-023.webp": "7e39a0dd4bf182ca9c3ba3cd28ab73892c5a9cdfb5efdbcf3d3975afc49bd7a7",
+    "dist/assets/park/exhibit-024.webp": "f902bde4eaa1284f57416d2b0836e9b9a434fae4b866a5a8ed5131471ea3dc3f",
+    "dist/assets/park/exhibit-025.webp": "380973e9ab7b25fce3196eafa30a70c3a018bd877bc710522e9a5ab1175a15a9",
+    "dist/assets/park/exhibit-026.webp": "a45f2f16072c6283b30a9fdafcecac4a06637b4e4ea1c9291f78565997efa030",
+    "dist/assets/park/exhibit-027.webp": "cb344e1860ac77aaa43d22953e53f1fc642e202526445a18bf5e3feb3cf2e52b",
+    "dist/assets/park/exhibit-028.webp": "3b097906432dc183e504348d2c29521857cf20b6497bce4851828a0668bc5300",
+    "dist/assets/park/exhibit-029.webp": "945e7cb8b04eb795e72cff7b4ba5147e25175f00e838748fab7c55a352e0908c",
+    "dist/assets/park/exhibit-030.webp": "b25005d6be1f394e4cb792374519e5a0e7b6ccbb7ba44e2e9bbe678e489f68f4",
+    "dist/assets/park/exhibit-031.webp": "03764621e3873ad75a798ff4e9f3431d670ecd5acee3dfedf86b958baa214060",
+    "dist/assets/park/exhibit-032.webp": "62e317d7d5f14c44a6b61c08b4abd407018236aabcb7f1d0094d05ee4b30f9a9",
+    "dist/assets/park/exhibit-033.webp": "9e5fc8cdbc608a57b5c11008787d79847a2e95917a3131d3e8cb3f8db4a73663",
+    "dist/assets/park/exhibit-034.webp": "c63ab4488849f1d4d52eb0c6b81f0ba9cdab6d24baca379a4d524df0cead5597",
+    "dist/assets/park/exhibit-035.webp": "78fd8f218d266aae2c1d019d23adaa8bbd633a3c4d21d6fb48423decbdb0fd6c",
+    "dist/assets/park/exhibit-036.webp": "3a78ab7058759eeaf303ab1c8eef3457583c69a40e4d8932ddc13f1880c0e111",
+    "dist/assets/park/exhibit-037.webp": "9dec055658cb673c1a49266f3f50ed8944162f300ec161bef20c8bcff6f2f9ef",
+    "dist/assets/park/exhibit-038.webp": "c99ad9dc7339f2e8bc61b009b0664cd57ba777642b6922dd85f9b85da9c68eb0",
+    "dist/assets/park/exhibit-039.webp": "0d134d48f3d41b10343f148c787acbbd5688ad4c4143f0e9a3e2755eefe8a1d8",
+    "dist/assets/park/exhibit-040.webp": "110da4343dfdd70c7a3a9804cb67ba604fa6670d5055b9ea95e19dadb93266e1",
+    "dist/assets/park/exhibit-041.webp": "480e3efb2fd4d15df45cc2168214d54504c8083e8b0e14e1b2bb2c7b454c8555",
+    "dist/assets/park/exhibit-042.webp": "ea8c8677344d4ec94ebeb7fdfd82b34f5f6606df6f11a268acd9ceebd4c9ac0e",
+    "dist/assets/park/exhibit-043.webp": "f54613bd9b8ea70c375b58078a2c797168b49d2db327b6c46d10aa0ec33888c2",
+    "dist/assets/park/exhibit-044.webp": "36bc27cc2ca79c7e7172243ff989ee40c6c211dbe90861bd954fbd50b8489637",
+    "dist/assets/park/exhibit-045.webp": "4d6fcbe25a0bf030aa76a5abe9347ab8360d37e98c996d14ff7dad251f28bc1b",
+    "dist/assets/park/exhibit-046.webp": "ca14300b3f363cb7f178b20bc167f4eff261884bdd0f31c070167f39cd62eb25",
+    "dist/assets/park/exhibit-047.webp": "31de4fbf97d4c7ef06d0282038064e21deb85a65ec55369df56675720bee3b21",
+    "dist/assets/park/exhibit-048.webp": "8071d6f89d1cf3722b6fdcf008062d025824b252a2bfe71fe29f80257ba4b33b",
+    "dist/assets/park/exhibit-049.webp": "40d08edd01e0459df069e16d7a200d9a1812181b40fe909f4a6d89a711e7e46d",
+    "dist/assets/park/exhibit-050.webp": "62ad17e7c225950175f9ad913601dad7ff4aff9f4defc4fc3429bef55400d3f9",
+    "dist/assets/park/exhibit-051.webp": "5ac05e13e5245181d552f382ee4ec087e8a857cf1e94135922e140180cb58b31",
+    "dist/assets/park/exhibit-052.webp": "184be05445607cb24a688d23179703f9dde859090fdfe428705bf4b03bab873d",
+    "dist/assets/park/exhibit-053.webp": "ea95cb8123e0f1d8e9ff70539c632bb904e20d4b513a078ca916ca185f7eec9e",
+    "dist/assets/park/exhibit-054.webp": "b45ca169895823cdef3110387bbc31be2157416580c49f5abfa753ee13255bb0",
+    "dist/assets/park/exhibit-055.webp": "6bbf5d1a1626b41fae6f749969451f37a84de589d605dd4e64ab6e48920d74e3",
+    "dist/assets/park/exhibit-056.webp": "c8a7daed5ffc41384bbc0da0f01eebc2c5b77d2452fb036a9d4141b7fe910113",
+    "dist/assets/park/exhibit-057.webp": "816a97910c7a5071c23f449ba057e6587f26c370a69f441655b2f9f74a85abbd",
+    "dist/assets/park/exhibit-058.webp": "717145d7c29c75dc80475fb49a0bc4e157667d573fcdb0201899199ae45cf30d",
+    "dist/assets/park/exhibit-059.webp": "bd0ea3fda50d6edbf719088d744e677fa1176902481f540aec76a793a52e5705",
+    "dist/assets/park/exhibit-060.webp": "3d2949ceff134af0d8d35a95827520f860f70637d4e5cda6fbf92994c05efa49",
+    "dist/assets/park/exhibit-061.webp": "a6d3968b8f4e14fc6ae3b2b9e5b1c65b32493f898f97b329a3c36995822fc7e4",
+    "dist/assets/park/exhibit-062.webp": "764d6758975bf58bcb37159e0ebc6d3566a9457a9111c3e7c5583a10deb77994",
+    "dist/assets/park/exhibit-063.webp": "fd516f6cc7eff4254937cfe2239ec8391e2933b3d744439bf53924f90f3aee3c",
+    "dist/assets/park/exhibit-064.webp": "c158f1a3fa2e727dad1a78d35c7cba860dec429b0b3730cc1479cbf586c70cce",
+    "dist/assets/park/exhibit-065.webp": "726ca09ad19a260d161c31ae17940189e9ec70e2d9e85f2417b0401720753433",
+    "dist/assets/park/exhibit-066.webp": "aac35d9655ecb45f16634c6c22572a6c81d9d4eaf8815e8b4a42d6652bd026fc",
+    "dist/assets/park/exhibit-067.webp": "c0e36e0010b381fff8a3548db87d621ac1679795b09a564145d15e15fdc2733f",
+    "dist/assets/park/exhibit-068.webp": "5e79fec249e8cdac0a8b4d71188925b4eecee4fa5916a4007ccbd6828d4fc7db",
+    "dist/assets/park/exhibit-069.webp": "891590d0ca375bd8c65f669c551c72cec08c6f2822fb050ab8aaed3c130e413a",
+    "dist/assets/park/exhibit-070.webp": "fbf0376d467eb388e7c24de83e85b9a81aa4a6b5448b2fec3fe61ea030f7802d",
+    "dist/assets/park/exhibit-071.webp": "4a77d6a57a285c74a1b3e14a5fd6cab3ce3a10ec430218a312e181a95b59bfd3",
+    "dist/assets/park/exhibit-072.webp": "ec9eb15bc2f987d453b84c017e3ee2e885dd0915a18f316a271c5c140b67b0a3",
+    "dist/assets/park/exhibit-073.webp": "f6ed8b072fb8f0fa17eabbf1dfa7d3cade2e32e17894769245fbbd6222d1d602",
+    "dist/assets/park/exhibit-074.webp": "64c255e1a05eee677cf6eeef01bb7eafeef630759b0d92fa701497ce0e700c56",
+    "dist/assets/park/exhibit-075.webp": "3e31be1a3be10ae9795218ecd49424a308df302f662f7e1445bf97b20eba9e29",
+    "dist/assets/park/exhibit-076.webp": "a292ebb54dbed37647cdeecf0a996cf4d20d65e13d7a19960bfb823e488c1575",
+    "dist/assets/park/exhibit-077.webp": "5a06c0d19bd2d48a841b994d10d3ecc38de43907178c14ba88a358635acda876",
+    "dist/assets/park/exhibit-078.webp": "1ce369b30eb2c5efcaa77181e6afe15e2baa82ebb8fd5f185de74796cba903a2",
+    "dist/assets/park/exhibit-079.webp": "ad19f6b49c922b912590ed73db4376cadffe0c71dd7c1ceba82341f6d693c828",
+    "dist/assets/park/exhibit-080.webp": "9ab5bae9870caac9769df3cf6d6249b1d378390d6a0d14fedc5a01cd7e6cbea6",
+    "dist/assets/park/exhibit-081.webp": "d9c85728a3e9a8ca0800cc52eb68f9b7b7205c5eccf027586aaa4fabcb143275",
+    "dist/assets/park/exhibit-082.webp": "3c34f248490d9b2ed1e809c3d6f82e813ffe3b459f3902b3ed9a324ed1f1a563",
+    "dist/assets/park/exhibit-083.webp": "3afaf647cb19db98cd8b6b842fa61a247afc77e348095469d6f290ea4d356408",
+    "dist/assets/park/exhibit-084.webp": "9c7e2fba9e726a6c8697c2fee71bc77b83afc7ca2ad92aa8b8ff874eb2afee77",
+    "dist/assets/park/exhibit-085.webp": "b2c5ed1ad112f5992f9ae9b6b05f166cc2e6b6a07733082ded08ee58f16e5bcc",
+    "dist/assets/park/exhibit-086.webp": "9a151c9bcc4268333f0db97c39668b567b6273e2fb07272e92d05a2e90f92fca",
+    "dist/assets/park/exhibit-087.webp": "3e8101cecfb0e78b23bb879559aba28d8829548d624c55fb9445281cd6077435",
+    "dist/assets/park/exhibit-088.webp": "b28c3ab2476072d58653585705f78037c714d1125975e0847597a81d4a4a0b46",
+    "dist/assets/park/exhibit-089.webp": "96364e22ba486fc832ef896a82f97009362373434f71ff88eb21fb62f06a9388",
+    "dist/assets/park/exhibit-090.webp": "86210aa19e3706a54331e7cb41ebe33a1686a7bd14a8de28a753b90977fa029d",
+    "dist/assets/park/exhibit-091.webp": "a8a8b552516e679e93a8ed76088dbac6a81d28587b22ce90ceaf2f0bd7bc526c",
+    "dist/assets/park/exhibit-092.webp": "370e13aa2ca2f9a14e6688695b8dbcb7c8df751026a91b5e31df0f3b6327c4f3",
+    "dist/assets/park/exhibit-093.webp": "3c2853d910d9c3f635d79e43863aa4bf417a88bd4a4c367dcf4ef5515ecc5712",
+    "dist/assets/park/exhibit-094.webp": "d88e8902d24a37cd1cd8603d175a89ac79191bcf0a91258f87386b4891f5c67e",
+    "dist/assets/park/exhibit-095.webp": "6f46d5f9da9bc91c91167ade75026d5689cd59b78a9aaf94a94da26f428c22de",
+    "dist/assets/park/exhibit-096.webp": "74a3a2053fd32b4da018e8223b739ad41e7394920b3b464cb0d6866e408518c5",
+    "dist/assets/park/exhibit-097.webp": "8eef4a988712a10b262faba8eb6e6cbf08ccaea9e495035461d0ad439697bac5",
+    "dist/assets/park/exhibit-098.webp": "4ba995ccddbacdecdc3c3562b1bf85c6537e983e032387ccf3d0923ee9069a2b",
+    "dist/assets/park/exhibit-099.webp": "b7e091d605aec37703d8f6f45248a01c5ac9bd44308d23407e26be13d4b5c8d6",
+    "dist/assets/park/exhibit-aquarium.webp": "2f0e1f611a2898a042ecbd183e30b823291ad3e9e02dc421be57d291b30815ee",
+    "dist/assets/park/exhibit-arch.webp": "cfa0a3261fbf71dc86543f8899e37720dd84ea7494f55f8d7b7b9333d422f64b",
+    "dist/assets/park/exhibit-balloon.webp": "2fe6c0d693c42100020c62d8be95fb7f59538d7d0d096749304b87a5f691b16a",
+    "dist/assets/park/exhibit-carousel.webp": "7d6ee151fc5948c9f7cda08e0325b61989cf04087c9c16fd66148b3055316c88",
+    "dist/assets/park/exhibit-clock.webp": "a110a2a4b63deec5a0d0bdcc003037e9b16708dbdcb15478451fcf05a7ea3fb4",
+    "dist/assets/park/exhibit-fountain.webp": "2295d60a2093a3f29670dd658aa2aae98dc45c812c55392635e6314989c9b073",
+    "dist/assets/park/exhibit-lamp.webp": "0996f0c0522a9d2bedf48298d39584bea1879280fb45aaac53ff92390490c687",
+    "dist/assets/park/exhibit-stage.webp": "ddfa9a993a8a91e1dcf64ef7cc9eab6802d47ef05b04433685707265fff8e0ec",
+    "dist/assets/park/exhibit-telescope.webp": "72fa1a5b89b7460a8580ea4f389afc5f4630ce660d620bd0efc97a711d52ab8b",
+    "dist/assets/park/exhibit-toy.webp": "363a10fd6266d73c944d27ea0c3a16bb8c6ce246576b0b55706d59ada173c96a",
+    "dist/assets/park/exhibit-train.webp": "bab5d77e60a7eb38915399c7898aee2d1507928f948351fc34e354bf1b878983",
+    "dist/assets/park/exhibit-wheel.webp": "cd8fcb7292ae0bb9979980d4246ef5e91f3accb48754b13ecd4115b31f45f56f",
+    "dist/assets/park/facility-frame.webp": "30a7933837e246f59609e142e38df64976df3a5ad09d9a0c4f4a9564504c0966",
+    "dist/assets/park/flower-0.webp": "f2b182b855fce57bb27e7c97cc0301442a4d7403c809c4fb9307fbd6ded1094a",
+    "dist/assets/park/flower-1.webp": "1c9a251f43bee8e1d6dea04f77104ac3074ac735f1d9822a264580a8b912c33b",
+    "dist/assets/park/flower-10.webp": "aa9a7932db5bc7e7525162a7060a6b76edbfb89a56d832bca2b0b9fe6134a7a6",
+    "dist/assets/park/flower-11.webp": "f23bdcc248d00bf74913e6fa71b3727f306508a2947b7dd0480316865a567e26",
+    "dist/assets/park/flower-2.webp": "daafbe60a872a38d1de21165762ca124b402b7f01d2ccbb58efb1505ba146023",
+    "dist/assets/park/flower-3.webp": "306be0c50d3278926b19acc3e917c6aa44274a6476617610a7909699204bbf30",
+    "dist/assets/park/flower-4.webp": "5161a8a9be4b28560dafaaad4ea5130e2dfd2df8285d6e7e8dc7bf453875b585",
+    "dist/assets/park/flower-5.webp": "fb43c1805633c7f836b6bf0daedadaecdbd9b3c929787ab36f8fc6fa0ccc1c64",
+    "dist/assets/park/flower-6.webp": "4f3800e226a79b9bbf8316b7361acf2b61f190892679147a9082048941ee8685",
+    "dist/assets/park/flower-7.webp": "e21bdb61b33c86d401400150f0836ee6a66ed0d660419e1253224489e8e1d0fd",
+    "dist/assets/park/flower-8.webp": "d561aaa8e1359f39390615a6707d386948609f7ddb7034c06be58dea0f94ee34",
+    "dist/assets/park/flower-9.webp": "83e24565a75891131403eb7728ce74f744776e7e1661928cf13b61fbfae12be4",
+    "dist/assets/park/font-license.txt": "babcfe66c8a098b2fa279bc724a3a342f8124f77ce18941fbcc1bbb39823cded",
+    "dist/assets/park/icon-back.webp": "5dcafc9df018776b44e798fc08c330d0c24efd4a6c629d8c1d8cfcac1a941c32",
+    "dist/assets/park/icon-bag.webp": "dd1914c0ef8b15e620a43bf614a601980adacb87f70c6238ff6ff7a9f84cf22d",
+    "dist/assets/park/icon-castle.webp": "bae71b4a3972bbb2a27151bd7998efce22974688c74c09051534421dbf1d5ad1",
+    "dist/assets/park/icon-check.webp": "269ea52222fb87a60643aa1724eae90fee963ed2fa5dcc92b1f4644e505347ae",
+    "dist/assets/park/icon-coil.webp": "30dbcd964a0474bbb44297fbfe5fe6c784d2e6e7f9cfe551aef913c6defbf973",
+    "dist/assets/park/icon-coin.webp": "6534e31198d4a89d5912b068ff98f3047e094d3ea50fa7d069a5fab09a4c28e1",
+    "dist/assets/park/icon-crown.webp": "ee226be4cacbf234e25847cd0ef003bffa4b3c6cf403d12645b01831c4d46e3b",
+    "dist/assets/park/icon-gem.webp": "c4ba5f593c187429ee6873147fe5f392d28da806a88283f4a7e6cecf7d44ecf1",
+    "dist/assets/park/icon-gift.webp": "dcac2c67d42086e38ed87560c31748060400383200c77545a486d0b366319ea5",
+    "dist/assets/park/icon-hint.webp": "f177a49cd8f9fdd93ea89a76bb8469caf4d4112408456144c3fc47d5f215a45d",
+    "dist/assets/park/icon-lens.webp": "4e5b603a6709fa455c9c5d46d197b882b4f8f7892111e841366a0036ea6aef9c",
+    "dist/assets/park/icon-lock.webp": "1c632abb81032ce77f5308e85f5f6cb61975ba69317a20da09c9254f18570115",
+    "dist/assets/park/icon-mail.webp": "b08f7acc7b2233899e0a4968524089c6478e6f7f01f2f62170e93a2df4fba38a",
+    "dist/assets/park/icon-map.webp": "21ac2481ce906d8ffc317f18540386780558aec50e4d06cbfec9517b77070b0f",
+    "dist/assets/park/icon-paw.webp": "45435baeabed9dbfe70e20ef6d7303cb92902736e991ad0e1b3b509160af0618",
+    "dist/assets/park/icon-play.webp": "5940dbd551a3a5cbd5f6b850c65ca7019adab82314eed5f29f8df483bde0401d",
+    "dist/assets/park/icon-reset.webp": "084087d14323484663ffbcc4d317ae26063d00815effa921d2a78669fda7789c",
+    "dist/assets/park/icon-settings.webp": "e86994a3373b7a0d568f8bcda7c0e023cb653a78443cff1fd6deb053a305b728",
+    "dist/assets/park/icon-shop.webp": "1d90d97d3f782c66c58dc28f905b85ec63729ea4ea45a3eabb0662d6f581b18b",
+    "dist/assets/park/icon-star.webp": "0a99a2a0087a090969e413002145c41831310009abc48c5f9ee067427869a516",
+    "dist/assets/park/icon-task.webp": "69e851c3f69425ff4acaeedcbdcf7f657ff353fa6f1a02a2b9f04513f99b09a0",
+    "dist/assets/park/icon-undo.webp": "de227305135f09210f79c1307866eaf76d1caaeb033d7bfc344244bb1e46f5b9",
+    "dist/assets/park/info-card.webp": "d34e433261fe640472a87115eba8d59c316f8b7755f8158006661bf00dbe34e0",
+    "dist/assets/park/island.webp": "b355f49e281cc50299764c693a7a60345c14709aafa2fb642ef1b601f3354504",
+    "dist/assets/park/level-sign.webp": "4ff6924b6898c981cb3f7c84d209397f31ff6713a67355bdb98e301ea4694bde",
+    "dist/assets/park/logo.webp": "ee3b97446491be9413e44a0b157434aafde3dc6d96292fd9334799702a2eaaf2",
+    "dist/assets/park/manifest.json": "8d2b2026d6dfdcc1fb763596bc0eebe7f2d5c509f3278e3b79f5b32920bc530e",
+    "dist/assets/park/mood-joy.webp": "3db0cc277619899c56292470e5573f51965a960f1dea0f8e2687ca8ec526068b",
+    "dist/assets/park/mood-rabbit-happy.webp": "981ebed42878839dbcea7988f3f7383a84c8f1247ce0d46cc46f936ff52034cd",
+    "dist/assets/park/mood-sheep-happy.webp": "2799fd8dd244d78e08a4a263178fd63a52a988f3f405bdcdd36ec1858753143d",
+    "dist/assets/park/mood-spirit-happy.webp": "bd1eb5c1799170a19f3f45c437ab674bee5e353890972e7e4fb91c6edbb4726c",
+    "dist/assets/park/outfit-rabbit-starlight.webp": "3c02b55b59fdd96587fa367e5853cd8f23dad50d8662c2c252b12bc4a8f860c6",
+    "dist/assets/park/outfit-sheep-starlight.webp": "5ff2fd4c46a045251147adb605543653265b914656e8475aea1d4b5de7113916",
+    "dist/assets/park/outfit-spirit-starlight.webp": "7aece58210ba43f54681ea1e18e6fd8526209973a1e878e1380fa8df00a6d030",
+    "dist/assets/park/pipe-corner-off.webp": "75f136df125347ccc68ee0d1cb32b8f6f33b173cb6e2a253d980c6d6dff6bca5",
+    "dist/assets/park/pipe-corner-on.webp": "e861d39576c915ccc695ffd5bda31a0dc9106ea502f8293a8a8d48ee342aa2ac",
+    "dist/assets/park/pipe-cross-off.webp": "02290a1a974cf9c0b476586f55d13905147d65559ada267d133e8bcb117db73f",
+    "dist/assets/park/pipe-cross-on.webp": "8cc16eb87ac31f1db53c6a61d0deeba03b18e7a1082294015f061f10e9347289",
+    "dist/assets/park/pipe-diode.webp": "32216a87987115cd52d290259118dc43f4d8e666df2cd18a445855069d2db8b9",
+    "dist/assets/park/pipe-line-off.webp": "c62d9c12f433d30dacb1e40754314ce62a3492e67db7455ffefca557dd256290",
+    "dist/assets/park/pipe-line-on.webp": "34c987b1b98937a5fadc28ae1b41d0a1ca4da381a1bec181b388b0506b2c1904",
+    "dist/assets/park/pipe-source.webp": "6069a8aa8c270bc050077da1fd3996b5fc35fbd9f03ba14df76c76c64f55b76b",
+    "dist/assets/park/pipe-switch-off.webp": "e0a0a97fac82f1d258ab61e4fa75c2df2e5a6f0b90303694e5a74d7a701d9a46",
+    "dist/assets/park/pipe-switch-on.webp": "ece3c5ea8bbd330059fe0dd1b3cf13d4f40c05738b06e203f04f42cf29ed3a7f",
+    "dist/assets/park/pipe-t_shape-off.webp": "1944572d13d84aa0c864b03abf87b3236fe8e27cb28b87007d5ebb5622b88be0",
+    "dist/assets/park/pipe-t_shape-on.webp": "335681642e8fe653bb40f3ca5948f25ebcd2f76918828c0de1b3f08a53405883",
+    "dist/assets/park/rabbit.webp": "a56e06dedcc8d95619e07aaef464543fa3df29ea1db5e4027893de93f00096f0",
+    "dist/assets/park/repair-sign.webp": "5c5a60c25c3407c36d717c740794d6c7f01da5ae0525c3df3658b6c6169ae672",
+    "dist/assets/park/reward-ribbon.webp": "9fa353ed895409eb6127a81d9a6999aa65ed379dd0b388a56345060d390d2df2",
+    "dist/assets/park/settings-button.webp": "1cecc0629c8de25f2c11cd0fc9a28ed43b922506a8a1a98253ebb0d5b9cb2b71",
+    "dist/assets/park/sheep-cheer.webp": "a434a3bd0c6b7f1b351c9cf31f69329f4b4889b305e03ef4ce459b68031826fd",
+    "dist/assets/park/sheep.webp": "ebc267ff9092014e87a6126a6ab4f2b5fea6cb3c8f48f6a9b9911dddd603a118",
+    "dist/assets/park/shop-assets.json": "e5a3c478540da815f291315a208b222bd2e76a62ac71f6030b91ae35499926c1",
+    "dist/assets/park/spirit-cheer.webp": "5b85f6d73373ab93c5ef601ee00b2928f4cbd060f0babe4c2597b2331fb08366",
+    "dist/assets/park/spirit.webp": "682d6137697bc8b4100577755c0b8f1720b17e76cc63dd20a4f22d4854889e82",
+    "dist/assets/park/status-panel.webp": "e8f49b964d3b8b7c3947a17ee387478395b64f20e3ee8830d2d15f71eef057ca",
+    "dist/assets/park/theme-calm-preview.webp": "c394c59c078e5b41da2880c8eb56ea69d680617b23d9aeb9da9c22bf216db673",
+    "dist/assets/park/tile.webp": "4aef2efb94d714efbb19cf88152f6f5c515dcfe63b4de5c7c828d96be4dc7829",
+    "dist/assets/park/tool-gold.webp": "2c0dff6a3941db7d3d8cf81863f65b2c2c3dbf05af673157de882346fc976a75",
+    "dist/assets/park/tool-ivory.webp": "83b61394e555778b61e13b6b435fe0727a087822b31d0d4ce58bd071bce4f7cf",
+    "dist/assets/park-font-0VMExQYh.woff2": "6c9417803655f2c37936c1cf21d67d34f3279e686d90b8f7ac1d183bb4ea3775",
+    "dist/assets/ui2-home.png": "b8a41db17791d6fb46b9ee0503002e6aa5af88acdd5748313d43ab6cc70affde",
+    "dist/assets/ui2-mascots.webp": "ea7917b877d7f0a1a010ba65f36809b46d090d03856d0dc290938284fb90478b",
+    "dist/assets/ui2-play.jpg": "a262ddca7aec22ac5d229ff7a1eb0fb0bab506c9039566ea6e02acb1b7de9b12",
+    "dist/assets/ui2-victory.jpg": "f55d207086b063d790bd09623a944d3c3f600440b2c60e38ea35205ecea72555",
+    "dist/icon.svg": "bfdb432d13ce5916e82e9aa319cd237e9767fbf23c391cdcace72c34ed278027",
+    "dist/index.html": "69233d36c396ba26165d3c95d70438e60e97b2aa24ff7d2f21b7995196d4b6d8",
+    "dist/manifest.webmanifest": "25ed7479868617dd83b2242ba3f09e7e905c21d164902949df6d2e1ca806d2ec",
+    "dist/pwa-192x192.png": "582ff89ef383b2c185267febc2cf3ba4982198422559a524bb0c9b8557932a27",
+    "dist/pwa-512x512.png": "df91d3cd899bcc6b945c7f3edae0cd6e5113cfa7a421fbfab87cf8197353c77a",
+    "dist/pwa-maskable-512x512.png": "df91d3cd899bcc6b945c7f3edae0cd6e5113cfa7a421fbfab87cf8197353c77a",
+    "dist/registerSW.js": "e12c8db54e3cc247034427f2b661b305a78fea7e7cdec1eac179fecec3da0fc7",
+    "dist/sw.js": "d55768b8885270d3ef7128b3b27537356edac1cd2840fab2382577aa4afaa6af",
+    "dist/workbox-9c191d2f.js": "04b086f1b2f4215ee4b659a7bc9c76162894abdb43fa876247bc7c0bd6fd1c37"
+  }
+}

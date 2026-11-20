@@ -1,0 +1,183 @@
+{
+  "generatedAt": "2026-11-20T11:30:35.295Z",
+  "base": "http://127.0.0.1:4178",
+  "checks": {
+    "purchaseTotal": 5210,
+    "finalCoins": 1790,
+    "supplyStock": 1,
+    "ownedCosmetics": 4,
+    "equipped": {
+      "mood": "joy",
+      "outfit": "starlight",
+      "exhibitId": 21,
+      "theme": "calm"
+    },
+    "insufficientDisabled": "通过",
+    "lockedDisabled": "通过",
+    "realWheelScroll": "通过",
+    "pageErrors": []
+  },
+  "records": [
+    {
+      "viewport": "390x844",
+      "state": "purchase-exhibit-picker",
+      "file": "purchase-exhibit-picker-390x844.png",
+      "scrollTop": 89,
+      "imageCount": 92
+    },
+    {
+      "viewport": "360x800",
+      "state": "shop-supply-top",
+      "file": "shop-supply-top-360x800.png",
+      "scrollTop": 0,
+      "imageCount": 53
+    },
+    {
+      "viewport": "360x800",
+      "state": "shop-supply-bottom",
+      "file": "shop-supply-bottom-360x800.png",
+      "scrollTop": 80,
+      "imageCount": 53
+    },
+    {
+      "viewport": "360x800",
+      "state": "shop-cosmetic-top",
+      "file": "shop-cosmetic-top-360x800.png",
+      "scrollTop": 0,
+      "imageCount": 53
+    },
+    {
+      "viewport": "360x800",
+      "state": "shop-cosmetic-bottom",
+      "file": "shop-cosmetic-bottom-360x800.png",
+      "scrollTop": 120,
+      "imageCount": 53
+    },
+    {
+      "viewport": "360x800",
+      "state": "shop-exhibit-picker",
+      "file": "shop-exhibit-picker-360x800.png",
+      "scrollTop": 120,
+      "imageCount": 92
+    },
+    {
+      "viewport": "360x800",
+      "state": "shop-owned-equipped-top",
+      "file": "shop-owned-equipped-top-360x800.png",
+      "scrollTop": 0,
+      "imageCount": 53
+    },
+    {
+      "viewport": "360x800",
+      "state": "shop-owned-equipped-bottom",
+      "file": "shop-owned-equipped-bottom-360x800.png",
+      "scrollTop": 120,
+      "imageCount": 53
+    },
+    {
+      "viewport": "360x800",
+      "state": "purchase-home",
+      "file": "purchase-home-360x800.png",
+      "scrollTop": 0,
+      "imageCount": 40
+    },
+    {
+      "viewport": "360x800",
+      "state": "purchase-bag",
+      "file": "purchase-bag-360x800.png",
+      "scrollTop": 0,
+      "imageCount": 44
+    },
+    {
+      "viewport": "360x800",
+      "state": "shop-insufficient",
+      "file": "shop-insufficient-360x800.png",
+      "scrollTop": 0,
+      "imageCount": 53
+    },
+    {
+      "viewport": "360x800",
+      "state": "shop-locked",
+      "file": "shop-locked-360x800.png",
+      "scrollTop": 0,
+      "imageCount": 53
+    },
+    {
+      "viewport": "430x932",
+      "state": "shop-supply-top",
+      "file": "shop-supply-top-430x932.png",
+      "scrollTop": 0,
+      "imageCount": 53
+    },
+    {
+      "viewport": "430x932",
+      "state": "shop-supply-bottom",
+      "file": "shop-supply-bottom-430x932.png",
+      "scrollTop": 89,
+      "imageCount": 53
+    },
+    {
+      "viewport": "430x932",
+      "state": "shop-cosmetic-top",
+      "file": "shop-cosmetic-top-430x932.png",
+      "scrollTop": 0,
+      "imageCount": 53
+    },
+    {
+      "viewport": "430x932",
+      "state": "shop-cosmetic-bottom",
+      "file": "shop-cosmetic-bottom-430x932.png",
+      "scrollTop": 89,
+      "imageCount": 53
+    },
+    {
+      "viewport": "430x932",
+      "state": "shop-exhibit-picker",
+      "file": "shop-exhibit-picker-430x932.png",
+      "scrollTop": 89,
+      "imageCount": 92
+    },
+    {
+      "viewport": "430x932",
+      "state": "shop-owned-equipped-top",
+      "file": "shop-owned-equipped-top-430x932.png",
+      "scrollTop": 0,
+      "imageCount": 53
+    },
+    {
+      "viewport": "430x932",
+      "state": "shop-owned-equipped-bottom",
+      "file": "shop-owned-equipped-bottom-430x932.png",
+      "scrollTop": 89,
+      "imageCount": 53
+    },
+    {
+      "viewport": "430x932",
+      "state": "purchase-home",
+      "file": "purchase-home-430x932.png",
+      "scrollTop": 0,
+      "imageCount": 40
+    },
+    {
+      "viewport": "430x932",
+      "state": "purchase-bag",
+      "file": "purchase-bag-430x932.png",
+      "scrollTop": 0,
+      "imageCount": 44
+    },
+    {
+      "viewport": "430x932",
+      "state": "shop-insufficient",
+      "file": "shop-insufficient-430x932.png",
+      "scrollTop": 0,
+      "imageCount": 53
+    },
+    {
+      "viewport": "430x932",
+      "state": "shop-locked",
+      "file": "shop-locked-430x932.png",
+      "scrollTop": 0,
+      "imageCount": 53
+    }
+  ]
+}

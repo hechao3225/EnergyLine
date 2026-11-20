@@ -1,18 +1,701 @@
 {
-  "sourceCommit": "341c0f24f53061c4d83521795b174d0f88997bf3",
-  "archiveMethod": "git archive HEAD | tar -x -C /private/tmp",
-  "dependencyStrategy": "symbolic link to workspace node_modules",
-  "commands": {
-    "tsc": "通过",
-    "pnpm test": "通过；clean HEAD 不含用户工作区 audit-distinct",
-    "pnpm build": "通过",
-    "test_shop_home.ts": "通过；3 个视口、30 张截图；三次重置走原生 window.confirm",
-    "test_shop_supplies.ts": "通过；9 项",
-    "test_park_ui.ts": "通过；13 项",
-    "audit_park_delivery.py": "通过；188 个资产、53 张截图、3 组设计稿对照"
+  "generatedAt": "2026-11-20T11:34:01.902598+00:00",
+  "codeCommit": "3b88df73c00247835ce0b23e217f91b67d2ccbc3",
+  "codeTree": "6d743395b893816e7ee656f2a020dae572e04ff1",
+  "archive": {
+    "command": "git archive --format=tar.gz 3b88df73c00247835ce0b23e217f91b67d2ccbc3",
+    "file": "source-3b88df7.tar.gz",
+    "bytes": 547267019,
+    "sha256": "7c2b4264a2c5bb00bbd3b4eeb8efa1713ef0827a3974816e305174430bfaa724"
   },
-  "currentWorkspace": {
-    "pnpm test": "通过；包含用户未提交 audit-distinct",
-    "test_shop_home.ts": "通过；三次重置走游戏内确认弹窗"
-  }
+  "cleanRoot": "/private/tmp/rotategame-shopping-clean2.nWZpOe",
+  "qaRoot": "/private/tmp/rotategame-shop-qa2.XBh7UA",
+  "dependencyStrategy": "node_modules 符号链接到工作区",
+  "commands": [
+    {
+      "command": "pnpm exec tsc --noEmit",
+      "status": 0,
+      "output": "通过"
+    },
+    {
+      "command": "pnpm test",
+      "status": 0,
+      "output": "clean HEAD 全量通过；不含用户 audit-distinct"
+    },
+    {
+      "command": "pnpm build",
+      "status": 0,
+      "output": "通过；仅有 chunk 体积警告"
+    },
+    {
+      "command": "prepare_shop_assets.py --check",
+      "status": 0,
+      "output": "10 个素材确定性一致"
+    },
+    {
+      "command": "test_shop_asset_generator.py",
+      "status": 0,
+      "output": "篡改 processing/source 均失败"
+    },
+    {
+      "command": "pnpm preview --host 127.0.0.1 --port 4178",
+      "status": 0,
+      "output": "生产预览可访问"
+    },
+    {
+      "command": "test_shop_home.ts",
+      "status": 0,
+      "output": "3 视口、30 张；三次原生 window.confirm"
+    },
+    {
+      "command": "test_shop_purchase.ts",
+      "status": 0,
+      "output": "真实购买 7000→1790；23 张状态截图"
+    },
+    {
+      "command": "test_shop_supplies.ts",
+      "status": 0,
+      "output": "9 项通过"
+    },
+    {
+      "command": "test_park_ui.ts",
+      "status": 0,
+      "output": "13 项通过"
+    },
+    {
+      "command": "audit_shop_assets.py",
+      "status": 0,
+      "output": "10 个素材、主 manifest、联系表通过"
+    },
+    {
+      "command": "audit_park_delivery.py",
+      "status": 0,
+      "output": "188 个资产、53 张截图、3 组对照通过"
+    },
+    {
+      "command": "build_shop_qa_contact_sheet.py",
+      "status": 0,
+      "output": "53 张截图 → 1500×7700 contact sheet"
+    }
+  ],
+  "logs": {
+    "audit-park-delivery.log": {
+      "path": "logs/audit-park-delivery.log",
+      "bytes": 898,
+      "sha256": "76079f8b62791737e3e33189bf9c0bd2c27f64d7369729ae5520ccfbadb617c7"
+    },
+    "build-contact-sheet.log": {
+      "path": "logs/build-contact-sheet.log",
+      "bytes": 95,
+      "sha256": "672f1196d8a973dbef71ffa5ac1d3bea6e72b924a6ad248fdcaf71e2650fafc9"
+    },
+    "shop-assets.log": {
+      "path": "logs/shop-assets.log",
+      "bytes": 1027,
+      "sha256": "17b9cb314c38096dea960ec49de07d79f90a9b3a5770290ab0904085c21a07a2"
+    },
+    "test-park-ui.log": {
+      "path": "logs/test-park-ui.log",
+      "bytes": 887,
+      "sha256": "9d0e11d9673cbe816799aedf27062b3bcace6f727485617d4bfbe5a745ec3047"
+    },
+    "test-shop-home.log": {
+      "path": "logs/test-shop-home.log",
+      "bytes": 222,
+      "sha256": "0e162192f20ca071fb331111eb3f93c2ac4030fe8bc3213a36a932c731e21a09"
+    },
+    "test-shop-purchase.log": {
+      "path": "logs/test-shop-purchase.log",
+      "bytes": 56,
+      "sha256": "bee0b82fc62100bee1eaabf7049f5ce668b6428f91e58ace0d8b079a56018a37"
+    },
+    "test-shop-supplies.log": {
+      "path": "logs/test-shop-supplies.log",
+      "bytes": 655,
+      "sha256": "5095fdaddb44afab520be48cd752954a2d86d05050164a7d7576ecb48b263bec"
+    },
+    "tsc-test-build.log": {
+      "path": "logs/tsc-test-build.log",
+      "bytes": 11301,
+      "sha256": "fea6b4486ec9e96be18ba87dec7005e3ab94ecb37d96d2f222b72ede78dde0f7"
+    }
+  },
+  "screens": {
+    "bag-360x800.png": {
+      "path": "screens/bag-360x800.png",
+      "bytes": 190667,
+      "sha256": "31abe899e4721f5ea7c69b45a5044178d614f14da68f6d918caf412100354842"
+    },
+    "bag-390x844.png": {
+      "path": "screens/bag-390x844.png",
+      "bytes": 207599,
+      "sha256": "217e86d716842da19a9261faac493686b547a51002450db3a752de3bab058df0"
+    },
+    "bag-430x932.png": {
+      "path": "screens/bag-430x932.png",
+      "bytes": 243730,
+      "sha256": "01d2a8d698da8d55f18da91dc5bee3490bd21762505fc1bcfc72795a814daa39"
+    },
+    "coil-refilled-360x800.png": {
+      "path": "screens/coil-refilled-360x800.png",
+      "bytes": 295374,
+      "sha256": "d815b061c226857023169e4eac40fc1936168721831dd33cb708226d9698a134"
+    },
+    "coil-refilled-390x844.png": {
+      "path": "screens/coil-refilled-390x844.png",
+      "bytes": 347856,
+      "sha256": "8d5058a89d20551f1f8de9c6827ea5f80bae16c21edfbdf7d3202bfabfccdff3"
+    },
+    "coil-refilled-430x932.png": {
+      "path": "screens/coil-refilled-430x932.png",
+      "bytes": 408018,
+      "sha256": "bc09fc712e6c3469bc4998d99cd55e772b02ad51c56604a4841e0992945bd26d"
+    },
+    "endless-hint-disabled-360x800.png": {
+      "path": "screens/endless-hint-disabled-360x800.png",
+      "bytes": 316490,
+      "sha256": "58c6639979c2fcb946019f4d7bba5cb3c9638232ba4806214c89d6cadf7aa193"
+    },
+    "endless-hint-disabled-390x844.png": {
+      "path": "screens/endless-hint-disabled-390x844.png",
+      "bytes": 375960,
+      "sha256": "d6b176754549d91cdd0eeebfb23b307b68376a7227ac6f136f69ec26ec3d13d6"
+    },
+    "endless-hint-disabled-430x932.png": {
+      "path": "screens/endless-hint-disabled-430x932.png",
+      "bytes": 431018,
+      "sha256": "b9e5dcdd3e755afcba449117281074ed0fc24e25004f37f4ec33e019432e0aac"
+    },
+    "history-rewind-360x800.png": {
+      "path": "screens/history-rewind-360x800.png",
+      "bytes": 145630,
+      "sha256": "f54f5ca28acffd45c41c55e579835fd738e408de413cdf753f92bb1fc4732755"
+    },
+    "history-rewind-390x844.png": {
+      "path": "screens/history-rewind-390x844.png",
+      "bytes": 162492,
+      "sha256": "764c442fef97c465c9cba885d25b21c47c89a345206d89c79c3a24d838638372"
+    },
+    "history-rewind-430x932.png": {
+      "path": "screens/history-rewind-430x932.png",
+      "bytes": 189144,
+      "sha256": "e6c534606e76ead3d7f4cd641990f1551a586de9eddf51e0d6780ed1ea5c0295"
+    },
+    "home-cosmetics-calm-360x800.png": {
+      "path": "screens/home-cosmetics-calm-360x800.png",
+      "bytes": 447296,
+      "sha256": "5835885d61f90baf8ada64e294381d940f99cb6474679b1d0e88360a6992ccef"
+    },
+    "home-cosmetics-calm-390x844.png": {
+      "path": "screens/home-cosmetics-calm-390x844.png",
+      "bytes": 509380,
+      "sha256": "c0822d9959d70dd18299a0310612fca4be79331cb5315ff8c13b98a922bcaa13"
+    },
+    "home-cosmetics-calm-430x932.png": {
+      "path": "screens/home-cosmetics-calm-430x932.png",
+      "bytes": 605206,
+      "sha256": "c386b625c5a80d35272e6afec11bbaa8ec44c78da9e5d96993c573237bebe7b3"
+    },
+    "home-default-360x800.png": {
+      "path": "screens/home-default-360x800.png",
+      "bytes": 450410,
+      "sha256": "f094c5d4e9a4c4cbcd95853fa9ccc6f9f21ea895684be876191e2b0396f83453"
+    },
+    "home-default-390x844.png": {
+      "path": "screens/home-default-390x844.png",
+      "bytes": 513228,
+      "sha256": "bd92424a540c77bb4b6affffc135d6bdafb7537381569a926ff257b176360788"
+    },
+    "home-default-430x932.png": {
+      "path": "screens/home-default-430x932.png",
+      "bytes": 604143,
+      "sha256": "7d398e01dfaec32ff5b01399fc8a53b6cb92e4c6222d845df50182e1e2fad986"
+    },
+    "lens-3-steps-360x800.png": {
+      "path": "screens/lens-3-steps-360x800.png",
+      "bytes": 152148,
+      "sha256": "2fe7d0f465470f97d208e1fe9ed2293011d8bff28a1ea810e8ba0f781f4df13f"
+    },
+    "lens-3-steps-390x844.png": {
+      "path": "screens/lens-3-steps-390x844.png",
+      "bytes": 168078,
+      "sha256": "a9436a280043a28e1c436bdc8c96d95ea58a526b5e5714ec5c3fdb9a8bac27b4"
+    },
+    "lens-3-steps-430x932.png": {
+      "path": "screens/lens-3-steps-430x932.png",
+      "bytes": 197018,
+      "sha256": "6cea39451d4cef775c6002bafe230425877385c0cd62cd2986e73e05a90472d7"
+    },
+    "out-of-steps-coil-360x800.png": {
+      "path": "screens/out-of-steps-coil-360x800.png",
+      "bytes": 309471,
+      "sha256": "ed5ded0ef43eef7f9792a5a99190e39e8f848d117a06037ae86d7aa9dbbb354d"
+    },
+    "out-of-steps-coil-390x844.png": {
+      "path": "screens/out-of-steps-coil-390x844.png",
+      "bytes": 350585,
+      "sha256": "8b24c28734c35892df38a5551e54bea86258e82127db0053e706107b7e7d75e5"
+    },
+    "out-of-steps-coil-430x932.png": {
+      "path": "screens/out-of-steps-coil-430x932.png",
+      "bytes": 406913,
+      "sha256": "0653afed31e220d6610d9670ac1880746868bb0d926044096fa70dc55d5ba802"
+    },
+    "purchase-bag-360x800.png": {
+      "path": "screens/purchase-bag-360x800.png",
+      "bytes": 196599,
+      "sha256": "d71dda8764b18a4c8d6ec0873922821114667e7687e914aa0d0fd36e09b308b5"
+    },
+    "purchase-bag-430x932.png": {
+      "path": "screens/purchase-bag-430x932.png",
+      "bytes": 252194,
+      "sha256": "db4bc3782a7acd1f94efa1531c3269985cce3198cc12e0bb21338adcb281b349"
+    },
+    "purchase-exhibit-picker-390x844.png": {
+      "path": "screens/purchase-exhibit-picker-390x844.png",
+      "bytes": 203107,
+      "sha256": "a50ff940d94bcd7e2d23bf44ba17f71a8cc2f4833925eee219cf5b9417a2cfd5"
+    },
+    "purchase-home-360x800.png": {
+      "path": "screens/purchase-home-360x800.png",
+      "bytes": 447215,
+      "sha256": "90ff12a41a770bd287c5f1637d0ff4b2675551bcd08c6b2a7ab36f087af75fd1"
+    },
+    "purchase-home-430x932.png": {
+      "path": "screens/purchase-home-430x932.png",
+      "bytes": 604932,
+      "sha256": "217b2e7ad6566cbc9660d2e73902a3c3db8ba34eed46017f5603f9b5f655e786"
+    },
+    "shop-cosmetic-360x800.png": {
+      "path": "screens/shop-cosmetic-360x800.png",
+      "bytes": 207809,
+      "sha256": "95d5e039e0845784f48cbbdf3ff1e55843bf52b8ff8f0b04e9d4daa071ad1c24"
+    },
+    "shop-cosmetic-390x844.png": {
+      "path": "screens/shop-cosmetic-390x844.png",
+      "bytes": 231774,
+      "sha256": "df8d0abeaba46d366eed4a922826c89412ed7f33115790705ee7ccebcf066dee"
+    },
+    "shop-cosmetic-430x932.png": {
+      "path": "screens/shop-cosmetic-430x932.png",
+      "bytes": 270451,
+      "sha256": "8c32586cf5f9868a45912315c28e1b2665ed6c7e85a063f8c75385c7b46e2beb"
+    },
+    "shop-cosmetic-bottom-360x800.png": {
+      "path": "screens/shop-cosmetic-bottom-360x800.png",
+      "bytes": 215610,
+      "sha256": "81ee1ebd797424af11889b79101f7cb2a1b5abef0f9b9fb029f0e457630c94d9"
+    },
+    "shop-cosmetic-bottom-430x932.png": {
+      "path": "screens/shop-cosmetic-bottom-430x932.png",
+      "bytes": 284837,
+      "sha256": "a8e4167de2542446d85a060e6047ece4aae9a1e2ffc404f0a26b4e55e8cd275a"
+    },
+    "shop-cosmetic-top-360x800.png": {
+      "path": "screens/shop-cosmetic-top-360x800.png",
+      "bytes": 199753,
+      "sha256": "03e5a079f6af8899c9d79e51d90581894a6adce2de6e00e33628c57354c81441"
+    },
+    "shop-cosmetic-top-430x932.png": {
+      "path": "screens/shop-cosmetic-top-430x932.png",
+      "bytes": 269130,
+      "sha256": "42a68f9300fffbdeabb9f6aab264226bb042600bbd5d83cc67be9200d6c0949f"
+    },
+    "shop-exhibit-picker-360x800.png": {
+      "path": "screens/shop-exhibit-picker-360x800.png",
+      "bytes": 179526,
+      "sha256": "2e0dd9acad25afcbee65f5f478cfde84948dc993aa4d503372c32f180c71070f"
+    },
+    "shop-exhibit-picker-430x932.png": {
+      "path": "screens/shop-exhibit-picker-430x932.png",
+      "bytes": 237918,
+      "sha256": "c6245e00a9800005b3a7dfe5fad17609b43c49e98609dd847642f8a041b4928b"
+    },
+    "shop-insufficient-360x800.png": {
+      "path": "screens/shop-insufficient-360x800.png",
+      "bytes": 185429,
+      "sha256": "9b15500c3a5f63e2285e66a23b6bb8917f0d58467d5ba56fd692b53e1fa52f7d"
+    },
+    "shop-insufficient-430x932.png": {
+      "path": "screens/shop-insufficient-430x932.png",
+      "bytes": 239523,
+      "sha256": "1cebcbff44987745f9a54e5884dc2b061155b7aedaef3ac340a0913e24e1f19f"
+    },
+    "shop-locked-360x800.png": {
+      "path": "screens/shop-locked-360x800.png",
+      "bytes": 186519,
+      "sha256": "3859478c49ce90ccffa986d0e6fdfa840743481301d99aa12da3624d49b9140c"
+    },
+    "shop-locked-430x932.png": {
+      "path": "screens/shop-locked-430x932.png",
+      "bytes": 245533,
+      "sha256": "dac72c4c4658722867962ec9c8cafb9c2d7132b34098d0862b4f74fed62e3fbe"
+    },
+    "shop-owned-equipped-bottom-360x800.png": {
+      "path": "screens/shop-owned-equipped-bottom-360x800.png",
+      "bytes": 207678,
+      "sha256": "f3e16bbbcdd70cfe4bd1d13f74e6f6d1cc4eb93aa4855827f1ef6679845c6713"
+    },
+    "shop-owned-equipped-bottom-430x932.png": {
+      "path": "screens/shop-owned-equipped-bottom-430x932.png",
+      "bytes": 270770,
+      "sha256": "f9fe98ef7f951f4d01bf8f98fe043d11c925f83fcd8e1c70ce13534759967223"
+    },
+    "shop-owned-equipped-top-360x800.png": {
+      "path": "screens/shop-owned-equipped-top-360x800.png",
+      "bytes": 191680,
+      "sha256": "04fb184478fd96ad87f57e17760d1637eebd3c7608bc81177dd4ded5b45b15dc"
+    },
+    "shop-owned-equipped-top-430x932.png": {
+      "path": "screens/shop-owned-equipped-top-430x932.png",
+      "bytes": 261441,
+      "sha256": "b6a4ede77af13e65edbe364f971106e21c62263496fe4685cc42e3f3bd48a974"
+    },
+    "shop-supply-360x800.png": {
+      "path": "screens/shop-supply-360x800.png",
+      "bytes": 190367,
+      "sha256": "d220b8c27a6b1fffcaf1fe62d05c882db7899286da561f052b3d21c8a1c545cf"
+    },
+    "shop-supply-390x844.png": {
+      "path": "screens/shop-supply-390x844.png",
+      "bytes": 209259,
+      "sha256": "be960c5ac34091d16e348325a6b7fddfea3453243da99ae7e8b2c8c3f86d0a3c"
+    },
+    "shop-supply-430x932.png": {
+      "path": "screens/shop-supply-430x932.png",
+      "bytes": 245386,
+      "sha256": "7e139d1c4dd70980be8e820619a4a498b5934ebb8ed7f36499bbec258fad428d"
+    },
+    "shop-supply-bottom-360x800.png": {
+      "path": "screens/shop-supply-bottom-360x800.png",
+      "bytes": 203709,
+      "sha256": "68fe7d079de4042fb89481901450dcf7410fe42f143ae683040a48b34df32b77"
+    },
+    "shop-supply-bottom-430x932.png": {
+      "path": "screens/shop-supply-bottom-430x932.png",
+      "bytes": 262469,
+      "sha256": "a095ba4e2c911adf55e1eec058e662c033f6b9ae59f389037391b8c4f7419e85"
+    },
+    "shop-supply-top-360x800.png": {
+      "path": "screens/shop-supply-top-360x800.png",
+      "bytes": 192586,
+      "sha256": "2145d993ab91c3b997def9d49c5b839b9f8c4b08f1e7f0667a1157740cb46430"
+    },
+    "shop-supply-top-430x932.png": {
+      "path": "screens/shop-supply-top-430x932.png",
+      "bytes": 248185,
+      "sha256": "8acebd324a0ca390eff3d23cfeb3a033f358e4c6e6a3ed3d55dbb67658fa2c22"
+    }
+  },
+  "parkUiScreens": {
+    "bag-390x844.png": {
+      "path": "park-ui/screens/bag-390x844.png",
+      "bytes": 208978,
+      "sha256": "d213ffa50bd96dcf8428f813d041e1872d335076440c75b3718815298d6e465b"
+    },
+    "editor-390x844.png": {
+      "path": "park-ui/screens/editor-390x844.png",
+      "bytes": 210862,
+      "sha256": "de01004a199d8aa6022dfa1abc2f4340f1f6b6c300e28215aa24d81b8ee88992"
+    },
+    "editor-connected-390x844.png": {
+      "path": "park-ui/screens/editor-connected-390x844.png",
+      "bytes": 217573,
+      "sha256": "1289345f9ac0755ec35b1c66e072a201b440f2015b97162cfd9c75df24e485cf"
+    },
+    "editor-victory-390x844.png": {
+      "path": "park-ui/screens/editor-victory-390x844.png",
+      "bytes": 442367,
+      "sha256": "0772508cc9efbfd224314251a5fe893dc44ec41c3a9bcd597ef7cb2bf165b4c8"
+    },
+    "endless-390x844.png": {
+      "path": "park-ui/screens/endless-390x844.png",
+      "bytes": 442313,
+      "sha256": "45d61f3005a847250560b3fc80120f8f81eec7f41e67f0de104d22b510d4e04f"
+    },
+    "endless-select-390x844.png": {
+      "path": "park-ui/screens/endless-select-390x844.png",
+      "bytes": 213607,
+      "sha256": "60da3df894ef794ce1da9ecd4f3ccd4d3d92b766f913f02f9b20b2c5d0bb9761"
+    },
+    "flora-390x844.png": {
+      "path": "park-ui/screens/flora-390x844.png",
+      "bytes": 211611,
+      "sha256": "1f32a6f122f5ca0dda9e6de6d067538ccbb4df1ba694546c8a909490d9c67e63"
+    },
+    "flow-390x844.png": {
+      "path": "park-ui/screens/flow-390x844.png",
+      "bytes": 436722,
+      "sha256": "dd3c1ec4dc98ad44ec278bbf13ba7646f49557a4d1ade956689d4a38c2965cd9"
+    },
+    "flower-detail-390x844.png": {
+      "path": "park-ui/screens/flower-detail-390x844.png",
+      "bytes": 186486,
+      "sha256": "864743c9cfab532faa24c61821a02ff9105ef11353c8085e5ef1a1c6ca312bca"
+    },
+    "hint-390x844.png": {
+      "path": "park-ui/screens/hint-390x844.png",
+      "bytes": 180370,
+      "sha256": "2d0360c97b01a5b6164ea486d8bf5a7bb2302c86a1a2bfde0f65973b84cd5281"
+    },
+    "history-390x844.png": {
+      "path": "park-ui/screens/history-390x844.png",
+      "bytes": 171697,
+      "sha256": "a5ce6ddc1680eb837022e620e068ed713db151a68e2c005bd6537929bc6dd44f"
+    },
+    "home-360x640.png": {
+      "path": "park-ui/screens/home-360x640.png",
+      "bytes": 2440767,
+      "sha256": "7c2134111047a5609773af886e9055bfad503215b968643a1dcaa32fcfd69d36"
+    },
+    "home-360x800.png": {
+      "path": "park-ui/screens/home-360x800.png",
+      "bytes": 2788382,
+      "sha256": "1df67f70121d0e17ce8a32decb13aef225bb63ac485a586ca844c277c8d77432"
+    },
+    "home-361x727.png": {
+      "path": "park-ui/screens/home-361x727.png",
+      "bytes": 430717,
+      "sha256": "e0c09a667562424ca38bbbcefa26aa4349b29c83b5406f5a935b537f0a76e6a4"
+    },
+    "home-390x844.png": {
+      "path": "park-ui/screens/home-390x844.png",
+      "bytes": 513228,
+      "sha256": "bd92424a540c77bb4b6affffc135d6bdafb7537381569a926ff257b176360788"
+    },
+    "home-720x1280.png": {
+      "path": "park-ui/screens/home-720x1280.png",
+      "bytes": 1241183,
+      "sha256": "cc176bfbeb4486213c811b60f86aca2668ae40f1760caac281d338a9e59f51cb"
+    },
+    "home-897x1752.png": {
+      "path": "park-ui/screens/home-897x1752.png",
+      "bytes": 1950205,
+      "sha256": "dd2435d345bf0f5866ee37628cbd805faf88eac7522c7cd9795227f61b867a23"
+    },
+    "home-897x1754.png": {
+      "path": "park-ui/screens/home-897x1754.png",
+      "bytes": 1948969,
+      "sha256": "e8483cc14697b71ff2468ead91b97d9b2c7890492636fcd4dc25609acba71560"
+    },
+    "home-progress-390x844.png": {
+      "path": "park-ui/screens/home-progress-390x844.png",
+      "bytes": 514881,
+      "sha256": "5ade737bd31cee1add595b0b008fa076b616e0922f2b4bc67b36aa961b3a6a9a"
+    },
+    "level24-powered-390x844.png": {
+      "path": "park-ui/screens/level24-powered-390x844.png",
+      "bytes": 475079,
+      "sha256": "3871e38a60a1d7f5bdb7661ecb970e4ec7f40ed0ac77243b98986ecea9914a1f"
+    },
+    "level24-start-390x844.png": {
+      "path": "park-ui/screens/level24-start-390x844.png",
+      "bytes": 460646,
+      "sha256": "e6e53ee4113c4fdfd433cb86b8896eafb4ff4e71f4d2aeeae5d7152a20e397fd"
+    },
+    "level41-powered-390x844.png": {
+      "path": "park-ui/screens/level41-powered-390x844.png",
+      "bytes": 453769,
+      "sha256": "f2d93a73a2e8838864eeece9e3b08ff5a081d89e42aaf21e19d166e0d22c02cb"
+    },
+    "level41-start-390x844.png": {
+      "path": "park-ui/screens/level41-start-390x844.png",
+      "bytes": 455382,
+      "sha256": "876b20a5fc8d6926c01dce113148800be1f9dd61882cfecad686d627e40ce3b2"
+    },
+    "level61-powered-390x844.png": {
+      "path": "park-ui/screens/level61-powered-390x844.png",
+      "bytes": 491925,
+      "sha256": "c061dc1a884851a89faa81aabfd85dd4dda55ff899abb2e4eb91c75801759077"
+    },
+    "level61-start-390x844.png": {
+      "path": "park-ui/screens/level61-start-390x844.png",
+      "bytes": 477215,
+      "sha256": "37084281938e444d17c71e71ee126e10bcebaa5293471ca241028ce27ef6ef88"
+    },
+    "level81-powered-390x844.png": {
+      "path": "park-ui/screens/level81-powered-390x844.png",
+      "bytes": 480632,
+      "sha256": "6b16d6c1cc63175d77055f159921129c934826543ce3e3ac99b5e5430e140007"
+    },
+    "level81-start-390x844.png": {
+      "path": "park-ui/screens/level81-start-390x844.png",
+      "bytes": 470275,
+      "sha256": "b0908038b73f231189fe2eae6a8875b666ebe43a8bb0049756a3b5b80087f218"
+    },
+    "levels-390x844.png": {
+      "path": "park-ui/screens/levels-390x844.png",
+      "bytes": 182461,
+      "sha256": "5056cbe1656cc8dce095fe3f8a544c33c6dfcd84202b35c6a237a7040031bb41"
+    },
+    "mail-390x844.png": {
+      "path": "park-ui/screens/mail-390x844.png",
+      "bytes": 191194,
+      "sha256": "de25653949adc1210f0a68f30d39e0c99ca97ff23001add0dc87ec90ed87e52f"
+    },
+    "onboarding-1-390x844.png": {
+      "path": "park-ui/screens/onboarding-1-390x844.png",
+      "bytes": 176924,
+      "sha256": "1462c7e5c1505cc338c086a44cf0a25bc47541aa0742c680c816624ed95072ba"
+    },
+    "onboarding-2-390x844.png": {
+      "path": "park-ui/screens/onboarding-2-390x844.png",
+      "bytes": 190732,
+      "sha256": "a780ed1eed1a98d9abb517f4c16fb52e10b23f8b4f278519ab3629bbfd04dd08"
+    },
+    "onboarding-3-390x844.png": {
+      "path": "park-ui/screens/onboarding-3-390x844.png",
+      "bytes": 183365,
+      "sha256": "c3bc5f08b087382db06cfb9c96e98ad0aa16130c7a59c81bfad53fd08d70c4c0"
+    },
+    "out-of-steps-390x844.png": {
+      "path": "park-ui/screens/out-of-steps-390x844.png",
+      "bytes": 403954,
+      "sha256": "7006c0a37e4ba5cccf7232c1240a986c593285b3ef6ff7dd84cf451dc3e76139"
+    },
+    "play-360x640.png": {
+      "path": "park-ui/screens/play-360x640.png",
+      "bytes": 1807446,
+      "sha256": "ad8ab78c7207bce83b171d6c13295d548f43abacc5f487bcab79791f4aa2d084"
+    },
+    "play-360x800.png": {
+      "path": "park-ui/screens/play-360x800.png",
+      "bytes": 1963211,
+      "sha256": "c5e8ddedd34ca8b685c7239c69573a49aff9a2e48d9809c824ebe243ec111ca4"
+    },
+    "play-361x727.png": {
+      "path": "park-ui/screens/play-361x727.png",
+      "bytes": 356845,
+      "sha256": "3fe88368969102416b7788d6f2a103a8605a7fb6d1eba2456afb3e705c90d0f4"
+    },
+    "play-390x844.png": {
+      "path": "park-ui/screens/play-390x844.png",
+      "bytes": 432288,
+      "sha256": "0607aedc03a6be148304549753a94d6c39ef5cc073e7d9af1090bcf460bc3672"
+    },
+    "play-720x1280.png": {
+      "path": "park-ui/screens/play-720x1280.png",
+      "bytes": 950098,
+      "sha256": "91f0f4d4b33e5dc7484c4549d93cd8fef799801d645c0989e33a39836a987ca3"
+    },
+    "play-897x1752.png": {
+      "path": "park-ui/screens/play-897x1752.png",
+      "bytes": 1637647,
+      "sha256": "396d15c539c3861e2a8c413ce214f57796f3c459946ee8f747aed6447586928d"
+    },
+    "play-897x1754.png": {
+      "path": "park-ui/screens/play-897x1754.png",
+      "bytes": 1623635,
+      "sha256": "8b166ce622c313f87d477e9b0cd4476fdf96f0f42ac9105bda478adb6b1b0625"
+    },
+    "profile-390x844.png": {
+      "path": "park-ui/screens/profile-390x844.png",
+      "bytes": 178321,
+      "sha256": "fe74dc027e33b4d686c6edb240bfa25ba0cd96f49c8b17f3715189571e6a091f"
+    },
+    "rules-390x844.png": {
+      "path": "park-ui/screens/rules-390x844.png",
+      "bytes": 205696,
+      "sha256": "632c36038c7b903205c00b35c87cd2dbb8a49f936379560c931872531d4ebf50"
+    },
+    "settings-390x844.png": {
+      "path": "park-ui/screens/settings-390x844.png",
+      "bytes": 193435,
+      "sha256": "be51f0c6f3100d24fbe9b9bdb787706d0549d06e872cd24686c6bc178d27a35b"
+    },
+    "shop-purchased-390x844.png": {
+      "path": "park-ui/screens/shop-purchased-390x844.png",
+      "bytes": 208197,
+      "sha256": "327c92d18d9bc839dca3e3378edf392eb85a17be8016b646508bdfdcdcc344be"
+    },
+    "story-390x844.png": {
+      "path": "park-ui/screens/story-390x844.png",
+      "bytes": 235883,
+      "sha256": "6aee3acc9666f888be033e5658b9800b1753ec0c0bae09df0942ae05ecdd4c6c"
+    },
+    "tasks-ready-390x844.png": {
+      "path": "park-ui/screens/tasks-ready-390x844.png",
+      "bytes": 180032,
+      "sha256": "a2100903d284725a93f80e19d73e9ba2f6c129b3fb7f7c1e83dedccb4446f9e2"
+    },
+    "victory-360x640.png": {
+      "path": "park-ui/screens/victory-360x640.png",
+      "bytes": 2011665,
+      "sha256": "4c27a14a97d0463fe5aac5adb0858a42f84b4946f03b1f63ee0012c648721073"
+    },
+    "victory-360x800.png": {
+      "path": "park-ui/screens/victory-360x800.png",
+      "bytes": 2338207,
+      "sha256": "f656bc0ababc085a92adf003197ba57211d984a34a67d60c5089fce57a11462a"
+    },
+    "victory-361x727.png": {
+      "path": "park-ui/screens/victory-361x727.png",
+      "bytes": 358855,
+      "sha256": "b71d08ec66a7394c01fee29b9ff7b0fc5b515f3819b5337c99bcfc0272a5f684"
+    },
+    "victory-390x844.png": {
+      "path": "park-ui/screens/victory-390x844.png",
+      "bytes": 424030,
+      "sha256": "d795f3af339cc7c9082a0003d6ee0cc79730a2f3c63edac554bde363c27b9769"
+    },
+    "victory-720x1280.png": {
+      "path": "park-ui/screens/victory-720x1280.png",
+      "bytes": 1039474,
+      "sha256": "1b28ae21a3851d431119329d89f2b0dc6e120e71ac876e78cab5a03c3fd8daf9"
+    },
+    "victory-897x1752.png": {
+      "path": "park-ui/screens/victory-897x1752.png",
+      "bytes": 1575736,
+      "sha256": "f8c4cafbebcd14caa406819feb1fd958f68b33e484c2ba5254f467082abca230"
+    },
+    "victory-897x1754.png": {
+      "path": "park-ui/screens/victory-897x1754.png",
+      "bytes": 1571716,
+      "sha256": "f7f7ace53fb105081418a9414a06c9f46933b3a65af3b385ad4e39d5a6a7da6d"
+    }
+  },
+  "results": {
+    "browser-results.json": {
+      "path": "browser-results.json",
+      "bytes": 12464,
+      "sha256": "5bda9a6add58f22bf1af6f6870171eb79bc3416edbe1b7b47425cc65d11a993b"
+    },
+    "purchase-results.json": {
+      "path": "purchase-results.json",
+      "bytes": 4412,
+      "sha256": "5f45b5d37b91e28fcf6e0300449bb7ca2a7c8e58760273bd2ab5528fc4f8900d"
+    },
+    "park-delivery-audit.json": {
+      "path": "park-delivery-audit.json",
+      "bytes": 96169,
+      "sha256": "b0c3625d26372511c40786d189a887e27bb5c3e71423abf6a3e0d2f362a929d6"
+    }
+  },
+  "buildArtifacts": {
+    "dist/index.html": {
+      "bytes": 1505,
+      "sha256": "69233d36c396ba26165d3c95d70438e60e97b2aa24ff7d2f21b7995196d4b6d8"
+    },
+    "dist/sw.js": {
+      "bytes": 11393,
+      "sha256": "d55768b8885270d3ef7128b3b27537356edac1cd2840fab2382577aa4afaa6af"
+    },
+    "dist/assets/index-CeibuYac.js": {
+      "bytes": 870951,
+      "sha256": "5f36531eea7ed1cc1a27f2a379a492c5ee37510d9054fba6b0207c003a149f40"
+    },
+    "dist/assets/index-C_CtbPFy.css": {
+      "bytes": 57935,
+      "sha256": "ee66f81c9c1aaf1dd7eb4156fad8a5739ccd2e88a542170112cde763f97138ba"
+    }
+  },
+  "contactSheet": {
+    "path": "contact-sheet.jpg",
+    "bytes": 2635728,
+    "sha256": "1b67cc04b6b204174268fccce8afe216a0a312cc1b4a3389dd976296795282f1"
+  },
+  "notes": [
+    "QA commit 由包含本 JSON 的独立提交自身标识。",
+    "用户工作区 manifest chroma、audit-distinct 与其他未提交差量未进入 clean archive。"
+  ]
 }

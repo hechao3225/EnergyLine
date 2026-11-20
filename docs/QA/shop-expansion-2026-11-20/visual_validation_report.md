@@ -2,7 +2,7 @@
 
 ## 结论
 
-本轮商店扩充的玩家路径、主题切换、补给使用、装扮展示和非主线提示禁用通过验收。三视口 30 张截图均来自生产构建预览的真实点击，尺寸与视口完全一致，所有 `<img>` 的 `naturalWidth > 0`，未发现文字截断、页面根层溢出、弹窗框越界或首页展台遮挡。
+本轮商店扩充的购买、玩家路径、主题切换、补给使用、装扮展示和非主线提示禁用通过验收。clean archive 生成 53 张截图，尺寸与视口完全一致，所有 `<img>` 的 `naturalWidth > 0`，未发现文字截断、页面根层溢出、弹窗框越界或首页展台遮挡。
 
 验收发现并修复一项真实视觉问题：实验场入口覆盖旋转木马展台底部。修复后已重新构建、重新点击并重拍全部证据。
 
@@ -10,12 +10,12 @@
 
 | 项目 | 值 |
 | --- | --- |
-| 最终代码提交 SHA | `341c0f24f53061c4d83521795b174d0f88997bf3` |
+| 最终代码提交 SHA | `3b88df73c00247835ce0b23e217f91b67d2ccbc3` |
 | 构建 | Vite 8.3.6 生产构建 |
 | 浏览器 | Chrome，Playwright headless |
 | 截图倍率 | 1，原尺寸输出 |
 | 素材运行时 | Python 3.12，Pillow 13.0.0 |
-| 联系表 | 1500×4200 JPEG，SHA-256 `abd12db7bc551f08e1b1c48f3809f0cc64c6452581d804ce673f23c9fc4e540a` |
+| 联系表 | 1500×7700 JPEG，SHA-256 `1b67cc04b6b204174268fccce8afe216a0a312cc1b4a3389dd976296795282f1` |
 | 结构化证据 | `browser-results.json` |
 
 生产构建命令 `pnpm build` 通过。构建仅报告主 JS chunk 超过 500 kB 的非阻塞警告，不影响页面加载与交互。
@@ -37,7 +37,19 @@
 | 线圈补回 3 步 | 通过 | 通过 | 通过 |
 | 无尽挑战提示禁用 | 通过 | 通过 | 通过 |
 
-截图文件位于 `screens/`，命名为 `<状态>-<宽度>x<高度>.png`。联系表按状态和视口排列，不压缩或替换原图证据。
+购买状态矩阵：
+
+| 状态 | 360×800 | 430×932 |
+| --- | --- | --- |
+| 补给顶部 / 底部 | 通过 | 通过 |
+| 装扮顶部 / 底部 | 通过 | 通过 |
+| 余额不足 | 通过 | 通过 |
+| 未开放 | 通过 | 通过 |
+| 已拥有 / 使用中顶部 / 底部 | 通过 | 通过 |
+| 展品选择器 | 通过 | 通过 |
+| 购买后首页 / 背包 | 通过 | 通过 |
+
+补给与装扮底部截图均由真实鼠标滚轮滚动后拍摄，`purchase-results.json` 记录每个状态的 `scrollTop`。390×844 另保留购买后展品选择器截图。截图文件位于 `screens/`，命名为 `<状态>-<宽度>x<高度>.png`；最终联系表包含 53 张证据。
 
 ## 玩家路径校验
 
@@ -66,9 +78,20 @@
 - 工坊与实验场使用同一主线限定判断；自动路径覆盖无尽挑战，代码条件覆盖 `story` 以外的全部玩法。
 - 重置流程兼容两套确认 UI：clean HEAD 的三次重置均实际记录为“原生 window.confirm”；当前工作区的三次重置均实际记录为“游戏内确认弹窗”。
 
+### 真实购买
+
+- 初始状态为 40 关已修复、7000 钻石、四类补给均为 0、未拥有装扮。
+- 依次购买提示灯泡 120、火花透镜 260、时光回针 180、应急线圈 300，以及开心问候 450、星愿礼服 900、星空展台 1200、宁静夜灯 1800。
+- 最终钻石为 1790；四类补给库存均为 1；四件装扮全部进入 `ownedCosmetics`。
+- 装备 joy、starlight、calm，并选择第 21 关旋转木马为展品，最终 `equippedCosmetics` 为 `joy/starlight/21/calm`。
+- 50 钻石状态四件补给按钮均为 disabled 并显示“钻石不足”；仅修复 4 关时四件装扮均为 locked 且不可购买。
+- 购买后按钮切换为“使用/选择展品”，装备后切换为“恢复默认/更换展品”。
+
 ## 素材真实性
 
 10 个商店资源与 `shop-assets.json`、主 manifest 的 name/file/source/size/bytes/sha256/alpha/processing 元数据一致。透明资源使用 `alpha > 28` 计算 bbox；宁静主题预览的 `has_alpha=false`，不按透明资源处理。`mood-joy` 的三个组合来源均记录为完整仓库相对路径。
+
+`prepare_shop_assets.py --check` 同时比较 name/file/source/size/processing/透明 metadata。负向验证脚本先确认确定性清单通过，再分别篡改 `mood-joy` 的 processing 与 source，两者均按预期失败。
 
 | 资源 | 尺寸 | 通道 | alpha bbox |
 | --- | --- | --- | --- |
@@ -96,20 +119,21 @@
 | `tsx scripts/test_park_progress.ts` | 28 项通过 |
 | `tsx scripts/test_hint_engine.ts` | 通过 |
 | `scripts/prepare_shop_assets.py --check` | 10 个素材与确定性产物一致 |
+| `scripts/test_shop_asset_generator.py` | 确定性清单通过；篡改 processing/source 均失败 |
 | `scripts/audit_shop_assets.py` | 10 个素材、主 manifest 与联系表通过 |
 | clean HEAD `pnpm test` | 通过；不含用户工作区 `audit-distinct` |
 | 当前工作区 `pnpm test` | 通过；包含用户未提交 `audit-distinct` |
 | `pnpm build` | 通过 |
 | clean HEAD `test_shop_supplies.ts` | 9 项通过 |
 | clean HEAD `test_shop_home.ts` | 3 视口、30 张截图通过；三次走原生 confirm |
+| clean HEAD `test_shop_purchase.ts` | 8 次购买通过；23 张购买状态截图 |
 | clean HEAD `test_park_ui.ts` | 13 项真实玩家路径通过 |
 | `audit_park_delivery.py` | 188 个资产、53 张截图、3 组设计稿对照通过 |
 
-完整 clean HEAD 验证从 `git archive 341c0f24f53061c4d83521795b174d0f88997bf3` 导出到仓库外 `/private/tmp`，软链接复用 `node_modules`。当前工作区保留用户未提交的 manifest 彩度差量和大量资源改动；主 manifest 通过专用索引提交，用户 chroma 差量未进入提交。
+完整 clean HEAD 验证从 `git archive 3b88df73c00247835ce0b23e217f91b67d2ccbc3` 导出到仓库外 `/private/tmp`，软链接复用 `node_modules`。archive SHA、命令、成功输出、构建产物、日志、53 张截图和联系表哈希记录在 `clean-head-verification.json`。当前工作区保留用户未提交的 manifest 彩度差量和大量资源改动；用户 chroma 与 `audit-distinct` 均未进入 clean archive。
 
 ## 未覆盖范围
 
-- 未在 Android 与 iOS 真机重复本轮 30 张矩阵；触控命中已通过 Playwright 原生点击验证。
+- 未在 Android 与 iOS 真机重复本轮 53 张矩阵或购买后真实滚轮列表；触控与滚轮命中已通过 Playwright 原生输入验证。
 - 未覆盖读屏软件、系统级大字体、横屏与平板布局。
 - 未进行弱网、离线 PWA 首装和低端机长时间帧率测试。
-- 商店内部滚动列表只截取首屏玩家视图；其余卡片通过 DOM 解码、文字溢出检查和既有玩家路径测试覆盖。
