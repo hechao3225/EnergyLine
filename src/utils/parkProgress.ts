@@ -1,4 +1,16 @@
 import type { LevelConfig } from "../types/game";
+import type {
+  CosmeticId,
+  EquippedMood,
+  EquippedOutfit,
+  EquippedTheme,
+  SupplyId,
+} from "../types/shop";
+import {
+  getCosmeticItem,
+  getSupplyItem,
+  isCosmeticId,
+} from "../data/shopCatalog";
 import { getStarsForRecord } from "./rating";
 import { CENTER_DISTRICTS } from "../content/zones";
 
@@ -6,13 +18,23 @@ import { CENTER_DISTRICTS } from "../content/zones";
 export const FIRST_CLEAR_COINS = 100;
 export const HELL_CLEAR_COINS = 150;
 /** 提示灯泡单价——合并货币以后这是唯一的经济出口。 */
-export const HINT_PRICE = 120;
+export const HINT_PRICE = getSupplyItem("hint")!.price;
 /** 老存档里独立的钻石字段并入统一货币的折算率（10 钻本来就是一关的奖励）。 */
 export const GEM_TO_COIN = 10;
 
 export interface ParkProgress {
   coins: number;
   hints: number;
+  lenses: number;
+  rewindTokens: number;
+  stepTokens: number;
+  ownedCosmetics: CosmeticId[];
+  equippedCosmetics: {
+    mood: EquippedMood;
+    outfit: EquippedOutfit;
+    exhibitId: number | null;
+    theme: EquippedTheme;
+  };
   rewardedLevels: number[];
   completedDate: string;
   claimedDate: string;
@@ -59,6 +81,16 @@ export function readStoryProgress(storage: StorageReader, levels: LevelConfig[])
 const DEFAULT_PROGRESS: ParkProgress = {
   coins: 0,
   hints: 3,
+  lenses: 0,
+  rewindTokens: 0,
+  stepTokens: 0,
+  ownedCosmetics: [],
+  equippedCosmetics: {
+    mood: "default",
+    outfit: "default",
+    exhibitId: null,
+    theme: "default",
+  },
   rewardedLevels: [],
   completedDate: "",
   claimedDate: "",
@@ -81,12 +113,51 @@ export function sanitizeProgress(raw: unknown): ParkProgress {
   const rewarded = Array.isArray(source.rewardedLevels)
     ? source.rewardedLevels
     : [];
+  const ownedCosmetics = Array.from(
+    new Set(
+      (Array.isArray(source.ownedCosmetics) ? source.ownedCosmetics : []).filter(
+        isCosmeticId,
+      ),
+    ),
+  );
+  const equipped =
+    source.equippedCosmetics &&
+    typeof source.equippedCosmetics === "object"
+      ? (source.equippedCosmetics as Record<string, unknown>)
+      : {};
+  const owns = (id: CosmeticId) => ownedCosmetics.includes(id);
+  const exhibitId = equipped.exhibitId;
   return {
     // 钻石已并入金币：老存档按 10 钻 = 100 币折算，不丢价值
     coins:
       asCount(source.coins, DEFAULT_PROGRESS.coins) +
       asCount(source.gems, 0) * GEM_TO_COIN,
     hints: asCount(source.hints, DEFAULT_PROGRESS.hints),
+    lenses: asCount(source.lenses, DEFAULT_PROGRESS.lenses),
+    rewindTokens: asCount(
+      source.rewindTokens,
+      DEFAULT_PROGRESS.rewindTokens,
+    ),
+    stepTokens: asCount(source.stepTokens, DEFAULT_PROGRESS.stepTokens),
+    ownedCosmetics,
+    equippedCosmetics: {
+      mood:
+        owns("joy-greeting") && equipped.mood === "joy" ? "joy" : "default",
+      outfit:
+        owns("starlight-outfit") && equipped.outfit === "starlight"
+          ? "starlight"
+          : "default",
+      exhibitId:
+        owns("exhibit-display") &&
+        typeof exhibitId === "number" &&
+        Number.isInteger(exhibitId) &&
+        exhibitId >= 1 &&
+        exhibitId <= 99
+          ? exhibitId
+          : null,
+      theme:
+        owns("calm-theme") && equipped.theme === "calm" ? "calm" : "default",
+    },
     rewardedLevels: Array.from(
       new Set(
         rewarded.filter(
@@ -191,15 +262,123 @@ export function claimDailyTask(
     ? { ...progress, coins: progress.coins + 100, claimedDate: date }
     : progress;
 }
+export function buySupply(
+  progress: ParkProgress,
+  id: SupplyId,
+): ParkProgress {
+  const item = getSupplyItem(id);
+  if (!item || progress.coins < item.price) return progress;
+  return {
+    ...progress,
+    coins: progress.coins - item.price,
+    [item.stockKey]: progress[item.stockKey] + 1,
+  };
+}
+export function consumeSupply(
+  progress: ParkProgress,
+  id: SupplyId,
+): ParkProgress {
+  const item = getSupplyItem(id);
+  if (!item || progress[item.stockKey] <= 0) return progress;
+  return {
+    ...progress,
+    [item.stockKey]: progress[item.stockKey] - 1,
+  };
+}
+export function buyCosmetic(
+  progress: ParkProgress,
+  id: CosmeticId,
+  clearedCount: number,
+): ParkProgress {
+  const item = getCosmeticItem(id);
+  if (
+    !item ||
+    progress.coins < item.price ||
+    clearedCount < item.unlockAt ||
+    progress.ownedCosmetics.includes(id)
+  ) {
+    return progress;
+  }
+  return {
+    ...progress,
+    coins: progress.coins - item.price,
+    ownedCosmetics: [...progress.ownedCosmetics, id],
+  };
+}
+export function equipCosmetic(
+  progress: ParkProgress,
+  id: CosmeticId,
+  active: boolean,
+): ParkProgress {
+  if (!progress.ownedCosmetics.includes(id)) return progress;
+
+  if (id === "joy-greeting") {
+    const mood: EquippedMood = active ? "joy" : "default";
+    return progress.equippedCosmetics.mood === mood
+      ? progress
+      : {
+          ...progress,
+          equippedCosmetics: { ...progress.equippedCosmetics, mood },
+        };
+  }
+  if (id === "starlight-outfit") {
+    const outfit: EquippedOutfit = active ? "starlight" : "default";
+    return progress.equippedCosmetics.outfit === outfit
+      ? progress
+      : {
+          ...progress,
+          equippedCosmetics: { ...progress.equippedCosmetics, outfit },
+        };
+  }
+  if (id === "calm-theme") {
+    const theme: EquippedTheme = active ? "calm" : "default";
+    return progress.equippedCosmetics.theme === theme
+      ? progress
+      : {
+          ...progress,
+          equippedCosmetics: { ...progress.equippedCosmetics, theme },
+        };
+  }
+  return progress;
+}
+export function setHomeExhibit(
+  progress: ParkProgress,
+  exhibitId: number | null,
+): ParkProgress {
+  if (!progress.ownedCosmetics.includes("exhibit-display")) return progress;
+  if (
+    exhibitId !== null &&
+    (!Number.isInteger(exhibitId) || exhibitId < 1 || exhibitId > 99)
+  ) {
+    return progress;
+  }
+  return progress.equippedCosmetics.exhibitId === exhibitId
+    ? progress
+    : {
+        ...progress,
+        equippedCosmetics: { ...progress.equippedCosmetics, exhibitId },
+      };
+}
+export function isCosmeticEquipped(
+  progress: ParkProgress,
+  id: CosmeticId,
+): boolean {
+  switch (id) {
+    case "joy-greeting":
+      return progress.equippedCosmetics.mood === "joy";
+    case "starlight-outfit":
+      return progress.equippedCosmetics.outfit === "starlight";
+    case "exhibit-display":
+      return progress.equippedCosmetics.exhibitId !== null;
+    case "calm-theme":
+      return progress.equippedCosmetics.theme === "calm";
+  }
+}
 export function buyHint(progress: ParkProgress): ParkProgress {
-  return progress.coins >= HINT_PRICE
-    ? { ...progress, coins: progress.coins - HINT_PRICE, hints: progress.hints + 1 }
-    : progress;
+  return buySupply(progress, "hint");
 }
 export function consumeHint(progress: ParkProgress): ParkProgress {
-  return progress.hints > 0
-    ? { ...progress, hints: progress.hints - 1 }
-    : progress;
+  return consumeSupply(progress, "hint");
 }
 export const CHAPTERS = CENTER_DISTRICTS.map((district) => district.name);
 export function chapterIndex(id: number): number {
