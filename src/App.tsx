@@ -101,8 +101,22 @@ export default function App() {
   const [historyIndex, setHistoryIndex] = useState(0);
   const [rewinds, setRewinds] = useState(3);
   const [attemptId, setAttemptId] = useState(0);
-  const attempt = useRef({ tiles, remaining, history, index: historyIndex, rewinds });
-  attempt.current = { tiles, remaining, history, index: historyIndex, rewinds };
+  const attempt = useRef({
+    tiles,
+    remaining,
+    history,
+    index: historyIndex,
+    rewinds,
+    bonusRewinds: 0,
+  });
+  attempt.current = {
+    tiles,
+    remaining,
+    history,
+    index: historyIndex,
+    rewinds,
+    bonusRewinds: attempt.current.bonusRewinds,
+  };
   const stepsUsed = history[historyIndex].stepsUsed ?? history[historyIndex].stepNumber;
   const [levelsOpen, setLevelsOpen] = useState(false);
   const [peek, setPeek] = useState(false);
@@ -131,7 +145,8 @@ export default function App() {
     setHistoryIndex(0);
     setRewinds(3);
     attempt.current = { tiles: config.tiles.map((tile) => ({ ...tile })), remaining: config.maxSteps,
-      history: [snapshot(config, config.tiles, config.maxSteps, 0, "初始状态")], index: 0, rewinds: 3 };
+      history: [snapshot(config, config.tiles, config.maxSteps, 0, "初始状态")], index: 0, rewinds: 3,
+      bonusRewinds: 0 };
     stats.current = { undos: 0, jumped: false, switched: false };
     setPeek(false);
     setScreen("play");
@@ -373,7 +388,11 @@ export default function App() {
     const current = attempt.current;
     if (winProcessed.current) return false;
     const nextRewinds = current.rewinds + 1;
-    attempt.current = { ...current, rewinds: nextRewinds };
+    attempt.current = {
+      ...current,
+      rewinds: nextRewinds,
+      bonusRewinds: current.bonusRewinds + 1,
+    };
     setRewinds(nextRewinds);
     sound.playSwitch();
     haptics.tapHeavy();
@@ -412,11 +431,16 @@ export default function App() {
     setLevelsOpen(false);
     if (mode === "story" && !winProcessed.current) {
       const current = attempt.current;
-      const nextRewinds = Math.min(current.rewinds, 3);
-      attempt.current = { ...current, rewinds: nextRewinds };
+      const nextRewinds = Math.max(0, current.rewinds - current.bonusRewinds);
+      attempt.current = {
+        ...current,
+        rewinds: nextRewinds,
+        bonusRewinds: 0,
+      };
       setRewinds(nextRewinds);
       setAttemptId((value) => value + 1);
     } else if (mode !== "story" || winProcessed.current) {
+      attempt.current = { ...attempt.current, bonusRewinds: 0 };
       const id = resumeLevel(clearedLevels);
       const config = levelById(id);
       setLevelId(id);

@@ -169,6 +169,44 @@ try {
     await expect(page.locator(".park-history-link")).toContainText("回溯 3 次");
   }))) failures += 1;
 
+  if (!(await test("消耗完基础回溯后购买的回针在返回首页时全部回收", async () => {
+    await openFreshHome();
+    await enterFirstLevel();
+    for (let index = 0; index < 4; index += 1) await rotateFirstCell();
+    for (let index = 0; index < 3; index += 1) {
+      await page.getByRole("button", { name: "撤销", exact: true }).click();
+    }
+    await expect(page.locator(".park-history-link")).toContainText("回溯 0 次");
+
+    await page.getByRole("button", { name: /操作足迹/ }).click();
+    await page
+      .getByRole("button", { name: "使用时光回针 · 余 1", exact: true })
+      .click();
+    await expect(
+      page.getByRole("button", { name: "使用时光回针 · 余 0", exact: true }),
+    ).toBeVisible();
+    await page.locator(".park-modal-history .park-close").click();
+
+    await page.getByRole("button", { name: "返回乐园", exact: true }).click();
+    await page.getByRole("button", { name: "开始修复", exact: true }).click();
+    await expect(page.locator(".park-history-link")).toContainText("回溯 0 次");
+  }))) failures += 1;
+
+  if (!(await test("未消耗的基础回溯在返回首页时保持 3 次", async () => {
+    await openFreshHome();
+    await enterFirstLevel();
+    await page.getByRole("button", { name: /操作足迹/ }).click();
+    await page
+      .getByRole("button", { name: "使用时光回针 · 余 1", exact: true })
+      .click();
+    await page.locator(".park-modal-history .park-close").click();
+    await expect(page.locator(".park-history-link")).toContainText("回溯 4 次");
+
+    await page.getByRole("button", { name: "返回乐园", exact: true }).click();
+    await page.getByRole("button", { name: "开始修复", exact: true }).click();
+    await expect(page.locator(".park-history-link")).toContainText("回溯 3 次");
+  }))) failures += 1;
+
   if (!(await test("无尽关背包中的提示按钮禁用", async () => {
     await openFreshHome();
     await page.getByRole("navigation").getByRole("button", { name: "关卡", exact: true }).click();
