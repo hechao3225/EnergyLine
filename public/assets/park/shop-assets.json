@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "generated": "2026-11-20",
+  "assets": [
+    {
+      "name": "icon-lens",
+      "file": "public/assets/park/icon-lens.webp",
+      "source": "docs/UI设计稿2.0/generated-sources/shop/icon-lens.png",
+      "size": [
+        512,
+        512
+      ],
+      "has_alpha": true,
+      "bytes": 45704,
+      "sha256": "4e5b603a6709fa455c9c5d46d197b882b4f8f7892111e841366a0036ea6aef9c",
+      "processing": "边界近白泛洪去底；2px 软边；透明裁边；512x512 居中透明画布"
+    },
+    {
+      "name": "icon-coil",
+      "file": "public/assets/park/icon-coil.webp",
+      "source": "docs/UI设计稿2.0/generated-sources/shop/icon-coil.png",
+      "size": [
+        512,
+        512
+      ],
+      "has_alpha": true,
+      "bytes": 42430,
+      "sha256": "30dbcd964a0474bbb44297fbfe5fe6c784d2e6e7f9cfe551aef913c6defbf973",
+      "processing": "边界近白泛洪去底；2px 软边；透明裁边；512x512 居中透明画布"
+    },
+    {
+      "name": "outfit-sheep-starlight",
+      "file": "public/assets/park/outfit-sheep-starlight.webp",
+      "source": "docs/UI设计稿2.0/generated-sources/shop/shop-sample-sheep-starlight.png",
+      "size": [
+        951,
+        1017
+      ],
+      "has_alpha": true,
+      "bytes": 233304,
+      "sha256": "5ff2fd4c46a045251147adb605543653265b914656e8475aea1d4b5de7113916",
+      "processing": "边界近白泛洪去底；2px 软边；透明裁边并保留原始比例"
+    },
+    {
+      "name": "outfit-rabbit-starlight",
+      "file": "public/assets/park/outfit-rabbit-starlight.webp",
+      "source": "docs/UI设计稿2.0/generated-sources/shop/shop-sample-rabbit-starlight.png",
+      "size": [
+        719,
+        1024
+      ],
+      "has_alpha": true,
+      "bytes": 142644,
+      "sha256": "3c02b55b59fdd96587fa367e5853cd8f23dad50d8662c2c252b12bc4a8f860c6",
+      "processing": "边界近白泛洪去底；2px 软边；透明裁边并保留原始比例"
+    },
+    {
+      "name": "outfit-spirit-starlight",
+      "file": "public/assets/park/outfit-spirit-starlight.webp",
+      "source": "docs/UI设计稿2.0/generated-sources/shop/shop-sample-spirit-starlight.png",
+      "size": [
+        988,
+        1015
+      ],
+      "has_alpha": true,
+      "bytes": 183366,
+      "sha256": "7aece58210ba43f54681ea1e18e6fd8526209973a1e878e1380fa8df00a6d030",
+      "processing": "边界近白泛洪去底；2px 软边；透明裁边并保留原始比例"
+    },
+    {
+      "name": "mood-sheep-happy",
+      "file": "public/assets/park/mood-sheep-happy.webp",
+      "source": "assets/energy_park_art_pack_v1/02_characters/expressions/xingya_happy.png",
+      "size": [
+        144,
+        100
+      ],
+      "has_alpha": true,
+      "bytes": 7234,
+      "sha256": "2799fd8dd244d78e08a4a263178fd63a52a988f3f405bdcdd36ec1858753143d",
+      "processing": "沿用现有开心表情透明画布；保持原尺寸转 WebP"
+    },
+    {
+      "name": "mood-rabbit-happy",
+      "file": "public/assets/park/mood-rabbit-happy.webp",
+      "source": "assets/energy_park_art_pack_v1/02_characters/expressions/yunrong_happy.png",
+      "size": [
+        144,
+        132
+      ],
+      "has_alpha": true,
+      "bytes": 6850,
+      "sha256": "981ebed42878839dbcea7988f3f7383a84c8f1247ce0d46cc46f936ff52034cd",
+      "processing": "沿用现有开心表情透明画布；保持原尺寸转 WebP"
+    },
+    {
+      "name": "mood-spirit-happy",
+      "file": "public/assets/park/mood-spirit-happy.webp",
+      "source": "assets/energy_park_art_pack_v1/02_characters/expressions/boling_happy.png",
+      "size": [
+        144,
+        136
+      ],
+      "has_alpha": true,
+      "bytes": 6516,
+      "sha256": "bd1eb5c1799170a19f3f45c437ab674bee5e353890972e7e4fb91c6edbb4726c",
+      "processing": "沿用现有开心表情透明画布；保持原尺寸转 WebP"
+    },
+    {
+      "name": "mood-joy",
+      "file": "public/assets/park/mood-joy.webp",
+      "source": "assets/energy_park_art_pack_v1/02_characters/expressions/xingya_happy.png + yunrong_happy.png + boling_happy.png",
+      "size": [
+        512,
+        256
+      ],
+      "has_alpha": true,
+      "bytes": 20122,
+      "sha256": "3db0cc277619899c56292470e5573f51965a960f1dea0f8e2687ca8ec526068b",
+      "processing": "三张开心表情按原始画布尺寸横向居中合成 512x256 透明画布"
+    },
+    {
+      "name": "theme-calm-preview",
+      "file": "public/assets/park/theme-calm-preview.webp",
+      "source": "docs/UI设计稿2.0/generated-sources/shop/theme-calm-home-390x844.png",
+      "size": [
+        512,
+        512
+      ],
+      "has_alpha": false,
+      "bytes": 70348,
+      "sha256": "c394c59c078e5b41da2880c8eb56ea69d680617b23d9aeb9da9c22bf216db673",
+      "processing": "真实宁静主题首页截图裁切 (0,270,780,1050) 后缩放为 512x512 RGB"
+    }
+  ]
+}
