@@ -353,7 +353,17 @@ export default function App() {
     const current = attempt.current;
     if (winProcessed.current || current.remaining > 0) return false;
     const nextRemaining = current.remaining + 3;
-    attempt.current = { ...current, remaining: nextRemaining };
+    const nextHistory = current.history.map((item, index) =>
+      index === current.index
+        ? { ...item, remainingSteps: nextRemaining }
+        : item,
+    );
+    attempt.current = {
+      ...current,
+      remaining: nextRemaining,
+      history: nextHistory,
+    };
+    setHistory(nextHistory);
     setRemaining(nextRemaining);
     sound.playSwitch();
     haptics.tapHeavy();
@@ -400,7 +410,13 @@ export default function App() {
     if (winTimer.current) clearTimeout(winTimer.current);
     setScreen("home");
     setLevelsOpen(false);
-    if (mode !== "story" || winProcessed.current) {
+    if (mode === "story" && !winProcessed.current) {
+      const current = attempt.current;
+      const nextRewinds = Math.min(current.rewinds, 3);
+      attempt.current = { ...current, rewinds: nextRewinds };
+      setRewinds(nextRewinds);
+      setAttemptId((value) => value + 1);
+    } else if (mode !== "story" || winProcessed.current) {
       const id = resumeLevel(clearedLevels);
       const config = levelById(id);
       setLevelId(id);

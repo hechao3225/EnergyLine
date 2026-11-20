@@ -140,6 +140,10 @@ export function CandyThemeShell(p: Props) {
     setHintMove(null);
     setHintMoves([]);
   }, [p.attemptId]);
+  useEffect(() => {
+    setHintMove(null);
+    setHintMoves([]);
+  }, [p.historyIndex]);
   const [muted, setMuted] = useState(sound.isMuted());
   const [vibration, setVibration] = useState(haptics.isEnabled());
   const [chapter, setChapter] = useState(chapterIndex(p.level.id));
@@ -231,13 +235,7 @@ export function CandyThemeShell(p: Props) {
       flash(`${item.name}已用完`);
       return;
     }
-    const moves =
-      id === "hint"
-        ? [findHint(p.level, p.tiles, p.remainingSteps)].filter(
-            (move): move is HintMove => Boolean(move),
-          )
-        : findHintSequence(p.level, p.tiles, p.remainingSteps, 3);
-    const first = moves[0];
+    const first = findHint(p.level, p.tiles, p.remainingSteps);
     if (!first) {
       flash("这一步已经算不出通路了，重置后再试");
       return;
@@ -246,6 +244,10 @@ export function CandyThemeShell(p: Props) {
       flash(`还差 ${first.stepsNeeded} 步才能接完，重置后再试`);
       return;
     }
+    const moves =
+      id === "hint"
+        ? [first]
+        : findHintSequence(p.level, p.tiles, p.remainingSteps, 3);
     save(consumeSupply(progress, id));
     setHintMoves(moves);
     setHintMove(first);
@@ -635,7 +637,9 @@ export function CandyThemeShell(p: Props) {
                     还差 {(p.level.goal ?? p.simulation.totalBulbs) - p.simulation.litCount} 处设施。
                     {canUndo
                       ? `还能回溯 ${p.rewinds} 次，回去改一步试试。`
-                      : "回溯次数已经用完，只能重来。"}
+                      : progress.rewindTokens > 0
+                        ? "基础回溯次数已经用完，可使用时光回针补充。"
+                        : "回溯次数已经用完，只能重来。"}
                   </p>
                   {canUndo && (
                     <ParkButton onClick={p.onUndo} purple>
@@ -978,7 +982,13 @@ export function CandyThemeShell(p: Props) {
                               {adviceId ? (
                                 <ParkButton
                                   className="park-shop-buy"
-                                  disabled={p.screen !== "play" || stock < 1}
+                                  disabled={
+                                    p.screen !== "play" ||
+                                    p.gameMode !== "story" ||
+                                    !supportsHintEngine(p.level) ||
+                                    p.remainingSteps <= 0 ||
+                                    stock < 1
+                                  }
                                   label={`使用${item.name}`}
                                   onClick={() => useAdviceSupply(adviceId)}
                                 >
