@@ -2692,3 +2692,64 @@ img {
   padding: 1.5cqw 3cqw;
   font-size: 3.8cqw;
 }
+
+/* 首页伙伴表情与已修复展台 */
+.park-home-moods {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.park-home-moods img {
+  position: absolute;
+  top: -7%;
+  width: 14cqw;
+  height: 12cqw;
+  object-fit: contain;
+  filter: drop-shadow(0 0.5cqw 0.7cqw rgba(62, 31, 81, 0.3));
+}
+.park-home-moods img:nth-child(1) {
+  left: 18%;
+}
+.park-home-moods img:nth-child(2) {
+  left: 52%;
+}
+.park-home-moods img:nth-child(3) {
+  right: 2%;
+}
+.park-home-exhibit {
+  position: absolute;
+  top: 25%;
+  right: 6%;
+  z-index: 3;
+  display: flex;
+  width: 19cqw;
+  height: 19cqw;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 0.55cqw solid #f7d778;
+  border-radius: 50%;
+  background: rgba(88, 53, 132, 0.88);
+  box-shadow:
+    0 0 0 0.35cqw rgba(254, 244, 205, 0.6),
+    0 0 2cqw rgba(255, 224, 137, 0.58);
+}
+.park-home-exhibit img {
+  width: 84%;
+  height: 66%;
+  object-fit: contain;
+  filter: drop-shadow(0 0.35cqw 0.45cqw rgba(41, 21, 62, 0.3));
+}
+.park-home-exhibit span {
+  width: 84%;
+  overflow: hidden;
+  color: #fff9e8;
+  font-size: 2.6cqw;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -41,6 +41,7 @@ import {
   setHomeExhibit,
 } from "../utils/parkProgress";
 import { SUPPLY_ITEMS } from "../data/shopCatalog";
+import { applyParkTheme } from "../utils/parkTheme";
 
 type Modal =
   | "none"
@@ -209,6 +210,12 @@ export function CandyThemeShell(p: Props) {
     setProgress(readParkProgress(localStorage));
   }, [p.screen, p.clearedLevels, p.victoryReward]);
   useEffect(() => {
+    const forcedTheme = new URLSearchParams(window.location.search).get("theme");
+    if (forcedTheme !== "calm" && forcedTheme !== "default") {
+      applyParkTheme(progress.equippedCosmetics.theme);
+    }
+  }, [progress.equippedCosmetics.theme]);
+  useEffect(() => {
     if (p.levelSelectOpen) setChapter(chapterIndex(p.level.id));
   }, [p.levelSelectOpen]);
   useEffect(() => {
@@ -314,6 +321,15 @@ export function CandyThemeShell(p: Props) {
   const lastLevel = p.gameMode === "story" && p.level.id === 99;
   const levelContent = getLevelContent(p.level.id);
   const collection = getCollectionEntry(p.level.id);
+  const homeExhibit =
+    progress.equippedCosmetics.exhibitId === null
+      ? null
+      : getCollectionEntry(progress.equippedCosmetics.exhibitId);
+  const visibleHomeExhibit =
+    homeExhibit && p.clearedLevels.includes(homeExhibit.levelId)
+      ? homeExhibit
+      : null;
+  const starlightOutfit = progress.equippedCosmetics.outfit === "starlight";
   const hasSwitch = p.tiles.some((t) => t.type === "switch");
   const hasDiode = p.tiles.some((t) => t.type === "diode");
   const hasGear = p.tiles.some((t) => (t.axisDir ?? 0) !== 0);
@@ -396,10 +412,35 @@ export function CandyThemeShell(p: Props) {
               ))}
             </div>
             <Art name="island" className="park-island" alt="浮空城堡与摩天轮" />
+            {visibleHomeExhibit && (
+              <div
+                className="park-home-exhibit"
+                aria-label={`陈列${visibleHomeExhibit.name}`}
+              >
+                <Art name={getExhibitArt(visibleHomeExhibit)} />
+                <span>{visibleHomeExhibit.name}</span>
+              </div>
+            )}
             <div className="park-home-friends">
-              <Art name="sheep" className="park-friend-sheep" />
-              <Art name="rabbit" className="park-friend-rabbit" />
-              <Art name="spirit" className="park-friend-spirit" />
+              <Art
+                name={starlightOutfit ? "outfit-sheep-starlight" : "sheep"}
+                className="park-friend-sheep"
+              />
+              <Art
+                name={starlightOutfit ? "outfit-rabbit-starlight" : "rabbit"}
+                className="park-friend-rabbit"
+              />
+              <Art
+                name={starlightOutfit ? "outfit-spirit-starlight" : "spirit"}
+                className="park-friend-spirit"
+              />
+              {progress.equippedCosmetics.mood === "joy" && (
+                <div className="park-home-moods" aria-label="伙伴开心问候">
+                  <Art name="mood-sheep-happy" />
+                  <Art name="mood-rabbit-happy" />
+                  <Art name="mood-spirit-happy" />
+                </div>
+              )}
             </div>
             <section
               className="park-home-progress"
