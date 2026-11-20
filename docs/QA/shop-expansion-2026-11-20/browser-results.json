@@ -1,0 +1,607 @@
+{
+  "generatedAt": "2026-11-20T10:31:37.289Z",
+  "base": "http://127.0.0.1:4173",
+  "platform": {
+    "browser": "Chrome",
+    "channel": "chrome",
+    "deviceScaleFactor": 1
+  },
+  "viewports": [
+    {
+      "width": 360,
+      "height": 800,
+      "label": "360x800"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "label": "390x844"
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "label": "430x932"
+    }
+  ],
+  "checks": {
+    "themeRefreshOverride": "通过",
+    "unrepairedExhibitHidden": "通过",
+    "imagesDecoded": "通过",
+    "textOverflow": "通过",
+    "elementBounds": "通过",
+    "homeExhibitOverlap": "通过",
+    "pageErrors": []
+  },
+  "records": [
+    {
+      "viewport": "360x800",
+      "state": "home-default",
+      "file": "home-default-360x800.png",
+      "size": {
+        "width": 360,
+        "height": 800
+      },
+      "imageCount": 36,
+      "layout": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "home-cosmetics-calm",
+      "file": "home-cosmetics-calm-360x800.png",
+      "size": {
+        "width": 360,
+        "height": 800
+      },
+      "imageCount": 40,
+      "layout": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "shop-supply",
+      "file": "shop-supply-360x800.png",
+      "size": {
+        "width": 360,
+        "height": 800
+      },
+      "imageCount": 53,
+      "layout": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "shop-cosmetic",
+      "file": "shop-cosmetic-360x800.png",
+      "size": {
+        "width": 360,
+        "height": 800
+      },
+      "imageCount": 53,
+      "layout": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "bag",
+      "file": "bag-360x800.png",
+      "size": {
+        "width": 360,
+        "height": 800
+      },
+      "imageCount": 21,
+      "layout": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "lens-3-steps",
+      "file": "lens-3-steps-360x800.png",
+      "size": {
+        "width": 360,
+        "height": 800
+      },
+      "imageCount": 18,
+      "layout": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "history-rewind",
+      "file": "history-rewind-360x800.png",
+      "size": {
+        "width": 360,
+        "height": 800
+      },
+      "imageCount": 17,
+      "layout": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "out-of-steps-coil",
+      "file": "out-of-steps-coil-360x800.png",
+      "size": {
+        "width": 360,
+        "height": 800
+      },
+      "imageCount": 17,
+      "layout": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "coil-refilled",
+      "file": "coil-refilled-360x800.png",
+      "size": {
+        "width": 360,
+        "height": 800
+      },
+      "imageCount": 17,
+      "layout": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "endless-hint-disabled",
+      "file": "endless-hint-disabled-360x800.png",
+      "size": {
+        "width": 360,
+        "height": 800
+      },
+      "imageCount": 26,
+      "layout": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "home-default",
+      "file": "home-default-390x844.png",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "imageCount": 36,
+      "layout": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "home-cosmetics-calm",
+      "file": "home-cosmetics-calm-390x844.png",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "imageCount": 40,
+      "layout": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "shop-supply",
+      "file": "shop-supply-390x844.png",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "imageCount": 53,
+      "layout": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "shop-cosmetic",
+      "file": "shop-cosmetic-390x844.png",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "imageCount": 53,
+      "layout": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "bag",
+      "file": "bag-390x844.png",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "imageCount": 21,
+      "layout": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "lens-3-steps",
+      "file": "lens-3-steps-390x844.png",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "imageCount": 18,
+      "layout": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "history-rewind",
+      "file": "history-rewind-390x844.png",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "imageCount": 17,
+      "layout": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "out-of-steps-coil",
+      "file": "out-of-steps-coil-390x844.png",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "imageCount": 17,
+      "layout": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "coil-refilled",
+      "file": "coil-refilled-390x844.png",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "imageCount": 17,
+      "layout": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "endless-hint-disabled",
+      "file": "endless-hint-disabled-390x844.png",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "imageCount": 20,
+      "layout": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "430x932",
+      "state": "home-default",
+      "file": "home-default-430x932.png",
+      "size": {
+        "width": 430,
+        "height": 932
+      },
+      "imageCount": 36,
+      "layout": {
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "430x932",
+      "state": "home-cosmetics-calm",
+      "file": "home-cosmetics-calm-430x932.png",
+      "size": {
+        "width": 430,
+        "height": 932
+      },
+      "imageCount": 40,
+      "layout": {
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "430x932",
+      "state": "shop-supply",
+      "file": "shop-supply-430x932.png",
+      "size": {
+        "width": 430,
+        "height": 932
+      },
+      "imageCount": 53,
+      "layout": {
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "430x932",
+      "state": "shop-cosmetic",
+      "file": "shop-cosmetic-430x932.png",
+      "size": {
+        "width": 430,
+        "height": 932
+      },
+      "imageCount": 53,
+      "layout": {
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "430x932",
+      "state": "bag",
+      "file": "bag-430x932.png",
+      "size": {
+        "width": 430,
+        "height": 932
+      },
+      "imageCount": 21,
+      "layout": {
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "430x932",
+      "state": "lens-3-steps",
+      "file": "lens-3-steps-430x932.png",
+      "size": {
+        "width": 430,
+        "height": 932
+      },
+      "imageCount": 18,
+      "layout": {
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "430x932",
+      "state": "history-rewind",
+      "file": "history-rewind-430x932.png",
+      "size": {
+        "width": 430,
+        "height": 932
+      },
+      "imageCount": 17,
+      "layout": {
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "430x932",
+      "state": "out-of-steps-coil",
+      "file": "out-of-steps-coil-430x932.png",
+      "size": {
+        "width": 430,
+        "height": 932
+      },
+      "imageCount": 17,
+      "layout": {
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "430x932",
+      "state": "coil-refilled",
+      "file": "coil-refilled-430x932.png",
+      "size": {
+        "width": 430,
+        "height": 932
+      },
+      "imageCount": 17,
+      "layout": {
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    },
+    {
+      "viewport": "430x932",
+      "state": "endless-hint-disabled",
+      "file": "endless-hint-disabled-430x932.png",
+      "size": {
+        "width": 430,
+        "height": 932
+      },
+      "imageCount": 22,
+      "layout": {
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "overflow": [],
+        "outside": [],
+        "homeOverlaps": []
+      }
+    }
+  ]
+}

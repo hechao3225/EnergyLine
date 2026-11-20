@@ -207,7 +207,7 @@ try {
     await expect(page.locator(".park-history-link")).toContainText("回溯 3 次");
   }))) failures += 1;
 
-  if (!(await test("无尽关背包中的提示按钮禁用", async () => {
+  if (!(await test("无尽关顶部提示按钮和背包使用按钮禁用", async () => {
     await openFreshHome();
     await page.getByRole("navigation").getByRole("button", { name: "关卡", exact: true }).click();
     await page
@@ -219,6 +219,9 @@ try {
       .getByRole("button", { name: /轻松漫游/ })
       .click();
     await expect(page.locator(".park-play")).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "提示", exact: true }),
+    ).toBeDisabled();
 
     await page
       .locator(".park-play-tools")
@@ -227,6 +230,31 @@ try {
     await expect(
       page.getByRole("button", { name: "使用提示灯泡", exact: true }),
     ).toBeDisabled();
+  }))) failures += 1;
+
+  if (!(await test("提示库存耗尽后顶部按钮禁用且仍可从背包进入商店", async () => {
+    await openFreshHome();
+    await enterFirstLevel();
+    for (let index = 0; index < 5; index += 1) await useHint();
+    await expect(
+      page.getByRole("button", { name: "提示", exact: true }),
+    ).toBeDisabled();
+
+    await page
+      .locator(".park-play-tools")
+      .getByRole("button", { name: "背包", exact: true })
+      .click();
+    await expect(
+      page.getByRole("button", { name: "使用提示灯泡", exact: true }),
+    ).toBeDisabled();
+    await page
+      .locator(".park-modal")
+      .getByRole("button", { name: "前往商店", exact: true })
+      .click();
+    await expect(page.locator(".park-shop")).toBeVisible();
+    await expect(
+      page.getByRole("tab", { name: "补给", exact: true }),
+    ).toHaveAttribute("aria-selected", "true");
   }))) failures += 1;
 
   if (!(await test("基础回溯耗尽且有回针库存时引导使用回针", async () => {

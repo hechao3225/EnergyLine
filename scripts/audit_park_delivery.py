@@ -10,8 +10,34 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / 'docs/QA/ui2-2026-11-10'
 SCREENS = REPORT / 'screens'
-label_font = ImageFont.truetype('C:/Windows/Fonts/msyh.ttc', 20)
+
+
+def load_label_font():
+    for candidate in (
+        Path('/System/Library/Fonts/PingFang.ttc'),
+        Path('/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc'),
+        Path('C:/Windows/Fonts/msyh.ttc'),
+    ):
+        if candidate.exists():
+            return ImageFont.truetype(str(candidate), 20)
+    return ImageFont.load_default()
+
+
+def resolve_source(source: str) -> list[Path]:
+    paths = []
+    for part in (item.strip() for item in source.split('+')):
+        candidate = ROOT / part
+        if not candidate.exists():
+            candidate = ROOT / 'docs/UI设计稿2.0/generated-sources' / part
+        assert candidate.exists(), f'缺少原件：{part}'
+        paths.append(candidate)
+    return paths
+
+
+label_font = load_label_font()
 manifest = json.loads((ROOT / 'public/assets/park/manifest.json').read_text(encoding='utf-8'))
+shop_manifest = json.loads((ROOT / 'public/assets/park/shop-assets.json').read_text(encoding='utf-8'))
+shop_by_name = {item['name']: item for item in shop_manifest['assets']}
 assets = []
 for item in manifest:
     file = ROOT / item['file']
@@ -23,10 +49,16 @@ for item in manifest:
         image.load()
         assert list(image.size) == item['size'], f'清单尺寸过期：{file.name}'
         alpha = image.convert('RGBA').getchannel('A')
-        if item['name'] != 'background':
+        shop_item = shop_by_name.get(item['name'])
+        has_alpha = shop_item['has_alpha'] if shop_item else item.get('has_alpha', item['name'] != 'background')
+        if has_alpha:
             assert all(alpha.getpixel(p) == 0 for p in [(0, 0), (image.width-1, 0), (0, image.height-1), (image.width-1, image.height-1)]), f'角点不透明：{file.name}'
-    assert (ROOT / 'docs/UI设计稿2.0/generated-sources' / item['source']).exists(), f'缺少原件：{item["source"]}'
-    assets.append({'name': item['name'], 'size': item['size'], 'sha256': digest})
+    sources = resolve_source(item['source'])
+    if shop_item:
+        for key in ('name', 'file', 'source', 'size', 'alpha_bbox', 'corner_alpha', 'sha256', 'bytes'):
+            assert item.get(key) == shop_item.get(key), f'商店条目与独立清单不一致：{item["name"]} {key}'
+    assets.append({'name': item['name'], 'size': item['size'], 'sha256': digest,
+                   'has_alpha': has_alpha, 'sources': [str(path.relative_to(ROOT)) for path in sources]})
 
 comparisons = []
 for number, name, screen in [

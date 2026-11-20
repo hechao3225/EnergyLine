@@ -19,6 +19,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_PILLOW_VERSION = "13.0.0"
 SHOP_ASSETS_PYTHON_ENV = "SHOP_ASSETS_PYTHON"
 CONTACT_SHEET_FILE = "docs/QA/shop-assets-2026-11-20/shop-assets-contact-sheet.png"
+ALPHA_VISIBLE_THRESHOLD = 28
 
 EXPECTED_ASSETS = {
     "icon-lens": (512, 512, True),
@@ -39,10 +40,21 @@ def fail(message: str) -> None:
 
 
 def require_pillow_version() -> None:
-    if not os.environ.get(SHOP_ASSETS_PYTHON_ENV):
+    configured = os.environ.get(SHOP_ASSETS_PYTHON_ENV)
+    if not configured:
         fail(
             f"需设置 {SHOP_ASSETS_PYTHON_ENV}，且必须为 Python3.12+ 可执行文件。"
-            f"示例：export {SHOP_ASSETS_PYTHON_ENV}=python3.12"
+            f"示例：export {SHOP_ASSETS_PYTHON_ENV}=/path/to/python3.12"
+        )
+    executable = Path(configured).expanduser()
+    if not executable.is_absolute():
+        executable = executable.resolve()
+    if not executable.is_file() or not os.access(executable, os.X_OK):
+        fail(f"{SHOP_ASSETS_PYTHON_ENV} 必须指向存在的可执行文件：{configured}")
+    if Path(sys.executable).resolve() != executable.resolve():
+        fail(
+            f"当前解释器不是 {SHOP_ASSETS_PYTHON_ENV} 指向的文件："
+            f"expected={executable}；actual={sys.executable}"
         )
     if sys.version_info < (3, 12):
         fail(
@@ -85,6 +97,7 @@ def main() -> None:
     require_pillow_version()
     root = args.root.resolve()
     manifest_path = root / "public/assets/park/shop-assets.json"
+    main_manifest_path = root / "public/assets/park/manifest.json"
 
     try:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -101,6 +114,23 @@ def main() -> None:
     if set(names) != set(EXPECTED_ASSETS) or len(set(names)) != len(names):
         fail(f"资源名称不完整或重复：{names}")
 
+    try:
+        main_manifest = json.loads(main_manifest_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        fail(f"无法读取主 manifest：{error}")
+    if not isinstance(main_manifest, list):
+        fail("主 manifest 必须为数组")
+    main_by_name: dict[str, dict] = {}
+    for entry in main_manifest:
+        name = entry.get("name")
+        if name in EXPECTED_ASSETS:
+            if name in main_by_name:
+                fail(f"主 manifest 重复登记商店资源：{name}")
+            main_by_name[name] = entry
+    missing = sorted(set(EXPECTED_ASSETS) - set(main_by_name))
+    if missing:
+        fail(f"主 manifest 缺少商店资源：{missing}")
+
     for entry in entries:
         name = entry["name"]
         path = root / entry["file"]
@@ -116,6 +146,27 @@ def main() -> None:
                 len(data),
                 digest,
             )
+        shared_metadata = {
+            key: entry.get(key)
+            for key in (
+                "name",
+                "file",
+                "source",
+                "size",
+                "alpha_bbox",
+                "corner_alpha",
+                "bytes",
+                "sha256",
+                "processing",
+            )
+        }
+        mismatched_main = {
+            key: (value, main_by_name[name].get(key))
+            for key, value in shared_metadata.items()
+            if main_by_name[name].get(key) != value
+        }
+        if mismatched_main:
+            fail(f"{name} 主 manifest 元数据不一致：{mismatched_main}")
 
         expected_width, expected_height, expected_alpha = EXPECTED_ASSETS[name]
         try:
@@ -185,7 +236,9 @@ def main() -> None:
                     len(data),
                     digest,
                 )
-            actual_bbox = alpha.point(lambda value: 255 if value > 8 else 0).getbbox()
+            actual_bbox = alpha.point(
+                lambda value: 255 if value > ALPHA_VISIBLE_THRESHOLD else 0
+            ).getbbox()
             actual_corners = [
                 alpha.getpixel((0, 0)),
                 alpha.getpixel((width - 1, 0)),
@@ -257,7 +310,10 @@ def main() -> None:
         f"通过：联系表 1500x640  {len(contact_data)} bytes  "
         f"sha256={contact_digest}"
     )
-    print("通过：10 个商店素材及 QA 联系表的格式、尺寸、透明通道、bytes 与 sha256 全部一致")
+    print(
+        f"通过：10 个商店素材与主 manifest 元数据一致；alpha>{ALPHA_VISIBLE_THRESHOLD} "
+        "边界、格式、尺寸、bytes 与 sha256 全部通过"
+    )
 
 
 if __name__ == "__main__":

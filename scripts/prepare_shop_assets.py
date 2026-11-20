@@ -145,7 +145,7 @@ def alpha_metadata(image: Image.Image) -> tuple[list[int] | None, list[int] | No
     if "A" not in image.getbands():
         return None, None
     alpha = image.getchannel("A")
-    bbox = alpha.point(lambda value: 255 if value > 8 else 0).getbbox()
+    bbox = alpha.point(lambda value: 255 if value > 28 else 0).getbbox()
     corners = [
         alpha.getpixel((0, 0)),
         alpha.getpixel((image.width - 1, 0)),

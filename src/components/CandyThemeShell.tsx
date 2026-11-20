@@ -743,6 +743,12 @@ export function CandyThemeShell(p: Props) {
               </ParkButton>
               <ParkButton
                 onClick={() => useAdviceSupply("hint")}
+                disabled={
+                  p.gameMode !== "story" ||
+                  !supportsHintEngine(p.level) ||
+                  p.remainingSteps <= 0 ||
+                  progress.hints < 1
+                }
                 label="提示"
               >
                 <Icon name="hint" />
