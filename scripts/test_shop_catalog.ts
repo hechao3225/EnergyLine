@@ -31,6 +31,17 @@ assert.deepEqual(
 );
 
 assert.deepEqual(
+  Object.fromEntries(SUPPLY_ITEMS.map((item) => [item.id, item.stockKey])),
+  {
+    hint: "hints",
+    lens: "lenses",
+    rewind: "rewindTokens",
+    step: "stepTokens",
+  },
+  "补给商品库存键映射不符",
+);
+
+assert.deepEqual(
   Object.fromEntries(COSMETIC_ITEMS.map((item) => [item.id, item.unlockAt])),
   {
     "joy-greeting": 5,
@@ -39,6 +50,17 @@ assert.deepEqual(
     "calm-theme": 40,
   },
   "装扮商品开放数映射不符",
+);
+
+assert.deepEqual(
+  Object.fromEntries(COSMETIC_ITEMS.map((item) => [item.id, item.effect])),
+  {
+    "joy-greeting": "mood",
+    "starlight-outfit": "outfit",
+    "exhibit-display": "exhibit",
+    "calm-theme": "theme",
+  },
+  "装扮商品效果映射不符",
 );
 
 assert.equal(getSupplyItem("lens")?.name, "火花透镜", "补给名称查询不符");

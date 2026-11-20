@@ -5,7 +5,7 @@ import type {
   SupplyShopItem,
 } from "../types/shop";
 
-export const SUPPLY_ITEMS: SupplyShopItem[] = [
+export const SUPPLY_ITEMS: readonly SupplyShopItem[] = [
   {
     id: "hint",
     name: "提示灯泡",
@@ -40,7 +40,7 @@ export const SUPPLY_ITEMS: SupplyShopItem[] = [
   },
 ];
 
-export const COSMETIC_ITEMS: CosmeticShopItem[] = [
+export const COSMETIC_ITEMS: readonly CosmeticShopItem[] = [
   {
     id: "joy-greeting",
     name: "开心问候",
