@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -9,8 +10,7 @@ from pathlib import Path
 from PIL import Image
 
 
-ROOT = Path(__file__).resolve().parents[1]
-MANIFEST_PATH = ROOT / "public/assets/park/shop-assets.json"
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 EXPECTED_ASSETS = {
     "icon-lens": (512, 512, True),
@@ -31,8 +31,19 @@ def fail(message: str) -> None:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="校验商店素材")
+    parser.add_argument(
+        "--root",
+        type=Path,
+        default=PROJECT_ROOT,
+        help=argparse.SUPPRESS,
+    )
+    args = parser.parse_args()
+    root = args.root.resolve()
+    manifest_path = root / "public/assets/park/shop-assets.json"
+
     try:
-        manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as error:
         fail(f"无法读取 shop-assets.json：{error}")
 
@@ -48,7 +59,7 @@ def main() -> None:
 
     for entry in entries:
         name = entry["name"]
-        path = ROOT / entry["file"]
+        path = root / entry["file"]
         if not path.is_file():
             fail(f"{name} 文件不存在：{entry['file']}")
         data = path.read_bytes()
@@ -58,16 +69,17 @@ def main() -> None:
         if entry.get("sha256") != digest:
             fail(f"{name} sha256 不一致")
 
+        expected_width, expected_height, expected_alpha = EXPECTED_ASSETS[name]
         try:
             with Image.open(path) as image:
                 image.load()
                 width, height = image.size
-                mode = image.mode
-                alpha = image.convert("RGBA").getchannel("A")
+                bands = image.getbands()
+                alpha = image.getchannel("A") if "A" in bands else None
+                has_transparency_info = "transparency" in image.info
         except Exception as error:
             fail(f"{name} 无法解码：{error}")
 
-        expected_width, expected_height, expected_alpha = EXPECTED_ASSETS[name]
         if expected_width is not None and (width, height) != (expected_width, expected_height):
             fail(
                 f"{name} 尺寸应为 {expected_width}x{expected_height}，"
@@ -81,11 +93,14 @@ def main() -> None:
         if bool(entry.get("has_alpha")) != expected_alpha:
             fail(f"{name} has_alpha 标记不正确")
         if expected_alpha:
-            if mode not in ("RGBA", "LA") and "transparency" not in image.info:
+            if "A" not in bands:
                 fail(f"{name} 缺少 RGBA 透明通道")
             low, high = alpha.getextrema()
             if low != 0 or high != 255 or alpha.getbbox() is None:
                 fail(f"{name} alpha 不是有效透明通道")
+        else:
+            if "A" in bands or has_transparency_info:
+                fail(f"{name} has_alpha=false，但实际包含 alpha 通道")
         print(f"通过：{name}  {width}x{height}  {len(data)} bytes")
 
     print("通过：10 个商店素材文件存在、可解码、尺寸/透明通道/字节数/sha256 全部一致")

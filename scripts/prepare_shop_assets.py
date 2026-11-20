@@ -245,28 +245,34 @@ def write_assets(assets: dict[str, Image.Image], manifest: dict) -> None:
     build_contact_sheet(manifest).save(CONTACT_SHEET_PATH, "PNG", optimize=True)
 
 
-def check_assets(assets: dict[str, Image.Image], manifest: dict) -> None:
-    entries = manifest.get("assets", [])
-    if len(entries) != len(assets):
-        raise ValueError(f"清单应有 {len(assets)} 项，实际为 {len(entries)} 项")
-    for entry in entries:
-        name = entry["name"]
-        expected = assets.get(name)
-        if expected is None:
-            raise ValueError(f"清单包含未知资源：{name}")
-        path = ROOT / entry["file"]
+def check_assets(generated_manifest: dict) -> None:
+    current_manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+    current_entries = current_manifest.get("assets", [])
+    generated_entries = generated_manifest.get("assets", [])
+    current_by_name = {entry["name"]: entry for entry in current_entries}
+    generated_by_name = {entry["name"]: entry for entry in generated_entries}
+    expected_names = set(generated_by_name)
+    if set(current_by_name) != expected_names or len(current_by_name) != len(current_entries):
+        raise ValueError("清单资源名称与脚本定义不一致")
+
+    for name, generated in generated_by_name.items():
+        current = current_by_name[name]
+        file_label = generated["file"]
+        path = ROOT / file_label
+        if not path.is_file():
+            raise ValueError(f"{file_label} 不存在")
         data = path.read_bytes()
-        if entry["bytes"] != len(data):
-            raise ValueError(f"{name} 字节数不一致")
-        if entry["sha256"] != hashlib.sha256(data).hexdigest():
-            raise ValueError(f"{name} sha256 不一致")
-        actual = Image.open(path).convert("RGBA")
-        if actual.size != expected.size:
-            raise ValueError(f"{name} 尺寸不一致：期望 {expected.size}，实际 {actual.size}")
-        if entry["has_alpha"]:
-            low, high = actual.getchannel("A").getextrema()
-            if low == high:
-                raise ValueError(f"{name} 缺少有效透明通道")
+        digest = hashlib.sha256(data).hexdigest()
+        if current["bytes"] != len(data) or current["sha256"] != digest:
+            raise ValueError(f"{file_label} 与清单记录不一致")
+        if generated["bytes"] != len(data) or generated["sha256"] != digest:
+            raise ValueError(
+                f"{file_label} 与重新处理源图生成的新产物不一致；"
+                f"请重新运行 prepare_shop_assets.py "
+                f"（新产物 {generated['bytes']} bytes / {generated['sha256']}）"
+            )
+        if generated["size"] != current["size"]:
+            raise ValueError(f"{file_label} 尺寸与重新处理源图生成的新产物不一致")
 
 
 def main() -> None:
@@ -278,8 +284,8 @@ def main() -> None:
     if args.check:
         if not MANIFEST_PATH.exists():
             raise FileNotFoundError(f"缺少 {MANIFEST_PATH.relative_to(ROOT)}")
-        check_assets(assets, json.loads(MANIFEST_PATH.read_text(encoding="utf-8")))
-        print(f"通过：{len(assets)} 个商店素材与清单一致")
+        check_assets(manifest)
+        print(f"通过：{len(assets)} 个商店素材与重新处理源图生成的新产物一致")
         return
     write_assets(assets, manifest)
     print(f"完成：已生成 {len(assets)} 个商店素材")

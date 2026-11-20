@@ -19,12 +19,40 @@
 
 ## 复现与自动验收
 
+先确认当前 `python3` 可导入 Pillow：
+
+```bash
+python3 -c "from PIL import Image"
+```
+
+若提示 `ModuleNotFoundError: No module named 'PIL'`，使用项目 Python 3.12 在仓库外创建临时虚拟环境。素材 bytes/sha 由 Pillow 13.0.0 的 WebP 编码器生成，因此版本需固定：
+
+```bash
+PROJECT_PYTHON=/Users/lxjj/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3
+"$PROJECT_PYTHON" -m venv /private/tmp/rotategame-shop-assets
+/private/tmp/rotategame-shop-assets/bin/python3 -m pip install --disable-pip-version-check pillow==13.0.0
+```
+
+随后使用该虚拟环境执行验收：
+
+```bash
+SHOP_PYTHON=/private/tmp/rotategame-shop-assets/bin/python3
+"$SHOP_PYTHON" scripts/prepare_shop_assets.py --check
+"$SHOP_PYTHON" scripts/audit_shop_assets.py
+```
+
+若本机 `python3` 已安装 Pillow，也可直接运行：
+
 ```bash
 python3 scripts/prepare_shop_assets.py --check
 python3 scripts/audit_shop_assets.py
 ```
 
-`prepare_shop_assets.py --check` 只读取并校验现有文件，不重写图片。重新生成时运行：
+`prepare_shop_assets.py --check` 不重写图片；它会在内存中重新处理全部源图，并将新产物的 bytes 与 sha256 同时对照独立清单和 `public/assets/park/*.webp`。源图改变但素材未重新生成时，检查会失败并输出对应 WebP 文件名。
+
+`audit_shop_assets.py` 要求透明资源实际具有 A 通道，alpha 范围为 0–255；`has_alpha=false` 的资源必须是纯 RGB，RGBA 或带 `transparency` 信息时会失败。
+
+需要重新生成时运行：
 
 ```bash
 python3 scripts/prepare_shop_assets.py
