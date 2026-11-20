@@ -100,6 +100,7 @@ export default function App() {
   ]);
   const [historyIndex, setHistoryIndex] = useState(0);
   const [rewinds, setRewinds] = useState(3);
+  const [attemptId, setAttemptId] = useState(0);
   const attempt = useRef({ tiles, remaining, history, index: historyIndex, rewinds });
   attempt.current = { tiles, remaining, history, index: historyIndex, rewinds };
   const stepsUsed = history[historyIndex].stepsUsed ?? history[historyIndex].stepNumber;
@@ -121,6 +122,7 @@ export default function App() {
   const reset = useCallback((config: LevelConfig) => {
     if (winTimer.current) clearTimeout(winTimer.current);
     winProcessed.current = false;
+    setAttemptId((value) => value + 1);
     setTiles(config.tiles.map((tile) => ({ ...tile })));
     setRemaining(config.maxSteps);
     setHistory([
@@ -448,6 +450,7 @@ export default function App() {
   return (
     <CandyThemeShell
       screen={screen}
+      attemptId={attemptId}
       level={level}
       levels={DEFAULT_LEVELS}
       tiles={tiles}

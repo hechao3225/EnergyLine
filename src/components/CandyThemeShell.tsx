@@ -62,6 +62,7 @@ type Modal =
   | "world";
 interface Props {
   screen: "home" | "play" | "victory";
+  attemptId: number;
   level: LevelConfig;
   levels: LevelConfig[];
   tiles: Tile[];
@@ -129,13 +130,16 @@ export function CandyThemeShell(p: Props) {
   /** 提示引擎算出的下一步，同时用来高亮棋盘格子 */
   const [hintMove, setHintMove] = useState<HintMove | null>(null);
   const [hintMoves, setHintMoves] = useState<HintMove[]>([]);
-  // 换关、重开、切页时上一次的高亮必须消失，否则会指向新盘面上的同一格
+  // 换关、切页时上一次的高亮必须消失，否则会指向新盘面上的同一格。
   useEffect(() => {
     setHintMove(null);
-  }, [p.screen, p.level.id]);
-  useEffect(() => {
     setHintMoves([]);
-  }, [p.screen, p.level.id, p.stepsUsed === 0]);
+  }, [p.screen, p.level.id]);
+  // 每次开始新的 attempt 都清空提示，0 步重置同样生效。
+  useEffect(() => {
+    setHintMove(null);
+    setHintMoves([]);
+  }, [p.attemptId]);
   const [muted, setMuted] = useState(sound.isMuted());
   const [vibration, setVibration] = useState(haptics.isEnabled());
   const [chapter, setChapter] = useState(chapterIndex(p.level.id));
@@ -639,17 +643,19 @@ export function CandyThemeShell(p: Props) {
                     </ParkButton>
                   )}
                   <ParkButton onClick={p.onRestart}>重新挑战</ParkButton>
-                  {p.onAddSteps && p.level.goal === undefined && (
-                    <ParkButton
-                      purple
-                      disabled={progress.stepTokens < 1}
-                      onClick={useStepSupply}
-                    >
-                      {progress.stepTokens > 0
-                        ? `使用应急线圈 · 余 ${progress.stepTokens}`
-                        : "应急线圈不足"}
-                    </ParkButton>
-                  )}
+                  {p.gameMode === "story" &&
+                    p.level.goal === undefined &&
+                    p.onAddSteps && (
+                      <ParkButton
+                        purple
+                        disabled={progress.stepTokens < 1}
+                        onClick={useStepSupply}
+                      >
+                        {progress.stepTokens > 0
+                          ? `使用应急线圈 · 余 ${progress.stepTokens}`
+                          : "应急线圈不足"}
+                      </ParkButton>
+                    )}
                 </div>
               )}
             </div>

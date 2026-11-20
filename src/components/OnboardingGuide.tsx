@@ -16,7 +16,7 @@ export function OnboardingGuide(p: OnboardingGuideProps) {
   if (!p.isOpen) return null;
   const slides = [
     { title: "点一下管道，旋转 90°", art: "pipe-corner-off",
-      copy: "每次旋转消耗 1 步。把相邻接头对齐，让能量继续前进。", note: "每次挑战可回溯 3 次，重试后重新补满。" },
+      copy: "每次旋转消耗 1 步。把相邻接头对齐，让能量继续前进。", note: "每局初始可回溯 3 次，可使用时光回针增加次数。" },
     { title: "把能量送到每一处设施", art: "pipe-source",
       copy: "从星光能量源出发，连接所有灰色设施。设施全部亮起即可完成修复。", note: "先接主干，再处理支路。能量闸的管身可以旋转，角标切换通断。" },
     { title: "用最少步数点亮第四颗星", art: "icon-star",
