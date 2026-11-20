@@ -2,13 +2,16 @@
 from pathlib import Path
 import hashlib
 import json
+import os
 from datetime import datetime, timezone
 
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
-REPORT = ROOT / 'docs/QA/ui2-2026-11-10'
+REPORT = Path(
+    os.environ.get('PARK_QA_DIR', ROOT / 'docs/QA/ui2-2026-11-10')
+).resolve()
 SCREENS = REPORT / 'screens'
 
 

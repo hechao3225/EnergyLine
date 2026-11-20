@@ -11,7 +11,9 @@ if (!configuredBase) {
 }
 const base = configuredBase;
 
-const QA_ROOT = path.resolve("docs/QA/shop-expansion-2026-11-20");
+const QA_ROOT = path.resolve(
+  process.env.PARK_QA_DIR || path.join("output", "qa", "shop-expansion"),
+);
 const SCREENS = path.join(QA_ROOT, "screens");
 fs.mkdirSync(SCREENS, { recursive: true });
 
@@ -138,36 +140,56 @@ async function closeModal(page: Page) {
 }
 
 async function resetAttempt(page: Page) {
-  let markDialogSeen: () => void = () => {};
-  const dialogSeen = new Promise<boolean>((resolve) => {
-    markDialogSeen = () => resolve(true);
+  type ResetOutcome =
+    | { kind: "dialog" }
+    | { kind: "game" }
+    | { kind: "error"; error: unknown };
+
+  let resolveDialog: (outcome: ResetOutcome) => void = () => {};
+  const dialogOutcome = new Promise<ResetOutcome>((resolve) => {
+    resolveDialog = resolve;
   });
   const acceptDialog = async (dialog: {
     accept: () => Promise<void>;
   }) => {
-    markDialogSeen();
-    await dialog.accept();
+    try {
+      await dialog.accept();
+      resolveDialog({ kind: "dialog" });
+    } catch (error) {
+      resolveDialog({ kind: "error", error });
+    }
   };
   page.once("dialog", acceptDialog);
   await page.getByRole("button", { name: "重置", exact: true }).click();
 
-  const sawDialog = await Promise.race([
-    dialogSeen,
-    page.waitForTimeout(750).then(() => false),
-  ]);
+  const confirm = page.getByRole("button", {
+    name: "确定重置",
+    exact: true,
+  });
+  const gameOutcome = confirm
+    .waitFor({ state: "visible", timeout: 1500 })
+    .then(async () => {
+      await confirm.click();
+      return { kind: "game" } as const;
+    })
+    .catch((error: unknown) => ({ kind: "error" as const, error }));
+  const outcome = await Promise.race([dialogOutcome, gameOutcome]);
+  page.off("dialog", acceptDialog);
+  if (outcome.kind === "error") {
+    const message =
+      outcome.error instanceof Error
+        ? outcome.error.message
+        : String(outcome.error);
+    pageErrors.push(`重置确认失败：${message}`);
+    throw outcome.error;
+  }
   console.log(
-    sawDialog
+    outcome.kind === "dialog"
       ? "重置确认：原生 window.confirm"
       : "重置确认：游戏内确认弹窗",
   );
-  if (!sawDialog) {
-    page.off("dialog", acceptDialog);
-    const confirm = page.getByRole("button", {
-      name: "确定重置",
-      exact: true,
-    });
-    await expect(confirm).toBeVisible({ timeout: 2500 });
-    await confirm.click();
+  if (outcome.kind === "game") {
+    await expect(confirm).toBeHidden();
   }
   await expect(page.getByRole("button", { name: /操作足迹/ })).toContainText(
     "操作足迹 · 0 步",

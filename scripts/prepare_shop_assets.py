@@ -38,6 +38,7 @@ MOOD_SOURCES = {
     "mood-rabbit-happy": ("yunrong_happy.png", "mood"),
     "mood-spirit-happy": ("boling_happy.png", "mood"),
 }
+EXPRESSION_SOURCE_PREFIX = "assets/energy_park_art_pack_v1/02_characters/expressions/"
 
 
 def exact_color_mask(image: Image.Image, color: tuple[int, int, int]) -> Image.Image:
@@ -189,9 +190,9 @@ def build_assets() -> tuple[dict[str, Image.Image], dict[str, dict[str, str | bo
     joy = build_mood_joy(moods)
     assets["mood-joy"] = joy
     metadata["mood-joy"] = {
-        "source": (
-            "assets/energy_park_art_pack_v1/02_characters/expressions/"
-            "xingya_happy.png + yunrong_happy.png + boling_happy.png"
+        "source": " + ".join(
+            f"{EXPRESSION_SOURCE_PREFIX}{filename}"
+            for filename, _ in MOOD_SOURCES.values()
         ),
         "has_alpha": True,
         "processing": "三张开心表情按原始画布尺寸横向居中合成 512x256 透明画布",
@@ -328,15 +329,30 @@ def check_assets(generated_manifest: dict, generated_assets: dict[str, Image.Ima
                 len(data),
                 digest,
             )
+        mismatched_metadata = {
+            key: (current.get(key), generated.get(key))
+            for key in (
+                "name",
+                "file",
+                "source",
+                "size",
+                "has_alpha",
+                "alpha_bbox",
+                "corner_alpha",
+                "processing",
+            )
+            if current.get(key) != generated.get(key)
+        }
+        if mismatched_metadata:
+            raise ValueError(
+                f"{file_label} 确定性清单字段不一致：{mismatched_metadata}"
+            )
         if any(
             current.get(key) != generated.get(key)
-            for key in ("size", "has_alpha", "alpha_bbox", "corner_alpha")
+            for key in ("bytes", "sha256")
         ):
             raise stats_error(
-                f"{file_label} 元数据与重新处理源图生成的新产物不一致："
-                f"expected(size/alpha/bbox/corners)="
-                f"{[current.get(key) for key in ('size', 'has_alpha', 'alpha_bbox', 'corner_alpha')]}, "
-                f"actual={[generated.get(key) for key in ('size', 'has_alpha', 'alpha_bbox', 'corner_alpha')]}",
+                f"{file_label} 摘要字段与重新处理源图生成的新产物不一致",
                 current["bytes"],
                 current["sha256"],
                 generated["bytes"],
