@@ -134,8 +134,7 @@ for (const level of sequenceLevels) {
 
 console.log('=== 6. 连续提示遵守剩余步数预算 ===');
 assert.deepEqual(findHintSequence(tight, tight.tiles, 0, 3), []);
-const twoStepBudget = expectOptimalHintSequence(tight, tight.tiles, 2, 3, 'L5(剩余 2 步)');
-assert.ok(twoStepBudget.length <= 2, '只剩 2 步时不应返回第 3 步');
-console.log('[PASS] 剩余 0 步返回空数组，剩余 2 步时返回不超过 2 步');
+assert.deepEqual(findHintSequence(tight, tight.tiles, 2, 3), []);
+console.log('[PASS] 剩余 0 步和不足通关所需的 2 步都返回空数组');
 
 console.log('=== 提示引擎测试通过 ===');
