@@ -2491,3 +2491,204 @@ img {
 .park-collection-flower:not(.sleeping) {
   filter: drop-shadow(0 0.3cqw 0.4cqw rgba(74, 34, 92, 0.22));
 }
+
+/* 乐园商店双页签货架 */
+.park-shop {
+  display: grid;
+  gap: 3cqw;
+  min-width: 0;
+}
+.park-shop .park-shop-balance {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  min-height: max(44px, 11cqw);
+  margin: -4cqw -4cqw 0;
+  padding: 2.6cqw 4cqw;
+  background: linear-gradient(180deg, #fef8ea 78%, #fef8ead9 100%);
+  border-bottom: 0.3cqw solid #efcba2;
+  box-shadow: 0 1.4cqw 2cqw #6d38621f;
+}
+.park-shop-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2cqw;
+  padding: 0.5cqw;
+  border-radius: 4cqw;
+  background: #ead8e9;
+}
+.park-shop-tabs button {
+  min-height: max(44px, 11cqw);
+  padding: 1.8cqw 2cqw;
+  border-radius: 3.3cqw;
+  background: transparent;
+  color: #74466f;
+  font-size: 4cqw;
+  font-weight: 900;
+}
+.park-shop-tabs button[aria-selected="true"] {
+  background: linear-gradient(#cb8ce8, #8b50bb);
+  color: #fff9e8;
+  text-shadow: 0 1px #683372;
+  box-shadow:
+    inset 0 0 0 0.4cqw #f9dfa5,
+    0 0.7cqw 1.2cqw #713c7233;
+}
+.park-shop-list {
+  display: grid;
+  gap: 3cqw;
+  min-width: 0;
+}
+.park-shop-card {
+  display: grid;
+  grid-template-columns: 17cqw minmax(0, 1fr);
+  gap: 2cqw 3cqw;
+  align-items: center;
+  min-width: 0;
+  padding: 3cqw;
+  border: 0.4cqw solid #dfb7d7;
+  border-radius: 4cqw;
+  background: linear-gradient(145deg, #fffaf0, #f7e8f4);
+  box-shadow:
+    inset 0 1px 0 #ffffff,
+    0 0.7cqw 1.4cqw #6f3a6018;
+}
+.park-shop-card.is-locked {
+  background: linear-gradient(145deg, #f4edf0, #e7dfe5);
+  border-color: #cdbed0;
+}
+.park-shop-card.is-locked .park-shop-card-art {
+  filter: grayscale(0.75);
+  opacity: 0.62;
+}
+.park-shop-card-art {
+  width: 17cqw;
+  height: 17cqw;
+  object-fit: contain;
+  filter: drop-shadow(0 0.5cqw 0.5cqw #6d38622b);
+}
+.park-shop-card-copy {
+  min-width: 0;
+}
+.park-shop-card-copy h3 {
+  margin: 0 0 0.8cqw;
+  color: #632b57;
+  font-size: 4.2cqw;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+.park-shop-card-copy p {
+  margin: 0 0 1.2cqw;
+  color: #815575;
+  font-size: max(12px, 3.3cqw);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.park-shop-card-copy > span {
+  display: inline-block;
+  max-width: 100%;
+  color: #73526d;
+  font-size: max(12px, 3.1cqw);
+  font-weight: 800;
+  line-height: 1.35;
+}
+.park-shop-card-action {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(12.5cqw, 1.35fr);
+  align-items: center;
+  gap: 2.5cqw;
+}
+.park-shop-price {
+  display: inline-flex;
+  align-items: center;
+  gap: 1cqw;
+  min-width: 0;
+  color: #6f3d5f;
+  font-size: 3.8cqw;
+  font-weight: 900;
+}
+.park-shop-price .park-icon {
+  width: 6cqw;
+  height: 6cqw;
+}
+.park-shop-card-action .park-shop-buy {
+  width: 100%;
+  min-height: max(44px, 11cqw);
+  padding: 1.4cqw 2.6cqw;
+  font-size: 3.9cqw;
+}
+.park-exhibit-picker {
+  grid-column: 1 / -1;
+  min-width: 0;
+  padding: 3cqw;
+  border-radius: 3cqw;
+  background: #f7e7d8;
+  box-shadow: inset 0 0 0 0.35cqw #e8c8a9;
+}
+.park-exhibit-picker-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2cqw;
+  margin-bottom: 2cqw;
+}
+.park-exhibit-picker-head strong {
+  min-width: 0;
+  color: #613454;
+  font-size: 3.8cqw;
+  overflow-wrap: anywhere;
+}
+.park-exhibit-picker-head button {
+  min-width: 44px;
+  min-height: max(44px, 10cqw);
+  padding: 1cqw 2cqw;
+  border-radius: 2.4cqw;
+  background: #e6cfdf;
+  color: #704265;
+  font-size: 3.3cqw;
+  font-weight: 800;
+}
+.park-exhibit-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2cqw;
+  min-width: 0;
+}
+.park-exhibit-picker-grid button {
+  display: grid;
+  grid-template-columns: 10cqw minmax(0, 1fr);
+  align-items: center;
+  gap: 1.5cqw;
+  min-width: 0;
+  min-height: max(44px, 10cqw);
+  padding: 1.5cqw;
+  border-radius: 2.5cqw;
+  background: #fff9ef;
+  color: #68445e;
+  text-align: left;
+}
+.park-exhibit-picker-grid button.is-selected {
+  background: #f3d48d;
+  box-shadow: inset 0 0 0 0.5cqw #b778a7;
+}
+.park-exhibit-picker-grid img {
+  width: 10cqw;
+  height: 10cqw;
+  object-fit: contain;
+}
+.park-exhibit-picker-grid span {
+  min-width: 0;
+  font-size: max(12px, 3cqw);
+  font-weight: 800;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.park-exhibit-picker .park-exhibit-clear {
+  display: flex;
+  width: 100%;
+  min-height: max(44px, 11cqw);
+  margin-top: 2.5cqw;
+  padding: 1.5cqw 3cqw;
+  font-size: 3.8cqw;
+}

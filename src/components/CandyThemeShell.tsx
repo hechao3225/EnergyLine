@@ -11,6 +11,7 @@ import { BUILD_TAG } from "../buildTag";
 import { LAB_LEVELS } from "../data/labLevels";
 import { LevelEditor } from "./LevelEditor";
 import { OnboardingGuide } from "./OnboardingGuide";
+import { ShopModal } from "./ShopModal";
 import { MAX_STARS, getParSteps, getStarThresholds, getStarsForLights, getStarsForSteps } from "../utils/rating";
 import { describeHint, findHint, HINT_ENGINE_MAX_LEVEL, supportsHintEngine, type HintMove } from "../utils/hint-engine";
 import { CENTER_DISTRICTS, getCollectionEntry, getLevelContent, WORLD } from "../content";
@@ -23,18 +24,21 @@ import {
 import { sound } from "../utils/audio";
 import { haptics } from "../utils/haptics";
 import {
-  buyHint,
-  HINT_PRICE,
+  buyCosmetic,
+  buySupply,
   claimDailyTask,
   CHAPTERS,
   chapterIndex,
   consumeHint,
+  equipCosmetic,
   getBestStars,
+  isCosmeticEquipped,
   localDate,
   PARK_STORAGE_KEY,
   ParkProgress,
   readParkProgress,
   resetParkProgress,
+  setHomeExhibit,
 } from "../utils/parkProgress";
 
 type Modal =
@@ -927,35 +931,43 @@ export function CandyThemeShell(p: Props) {
                   </>
                 )}
                 {activeModal === "shop" && (
-                  <>
-                    <div className="park-shop-balance">
-                      <Icon name="gem" />
-                      {progress.coins.toLocaleString()}
-                    </div>
-                    <div className="park-item-card">
-                      <Icon name="hint" />
-                      <div>
-                        <h3>提示灯泡 × 1</h3>
-                        <p>为下一次修复做好准备</p>
-                      </div>
-                      <span className="park-item-price">
-                        <Icon name="gem" />
-                        {HINT_PRICE}
-                      </span>
-                    </div>
-                    <ParkButton
-                      disabled={progress.coins < HINT_PRICE}
-                      onClick={() => {
-                        save(buyHint(progress));
-                        flash("兑换成功，提示灯泡 +1");
-                      }}
-                    >
-                      {progress.coins < HINT_PRICE ? "钻石不足" : "兑换灯泡"}
-                    </ParkButton>
-                    <p className="park-fine-print">
-                      首次修复设施可获得钻石
-                    </p>
-                  </>
+                  <ShopModal
+                    progress={progress}
+                    clearedCount={p.clearedLevels.length}
+                    clearedLevels={p.clearedLevels}
+                    onBuySupply={(id) => {
+                      const next = buySupply(progress, id);
+                      if (next !== progress) {
+                        save(next);
+                        flash("补给已放入背包");
+                      }
+                    }}
+                    onBuyCosmetic={(id) => {
+                      const next = buyCosmetic(
+                        progress,
+                        id,
+                        p.clearedLevels.length,
+                      );
+                      if (next !== progress) {
+                        save(next);
+                        flash("装扮已加入收藏");
+                      }
+                    }}
+                    onEquipCosmetic={(id, active) => {
+                      const next = equipCosmetic(progress, id, active);
+                      if (next !== progress) {
+                        save(next);
+                        flash(active ? "装扮已启用" : "已恢复默认装扮");
+                      }
+                    }}
+                    onSelectExhibit={(id) => {
+                      const next = setHomeExhibit(progress, id);
+                      if (next !== progress) {
+                        save(next);
+                        flash(id === null ? "已收起首页展品" : "首页展品已更新");
+                      }
+                    }}
+                  />
                 )}
                 {activeModal === "hint" && (
                   <>
