@@ -17,7 +17,7 @@ import { CENTER_DISTRICTS } from "../content/zones";
 /** 首通奖励。存档字段仍叫 coins，界面统一叫「钻石」——只改显示，不动存档结构。 */
 export const FIRST_CLEAR_COINS = 100;
 export const HELL_CLEAR_COINS = 150;
-/** 提示灯泡单价——合并货币以后这是唯一的经济出口。 */
+/** 提示灯泡单价——与商店目录保持同一来源。 */
 export const HINT_PRICE = getSupplyItem("hint")!.price;
 /** 老存档里独立的钻石字段并入统一货币的折算率（10 钻本来就是一关的奖励）。 */
 export const GEM_TO_COIN = 10;
@@ -97,7 +97,12 @@ const DEFAULT_PROGRESS: ParkProgress = {
 };
 /** 计数类字段：任意脏数据都落回默认值，绝不让 NaN / 负数进存档。 */
 function asCount(value: unknown, fallback: number): number {
-  const parsed = Number(value);
+  const parsed =
+    typeof value === "number"
+      ? value
+      : typeof value === "string" && value.trim() !== ""
+        ? Number(value)
+        : Number.NaN;
   return Number.isFinite(parsed) && parsed >= 0 ? Math.floor(parsed) : fallback;
 }
 /**
@@ -291,19 +296,21 @@ export function buyCosmetic(
   clearedCount: number,
 ): ParkProgress {
   const item = getCosmeticItem(id);
+  if (!item) return progress;
   if (
-    !item ||
-    progress.coins < item.price ||
-    clearedCount < item.unlockAt ||
-    progress.ownedCosmetics.includes(id)
+    progress.coins >= item.price &&
+    Number.isFinite(clearedCount) &&
+    Number.isInteger(clearedCount) &&
+    clearedCount >= item.unlockAt &&
+    !progress.ownedCosmetics.includes(id)
   ) {
-    return progress;
+    return {
+      ...progress,
+      coins: progress.coins - item.price,
+      ownedCosmetics: [...progress.ownedCosmetics, id],
+    };
   }
-  return {
-    ...progress,
-    coins: progress.coins - item.price,
-    ownedCosmetics: [...progress.ownedCosmetics, id],
-  };
+  return progress;
 }
 export function equipCosmetic(
   progress: ParkProgress,
@@ -372,6 +379,8 @@ export function isCosmeticEquipped(
       return progress.equippedCosmetics.exhibitId !== null;
     case "calm-theme":
       return progress.equippedCosmetics.theme === "calm";
+    default:
+      return false;
   }
 }
 export function buyHint(progress: ParkProgress): ParkProgress {

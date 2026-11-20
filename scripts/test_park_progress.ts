@@ -151,6 +151,15 @@ test("四件装扮达到开放关数后按目录价格购买一次", () => {
     assert.equal(repeated, bought);
   }
 });
+test("装扮购买拒绝非有限整数通关数", () => {
+  const item = COSMETIC_ITEMS[0];
+  const start = { ...fresh(), coins: item.price };
+  assert.equal(buyCosmetic(start, item.id, Number.NaN), start);
+  assert.equal(buyCosmetic(start, item.id, Number.POSITIVE_INFINITY), start);
+  assert.equal(buyCosmetic(start, item.id, item.unlockAt + 0.5), start);
+  assert.equal(start.coins, item.price);
+  assert.deepEqual(start.ownedCosmetics, []);
+});
 test("开心问候可以装备和卸下", () => {
   const owned = ownedOnly("joy-greeting");
   const equipped = equipCosmetic(owned, "joy-greeting", true);
@@ -205,6 +214,12 @@ test("非法展品编号不会改变装备状态", () => {
   assert.equal(setHomeExhibit(start, 1.5), start);
   assert.equal(setHomeExhibit(start, Number.NaN), start);
 });
+test("未识别的装扮 ID 始终报告未装备", () => {
+  assert.equal(
+    isCosmeticEquipped(fresh(), "unknown-cosmetic" as CosmeticId),
+    false,
+  );
+});
 test("旧存档缺少商店扩展字段时补齐默认值并保留提示库存", () => {
   const p = readParkProgress(
     store({
@@ -228,6 +243,48 @@ test("旧存档缺少商店扩展字段时补齐默认值并保留提示库存",
     exhibitId: null,
     theme: "default",
   });
+});
+test("脏计数值回落默认值，不转换成库存数量", () => {
+  const p = readParkProgress(
+    store({
+      [PARK_STORAGE_KEY]: JSON.stringify({
+        coins: [],
+        hints: "",
+        lenses: {},
+        rewindTokens: [],
+        stepTokens: true,
+        rewardedLevels: [],
+        completedDate: "",
+        claimedDate: "",
+      }),
+    }),
+  );
+  assert.equal(p.coins, 0);
+  assert.equal(p.hints, 3);
+  assert.equal(p.lenses, 0);
+  assert.equal(p.rewindTokens, 0);
+  assert.equal(p.stepTokens, 0);
+});
+test("合法数字和数字字符串计数继续接受并取整", () => {
+  const p = readParkProgress(
+    store({
+      [PARK_STORAGE_KEY]: JSON.stringify({
+        coins: "12.9",
+        hints: "4.8",
+        lenses: 2.7,
+        rewindTokens: "3",
+        stepTokens: 4,
+        rewardedLevels: [],
+        completedDate: "",
+        claimedDate: "",
+      }),
+    }),
+  );
+  assert.equal(p.coins, 12);
+  assert.equal(p.hints, 4);
+  assert.equal(p.lenses, 2);
+  assert.equal(p.rewindTokens, 3);
+  assert.equal(p.stepTokens, 4);
 });
 test("未知装扮会被过滤，只保留已拥有装扮的装备状态", () => {
   const p = readParkProgress(
@@ -283,16 +340,27 @@ test("非法装扮装备值回落默认状态", () => {
   });
 });
 test("存档重启读取后补给库存、装扮与装备状态保持", () => {
-  let p = { ...fresh(), coins: 5000 };
+  let p = { ...fresh(), coins: 6000 };
   p = buySupply(p, "lens");
+  p = buySupply(p, "rewind");
+  p = buySupply(p, "step");
   p = buyCosmetic(p, "joy-greeting", 5);
+  p = buyCosmetic(p, "starlight-outfit", 20);
+  p = buyCosmetic(p, "calm-theme", 40);
   p = equipCosmetic(p, "joy-greeting", true);
+  p = equipCosmetic(p, "starlight-outfit", true);
+  p = equipCosmetic(p, "calm-theme", true);
   p = buyCosmetic(p, "exhibit-display", 10);
   p = setHomeExhibit(p, 12);
 
   const data = memoryStore({});
   data.setItem(PARK_STORAGE_KEY, JSON.stringify(p));
-  assert.deepEqual(readParkProgress(data), p);
+  const restored = readParkProgress(data);
+  assert.deepEqual(restored, p);
+  assert.equal(restored.equippedCosmetics.outfit, "starlight");
+  assert.equal(restored.equippedCosmetics.theme, "calm");
+  assert.equal(restored.rewindTokens, 1);
+  assert.equal(restored.stepTokens, 1);
 });
 test("存档重启读取后余额、库存与领取记录保持", () => {
   const p = buyHint(
