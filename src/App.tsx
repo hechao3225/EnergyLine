@@ -356,6 +356,15 @@ export default function App() {
     sound.playSwitch();
     haptics.tapHeavy();
   };
+  const addRewind = () => {
+    const current = attempt.current;
+    if (winProcessed.current) return;
+    const nextRewinds = current.rewinds + 1;
+    attempt.current = { ...current, rewinds: nextRewinds };
+    setRewinds(nextRewinds);
+    sound.playSwitch();
+    haptics.tapHeavy();
+  };
   const startEndless = (targets: number, next = false) => {
     const index = next ? endless.current.index + 1 : 1;
     endless.current = {
@@ -462,6 +471,7 @@ export default function App() {
       onUndo={() => travel(historyIndex - 1)}
       onRedo={() => travel(historyIndex + 1)}
       onTileClick={rotate}
+      onAddRewind={addRewind}
       onOpenLevels={() => setLevelsOpen(true)}
       onCloseLevels={() => setLevelsOpen(false)}
       onSelectLevel={selectLevel}

@@ -89,6 +89,8 @@ interface Props {
   onStartLab?: (index: number) => void;
   /** 道具：步数用尽后补 3 步 */
   onAddSteps?: () => void;
+  /** 道具：本局额外回溯 +1 */
+  onAddRewind?: () => void;
   /** 达标关：提前结算（拿当前星数） */
   onSettle?: () => void;
   gameMode: "story" | "endless" | "editor" | "lab";
