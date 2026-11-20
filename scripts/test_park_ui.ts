@@ -134,7 +134,7 @@ try {
       .getByRole("navigation")
       .getByRole("button", { name: "商店", exact: true })
       .click();
-    await page.getByRole("button", { name: "兑换灯泡", exact: true }).click();
+    await page.getByRole("button", { name: "购买提示灯泡", exact: true }).click();
     await capture(page, "shop-purchased-390x844");
     await close(page);
     await page
