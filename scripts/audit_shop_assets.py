@@ -5,19 +5,24 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+from importlib import metadata
 from pathlib import Path
 
 from PIL import Image
 
+from prepare_shop_assets import build_contact_sheet, png_bytes
+
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+REQUIRED_PILLOW_VERSION = "13.0.0"
+CONTACT_SHEET_FILE = "docs/QA/shop-assets-2026-11-20/shop-assets-contact-sheet.png"
 
 EXPECTED_ASSETS = {
     "icon-lens": (512, 512, True),
     "icon-coil": (512, 512, True),
-    "outfit-sheep-starlight": (None, None, True),
-    "outfit-rabbit-starlight": (None, None, True),
-    "outfit-spirit-starlight": (None, None, True),
+    "outfit-sheep-starlight": (951, 1017, True),
+    "outfit-rabbit-starlight": (719, 1024, True),
+    "outfit-spirit-starlight": (988, 1015, True),
     "mood-sheep-happy": (144, 100, True),
     "mood-rabbit-happy": (144, 132, True),
     "mood-spirit-happy": (144, 136, True),
@@ -30,6 +35,31 @@ def fail(message: str) -> None:
     raise SystemExit(f"失败：{message}")
 
 
+def require_pillow_version() -> None:
+    try:
+        installed = metadata.version("Pillow")
+    except metadata.PackageNotFoundError:
+        installed = "未安装"
+    if installed != REQUIRED_PILLOW_VERSION:
+        fail(
+            f"需要 Pillow=={REQUIRED_PILLOW_VERSION}，实际为 {installed}。"
+            "安装：python3.12 -m pip install -r scripts/requirements-shop-assets.txt"
+        )
+
+
+def mismatch(
+    label: str,
+    expected_bytes: int,
+    expected_sha256: str,
+    actual_bytes: int,
+    actual_sha256: str,
+) -> None:
+    fail(
+        f"{label}：expected bytes={expected_bytes}, sha256={expected_sha256}；"
+        f"actual bytes={actual_bytes}, sha256={actual_sha256}"
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="校验商店素材")
     parser.add_argument(
@@ -39,6 +69,7 @@ def main() -> None:
         help=argparse.SUPPRESS,
     )
     args = parser.parse_args()
+    require_pillow_version()
     root = args.root.resolve()
     manifest_path = root / "public/assets/park/shop-assets.json"
 
@@ -63,16 +94,21 @@ def main() -> None:
         if not path.is_file():
             fail(f"{name} 文件不存在：{entry['file']}")
         data = path.read_bytes()
-        if entry.get("bytes") != len(data):
-            fail(f"{name} 字节数不一致")
         digest = hashlib.sha256(data).hexdigest()
-        if entry.get("sha256") != digest:
-            fail(f"{name} sha256 不一致")
+        if entry.get("bytes") != len(data) or entry.get("sha256") != digest:
+            mismatch(
+                f"{name} 文件统计与清单不一致",
+                entry.get("bytes", -1),
+                entry.get("sha256", "<missing>"),
+                len(data),
+                digest,
+            )
 
         expected_width, expected_height, expected_alpha = EXPECTED_ASSETS[name]
         try:
             with Image.open(path) as image:
                 image.load()
+                image_format = image.format
                 width, height = image.size
                 bands = image.getbands()
                 alpha = image.getchannel("A") if "A" in bands else None
@@ -80,30 +116,111 @@ def main() -> None:
         except Exception as error:
             fail(f"{name} 无法解码：{error}")
 
-        if expected_width is not None and (width, height) != (expected_width, expected_height):
-            fail(
-                f"{name} 尺寸应为 {expected_width}x{expected_height}，"
-                f"实际为 {width}x{height}"
+        if image_format != "WEBP":
+            mismatch(
+                f"{name} 格式错误：expected=Pillow format WEBP；actual={image_format}",
+                entry["bytes"],
+                entry["sha256"],
+                len(data),
+                digest,
             )
-        if name.startswith("outfit-"):
-            if max(width, height) > 1024 or min(width, height) < 600:
-                fail(f"{name} 裁边尺寸异常：{width}x{height}")
+        if (width, height) != (expected_width, expected_height):
+            mismatch(
+                f"{name} 尺寸错误：expected={expected_width}x{expected_height}；"
+                f"actual={width}x{height}",
+                entry["bytes"],
+                entry["sha256"],
+                len(data),
+                digest,
+            )
         if list(entry.get("size", [])) != [width, height]:
-            fail(f"{name} 清单尺寸与实际图片不一致")
+            mismatch(
+                f"{name} 清单尺寸错误：expected={entry.get('size')}；"
+                f"actual={[width, height]}",
+                entry["bytes"],
+                entry["sha256"],
+                len(data),
+                digest,
+            )
         if bool(entry.get("has_alpha")) != expected_alpha:
-            fail(f"{name} has_alpha 标记不正确")
+            mismatch(
+                f"{name} has_alpha 标记不正确：expected={expected_alpha}；"
+                f"actual={entry.get('has_alpha')}",
+                entry["bytes"],
+                entry["sha256"],
+                len(data),
+                digest,
+            )
         if expected_alpha:
             if "A" not in bands:
-                fail(f"{name} 缺少 RGBA 透明通道")
+                mismatch(
+                    f"{name} 缺少 RGBA 透明通道",
+                    entry["bytes"],
+                    entry["sha256"],
+                    len(data),
+                    digest,
+                )
             low, high = alpha.getextrema()
             if low != 0 or high != 255 or alpha.getbbox() is None:
-                fail(f"{name} alpha 不是有效透明通道")
+                mismatch(
+                    f"{name} alpha 不是有效透明通道：expected=(0, 255)；"
+                    f"actual={alpha.getextrema()}",
+                    entry["bytes"],
+                    entry["sha256"],
+                    len(data),
+                    digest,
+                )
         else:
             if "A" in bands or has_transparency_info:
-                fail(f"{name} has_alpha=false，但实际包含 alpha 通道")
+                mismatch(
+                    f"{name} has_alpha=false，但实际包含 alpha 通道",
+                    entry["bytes"],
+                    entry["sha256"],
+                    len(data),
+                    digest,
+                )
         print(f"通过：{name}  {width}x{height}  {len(data)} bytes")
 
-    print("通过：10 个商店素材文件存在、可解码、尺寸/透明通道/字节数/sha256 全部一致")
+    assets = {}
+    for entry in entries:
+        with Image.open(root / entry["file"]) as image:
+            assets[entry["name"]] = image.convert("RGBA")
+    expected_sheet = png_bytes(build_contact_sheet(manifest, assets))
+    expected_sheet_digest = hashlib.sha256(expected_sheet).hexdigest()
+    contact_path = root / CONTACT_SHEET_FILE
+    if not contact_path.is_file():
+        fail(
+            f"{CONTACT_SHEET_FILE} 不存在；"
+            f"expected bytes={len(expected_sheet)}, sha256={expected_sheet_digest}"
+        )
+    contact_data = contact_path.read_bytes()
+    contact_digest = hashlib.sha256(contact_data).hexdigest()
+    with Image.open(contact_path) as contact:
+        contact.load()
+        contact_format = contact.format
+        contact_size = contact.size
+    if contact_format != "PNG" or contact_size != (1500, 640):
+        mismatch(
+            f"联系表格式或尺寸错误：expected=PNG 1500x640；"
+            f"actual={contact_format} {contact_size[0]}x{contact_size[1]}",
+            len(expected_sheet),
+            expected_sheet_digest,
+            len(contact_data),
+            contact_digest,
+        )
+    if contact_data != expected_sheet:
+        mismatch(
+            "联系表与确定性重新生成结果不一致",
+            len(expected_sheet),
+            expected_sheet_digest,
+            len(contact_data),
+            contact_digest,
+        )
+    print(
+        f"通过：联系表 1500x640  {len(contact_data)} bytes  "
+        f"sha256={contact_digest}"
+    )
+    print("通过：10 个商店素材及 QA 联系表的格式、尺寸、透明通道、bytes 与 sha256 全部一致")
 
 
 if __name__ == "__main__":

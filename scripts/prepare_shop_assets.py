@@ -6,6 +6,7 @@ import argparse
 import hashlib
 import json
 from io import BytesIO
+from importlib import metadata
 from pathlib import Path
 
 from PIL import Image, ImageChops, ImageDraw, ImageFilter
@@ -19,6 +20,7 @@ QA_DIR = ROOT / "docs/QA/shop-assets-2026-11-20"
 MANIFEST_PATH = ASSET_DIR / "shop-assets.json"
 CONTACT_SHEET_PATH = QA_DIR / "shop-assets-contact-sheet.png"
 BACKGROUND_MARKER = (255, 0, 255)
+REQUIRED_PILLOW_VERSION = "13.0.0"
 
 WHITE_SOURCES = {
     "icon-lens": ("icon-lens.png", "icon"),
@@ -132,6 +134,10 @@ def webp_bytes(image: Image.Image, quality: int) -> bytes:
     return buffer.getvalue()
 
 
+def asset_webp_bytes(name: str, image: Image.Image) -> bytes:
+    return webp_bytes(image, 88 if name == "theme-calm-preview" else 92)
+
+
 def build_assets() -> tuple[dict[str, Image.Image], dict[str, dict[str, str | bool]]]:
     assets: dict[str, Image.Image] = {}
     metadata: dict[str, dict[str, str | bool]] = {}
@@ -186,7 +192,7 @@ def build_assets() -> tuple[dict[str, Image.Image], dict[str, dict[str, str | bo
 def manifest_for(assets: dict[str, Image.Image], metadata: dict[str, dict[str, str | bool]]) -> dict:
     entries = []
     for name, image in assets.items():
-        data = webp_bytes(image, 88 if name == "theme-calm-preview" else 92)
+        data = asset_webp_bytes(name, image)
         digest = hashlib.sha256(data).hexdigest()
         entries.append(
             {
@@ -207,7 +213,7 @@ def manifest_for(assets: dict[str, Image.Image], metadata: dict[str, dict[str, s
     }
 
 
-def build_contact_sheet(manifest: dict) -> Image.Image:
+def build_contact_sheet(manifest: dict, assets: dict[str, Image.Image]) -> Image.Image:
     cell_width = 300
     cell_height = 320
     columns = 5
@@ -215,7 +221,7 @@ def build_contact_sheet(manifest: dict) -> Image.Image:
     sheet = Image.new("RGB", (cell_width * columns, cell_height * rows), "#211532")
     draw = ImageDraw.Draw(sheet)
     for index, entry in enumerate(manifest["assets"]):
-        image = Image.open(ROOT / entry["file"]).convert("RGBA")
+        image = assets[entry["name"]].convert("RGBA")
         image.thumbnail((244, 230), Image.Resampling.LANCZOS)
         left = (index % columns) * cell_width
         top = (index // columns) * cell_height
@@ -235,17 +241,38 @@ def build_contact_sheet(manifest: dict) -> Image.Image:
     return sheet
 
 
+def png_bytes(image: Image.Image) -> bytes:
+    buffer = BytesIO()
+    image.save(buffer, "PNG", optimize=True)
+    return buffer.getvalue()
+
+
 def write_assets(assets: dict[str, Image.Image], manifest: dict) -> None:
     ASSET_DIR.mkdir(parents=True, exist_ok=True)
     QA_DIR.mkdir(parents=True, exist_ok=True)
+    contact_assets = {}
     for name, image in assets.items():
-        data = webp_bytes(image, 88 if name == "theme-calm-preview" else 92)
+        data = asset_webp_bytes(name, image)
         (ASSET_DIR / f"{name}.webp").write_bytes(data)
+        contact_assets[name] = Image.open(BytesIO(data)).convert("RGBA")
     MANIFEST_PATH.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    build_contact_sheet(manifest).save(CONTACT_SHEET_PATH, "PNG", optimize=True)
+    CONTACT_SHEET_PATH.write_bytes(png_bytes(build_contact_sheet(manifest, contact_assets)))
 
 
-def check_assets(generated_manifest: dict) -> None:
+def stats_error(
+    label: str,
+    expected_bytes: int,
+    expected_sha256: str,
+    actual_bytes: int,
+    actual_sha256: str,
+) -> ValueError:
+    return ValueError(
+        f"{label}：expected bytes={expected_bytes}, sha256={expected_sha256}；"
+        f"actual bytes={actual_bytes}, sha256={actual_sha256}"
+    )
+
+
+def check_assets(generated_manifest: dict, generated_assets: dict[str, Image.Image]) -> None:
     current_manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
     current_entries = current_manifest.get("assets", [])
     generated_entries = generated_manifest.get("assets", [])
@@ -264,28 +291,80 @@ def check_assets(generated_manifest: dict) -> None:
         data = path.read_bytes()
         digest = hashlib.sha256(data).hexdigest()
         if current["bytes"] != len(data) or current["sha256"] != digest:
-            raise ValueError(f"{file_label} 与清单记录不一致")
+            raise stats_error(
+                f"{file_label} 与清单记录不一致",
+                current["bytes"],
+                current["sha256"],
+                len(data),
+                digest,
+            )
         if generated["bytes"] != len(data) or generated["sha256"] != digest:
-            raise ValueError(
+            raise stats_error(
                 f"{file_label} 与重新处理源图生成的新产物不一致；"
-                f"请重新运行 prepare_shop_assets.py "
-                f"（新产物 {generated['bytes']} bytes / {generated['sha256']}）"
+                f"请重新运行 prepare_shop_assets.py",
+                generated["bytes"],
+                generated["sha256"],
+                len(data),
+                digest,
             )
         if generated["size"] != current["size"]:
-            raise ValueError(f"{file_label} 尺寸与重新处理源图生成的新产物不一致")
+            raise stats_error(
+                f"{file_label} 尺寸与重新处理源图生成的新产物不一致："
+                f"expected={current['size']}, actual={generated['size']}",
+                current["bytes"],
+                current["sha256"],
+                generated["bytes"],
+                generated["sha256"],
+            )
+
+    contact_assets = {
+        name: Image.open(BytesIO(asset_webp_bytes(name, image))).convert("RGBA")
+        for name, image in generated_assets.items()
+    }
+    expected_sheet = png_bytes(build_contact_sheet(generated_manifest, contact_assets))
+    if not CONTACT_SHEET_PATH.is_file():
+        expected_digest = hashlib.sha256(expected_sheet).hexdigest()
+        raise ValueError(
+            f"{CONTACT_SHEET_PATH.relative_to(ROOT)} 不存在；"
+            f"expected bytes={len(expected_sheet)}, sha256={expected_digest}"
+        )
+    actual_sheet = CONTACT_SHEET_PATH.read_bytes()
+    actual_sheet_digest = hashlib.sha256(actual_sheet).hexdigest()
+    expected_sheet_digest = hashlib.sha256(expected_sheet).hexdigest()
+    if actual_sheet != expected_sheet:
+        raise stats_error(
+            f"{CONTACT_SHEET_PATH.relative_to(ROOT)} 与重新生成联系表不一致",
+            len(expected_sheet),
+            expected_sheet_digest,
+            len(actual_sheet),
+            actual_sheet_digest,
+        )
+
+
+def require_pillow_version() -> None:
+    try:
+        installed = metadata.version("Pillow")
+    except metadata.PackageNotFoundError:
+        installed = "未安装"
+    if installed != REQUIRED_PILLOW_VERSION:
+        raise SystemExit(
+            f"失败：需要 Pillow=={REQUIRED_PILLOW_VERSION}，实际为 {installed}。"
+            "安装：python3.12 -m pip install -r scripts/requirements-shop-assets.txt"
+        )
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="整理并校验商店新增素材")
     parser.add_argument("--check", action="store_true", help="只校验现有素材与清单，不重写文件")
     args = parser.parse_args()
+    require_pillow_version()
     assets, metadata = build_assets()
     manifest = manifest_for(assets, metadata)
     if args.check:
         if not MANIFEST_PATH.exists():
             raise FileNotFoundError(f"缺少 {MANIFEST_PATH.relative_to(ROOT)}")
-        check_assets(manifest)
-        print(f"通过：{len(assets)} 个商店素材与重新处理源图生成的新产物一致")
+        check_assets(manifest, assets)
+        print(f"通过：{len(assets)} 个商店素材及联系表与重新生成产物一致")
         return
     write_assets(assets, manifest)
     print(f"完成：已生成 {len(assets)} 个商店素材")

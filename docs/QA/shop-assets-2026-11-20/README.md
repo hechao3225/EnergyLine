@@ -8,9 +8,9 @@
 | --- | --- | --- |
 | `icon-lens.webp` | 512×512 RGBA | 火花透镜白底生成源 |
 | `icon-coil.webp` | 512×512 RGBA | 应急线圈白底生成源 |
-| `outfit-sheep-starlight.webp` | 透明裁边，保持比例 | 羊伙伴星愿礼服白底生成源 |
-| `outfit-rabbit-starlight.webp` | 透明裁边，保持比例 | 兔子伙伴星愿礼服白底生成源 |
-| `outfit-spirit-starlight.webp` | 透明裁边，保持比例 | 精灵伙伴星愿礼服白底生成源 |
+| `outfit-sheep-starlight.webp` | 951×1017 RGBA | 羊伙伴星愿礼服白底生成源 |
+| `outfit-rabbit-starlight.webp` | 719×1024 RGBA | 兔子伙伴星愿礼服白底生成源 |
+| `outfit-spirit-starlight.webp` | 988×1015 RGBA | 精灵伙伴星愿礼服白底生成源 |
 | `mood-sheep-happy.webp` | 144×100 RGBA | 现有 `xingya_happy.png` |
 | `mood-rabbit-happy.webp` | 144×132 RGBA | 现有 `yunrong_happy.png` |
 | `mood-spirit-happy.webp` | 144×136 RGBA | 现有 `boling_happy.png` |
@@ -19,18 +19,18 @@
 
 ## 复现与自动验收
 
-先确认当前 `python3` 可导入 Pillow：
+素材格式与编解码使用固定版本，先确认当前解释器满足门禁：
 
 ```bash
-python3 -c "from PIL import Image"
+python3 -c "import importlib.metadata as m; print(m.version('Pillow'))"
 ```
 
-若提示 `ModuleNotFoundError: No module named 'PIL'`，使用项目 Python 3.12 在仓库外创建临时虚拟环境。素材 bytes/sha 由 Pillow 13.0.0 的 WebP 编码器生成，因此版本需固定：
+要求输出 `13.0.0`。若版本不符或无法导入，使用 Python 3.12 在仓库外创建临时虚拟环境并安装固定依赖：
 
 ```bash
-PROJECT_PYTHON=/Users/lxjj/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3
-"$PROJECT_PYTHON" -m venv /private/tmp/rotategame-shop-assets
-/private/tmp/rotategame-shop-assets/bin/python3 -m pip install --disable-pip-version-check pillow==13.0.0
+PYTHON312=$(command -v python3.12)
+"$PYTHON312" -m venv /private/tmp/rotategame-shop-assets
+/private/tmp/rotategame-shop-assets/bin/python3 -m pip install --disable-pip-version-check -r scripts/requirements-shop-assets.txt
 ```
 
 随后使用该虚拟环境执行验收：
@@ -41,16 +41,18 @@ SHOP_PYTHON=/private/tmp/rotategame-shop-assets/bin/python3
 "$SHOP_PYTHON" scripts/audit_shop_assets.py
 ```
 
-若本机 `python3` 已安装 Pillow，也可直接运行：
+若本机 `python3` 已安装 Pillow 13.0.0，也可直接运行：
 
 ```bash
 python3 scripts/prepare_shop_assets.py --check
 python3 scripts/audit_shop_assets.py
 ```
 
-`prepare_shop_assets.py --check` 不重写图片；它会在内存中重新处理全部源图，并将新产物的 bytes 与 sha256 同时对照独立清单和 `public/assets/park/*.webp`。源图改变但素材未重新生成时，检查会失败并输出对应 WebP 文件名。
+两个脚本默认要求 `Pillow==13.0.0`，版本不符时拒绝运行并输出固定依赖安装命令。
 
-`audit_shop_assets.py` 要求透明资源实际具有 A 通道，alpha 范围为 0–255；`has_alpha=false` 的资源必须是纯 RGB，RGBA 或带 `transparency` 信息时会失败。
+`prepare_shop_assets.py --check` 不重写图片；它会在内存中重新处理全部源图，将新产物的 bytes 与 sha256 对照独立清单和 `public/assets/park/*.webp`，并确定性重建 1500×640 QA 联系表后与现有 PNG 比对。源图或联系表变化但未重新生成时，检查会失败并输出对应文件名及 expected/actual bytes、sha256。
+
+`audit_shop_assets.py` 要求 Pillow 识别文件格式为 `WEBP`，扩展名不参与格式判定；10 个资源尺寸均按清单精确匹配。透明资源必须实际具有 A 通道且 alpha 范围为 0–255；`has_alpha=false` 的资源必须是纯 RGB，RGBA 或带 `transparency` 信息时会失败。QA 联系表必须存在、为 1500×640 PNG，且确定性重建后的 bytes/sha256 与现有文件一致。
 
 需要重新生成时运行：
 
