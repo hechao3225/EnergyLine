@@ -101,6 +101,28 @@ export function findHint(
   return null;
 }
 
+/** 从当前盘面连续找最多 count 个正确下一步，不修改传入盘面。 */
+export function findHintSequence(
+  level: LevelConfig,
+  tiles: Tile[],
+  remainingSteps: number,
+  count: number,
+): HintMove[] {
+  const sequence: HintMove[] = [];
+  let currentTiles = tiles;
+  let budget = remainingSteps;
+
+  for (let index = 0; index < count && budget > 0; index++) {
+    const move = findHint(level, currentTiles, budget);
+    if (!move?.reachable) break;
+    sequence.push(move);
+    currentTiles = applyHintAction(level, currentTiles, move);
+    budget--;
+  }
+
+  return sequence;
+}
+
 export function applyHintAction(level: LevelConfig, tiles: Tile[], move: HintMove): Tile[] {
   const clicked = tiles.find((tile) => tile.id === move.tileId);
   const axis = move.action === 'rotate-axis' ? clicked?.axis : undefined;
