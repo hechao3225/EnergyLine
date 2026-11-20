@@ -5,6 +5,8 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
+import sys
 from io import BytesIO
 from importlib import metadata
 from pathlib import Path
@@ -21,6 +23,7 @@ MANIFEST_PATH = ASSET_DIR / "shop-assets.json"
 CONTACT_SHEET_PATH = QA_DIR / "shop-assets-contact-sheet.png"
 BACKGROUND_MARKER = (255, 0, 255)
 REQUIRED_PILLOW_VERSION = "13.0.0"
+SHOP_ASSETS_PYTHON_ENV = "SHOP_ASSETS_PYTHON"
 
 WHITE_SOURCES = {
     "icon-lens": ("icon-lens.png", "icon"),
@@ -138,6 +141,20 @@ def asset_webp_bytes(name: str, image: Image.Image) -> bytes:
     return webp_bytes(image, 88 if name == "theme-calm-preview" else 92)
 
 
+def alpha_metadata(image: Image.Image) -> tuple[list[int] | None, list[int] | None]:
+    if "A" not in image.getbands():
+        return None, None
+    alpha = image.getchannel("A")
+    bbox = alpha.point(lambda value: 255 if value > 8 else 0).getbbox()
+    corners = [
+        alpha.getpixel((0, 0)),
+        alpha.getpixel((image.width - 1, 0)),
+        alpha.getpixel((0, image.height - 1)),
+        alpha.getpixel((image.width - 1, image.height - 1)),
+    ]
+    return list(bbox) if bbox else None, corners
+
+
 def build_assets() -> tuple[dict[str, Image.Image], dict[str, dict[str, str | bool]]]:
     assets: dict[str, Image.Image] = {}
     metadata: dict[str, dict[str, str | bool]] = {}
@@ -194,6 +211,8 @@ def manifest_for(assets: dict[str, Image.Image], metadata: dict[str, dict[str, s
     for name, image in assets.items():
         data = asset_webp_bytes(name, image)
         digest = hashlib.sha256(data).hexdigest()
+        with Image.open(BytesIO(data)) as encoded:
+            alpha_bbox, corner_alpha = alpha_metadata(encoded)
         entries.append(
             {
                 "name": name,
@@ -201,6 +220,8 @@ def manifest_for(assets: dict[str, Image.Image], metadata: dict[str, dict[str, s
                 "source": metadata[name]["source"],
                 "size": list(image.size),
                 "has_alpha": metadata[name]["has_alpha"],
+                "alpha_bbox": alpha_bbox,
+                "corner_alpha": corner_alpha,
                 "bytes": len(data),
                 "sha256": digest,
                 "processing": metadata[name]["processing"],
@@ -307,10 +328,15 @@ def check_assets(generated_manifest: dict, generated_assets: dict[str, Image.Ima
                 len(data),
                 digest,
             )
-        if generated["size"] != current["size"]:
+        if any(
+            current.get(key) != generated.get(key)
+            for key in ("size", "has_alpha", "alpha_bbox", "corner_alpha")
+        ):
             raise stats_error(
-                f"{file_label} 尺寸与重新处理源图生成的新产物不一致："
-                f"expected={current['size']}, actual={generated['size']}",
+                f"{file_label} 元数据与重新处理源图生成的新产物不一致："
+                f"expected(size/alpha/bbox/corners)="
+                f"{[current.get(key) for key in ('size', 'has_alpha', 'alpha_bbox', 'corner_alpha')]}, "
+                f"actual={[generated.get(key) for key in ('size', 'has_alpha', 'alpha_bbox', 'corner_alpha')]}",
                 current["bytes"],
                 current["sha256"],
                 generated["bytes"],
@@ -342,6 +368,16 @@ def check_assets(generated_manifest: dict, generated_assets: dict[str, Image.Ima
 
 
 def require_pillow_version() -> None:
+    if not os.environ.get(SHOP_ASSETS_PYTHON_ENV):
+        raise SystemExit(
+            f"失败：需设置 {SHOP_ASSETS_PYTHON_ENV}，且必须为 Python3.12+ 可执行文件。"
+            f"示例：export {SHOP_ASSETS_PYTHON_ENV}=python3.12"
+        )
+    if sys.version_info < (3, 12):
+        raise SystemExit(
+            f"失败：需 Python3.12+，当前为 {sys.version.split()[0]}。"
+            f"请将 {SHOP_ASSETS_PYTHON_ENV} 指向 Python3.12+ 可执行文件。"
+        )
     try:
         installed = metadata.version("Pillow")
     except metadata.PackageNotFoundError:
@@ -349,7 +385,7 @@ def require_pillow_version() -> None:
     if installed != REQUIRED_PILLOW_VERSION:
         raise SystemExit(
             f"失败：需要 Pillow=={REQUIRED_PILLOW_VERSION}，实际为 {installed}。"
-            "安装：python3.12 -m pip install -r scripts/requirements-shop-assets.txt"
+            f'安装：${SHOP_ASSETS_PYTHON_ENV} -m pip install -r scripts/requirements-shop-assets.txt'
         )
 
 

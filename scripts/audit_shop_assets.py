@@ -5,6 +5,8 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
+import sys
 from importlib import metadata
 from pathlib import Path
 
@@ -15,6 +17,7 @@ from prepare_shop_assets import build_contact_sheet, png_bytes
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_PILLOW_VERSION = "13.0.0"
+SHOP_ASSETS_PYTHON_ENV = "SHOP_ASSETS_PYTHON"
 CONTACT_SHEET_FILE = "docs/QA/shop-assets-2026-11-20/shop-assets-contact-sheet.png"
 
 EXPECTED_ASSETS = {
@@ -36,6 +39,16 @@ def fail(message: str) -> None:
 
 
 def require_pillow_version() -> None:
+    if not os.environ.get(SHOP_ASSETS_PYTHON_ENV):
+        fail(
+            f"需设置 {SHOP_ASSETS_PYTHON_ENV}，且必须为 Python3.12+ 可执行文件。"
+            f"示例：export {SHOP_ASSETS_PYTHON_ENV}=python3.12"
+        )
+    if sys.version_info < (3, 12):
+        fail(
+            f"需 Python3.12+，当前为 {sys.version.split()[0]}。"
+            f"请将 {SHOP_ASSETS_PYTHON_ENV} 指向 Python3.12+ 可执行文件。"
+        )
     try:
         installed = metadata.version("Pillow")
     except metadata.PackageNotFoundError:
@@ -43,7 +56,7 @@ def require_pillow_version() -> None:
     if installed != REQUIRED_PILLOW_VERSION:
         fail(
             f"需要 Pillow=={REQUIRED_PILLOW_VERSION}，实际为 {installed}。"
-            "安装：python3.12 -m pip install -r scripts/requirements-shop-assets.txt"
+            f'安装：${SHOP_ASSETS_PYTHON_ENV} -m pip install -r scripts/requirements-shop-assets.txt'
         )
 
 
@@ -151,6 +164,8 @@ def main() -> None:
                 len(data),
                 digest,
             )
+        if "alpha_bbox" not in entry or "corner_alpha" not in entry:
+            fail(f"{name} 缺少 alpha_bbox 或 corner_alpha")
         if expected_alpha:
             if "A" not in bands:
                 mismatch(
@@ -170,6 +185,22 @@ def main() -> None:
                     len(data),
                     digest,
                 )
+            actual_bbox = alpha.point(lambda value: 255 if value > 8 else 0).getbbox()
+            actual_corners = [
+                alpha.getpixel((0, 0)),
+                alpha.getpixel((width - 1, 0)),
+                alpha.getpixel((0, height - 1)),
+                alpha.getpixel((width - 1, height - 1)),
+            ]
+            expected_bbox = list(actual_bbox) if actual_bbox else None
+            if entry["alpha_bbox"] != expected_bbox or entry["corner_alpha"] != actual_corners:
+                fail(
+                    f"{name} alpha 清单错误：expected_bbox={expected_bbox}, "
+                    f"actual_bbox={entry['alpha_bbox']}；"
+                    f"expected_corners={actual_corners}, "
+                    f"actual_corners={entry['corner_alpha']}；"
+                    f"bytes={len(data)}, sha256={digest}"
+                )
         else:
             if "A" in bands or has_transparency_info:
                 mismatch(
@@ -178,6 +209,12 @@ def main() -> None:
                     entry["sha256"],
                     len(data),
                     digest,
+                )
+            if entry["alpha_bbox"] is not None or entry["corner_alpha"] is not None:
+                fail(
+                    f"{name} 无 alpha 资源必须使用 null alpha_bbox/corner_alpha；"
+                    f"actual_bbox={entry['alpha_bbox']}, "
+                    f"actual_corners={entry['corner_alpha']}"
                 )
         print(f"通过：{name}  {width}x{height}  {len(data)} bytes")
 

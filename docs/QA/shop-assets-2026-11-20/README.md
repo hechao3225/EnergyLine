@@ -19,62 +19,60 @@
 
 ## 复现与自动验收
 
-素材格式与编解码使用固定版本，先确认当前解释器满足门禁：
+需 Python3.12+。先设置并确认 `SHOP_ASSETS_PYTHON`：
 
 ```bash
-python3 -c "import importlib.metadata as m; print(m.version('Pillow'))"
+export SHOP_ASSETS_PYTHON=python3.12
+"$SHOP_ASSETS_PYTHON" --version
 ```
 
-要求输出 `13.0.0`。若版本不符或无法导入，使用 Python 3.12 在仓库外创建临时虚拟环境并安装固定依赖：
+命令不可用时，将 `SHOP_ASSETS_PYTHON` 指向机器上任意可执行的 Python3.12+ 路径。随后创建仓库外虚拟环境：
 
 ```bash
-PYTHON312=$(command -v python3.12)
-"$PYTHON312" -m venv /private/tmp/rotategame-shop-assets
+"$SHOP_ASSETS_PYTHON" -m venv /private/tmp/rotategame-shop-assets
+SHOP_ASSETS_PYTHON=/private/tmp/rotategame-shop-assets/bin/python3
+export SHOP_ASSETS_PYTHON
 /private/tmp/rotategame-shop-assets/bin/python3 -m pip install --disable-pip-version-check -r scripts/requirements-shop-assets.txt
 ```
 
-随后使用该虚拟环境执行验收：
+检查 Pillow 版本并使用同一解释器执行验收：
 
 ```bash
-SHOP_PYTHON=/private/tmp/rotategame-shop-assets/bin/python3
-"$SHOP_PYTHON" scripts/prepare_shop_assets.py --check
-"$SHOP_PYTHON" scripts/audit_shop_assets.py
+"$SHOP_ASSETS_PYTHON" -c "import importlib.metadata as m; print(m.version('Pillow'))"
+"$SHOP_ASSETS_PYTHON" scripts/prepare_shop_assets.py --check
+"$SHOP_ASSETS_PYTHON" scripts/audit_shop_assets.py
 ```
 
-若本机 `python3` 已安装 Pillow 13.0.0，也可直接运行：
-
-```bash
-python3 scripts/prepare_shop_assets.py --check
-python3 scripts/audit_shop_assets.py
-```
-
-两个脚本默认要求 `Pillow==13.0.0`，版本不符时拒绝运行并输出固定依赖安装命令。
+两个脚本要求 `SHOP_ASSETS_PYTHON` 已设置、解释器为 Python3.12+ 且 `Pillow==13.0.0`；任一条件不符都会拒绝运行并输出可操作命令。
 
 `prepare_shop_assets.py --check` 不重写图片；它会在内存中重新处理全部源图，将新产物的 bytes 与 sha256 对照独立清单和 `public/assets/park/*.webp`，并确定性重建 1500×640 QA 联系表后与现有 PNG 比对。源图或联系表变化但未重新生成时，检查会失败并输出对应文件名及 expected/actual bytes、sha256。
 
 `audit_shop_assets.py` 要求 Pillow 识别文件格式为 `WEBP`，扩展名不参与格式判定；10 个资源尺寸均按清单精确匹配。透明资源必须实际具有 A 通道且 alpha 范围为 0–255；`has_alpha=false` 的资源必须是纯 RGB，RGBA 或带 `transparency` 信息时会失败。QA 联系表必须存在、为 1500×640 PNG，且确定性重建后的 bytes/sha256 与现有文件一致。
 
+`shop-assets.json` 和共享素材 manifest 均记录透明资源的 `alpha_bbox` 与 `corner_alpha`；宁静主题预览字段为 `null`。
+
 需要重新生成时运行：
 
 ```bash
-python3 scripts/prepare_shop_assets.py
+"$SHOP_ASSETS_PYTHON" scripts/prepare_shop_assets.py
 ```
 
 联系表：`shop-assets-contact-sheet.png`，透明资源同时放在深浅背景上检查轮廓与边缘。
 
 ## 浏览器验收
 
-使用真实 Chrome 分别以 390×844 和 360×800 打开首页装扮状态与商店：
+使用真实 Chrome 分别以 360×800、390×844 和 430×932 打开首页装扮状态与商店：
 
 1. 首页确认三套星愿礼服、三张开心表情与展台名称完整显示。
 2. 商店补给页确认火花透镜与应急线圈加载。
 3. 商店装扮页确认开心问候、星愿礼服与宁静夜灯预览加载。
 4. 10 个资源均要求 `naturalWidth > 0`，展台名称不得出现横向或纵向裁切。
 
-验收结果：通过。两个视口均覆盖全部 10 个 WebP，所有资源 `naturalWidth > 0`，无破图和页面运行错误。
+验收结果：通过。三个视口均覆盖全部 10 个 WebP，所有资源 `naturalWidth > 0`，无破图和页面运行错误。18cqw 展台与标题、侧栏、伙伴、进度、设施卡和导航均无重叠。
 
 | 视口 | 展台文字 | 字号 | 行高 | 文字边界 |
 | --- | --- | --- | --- | --- |
+| 430×932 | 迎宾门 | 13.76px | 15.824px | 完整位于展台内 |
 | 390×844 | 迎宾门 | 12.48px | 14.352px | 完整位于展台内 |
 | 360×800 | 迎宾门 | 12px | 13.8px | 完整位于展台内 |
 
@@ -86,5 +84,6 @@ python3 scripts/prepare_shop_assets.py
 - `360x800-home.png`
 - `360x800-shop-supply.png`
 - `360x800-shop-cosmetic.png`
+- `430x932-home.png`
 
 类型检查：`pnpm exec tsc --noEmit` 通过。
