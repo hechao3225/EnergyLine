@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T10:31:37.289Z",
+  "generatedAt": "2026-11-20T10:54:25.979Z",
   "base": "http://127.0.0.1:4173",
   "platform": {
     "browser": "Chrome",
@@ -212,7 +212,7 @@
         "width": 360,
         "height": 800
       },
-      "imageCount": 26,
+      "imageCount": 21,
       "layout": {
         "viewport": {
           "width": 360,
@@ -402,7 +402,7 @@
         "width": 390,
         "height": 844
       },
-      "imageCount": 20,
+      "imageCount": 21,
       "layout": {
         "viewport": {
           "width": 390,
@@ -592,7 +592,7 @@
         "width": 430,
         "height": 932
       },
-      "imageCount": 22,
+      "imageCount": 21,
       "layout": {
         "viewport": {
           "width": 430,

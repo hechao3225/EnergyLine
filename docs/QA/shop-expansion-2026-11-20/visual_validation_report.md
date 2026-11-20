@@ -10,12 +10,12 @@
 
 | 项目 | 值 |
 | --- | --- |
-| 源码 SHA | `635d045e8902e983d68083d25108c71bbd11fbac` |
+| 最终代码提交 SHA | `341c0f24f53061c4d83521795b174d0f88997bf3` |
 | 构建 | Vite 8.3.6 生产构建 |
 | 浏览器 | Chrome，Playwright headless |
 | 截图倍率 | 1，原尺寸输出 |
 | 素材运行时 | Python 3.12，Pillow 13.0.0 |
-| 联系表 | 1500×4200 JPEG，SHA-256 `de4708eb338e199806bce04400e62448f2abb4fe88868cd47eac32db2229ae3c` |
+| 联系表 | 1500×4200 JPEG，SHA-256 `abd12db7bc551f08e1b1c48f3809f0cc64c6452581d804ce673f23c9fc4e540a` |
 | 结构化证据 | `browser-results.json` |
 
 生产构建命令 `pnpm build` 通过。构建仅报告主 JS chunk 超过 500 kB 的非阻塞警告，不影响页面加载与交互。
@@ -64,10 +64,11 @@
 - 无尽挑战顶部“提示”按钮为 disabled，背包中的“使用提示灯泡”同时禁用。
 - 主线提示库存耗尽后，顶部“提示”按钮禁用；背包仍可通过“前往商店”进入补给页。
 - 工坊与实验场使用同一主线限定判断；自动路径覆盖无尽挑战，代码条件覆盖 `story` 以外的全部玩法。
+- 重置流程兼容两套确认 UI：clean HEAD 的三次重置均实际记录为“原生 window.confirm”；当前工作区的三次重置均实际记录为“游戏内确认弹窗”。
 
 ## 素材真实性
 
-10 个商店资源与 `shop-assets.json`、主 manifest 的 name/file/source/size/bytes/sha256/alpha 元数据一致。透明资源使用 `alpha > 28` 计算 bbox；宁静主题预览为 RGB，不按透明资源处理。
+10 个商店资源与 `shop-assets.json`、主 manifest 的 name/file/source/size/bytes/sha256/alpha/processing 元数据一致。透明资源使用 `alpha > 28` 计算 bbox；宁静主题预览的 `has_alpha=false`，不按透明资源处理。`mood-joy` 的三个组合来源均记录为完整仓库相对路径。
 
 | 资源 | 尺寸 | 通道 | alpha bbox |
 | --- | --- | --- | --- |
@@ -96,13 +97,15 @@
 | `tsx scripts/test_hint_engine.ts` | 通过 |
 | `scripts/prepare_shop_assets.py --check` | 10 个素材与确定性产物一致 |
 | `scripts/audit_shop_assets.py` | 10 个素材、主 manifest 与联系表通过 |
-| `pnpm test` | 全量通过，含用户工作区 `audit-distinct` |
+| clean HEAD `pnpm test` | 通过；不含用户工作区 `audit-distinct` |
+| 当前工作区 `pnpm test` | 通过；包含用户未提交 `audit-distinct` |
 | `pnpm build` | 通过 |
-| `test_shop_supplies.ts` | 9 项通过 |
-| `test_shop_home.ts` | 3 视口、30 张截图通过 |
-| `test_park_ui.ts` | 14 项真实玩家路径通过 |
+| clean HEAD `test_shop_supplies.ts` | 9 项通过 |
+| clean HEAD `test_shop_home.ts` | 3 视口、30 张截图通过；三次走原生 confirm |
+| clean HEAD `test_park_ui.ts` | 13 项真实玩家路径通过 |
+| `audit_park_delivery.py` | 188 个资产、53 张截图、3 组设计稿对照通过 |
 
-当前工作区保留用户未提交的 manifest 彩度差量和大量资源改动。本轮素材审计使用索引中的主 manifest metadata 与当前图片文件组成的临时只读根目录，验证的是即将提交的 manifest 版本；工作区用户 manifest 未被改写或提交。
+完整 clean HEAD 验证从 `git archive 341c0f24f53061c4d83521795b174d0f88997bf3` 导出到仓库外 `/private/tmp`，软链接复用 `node_modules`。当前工作区保留用户未提交的 manifest 彩度差量和大量资源改动；主 manifest 通过专用索引提交，用户 chroma 差量未进入提交。
 
 ## 未覆盖范围
 

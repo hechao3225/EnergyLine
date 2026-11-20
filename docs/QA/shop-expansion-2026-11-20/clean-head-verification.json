@@ -1,0 +1,18 @@
+{
+  "sourceCommit": "341c0f24f53061c4d83521795b174d0f88997bf3",
+  "archiveMethod": "git archive HEAD | tar -x -C /private/tmp",
+  "dependencyStrategy": "symbolic link to workspace node_modules",
+  "commands": {
+    "tsc": "通过",
+    "pnpm test": "通过；clean HEAD 不含用户工作区 audit-distinct",
+    "pnpm build": "通过",
+    "test_shop_home.ts": "通过；3 个视口、30 张截图；三次重置走原生 window.confirm",
+    "test_shop_supplies.ts": "通过；9 项",
+    "test_park_ui.ts": "通过；13 项",
+    "audit_park_delivery.py": "通过；188 个资产、53 张截图、3 组设计稿对照"
+  },
+  "currentWorkspace": {
+    "pnpm test": "通过；包含用户未提交 audit-distinct",
+    "test_shop_home.ts": "通过；三次重置走游戏内确认弹窗"
+  }
+}
