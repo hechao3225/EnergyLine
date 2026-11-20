@@ -1,0 +1,4 @@
+const {chromium}=require('C:/Users/Admin/.codex/tools/android-mobile/node_modules/playwright');
+const path=require('node:path');const fs=require('node:fs');
+(async()=>{const browser=await chromium.launch({headless:true,channel:"chrome"});const page=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:1});page.on('pageerror',e=>console.log('页面错误',e.message));await page.goto('http://localhost:3000');await page.evaluate(()=>document.fonts.ready);await page.screenshot({path:'docs/QA/ui2-2026-11-10/home-first.png'});await page.getByRole('button',{name:'开始挑战',exact:true}).click();await page.screenshot({path:'docs/QA/ui2-2026-11-10/play-first.png'});console.log(await page.locator('[data-tile-id]').evaluateAll(els=>els.map(e=>({id:e.dataset.tileId,type:e.dataset.type,rotation:e.dataset.rotation,powered:e.dataset.powered}))));await browser.close()})().catch(e=>{console.error(e);process.exit(1)});
+

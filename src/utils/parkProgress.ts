@@ -24,6 +24,7 @@ export const GEM_TO_COIN = 10;
 
 export interface ParkProgress {
   coins: number;
+  gems?: number;
   hints: number;
   lenses: number;
   rewindTokens: number;
@@ -136,7 +137,8 @@ export function sanitizeProgress(raw: unknown): ParkProgress {
     // 钻石已并入金币：老存档按 10 钻 = 100 币折算，不丢价值
     coins:
       asCount(source.coins, DEFAULT_PROGRESS.coins) +
-      asCount(source.gems, 0) * GEM_TO_COIN,
+      (source.coins === undefined ? asCount(source.gems, 0) * GEM_TO_COIN : 0),
+    gems: source.gems !== undefined ? asCount(source.gems, 0) : undefined,
     hints: asCount(source.hints, DEFAULT_PROGRESS.hints),
     lenses: asCount(source.lenses, DEFAULT_PROGRESS.lenses),
     rewindTokens: asCount(
@@ -248,11 +250,13 @@ export function completeParkLevel(
   levelId: number,
   date: string,
   coins = FIRST_CLEAR_COINS,
+  gems = 10,
 ): ParkProgress {
   const firstReward = !progress.rewardedLevels.includes(levelId);
   return {
     ...progress,
     coins: progress.coins + (firstReward ? coins : 0),
+    gems: (progress.gems ?? 0) + (firstReward ? gems : 0),
     rewardedLevels: firstReward
       ? [...progress.rewardedLevels, levelId]
       : progress.rewardedLevels,

@@ -16,6 +16,7 @@ import { MAX_STARS, getParSteps, getStarThresholds, getStarsForLights, getStarsF
 import { describeHint, findHint, findHintSequence, supportsHintEngine, type HintMove } from "../utils/hint-engine";
 import { CENTER_DISTRICTS, getCollectionEntry, getLevelContent, WORLD } from "../content";
 import { WorldMapModal } from "./WorldMapModal";
+import { ChapterMapView } from "./ChapterMapView";
 import {
   ALL_ACHIEVEMENTS,
   loadUnlockedAchievements,
@@ -101,7 +102,7 @@ interface Props {
   /** 达标关：提前结算（拿当前星数） */
   onSettle?: () => void;
   gameMode: "story" | "endless" | "editor" | "lab";
-  victoryReward: { stars: number; coins: number };
+  victoryReward: { stars: number; coins: number; gems?: number };
 }
 const TITLES: Record<Exclude<Modal, "none">, string> = {
   levels: "乐园关卡",
@@ -175,7 +176,7 @@ export function CandyThemeShell(p: Props) {
   const onParPace = currentStars >= MAX_STARS;
   const canUndo = p.historyIndex > 0 && p.rewinds > 0;
   const today = localDate();
-  const activeModal = p.levelSelectOpen ? "levels" : modal;
+  const activeModal = modal;
   const close = () => {
     if (modal === "story") localStorage.setItem("honeycomb_story_seen_v1", "1");
     if (modal === "onboarding") localStorage.setItem("honeycomb_onboarding_v1", "1");
@@ -336,7 +337,14 @@ export function CandyThemeShell(p: Props) {
   const exhibit = exhibitId == null ? null : getCollectionEntry(exhibitId);
 
   const navigation: { icon: IconName; text: string; action: () => void }[] = [
-    { icon: "castle", text: "乐园", action: p.onBackHome },
+    {
+      icon: "castle",
+      text: "乐园",
+      action: () => {
+        p.onCloseLevels();
+        p.onBackHome();
+      },
+    },
     { icon: "map", text: "关卡", action: p.onOpenLevels },
     { icon: "star", text: "任务", action: () => open("tasks") },
     { icon: "bag", text: "背包", action: () => open("bag") },
@@ -345,7 +353,37 @@ export function CandyThemeShell(p: Props) {
   return (
     <div className="park-shell">
       <div className="park-stage">
-        {p.screen === "home" && (
+        {p.levelSelectOpen ? (
+          <main className="park-levels-screen" aria-label="关卡路线">
+            <ChapterMapView
+              levels={p.levels}
+              currentLevelId={p.level.id}
+              clearedLevels={p.clearedLevels}
+              bestSteps={p.bestSteps}
+              bestLights={p.bestLights}
+              onSelectLevel={select}
+              onBack={() => {
+                p.onCloseLevels();
+                p.onBackHome();
+              }}
+              initialChapter={chapter}
+            />
+            <nav className="park-nav" aria-label="乐园导航">
+              {navigation.map((item, i) => (
+                <button
+                  key={item.text}
+                  className={i === 1 ? "is-active" : ""}
+                  onClick={item.action}
+                >
+                  <Icon name={item.icon} />
+                  <span>{item.text}</span>
+                </button>
+              ))}
+            </nav>
+          </main>
+        ) : (
+          <>
+            {p.screen === "home" && (
           <main className="park-home" aria-label="能量管道乐园首页">
             <header className="park-resource-bar">
               <button
@@ -772,11 +810,16 @@ export function CandyThemeShell(p: Props) {
 
         {p.screen === "victory" && (
           <main className="park-victory" aria-label="设施修复结算">
-            <h1 className="park-victory-title">设施修复！</h1>
+            <h1 className="park-victory-title" aria-label="设施复苏！">
+              <span className="sr-only">设施复苏！</span>
+            </h1>
             <div className="park-victory-showcase">
               <div className="park-sunrays" />
-              <Art name="island" className="park-victory-island" />
-              <Art name={collection ? getExhibitArt(collection) : "carousel"} className="park-victory-carousel" />
+              <div className="park-sparkles-layer" />
+              <Art
+                name={collection ? getExhibitArt(collection) : "carousel"}
+                className="park-victory-carousel"
+              />
               <div className="park-victory-friends">
                 <Art name="sheep-cheer" />
                 <Art name="spirit-cheer" />
@@ -784,63 +827,80 @@ export function CandyThemeShell(p: Props) {
               </div>
             </div>
             <section className="park-victory-panel">
-              <h2 className="park-red-sign">{collection?.name ?? "设施"} · 修复完成</h2>
+              <h2
+                className="park-red-sign"
+                aria-label={`${collection?.name ?? "旋转木马"} · 成功修复`}
+              >
+                <span>{collection?.name ?? "旋转木马"} · 成功修复</span>
+              </h2>
               <div className="park-repair-detail">
-                <ul>
-                  <li>连接能量管道</li>
-                  <li>为{collection?.name ?? "设施"}供能</li>
-                  <li>设施重新运转</li>
+                <ul className="park-repair-checklist">
+                  <li>
+                    <img src="/assets/park/icon-check.webp" className="park-check-icon" alt="" />
+                    <span>连接能量管道</span>
+                  </li>
+                  <li>
+                    <img src="/assets/park/icon-check.webp" className="park-check-icon" alt="" />
+                    <span>为{collection?.name ?? "旋转木马"}供能</span>
+                  </li>
+                  <li>
+                    <img src="/assets/park/icon-check.webp" className="park-check-icon" alt="" />
+                    <span>设施重新运转</span>
+                  </li>
                 </ul>
                 <div className="park-before-after">
-                  <Art name={collection ? getExhibitArt(collection) : "carousel"} className="sleeping" />
-                  <span>➜</span>
-                  <Art name={collection ? getExhibitArt(collection) : "carousel"} />
+                  <div className="park-compare-stage is-dormant">
+                    <Art
+                      name={collection ? getExhibitArt(collection) : "carousel"}
+                      className="sleeping"
+                    />
+                  </div>
+                  <img
+                    src="/assets/park/arrow-transition.webp"
+                    className="park-compare-arrow"
+                    alt="➜"
+                  />
+                  <div className="park-compare-stage is-active">
+                    <Art
+                      name={collection ? getExhibitArt(collection) : "carousel"}
+                    />
+                  </div>
                 </div>
               </div>
-              <h3 className="park-reward-title">
-                {p.gameMode !== "story"
-                  ? "挑战完成"
-                  : hasNewReward
-                    ? "修复奖励"
-                    : "本次无新增奖励"}
-              </h3>
-              {hasNewReward ? (
-                <div className="park-rewards">
-                  {(
-                    [
-                      { icon: "star", value: reward.stars },
-                      { icon: "gem", value: reward.coins },
-                    ] as const
-                  ).map((item) => (
-                    <div key={item.icon}>
-                      <Icon name={item.icon} />
-                      <b>+{item.value}</b>
-                    </div>
-                  ))}
+              <h3 className="park-reward-title">通关奖励</h3>
+              <div className="park-rewards">
+                <div className="park-reward-slot">
+                  <Icon name="star" className="park-reward-icon" />
+                  <b>+{reward.stars}</b>
                 </div>
-              ) : (
-                <p className="park-reward-empty">
-                  {p.gameMode === "story"
-                    ? "首通奖励此前已领取，本次成绩仍会记入最佳步数"
-                    : "试玩不计奖励，成绩仅用于本次挑战"}
-                </p>
-              )}
+                <div className="park-reward-slot">
+                  <Icon name="coin" className="park-reward-icon" />
+                  <b>+{reward.coins}</b>
+                </div>
+                <div className="park-reward-slot">
+                  <Icon name="gem" className="park-reward-icon" />
+                  <b>+{reward.gems ?? 0}</b>
+                </div>
+              </div>
               <div className="park-result-score">
                 <Stars value={currentStars} />
                 <span>
                   已用 {p.stepsUsed} 步
                   {p.gameMode === "story"
-                    ? ` · 最佳 ${p.bestSteps[p.level.id] ?? 0} 步`
+                    ? ` · 最佳 ${p.bestSteps[p.level.id] ?? p.stepsUsed} 步`
                     : ""}
                 </span>
               </div>
             </section>
             <div className="park-victory-actions">
-              <ParkButton purple onClick={p.onBackHome}>
-                <Icon name="castle" />
+              <ParkButton purple onClick={p.onBackHome} className="park-action-back">
+                <Icon name="home" />
                 返回乐园
               </ParkButton>
-              <ParkButton onClick={lastLevel ? p.onOpenLevels : p.onNextLevel}>
+              <ParkButton
+                onClick={lastLevel ? p.onOpenLevels : p.onNextLevel}
+                className="park-action-next"
+              >
                 {lastLevel
                   ? "全部关卡"
                   : p.gameMode === "editor"
@@ -849,13 +909,15 @@ export function CandyThemeShell(p: Props) {
                 <Icon name="play" />
               </ParkButton>
             </div>
-            <button className="park-history-link" onClick={p.onRestart}>
+            <button className="park-history-link park-replay-link" onClick={p.onRestart}>
               {currentStars >= MAX_STARS
                 ? "再玩一次，刷新自己的步数纪录"
                 : "再玩一次，挑战更高星级"}
             </button>
           </main>
         )}
+      </>
+    )}
 
         {activeModal !== "none" && (
           <div

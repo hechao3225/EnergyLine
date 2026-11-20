@@ -123,6 +123,7 @@ export default function App() {
   const [victoryReward, setVictoryReward] = useState({
     stars: 0,
     coins: 0,
+    gems: 0,
   });
   const winProcessed = useRef(false);
   const winTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -191,13 +192,15 @@ export default function App() {
         localStorage.setItem(BEST_LIGHTS_KEY, JSON.stringify(nextLights));
       }
       const clearCoins = level.tier === "hell" ? HELL_CLEAR_COINS : FIRST_CLEAR_COINS;
+      const clearGems = level.tier === "hell" ? 15 : 10;
       setVictoryReward({
         stars: Math.max(0, earnedStars - previousStars),
         coins: firstReward ? clearCoins : 0,
+        gems: firstReward ? clearGems : 0,
       });
       localStorage.setItem(
         PARK_STORAGE_KEY,
-        JSON.stringify(completeParkLevel(progress, level.id, localDate(), clearCoins)),
+        JSON.stringify(completeParkLevel(progress, level.id, localDate(), clearCoins, clearGems)),
       );
       const cleared = clearedLevels.includes(level.id)
         ? clearedLevels
@@ -210,7 +213,7 @@ export default function App() {
       localStorage.setItem("honeycomb_best_steps", JSON.stringify(best));
       setClearedLevels(cleared);
       setBestSteps(best);
-    } else setVictoryReward({ stars: 0, coins: 0 });
+    } else setVictoryReward({ stars: 0, coins: 0, gems: 0 });
     if (mode === "endless") endless.current.streak += 1;
     if (mode !== "editor" && mode !== "lab")
       checkVictoryAchievements({
