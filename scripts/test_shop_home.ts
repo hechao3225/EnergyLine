@@ -137,6 +137,43 @@ async function closeModal(page: Page) {
   await page.locator(".park-modal .park-close").click();
 }
 
+async function resetAttempt(page: Page) {
+  let markDialogSeen: () => void = () => {};
+  const dialogSeen = new Promise<boolean>((resolve) => {
+    markDialogSeen = () => resolve(true);
+  });
+  const acceptDialog = async (dialog: {
+    accept: () => Promise<void>;
+  }) => {
+    markDialogSeen();
+    await dialog.accept();
+  };
+  page.once("dialog", acceptDialog);
+  await page.getByRole("button", { name: "重置", exact: true }).click();
+
+  const sawDialog = await Promise.race([
+    dialogSeen,
+    page.waitForTimeout(750).then(() => false),
+  ]);
+  console.log(
+    sawDialog
+      ? "重置确认：原生 window.confirm"
+      : "重置确认：游戏内确认弹窗",
+  );
+  if (!sawDialog) {
+    page.off("dialog", acceptDialog);
+    const confirm = page.getByRole("button", {
+      name: "确定重置",
+      exact: true,
+    });
+    await expect(confirm).toBeVisible({ timeout: 2500 });
+    await confirm.click();
+  }
+  await expect(page.getByRole("button", { name: /操作足迹/ })).toContainText(
+    "操作足迹 · 0 步",
+  );
+}
+
 async function openShop(page: Page) {
   await page
     .getByRole("navigation")
@@ -413,8 +450,7 @@ async function runViewport(browser: Browser, viewport: (typeof viewports)[number
   await capture(page, viewport.label, "history-rewind");
   await closeModal(page);
 
-  await page.getByRole("button", { name: "重置", exact: true }).click();
-  await page.getByRole("button", { name: "确定重置", exact: true }).click();
+  await resetAttempt(page);
   const budget = Number(
     await page.getByTestId("remaining-steps").textContent(),
   );

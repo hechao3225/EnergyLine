@@ -205,7 +205,7 @@
     {
       "name": "mood-joy",
       "file": "public/assets/park/mood-joy.webp",
-      "source": "assets/energy_park_art_pack_v1/02_characters/expressions/xingya_happy.png + yunrong_happy.png + boling_happy.png",
+      "source": "assets/energy_park_art_pack_v1/02_characters/expressions/xingya_happy.png + assets/energy_park_art_pack_v1/02_characters/expressions/yunrong_happy.png + assets/energy_park_art_pack_v1/02_characters/expressions/boling_happy.png",
       "size": [
         512,
         256

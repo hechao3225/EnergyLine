@@ -55,7 +55,7 @@ for item in manifest:
             assert all(alpha.getpixel(p) == 0 for p in [(0, 0), (image.width-1, 0), (0, image.height-1), (image.width-1, image.height-1)]), f'角点不透明：{file.name}'
     sources = resolve_source(item['source'])
     if shop_item:
-        for key in ('name', 'file', 'source', 'size', 'alpha_bbox', 'corner_alpha', 'sha256', 'bytes'):
+        for key in ('name', 'file', 'source', 'size', 'alpha_bbox', 'corner_alpha', 'sha256', 'bytes', 'processing'):
             assert item.get(key) == shop_item.get(key), f'商店条目与独立清单不一致：{item["name"]} {key}'
     assets.append({'name': item['name'], 'size': item['size'], 'sha256': digest,
                    'has_alpha': has_alpha, 'sources': [str(path.relative_to(ROOT)) for path in sources]})
