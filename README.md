@@ -76,6 +76,7 @@ python scripts/audit_park_delivery.py
 - 补充图标与牌匾：`python scripts/prepare_park_details.py`，使用 rembg 去底并输出深浅底审查图；完整原件保存在仓库。
 - 字体：Noto Sans SC，采用 SIL Open Font License 1.1；许可位于 `src/assets/park-font-LICENSE.txt` 和发行目录的 `assets/park/font-license.txt`。
 - 字体子集：`python scripts/prepare_park_font.py --source <本地NotoSansSC字体文件>`；省略 source 时从 Google Fonts 官方仓库读取。
+- 主角角色设定与 IP 形象规范：`docs/角色IP/能量管道乐园-主角角色设定集.md`（星芽 / 波铃 / 云绒）。
 
 ## Android
 

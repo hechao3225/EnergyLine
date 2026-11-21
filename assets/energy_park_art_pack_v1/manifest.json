@@ -1,8 +1,8 @@
 {
   "project": "Energy Pipeline Amusement Park",
-  "version": "1.0",
+  "version": "1.1",
   "concept_status": "prototype ready, requires final polish",
-  "asset_count": 100,
+  "asset_count": 106,
   "assets": [
     {
       "file": "02_characters/xingya_main.png",
@@ -38,90 +38,150 @@
       "file": "02_characters/expressions/xingya_happy.png",
       "size": [
         144,
-        100
+        137
       ],
       "category": "expression",
-      "note": "小尺寸表情头像，供提示气泡或弹窗使用",
+      "note": "2026-11-21 重新绘制的小尺寸表情头像；供提示气泡或弹窗使用",
       "alpha": true
     },
     {
       "file": "02_characters/expressions/xingya_wink.png",
       "size": [
         144,
-        119
+        144
       ],
       "category": "expression",
-      "note": "小尺寸表情头像，供提示气泡或弹窗使用",
+      "note": "2026-11-21 重新绘制的小尺寸表情头像；供提示气泡或弹窗使用",
       "alpha": true
     },
     {
       "file": "02_characters/expressions/xingya_sleep.png",
       "size": [
         144,
-        123
+        136
       ],
       "category": "expression",
-      "note": "小尺寸表情头像，供提示气泡或弹窗使用",
+      "note": "2026-11-21 重新绘制的小尺寸表情头像；供提示气泡或弹窗使用",
+      "alpha": true
+    },
+    {
+      "file": "02_characters/expressions/xingya_surprised.png",
+      "size": [
+        144,
+        113
+      ],
+      "category": "expression",
+      "note": "2026-11-21 重新绘制的小尺寸表情头像；供提示气泡或弹窗使用",
+      "alpha": true
+    },
+    {
+      "file": "02_characters/expressions/xingya_sparkle.png",
+      "size": [
+        144,
+        137
+      ],
+      "category": "expression",
+      "note": "2026-11-21 重新绘制的小尺寸表情头像；供提示气泡或弹窗使用",
       "alpha": true
     },
     {
       "file": "02_characters/expressions/boling_happy.png",
       "size": [
         144,
-        136
+        146
       ],
       "category": "expression",
-      "note": "小尺寸表情头像，供提示气泡或弹窗使用",
+      "note": "2026-11-21 重新绘制的小尺寸表情头像；供提示气泡或弹窗使用",
       "alpha": true
     },
     {
       "file": "02_characters/expressions/boling_wink.png",
       "size": [
         144,
-        133
+        147
       ],
       "category": "expression",
-      "note": "小尺寸表情头像，供提示气泡或弹窗使用",
+      "note": "2026-11-21 重新绘制的小尺寸表情头像；供提示气泡或弹窗使用",
       "alpha": true
     },
     {
       "file": "02_characters/expressions/boling_sleep.png",
       "size": [
         144,
-        130
+        145
       ],
       "category": "expression",
-      "note": "小尺寸表情头像，供提示气泡或弹窗使用",
+      "note": "2026-11-21 重新绘制的小尺寸表情头像；供提示气泡或弹窗使用",
+      "alpha": true
+    },
+    {
+      "file": "02_characters/expressions/boling_surprised.png",
+      "size": [
+        144,
+        135
+      ],
+      "category": "expression",
+      "note": "2026-11-21 重新绘制的小尺寸表情头像；供提示气泡或弹窗使用",
+      "alpha": true
+    },
+    {
+      "file": "02_characters/expressions/boling_sparkle.png",
+      "size": [
+        144,
+        146
+      ],
+      "category": "expression",
+      "note": "2026-11-21 重新绘制的小尺寸表情头像；供提示气泡或弹窗使用",
       "alpha": true
     },
     {
       "file": "02_characters/expressions/yunrong_happy.png",
       "size": [
         144,
-        132
+        182
       ],
       "category": "expression",
-      "note": "小尺寸表情头像，供提示气泡或弹窗使用",
+      "note": "2026-11-21 重新绘制的小尺寸表情头像；供提示气泡或弹窗使用",
       "alpha": true
     },
     {
       "file": "02_characters/expressions/yunrong_wink.png",
       "size": [
         144,
-        153
+        183
       ],
       "category": "expression",
-      "note": "小尺寸表情头像，供提示气泡或弹窗使用",
+      "note": "2026-11-21 重新绘制的小尺寸表情头像；供提示气泡或弹窗使用",
       "alpha": true
     },
     {
       "file": "02_characters/expressions/yunrong_sleep.png",
       "size": [
         144,
-        153
+        193
       ],
       "category": "expression",
-      "note": "小尺寸表情头像，供提示气泡或弹窗使用",
+      "note": "2026-11-21 重新绘制的小尺寸表情头像；供提示气泡或弹窗使用",
+      "alpha": true
+    },
+    {
+      "file": "02_characters/expressions/yunrong_surprised.png",
+      "size": [
+        144,
+        181
+      ],
+      "category": "expression",
+      "note": "2026-11-21 重新绘制的小尺寸表情头像；供提示气泡或弹窗使用",
+      "alpha": true
+    },
+    {
+      "file": "02_characters/expressions/yunrong_sparkle.png",
+      "size": [
+        144,
+        190
+      ],
+      "category": "expression",
+      "note": "2026-11-21 重新绘制的小尺寸表情头像；供提示气泡或弹窗使用",
       "alpha": true
     },
     {

@@ -24,7 +24,8 @@
     "sha256": "d74f13c040cd73166554a7174c70b613ee076291231086b6bae3f03cc35ecc60",
     "bytes": 120106,
     "route": "image_gen built-in",
-    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained"
+    "processing": "alpha-aware atlas slicing; alpha <=4 cleared; original retained",
+    "has_alpha": false
   },
   {
     "name": "sheep",
@@ -5641,13 +5642,13 @@
     "rotation_ccw": 0,
     "size": [
       144,
-      100
+      137
     ],
     "alpha_bbox": [
-      11,
-      9,
-      137,
-      89
+      1,
+      1,
+      143,
+      136
     ],
     "corner_alpha": [
       0,
@@ -5655,10 +5656,10 @@
       0,
       0
     ],
-    "sha256": "2799fd8dd244d78e08a4a263178fd63a52a988f3f405bdcdd36ec1858753143d",
-    "bytes": 7234,
+    "sha256": "b65afdb96a365c48d8a0c8eed056c3486c6f6d31b650a730ec8432ebd79cf75a",
+    "bytes": 12918,
     "route": "Pillow 13.0.0 shop pipeline",
-    "processing": "沿用现有开心表情透明画布；保持原尺寸转 WebP"
+    "processing": "2026-11-21 重新绘制表情；保持原画布尺寸转 WebP"
   },
   {
     "name": "mood-rabbit-happy",
@@ -5668,13 +5669,13 @@
     "rotation_ccw": 0,
     "size": [
       144,
-      132
+      182
     ],
     "alpha_bbox": [
-      13,
-      6,
-      131,
-      126
+      1,
+      1,
+      143,
+      181
     ],
     "corner_alpha": [
       0,
@@ -5682,10 +5683,10 @@
       0,
       0
     ],
-    "sha256": "981ebed42878839dbcea7988f3f7383a84c8f1247ce0d46cc46f936ff52034cd",
-    "bytes": 6850,
+    "sha256": "7fbd3c88799ff5e5bce5a31963892824132c6d27914d3d63e3b4865269e55f15",
+    "bytes": 12758,
     "route": "Pillow 13.0.0 shop pipeline",
-    "processing": "沿用现有开心表情透明画布；保持原尺寸转 WebP"
+    "processing": "2026-11-21 重新绘制表情；保持原画布尺寸转 WebP"
   },
   {
     "name": "mood-spirit-happy",
@@ -5695,13 +5696,13 @@
     "rotation_ccw": 0,
     "size": [
       144,
-      136
+      146
     ],
     "alpha_bbox": [
-      15,
-      15,
-      129,
-      121
+      1,
+      1,
+      143,
+      145
     ],
     "corner_alpha": [
       0,
@@ -5709,10 +5710,10 @@
       0,
       0
     ],
-    "sha256": "bd1eb5c1799170a19f3f45c437ab674bee5e353890972e7e4fb91c6edbb4726c",
-    "bytes": 6516,
+    "sha256": "9e7ac05feb883d62a0c3dabfc167626196a522a787bc1902c704ca7783c812ac",
+    "bytes": 9792,
     "route": "Pillow 13.0.0 shop pipeline",
-    "processing": "沿用现有开心表情透明画布；保持原尺寸转 WebP"
+    "processing": "2026-11-21 重新绘制表情；保持原画布尺寸转 WebP"
   },
   {
     "name": "mood-joy",
@@ -5725,10 +5726,10 @@
       256
     ],
     "alpha_bbox": [
-      24,
-      68,
-      482,
-      188
+      14,
+      38,
+      496,
+      218
     ],
     "corner_alpha": [
       0,
@@ -5736,10 +5737,10 @@
       0,
       0
     ],
-    "sha256": "3db0cc277619899c56292470e5573f51965a960f1dea0f8e2687ca8ec526068b",
-    "bytes": 20122,
+    "sha256": "c393c9d1b46b47b1d0d9533128d90d4f60fd54764aaf2f625c61d0664460f77e",
+    "bytes": 34354,
     "route": "Pillow 13.0.0 shop pipeline",
-    "processing": "三张开心表情按原始画布尺寸横向居中合成 512x256 透明画布"
+    "processing": "2026-11-21 重新绘制表情；保持原画布尺寸转 WebP"
   },
   {
     "name": "theme-calm-preview",
@@ -5756,7 +5757,8 @@
     "sha256": "c394c59c078e5b41da2880c8eb56ea69d680617b23d9aeb9da9c22bf216db673",
     "bytes": 70348,
     "route": "Pillow 13.0.0 shop pipeline",
-    "processing": "真实宁静主题首页截图裁切 (0,270,780,1050) 后缩放为 512x512 RGB"
+    "processing": "真实宁静主题首页截图裁切 (0,270,780,1050) 后缩放为 512x512 RGB",
+    "has_alpha": false
   },
   {
     "name": "map-path-background",
@@ -5788,7 +5790,8 @@
     "sha256": "11a91fc7099ecef650e58469510b6d65e4f0411db922d4a9772b26d5f8e4ed21",
     "bytes": 290788,
     "route": "image-generator subagent",
-    "processing": "u2netp background removal, alpha trim, Lanczos scale"
+    "processing": "u2netp background removal, alpha trim, Lanczos scale",
+    "has_alpha": false
   },
   {
     "name": "map-node-cleared",
@@ -6045,5 +6048,223 @@
     "bytes": 69584,
     "route": "image-generator subagent",
     "processing": "u2netp background removal, alpha trim, Lanczos scale"
+  },
+  {
+    "name": "rabbit-cheer",
+    "file": "public/assets/park/rabbit-cheer.webp",
+    "size": [
+      370,
+      400
+    ],
+    "has_alpha": true,
+    "alpha_bbox": [
+      1,
+      1,
+      369,
+      399
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 29462,
+    "sha256": "9b1a2ffc57ccb97049f405bad53ec1c1b634a36fcbf5835b86457efb24ec0938",
+    "source": "character-ip/yunrong_cheer_raw.png",
+    "route": "images_api gpt-image-2.5",
+    "processing": "边界近白泛洪去底；透明裁边；最长边 400px 等比缩放；WebP 92"
+  },
+  {
+    "name": "avatar-xingya",
+    "file": "public/assets/park/avatar-xingya.webp",
+    "size": [
+      48,
+      48
+    ],
+    "has_alpha": true,
+    "alpha_bbox": [
+      0,
+      0,
+      48,
+      48
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 2076,
+    "sha256": "731eca8f9fc0867cfc4572f43fbdc365f2b9970138e6444bb8166e78d937eac4",
+    "source": "docs/角色IP/素材/主角三人组-角色设计图.jpg",
+    "crop": [
+      1215,
+      655,
+      1302,
+      731
+    ],
+    "route": "design-sheet crop",
+    "processing": "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
+  },
+  {
+    "name": "avatar-xingya@2x",
+    "file": "public/assets/park/avatar-xingya@2x.webp",
+    "size": [
+      96,
+      96
+    ],
+    "has_alpha": true,
+    "alpha_bbox": [
+      0,
+      0,
+      96,
+      96
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 5250,
+    "sha256": "4255904a9c92cc732fdcb228a076c974ba152eddad6502c5352ed7f5037e694b",
+    "source": "docs/角色IP/素材/主角三人组-角色设计图.jpg",
+    "crop": [
+      1215,
+      655,
+      1302,
+      731
+    ],
+    "route": "design-sheet crop",
+    "processing": "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
+  },
+  {
+    "name": "avatar-boling",
+    "file": "public/assets/park/avatar-boling.webp",
+    "size": [
+      48,
+      48
+    ],
+    "has_alpha": true,
+    "alpha_bbox": [
+      0,
+      0,
+      48,
+      48
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 1914,
+    "sha256": "751a41c534f29e8342fc36557afd350a6f5d26d228c69c3dbf0938d4b66a1e5c",
+    "source": "docs/角色IP/素材/主角三人组-角色设计图.jpg",
+    "crop": [
+      1320,
+      654,
+      1407,
+      731
+    ],
+    "route": "design-sheet crop",
+    "processing": "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
+  },
+  {
+    "name": "avatar-boling@2x",
+    "file": "public/assets/park/avatar-boling@2x.webp",
+    "size": [
+      96,
+      96
+    ],
+    "has_alpha": true,
+    "alpha_bbox": [
+      0,
+      0,
+      96,
+      96
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 4652,
+    "sha256": "e6b45b22b554a41dfbb6ad023870b56558de8ce36a18593e3ffda9c4c17fc245",
+    "source": "docs/角色IP/素材/主角三人组-角色设计图.jpg",
+    "crop": [
+      1320,
+      654,
+      1407,
+      731
+    ],
+    "route": "design-sheet crop",
+    "processing": "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
+  },
+  {
+    "name": "avatar-yunrong",
+    "file": "public/assets/park/avatar-yunrong.webp",
+    "size": [
+      48,
+      48
+    ],
+    "has_alpha": true,
+    "alpha_bbox": [
+      0,
+      0,
+      48,
+      48
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 1758,
+    "sha256": "1119f9af50742c1aa4378178052e8b0dc8669e93a459b1e2f5a04691f9e859a4",
+    "source": "docs/角色IP/素材/主角三人组-角色设计图.jpg",
+    "crop": [
+      1427,
+      654,
+      1513,
+      730
+    ],
+    "route": "design-sheet crop",
+    "processing": "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
+  },
+  {
+    "name": "avatar-yunrong@2x",
+    "file": "public/assets/park/avatar-yunrong@2x.webp",
+    "size": [
+      96,
+      96
+    ],
+    "has_alpha": true,
+    "alpha_bbox": [
+      0,
+      0,
+      96,
+      96
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 4184,
+    "sha256": "f4fc9a193abb5aa0961e5c733110006973cb55c913d40b1f7cc3f26ae8fcccd6",
+    "source": "docs/角色IP/素材/主角三人组-角色设计图.jpg",
+    "crop": [
+      1427,
+      654,
+      1513,
+      730
+    ],
+    "route": "design-sheet crop",
+    "processing": "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
   }
 ]

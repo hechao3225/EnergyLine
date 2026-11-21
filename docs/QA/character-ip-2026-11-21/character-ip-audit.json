@@ -1,0 +1,426 @@
+{
+  "date": "2026-11-21",
+  "model": "gpt-image-2.5",
+  "route": "images_api /images/edits via ~/.config/ai/imagegen.env",
+  "expressions": {
+    "xingya_happy": {
+      "size": [
+        144,
+        137
+      ],
+      "file": "assets/energy_park_art_pack_v1/02_characters/expressions/xingya_happy.png"
+    },
+    "xingya_wink": {
+      "size": [
+        144,
+        144
+      ],
+      "file": "assets/energy_park_art_pack_v1/02_characters/expressions/xingya_wink.png"
+    },
+    "xingya_sleep": {
+      "size": [
+        144,
+        136
+      ],
+      "file": "assets/energy_park_art_pack_v1/02_characters/expressions/xingya_sleep.png"
+    },
+    "xingya_surprised": {
+      "size": [
+        144,
+        113
+      ],
+      "file": "assets/energy_park_art_pack_v1/02_characters/expressions/xingya_surprised.png"
+    },
+    "xingya_sparkle": {
+      "size": [
+        144,
+        137
+      ],
+      "file": "assets/energy_park_art_pack_v1/02_characters/expressions/xingya_sparkle.png"
+    },
+    "boling_happy": {
+      "size": [
+        144,
+        146
+      ],
+      "file": "assets/energy_park_art_pack_v1/02_characters/expressions/boling_happy.png"
+    },
+    "boling_wink": {
+      "size": [
+        144,
+        147
+      ],
+      "file": "assets/energy_park_art_pack_v1/02_characters/expressions/boling_wink.png"
+    },
+    "boling_sleep": {
+      "size": [
+        144,
+        145
+      ],
+      "file": "assets/energy_park_art_pack_v1/02_characters/expressions/boling_sleep.png"
+    },
+    "boling_surprised": {
+      "size": [
+        144,
+        135
+      ],
+      "file": "assets/energy_park_art_pack_v1/02_characters/expressions/boling_surprised.png"
+    },
+    "boling_sparkle": {
+      "size": [
+        144,
+        146
+      ],
+      "file": "assets/energy_park_art_pack_v1/02_characters/expressions/boling_sparkle.png"
+    },
+    "yunrong_happy": {
+      "size": [
+        144,
+        182
+      ],
+      "file": "assets/energy_park_art_pack_v1/02_characters/expressions/yunrong_happy.png"
+    },
+    "yunrong_wink": {
+      "size": [
+        144,
+        183
+      ],
+      "file": "assets/energy_park_art_pack_v1/02_characters/expressions/yunrong_wink.png"
+    },
+    "yunrong_sleep": {
+      "size": [
+        144,
+        193
+      ],
+      "file": "assets/energy_park_art_pack_v1/02_characters/expressions/yunrong_sleep.png"
+    },
+    "yunrong_surprised": {
+      "size": [
+        144,
+        181
+      ],
+      "file": "assets/energy_park_art_pack_v1/02_characters/expressions/yunrong_surprised.png"
+    },
+    "yunrong_sparkle": {
+      "size": [
+        144,
+        190
+      ],
+      "file": "assets/energy_park_art_pack_v1/02_characters/expressions/yunrong_sparkle.png"
+    }
+  },
+  "runtime_assets": [
+    {
+      "name": "rabbit-cheer",
+      "file": "public/assets/park/rabbit-cheer.webp",
+      "size": [
+        370,
+        400
+      ],
+      "has_alpha": true,
+      "alpha_bbox": [
+        1,
+        1,
+        369,
+        399
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 29462,
+      "sha256": "9b1a2ffc57ccb97049f405bad53ec1c1b634a36fcbf5835b86457efb24ec0938",
+      "source": "character-ip/yunrong_cheer_raw.png",
+      "route": "images_api gpt-image-2.5",
+      "processing": "边界近白泛洪去底；透明裁边；最长边 400px 等比缩放；WebP 92"
+    },
+    {
+      "name": "avatar-xingya",
+      "file": "public/assets/park/avatar-xingya.webp",
+      "size": [
+        48,
+        48
+      ],
+      "has_alpha": true,
+      "alpha_bbox": [
+        0,
+        0,
+        48,
+        48
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 2076,
+      "sha256": "731eca8f9fc0867cfc4572f43fbdc365f2b9970138e6444bb8166e78d937eac4",
+      "source": "docs/角色IP/素材/主角三人组-角色设计图.jpg",
+      "crop": [
+        1215,
+        655,
+        1302,
+        731
+      ],
+      "route": "design-sheet crop",
+      "processing": "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
+    },
+    {
+      "name": "avatar-xingya@2x",
+      "file": "public/assets/park/avatar-xingya@2x.webp",
+      "size": [
+        96,
+        96
+      ],
+      "has_alpha": true,
+      "alpha_bbox": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 5250,
+      "sha256": "4255904a9c92cc732fdcb228a076c974ba152eddad6502c5352ed7f5037e694b",
+      "source": "docs/角色IP/素材/主角三人组-角色设计图.jpg",
+      "crop": [
+        1215,
+        655,
+        1302,
+        731
+      ],
+      "route": "design-sheet crop",
+      "processing": "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
+    },
+    {
+      "name": "avatar-boling",
+      "file": "public/assets/park/avatar-boling.webp",
+      "size": [
+        48,
+        48
+      ],
+      "has_alpha": true,
+      "alpha_bbox": [
+        0,
+        0,
+        48,
+        48
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 1914,
+      "sha256": "751a41c534f29e8342fc36557afd350a6f5d26d228c69c3dbf0938d4b66a1e5c",
+      "source": "docs/角色IP/素材/主角三人组-角色设计图.jpg",
+      "crop": [
+        1320,
+        654,
+        1407,
+        731
+      ],
+      "route": "design-sheet crop",
+      "processing": "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
+    },
+    {
+      "name": "avatar-boling@2x",
+      "file": "public/assets/park/avatar-boling@2x.webp",
+      "size": [
+        96,
+        96
+      ],
+      "has_alpha": true,
+      "alpha_bbox": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 4652,
+      "sha256": "e6b45b22b554a41dfbb6ad023870b56558de8ce36a18593e3ffda9c4c17fc245",
+      "source": "docs/角色IP/素材/主角三人组-角色设计图.jpg",
+      "crop": [
+        1320,
+        654,
+        1407,
+        731
+      ],
+      "route": "design-sheet crop",
+      "processing": "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
+    },
+    {
+      "name": "avatar-yunrong",
+      "file": "public/assets/park/avatar-yunrong.webp",
+      "size": [
+        48,
+        48
+      ],
+      "has_alpha": true,
+      "alpha_bbox": [
+        0,
+        0,
+        48,
+        48
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 1758,
+      "sha256": "1119f9af50742c1aa4378178052e8b0dc8669e93a459b1e2f5a04691f9e859a4",
+      "source": "docs/角色IP/素材/主角三人组-角色设计图.jpg",
+      "crop": [
+        1427,
+        654,
+        1513,
+        730
+      ],
+      "route": "design-sheet crop",
+      "processing": "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
+    },
+    {
+      "name": "avatar-yunrong@2x",
+      "file": "public/assets/park/avatar-yunrong@2x.webp",
+      "size": [
+        96,
+        96
+      ],
+      "has_alpha": true,
+      "alpha_bbox": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 4184,
+      "sha256": "f4fc9a193abb5aa0961e5c733110006973cb55c913d40b1f7cc3f26ae8fcccd6",
+      "source": "docs/角色IP/素材/主角三人组-角色设计图.jpg",
+      "crop": [
+        1427,
+        654,
+        1513,
+        730
+      ],
+      "route": "design-sheet crop",
+      "processing": "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
+    }
+  ],
+  "mood_updates": {
+    "mood-sheep-happy": {
+      "name": "mood-sheep-happy",
+      "file": "public/assets/park/mood-sheep-happy.webp",
+      "size": [
+        144,
+        137
+      ],
+      "has_alpha": true,
+      "alpha_bbox": [
+        1,
+        1,
+        143,
+        136
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 12918,
+      "sha256": "b65afdb96a365c48d8a0c8eed056c3486c6f6d31b650a730ec8432ebd79cf75a"
+    },
+    "mood-rabbit-happy": {
+      "name": "mood-rabbit-happy",
+      "file": "public/assets/park/mood-rabbit-happy.webp",
+      "size": [
+        144,
+        182
+      ],
+      "has_alpha": true,
+      "alpha_bbox": [
+        1,
+        1,
+        143,
+        181
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 12758,
+      "sha256": "7fbd3c88799ff5e5bce5a31963892824132c6d27914d3d63e3b4865269e55f15"
+    },
+    "mood-spirit-happy": {
+      "name": "mood-spirit-happy",
+      "file": "public/assets/park/mood-spirit-happy.webp",
+      "size": [
+        144,
+        146
+      ],
+      "has_alpha": true,
+      "alpha_bbox": [
+        1,
+        1,
+        143,
+        145
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 9792,
+      "sha256": "9e7ac05feb883d62a0c3dabfc167626196a522a787bc1902c704ca7783c812ac"
+    },
+    "mood-joy": {
+      "name": "mood-joy",
+      "file": "public/assets/park/mood-joy.webp",
+      "size": [
+        512,
+        256
+      ],
+      "has_alpha": true,
+      "alpha_bbox": [
+        14,
+        38,
+        496,
+        218
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 34354,
+      "sha256": "c393c9d1b46b47b1d0d9533128d90d4f60fd54764aaf2f625c61d0664460f77e"
+    }
+  }
+}

@@ -2035,6 +2035,37 @@ img {
 .park-profile-intro p {
   margin: 1cqw 0;
 }
+.park-profile-companions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.4cqw;
+  margin: 4cqw 0 2cqw;
+}
+.park-profile-companion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1cqw;
+  padding: 2.6cqw 1.4cqw;
+  border-radius: 3cqw;
+  background: #eadde8;
+  text-align: center;
+}
+.park-profile-companion img {
+  width: 13cqw;
+  height: 13cqw;
+  border-radius: 22%;
+  filter: drop-shadow(0 0.5cqw 0.9cqw rgba(62, 31, 81, 0.28));
+}
+.park-profile-companion b {
+  font-size: 3.2cqw;
+  color: #4b2b5e;
+}
+.park-profile-companion span {
+  font-size: 2.5cqw;
+  line-height: 1.35;
+  color: #7a5d8a;
+}
 .park-achievements > div {
   display: flex;
   align-items: center;

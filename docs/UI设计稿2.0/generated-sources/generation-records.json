@@ -227,5 +227,36 @@
       "exhibit-099"
     ],
     "note": "all 99 levels now use one icon per level; 12 category artKeys are no longer used by the collection."
+  },
+  "character_ip_2026_11_21": {
+    "date": "2026-11-21",
+    "route": "images_api",
+    "base_url": "https://api.thqllm.com/v1",
+    "model": "gpt-image-2.5",
+    "source_size": [
+      1024,
+      1024
+    ],
+    "purpose": "修复残缺表情，补齐 5 情绪 × 3 角色，新增云绒庆祝姿态与角色头像",
+    "inputs": [
+      "public/assets/park/sheep.webp",
+      "public/assets/park/spirit.webp",
+      "public/assets/park/rabbit.webp",
+      "assets/energy_park_art_pack_v1/02_characters/yunrong_main.png"
+    ],
+    "raw_dir": "docs/UI设计稿2.0/generated-sources/character-ip/",
+    "prompts": "docs/UI设计稿2.0/generated-sources/character-ip/prompts.md",
+    "processing": "scripts/prepare_character_ip_assets.py：边界近白泛洪去底、透明裁边、表情宽 144px、庆祝姿态最长边 400px、头像圆角遮罩 48/96",
+    "outputs": {
+      "expressions": "assets/energy_park_art_pack_v1/02_characters/expressions/{id}_{happy,wink,sleep,surprised,sparkle}.png",
+      "runtime": [
+        "mood-*-happy.webp",
+        "mood-joy.webp",
+        "rabbit-cheer.webp",
+        "avatar-*.webp",
+        "avatar-*@2x.webp"
+      ],
+      "qa": "docs/QA/character-ip-2026-11-21/"
+    }
   }
 }

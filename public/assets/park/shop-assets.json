@@ -133,14 +133,14 @@
       "source": "assets/energy_park_art_pack_v1/02_characters/expressions/xingya_happy.png",
       "size": [
         144,
-        100
+        137
       ],
       "has_alpha": true,
       "alpha_bbox": [
-        11,
-        9,
-        137,
-        89
+        1,
+        1,
+        143,
+        136
       ],
       "corner_alpha": [
         0,
@@ -148,9 +148,9 @@
         0,
         0
       ],
-      "bytes": 7234,
-      "sha256": "2799fd8dd244d78e08a4a263178fd63a52a988f3f405bdcdd36ec1858753143d",
-      "processing": "沿用现有开心表情透明画布；保持原尺寸转 WebP"
+      "bytes": 12918,
+      "sha256": "b65afdb96a365c48d8a0c8eed056c3486c6f6d31b650a730ec8432ebd79cf75a",
+      "processing": "2026-11-21 重新绘制表情；保持原画布尺寸转 WebP"
     },
     {
       "name": "mood-rabbit-happy",
@@ -158,14 +158,14 @@
       "source": "assets/energy_park_art_pack_v1/02_characters/expressions/yunrong_happy.png",
       "size": [
         144,
-        132
+        182
       ],
       "has_alpha": true,
       "alpha_bbox": [
-        13,
-        6,
-        131,
-        126
+        1,
+        1,
+        143,
+        181
       ],
       "corner_alpha": [
         0,
@@ -173,9 +173,9 @@
         0,
         0
       ],
-      "bytes": 6850,
-      "sha256": "981ebed42878839dbcea7988f3f7383a84c8f1247ce0d46cc46f936ff52034cd",
-      "processing": "沿用现有开心表情透明画布；保持原尺寸转 WebP"
+      "bytes": 12758,
+      "sha256": "7fbd3c88799ff5e5bce5a31963892824132c6d27914d3d63e3b4865269e55f15",
+      "processing": "2026-11-21 重新绘制表情；保持原画布尺寸转 WebP"
     },
     {
       "name": "mood-spirit-happy",
@@ -183,14 +183,14 @@
       "source": "assets/energy_park_art_pack_v1/02_characters/expressions/boling_happy.png",
       "size": [
         144,
-        136
+        146
       ],
       "has_alpha": true,
       "alpha_bbox": [
-        15,
-        15,
-        129,
-        121
+        1,
+        1,
+        143,
+        145
       ],
       "corner_alpha": [
         0,
@@ -198,9 +198,9 @@
         0,
         0
       ],
-      "bytes": 6516,
-      "sha256": "bd1eb5c1799170a19f3f45c437ab674bee5e353890972e7e4fb91c6edbb4726c",
-      "processing": "沿用现有开心表情透明画布；保持原尺寸转 WebP"
+      "bytes": 9792,
+      "sha256": "9e7ac05feb883d62a0c3dabfc167626196a522a787bc1902c704ca7783c812ac",
+      "processing": "2026-11-21 重新绘制表情；保持原画布尺寸转 WebP"
     },
     {
       "name": "mood-joy",
@@ -212,10 +212,10 @@
       ],
       "has_alpha": true,
       "alpha_bbox": [
-        24,
-        68,
-        482,
-        188
+        14,
+        38,
+        496,
+        218
       ],
       "corner_alpha": [
         0,
@@ -223,9 +223,9 @@
         0,
         0
       ],
-      "bytes": 20122,
-      "sha256": "3db0cc277619899c56292470e5573f51965a960f1dea0f8e2687ca8ec526068b",
-      "processing": "三张开心表情按原始画布尺寸横向居中合成 512x256 透明画布"
+      "bytes": 34354,
+      "sha256": "c393c9d1b46b47b1d0d9533128d90d4f60fd54764aaf2f625c61d0664460f77e",
+      "processing": "2026-11-21 重新绘制表情；保持原画布尺寸转 WebP"
     },
     {
       "name": "theme-calm-preview",

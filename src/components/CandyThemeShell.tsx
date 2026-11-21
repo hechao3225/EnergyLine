@@ -823,7 +823,7 @@ export function CandyThemeShell(p: Props) {
               <div className="park-victory-friends">
                 <Art name="sheep-cheer" />
                 <Art name="spirit-cheer" />
-                <Art name="rabbit" />
+                <Art name="rabbit-cheer" />
               </div>
             </div>
             <section className="park-victory-panel">
@@ -1333,6 +1333,21 @@ export function CandyThemeShell(p: Props) {
                           {ALL_ACHIEVEMENTS.length}
                         </p>
                       </div>
+                    </div>
+                    <div className="park-profile-companions" aria-label="乐园伙伴">
+                      {(
+                        [
+                          { id: "xingya", name: "星芽", role: "乐园修复师" },
+                          { id: "boling", name: "波铃", role: "能量精灵" },
+                          { id: "yunrong", name: "云绒", role: "星光使者 / 图鉴记录员" },
+                        ] as const
+                      ).map((mate) => (
+                        <div className="park-profile-companion" key={mate.id}>
+                          <Art name={`avatar-${mate.id}@2x`} alt={mate.name} />
+                          <b>{mate.name}</b>
+                          <span>{mate.role}</span>
+                        </div>
+                      ))}
                     </div>
                     <div className="park-achievements">
                       {ALL_ACHIEVEMENTS.map((achievement) => (
