@@ -217,7 +217,7 @@ try {
     await page.getByRole("button", { name: "乐园指南", exact: true }).click();
     await capture(page, "rules-390x844");
     await close(page);
-    await page.getByRole("button", { name: "修复手册", exact: true }).click();
+    await page.getByRole("button", { name: "修复师档案", exact: true }).click();
     await capture(page, "profile-390x844");
     await close(page);
     await page.getByRole("button", { name: "乐园图鉴", exact: true }).click();

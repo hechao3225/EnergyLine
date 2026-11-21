@@ -228,6 +228,21 @@ img {
   object-fit: contain;
   object-position: center 10%;
 }
+.park-avatar {
+  position: relative;
+}
+.park-honor-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3.4cqw;
+  height: 3.4cqw;
+  border: 0.55cqw solid #fff8d7;
+  border-radius: 50%;
+  background: linear-gradient(#ff8aa9, #e73e72);
+  box-shadow: 0 0 1.5cqw #ff7da4;
+  z-index: 2;
+}
 .park-resource {
   height: 6.5cqw;
   display: flex;
@@ -2065,6 +2080,141 @@ img {
   font-size: 2.5cqw;
   line-height: 1.35;
   color: #7a5d8a;
+}
+.park-profile-intro > img {
+  border-radius: 24%;
+  object-fit: contain;
+  filter: drop-shadow(0 0.8cqw 1.2cqw rgba(63, 31, 86, 0.28));
+}
+.park-equipped-title {
+  display: inline-block;
+  margin: 0.8cqw 0;
+  padding: 0.7cqw 2.2cqw;
+  border-radius: 3cqw;
+  background: linear-gradient(#ffe49b, #f5b95d);
+  color: #713e68;
+  font-size: 3.3cqw;
+}
+.park-honor-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2cqw;
+  margin: 4cqw 0 3cqw;
+}
+.park-honor-tabs button {
+  min-height: 44px;
+  border-radius: 3.5cqw;
+  background: #ead8e9;
+  color: #73456f;
+  font-size: 3.8cqw;
+  font-weight: 800;
+}
+.park-honor-tabs button.selected {
+  background: linear-gradient(#cc82ef, #904fc8);
+  color: white;
+  box-shadow: inset 0 0 0 0.4cqw #fce3af;
+}
+.park-title-wall,
+.park-achievement-groups {
+  display: grid;
+  gap: 2.2cqw;
+}
+.park-title-card {
+  display: grid;
+  grid-template-columns: 10cqw minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 2cqw;
+  min-height: 15cqw;
+  padding: 2.2cqw;
+  border-radius: 3.5cqw;
+  background: #e9dde8;
+  color: #71466f;
+  text-align: left;
+}
+.park-title-card.is-earned {
+  background: linear-gradient(#fff0b7, #f8d9e1);
+  box-shadow: inset 0 0 0 0.4cqw #efc66f;
+}
+.park-title-card.is-chapter {
+  border-left: 1cqw solid #ba70d0;
+}
+.park-title-card.is-mastery {
+  border-left: 1cqw solid #65b99e;
+}
+.park-title-card.is-equipped {
+  box-shadow:
+    inset 0 0 0 0.6cqw #f4a53e,
+    0 0 2cqw #ffd66e;
+}
+.park-title-card:disabled {
+  opacity: 0.72;
+}
+.park-title-card .park-icon {
+  width: 8.5cqw;
+  height: 8.5cqw;
+}
+.park-title-card > span {
+  display: grid;
+  min-width: 0;
+  gap: 0.4cqw;
+}
+.park-title-card b {
+  font-size: 3.8cqw;
+}
+.park-title-card small,
+.park-title-card em {
+  font-size: 2.8cqw;
+  font-style: normal;
+}
+.park-title-card em {
+  color: #a05482;
+  text-align: right;
+}
+.park-achievement-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 2cqw;
+  padding: 2.5cqw;
+  border-radius: 3cqw;
+  background: #e9dde8;
+}
+.park-achievement-card.earned {
+  background: linear-gradient(#fef0be, #fde1ce);
+  box-shadow: inset 0 0 0 0.4cqw #e6c588;
+}
+.park-achievement-card .park-icon {
+  width: 9cqw;
+  height: 9cqw;
+}
+.park-achievement-card > span {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  gap: 0.6cqw;
+}
+.park-achievement-card b {
+  font-size: 3.7cqw;
+}
+.park-achievement-reward {
+  color: #9b4f8d;
+  font-size: 3cqw;
+}
+.park-achievement-card small,
+.park-achievement-card em {
+  font-size: 2.9cqw;
+  font-style: normal;
+}
+.park-achievement-progress {
+  height: 1.8cqw;
+  overflow: hidden;
+  border-radius: 2cqw;
+  background: #cdbad2;
+}
+.park-achievement-progress i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #a96bd0, #f3b758);
 }
 .park-achievements > div {
   display: flex;

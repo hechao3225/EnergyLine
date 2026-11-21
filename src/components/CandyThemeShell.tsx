@@ -17,11 +17,16 @@ import { describeHint, findHint, findHintSequence, supportsHintEngine, type Hint
 import { CENTER_DISTRICTS, getCollectionEntry, getLevelContent, WORLD } from "../content";
 import { WorldMapModal } from "./WorldMapModal";
 import { ChapterMapView } from "./ChapterMapView";
+import { HonorProfile } from "./HonorProfile";
 import {
-  ALL_ACHIEVEMENTS,
+  getDecoratedAchievements,
   loadUnlockedAchievements,
   loadPlayerStats,
 } from "../utils/achievements";
+import {
+  HONOR_TITLES,
+  resolveEquippedHonorTitle,
+} from "../data/honorTitles";
 import { sound } from "../utils/audio";
 import { haptics } from "../utils/haptics";
 import {
@@ -32,6 +37,7 @@ import {
   chapterIndex,
   consumeSupply,
   equipCosmetic,
+  equipHonorTitle,
   getBestStars,
   isCosmeticEquipped,
   localDate,
@@ -112,7 +118,7 @@ const TITLES: Record<Exclude<Modal, "none">, string> = {
   hint: "通路提示",
   rules: "乐园指南",
   settings: "乐园设置",
-  profile: "修复手册",
+  profile: "修复师档案",
   flora: "乐园图鉴",
   mail: "乐园来信",
   story: "乐园的故事",
@@ -122,6 +128,7 @@ const TITLES: Record<Exclude<Modal, "none">, string> = {
   endless: "无尽挑战",
   world: "乐园宇宙",
 };
+const HONOR_TITLE_SEEN_KEY = "honeycomb_honor_titles_seen_v1";
 
 export function CandyThemeShell(p: Props) {
   const [modal, setModal] = useState<Modal>(() => localStorage.getItem("honeycomb_story_seen_v1") === "1" ? "none" : "story");
@@ -177,6 +184,30 @@ export function CandyThemeShell(p: Props) {
   const canUndo = p.historyIndex > 0 && p.rewinds > 0;
   const today = localDate();
   const activeModal = modal;
+  const unlocked = loadUnlockedAchievements();
+  const playerStats = loadPlayerStats();
+  const achievements = getDecoratedAchievements();
+  const equippedHonorTitle = resolveEquippedHonorTitle(
+    progress.equippedTitleId,
+    unlocked,
+  );
+  const unlockedHonorTitleIds = HONOR_TITLES.filter(
+    (title) => unlocked[title.achievementId],
+  ).map((title) => title.id);
+  let seenHonorTitleIds: string[] = [];
+  try {
+    const saved = JSON.parse(
+      localStorage.getItem(HONOR_TITLE_SEEN_KEY) ?? "[]",
+    );
+    seenHonorTitleIds = Array.isArray(saved)
+      ? saved.filter((id): id is string => typeof id === "string")
+      : [];
+  } catch {
+    seenHonorTitleIds = [];
+  }
+  const hasUnseenHonorTitle = unlockedHonorTitleIds.some(
+    (id) => !seenHonorTitleIds.includes(id),
+  );
   const close = () => {
     if (modal === "story") localStorage.setItem("honeycomb_story_seen_v1", "1");
     if (modal === "onboarding") localStorage.setItem("honeycomb_onboarding_v1", "1");
@@ -185,6 +216,12 @@ export function CandyThemeShell(p: Props) {
     setExhibitId(null);
   };
   const open = (name: Modal) => {
+    if (name === "profile" && unlockedHonorTitleIds.length > 0) {
+      localStorage.setItem(
+        HONOR_TITLE_SEEN_KEY,
+        JSON.stringify(unlockedHonorTitleIds),
+      );
+    }
     if (name === "settings") {
       setMuted(sound.isMuted());
       setVibration(haptics.isEnabled());
@@ -312,7 +349,6 @@ export function CandyThemeShell(p: Props) {
     close();
     p.onSelectLevel(id);
   };
-  const unlocked = loadUnlockedAchievements();
   const completed = p.clearedLevels.length;
   const district = CENTER_DISTRICTS[chapter] ?? CENTER_DISTRICTS[0];
   const districtCleared = p.clearedLevels.filter(
@@ -389,9 +425,10 @@ export function CandyThemeShell(p: Props) {
               <button
                 className="park-avatar"
                 onClick={() => open("profile")}
-                aria-label="修复手册"
+                aria-label="修复师档案"
               >
-                <Art name="sheep" />
+                <Art name="avatar-xingya@2x" />
+                {hasUnseenHonorTitle && <span className="park-honor-badge" />}
               </button>
               {(
                 [
@@ -1321,57 +1358,22 @@ export function CandyThemeShell(p: Props) {
                   </>
                 )}
                 {activeModal === "profile" && (
-                  <>
-                    <div className="park-profile-intro">
-                      <Art name="sheep" />
-                      <div>
-                        <h3>乐园修复师</h3>
-                        <p>已修复 {completed} 处设施</p>
-                        <p>收集星星 {totalStars} 颗</p>
-                        <p>
-                          成就 {Object.keys(unlocked).length}/
-                          {ALL_ACHIEVEMENTS.length}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="park-profile-companions" aria-label="乐园伙伴">
-                      {(
-                        [
-                          { id: "xingya", name: "星芽", role: "乐园修复师" },
-                          { id: "boling", name: "波铃", role: "能量精灵" },
-                          { id: "yunrong", name: "云绒", role: "星光使者 / 图鉴记录员" },
-                        ] as const
-                      ).map((mate) => (
-                        <div className="park-profile-companion" key={mate.id}>
-                          <Art name={`avatar-${mate.id}@2x`} alt={mate.name} />
-                          <b>{mate.name}</b>
-                          <span>{mate.role}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="park-achievements">
-                      {ALL_ACHIEVEMENTS.map((achievement) => (
-                        <div
-                          key={achievement.id}
-                          className={unlocked[achievement.id] ? "earned" : ""}
-                        >
-                          <Icon
-                            name={unlocked[achievement.id] ? "star" : "lock"}
-                          />
-                          <section>
-                            <h3>{achievement.title}</h3>
-                            <p>{achievement.description}</p>
-                          </section>
-                          <span>
-                            {unlocked[achievement.id] ? "已达成" : "未达成"}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                    <p className="park-fine-print">
-                      累计撤销 {loadPlayerStats().totalUndos} 次
-                    </p>
-                  </>
+                  <HonorProfile
+                    completed={completed}
+                    totalStars={totalStars}
+                    totalUndos={playerStats.totalUndos}
+                    achievements={achievements}
+                    unlockedAchievements={unlocked}
+                    equippedTitle={equippedHonorTitle}
+                    onEquipTitle={(titleId) => {
+                      const next = equipHonorTitle(
+                        progress,
+                        titleId,
+                        unlocked,
+                      );
+                      if (next !== progress) save(next);
+                    }}
+                  />
                 )}
                 {activeModal === "flora" && (
                   <>
