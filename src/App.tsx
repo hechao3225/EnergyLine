@@ -16,10 +16,18 @@ import { haptics } from "./utils/haptics";
 import { triggerConfetti } from "./utils/confetti";
 import {
   checkVictoryAchievements,
+  loadUnlockedAchievements,
   trackUndoOperation,
 } from "./utils/achievements";
 import {
+  chooseAutoEquipHonorTitle,
+  getNewHonorTitles,
+  resolveEquippedHonorTitle,
+} from "./data/honorTitles";
+import type { HonorTitle } from "./types/honor";
+import {
   completeParkLevel,
+  equipHonorTitle,
   getBestStars,
   localDate,
   PARK_STORAGE_KEY,
@@ -125,6 +133,7 @@ export default function App() {
     coins: 0,
     gems: 0,
   });
+  const [victoryHonorTitles, setVictoryHonorTitles] = useState<HonorTitle[]>([]);
   const winProcessed = useRef(false);
   const winTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const stats = useRef({ undos: 0, jumped: false, switched: false });
@@ -149,6 +158,7 @@ export default function App() {
       history: [snapshot(config, config.tiles, config.maxSteps, 0, "初始状态")], index: 0, rewinds: 3,
       bonusRewinds: 0 };
     stats.current = { undos: 0, jumped: false, switched: false };
+    setVictoryHonorTitles([]);
     setPeek(false);
     setScreen("play");
   }, []);
@@ -215,8 +225,9 @@ export default function App() {
       setBestSteps(best);
     } else setVictoryReward({ stars: 0, coins: 0, gems: 0 });
     if (mode === "endless") endless.current.streak += 1;
-    if (mode !== "editor" && mode !== "lab")
-      checkVictoryAchievements({
+    const achievementResult =
+      mode !== "editor" && mode !== "lab"
+        ? checkVictoryAchievements({
         levelId: level.id,
         stepsUsed,
         remainingSteps: nextRemaining,
@@ -228,7 +239,23 @@ export default function App() {
         stars: earnedStars,
         isEndless: mode === "endless",
         endlessStreak: endless.current.streak,
-      });
+          })
+        : { newlyUnlocked: [] };
+    const newHonorTitles = getNewHonorTitles(achievementResult.newlyUnlocked);
+    setVictoryHonorTitles(newHonorTitles);
+    if (newHonorTitles.length > 0) {
+      const unlocked = loadUnlockedAchievements();
+      const progress = readParkProgress(localStorage);
+      if (!resolveEquippedHonorTitle(progress.equippedTitleId, unlocked)) {
+        const autoTitle = chooseAutoEquipHonorTitle(newHonorTitles);
+        if (autoTitle) {
+          localStorage.setItem(
+            PARK_STORAGE_KEY,
+            JSON.stringify(equipHonorTitle(progress, autoTitle.id, unlocked)),
+          );
+        }
+      }
+    }
     sound.playWin();
     haptics.victory();
     triggerConfetti();
@@ -537,6 +564,7 @@ export default function App() {
       onAddSteps={addSteps}
       gameMode={mode}
       victoryReward={victoryReward}
+      victoryHonorTitles={victoryHonorTitles}
     />
   );
 }

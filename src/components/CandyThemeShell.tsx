@@ -5,6 +5,7 @@ import type {
   Tile,
   HistorySnapshot,
 } from "../types/game";
+import type { HonorTitle } from "../types/honor";
 import { Art, Icon, IconName, ParkButton, Stars, ParkExhibit, getExhibitArt } from "./ParkArt";
 import { GameBoard } from "./GameBoard";
 import { BUILD_TAG } from "../buildTag";
@@ -109,6 +110,7 @@ interface Props {
   onSettle?: () => void;
   gameMode: "story" | "endless" | "editor" | "lab";
   victoryReward: { stars: number; coins: number; gems?: number };
+  victoryHonorTitles: HonorTitle[];
 }
 const TITLES: Record<Exclude<Modal, "none">, string> = {
   levels: "乐园关卡",
@@ -904,6 +906,14 @@ export function CandyThemeShell(p: Props) {
                   </div>
                 </div>
               </div>
+              {p.victoryHonorTitles.length > 0 && (
+                <div className="park-victory-honors">
+                  <span>获得荣誉称号</span>
+                  {p.victoryHonorTitles.map((title) => (
+                    <strong key={title.id}>{title.name}</strong>
+                  ))}
+                </div>
+              )}
               <h3 className="park-reward-title">通关奖励</h3>
               <div className="park-rewards">
                 <div className="park-reward-slot">
