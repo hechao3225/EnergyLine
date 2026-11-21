@@ -6,7 +6,7 @@ import type {
   HistorySnapshot,
 } from "../types/game";
 import type { HonorTitle } from "../types/honor";
-import { Art, Icon, IconName, ParkButton, Stars, ParkExhibit, getExhibitArt } from "./ParkArt";
+import { Art, Icon, IconName, ParkButton, Stars, getExhibitArt } from "./ParkArt";
 import { GameBoard } from "./GameBoard";
 import { BUILD_TAG } from "../buildTag";
 import { LAB_LEVELS } from "../data/labLevels";
@@ -61,7 +61,6 @@ type Modal =
   | "rules"
   | "settings"
   | "profile"
-  | "flora"
   | "mail"
   | "story"
   | "onboarding"
@@ -121,7 +120,6 @@ const TITLES: Record<Exclude<Modal, "none">, string> = {
   rules: "乐园指南",
   settings: "乐园设置",
   profile: "修复师档案",
-  flora: "乐园图鉴",
   mail: "乐园来信",
   story: "乐园的故事",
   onboarding: "修复指南",
@@ -158,8 +156,6 @@ export function CandyThemeShell(p: Props) {
   const [muted, setMuted] = useState(sound.isMuted());
   const [vibration, setVibration] = useState(haptics.isEnabled());
   const [chapter, setChapter] = useState(chapterIndex(p.level.id));
-  const [collectionPage, setCollectionPage] = useState(0);
-  const [exhibitId, setExhibitId] = useState<number | null>(null);
   const reward = p.victoryReward;
   const hasNewReward = reward.stars + reward.coins > 0;
   const noticeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -215,7 +211,6 @@ export function CandyThemeShell(p: Props) {
     if (modal === "onboarding") localStorage.setItem("honeycomb_onboarding_v1", "1");
     p.onCloseLevels();
     setModal("none");
-    setExhibitId(null);
   };
   const open = (name: Modal) => {
     if (name === "profile" && unlockedHonorTitleIds.length > 0) {
@@ -229,7 +224,6 @@ export function CandyThemeShell(p: Props) {
       setVibration(haptics.isEnabled());
     }
     setModal(name);
-    setExhibitId(null);
   };
   const flash = (message: string) => {
     setNotice(message);
@@ -372,8 +366,6 @@ export function CandyThemeShell(p: Props) {
   const hasSwitch = p.tiles.some((t) => t.type === "switch");
   const hasDiode = p.tiles.some((t) => t.type === "diode");
   const hasGear = p.tiles.some((t) => (t.axisDir ?? 0) !== 0);
-  const exhibit = exhibitId == null ? null : getCollectionEntry(exhibitId);
-
   const navigation: { icon: IconName; text: string; action: () => void }[] = [
     {
       icon: "castle",
@@ -470,7 +462,6 @@ export function CandyThemeShell(p: Props) {
                   { icon: "mail", label: "乐园来信", modal: "mail" },
                   { icon: "castle", label: "乐园宇宙", modal: "world" },
                   { icon: "task", label: "每日任务", modal: "tasks" },
-                  { icon: "map", label: "乐园图鉴", modal: "flora" },
                 ] as const
               ).map((item) => (
                 <button
@@ -968,7 +959,7 @@ export function CandyThemeShell(p: Props) {
 
         {activeModal !== "none" && (
           <div
-            className={`park-modal-backdrop ${activeModal === "levels" || activeModal === "flora" || activeModal === "profile" || activeModal === "editor" || activeModal === "world" ? "is-large" : ""}`}
+            className={`park-modal-backdrop ${activeModal === "levels" || activeModal === "profile" || activeModal === "editor" || activeModal === "world" ? "is-large" : ""}`}
           >
             <section
               className={`park-modal park-modal-${activeModal}`}
@@ -1066,15 +1057,6 @@ export function CandyThemeShell(p: Props) {
                       }}
                     >
                       世界地图
-                    </button>
-                    <button
-                      className="park-text-link"
-                      onClick={() => {
-                        p.onCloseLevels();
-                        open("flora");
-                      }}
-                    >
-                      查看乐园图鉴
                     </button>
                   </>
                 )}
@@ -1384,84 +1366,6 @@ export function CandyThemeShell(p: Props) {
                       if (next !== progress) save(next);
                     }}
                   />
-                )}
-                {activeModal === "flora" && (
-                  <>
-                    {exhibit ? (
-                      <div className="park-flower-detail">
-                        <ParkExhibit
-                          entry={exhibit}
-                          unlocked={p.clearedLevels.includes(exhibitId!)}
-                          large
-                        />
-                        <h3>{exhibit.name}</h3>
-                        <p>{exhibit.alias}</p>
-                        <p>
-                          {p.clearedLevels.includes(exhibitId!)
-                            ? exhibit.lore
-                            : `完成第 ${exhibitId} 关，修复这件藏品`}
-                        </p>
-                        <ParkButton onClick={() => select(exhibitId!)}>
-                          前往第 {exhibitId} 关
-                        </ParkButton>
-                        <button
-                          className="park-text-link"
-                          onClick={() => setExhibitId(null)}
-                        >
-                          返回图鉴
-                        </button>
-                      </div>
-                    ) : (
-                      <>
-                        <p>修复乐园，收集 99 件乐园藏品。已收集 {completed}/99</p>
-                        <div className="park-flower-grid">
-                          {p.levels
-                            .slice(
-                              collectionPage * 20,
-                              collectionPage * 20 + 20,
-                            )
-                            .map((level) => {
-                              const entry = getCollectionEntry(level.id);
-                              if (!entry) return null;
-                              return (
-                                <button
-                                  key={level.id}
-                                  onClick={() => setExhibitId(level.id)}
-                                >
-                                  <ParkExhibit
-                                    entry={entry}
-                                    unlocked={p.clearedLevels.includes(
-                                      level.id,
-                                    )}
-                                  />
-                                  <b>{entry.name}</b>
-                                  <small>第 {level.id} 关</small>
-                                </button>
-                              );
-                            })}
-                        </div>
-                        <div className="park-pagination">
-                          <button
-                            disabled={collectionPage === 0}
-                            onClick={() =>
-                              setCollectionPage(collectionPage - 1)
-                            }
-                          >
-                            上一页
-                          </button>
-                          <span>{collectionPage + 1}/5</span>
-                          <button
-                            disabled={collectionPage === 4}
-                            onClick={() =>
-                              setCollectionPage(collectionPage + 1)
-                            }
-                          >
-                            下一页
-                          </button>
-                        </div>
-                      </>
-                    )}
-                  </>
                 )}
                 {activeModal === "mail" && (
                   <>

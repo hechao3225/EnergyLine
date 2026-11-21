@@ -5,8 +5,12 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import type { LevelConfig } from "../types/game";
-import { Art, Icon } from "./ParkArt";
-import { CENTER_DISTRICTS } from "../content";
+import { Art, Icon, ParkButton, ParkExhibit, getExhibitArt } from "./ParkArt";
+import {
+  CENTER_DISTRICTS,
+  getCollectionEntry,
+  getLevelContent,
+} from "../content";
 import { getParSteps, getStarsForLights, getStarsForSteps } from "../utils/rating";
 
 export interface ChapterMapViewProps {
@@ -55,6 +59,7 @@ export function ChapterMapView({
   });
 
   const [unlockAll, setUnlockAll] = useState(false);
+  const [selectedLevelId, setSelectedLevelId] = useState<number | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const toastTimer = useRef<number | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -70,6 +75,12 @@ export function ChapterMapView({
   const chapterLevels = levels.filter(
     (lvl) => lvl.id >= district.range[0] && lvl.id <= district.range[1],
   );
+  const selectedLevel =
+    selectedLevelId === null
+      ? null
+      : levels.find((level) => level.id === selectedLevelId) ?? null;
+  const selectedExhibit =
+    selectedLevelId === null ? null : getCollectionEntry(selectedLevelId);
 
   const districtClearedCount = chapterLevels.filter((lvl) =>
     clearedLevels.includes(lvl.id),
@@ -108,6 +119,10 @@ export function ChapterMapView({
       }
     }, 150);
     return () => clearTimeout(timer);
+  }, [chapter]);
+
+  useEffect(() => {
+    setSelectedLevelId(null);
   }, [chapter]);
 
   // S-curve coordinates calculation:
@@ -152,7 +167,7 @@ export function ChapterMapView({
               ◀
             </button>
             <span className="chapter-progress-pill">
-              关卡 {district.range[0]}~{district.range[1]} · 已修 {districtClearedCount}/{chapterLevels.length}
+              关卡 {district.range[0]}~{district.range[1]} · 图鉴 {districtClearedCount}/{chapterLevels.length}
             </span>
             <button
               className="chapter-arrow-btn next"
@@ -259,7 +274,7 @@ export function ChapterMapView({
                       showToast(`请先通关第 ${lvl.id - 1} 关解锁此设施`);
                       return;
                     }
-                    onSelectLevel(lvl.id);
+                    setSelectedLevelId(lvl.id);
                   }}
                   title={
                     isLocked
@@ -270,13 +285,22 @@ export function ChapterMapView({
                 >
                   <Art name={nodeArtName} className="chapter-node-disc-art" />
 
-                  {/* Level Number */}
+                  {(() => {
+                    const exhibit = getCollectionEntry(lvl.id);
+                    if (!exhibit || isLocked) return null;
+                    return (
+                      <Art
+                        name={getExhibitArt(exhibit)}
+                        className={`chapter-node-exhibit ${
+                          isCleared ? "" : "sleeping"
+                        }`}
+                        alt={isCleared ? exhibit.name : "尚未修复的藏品"}
+                      />
+                    );
+                  })()}
+
                   {!isLocked && (
-                    <span
-                      className={`chapter-node-number ${isCurrent ? "number-white" : isCleared ? "number-brown" : "number-purple"}`}
-                    >
-                      {lvl.id}
-                    </span>
+                    <span className="chapter-node-number">{lvl.id}</span>
                   )}
 
                   {/* Star indicators underneath cleared nodes */}
@@ -304,6 +328,51 @@ export function ChapterMapView({
           })}
         </div>
       </div>
+
+      {selectedLevel && selectedExhibit && (
+        <aside
+          className="chapter-node-detail"
+          aria-label={`${selectedExhibit.name}设施详情`}
+        >
+          <button
+            className="chapter-node-detail-close"
+            onClick={() => setSelectedLevelId(null)}
+            aria-label="收起设施详情"
+          >
+            ×
+          </button>
+          <div className="chapter-node-detail-art">
+            <ParkExhibit
+              entry={selectedExhibit}
+              unlocked={clearedLevels.includes(selectedLevel.id)}
+              large
+            />
+          </div>
+          <div className="chapter-node-detail-copy">
+            <span className="chapter-node-detail-kicker">
+              第 {selectedLevel.id} 关 · {district.name}
+            </span>
+            <h3>{selectedExhibit.name}</h3>
+            <strong>{selectedExhibit.alias}</strong>
+            <p>
+              {clearedLevels.includes(selectedLevel.id)
+                ? selectedExhibit.lore
+                : `完成第 ${selectedLevel.id} 关后收录完整故事与祝福。`}
+            </p>
+            <div className="chapter-node-detail-meta">
+              <span>
+                {getLevelContent(selectedLevel.id)?.title ?? "能量设施"}
+              </span>
+              <span>最佳 {bestSteps[selectedLevel.id] ?? "—"} 步</span>
+            </div>
+            <ParkButton onClick={() => onSelectLevel(selectedLevel.id)}>
+              {clearedLevels.includes(selectedLevel.id)
+                ? "再次挑战"
+                : "开始修复"}
+            </ParkButton>
+          </div>
+        </aside>
+      )}
 
       {/* Floating Notice / Toast */}
       {toast && (

@@ -220,11 +220,19 @@ try {
     await page.getByRole("button", { name: "修复师档案", exact: true }).click();
     await capture(page, "profile-390x844");
     await close(page);
-    await page.getByRole("button", { name: "乐园图鉴", exact: true }).click();
-    await capture(page, "flora-390x844");
-    await page.locator(".park-flower-grid button").first().click();
-    await capture(page, "flower-detail-390x844");
-    await close(page);
+    await page
+      .getByRole("navigation")
+      .getByRole("button", { name: "关卡", exact: true })
+      .click();
+    await capture(page, "repair-atlas-map-390x844");
+    await page
+      .getByRole("button", { name: /第 1 关/ })
+      .click();
+    await capture(page, "repair-atlas-detail-390x844");
+    await page
+      .getByRole("button", { name: "收起设施详情", exact: true })
+      .click();
+    await page.getByRole("button", { name: "返回乐园", exact: true }).click();
     await page.getByRole("button", { name: "乐园来信", exact: true }).click();
     await capture(page, "mail-390x844");
     await page

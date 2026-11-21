@@ -3275,30 +3275,37 @@ img {
   pointer-events: none;
 }
 
+.chapter-node-exhibit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 76%;
+  height: 76%;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 0.5cqw 0.7cqw rgba(61, 30, 77, 0.32));
+}
+
+.chapter-node-exhibit.sleeping {
+  filter: grayscale(1) opacity(0.52);
+}
+
 .chapter-node-number {
   position: absolute;
-  top: 38%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 5.8cqw;
+  right: -0.6cqw;
+  bottom: -0.8cqw;
+  min-width: 5.4cqw;
+  padding: 0.25cqw 1cqw;
+  border: 0.35cqw solid #fff7da;
+  border-radius: 3cqw;
+  background: linear-gradient(#8e5bc0, #5f327f);
+  color: #fff8e8;
+  box-shadow: 0 0.4cqw 0.8cqw rgba(56, 27, 72, 0.35);
+  font-size: 2.7cqw;
   font-weight: 900;
   line-height: 1;
   pointer-events: none;
-}
-
-.chapter-node-number.number-white {
-  color: #ffffff;
-  text-shadow: 0 0.4cqw 0.8cqw #4a0e4e, 0 0 1.2cqw #f76ff1;
-}
-
-.chapter-node-number.number-brown {
-  color: #541e00;
-  text-shadow: 0 0.3cqw 0.4cqw #fffae8;
-}
-
-.chapter-node-number.number-purple {
-  color: #4b2468;
-  text-shadow: 0 0.2cqw 0.4cqw #ffffff;
 }
 
 .chapter-node-stars {
@@ -3352,6 +3359,109 @@ img {
   white-space: nowrap;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   pointer-events: none;
+}
+
+.chapter-node-detail {
+  position: absolute;
+  left: 3%;
+  right: 3%;
+  bottom: 2.5%;
+  z-index: 40;
+  display: grid;
+  grid-template-columns: 25cqw minmax(0, 1fr);
+  gap: 3cqw;
+  max-height: 38%;
+  padding: 3cqw;
+  border: 0.45cqw solid #ffe6a4;
+  border-radius: 5cqw;
+  background: linear-gradient(145deg, #fff8e8, #f4dff4);
+  color: #5d356a;
+  box-shadow:
+    0 0 0 0.45cqw #d195df,
+    0 1.5cqw 3cqw rgba(48, 17, 65, 0.4);
+  animation: chapterDetailIn 0.22s ease-out both;
+}
+
+.chapter-node-detail-close {
+  position: absolute;
+  top: 1.4cqw;
+  right: 1.4cqw;
+  width: 8cqw;
+  height: 8cqw;
+  border-radius: 50%;
+  background: #8d55ae;
+  color: #fff7dd;
+  font-size: 6cqw;
+  line-height: 1;
+}
+
+.chapter-node-detail-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.chapter-node-detail-art .park-collection-flower {
+  width: 25cqw;
+  height: 25cqw;
+  object-fit: contain;
+}
+
+.chapter-node-detail-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 1cqw;
+  padding-right: 7cqw;
+}
+
+.chapter-node-detail-kicker,
+.chapter-node-detail-meta {
+  font-size: 2.7cqw;
+  color: #8b5c86;
+}
+
+.chapter-node-detail-copy h3 {
+  margin: 0;
+  font-size: 5cqw;
+  line-height: 1.1;
+}
+
+.chapter-node-detail-copy > strong {
+  color: #a54584;
+  font-size: 3.2cqw;
+}
+
+.chapter-node-detail-copy p {
+  max-height: 12cqw;
+  margin: 0;
+  overflow: auto;
+  font-size: 3cqw;
+  line-height: 1.55;
+}
+
+.chapter-node-detail-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 2cqw;
+}
+
+.chapter-node-detail-copy .park-button {
+  min-height: 10cqw;
+  margin-top: auto;
+  font-size: 3.7cqw;
+}
+
+@keyframes chapterDetailIn {
+  from {
+    opacity: 0;
+    transform: translateY(4cqw) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .chapter-map-toast {
