@@ -11,7 +11,8 @@ import {
   getSupplyItem,
   isCosmeticId,
 } from "../data/shopCatalog";
-import { getStarsForRecord } from "./rating";
+import { getHonorTitle, resolveEquippedHonorTitle } from "../data/honorTitles";
+import { getStarsForLights, getStarsForRecord } from "./rating";
 import { CENTER_DISTRICTS } from "../content/zones";
 
 /** 首通奖励。存档字段仍叫 coins，界面统一叫「钻石」——只改显示，不动存档结构。 */
@@ -29,6 +30,7 @@ export interface ParkProgress {
   lenses: number;
   rewindTokens: number;
   stepTokens: number;
+  equippedTitleId: string | null;
   ownedCosmetics: CosmeticId[];
   equippedCosmetics: {
     mood: EquippedMood;
@@ -58,6 +60,41 @@ export function getBestStars(
 ): number {
   return getStarsForRecord(best[level.id], level, cleared.includes(level.id));
 }
+
+export function getStoredLevelStars(
+  level: LevelConfig,
+  cleared: number[],
+  bestSteps: Record<number, number>,
+  bestLights: Record<number, number>,
+): number {
+  if (level.goal !== undefined) {
+    const totalBulbs = level.tiles.filter((tile) => tile.type === "bulb").length;
+    return getStarsForLights(
+      level.goal,
+      totalBulbs,
+      bestLights[level.id] ??
+        (cleared.includes(level.id) ? level.goal : 0),
+    );
+  }
+  return getBestStars(level, cleared, bestSteps);
+}
+
+export function isChapterLocked(
+  chapter: number,
+  clearedLevels: number[],
+  unlockAll: boolean,
+): boolean {
+  const district = CENTER_DISTRICTS[chapter];
+  if (!district) return true;
+  if (unlockAll || chapter === 0) return false;
+  const [start, end] = district.range;
+  const previousBoss = start - 1;
+  return (
+    !clearedLevels.includes(previousBoss) &&
+    !clearedLevels.some((id) => id >= start && id <= end)
+  );
+}
+
 export const PROGRESS_VERSION_KEY = "honeycomb_progress_version";
 export const PROGRESS_VERSION = "4";
 function readStored<T>(storage: StorageReader, key: string, fallback: T): T {
@@ -85,6 +122,7 @@ const DEFAULT_PROGRESS: ParkProgress = {
   lenses: 0,
   rewindTokens: 0,
   stepTokens: 0,
+  equippedTitleId: null,
   ownedCosmetics: [],
   equippedCosmetics: {
     mood: "default",
@@ -146,6 +184,9 @@ export function sanitizeProgress(raw: unknown): ParkProgress {
       DEFAULT_PROGRESS.rewindTokens,
     ),
     stepTokens: asCount(source.stepTokens, DEFAULT_PROGRESS.stepTokens),
+    equippedTitleId: getHonorTitle(source.equippedTitleId)
+      ? String(source.equippedTitleId)
+      : null,
     ownedCosmetics,
     equippedCosmetics: {
       mood:
@@ -245,6 +286,25 @@ export function resetParkProgress(storage: Storage): void {
   }
   keys.forEach((key) => storage.removeItem(key));
 }
+
+export function equipHonorTitle(
+  progress: ParkProgress,
+  titleId: string | null,
+  unlockedAchievements: Record<string, number>,
+): ParkProgress {
+  if (titleId === null) {
+    return progress.equippedTitleId === null
+      ? progress
+      : { ...progress, equippedTitleId: null };
+  }
+  if (!resolveEquippedHonorTitle(titleId, unlockedAchievements)) {
+    return progress;
+  }
+  return progress.equippedTitleId === titleId
+    ? progress
+    : { ...progress, equippedTitleId: titleId };
+}
+
 export function completeParkLevel(
   progress: ParkProgress,
   levelId: number,

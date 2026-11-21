@@ -8,8 +8,11 @@ import {
   consumeHint,
   consumeSupply,
   equipCosmetic,
+  equipHonorTitle,
   getBestStars,
+  getStoredLevelStars,
   HINT_PRICE,
+  isChapterLocked,
   isCosmeticEquipped,
   localDate,
   PARK_STORAGE_KEY,
@@ -18,6 +21,7 @@ import {
   readStoryProgress,
   PROGRESS_VERSION,
   PROGRESS_VERSION_KEY,
+  resetParkProgress,
   setHomeExhibit,
 } from "../src/utils/parkProgress";
 import { COSMETIC_ITEMS, SUPPLY_ITEMS, getSupplyItem } from "../src/data/shopCatalog";
@@ -417,5 +421,75 @@ test("重塑补偿上限为 4950 钻石", () => {
     ),
   });
   assert.equal(readParkProgress(data).coins, 4950);
+});
+test("旧存档缺少佩戴称号时补为空", () => {
+  const p = readParkProgress(
+    store({
+      [PARK_STORAGE_KEY]: JSON.stringify({
+        coins: 0,
+        hints: 3,
+        rewardedLevels: [],
+        completedDate: "",
+        claimedDate: "",
+      }),
+    }),
+  );
+  assert.equal(p.equippedTitleId, null);
+});
+test("只允许佩戴已存在且已解锁的称号", () => {
+  const start = fresh();
+  assert.equal(equipHonorTitle(start, "first_light", {}), start);
+  const unlocked = { first_spark: 1 };
+  const equipped = equipHonorTitle(start, "first_light", unlocked);
+  assert.equal(equipped.equippedTitleId, "first_light");
+  assert.equal(
+    equipHonorTitle(equipped, "missing-title", unlocked),
+    equipped,
+  );
+});
+test("非法佩戴 ID 在读取存档时回落为空", () => {
+  const p = readParkProgress(
+    store({
+      [PARK_STORAGE_KEY]: JSON.stringify({
+        equippedTitleId: "missing-title",
+        rewardedLevels: [],
+      }),
+    }),
+  );
+  assert.equal(p.equippedTitleId, null);
+});
+test("章节锁定与共享星级计算保持现有规则", () => {
+  assert.equal(isChapterLocked(0, [], false), false);
+  assert.equal(isChapterLocked(1, [], false), true);
+  assert.equal(isChapterLocked(1, [20], false), false);
+  assert.equal(isChapterLocked(4, [], true), false);
+
+  const level = DEFAULT_LEVELS[0];
+  assert.equal(getStoredLevelStars(level, [], {}, {}), 0);
+  assert.equal(getStoredLevelStars(level, [1], { 1: level.maxSteps }, {}), 1);
+});
+test("重置存档同时清除佩戴称号与成就记录", () => {
+  const entries = new Map<string, string>([
+    ["energy_park_progress_v2", '{"equippedTitleId":"first_light"}'],
+    ["honeycomb_achievements_v1", '{"first_spark":1}'],
+  ]);
+  const storage = {
+    get length() {
+      return entries.size;
+    },
+    key: (index: number) => [...entries.keys()][index] ?? null,
+    getItem: (key: string) => entries.get(key) ?? null,
+    setItem: (key: string, value: string) => {
+      entries.set(key, value);
+    },
+    removeItem: (key: string) => {
+      entries.delete(key);
+    },
+    clear: () => {
+      entries.clear();
+    },
+  } as Storage;
+  resetParkProgress(storage);
+  assert.equal(entries.size, 0);
 });
 console.log(`${passed} 项需求验证通过`);
