@@ -10,6 +10,8 @@
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
     "test": "tsx scripts/test_circuits.ts && tsx scripts/test_park_progress.ts && tsx scripts/test_theme_content.ts && tsx scripts/test_shop_catalog.ts && tsx scripts/audit_theme.ts && tsx scripts/test_hint_engine.ts && tsx scripts/audit-rules.ts && tsx scripts/test_phase0_spec.ts && tsx scripts/test_phase0_burden.ts && tsx scripts/audit-phase0.ts && tsx scripts/test_chapter1.ts && tsx scripts/test_chapter2.ts && tsx scripts/test_chapter3.ts && tsx scripts/test_chapter4.ts && tsx scripts/test_chapter5.ts && tsx scripts/audit-mainline.ts && tsx scripts/audit-distinct.ts",
+    "test:honors": "tsx scripts/test_honor_titles.ts && tsx scripts/test_achievement_honors.ts",
+    "test:ui:honors": "tsx scripts/test_honor_profile.ts && tsx scripts/test_victory_honors.ts",
     "test:ui": "tsx scripts/test_park_ui.ts && tsx scripts/test_park_star_upgrade.ts && tsx scripts/test_park_victory_layout.ts && tsx scripts/test_shop_home.ts && tsx scripts/test_shop_purchase.ts && tsx scripts/test_shop_supplies.ts",
     "test:pipes": "python scripts/audit_pipe_ports.py && tsx scripts/test_pipe_alignment.ts",
     "test:merge": "tsx scripts/test_master_merge.ts",
