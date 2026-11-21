@@ -3,6 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import type { HonorTitleId } from "./honor";
+
 export type AchievementRarity = 'common' | 'rare' | 'epic' | 'legendary';
 
 export interface AchievementProgressInfo {
@@ -24,6 +26,7 @@ export interface Achievement {
   hint: string;
   unlockedAt?: number; // timestamp when unlocked
   progress?: AchievementProgressInfo;
+  rewardTitleId?: HonorTitleId;
 }
 
 export interface PlayerStats {

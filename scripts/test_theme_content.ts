@@ -20,6 +20,7 @@ import {
 } from '../src/content';
 import { DEFAULT_LEVELS } from '../src/data/defaultLevels';
 import { ALL_ACHIEVEMENTS } from '../src/utils/achievements';
+import { getHonorTitle } from '../src/data/honorTitles';
 import { PARK_STORAGE_KEY, PROGRESS_VERSION_KEY } from '../src/utils/parkProgress';
 import { layoutHash } from './level_hash';
 
@@ -87,7 +88,7 @@ for (const zone of ZONES.filter((item) => item.id !== 'center')) {
   check(zone.levelRange !== null && zone.levelRange[1] - zone.levelRange[0] + 1 === 9, `${zone.name} 规划关卡应为 9 关`);
 }
 
-const ACHIEVEMENT_IDS = [
+const LEGACY_ACHIEVEMENT_IDS = [
   'ten_steps_clear',
   'undo_master',
   'consecutive_perfect',
@@ -103,12 +104,32 @@ const ACHIEVEMENT_IDS = [
   'endless_champion',
   'hall_of_fame',
 ];
+const NEW_ACHIEVEMENT_IDS = [
+  'levels_30',
+  'levels_50',
+  'chapter_garden_complete',
+  'chapter_cloud_complete',
+  'chapter_rainbow_complete',
+  'chapter_peak_complete',
+  'perfect_20',
+];
+const ACHIEVEMENT_IDS = [
+  ...LEGACY_ACHIEVEMENT_IDS,
+  ...NEW_ACHIEVEMENT_IDS,
+];
 check(ALL_ACHIEVEMENTS.length === ACHIEVEMENT_IDS.length, '成就数量变化');
 check(
   ALL_ACHIEVEMENTS.every((achievement, index) => achievement.id === ACHIEVEMENT_IDS[index]),
   '成就 ID 或顺序发生变化（会重置已解锁记录）',
 );
 for (const achievement of ALL_ACHIEVEMENTS) {
+  if (achievement.rewardTitleId) {
+    check(
+      getHonorTitle(achievement.rewardTitleId)?.achievementId ===
+        achievement.id,
+      `${achievement.id} 的称号关联不一致`,
+    );
+  }
   for (const term of BANNED_TERMS) {
     check(!achievement.title.includes(term), `${achievement.id} 标题含禁用词 ${term}`);
     check(!achievement.description.includes(term), `${achievement.id} 描述含禁用词 ${term}`);
@@ -166,4 +187,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log('主题内容回归通过：99 关文案 / 99 件藏品 / 11 个区域 / 14 个成就 / 布局指纹一致');
+console.log(`主题内容回归通过：99 关文案 / 99 件藏品 / 11 个区域 / ${ALL_ACHIEVEMENTS.length} 个成就 / 布局指纹一致`);

@@ -46,6 +46,7 @@ export const ALL_ACHIEVEMENTS: Achievement[] = [
     icon: 'Sparkles',
     rarity: 'common',
     hint: '点亮第一处设施',
+    rewardTitleId: 'first_light',
   },
   {
     id: 'circuit_adept',
@@ -64,6 +65,7 @@ export const ALL_ACHIEVEMENTS: Achievement[] = [
     icon: 'Award',
     rarity: 'rare',
     hint: '通过第 10 关',
+    rewardTitleId: 'park_trainee',
   },
   {
     id: 'circuit_grandmaster',
@@ -73,6 +75,7 @@ export const ALL_ACHIEVEMENTS: Achievement[] = [
     icon: 'Trophy',
     rarity: 'epic',
     hint: '持续修复乐园里的设施',
+    rewardTitleId: 'lamplighter',
   },
   {
     id: 'switch_operator',
@@ -100,6 +103,7 @@ export const ALL_ACHIEVEMENTS: Achievement[] = [
     icon: 'Star',
     rarity: 'rare',
     hint: '每一步都用在刀刃上',
+    rewardTitleId: 'precision_calibrator',
   },
   {
     id: 'perfectionist',
@@ -109,6 +113,7 @@ export const ALL_ACHIEVEMENTS: Achievement[] = [
     icon: 'StarHalf',
     rarity: 'epic',
     hint: '精益求精，在 5 关拿下高星',
+    rewardTitleId: 'steady_calibrator',
   },
   {
     id: 'endless_scout',
@@ -136,6 +141,76 @@ export const ALL_ACHIEVEMENTS: Achievement[] = [
     icon: 'Medal',
     rarity: 'legendary',
     hint: '收集丰硕的乐园勋章',
+  },
+  {
+    id: 'levels_30',
+    title: '星光工程师',
+    description: '累计完成 30 个关卡',
+    category: 'progress',
+    icon: 'Award',
+    rarity: 'epic',
+    hint: '继续修复乐园中心',
+    rewardTitleId: 'starlight_engineer',
+  },
+  {
+    id: 'levels_50',
+    title: '乐园守护者',
+    description: '累计完成 50 个关卡',
+    category: 'progress',
+    icon: 'Shield',
+    rarity: 'epic',
+    hint: '让更多区域重新亮起',
+    rewardTitleId: 'park_guardian',
+  },
+  {
+    id: 'chapter_garden_complete',
+    title: '花期守望者',
+    description: '完成星光花园 21–40 关',
+    category: 'progress',
+    icon: 'Sparkles',
+    rarity: 'epic',
+    hint: '修复星光花园的全部设施',
+    rewardTitleId: 'garden_watcher',
+  },
+  {
+    id: 'chapter_cloud_complete',
+    title: '云桥引路人',
+    description: '完成云端奇境 41–60 关',
+    category: 'progress',
+    icon: 'Compass',
+    rarity: 'epic',
+    hint: '修复云端奇境的全部设施',
+    rewardTitleId: 'cloud_guide',
+  },
+  {
+    id: 'chapter_rainbow_complete',
+    title: '虹光调校师',
+    description: '完成虹彩天桥 61–80 关',
+    category: 'progress',
+    icon: 'Crown',
+    rarity: 'epic',
+    hint: '修复虹彩天桥的全部设施',
+    rewardTitleId: 'rainbow_tuner',
+  },
+  {
+    id: 'chapter_peak_complete',
+    title: '乐园复兴师',
+    description: '完成梦幻之巅 81–99 关',
+    category: 'progress',
+    icon: 'Trophy',
+    rarity: 'legendary',
+    hint: '修复乐园中心的最后一处设施',
+    rewardTitleId: 'park_reviver',
+  },
+  {
+    id: 'perfect_20',
+    title: '完美回路师',
+    description: '在 20 个不同关卡获得三星及以上',
+    category: 'skill',
+    icon: 'Star',
+    rarity: 'legendary',
+    hint: '在 20 关取得高星评价',
+    rewardTitleId: 'perfect_circuit_master',
   },
 ];
 
@@ -257,6 +332,47 @@ export function calculateAchievementProgress(
       current = isUnlocked ? 20 : Math.min(stats.clearedLevelIds.length, 20);
       unit = '关';
       label = `通关进度 ${stats.clearedLevelIds.length}/20 关`;
+      break;
+
+    case 'levels_30':
+      max = 30;
+      current = Math.min(stats.clearedLevelIds.length, max);
+      unit = '关';
+      label = `通关进度 ${current}/30 关`;
+      break;
+
+    case 'levels_50':
+      max = 50;
+      current = Math.min(stats.clearedLevelIds.length, max);
+      unit = '关';
+      label = `通关进度 ${current}/50 关`;
+      break;
+
+    case 'chapter_garden_complete':
+    case 'chapter_cloud_complete':
+    case 'chapter_rainbow_complete':
+    case 'chapter_peak_complete': {
+      const ranges = {
+        chapter_garden_complete: [21, 40, '星光花园'],
+        chapter_cloud_complete: [41, 60, '云端奇境'],
+        chapter_rainbow_complete: [61, 80, '虹彩天桥'],
+        chapter_peak_complete: [81, 99, '梦幻之巅'],
+      } as const;
+      const [start, end, name] = ranges[achId];
+      max = end - start + 1;
+      current = stats.clearedLevelIds.filter(
+        (id) => id >= start && id <= end,
+      ).length;
+      unit = '关';
+      label = `${name} ${current}/${max} 关`;
+      break;
+    }
+
+    case 'perfect_20':
+      max = 20;
+      current = Math.min(stats.threeStarLevelIds.length, max);
+      unit = '关';
+      label = `三星关卡 ${current}/20 关`;
       break;
 
     case 'switch_operator':
@@ -459,6 +575,30 @@ export function checkVictoryAchievements(ctx: VictoryCheckContext): {
     unlockCandidate('circuit_grandmaster');
   }
 
+  if (stats.clearedLevelIds.length >= 30) {
+    unlockCandidate('levels_30');
+  }
+
+  if (stats.clearedLevelIds.length >= 50) {
+    unlockCandidate('levels_50');
+  }
+
+  const chapterRanges = [
+    [21, 40, 'chapter_garden_complete'],
+    [41, 60, 'chapter_cloud_complete'],
+    [61, 80, 'chapter_rainbow_complete'],
+    [81, 99, 'chapter_peak_complete'],
+  ] as const;
+  for (const [start, end, achievementId] of chapterRanges) {
+    const complete = Array.from(
+      { length: end - start + 1 },
+      (_, index) => start + index,
+    ).every((id) => stats.clearedLevelIds.includes(id));
+    if (complete) {
+      unlockCandidate(achievementId);
+    }
+  }
+
   // 8. 通断掌控 (Toggled switch in winning level)
   if (ctx.hasToggledSwitch) {
     unlockCandidate('switch_operator');
@@ -477,6 +617,10 @@ export function checkVictoryAchievements(ctx: VictoryCheckContext): {
   // 11. 完美主义者 (3+ stars in >= 5 distinct levels)
   if (stats.threeStarLevelIds.length >= 5) {
     unlockCandidate('perfectionist');
+  }
+
+  if (stats.threeStarLevelIds.length >= 20) {
+    unlockCandidate('perfect_20');
   }
 
   // 12. 无尽探险家 (Streak >= 3)
