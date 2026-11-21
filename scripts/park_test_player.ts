@@ -15,6 +15,13 @@ export async function openFreshHome(page: Page, url: string) {
   }
 }
 
+export async function unlockAllChapters(page: Page) {
+  const toggle = page.getByRole("button", {
+    name: /章节锁定中.*点击临时全解锁/,
+  });
+  if (await toggle.count()) await toggle.click();
+}
+
 export async function finishFirstGuide(page: Page, capture?: (step: number) => Promise<void>) {
   const seen = await page.evaluate(() => localStorage.getItem("honeycomb_onboarding_v1"));
   if (seen === "1") return;
