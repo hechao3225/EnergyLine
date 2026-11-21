@@ -16,6 +16,7 @@ import {
   withScheduleMeta,
 } from "./chapter-level-utils";
 import { generate as generateAxisLevel } from "./axis-gen";
+import { applyLevelRepairs } from "./chapter-repairs";
 
 const BASIC_BLUEPRINTS: Partial<Record<number, number>> = {
   1: 1,
@@ -146,7 +147,7 @@ function buildChapter1(): LevelConfig[] {
   }).sort((a, b) => a.id - b.id);
 }
 
-const chapter = buildChapter1();
+const chapter = applyLevelRepairs(buildChapter1());
 for (const level of chapter) {
   const solution = solveRuleLevel(level);
   const title = specOf(level.id).title;

@@ -12,6 +12,7 @@ import {
   buildNoSpecialLevel,
   withScheduleMeta,
 } from "./chapter-level-utils";
+import { applyLevelRepairs } from "./chapter-repairs";
 import {
   createScrambledLevel,
   generateAlgorithmLayout,
@@ -347,7 +348,7 @@ function buildChapter4(): LevelConfig[] {
 }
 
 function main() {
-  const chapter = buildChapter4();
+  const chapter = applyLevelRepairs(buildChapter4());
   for (const level of chapter) {
     const solution = solveRuleLevel(level);
     console.log(

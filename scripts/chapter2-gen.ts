@@ -6,6 +6,7 @@ import { TORUS_TEST_LEVELS } from "../src/data/torusLevels";
 import { simulateCircuit } from "../src/utils/circuit";
 import { solveRuleLevel } from "../src/utils/rule-solver";
 import { generate as generateAxisLevel } from "./axis-gen";
+import { applyLevelRepairs } from "./chapter-repairs";
 import {
   addSwitchToPlan,
   buildBasicFromBlueprint,
@@ -250,7 +251,7 @@ function buildChapter2(): LevelConfig[] {
   }).sort((a, b) => a.id - b.id);
 }
 
-const chapter = buildChapter2();
+const chapter = applyLevelRepairs(buildChapter2());
 for (const level of chapter) {
   const solution = solveRuleLevel(level);
   console.log(

@@ -142,6 +142,8 @@ function build(spec: TorusGenSpec, seed: number): LevelConfig | null {
   const rng = makeRng(seed);
   const tree = growTree(rng, spec.cells);
   if (tree.size < spec.cells) return null;
+  // 源点必须至少有一个端口，否则电池无法定向（旧实现在此直接抛异常）。
+  if ((tree.get(key(SOURCE.row, SOURCE.col)) ?? 0) === 0) return null;
   const cells = [...tree.keys()].map((k) => {
     const [row, col] = k.split(',').map(Number);
     return { row, col, ports: tree.get(k)! };

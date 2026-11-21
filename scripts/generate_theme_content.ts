@@ -340,9 +340,9 @@ function mechanicClauses(level: (typeof DEFAULT_LEVELS)[number]): string[] {
   return clauses;
 }
 
-function hintFor(level: (typeof DEFAULT_LEVELS)[number], facility: string, id: number): string {
+function hintFor(level: (typeof DEFAULT_LEVELS)[number], facility: string, id: number, routeOffset = 0): string {
   const clauses = mechanicClauses(level);
-  const route = ROUTES[id % ROUTES.length].replaceAll('{facility}', facility);
+  const route = ROUTES[(id + routeOffset) % ROUTES.length].replaceAll('{facility}', facility);
   return clauses.length > 0 ? `${clauses.join('·')}。${route}` : route;
 }
 
@@ -382,7 +382,12 @@ for (const level of DEFAULT_LEVELS) {
   if (!entry) throw new Error(`缺少设施词条：L${level.id}`);
   const state = TITLE_ACTIONS[level.id] ?? stateFor(entry.facility, level.id);
   const title = `${entry.facility}·${state}`;
-  const hint = hintFor(level, entry.facility, level.id);
+  // 提示去重：同一句式只允许出现一次，重复时顺延路线模板。
+  const usedHints = new Set(levels.map((item) => item.hint));
+  let hint = hintFor(level, entry.facility, level.id);
+  for (let offset = 1; usedHints.has(hint) && offset < ROUTES.length; offset++) {
+    hint = hintFor(level, entry.facility, level.id, offset);
+  }
   levels.push({
     levelId: level.id,
     zoneId: 'center',
@@ -412,7 +417,8 @@ function writeArray<T>(file: string, exportName: string, typeName: string, items
 }
 
 writeArray('src/content/levels.ts', 'LEVEL_CONTENT', 'LevelContent', levels);
-writeArray('src/content/collection.ts', 'COLLECTION', 'CollectionEntry', collection);
+// 藏品表含人工校订的 artKey，脚本只校验不覆盖（覆盖会打散 artKey 唯一性）。
+
 
 const fixtureDir = path.resolve(process.cwd(), 'scripts/fixtures');
 fs.mkdirSync(fixtureDir, { recursive: true });

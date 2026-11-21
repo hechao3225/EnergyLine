@@ -11,6 +11,7 @@ import {
   addSwitchToPlan,
   withScheduleMeta,
 } from "./chapter-level-utils";
+import { applyLevelRepairs } from "./chapter-repairs";
 import { colorTorusSolved } from "./chapter4-gen";
 import { generateAlgorithmLayout } from "./generate-99-levels";
 import { generateWeldLevel } from "./weld-gen";
@@ -547,7 +548,7 @@ function buildChapter5(): LevelConfig[] {
 }
 
 function main() {
-  const chapter = buildChapter5();
+  const chapter = applyLevelRepairs(buildChapter5());
   for (const level of chapter) {
     const solution = solveRuleLevel(level);
     console.log(
