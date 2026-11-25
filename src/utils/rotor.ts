@@ -4,6 +4,14 @@ import { simulateCircuit } from "./circuit";
 export interface RotorActivationResult {
   tiles: Tile[];
   activatedIds: string[];
+  steps: RotorActivationStep[];
+}
+
+export interface RotorActivationStep {
+  rotorId: string;
+  rotor: Tile;
+  fromTiles: Tile[];
+  toTiles: Tile[];
 }
 
 /** 环轨位置按顺时针排列：上边从左到右，右边从上到下，下边从右到左，左边从下到上。 */
@@ -35,6 +43,7 @@ export function activatePoweredRotors(
 ): RotorActivationResult {
   let tiles = currentTiles;
   const activatedIds: string[] = [];
+  const steps: RotorActivationStep[] = [];
   const rotorCount = tiles.filter((tile) => tile.type === "rotor").length;
 
   while (activatedIds.length < rotorCount) {
@@ -66,6 +75,7 @@ export function activatePoweredRotors(
       return tiles[index];
     });
 
+    const fromTiles = tiles;
     const nextTiles = tiles.map((tile) => ({ ...tile }));
     positions.forEach((position, index) => {
       const source = ringTiles[(index - 1 + ringTiles.length) % ringTiles.length];
@@ -79,9 +89,15 @@ export function activatePoweredRotors(
     const rotorIndex = indexByPosition.get(`${rotor.row},${rotor.col}`)!;
     nextTiles[rotorIndex] = { ...nextTiles[rotorIndex], rotorActivated: true };
 
+    steps.push({
+      rotorId: rotor.id,
+      rotor: { ...rotor },
+      fromTiles,
+      toTiles: nextTiles,
+    });
     tiles = nextTiles;
     activatedIds.push(rotor.id);
   }
 
-  return { tiles, activatedIds };
+  return { tiles, activatedIds, steps };
 }

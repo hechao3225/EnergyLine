@@ -1,4 +1,5 @@
 import React, {
+  useCallback,
   useEffect,
   useLayoutEffect,
   useMemo,
@@ -7,7 +8,10 @@ import React, {
 } from "react";
 import type { Tile, SimulationResult } from "../types/game";
 import { TileView } from "./TileView";
-import { getRotorRingPositions } from "../utils/rotor";
+import {
+  getRotorRingPositions,
+  type RotorActivationStep,
+} from "../utils/rotor";
 
 /** 齿轮分组配色：同色 = 同一组；相邻两格咬合，点一下一顺一反。 */
 const GEAR_COLORS = ["#d8b264", "#7fc9b4", "#d9a3bb", "#9ec4dd", "#b3a3d1"];
@@ -29,11 +33,14 @@ interface GameBoardProps {
   wrap?: boolean;
   /** 焊死关卡：通电的格子锁住 */
   weld?: boolean;
+  /** 本次操作触发的连续转盘换位 */
+  rotorAnimation?: RotorActivationStep[] | null;
 }
 
 interface RotorMotion {
   rotor: Tile;
   fromTiles: Tile[];
+  step: number;
 }
 
 export function GameBoard({
@@ -48,8 +55,13 @@ export function GameBoard({
   hintTileId,
   wrap = false,
   weld = false,
+  rotorAnimation,
 }: GameBoardProps) {
-  const cells = new Map(tiles.map((tile) => [`${tile.row},${tile.col}`, tile]));
+  const [visualTiles, setVisualTiles] = useState<Tile[] | null>(null);
+  const displayTiles = visualTiles ?? tiles;
+  const cells = new Map(
+    displayTiles.map((tile) => [`${tile.row},${tile.col}`, tile]),
+  );
   const wrapLinks = useMemo(() => {
     if (!wrap) return [];
     const links = new Map<
@@ -101,51 +113,67 @@ export function GameBoard({
   // 焊死：齿轮组只要有一格通电，整组锁住
   const weldedAxes = new Set<string>();
   if (weld) {
-    for (const tile of tiles) {
+    for (const tile of displayTiles) {
       if (tile.axis && simulation.poweredTileIds.has(tile.id)) weldedAxes.add(tile.axis);
     }
   }
   const axisIndex = useMemo(() => {
-    const ids = [...new Set(tiles.map((tile) => tile.axis).filter(Boolean))] as string[];
+    const ids = [...new Set(displayTiles.map((tile) => tile.axis).filter(Boolean))] as string[];
     ids.sort((a, b) => a.localeCompare(b, "en", { numeric: true }));
     return new Map(ids.map((id, index) => [id, index + 1]));
-  }, [tiles]);
-  const rotor = tiles.find((tile) => tile.type === "rotor");
+  }, [displayTiles]);
+  const rotors = displayTiles.filter((tile) => tile.type === "rotor");
   const rotorRing = useMemo(
     () =>
       new Set(
-        rotor
-          ? getRotorRingPositions(rotor).map(({ row, col }) => `${row},${col}`)
-          : [],
+        rotors.flatMap((rotor) =>
+          getRotorRingPositions(rotor).map(({ row, col }) => `${row},${col}`),
+        ),
       ),
-    [rotor],
+    [rotors],
   );
-  const rotorActive = Boolean(rotor?.rotorActivated);
-  const previousRotorActive = useRef(rotorActive);
-  const previousTiles = useRef(tiles);
   const [rotorSpinning, setRotorSpinning] = useState(false);
   const [rotorMotion, setRotorMotion] = useState<RotorMotion | null>(null);
-
-  useLayoutEffect(() => {
-    if (rotorActive && !previousRotorActive.current && rotor) {
-      setRotorMotion({ rotor: { ...rotor }, fromTiles: previousTiles.current });
+  const rotorTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const playRotorStep = useCallback(
+    (steps: RotorActivationStep[], index: number) => {
+      if (rotorTimer.current) clearTimeout(rotorTimer.current);
+      const step = steps[index];
+      if (!step) return;
+      setVisualTiles(step.fromTiles);
+      setRotorMotion({
+        rotor: step.rotor,
+        fromTiles: step.fromTiles,
+        step: index,
+      });
       setRotorSpinning(true);
-    }
-    previousRotorActive.current = rotorActive;
-  }, [rotorActive, rotor]);
+      rotorTimer.current = setTimeout(() => {
+        if (index + 1 < steps.length) {
+          setVisualTiles(step.toTiles);
+          playRotorStep(steps, index + 1);
+          return;
+        }
+        setVisualTiles(null);
+        setRotorMotion(null);
+        setRotorSpinning(false);
+      }, 880);
+    },
+    [],
+  );
 
   useLayoutEffect(() => {
-    previousTiles.current = tiles;
-  }, [tiles]);
-
-  useEffect(() => {
-    if (!rotorSpinning) return;
-    const timer = setTimeout(() => {
-      setRotorSpinning(false);
+    if (!rotorAnimation?.length) {
+      if (rotorTimer.current) clearTimeout(rotorTimer.current);
+      setVisualTiles(null);
       setRotorMotion(null);
-    }, 880);
-    return () => clearTimeout(timer);
-  }, [rotorSpinning]);
+      setRotorSpinning(false);
+      return;
+    }
+    playRotorStep(rotorAnimation, 0);
+    return () => {
+      if (rotorTimer.current) clearTimeout(rotorTimer.current);
+    };
+  }, [playRotorStep, rotorAnimation]);
 
   const rotorMotionItems = useMemo(() => {
     if (!rotorMotion) return [];
@@ -219,7 +247,7 @@ export function GameBoard({
               isLit={simulation.litBulbIds.has(tile.id)}
               isPeekActive={isPeekActive}
               onClick={onTileClick}
-              interactive={interactive}
+              interactive={interactive && !rotorSpinning}
               isHint={Boolean(hintTileId) && hintTileId === tile.id}
               isRotorRing={rotorRing.has(`${tile.row},${tile.col}`)}
               levelId={levelId}
@@ -248,8 +276,9 @@ export function GameBoard({
             <div className="park-tile" key={`space-${i}`} />
           );
         })}
-        {rotor && (
+        {rotors.map((rotor) => (
           <span
+            key={`rotor-orbit-${rotor.id}`}
             className="park-rotor-orbit"
             style={{
               left: `${((rotor.col - Math.max(1, rotor.rotorRadius ?? 1)) / gridCols) * 100}%`,
@@ -259,12 +288,12 @@ export function GameBoard({
             }}
             aria-hidden="true"
           />
-        )}
+        ))}
         {rotorMotion && (
           <div className="park-rotor-motion" aria-hidden="true">
             {rotorMotionItems.map(({ tile, style }) => (
               <div
-                key={tile.id}
+                key={`${rotorMotion.step}-${tile.id}`}
                 className="park-rotor-moving-tile"
                 style={style}
               >
@@ -280,12 +309,12 @@ export function GameBoard({
             ))}
           </div>
         )}
-        {rotorSpinning && rotor && (
+        {rotorSpinning && rotorMotion && (
           <b
             className="park-rotor-callout"
             style={{
-              left: `${((rotor.col + 0.5) / gridCols) * 100}%`,
-              top: `${((rotor.row + 0.5) / gridRows) * 100}%`,
+              left: `${((rotorMotion.rotor.col + 0.5) / gridCols) * 100}%`,
+              top: `${((rotorMotion.rotor.row + 0.5) / gridRows) * 100}%`,
             }}
             aria-hidden="true"
           >

@@ -40,7 +40,10 @@ import {
   PROGRESS_VERSION_KEY,
 } from "./utils/parkProgress";
 import { getStarsForLights, getStarsForSteps } from "./utils/rating";
-import { activatePoweredRotors } from "./utils/rotor";
+import {
+  activatePoweredRotors,
+  type RotorActivationStep,
+} from "./utils/rotor";
 
 const BEST_LIGHTS_KEY = "honeycomb_best_lights";
 const bulbsOf = (level: LevelConfig) => level.tiles.filter((t) => t.type === "bulb").length;
@@ -97,6 +100,9 @@ export default function App() {
   const [levelId, setLevelId] = useState(() => resumeLevel(clearedLevels));
   const [mode, setMode] = useState<Mode>("story");
   const [customLevel, setCustomLevel] = useState<LevelConfig | null>(null);
+  const [rotorAnimation, setRotorAnimation] = useState<
+    RotorActivationStep[] | null
+  >(null);
   // 玩法试玩：?trial=axis 时把主线 41–43 临时换成三张联动轴实验板（不改任何数据/存档字段）
   const level = customLevel ?? levelById(levelId);
   const [screen, setScreen] = useState<"home" | "play" | "victory">("home");
@@ -161,6 +167,7 @@ export default function App() {
     stats.current = { undos: 0, jumped: false, switched: false };
     setVictoryHonorTitles([]);
     setPeek(false);
+    setRotorAnimation(null);
     setScreen("play");
   }, []);
   useEffect(
@@ -297,6 +304,9 @@ export default function App() {
     });
     const rotorResult = activatePoweredRotors(level, rotatedTiles);
     const nextTiles = rotorResult.tiles;
+    if (rotorResult.steps.length > 0) {
+      setRotorAnimation(rotorResult.steps);
+    }
     const nextRemaining = current.remaining - 1;
     const nextSteps = (current.history[current.index].stepsUsed ?? current.history[current.index].stepNumber) + 1;
     const description = rotorResult.activatedIds.length
@@ -372,6 +382,7 @@ export default function App() {
       if (backtrack && current.rewinds === 0) return;
       const nextRewinds = current.rewinds - (backtrack ? 1 : 0);
       attempt.current = { ...current, tiles: item.tiles.map((tile) => ({ ...tile })), remaining: item.remainingSteps, index, rewinds: nextRewinds };
+      setRotorAnimation(null);
       setRewinds(nextRewinds);
       setTiles(item.tiles.map((tile) => ({ ...tile })));
       setRemaining(item.remainingSteps);
@@ -467,6 +478,7 @@ export default function App() {
   };
   const home = () => {
     if (winTimer.current) clearTimeout(winTimer.current);
+    setRotorAnimation(null);
     setScreen("home");
     setLevelsOpen(false);
     if (mode === "story" && !winProcessed.current) {
@@ -573,6 +585,7 @@ export default function App() {
       onStartLab={startLab}
       onAddSteps={addSteps}
       gameMode={mode}
+      rotorAnimation={rotorAnimation}
       victoryReward={victoryReward}
       victoryHonorTitles={victoryHonorTitles}
     />

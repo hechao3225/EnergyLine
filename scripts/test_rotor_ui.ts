@@ -45,7 +45,10 @@ await page.evaluate(`
 await closeTransientModals(page);
 await page.evaluate(() => document.fonts.ready);
 
-const entry = page.locator(".park-lab-entry.is-rotor");
+const entry = page
+  .locator(".park-lab-entry.is-rotor")
+  .filter({ hasText: /R1/ })
+  .first();
 await entry.waitFor({ timeout: 8_000 });
 await entry.scrollIntoViewIfNeeded();
 await page.screenshot({
@@ -216,10 +219,79 @@ const victory = await page.evaluate(() => ({
   steps: document.querySelector(".park-result-score")?.textContent?.replace(/\s+/g, " ").trim(),
 }));
 
+await page.getByRole("button", { name: /返回乐园/ }).click();
+const chainEntry = page
+  .locator(".park-lab-entry")
+  .filter({ hasText: /R2/ })
+  .first();
+await chainEntry.scrollIntoViewIfNeeded();
+await chainEntry.click();
+await page.waitForSelector(".park-play", { timeout: 8_000 });
+await page.evaluate(() => document.fonts.ready);
+await page.screenshot({
+  path: path.join(OUTPUT_DIR, "06-r2-chain-initial-390x844.png"),
+  animations: "allow",
+});
+
+await page.locator('[data-tile-id="lab-0-2"] .park-tile-rotate').click();
+await page.waitForTimeout(220);
+const chainStepA = await page.evaluate(() => {
+  const callout = document.querySelector(".park-rotor-callout");
+  const grid = document.querySelector(".park-grid")?.getBoundingClientRect();
+  const rect = callout?.getBoundingClientRect();
+  return {
+    movingTiles: document.querySelectorAll(".park-rotor-moving-tile").length,
+    calloutY:
+      rect && grid ? Math.round(((rect.top + rect.height / 2 - grid.top) / grid.height) * 100) : null,
+  };
+});
+await page.screenshot({
+  path: path.join(OUTPUT_DIR, "07-r2-chain-a-390x844.png"),
+  animations: "allow",
+});
+
+await page.waitForTimeout(830);
+const chainStepB = await page.evaluate(() => {
+  const callout = document.querySelector(".park-rotor-callout");
+  const grid = document.querySelector(".park-grid")?.getBoundingClientRect();
+  const rect = callout?.getBoundingClientRect();
+  return {
+    movingTiles: document.querySelectorAll(".park-rotor-moving-tile").length,
+    calloutY:
+      rect && grid ? Math.round(((rect.top + rect.height / 2 - grid.top) / grid.height) * 100) : null,
+  };
+});
+await page.screenshot({
+  path: path.join(OUTPUT_DIR, "08-r2-chain-b-390x844.png"),
+  animations: "allow",
+});
+
+await page.waitForTimeout(1100);
+const chainAfterSpin = await page.evaluate(() => ({
+  activeRotors: document.querySelectorAll('[data-type="rotor"][data-rotor-active="true"]').length,
+  movingTiles: document.querySelectorAll(".park-rotor-moving-tile").length,
+  target: document.querySelector("[data-testid=target-count]")?.textContent?.trim(),
+  switchText: document
+    .querySelector('[data-tile-id="lab-3-2"] .park-switch-toggle')
+    ?.textContent?.trim(),
+}));
+await page.locator('[data-tile-id="lab-3-2"] .park-switch-toggle').click();
+await page.locator(".park-victory").waitFor({ timeout: 5_000 });
+await page.screenshot({
+  path: path.join(OUTPUT_DIR, "09-r2-chain-victory-390x844.png"),
+  animations: "allow",
+});
+const chainVictory = await page.evaluate(() => ({
+  steps: document.querySelector(".park-result-score")?.textContent?.replace(/\s+/g, " ").trim(),
+}));
+
 await page.setViewportSize({ width: 360, height: 800 });
 await page.goto(BASE_URL, { waitUntil: "networkidle" });
 await closeTransientModals(page);
-const compactEntry = page.locator(".park-lab-entry.is-rotor");
+const compactEntry = page
+  .locator(".park-lab-entry.is-rotor")
+  .filter({ hasText: /R1/ })
+  .first();
 await compactEntry.scrollIntoViewIfNeeded();
 await compactEntry.click();
 await page.waitForSelector(".park-play", { timeout: 8_000 });
@@ -273,6 +345,10 @@ const result = {
   motion,
   afterShift,
   victory,
+  chainStepA,
+  chainStepB,
+  chainAfterSpin,
+  chainVictory,
   compactLessonState,
   compact,
   errors,
@@ -301,6 +377,15 @@ if (
   afterShift.movingTiles !== 0 ||
   afterShift.target !== "1/2" ||
   afterShift.remaining !== "5" ||
+  chainStepA.movingTiles !== 8 ||
+  chainStepA.calloutY !== 25 ||
+  chainStepB.movingTiles !== 8 ||
+  Math.abs((chainStepB.calloutY ?? 0) - 75) > 2 ||
+  chainAfterSpin.activeRotors !== 2 ||
+  chainAfterSpin.movingTiles !== 0 ||
+  chainAfterSpin.target !== "0/1" ||
+  chainAfterSpin.switchText !== "断" ||
+  chainVictory.steps !== "已用 2 步" ||
   !compactLessonState.insideViewport ||
   compactLessonState.bodyOverflowX ||
   compact.bodyOverflowX ||

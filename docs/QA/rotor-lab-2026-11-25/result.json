@@ -42,6 +42,23 @@
     "title": "",
     "steps": "已用 2 步"
   },
+  "chainStepA": {
+    "movingTiles": 8,
+    "calloutY": 25
+  },
+  "chainStepB": {
+    "movingTiles": 8,
+    "calloutY": 74
+  },
+  "chainAfterSpin": {
+    "activeRotors": 2,
+    "movingTiles": 0,
+    "target": "0/1",
+    "switchText": "断"
+  },
+  "chainVictory": {
+    "steps": "已用 2 步"
+  },
   "compactLessonState": {
     "insideViewport": true,
     "bodyOverflowX": false

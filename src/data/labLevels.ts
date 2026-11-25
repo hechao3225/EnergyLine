@@ -290,6 +290,36 @@ const ROTOR_RING: Put[] = [
   [5, 2, "corner", 180, { locked: true }],
 ];
 
+/**
+ * R2 双转盘：左侧 A 启动后把下路管线换到 B 的供能口，B 随即启动。
+ * B 的环轨把一扇断开的能量闸送到目标线路，玩家最后扳通它。
+ */
+const ROTOR_CHAIN: Put[] = [
+  [0, 0, "corner", 0, { locked: true }],
+  [0, 1, "corner", 0, { locked: true }],
+  [0, 2, "line", 90],
+  [0, 3, "battery", 180, { locked: true }],
+  [1, 0, "line", 90, { locked: true }],
+  [1, 1, "rotor", 0, { locked: true, rotorRadius: 1 }],
+  [1, 2, "line", 0, { locked: true }],
+  [2, 0, "corner", 180, { locked: true }],
+  [2, 1, "line", 0, { locked: true }],
+  [2, 2, "corner", 0, { locked: true }],
+  [2, 3, "battery", 180, { locked: true }],
+
+  [3, 0, "corner", 0, { locked: true }],
+  [3, 1, "t_shape", 270, { locked: true }],
+  [3, 2, "switch", 90, { switchClosed: false }],
+  [3, 3, "battery", 180, { locked: true }],
+  [4, 0, "line", 90, { locked: true }],
+  [4, 1, "rotor", 0, { locked: true, rotorRadius: 1 }],
+  [4, 2, "t_shape", 180, { locked: true }],
+  [5, 0, "corner", 270, { locked: true }],
+  [5, 1, "line", 0, { locked: true }],
+  [5, 2, "corner", 180, { locked: true }],
+  [5, 3, "bulb", 0, { locked: true }],
+];
+
 export const LAB_LEVELS: LevelConfig[] = [
   {
     id: 901,
@@ -428,6 +458,24 @@ export const LAB_LEVELS: LevelConfig[] = [
     questionType: "相变",
     role: "教",
     tiles: board(ROTOR_RING),
+  },
+  {
+    id: 951,
+    code: "R2",
+    totalLevels: 99,
+    title: "动力转盘 · 机关带动机关",
+    subtitle: "双机关",
+    hintText: "先接通左侧转盘。第二台转盘会自动启动，最后扳通换到右侧的能量闸。",
+    winText: "试验通过：一台机关启动了下一台。",
+    parSteps: 2,
+    maxSteps: 8,
+    gridRows: 6,
+    gridCols: 6,
+    mechanicTags: ["rotor", "switch"],
+    primaryMechanic: "rotor",
+    questionType: "顺序",
+    role: "练",
+    tiles: board(ROTOR_CHAIN),
   },
   {
     id: 909,

@@ -30,6 +30,7 @@ import {
 } from "../data/honorTitles";
 import { sound } from "../utils/audio";
 import { haptics } from "../utils/haptics";
+import type { RotorActivationStep } from "../utils/rotor";
 import {
   adStepsUsedToday,
   buyCosmetic,
@@ -118,6 +119,8 @@ interface Props {
   onAddSteps?: (amount?: number) => boolean;
   /** 道具：本局额外回溯 +1 */
   onAddRewind?: () => boolean;
+  /** 本次操作触发的连续转盘换位 */
+  rotorAnimation?: RotorActivationStep[] | null;
   /** 达标关：提前结算（拿当前星数） */
   onSettle?: () => void;
   gameMode: "story" | "endless" | "editor" | "lab";
@@ -854,6 +857,7 @@ export function CandyThemeShell(p: Props) {
                 levelId={p.level.id}
                 wrap={Boolean(p.level.rules?.wrap)}
                 weld={Boolean(p.level.rules?.weld)}
+                rotorAnimation={p.rotorAnimation}
               />
               {p.remainingSteps === 0 && !p.simulation.isAllLit && (
                 <div className="park-out-of-steps">
