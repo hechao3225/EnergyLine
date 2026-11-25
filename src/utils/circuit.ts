@@ -52,6 +52,9 @@ export function getDefaultBasePorts(type: TileType): number {
     case 'diode':
       // Diode from left to right
       return Direction.LEFT | Direction.RIGHT;
+    case 'rotor':
+      // The powered turntable accepts energy from any direction.
+      return Direction.UP | Direction.RIGHT | Direction.DOWN | Direction.LEFT;
     default:
       return Direction.NONE;
   }
@@ -181,8 +184,12 @@ export function simulateCircuit(
           litBulbIds.add(neighbor.id);
         }
 
-        // Bulbs and batteries don't continue to chain out further
-        if (neighbor.type !== 'bulb' && neighbor.type !== 'battery') {
+        // Facilities, sources and turntables terminate the traversed branch.
+        if (
+          neighbor.type !== 'bulb' &&
+          neighbor.type !== 'battery' &&
+          neighbor.type !== 'rotor'
+        ) {
           queue.push({ tile: neighbor, fromDir: inDir });
         }
       }

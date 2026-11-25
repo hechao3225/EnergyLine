@@ -6,6 +6,10 @@ import { applyRuleSolution, isRuleLevelSolved, solveRuleLevel } from '../src/uti
 
 let bad = 0;
 for (const level of LAB_LEVELS) {
+  if (level.tiles.some((tile) => tile.type === 'rotor')) {
+    console.log(`• ${level.code} ${level.title}：动态机关由 test_rotor.ts 验证`);
+    continue;
+  }
   const axes = new Set(level.tiles.map((t) => t.axis).filter(Boolean));
   const sol = solveRuleLevel(level);
   const declared = level.parSteps ?? 0;

@@ -1,0 +1,37 @@
+{
+  "homeState": {
+    "label": "机关 R1通电变形新",
+    "visible": true,
+    "bodyOverflowX": false,
+    "overlapsCoreControls": false
+  },
+  "initial": {
+    "rotorMark": "↻动力",
+    "orbitInsideBoard": true,
+    "target": "0/2",
+    "caption": "动力转盘通电后，周围 8 格管道会沿环轨换位",
+    "clipped": []
+  },
+  "afterShift": {
+    "active": "true",
+    "switchedTileRowCol": {
+      "id": "lab-1-2",
+      "position": 9,
+      "switchOpen": "断"
+    },
+    "target": "1/2",
+    "remaining": "5",
+    "caption": "动力转盘已启动：周围管道完成换位，继续接通设施"
+  },
+  "victory": {
+    "title": "",
+    "steps": "已用 2 步"
+  },
+  "compact": {
+    "bodyOverflowX": false,
+    "tileWidth": 54,
+    "rotorMarkVisible": true,
+    "captionHeight": 16
+  },
+  "errors": []
+}

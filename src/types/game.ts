@@ -23,7 +23,8 @@ export type TileType =
   | 't_shape'   // 3-way T-junction
   | 'cross'     // 4-way cross junction
   | 'switch'    // Toggle switch (can open/close circuit)
-  | 'diode';    // Diode (one-way electric flow)
+  | 'diode'     // Diode (one-way electric flow)
+  | 'rotor';    // Powered turntable (rotates its surrounding ring once)
 
 export interface Tile {
   id: string;
@@ -44,6 +45,10 @@ export interface Tile {
   color?: number;
   switchClosed?: boolean;  // For switch tile: true = conducting, false = disconnected
   label?: string;
+  /** 动力转盘作用半径；缺省为 1，即周围 8 格 */
+  rotorRadius?: number;
+  /** 动力转盘是否已经放电换位 */
+  rotorActivated?: boolean;
 }
 
 /** 关卡级规则（不是某个格子的属性） */
@@ -70,6 +75,7 @@ export type MechanicTag =
   | "goal"
   | "weld"
   | "gear"
+  | "rotor"
   | "colors"
   | "noCycle"
   | "7x7";

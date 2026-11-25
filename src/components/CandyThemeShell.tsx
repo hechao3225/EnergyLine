@@ -469,6 +469,8 @@ export function CandyThemeShell(p: Props) {
   const hasSwitch = p.tiles.some((t) => t.type === "switch");
   const hasDiode = p.tiles.some((t) => t.type === "diode");
   const hasGear = p.tiles.some((t) => (t.axisDir ?? 0) !== 0);
+  const rotor = p.tiles.find((t) => t.type === "rotor");
+  const hasRotor = Boolean(rotor);
   const navigation: { icon: IconName; text: string; action: () => void }[] = [
     {
       icon: "castle",
@@ -677,13 +679,17 @@ export function CandyThemeShell(p: Props) {
               (() => {
                 const entries = LAB_LEVELS.map((lab, index) => ({ lab, index }));
                 const isNew = (code: string) =>
+                  code.startsWith("R") ||
                   code.startsWith("G") ||
                   code.startsWith("T") ||
                   code.startsWith("W") ||
                   code.startsWith("K") ||
                   code === "C2";
                 const ordered = [
-                  ...entries.filter(({ lab }) => isNew(lab.code)),
+                  ...entries.filter(({ lab }) => lab.code.startsWith("R")),
+                  ...entries.filter(
+                    ({ lab }) => isNew(lab.code) && !lab.code.startsWith("R"),
+                  ),
                   ...entries.filter(({ lab }) => !isNew(lab.code)),
                 ];
                 return (
@@ -693,6 +699,7 @@ export function CandyThemeShell(p: Props) {
                       const isGear = lab.code.startsWith("G");
                       const isTorus = lab.code.startsWith("T");
                       const isWeld = lab.code.startsWith("W");
+                      const isRotor = lab.code.startsWith("R");
                       const isCombo =
                         lab.code.startsWith("K") ||
                         lab.code === "W-1" ||
@@ -700,12 +707,14 @@ export function CandyThemeShell(p: Props) {
                       return (
                         <button
                           key={lab.id}
-                          className={`park-lab-entry ${isGear ? "is-gear" : ""} ${isTorus ? "is-torus" : ""} ${isWeld ? "is-weld" : ""} ${isCombo ? "is-combo" : ""}`}
+                          className={`park-lab-entry ${isRotor ? "is-rotor" : ""} ${isGear ? "is-gear" : ""} ${isTorus ? "is-torus" : ""} ${isWeld ? "is-weld" : ""} ${isCombo ? "is-combo" : ""}`}
                           type="button"
                           onClick={() => p.onStartLab?.(index)}
                           aria-label={`实验关 ${lab.code} ${lab.title}`}
                         >
-                          {isCombo
+                          {isRotor
+                            ? "机关 "
+                            : isCombo
                             ? "组合 "
                             : isGear
                               ? "齿轮 "
@@ -716,7 +725,7 @@ export function CandyThemeShell(p: Props) {
                                   : "实验关 "}
                           {lab.code}
                           <i>{lab.subtitle ?? lab.title}</i>
-                          {(isGear || isTorus || isWeld || isCombo) && <b className="park-lab-new">新</b>}
+                          {(isRotor || isGear || isTorus || isWeld || isCombo) && <b className="park-lab-new">新</b>}
                         </button>
                       );
                     })}
@@ -897,6 +906,10 @@ export function CandyThemeShell(p: Props) {
             <div className="park-play-caption">
               {p.simulation.overloaded
                 ? "回路过载！能量在环里打转，整段熄灭 —— 通路不能连成圈"
+                : hasRotor
+                  ? rotor?.rotorActivated
+                    ? "动力转盘已启动：周围管道完成换位，继续接通设施"
+                    : "动力转盘通电后，周围 8 格管道会沿环轨换位"
                 : p.level.rules?.wrap && p.level.rules?.weld
                   ? "环面 + 焊死：远端起手，跨缝接通即锁"
                   : p.level.rules?.colors && p.level.rules?.weld
@@ -1395,6 +1408,15 @@ export function CandyThemeShell(p: Props) {
                           title: "固定管道",
                           text: "带锁标记的管道不能旋转，只能按它现在的方向规划。",
                         },
+                        ...(hasRotor
+                          ? [
+                              {
+                                art: "pipe-cross-on",
+                                title: "动力转盘",
+                                text: "首次通电时启动一次，周围 8 格管道顺时针换位；管道朝向不变，换位本身不消耗步数。",
+                              },
+                            ]
+                          : []),
                         {
                           art: "icon-star",
                           title: "取舍关",

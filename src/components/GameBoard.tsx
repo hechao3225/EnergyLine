@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import type { Tile, SimulationResult } from "../types/game";
 import { TileView } from "./TileView";
+import { getRotorRingPositions } from "../utils/rotor";
 
 /** 齿轮分组配色：同色 = 同一组；相邻两格咬合，点一下一顺一反。 */
 const GEAR_COLORS = ["#d8b264", "#7fc9b4", "#d9a3bb", "#9ec4dd", "#b3a3d1"];
@@ -98,6 +99,28 @@ export function GameBoard({
     ids.sort((a, b) => a.localeCompare(b, "en", { numeric: true }));
     return new Map(ids.map((id, index) => [id, index + 1]));
   }, [tiles]);
+  const rotor = tiles.find((tile) => tile.type === "rotor");
+  const rotorRing = useMemo(
+    () =>
+      new Set(
+        rotor
+          ? getRotorRingPositions(rotor).map(({ row, col }) => `${row},${col}`)
+          : [],
+      ),
+    [rotor],
+  );
+  const rotorActive = Boolean(rotor?.rotorActivated);
+  const previousRotorActive = useRef(rotorActive);
+  const [rotorSpinning, setRotorSpinning] = useState(false);
+  useEffect(() => {
+    if (rotorActive && !previousRotorActive.current) {
+      setRotorSpinning(true);
+      previousRotorActive.current = true;
+      const timer = setTimeout(() => setRotorSpinning(false), 920);
+      return () => clearTimeout(timer);
+    }
+    previousRotorActive.current = rotorActive;
+  }, [rotorActive]);
 
   // 只有真的转过的格子才闪：撤销、进关都不触发。
   const previousRotation = useRef(new Map<string, number>());
@@ -122,7 +145,7 @@ export function GameBoard({
 
   return (
     <div
-      className={`park-board ${simulation.isAllLit ? "is-complete" : ""} ${simulation.overloaded ? "is-overloaded" : ""} ${wrap ? "is-wrap" : ""}`}
+      className={`park-board ${simulation.isAllLit ? "is-complete" : ""} ${simulation.overloaded ? "is-overloaded" : ""} ${wrap ? "is-wrap" : ""} ${rotorSpinning ? "is-rotor-spin" : ""}`}
       data-wrap={wrap ? "true" : undefined}
       aria-label="能量管道棋盘"
     >
@@ -147,6 +170,7 @@ export function GameBoard({
               onClick={onTileClick}
               interactive={interactive}
               isHint={Boolean(hintTileId) && hintTileId === tile.id}
+              isRotorRing={rotorRing.has(`${tile.row},${tile.col}`)}
               levelId={levelId}
               gearIndex={tile.axis ? axisIndex.get(tile.axis) ?? 0 : 0}
               gearFlash={flash[tile.id] ?? 0}
@@ -173,6 +197,20 @@ export function GameBoard({
             <div className="park-tile" key={`space-${i}`} />
           );
         })}
+        {rotor && (
+          <span
+            className="park-rotor-orbit"
+            style={{
+              left: `${((rotor.col - Math.max(1, rotor.rotorRadius ?? 1)) / gridCols) * 100}%`,
+              top: `${((rotor.row - Math.max(1, rotor.rotorRadius ?? 1)) / gridRows) * 100}%`,
+              width: `${((Math.max(1, rotor.rotorRadius ?? 1) * 2 + 1) / gridCols) * 100}%`,
+              height: `${((Math.max(1, rotor.rotorRadius ?? 1) * 2 + 1) / gridRows) * 100}%`,
+            }}
+            aria-hidden="true"
+          >
+            {rotorSpinning && <b>环轨换位</b>}
+          </span>
+        )}
       </div>
       {wrapLinks.length > 0 && (
         <div className="park-wrap-ghosts" aria-hidden="true">

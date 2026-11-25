@@ -1243,6 +1243,14 @@ img {
   color: #ffe9a8;
   box-shadow: 0 0 1.2cqw #ffcf4d55;
 }
+.park-lab-entry.is-rotor {
+  border-color: #7df0d1;
+  background: linear-gradient(135deg, #07382ee8, #2c1952ee);
+  color: #d9fff4;
+  box-shadow:
+    0 0 1.2cqw #7df0d166,
+    0 0 2cqw #b28dff33;
+}
 .park-lab-entry.is-torus {
   border-color: #7fc9b4;
   background: #04322de6;
@@ -1440,6 +1448,102 @@ img {
   0% { transform: scale(1); }
   40% { transform: scale(1.3); }
   100% { transform: scale(1); }
+}
+/* 动力转盘：环轨底座 + 中央机关章 */
+.park-rotor-orbit {
+  position: absolute;
+  z-index: 4;
+  border: 0.42cqw dashed #8af6df;
+  border-radius: 18%;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 1.8cqw #7df0d166,
+    0 0 1.6cqw #7df0d155;
+  opacity: 0.7;
+}
+.park-rotor-orbit > b {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 8;
+  padding: 0.7cqw 1.8cqw;
+  border-radius: 999px;
+  background: #062d2ae8;
+  color: #e9fff9;
+  font-size: 2.9cqw;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 1.5cqw #7df0d1aa;
+  animation: rotorShiftLabel 0.92s ease-out both;
+}
+.park-tile.has-rotor::before {
+  box-shadow:
+    inset 0 0 0 0.5cqw #8af6df,
+    inset 1px 2px 2px #f8ecffa0,
+    inset -1px -2px 3px #493274,
+    0 0 1.4cqw #7df0d177;
+  filter: saturate(1.05) brightness(1.03);
+}
+.park-tile.is-rotor-ring .park-tile-rotate {
+  box-shadow: inset 0 0 1.1cqw #7df0d13d;
+}
+.park-rotor-mark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 7;
+  width: 45%;
+  aspect-ratio: 1;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  border-radius: 50%;
+  border: 0.32cqw solid #e8fff9;
+  background:
+    radial-gradient(circle at 35% 28%, #ffffff, #7df0d1 35%, #286f70 68%, #102b3e);
+  color: #092b32;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  box-shadow:
+    0 0 0.9cqw #7df0d1aa,
+    inset 0 -0.5cqw 0.8cqw #164b5b66;
+}
+.park-rotor-mark b {
+  font-size: 4.2cqw;
+  line-height: 0.9;
+}
+.park-rotor-mark small {
+  margin-top: 0.2cqw;
+  font-size: 1.7cqw;
+  font-weight: 900;
+  line-height: 1;
+}
+.park-tile.is-rotor-active .park-rotor-mark {
+  background:
+    radial-gradient(circle at 35% 28%, #fffceb, #ffe27a 38%, #bf7a13 72%, #4f2800);
+  color: #4b2600;
+  box-shadow:
+    0 0 1.2cqw #ffe27aaa,
+    inset 0 -0.5cqw 0.8cqw #7c4a0066;
+}
+.park-board.is-rotor-spin .park-rotor-orbit {
+  animation: rotorOrbitSpin 0.92s cubic-bezier(0.3, 0.8, 0.2, 1) both;
+}
+.park-board.is-rotor-spin .park-tile.is-rotor-ring .park-pipe {
+  filter: brightness(1.65) drop-shadow(0 0 1cqw #8af6df);
+}
+@keyframes rotorOrbitSpin {
+  0% { opacity: 0.5; transform: rotate(0deg) scale(0.96); }
+  45% { opacity: 1; transform: rotate(34deg) scale(1.03); }
+  100% { opacity: 0.7; transform: rotate(90deg) scale(1); }
+}
+@keyframes rotorShiftLabel {
+  0% { opacity: 0; transform: translate(-50%, -34%) scale(0.78); }
+  24% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  76% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -64%) scale(0.96); }
 }
 /* 设施复苏 */
 .park-victory {

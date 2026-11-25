@@ -23,6 +23,8 @@ interface TileViewProps {
   wrapEdges?: ("up" | "down" | "left" | "right")[];
   /** 焊死关卡：这一格已通电，不能再转 */
   weldLocked?: boolean;
+  /** 动力转盘：这一格位于当前转盘的环轨上 */
+  isRotorRing?: boolean;
   /** 提示引擎高亮的格子 */
   isHint?: boolean;
 }
@@ -36,6 +38,7 @@ const TILE_NAMES: Record<Tile["type"], string> = {
   cross: "十字管",
   switch: "能量闸",
   diode: "单向管",
+  rotor: "动力转盘",
 };
 export const TileView: React.FC<TileViewProps> = ({
   tile,
@@ -50,10 +53,12 @@ export const TileView: React.FC<TileViewProps> = ({
   gearFlash = 0,
   wrapEdges,
   weldLocked = false,
+  isRotorRing = false,
   isHint = false,
 }) => {
   const isGoal = tile.type === "bulb",
-    isSource = tile.type === "battery";
+    isSource = tile.type === "battery",
+    isRotor = tile.type === "rotor";
   const wasWelded = useRef(false);
   const weldTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [justWelded, setJustWelded] = useState(false);
@@ -89,12 +94,15 @@ export const TileView: React.FC<TileViewProps> = ({
         ? `pipe-switch-${tile.switchClosed === false ? "off" : "on"}`
         : tile.type === "diode"
           ? "pipe-diode"
+          : isRotor
+            ? `pipe-cross-${isPowered ? "on" : "off"}`
           : `pipe-${tile.type}-${isPowered ? "on" : "off"}`;
   return (
     <div
-      className={`park-tile ${isPowered ? "is-powered" : ""} ${isGoal ? "is-goal" : ""} ${isLit ? "is-lit" : ""} ${tile.locked ? "is-fixed" : ""} ${noop ? "is-noop" : ""} ${tile.axis ? "has-axis" : ""} ${weldLocked ? "is-welded" : ""} ${isHint ? "is-hint" : ""} ${shownColor ? `color-${shownColor}` : ""}`}
+      className={`park-tile ${isPowered ? "is-powered" : ""} ${isGoal ? "is-goal" : ""} ${isLit ? "is-lit" : ""} ${tile.locked ? "is-fixed" : ""} ${noop ? "is-noop" : ""} ${tile.axis ? "has-axis" : ""} ${weldLocked ? "is-welded" : ""} ${isRotor ? "has-rotor" : ""} ${tile.rotorActivated ? "is-rotor-active" : ""} ${isRotorRing ? "is-rotor-ring" : ""} ${isHint ? "is-hint" : ""} ${shownColor ? `color-${shownColor}` : ""}`}
       data-tile-id={tile.id}
       data-type={tile.type}
+      data-rotor-active={isRotor ? Boolean(tile.rotorActivated) : undefined}
       data-axis={tile.axis}
       data-axis-dir={tile.axisDir}
       data-gear-index={gearIndex || undefined}
@@ -108,7 +116,7 @@ export const TileView: React.FC<TileViewProps> = ({
         className="park-tile-rotate"
         disabled={locked}
         onClick={() => onClick(tile, "rotate")}
-        aria-label={`${tile.row + 1}行${tile.col + 1}列${TILE_NAMES[tile.type]}${tile.type === "empty" ? "不可操作" : tile.locked ? "固定" : noop ? "四向对称，无需旋转" : "旋转"}`}
+        aria-label={`${tile.row + 1}行${tile.col + 1}列${TILE_NAMES[tile.type]}${tile.type === "empty" ? "不可操作" : isRotor ? (tile.rotorActivated ? "已启动" : "固定") : tile.locked ? "固定" : noop ? "四向对称，无需旋转" : "旋转"}`}
       >
         {tile.type !== "empty" && (
           <Art
@@ -123,6 +131,12 @@ export const TileView: React.FC<TileViewProps> = ({
         {(wrapEdges ?? []).map((edge) => (
           <span key={edge} className={`park-wrap-tick is-${edge}`} aria-hidden="true" />
         ))}
+        {isRotor && (
+          <span className="park-rotor-mark" aria-hidden="true">
+            <b>{tile.rotorActivated ? "✓" : "↻"}</b>
+            <small>{tile.rotorActivated ? "已启" : "动力"}</small>
+          </span>
+        )}
         {shownColor > 0 && (
           <span
             className="park-color-mark"
@@ -150,7 +164,7 @@ export const TileView: React.FC<TileViewProps> = ({
           </span>
         )}
 
-        {tile.locked && !isSource && !isGoal && (
+        {tile.locked && !isSource && !isGoal && !isRotor && (
           <span className="park-fixed-mark">
             <Icon name="lock" />
           </span>

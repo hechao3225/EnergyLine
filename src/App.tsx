@@ -40,6 +40,7 @@ import {
   PROGRESS_VERSION_KEY,
 } from "./utils/parkProgress";
 import { getStarsForLights, getStarsForSteps } from "./utils/rating";
+import { activatePoweredRotors } from "./utils/rotor";
 
 const BEST_LIGHTS_KEY = "honeycomb_best_lights";
 const bulbsOf = (level: LevelConfig) => level.tiles.filter((t) => t.type === "bulb").length;
@@ -286,7 +287,7 @@ export default function App() {
         : simulation.poweredTileIds.has(clicked.id);
       if (welded) return;
     }
-    const nextTiles = current.tiles.map((tile) => {
+    const rotatedTiles = current.tiles.map((tile) => {
       if (axis && tile.axis === axis)
         return { ...tile, rotation: tile.rotation + 90 * (tile.axisDir ?? 1) };
       if (tile.id !== clicked.id) return tile;
@@ -294,8 +295,13 @@ export default function App() {
         ? { ...tile, switchClosed: !tile.switchClosed }
         : { ...tile, rotation: tile.rotation + 90 };
     });
+    const rotorResult = activatePoweredRotors(level, rotatedTiles);
+    const nextTiles = rotorResult.tiles;
     const nextRemaining = current.remaining - 1;
     const nextSteps = (current.history[current.index].stepsUsed ?? current.history[current.index].stepNumber) + 1;
+    const description = rotorResult.activatedIds.length
+      ? `动力转盘启动 · 环轨换位 (${clicked.row + 1}, ${clicked.col + 1})`
+      : `${toggle ? "切换能量闸" : axis ? "联动旋转" : "旋转管道"} (${clicked.row + 1}, ${clicked.col + 1})`;
     const nextHistory = [
       ...current.history.slice(0, current.index + 1),
       snapshot(
@@ -303,7 +309,7 @@ export default function App() {
         nextTiles,
         nextRemaining,
         nextSteps,
-        `${toggle ? "切换能量闸" : axis ? "联动旋转" : "旋转管道"} (${clicked.row + 1}, ${clicked.col + 1})`,
+        description,
       ),
     ];
     attempt.current = { ...current, tiles: nextTiles, remaining: nextRemaining, history: nextHistory, index: nextHistory.length - 1 };
@@ -311,7 +317,10 @@ export default function App() {
     setRemaining(nextRemaining);
     setHistory(nextHistory);
     setHistoryIndex(nextHistory.length - 1);
-    if (toggle) {
+    if (rotorResult.activatedIds.length > 0) {
+      sound.playGear();
+      haptics.tapHeavy();
+    } else if (toggle) {
       stats.current.switched = true;
       sound.playSwitch();
       haptics.tapHeavy();

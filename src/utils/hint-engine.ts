@@ -43,6 +43,7 @@ const LABELS: Record<Tile['type'], string> = {
   cross: '十字管',
   switch: '能量闸',
   diode: '单向管',
+  rotor: '动力转盘',
 };
 
 /**

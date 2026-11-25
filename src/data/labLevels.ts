@@ -263,6 +263,33 @@ const X1: Put[] = [
   [5, 2, "bulb", 0, { locked: true }],
 ];
 
+/**
+ * R1 动力转盘：左侧支路先给转盘供电，环轨顺时针换位后，
+ * 下支路会接上右侧设施；再把换到右上的能量闸扳通，顶部设施也接通。
+ */
+const ROTOR_RING: Put[] = [
+  [0, 3, "bulb", 0, { locked: true }],
+
+  [1, 1, "corner", 0, { locked: true }],
+  [1, 2, "switch", 90, { switchClosed: false }],
+  [1, 3, "cross", 0, { locked: true }],
+  [2, 0, "battery", 0, { locked: true }],
+  [2, 1, "line", 90],
+  [2, 2, "rotor", 0, { locked: true, rotorRadius: 1 }],
+  [2, 3, "corner", 180, { locked: true }],
+  [3, 1, "corner", 90, { locked: true }],
+  [3, 2, "line", 0, { locked: true }],
+  [3, 3, "corner", 0, { locked: true }],
+
+  [2, 4, "line", 0, { locked: true }],
+  [2, 5, "bulb", 0, { locked: true }],
+
+  [4, 2, "line", 90, { locked: true }],
+  [5, 0, "battery", 0, { locked: true }],
+  [5, 1, "line", 0, { locked: true }],
+  [5, 2, "corner", 180, { locked: true }],
+];
+
 export const LAB_LEVELS: LevelConfig[] = [
   {
     id: 901,
@@ -383,6 +410,24 @@ export const LAB_LEVELS: LevelConfig[] = [
     gridRows: 7,
     gridCols: 7,
     tiles: board(M1, 7),
+  },
+  {
+    id: 950,
+    code: "R1",
+    totalLevels: 99,
+    title: "动力转盘 · 环轨换位",
+    subtitle: "通电变形",
+    hintText: "先接通左侧动力转盘。环轨换位后，再扳通换到右上的能量闸。",
+    winText: "试验通过：通电让整段环轨换位。",
+    parSteps: 2,
+    maxSteps: 6,
+    gridRows: 6,
+    gridCols: 6,
+    mechanicTags: ["rotor"],
+    primaryMechanic: "rotor",
+    questionType: "相变",
+    role: "教",
+    tiles: board(ROTOR_RING),
   },
   {
     id: 909,
