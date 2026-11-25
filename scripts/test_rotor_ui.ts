@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { chromium } from "playwright";
-import { closeTransientModals } from "./playwright-game-actions";
+import { clickStep, closeTransientModals } from "./playwright-game-actions";
 
 const BASE_URL = process.env.ROTOR_URL ?? "http://127.0.0.1:3001/";
 const OUTPUT_DIR = path.resolve("docs/QA/rotor-lab-2026-11-25");
@@ -249,8 +249,24 @@ await page.screenshot({
   path: path.join(OUTPUT_DIR, "07-r2-chain-a-390x844.png"),
   animations: "allow",
 });
+await page.waitForTimeout(760);
+const chainAfterA = await page.evaluate(() => ({
+  activeRotors: document.querySelectorAll('[data-type="rotor"][data-rotor-active="true"]').length,
+  movingTiles: document.querySelectorAll(".park-rotor-moving-tile").length,
+  target: document.querySelector("[data-testid=target-count]")?.textContent?.trim(),
+  switchText: document
+    .querySelector('[data-tile-id="lab-3-1"] .park-switch-toggle')
+    ?.textContent?.trim(),
+}));
+await page.locator('[data-tile-id="lab-3-1"] .park-switch-toggle').click();
+await page.waitForTimeout(80);
+const chainAfterASwitch = await page.evaluate(() => ({
+  target: document.querySelector("[data-testid=target-count]")?.textContent?.trim(),
+  remaining: document.querySelector("[data-testid=remaining-steps]")?.textContent?.trim(),
+}));
 
-await page.waitForTimeout(830);
+await page.locator('[data-tile-id="lab-5-3"] .park-tile-rotate').click();
+await page.waitForTimeout(220);
 const chainStepB = await page.evaluate(() => {
   const callout = document.querySelector(".park-rotor-callout");
   const grid = document.querySelector(".park-grid")?.getBoundingClientRect();
@@ -265,17 +281,19 @@ await page.screenshot({
   path: path.join(OUTPUT_DIR, "08-r2-chain-b-390x844.png"),
   animations: "allow",
 });
-
-await page.waitForTimeout(1100);
-const chainAfterSpin = await page.evaluate(() => ({
+await page.waitForTimeout(760);
+const chainAfterB = await page.evaluate(() => ({
   activeRotors: document.querySelectorAll('[data-type="rotor"][data-rotor-active="true"]').length,
-  movingTiles: document.querySelectorAll(".park-rotor-moving-tile").length,
   target: document.querySelector("[data-testid=target-count]")?.textContent?.trim(),
+  switchRotation: document
+    .querySelector('[data-tile-id="lab-2-4"]')
+    ?.getAttribute("data-rotation"),
   switchText: document
-    .querySelector('[data-tile-id="lab-3-2"] .park-switch-toggle')
+    .querySelector('[data-tile-id="lab-2-4"] .park-switch-toggle')
     ?.textContent?.trim(),
 }));
-await page.locator('[data-tile-id="lab-3-2"] .park-switch-toggle').click();
+await clickStep(page, { id: "lab-2-4", taps: 1 });
+await page.locator('[data-tile-id="lab-2-4"] .park-switch-toggle').click();
 await page.locator(".park-victory").waitFor({ timeout: 5_000 });
 await page.screenshot({
   path: path.join(OUTPUT_DIR, "09-r2-chain-victory-390x844.png"),
@@ -346,8 +364,10 @@ const result = {
   afterShift,
   victory,
   chainStepA,
+  chainAfterA,
+  chainAfterASwitch,
   chainStepB,
-  chainAfterSpin,
+  chainAfterB,
   chainVictory,
   compactLessonState,
   compact,
@@ -379,13 +399,19 @@ if (
   afterShift.remaining !== "5" ||
   chainStepA.movingTiles !== 8 ||
   chainStepA.calloutY !== 25 ||
+  chainAfterA.activeRotors !== 1 ||
+  chainAfterA.movingTiles !== 0 ||
+  chainAfterA.target !== "0/2" ||
+  chainAfterA.switchText !== "断" ||
+  chainAfterASwitch.target !== "1/2" ||
+  chainAfterASwitch.remaining !== "4" ||
   chainStepB.movingTiles !== 8 ||
   Math.abs((chainStepB.calloutY ?? 0) - 75) > 2 ||
-  chainAfterSpin.activeRotors !== 2 ||
-  chainAfterSpin.movingTiles !== 0 ||
-  chainAfterSpin.target !== "0/1" ||
-  chainAfterSpin.switchText !== "断" ||
-  chainVictory.steps !== "已用 2 步" ||
+  chainAfterB.activeRotors !== 2 ||
+  chainAfterB.target !== "1/2" ||
+  chainAfterB.switchRotation !== "0" ||
+  chainAfterB.switchText !== "断" ||
+  chainVictory.steps !== "已用 5 步" ||
   !compactLessonState.insideViewport ||
   compactLessonState.bodyOverflowX ||
   compact.bodyOverflowX ||

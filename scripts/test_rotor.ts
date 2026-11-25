@@ -90,40 +90,75 @@ const chainFirstTap = chain.tiles.map((tile) =>
     : tile,
 );
 const chainActivated = activatePoweredRotors(chain, chainFirstTap);
-assert.equal(chainActivated.steps.length, 2, "A 转盘应连锁启动 B 转盘");
+assert.equal(chainActivated.steps.length, 1, "A 转盘不应自动启动 B 转盘");
 assert.deepEqual(
   chainActivated.activatedIds,
-  chainRotors.map((tile) => tile.id),
-  "两台转盘应按 A、B 顺序启动",
+  [chainRotors[0].id],
+  "玩家只接通 A 时，只应启动 A",
 );
 
-const chainSwitch = chainActivated.tiles.find(
-  (tile) => tile.id === "lab-3-2",
+const chainASwitch = chainActivated.tiles.find(
+  (tile) => tile.id === "lab-3-1",
 );
-assert(chainSwitch, "R2 换位后能量闸消失");
-assert.equal(chainSwitch.row, 4, "能量闸应换位到第 5 行");
-assert.equal(chainSwitch.col, 2, "能量闸应换位到第 3 列");
-assert.equal(chainSwitch.switchClosed, false, "换位后的能量闸应保持断开");
+assert(chainASwitch, "R2 左侧能量闸消失");
+assert.equal(chainASwitch.switchClosed, false, "左侧能量闸应保持断开");
 
-const chainAfterShift = simulateCircuit(
+const chainAfterA = simulateCircuit(
   chainActivated.tiles,
   chain.gridRows,
   chain.gridCols,
   chain.rules,
 );
-assert.equal(chainAfterShift.litCount, 0, "双转盘启动后仍需玩家扳闸");
+assert.equal(chainAfterA.litCount, 0, "A 启动后仍需玩家扳闸");
 
-const chainFinalTiles = chainActivated.tiles.map((tile) =>
-  tile.id === chainSwitch.id
+const chainAfterASwitch = chainActivated.tiles.map((tile) =>
+  tile.id === chainASwitch.id
     ? { ...tile, switchClosed: true }
     : tile,
 );
-const chainFinal = simulateCircuit(
-  chainFinalTiles,
+const chainAAfterToggle = simulateCircuit(
+  chainAfterASwitch,
   chain.gridRows,
   chain.gridCols,
   chain.rules,
 );
-assert.equal(chainFinal.isAllLit, true, "R2 扳闸后应点亮设施");
+assert.equal(chainAAfterToggle.litCount, 1, "左侧路线应点亮第一处设施");
 
-console.log("R2 双转盘：A→B 连锁、两次顺序换位与最终扳闸均通过");
+const chainBFeeder = chain.tiles.find(
+  (tile) => tile.row === 5 && tile.col === 3,
+);
+assert(chainBFeeder, "R2 缺少右侧转盘供能直管");
+const chainBTap = chainAfterASwitch.map((tile) =>
+  tile.id === chainBFeeder.id
+    ? { ...tile, rotation: tile.rotation + 90 }
+    : tile,
+);
+const chainBActivated = activatePoweredRotors(chain, chainBTap);
+assert.equal(chainBActivated.steps.length, 1, "B 转盘应独立启动");
+assert.deepEqual(
+  chainBActivated.activatedIds,
+  [chainRotors[1].id],
+  "B 转盘启动顺序应独立",
+);
+
+const chainBSwitch = chainBActivated.tiles.find(
+  (tile) => tile.id === "lab-2-4",
+);
+assert(chainBSwitch, "R2 右侧能量闸消失");
+assert.equal(chainBSwitch.rotation, 0, "右侧能量闸需要玩家先转向");
+assert.equal(chainBSwitch.switchClosed, false, "右侧能量闸应保持断开");
+
+const chainBSwitchAligned = chainBActivated.tiles.map((tile) =>
+  tile.id === chainBSwitch.id
+    ? { ...tile, rotation: tile.rotation + 90, switchClosed: true }
+    : tile,
+);
+const chainFinal = simulateCircuit(
+  chainBSwitchAligned,
+  chain.gridRows,
+  chain.gridCols,
+  chain.rules,
+);
+assert.equal(chainFinal.isAllLit, true, "两条独立路线完成后应点亮全部设施");
+
+console.log("R2 双转盘：左右独立启动、转向与扳闸共五步均通过");

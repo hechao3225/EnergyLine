@@ -291,8 +291,8 @@ const ROTOR_RING: Put[] = [
 ];
 
 /**
- * R2 双转盘：左侧 A 启动后把下路管线换到 B 的供能口，B 随即启动。
- * B 的环轨把一扇断开的能量闸送到目标线路，玩家最后扳通它。
+ * R2 双机关：左右两台转盘使用独立供能线和独立目标。
+ * 玩家自行选择先修哪边；每次启动转盘后，还要把换位后的能量闸扳通。
  */
 const ROTOR_CHAIN: Put[] = [
   [0, 0, "corner", 0, { locked: true }],
@@ -306,18 +306,25 @@ const ROTOR_CHAIN: Put[] = [
   [2, 1, "line", 0, { locked: true }],
   [2, 2, "corner", 0, { locked: true }],
   [2, 3, "battery", 180, { locked: true }],
+  [3, 1, "switch", 90, { switchClosed: false }],
+  [4, 1, "bulb", 0, { locked: true }],
 
-  [3, 0, "corner", 0, { locked: true }],
-  [3, 1, "t_shape", 270, { locked: true }],
-  [3, 2, "switch", 90, { switchClosed: false }],
-  [3, 3, "battery", 180, { locked: true }],
+  [3, 0, "line", 0, { locked: true }],
+  [3, 2, "battery", 0, { locked: true }],
+  [3, 3, "corner", 180, { locked: true }],
+  [3, 5, "corner", 0, { locked: true }],
   [4, 0, "line", 90, { locked: true }],
-  [4, 1, "rotor", 0, { locked: true, rotorRadius: 1 }],
-  [4, 2, "t_shape", 180, { locked: true }],
-  [5, 0, "corner", 270, { locked: true }],
-  [5, 1, "line", 0, { locked: true }],
-  [5, 2, "corner", 180, { locked: true }],
-  [5, 3, "bulb", 0, { locked: true }],
+  [4, 3, "line", 0, { locked: true }],
+  [4, 4, "rotor", 0, { locked: true, rotorRadius: 1 }],
+  [4, 5, "corner", 270, { locked: true }],
+  [5, 0, "line", 90, { locked: true }],
+  [5, 2, "battery", 0, { locked: true }],
+  [5, 3, "line", 90],
+  [5, 4, "corner", 180, { locked: true }],
+  [5, 5, "line", 0, { locked: true }],
+
+  [1, 4, "bulb", 0, { locked: true }],
+  [2, 4, "switch", 0, { switchClosed: false }],
 ];
 
 export const LAB_LEVELS: LevelConfig[] = [
@@ -463,18 +470,18 @@ export const LAB_LEVELS: LevelConfig[] = [
     id: 951,
     code: "R2",
     totalLevels: 99,
-    title: "动力转盘 · 机关带动机关",
+    title: "动力转盘 · 先修哪一边",
     subtitle: "双机关",
-    hintText: "先接通左侧转盘。第二台转盘会自动启动，最后扳通换到右侧的能量闸。",
-    winText: "试验通过：一台机关启动了下一台。",
-    parSteps: 2,
-    maxSteps: 8,
+    hintText: "左右两台转盘各有独立路线。先比较两边，再启动一台转盘；环轨换位后扳通能量闸。",
+    winText: "试验通过：两边机关都按自己的路线接好了。",
+    parSteps: 5,
+    maxSteps: 6,
     gridRows: 6,
     gridCols: 6,
     mechanicTags: ["rotor", "switch"],
     primaryMechanic: "rotor",
-    questionType: "顺序",
-    role: "练",
+    questionType: "取舍",
+    role: "变",
     tiles: board(ROTOR_CHAIN),
   },
   {
