@@ -74,11 +74,11 @@ class HapticEngine {
     }
   }
 
-  // 动力转盘：启动重拍、滑轨细颤、末端落锁
+  // 动力转盘：只给启动一次很轻的触感
   public rotorStart() {
     if (!this.enabled || !this.isSupported()) return;
     try {
-      navigator.vibrate([32, 90, 12, 480, 64]);
+      navigator.vibrate(18);
     } catch {
       // ignore
     }

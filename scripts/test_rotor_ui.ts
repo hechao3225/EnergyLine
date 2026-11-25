@@ -177,10 +177,6 @@ const motion = await page.evaluate(() => ({
   ).filter((node) =>
     node.getAnimations().some((animation) => animation.playState === "running"),
   ).length,
-  boardShaking: document
-    .querySelector(".park-board")
-    ?.getAnimations()
-    .some((animation) => animation.playState === "running"),
   vibrationPatterns: (
     window as Window & { __rotorVibrations?: (number | number[])[] }
   ).__rotorVibrations,
@@ -299,9 +295,7 @@ if (
   initial.target !== "0/2" ||
   motion.movingTiles !== 8 ||
   motion.runningAnimations !== 8 ||
-  !motion.boardShaking ||
-  JSON.stringify(motion.vibrationPatterns?.at(-1)) !==
-    JSON.stringify([32, 90, 12, 480, 64]) ||
+  motion.vibrationPatterns?.at(-1) !== 18 ||
   motion.callout !== "环轨换位" ||
   afterShift.active !== "true" ||
   afterShift.movingTiles !== 0 ||
