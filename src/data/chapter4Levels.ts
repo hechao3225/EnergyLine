@@ -3447,9 +3447,10 @@ export const CHAPTER4_LEVELS: LevelConfig[] = [
         "id": "t-4-2",
         "row": 4,
         "col": 2,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
+        "type": "line",
+        "rotation": 90,
+        "basePorts": 10,
+        "locked": false
       },
       {
         "id": "t-4-3",

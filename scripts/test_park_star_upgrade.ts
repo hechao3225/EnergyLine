@@ -55,7 +55,8 @@ try {
     "4星",
   );
   await expect(page.locator(".park-rewards div").first()).toContainText("+3");
-  await expect(page.locator(".park-rewards div").nth(1)).toContainText("+0");
+  await expect(page.locator(".park-rewards div").nth(1)).toContainText("—");
+  await expect(page.locator(".park-result-score")).toContainText("首通奖励已领取");
 
   const progress = await page.evaluate(() => ({
     park: JSON.parse(localStorage.getItem("energy_park_progress_v2")!),

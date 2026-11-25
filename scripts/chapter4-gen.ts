@@ -13,6 +13,7 @@ import {
   withScheduleMeta,
 } from "./chapter-level-utils";
 import { applyLevelRepairs } from "./chapter-repairs";
+import { applyDecoyRevives } from "./decoy-revives";
 import {
   createScrambledLevel,
   generateAlgorithmLayout,
@@ -348,7 +349,7 @@ function buildChapter4(): LevelConfig[] {
 }
 
 function main() {
-  const chapter = applyLevelRepairs(buildChapter4());
+  const chapter = applyDecoyRevives(applyLevelRepairs(buildChapter4()));
   for (const level of chapter) {
     const solution = solveRuleLevel(level);
     console.log(

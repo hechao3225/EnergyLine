@@ -2,6 +2,7 @@ import { chromium, expect, type Browser, type Page } from "@playwright/test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
+import { selectLevelOnMap } from "./park_test_player";
 
 const configuredBase = process.env.PARK_TEST_URL;
 if (!configuredBase) {
@@ -204,22 +205,78 @@ async function openShop(page: Page) {
   await expect(page.locator(".park-shop")).toBeVisible();
 }
 
+// 货架余额条必须是吸顶栏：滚动时贴住容器顶边、铺满整宽、底色不透明，
+// 否则滚过的商品会从标题栏下方的缝隙和半透明底色里透出来形成叠加。
+async function assertShelfBarSticks(page: Page, viewport: string) {
+  const metrics = await page.evaluate(() => {
+    const body = document.querySelector<HTMLElement>(".park-modal-body");
+    const head = document.querySelector<HTMLElement>(".park-shop-head");
+    const bar = document.querySelector<HTMLElement>(".park-shop-balance");
+    const tabs = document.querySelector<HTMLElement>(".park-shop-tabs");
+    if (!body || !head || !bar || !tabs) return null;
+    const previous = body.scrollTop;
+    const maxScroll = Math.max(0, body.scrollHeight - body.clientHeight);
+    const samples = [0, 0.5, 1].map((ratio) => {
+      body.scrollTop = maxScroll * ratio;
+      const bodyRect = body.getBoundingClientRect();
+      const headRect = head.getBoundingClientRect();
+      const barRect = bar.getBoundingClientRect();
+      const tabsRect = tabs.getBoundingClientRect();
+      return {
+        scrollTop: Math.round(body.scrollTop),
+        gap: Number((headRect.top - bodyRect.top).toFixed(2)),
+        widthGap: Number((bodyRect.width - headRect.width).toFixed(2)),
+        barInsideHead:
+          barRect.top >= headRect.top - 0.5 &&
+          barRect.bottom <= headRect.bottom + 0.5,
+        tabsInsideViewport:
+          tabsRect.top >= bodyRect.top - 0.5 &&
+          tabsRect.bottom <= bodyRect.bottom + 0.5,
+      };
+    });
+    body.scrollTop = previous;
+    // 只查渐变：background-color 恒为 rgba(0, 0, 0, 0)，由渐变负责铺底。
+    // 不透明色会被序列化成 rgb(...)，出现 rgba(...) 就说明底色带 alpha。
+    const style = getComputedStyle(head);
+    return {
+      maxScroll,
+      samples,
+      hasAlpha: /rgba\(/.test(style.backgroundImage),
+    };
+  });
+  assert.ok(metrics, `${viewport} 商店货架缺少滚动容器、吸顶栏或页签`);
+  assert.ok(metrics.maxScroll > 0, `${viewport} 商店货架不可滚动，无法验证吸顶`);
+  for (const sample of metrics.samples) {
+    assert.ok(
+      Math.abs(sample.gap) < 0.5,
+      `${viewport} 货架栏未贴住滚动容器顶边（scrollTop=${sample.scrollTop}，缝隙 ${sample.gap}px）`,
+    );
+    assert.ok(
+      Math.abs(sample.widthGap) < 0.5,
+      `${viewport} 货架栏未铺满货架宽度（差 ${sample.widthGap}px）`,
+    );
+    assert.ok(
+      sample.barInsideHead,
+      `${viewport} 余额条跑出货架栏（scrollTop=${sample.scrollTop}）`,
+    );
+    assert.ok(
+      sample.tabsInsideViewport,
+      `${viewport} 补给/装扮页签被裁掉（scrollTop=${sample.scrollTop}）`,
+    );
+  }
+  assert.equal(
+    metrics.hasAlpha,
+    false,
+    `${viewport} 货架栏底色带透明度，滚动商品会透出`,
+  );
+}
+
 async function selectStoryLevel(page: Page, id: number) {
   await page
     .getByRole("navigation")
     .getByRole("button", { name: "关卡", exact: true })
     .click();
-  await page
-    .getByRole("button", {
-      name: `${Math.floor((id - 1) / 20) + 1}章`,
-      exact: true,
-    })
-    .click();
-  await page
-    .locator(".park-modal-levels")
-    .getByRole("button", { name: `修复第${id}处设施`, exact: true })
-    .click();
-  await expect(page.locator(".park-level-sign")).toHaveText(`第 ${id} 关`);
+  await selectLevelOnMap(page, id);
 }
 
 async function inspectLayout(page: Page) {
@@ -437,6 +494,7 @@ async function runViewport(browser: Browser, viewport: (typeof viewports)[number
     "true",
   );
   await capture(page, viewport.label, "shop-supply");
+  await assertShelfBarSticks(page, viewport.label);
 
   await page.getByRole("tab", { name: "装扮", exact: true }).click();
   const themeCard = page.locator(".park-shop-card").filter({ hasText: "宁静夜灯" });
@@ -481,11 +539,11 @@ async function runViewport(browser: Browser, viewport: (typeof viewports)[number
   }
   await expect(page.getByText("修复步数用完啦", { exact: true })).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "使用应急线圈 · 余 1", exact: true }),
+    page.getByRole("button", { name: "使用加步电池 · 余 1", exact: true }),
   ).toBeVisible();
   await capture(page, viewport.label, "out-of-steps-coil");
   await page
-    .getByRole("button", { name: "使用应急线圈 · 余 1", exact: true })
+    .getByRole("button", { name: "使用加步电池 · 余 1", exact: true })
     .click();
   await expect(page.getByTestId("remaining-steps")).toHaveText("3");
   await capture(page, viewport.label, "coil-refilled");

@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<title>伙伴动效小样 · 能量管道乐园</title>
+<style>
+  :root{
+    --gold:#f5cc6f; --gold-deep:#b8792a; --ink:#3b2360; --energy:#b0ecff;
+    --good:#8ff0c0; --bad:#ff9aa2;
+  }
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body{ height:100%; margin:0; }
+  body{
+    display:grid; place-items:center; overflow:hidden;
+    background:#2a1140 url('/assets/park/background.webp') center/cover no-repeat;
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+    color:#fff8ec; touch-action:manipulation;
+  }
+  .stage{
+    position:relative; width:min(430px,100vw); height:min(100dvh,920px);
+    display:flex; flex-direction:column; overflow:hidden;
+    background:radial-gradient(120% 55% at 50% 0%, rgba(255,255,255,.16), transparent 62%);
+  }
+  /* ---------- 顶栏 ---------- */
+  .topbar{ display:flex; align-items:center; justify-content:space-between; padding:14px 16px 4px; }
+  .level-chip{
+    display:flex; flex-direction:column; gap:1px; padding:6px 14px 7px;
+    border-radius:14px; border:2px solid var(--gold);
+    background:linear-gradient(160deg,#7b57b8,#57358a);
+    box-shadow:0 4px 0 rgba(72,37,120,.55), inset 0 1px 0 rgba(255,255,255,.35);
+  }
+  .level-chip b{ font-size:15px; letter-spacing:.5px; }
+  .level-chip span{ font-size:10px; opacity:.82; }
+  .anim-switch{ display:flex; align-items:center; gap:7px; cursor:pointer; user-select:none; }
+  .anim-switch input{ position:absolute; opacity:0; pointer-events:none; }
+  .switch-track{
+    width:44px; height:24px; border-radius:99px; position:relative;
+    background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
+    transition:background .2s;
+  }
+  .switch-knob{
+    position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%;
+    background:#fff5dc; box-shadow:0 2px 4px rgba(30,10,60,.35); transition:transform .2s;
+  }
+  .anim-switch input:checked + .switch-track{ background:linear-gradient(160deg,#ffd98b,#e8a44b); border-color:#ffe3a6; }
+  .anim-switch input:checked + .switch-track .switch-knob{ transform:translateX(20px); }
+  .switch-label{ font-size:11px; font-weight:700; opacity:.9; }
+  /* ---------- HUD ---------- */
+  .hud{ display:flex; align-items:center; gap:6px; padding:2px 16px 6px; font-size:11px; }
+  .hud-item{
+    display:flex; align-items:center; gap:4px; padding:4px 9px; border-radius:99px;
+    background:rgba(48,22,82,.5); border:1px solid rgba(255,255,255,.18);
+  }
+  .hud-item b{ color:var(--gold); font-size:12px; }
+  .hud-tip{ margin-left:auto; opacity:.78; font-size:10px; text-align:right; }
+  /* ---------- 棋盘 ---------- */
+  .board-wrap{
+    position:relative; margin:2px 12px 0; padding:10px; border-radius:28px;
+    background:linear-gradient(165deg, rgba(255,255,255,.26), rgba(120,74,182,.22));
+    border:1.5px solid rgba(255,255,255,.42);
+    box-shadow:0 10px 26px rgba(28,10,56,.35), inset 0 1px 0 rgba(255,255,255,.5);
+    transition:box-shadow .4s;
+  }
+  .stage.is-win .board-wrap{ box-shadow:0 10px 34px rgba(150,240,255,.35), inset 0 1px 0 rgba(255,255,255,.6); }
+  .board{ display:grid; grid-template-columns:repeat(4,1fr); gap:6px; aspect-ratio:1/1; }
+  .tile{
+    position:relative; border-radius:16px; overflow:hidden; cursor:pointer;
+    background:
+      radial-gradient(140% 120% at 28% 16%, rgba(255,255,255,.22), transparent 46%),
+      linear-gradient(160deg,#6c4a9f,#472a72);
+    box-shadow:inset 0 2px 0 rgba(255,255,255,.28), inset 0 -6px 10px rgba(34,12,66,.55), 0 3px 6px rgba(24,8,48,.28);
+    transition:transform .12s, box-shadow .25s;
+  }
+  .tile.is-empty{ cursor:default; }
+  .tile:not(.is-empty):active{ transform:scale(.955); }
+  .tile::after{
+    content:''; position:absolute; inset:0; border-radius:16px; pointer-events:none;
+    border:1.5px solid transparent; transition:border-color .2s, box-shadow .25s;
+  }
+  .tile.is-powered::after{ border-color:rgba(178,238,255,.55); box-shadow:inset 0 0 14px rgba(150,226,255,.45); }
+  .tile.is-bad::after{ border-color:rgba(255,140,150,.85); box-shadow:inset 0 0 12px rgba(255,120,140,.45); }
+  .tile.is-hint::after{ border-color:var(--gold); box-shadow:inset 0 0 16px rgba(255,214,120,.65); animation:hintPulse 1s ease-in-out infinite; }
+  .tile.is-lit-seq::after{ border-color:#ffe9a8; box-shadow:inset 0 0 22px rgba(255,226,150,.85); }
+  .pipe{
+    position:absolute; width:100%; height:100%; object-fit:contain; pointer-events:none;
+    transition:transform .3s cubic-bezier(.34,1.35,.64,1), filter .25s;
+    transform-origin:50% 50%;
+  }
+  .tile.is-powered .pipe{ filter:drop-shadow(0 0 7px rgba(160,236,255,.85)); }
+  .tile .exhibit{ width:92%; height:92%; left:4%; top:4%; object-fit:contain; transition:transform .3s, filter .35s, opacity .35s; }
+  .tile .exhibit.is-dormant{ filter:grayscale(.92) brightness(.72); opacity:.82; }
+  .tile.is-lit .exhibit{ filter:drop-shadow(0 0 10px rgba(255,226,150,.95)); }
+  .tile.is-lit-seq .exhibit{ animation:facilityPop .5s cubic-bezier(.34,1.5,.64,1); }
+  /* 胜利横幅 */
+  .win-banner{
+    position:absolute; left:50%; top:50%; z-index:6; width:76%; padding:10px 12px 12px;
+    transform:translate(-50%,-50%) scale(.86); opacity:0; pointer-events:none;
+    display:flex; flex-direction:column; align-items:center; gap:2px;
+    border-radius:20px; border:2.5px solid var(--gold);
+    background:linear-gradient(165deg,#fff7e4,#ffe4b0);
+    box-shadow:0 10px 30px rgba(60,20,30,.45), inset 0 2px 0 #fff;
+    transition:opacity .3s, transform .38s cubic-bezier(.34,1.56,.64,1);
+  }
+  .win-banner.show{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+  .win-banner b{ color:#b4423d; font-size:22px; letter-spacing:2px; text-shadow:0 1px 0 #fff; }
+  .win-banner span{ color:#8a5a2a; font-size:11px; font-weight:700; }
+  .fx{ position:absolute; inset:0; pointer-events:none; z-index:5; overflow:visible; }
+  .fx-star{ position:absolute; width:20px; height:20px; object-fit:contain; will-change:transform; }
+  /* ---------- 伙伴 ---------- */
+  .rail{
+    position:relative; flex:1; min-height:132px; display:flex; align-items:flex-end;
+    justify-content:space-evenly; padding:0 6px 2px; z-index:10;
+  }
+  .mate{ position:relative; display:flex; flex-direction:column; align-items:center; --h:110px;
+    transition:transform .55s cubic-bezier(.3,.9,.3,1); will-change:transform; }
+  .mate[data-who="xingya"]{ --h:126px; }
+  .mate[data-who="boling"]{ --h:96px; }
+  .mate[data-who="yunrong"]{ --h:100px; }
+  .mate-figure{ position:relative; width:calc(var(--h) * .86); height:var(--h); }
+  .mate-body{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; object-position:center bottom;
+    filter:drop-shadow(0 6px 8px rgba(30,10,60,.34)); transition:opacity .2s, transform .25s; }
+  .mate-body.cheer{ opacity:0; }
+  .mate.is-cheering .mate-body.base{ opacity:0; }
+  .mate.is-cheering .mate-body.cheer{ opacity:1; }
+  .mate-name{ margin-top:2px; font-size:10px; font-weight:700; color:#fff3d8; opacity:.9;
+    text-shadow:0 1px 3px rgba(40,14,70,.7); }
+  .mate.is-flying .mate-body{ animation:none !important; }
+  .mate.is-flying .mate-name{ opacity:0; }
+  .mate-name{ transition:opacity .25s; }
+  .mate[data-who="xingya"] .mate-body.base{ animation:breathe 3.6s ease-in-out infinite; }
+  .mate[data-who="boling"] .mate-body.base{ animation:floaty 2.9s ease-in-out infinite; }
+  .mate[data-who="yunrong"] .mate-body.base{ animation:glide 3.4s ease-in-out infinite; }
+  .mate[data-who="yunrong"] .mate-figure{ transform:translateY(-10px); }
+  .mate.is-shove .mate-figure{ animation:shove .3s ease-out; }
+  .mate.is-hop .mate-figure{ animation:hop .42s cubic-bezier(.3,1.5,.5,1); }
+  .mate.is-nod .mate-figure{ animation:nod .4s ease-out; }
+  .mate.is-shake .mate-figure{ animation:shake .42s ease-out; }
+  .mate.is-spin .mate-figure{ animation:spin .7s cubic-bezier(.3,1.2,.4,1); }
+  .mate.is-cheering .mate-figure{ animation:cheerJump .5s cubic-bezier(.3,1.6,.5,1) 2; }
+  /* 表情气泡 */
+  .bubble{
+    position:absolute; bottom:calc(var(--h) + 12px); left:50%; z-index:30; pointer-events:none;
+    display:flex; flex-direction:column; align-items:center; gap:1px; min-width:74px; padding:5px 9px 6px;
+    border-radius:14px; border:2px solid #f3d79a;
+    background:linear-gradient(175deg,#fffdf4,#fff0cf);
+    box-shadow:0 6px 14px rgba(40,16,60,.35);
+    transform:translate(-50%,8px) scale(.8); opacity:0;
+    transition:opacity .2s, transform .26s cubic-bezier(.34,1.56,.64,1);
+  }
+  .bubble.show{ opacity:1; transform:translate(-50%,0) scale(1); }
+  .bubble img{ height:42px; width:auto; max-width:72px; object-fit:contain; display:block; }
+  .bubble span{ font-size:10px; font-weight:800; color:#8a4a63; white-space:nowrap; line-height:1.1; }
+  .bubble i{ position:absolute; bottom:-7px; left:50%; margin-left:-6px; width:0; height:0;
+    border-left:6px solid transparent; border-right:6px solid transparent; border-top:7px solid #fff0cf; }
+  /* ---------- 控制 ---------- */
+  .controls{ display:flex; gap:10px; padding:8px 16px 18px; }
+  .btn{
+    flex:1; height:44px; border-radius:16px; border:2px solid rgba(255,255,255,.55);
+    font-family:inherit; font-size:14px; font-weight:800; color:#5a2f2a; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    background:linear-gradient(170deg,#ffeec4,#ffd27f);
+    box-shadow:0 4px 0 #c98f2e, inset 0 1px 0 #fff;
+    transition:transform .1s, box-shadow .1s;
+  }
+  .btn:active{ transform:translateY(3px); box-shadow:0 1px 0 #c98f2e, inset 0 1px 0 #fff; }
+  .btn.ghost{ flex:0 0 96px; color:#fff4dd; background:rgba(255,255,255,.12); box-shadow:none; border-color:rgba(255,255,255,.4); }
+  .btn img{ width:18px; height:18px; object-fit:contain; }
+  .btn:disabled{ opacity:.55; }
+  /* ---------- keyframes ---------- */
+  @keyframes breathe{ 0%,100%{ transform:translateY(0) scale(1);} 50%{ transform:translateY(-2px) scale(1.012);} }
+  @keyframes floaty{ 0%,100%{ transform:translateY(0) rotate(0);} 50%{ transform:translateY(-7px) rotate(-2deg);} }
+  @keyframes glide{ 0%,100%{ transform:translateY(0) rotate(-1.5deg);} 50%{ transform:translateY(-9px) rotate(2deg);} }
+  @keyframes shove{ 0%{transform:none;} 35%{transform:translateX(6px) rotate(-5deg);} 100%{transform:none;} }
+  @keyframes hop{ 0%{transform:translateY(0);} 40%{transform:translateY(-14px) scale(1.04,.97);} 70%{transform:translateY(2px) scale(.98,1.02);} 100%{transform:none;} }
+  @keyframes nod{ 0%{transform:rotate(0);} 30%{transform:rotate(5deg);} 65%{transform:rotate(-3deg);} 100%{transform:rotate(0);} }
+  @keyframes shake{ 0%,100%{transform:translateX(0);} 25%{transform:translateX(-4px) rotate(-2deg);} 60%{transform:translateX(4px) rotate(2deg);} }
+  @keyframes spin{ 0%{transform:rotate(0) scale(1);} 45%{transform:rotate(200deg) scale(1.08);} 100%{transform:rotate(360deg) scale(1);} }
+  @keyframes cheerJump{ 0%{transform:translateY(0);} 40%{transform:translateY(-12px);} 100%{transform:translateY(0);} }
+  @keyframes hintPulse{ 0%,100%{ box-shadow:inset 0 0 10px rgba(255,214,120,.45);} 50%{ box-shadow:inset 0 0 22px rgba(255,226,150,.95);} }
+  @keyframes facilityPop{ 0%{transform:scale(1);} 45%{transform:scale(1.16);} 100%{transform:scale(1);} }
+  /* 关闭动效：对照模式 */
+  .stage.no-anim *, .stage.no-anim *::before, .stage.no-anim *::after{
+    animation:none !important; transition:none !important;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{ animation:none !important; transition:none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <header class="topbar">
+    <div class="level-chip"><b>第 1 关</b><span>迎宾门 · 接通</span></div>
+    <label class="anim-switch" for="animToggle">
+      <input type="checkbox" id="animToggle" checked />
+      <span class="switch-track"><span class="switch-knob"></span></span>
+      <span class="switch-label">角色动效</span>
+    </label>
+  </header>
+
+  <div class="hud">
+    <div class="hud-item">目标 <b><i id="goalCount">0</i>/1</b></div>
+    <div class="hud-item">步数 <b id="stepCount">0</b></div>
+    <div class="hud-tip" id="hudTip">点管道旋转，把星光接到迎宾门</div>
+  </div>
+
+  <main class="board-wrap">
+    <div class="board" id="board" aria-label="能量管道棋盘"></div>
+    <div class="fx" id="fx"></div>
+    <div class="win-banner" id="winBanner"><b>设施复苏！</b><span>迎宾门 · 已点亮</span></div>
+  </main>
+
+  <section class="rail" id="rail" aria-label="乐园伙伴">
+    <div class="mate" data-who="xingya" id="mate-xingya">
+      <div class="bubble" aria-hidden="true"><img alt="" /><span></span><i></i></div>
+      <div class="mate-figure">
+        <img class="mate-body base" src="/assets/park/sheep.webp" alt="星芽" draggable="false" />
+        <img class="mate-body cheer" src="/assets/park/sheep-cheer.webp" alt="" draggable="false" />
+      </div>
+      <div class="mate-name">星芽</div>
+    </div>
+    <div class="mate" data-who="boling" id="mate-boling">
+      <div class="bubble" aria-hidden="true"><img alt="" /><span></span><i></i></div>
+      <div class="mate-figure">
+        <img class="mate-body base" src="/assets/park/spirit.webp" alt="波铃" draggable="false" />
+        <img class="mate-body cheer" src="/assets/park/spirit-cheer.webp" alt="" draggable="false" />
+      </div>
+      <div class="mate-name">波铃</div>
+    </div>
+    <div class="mate" data-who="yunrong" id="mate-yunrong">
+      <div class="bubble" aria-hidden="true"><img alt="" /><span></span><i></i></div>
+      <div class="mate-figure">
+        <img class="mate-body base" src="/assets/park/rabbit.webp" alt="云绒" draggable="false" />
+        <img class="mate-body cheer" src="/assets/park/rabbit-cheer.webp" alt="" draggable="false" />
+      </div>
+      <div class="mate-name">云绒</div>
+    </div>
+  </section>
+
+  <footer class="controls">
+    <button class="btn ghost" id="resetBtn">重来</button>
+    <button class="btn" id="hintBtn"><img src="/assets/park/icon-star.webp" alt="" />波铃，帮我看看</button>
+  </footer>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var ART = '/assets/park/';
+  var EXPR = '/prototypes/expr/';
+
+  var U = 1, R = 2, D = 4, L = 8;
+  var DIRS = [[U,-1,0],[R,0,1],[D,1,0],[L,0,-1]];
+  var BASE = { line:10, corner:6, battery:R, bulb:U };
+  var SOLUTION = { '0,1':0, '0,2':1, '1,2':1, '2,2':3, '2,3':1 };
+  var INITIAL = [
+    { r:0, c:0, type:'battery', rot:0 },
+    { r:0, c:1, type:'line',    rot:3 },
+    { r:0, c:2, type:'corner',  rot:0 },
+    { r:1, c:2, type:'line',    rot:0 },
+    { r:2, c:2, type:'corner',  rot:2 },
+    { r:2, c:3, type:'corner',  rot:0 },
+    { r:3, c:3, type:'bulb',    rot:0 }
+  ];
+  var WORDS = {
+    neutral: ['还没通哦', '再绕一圈看看', '顺着光走'],
+    ok: ['接通一段！', '有电啦！', '接上了！'],
+    bad: ['能量断啦！', '哎，断了', '这边不通']
+  };
+
+  var stage = document.getElementById('stage');
+  var board = document.getElementById('board');
+  var fx = document.getElementById('fx');
+  var banner = document.getElementById('winBanner');
+  var goalEl = document.getElementById('goalCount');
+  var stepEl = document.getElementById('stepCount');
+  var hudTip = document.getElementById('hudTip');
+  var animToggle = document.getElementById('animToggle');
+  var resetBtn = document.getElementById('resetBtn');
+  var hintBtn = document.getElementById('hintBtn');
+
+  var mates = {
+    xingya: document.getElementById('mate-xingya'),
+    boling: document.getElementById('mate-boling'),
+    yunrong: document.getElementById('mate-yunrong')
+  };
+  var tiles = [];
+  var els = {};
+  var homeRects = {};
+  var steps = 0;
+  var locked = false;
+  var won = false;
+  var animOn = true;
+  var winSeq = 0;
+  var actx = null;
+
+  function key(r,c){ return r + ',' + c; }
+  function rotMask(m, n){
+    for (var i=0;i<n;i++){
+      m = ((m & L) ? U : 0) | ((m & U) ? R : 0) | ((m & R) ? D : 0) | ((m & D) ? L : 0);
+    }
+    return m;
+  }
+  function opposite(d){ return d === U ? D : d === D ? U : d === R ? L : R; }
+  function portsOf(t){ return t.type === 'empty' ? 0 : rotMask(BASE[t.type], t.rot || 0); }
+  function tileAt(r,c){ for (var i=0;i<tiles.length;i++){ if (tiles[i].r===r && tiles[i].c===c) return tiles[i]; } return null; }
+  function sleep(ms){ return new Promise(function(res){ setTimeout(res, ms); }); }
+  function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+
+  /* ---------- 声音 ---------- */
+  function tone(freq, dur, type, vol, delay){
+    try{
+      if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+      var t = actx.currentTime + (delay || 0);
+      var o = actx.createOscillator(), g = actx.createGain();
+      o.type = type || 'sine';
+      o.frequency.setValueAtTime(freq, t);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol || 0.05, t + 0.012);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + (dur || 0.12));
+      o.connect(g); g.connect(actx.destination);
+      o.start(t); o.stop(t + (dur || 0.12) + 0.03);
+    }catch(e){}
+  }
+  function sfxRotate(){ tone(360, 0.07, 'triangle', 0.035); }
+  function sfxConnect(){ tone(660, 0.11, 'sine', 0.05); tone(880, 0.12, 'sine', 0.045, 0.07); }
+  function sfxBreak(){ tone(220, 0.12, 'sawtooth', 0.035); }
+  function sfxWin(){
+    [523, 659, 784, 1046].forEach(function(f, i){ tone(f, 0.2, 'sine', 0.05, i * 0.11); });
+  }
+
+  /* ---------- 连通计算 ---------- */
+  function computePower(){
+    var byKey = {};
+    tiles.forEach(function(t){ byKey[key(t.r,t.c)] = t; });
+    var powered = {}, parent = {};
+    var start = null;
+    tiles.forEach(function(t){ if (t.type === 'battery') start = t; });
+    if (!start) return { powered:{}, pathKeys:[], size:0 };
+    var sk = key(start.r, start.c);
+    powered[sk] = true;
+    var queue = [start];
+    while (queue.length){
+      var cur = queue.shift();
+      var pm = portsOf(cur);
+      for (var i=0;i<DIRS.length;i++){
+        var d = DIRS[i][0], dr = DIRS[i][1], dc = DIRS[i][2];
+        if (!(pm & d)) continue;
+        var nb = byKey[key(cur.r + dr, cur.c + dc)];
+        if (!nb || nb.type === 'empty') continue;
+        var nm = portsOf(nb);
+        if (!(nm & opposite(d))) continue;
+        var nk = key(nb.r, nb.c);
+        if (!powered[nk]){
+          powered[nk] = true; parent[nk] = key(cur.r, cur.c); queue.push(nb);
+        }
+      }
+    }
+    var bulb = null;
+    tiles.forEach(function(t){ if (t.type === 'bulb') bulb = t; });
+    var pathKeys = [];
+    var bk = key(bulb.r, bulb.c);
+    if (powered[bk]){
+      var cur = bk;
+      while (cur){ pathKeys.unshift(cur); cur = parent[cur]; }
+    }
+    return { powered:powered, pathKeys:pathKeys, size:Object.keys(powered).length };
+  }
+
+  /* ---------- DOM ---------- */
+  function buildBoard(){
+    board.innerHTML = '';
+    els = {};
+    for (var i=0;i<16;i++){
+      var r = Math.floor(i/4), c = i % 4;
+      var el = document.createElement('div');
+      el.className = 'tile';
+      el.dataset.r = String(r);
+      el.dataset.c = String(c);
+      var t = tileAt(r,c);
+      if (!t){
+        el.classList.add('is-empty');
+        board.appendChild(el);
+        continue;
+      }
+      el.dataset.type = t.type;
+      var img = document.createElement('img');
+      img.className = 'pipe';
+      img.alt = '';
+      img.draggable = false;
+      if (t.type === 'battery'){
+        img.src = ART + 'pipe-source.webp';
+      } else if (t.type === 'bulb'){
+        img.src = ART + 'exhibit-001.webp';
+        img.classList.add('exhibit', 'is-dormant');
+      } else {
+        img.src = ART + 'pipe-' + t.type + '-off.webp';
+        img.style.transform = 'rotate(' + (t.rot * 90) + 'deg)';
+      }
+      el.appendChild(img);
+      el.addEventListener('click', (function(tile, node){
+        return function(){ onTileClick(tile, node); };
+      })(t, el));
+      board.appendChild(el);
+      els[key(r,c)] = el;
+    }
+  }
+
+  function refresh(){
+    var info = computePower();
+    tiles.forEach(function(t){
+      var el = els[key(t.r,t.c)];
+      if (!el) return;
+      var pw = !!info.powered[key(t.r,t.c)];
+      el.classList.toggle('is-powered', pw);
+      if (t.type === 'line' || t.type === 'corner'){
+        var img = el.querySelector('.pipe');
+        img.src = ART + 'pipe-' + t.type + '-' + (pw ? 'on' : 'off') + '.webp';
+        img.style.transform = 'rotate(' + (t.rot * 90) + 'deg)';
+      }
+      if (t.type === 'bulb'){
+        el.classList.toggle('is-lit', pw);
+        el.querySelector('.exhibit').classList.toggle('is-dormant', !pw);
+      }
+    });
+    var full = !!info.powered['3,3'];
+    goalEl.textContent = full ? '1' : '0';
+    return { info: info, full: full };
+  }
+
+  /* ---------- 角色动作 ---------- */
+  function say(who, expr, text, ms){
+    if (!animOn) return;
+    var mate = mates[who];
+    if (!mate) return;
+    Object.keys(mates).forEach(function(k){
+      if (k !== who) mates[k].querySelector('.bubble').classList.remove('show');
+    });
+    var b = mate.querySelector('.bubble');
+    var img = b.querySelector('img');
+    var cap = b.querySelector('span');
+    img.src = EXPR + who + '_' + expr + '.png';
+    cap.textContent = text || '';
+    b.classList.remove('show');
+    void b.offsetWidth;
+    b.classList.add('show');
+    if (b._timer) clearTimeout(b._timer);
+    b._timer = setTimeout(function(){ b.classList.remove('show'); }, ms || 1500);
+  }
+  function act(who, cls, ms){
+    if (!animOn) return;
+    var mate = mates[who];
+    if (!mate) return;
+    mate.classList.remove(cls);
+    void mate.offsetWidth;
+    mate.classList.add(cls);
+    setTimeout(function(){ mate.classList.remove(cls); }, ms || 600);
+  }
+  function clearBubbles(){
+    Object.keys(mates).forEach(function(k){
+      var b = mates[k].querySelector('.bubble');
+      if (b._timer) clearTimeout(b._timer);
+      b.classList.remove('show');
+    });
+  }
+
+  function centerIn(el, container){
+    var a = el.getBoundingClientRect(), c = container.getBoundingClientRect();
+    return { x:a.left - c.left + a.width/2, y:a.top - c.top + a.height/2 };
+  }
+  function burstAt(el, n, scale){
+    if (!animOn) return;
+    var c = centerIn(el, fx);
+    for (var i=0;i<n;i++){
+      (function(){
+        var s = document.createElement('img');
+        s.src = ART + 'icon-star.webp';
+        s.className = 'fx-star';
+        s.style.left = c.x + 'px';
+        s.style.top = c.y + 'px';
+        s.style.width = (14 + Math.random()*10) * (scale || 1) + 'px';
+        s.style.height = s.style.width;
+        fx.appendChild(s);
+        var ang = Math.random() * Math.PI * 2;
+        var dist = 24 + Math.random() * 46;
+        var anim = s.animate([
+          { transform:'translate(-50%,-50%) scale(.2) rotate(0deg)', opacity:0 },
+          { transform:'translate(-50%,-50%) scale(1) rotate(50deg)', opacity:1, offset:.22 },
+          { transform:'translate(calc(-50% + ' + (Math.cos(ang)*dist).toFixed(1) + 'px), calc(-50% + ' + (Math.sin(ang)*dist).toFixed(1) + 'px)) scale(.15) rotate(150deg)', opacity:0 }
+        ], { duration: 560 + Math.random()*260, easing:'cubic-bezier(.2,.8,.3,1)', fill:'both' });
+        anim.onfinish = function(){ s.remove(); };
+      })();
+    }
+  }
+
+  function travelStar(fromEl, toEl, delay){
+    var a = centerIn(fromEl, fx), b = centerIn(toEl, fx);
+    var s = document.createElement('img');
+    s.src = ART + 'icon-star.webp';
+    s.className = 'fx-star';
+    s.style.left = a.x + 'px';
+    s.style.top = a.y + 'px';
+    s.style.width = '22px';
+    s.style.height = '22px';
+    s.style.zIndex = '8';
+    fx.appendChild(s);
+    var anim = s.animate([
+      { transform:'translate(-50%,-50%) scale(.6)', opacity:0 },
+      { transform:'translate(-50%,-50%) scale(1.05)', opacity:1, offset:.25 },
+      { transform:'translate(calc(-50% + ' + (b.x - a.x) + 'px), calc(-50% + ' + (b.y - a.y) + 'px)) scale(.95)', opacity:1 }
+    ], { duration: 160, delay: delay || 0, easing:'linear', fill:'both' });
+    anim.onfinish = function(){ s.remove(); };
+  }
+
+  /* ---------- 交互 ---------- */
+  function onTileClick(t, el){
+    if (locked) return;
+    if (t.type !== 'line' && t.type !== 'corner'){
+      if (animOn && !won) say('yunrong', 'wink', '这里不用转哦', 1100);
+      return;
+    }
+    var beforeInfo = computePower();
+    var before = beforeInfo.size;
+    t.rot = (t.rot + 1) % 4;
+    steps++;
+    stepEl.textContent = String(steps);
+    sfxRotate();
+    el.classList.add('is-turning');
+    setTimeout(function(){ el.classList.remove('is-turning'); }, 320);
+    var res = refresh();
+    var after = res.info.size;
+    if (res.full){ startWin(res.info); return; }
+    if (!animOn) return;
+    if (after > before){
+      var freshly = [];
+      Object.keys(res.info.powered).forEach(function(k){
+        if (!beforeInfo.powered[k]) freshly.push(k);
+      });
+      freshly.forEach(function(k){
+        var target = els[k];
+        if (!target) return;
+        var p = k.split(',');
+        var rr = Number(p[0]), cc = Number(p[1]);
+        var around = [[-1,0],[0,1],[1,0],[0,-1]];
+        var fromKey = null;
+        for (var ii=0; ii<around.length; ii++){
+          var nk = (rr + around[ii][0]) + ',' + (cc + around[ii][1]);
+          if (beforeInfo.powered[nk] && els[nk]){ fromKey = nk; break; }
+        }
+        if (fromKey) travelStar(els[fromKey], target, 0);
+        target.classList.add('is-lit-seq');
+        setTimeout(function(){ target.classList.remove('is-lit-seq'); }, 560);
+      });
+      say('xingya', 'sparkle', pick(WORDS.ok), 1200);
+      act('xingya', 'is-nod', 460);
+      act('boling', 'is-hop', 480);
+      burstAt(el, 6, .9);
+      sfxConnect();
+    } else if (after < before){
+      say('boling', 'surprised', pick(WORDS.bad), 1300);
+      act('boling', 'is-shake', 480);
+      el.classList.add('is-bad');
+      setTimeout(function(){ el.classList.remove('is-bad'); }, 460);
+      sfxBreak();
+    } else {
+      act('xingya', 'is-shove', 360);
+      if (Math.random() < 0.4) say('xingya', 'wink', pick(WORDS.neutral), 1200);
+    }
+  }
+
+  function cellEl(r, c){ return els[key(r,c)]; }
+
+  function flyMate(who, targetEl, opts){
+    var mate = mates[who];
+    var home = homeRects[who];
+    if (!home) { home = mate.getBoundingClientRect(); homeRects[who] = home; }
+    mate.classList.add('is-flying');
+    if (!targetEl){
+      mate.style.transform = '';
+      return sleep(560).then(function(){ mate.classList.remove('is-flying'); });
+    }
+    var t = targetEl.getBoundingClientRect();
+    var stageRect = stage.getBoundingClientRect();
+    var homeCx = home.left + home.width/2;
+    var homeCy = home.top + home.height/2;
+    var targetCx = t.left + t.width/2;
+    var targetCy = t.top + t.height/2;
+    var placeY = targetCy - t.height * 1.02 - home.height * 0.18;
+    if (placeY - stageRect.top < 118) placeY = targetCy + t.height * 1.02 + home.height * 0.2;
+    var dx = targetCx - homeCx;
+    var dy = placeY - homeCy;
+    mate.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px) scale(' + ((opts && opts.scale) || .8) + ') rotate(' + ((opts && opts.rotate) || 0) + 'deg)';
+    return sleep(560);
+  }
+
+  function startWin(info){
+    locked = true;
+    won = true;
+    var seq = ++winSeq;
+    stage.classList.add('is-win');
+    hudTip.textContent = '接通啦！';
+    clearBubbles();
+    if (!animOn){
+      banner.classList.add('show');
+      return;
+    }
+    sfxWin();
+    say('xingya', 'sparkle', '接通啦！', 1500);
+    act('xingya', 'is-hop', 500);
+    Promise.resolve()
+      .then(function(){ return sleep(300); })
+      .then(function(){
+        if (seq !== winSeq) return null;
+        return flyMate('boling', cellEl(0,0), { scale:.62, rotate:-6 });
+      })
+      .then(function(){
+        if (seq !== winSeq) return null;
+        var chain = info.pathKeys.map(function(k){
+          var p = k.split(',');
+          return cellEl(Number(p[0]), Number(p[1]));
+        });
+        for (var i=1;i<chain.length;i++){
+          (function(idx){
+            var cell = chain[idx];
+            travelStar(chain[idx-1], cell, 0);
+            setTimeout(function(){
+              if (seq !== winSeq) return;
+              cell.classList.add('is-lit-seq');
+              tone(720 + idx * 40, 0.06, 'sine', 0.03);
+              setTimeout(function(){ cell.classList.remove('is-lit-seq'); }, 520);
+            }, 120);
+          })(i);
+        }
+        return sleep(chain.length * 150 + 160);
+      })
+      .then(function(){
+        if (seq !== winSeq) return null;
+        var bulb = cellEl(3,3);
+        burstAt(bulb, 18, 1.1);
+        banner.classList.add('show');
+        return flyMate('boling', null).then(function(){ return sleep(160); });
+      })
+      .then(function(){
+        if (seq !== winSeq) return null;
+        return flyMate('yunrong', cellEl(3,3), { scale:.66 });
+      })
+      .then(function(){
+        if (seq !== winSeq) return null;
+        act('yunrong', 'is-spin', 700);
+        burstAt(cellEl(3,3), 14, 1.2);
+        return sleep(560);
+      })
+      .then(function(){
+        if (seq !== winSeq) return null;
+        return flyMate('yunrong', null);
+      })
+      .then(function(){
+        if (seq !== winSeq) return null;
+        ['xingya','boling','yunrong'].forEach(function(who){
+          mates[who].classList.add('is-cheering');
+        });
+      });
+  }
+
+  /* ---------- 提示：波铃指路 ---------- */
+  function findNextFix(){
+    var order = ['0,1','0,2','1,2','2,2','2,3'];
+    for (var i=0;i<order.length;i++){
+      var p = order[i].split(',');
+      var t = tileAt(Number(p[0]), Number(p[1]));
+      if (t && SOLUTION[order[i]] !== undefined && t.rot !== SOLUTION[order[i]]) return t;
+    }
+    return null;
+  }
+  function onHint(){
+    if (locked) return;
+    var target = findNextFix();
+    if (!target){ say('boling', 'happy', '都接对啦，转一下试试', 1400); return; }
+    var el = els[key(target.r, target.c)];
+    if (!animOn){
+      el.classList.add('is-hint');
+      setTimeout(function(){ el.classList.remove('is-hint'); }, 1600);
+      return;
+    }
+    say('boling', 'sparkle', '从这一格开始！', 1800);
+    setTimeout(clearBubbles, 820);
+    sleep(820).then(function(){ return flyMate('boling', el, { scale:.62 }); })
+      .then(function(){
+        el.classList.add('is-hint');
+        burstAt(el, 5, .8);
+        return sleep(1100);
+      })
+      .then(function(){
+        el.classList.remove('is-hint');
+        return flyMate('boling', null);
+      });
+  }
+
+  /* ---------- 重置 ---------- */
+  function reset(){
+    winSeq++;
+    locked = false;
+    won = false;
+    steps = 0;
+    stepEl.textContent = '0';
+    goalEl.textContent = '0';
+    hudTip.textContent = animOn ? '点管道旋转，把星光接到迎宾门' : '对照模式：角色动效已关闭';
+    banner.classList.remove('show');
+    stage.classList.remove('is-win');
+    fx.innerHTML = '';
+    tiles = INITIAL.map(function(t){ return { r:t.r, c:t.c, type:t.type, rot:t.rot }; });
+    clearBubbles();
+    Object.keys(mates).forEach(function(who){
+      var m = mates[who];
+      m.style.transform = '';
+      m.classList.remove('is-flying','is-cheering','is-shove','is-hop','is-nod','is-shake','is-spin');
+    });
+    buildBoard();
+    refresh();
+  }
+
+  /* ---------- 初始化 ---------- */
+  function captureHomes(){
+    Object.keys(mates).forEach(function(who){
+      var m = mates[who];
+      var prev = m.style.transform;
+      m.style.transform = '';
+      homeRects[who] = m.getBoundingClientRect();
+      m.style.transform = prev;
+    });
+  }
+
+  tiles = INITIAL.map(function(t){ return { r:t.r, c:t.c, type:t.type, rot:t.rot }; });
+  buildBoard();
+  refresh();
+  captureHomes();
+  window.addEventListener('resize', function(){ setTimeout(captureHomes, 60); });
+
+  animToggle.addEventListener('change', function(){
+    animOn = animToggle.checked;
+    stage.classList.toggle('no-anim', !animOn);
+    if (!animOn){
+      winSeq++;
+      clearBubbles();
+      Object.keys(mates).forEach(function(who){
+        mates[who].style.transform = '';
+        mates[who].classList.remove('is-flying','is-cheering','is-spin');
+      });
+      hudTip.textContent = '对照模式：角色动效已关闭';
+      if (won) banner.classList.add('show');
+    } else {
+      hudTip.textContent = won ? '接通啦！' : '点管道旋转，把星光接到迎宾门';
+      if (won){
+        Object.keys(mates).forEach(function(who){ mates[who].classList.add('is-cheering'); });
+      }
+    }
+    refresh();
+  });
+  resetBtn.addEventListener('click', reset);
+  hintBtn.addEventListener('click', onHint);
+
+  // 开场问候
+  setTimeout(function(){
+    if (!won) say('xingya', 'happy', '转两下管道试试！', 2400);
+  }, 700);
+
+  // 调试入口（自动化验证用）
+  window.__demo = {
+    rotate: function(r, c){ var t = tileAt(r, c); if (t) onTileClick(t, els[key(r, c)]); },
+    hint: onHint,
+    reset: reset,
+    state: function(){ return { steps: steps, won: won, goal: goalEl.textContent, animOn: animOn }; }
+  };
+})();
+</script>
+</body>
+</html>

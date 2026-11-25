@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import type {
   LevelConfig,
   SimulationResult,
@@ -31,11 +31,13 @@ import {
 import { sound } from "../utils/audio";
 import { haptics } from "../utils/haptics";
 import {
+  adStepsUsedToday,
   buyCosmetic,
   buySupply,
   claimDailyTask,
   CHAPTERS,
   chapterIndex,
+  consumeAdStep,
   consumeSupply,
   equipCosmetic,
   equipHonorTitle,
@@ -50,6 +52,17 @@ import {
 } from "../utils/parkProgress";
 import { SUPPLY_ITEMS } from "../data/shopCatalog";
 import { applyParkTheme } from "../utils/parkTheme";
+import {
+  isRewardedAdAvailable,
+  preloadRewardedAd,
+  showRewardedAd,
+} from "../platform/ads";
+import {
+  AD_STEP_REWARD,
+  DAILY_AD_STEP_CAP,
+  REVIVES_PER_RUN,
+  decideAdStepOffer,
+} from "../utils/adReward";
 
 type Modal =
   | "none"
@@ -101,8 +114,8 @@ interface Props {
   onStartEndless: (difficulty: number) => void;
   /** 玩法实验关入口（纵向切片验证用，可移除） */
   onStartLab?: (index: number) => void;
-  /** 道具：步数用尽后补 3 步 */
-  onAddSteps?: () => boolean;
+  /** 道具：步数用尽后补步（加步电池 3 步；续命广告按盘面给 3–5 步） */
+  onAddSteps?: (amount?: number) => boolean;
   /** 道具：本局额外回溯 +1 */
   onAddRewind?: () => boolean;
   /** 达标关：提前结算（拿当前星数） */
@@ -136,9 +149,28 @@ export function CandyThemeShell(p: Props) {
     readParkProgress.bind(null, localStorage),
   );
   const [notice, setNotice] = useState("");
+  /**
+   * 危险操作的二次确认。
+   * 不用 window.confirm：安卓 WebView、小游戏壳、以及浏览器勾选过
+   * 「阻止此页面创建更多对话框」之后，confirm 会直接返回 false，
+   * 重置按钮就变成点了没反应。自绘确认层在任何运行环境都能用。
+   */
+  const [confirmAsk, setConfirmAsk] = useState<{
+    title: string;
+    body: string;
+    confirmLabel: string;
+    onConfirm: () => void;
+  } | null>(null);
   /** 提示引擎算出的下一步，同时用来高亮棋盘格子 */
   const [hintMove, setHintMove] = useState<HintMove | null>(null);
   const [hintMoves, setHintMoves] = useState<HintMove[]>([]);
+  /** 这一局已经续命几次（加步电池 + 续命广告合计），第 3 次只给重来 */
+  const [revives, setRevives] = useState(0);
+  const [adBusy, setAdBusy] = useState(false);
+  useEffect(() => {
+    setRevives(0);
+    setAdBusy(false);
+  }, [p.attemptId, p.level.id]);
   // 换关、切页时上一次的高亮必须消失，否则会指向新盘面上的同一格。
   useEffect(() => {
     setHintMove(null);
@@ -149,6 +181,13 @@ export function CandyThemeShell(p: Props) {
     setHintMove(null);
     setHintMoves([]);
   }, [p.attemptId]);
+  // 进关后提前拉一次广告：步数用完是最高意图的广告位，现场加载要多等 2–4 秒。
+  useEffect(() => {
+    if (p.screen !== "play" || p.gameMode !== "story") return;
+    if (!isRewardedAdAvailable()) return;
+    const timer = setTimeout(() => preloadRewardedAd("out-of-steps"), 2500);
+    return () => clearTimeout(timer);
+  }, [p.screen, p.gameMode, p.level.id]);
   useEffect(() => {
     setHintMove(null);
     setHintMoves([]);
@@ -157,7 +196,6 @@ export function CandyThemeShell(p: Props) {
   const [vibration, setVibration] = useState(haptics.isEnabled());
   const [chapter, setChapter] = useState(chapterIndex(p.level.id));
   const reward = p.victoryReward;
-  const hasNewReward = reward.stars + reward.coins > 0;
   const noticeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const candlesOf = (lv: LevelConfig) => lv.tiles.filter((t) => t.type === "bulb").length;
   /** 达标关按“保住几处”给星，其余关按步数给星 */
@@ -181,6 +219,31 @@ export function CandyThemeShell(p: Props) {
   const onParPace = currentStars >= MAX_STARS;
   const canUndo = p.historyIndex > 0 && p.rewinds > 0;
   const today = localDate();
+  const adStepsLeftToday = Math.max(
+    0,
+    DAILY_AD_STEP_CAP - adStepsUsedToday(progress, today),
+  );
+  /** 同一局最多续命 2 次：第 3 次只给重来，避免靠广告硬磨卡死关 */
+  const reviveAllowed = revives < REVIVES_PER_RUN;
+  /** 只有步数用完的遮罩需要这份决策，其余时候不跑求解器 */
+  const outOfSteps = p.remainingSteps === 0 && !p.simulation.isAllLit;
+  const adOffer = useMemo(
+    () =>
+      outOfSteps &&
+      p.screen === "play" &&
+      p.gameMode === "story" &&
+      p.level.goal === undefined
+        ? decideAdStepOffer(p.level, p.tiles)
+        : null,
+    [outOfSteps, p.screen, p.gameMode, p.level, p.tiles],
+  );
+  const canWatchAd = Boolean(
+    adOffer &&
+      adOffer.reward > 0 &&
+      adStepsLeftToday > 0 &&
+      reviveAllowed &&
+      isRewardedAdAvailable(),
+  );
   const activeModal = modal;
   const unlocked = loadUnlockedAchievements();
   const playerStats = loadPlayerStats();
@@ -304,18 +367,49 @@ export function CandyThemeShell(p: Props) {
   };
   const useStepSupply = () => {
     if (!p.onAddSteps) return;
-    const ok = p.onAddSteps();
+    const ok = p.onAddSteps(AD_STEP_REWARD);
     if (!ok) return;
     save(consumeSupply(progress, "step"));
-    flash("应急线圈已补回 3 步");
+    setRevives((value) => value + 1);
+    flash("加步电池已补回 3 步");
+  };
+  /**
+   * 看完激励视频补步。
+   *
+   * 三种结果分开处理：看完才发奖励；玩家主动关掉不发；广告拉不到（无网、没填充、
+   * 未配置广告位）兜底发放，否则网络一抖玩家就被卡死在遮罩里。兜底同样扣每日额度，
+   * 所以断网并不能白嫖步数。
+   */
+  const watchAdForSteps = async () => {
+    if (adBusy || !adOffer || adOffer.reward <= 0 || !p.onAddSteps) return;
+    const reward = adOffer.reward;
+    setAdBusy(true);
+    const status = await showRewardedAd("out-of-steps");
+    setAdBusy(false);
+    if (status === "closed") {
+      flash("广告没看完，这次没有奖励");
+      return;
+    }
+    const ok = p.onAddSteps(reward);
+    if (!ok) return;
+    setRevives((value) => value + 1);
+    save(consumeAdStep(progress, today));
+    flash(
+      status === "rewarded"
+        ? `看完广告，补回 ${reward} 步`
+        : `广告暂不可用，先补 ${reward} 步`,
+    );
   };
   /** 局内「重置」：已经走过步数才确认，空局直接重来。 */
   const restartWithConfirm = () => {
     if (p.stepsUsed > 0) {
-      const ok = window.confirm(
-        `本局已经操作 ${p.stepsUsed} 步，重置会清空这一步的全部操作，确定吗？`,
-      );
-      if (!ok) return;
+      setConfirmAsk({
+        title: "重置本局",
+        body: `本局已经操作 ${p.stepsUsed} 步，重置会清空这一步的全部操作，确定吗？`,
+        confirmLabel: "确定重置",
+        onConfirm: p.onRestart,
+      });
+      return;
     }
     p.onRestart();
   };
@@ -331,6 +425,12 @@ export function CandyThemeShell(p: Props) {
   /** 章节解锁：上一章关底通关（或本章已有进度）才开放 */
   const chapterLocked = (i: number) => {
     if (unlockAll) return false;
+    // 章节地图页有自己的「全开」开关，写的是同一个键：按调用时读，别让两处开关互相打架
+    try {
+      if (localStorage.getItem("honeycomb_unlock_all") === "1") return false;
+    } catch {
+      // 存储不可用时退回正常解锁规则
+    }
     if (i === 0) return false;
     const start = i * 20 + 1;
     const end = Math.min(99, (i + 1) * 20);
@@ -354,6 +454,9 @@ export function CandyThemeShell(p: Props) {
   const lastLevel = p.gameMode === "story" && p.level.id === 99;
   const levelContent = getLevelContent(p.level.id);
   const collection = getCollectionEntry(p.level.id);
+  /** 结算页展示的设施名与素材：本关实际修复的那一件，和上方大图严格对应 */
+  const facilityName = collection?.name ?? "能量设施";
+  const facilityArt = collection ? getExhibitArt(collection) : "carousel";
   const homeExhibit =
     progress.equippedCosmetics.exhibitId === null
       ? null
@@ -658,20 +761,6 @@ export function CandyThemeShell(p: Props) {
               <div className="park-play-tools">
                 <button
                   className="park-round"
-                  onClick={() => open("bag")}
-                  aria-label="背包"
-                >
-                  <Icon name="bag" />
-                </button>
-                <button
-                  className="park-round"
-                  onClick={() => open("flora")}
-                  aria-label="乐园图鉴"
-                >
-                  <Icon name="map" />
-                </button>
-                <button
-                  className="park-round"
                   onClick={() => open("rules")}
                   aria-label="查看玩法说明"
                 >
@@ -758,17 +847,50 @@ export function CandyThemeShell(p: Props) {
                   <ParkButton onClick={p.onRestart}>重新挑战</ParkButton>
                   {p.gameMode === "story" &&
                     p.level.goal === undefined &&
-                    p.onAddSteps && (
-                      <ParkButton
-                        purple
-                        disabled={progress.stepTokens < 1}
-                        onClick={useStepSupply}
-                      >
-                        {progress.stepTokens > 0
-                          ? `使用应急线圈 · 余 ${progress.stepTokens}`
-                          : "应急线圈不足"}
-                      </ParkButton>
+                    p.onAddSteps &&
+                    reviveAllowed && (
+                      <>
+                        {progress.stepTokens > 0 ? (
+                          <ParkButton purple onClick={useStepSupply}>
+                            {`使用加步电池 · 余 ${progress.stepTokens}`}
+                          </ParkButton>
+                        ) : canWatchAd ? (
+                          <ParkButton
+                            purple
+                            disabled={adBusy}
+                            onClick={watchAdForSteps}
+                          >
+                            {adBusy
+                              ? "广告加载中…"
+                              : `看广告 +${adOffer?.reward ?? AD_STEP_REWARD} 步`}
+                          </ParkButton>
+                        ) : (
+                          // 没库存、广告也不可用时，别再留一个点了没反应的灰按钮
+                          <ParkButton purple onClick={() => open("shop")}>
+                            加步电池不足 · 去商店补
+                          </ParkButton>
+                        )}
+                      </>
                     )}
+                  {!reviveAllowed && (
+                    <p className="park-out-of-steps-note">
+                      本局续命次数已用完，重开这一关吧
+                    </p>
+                  )}
+                  {reviveAllowed && progress.stepTokens < 1 && adOffer && (
+                    <p className="park-out-of-steps-note">
+                      {adOffer.reward === 0
+                        ? "这一局已经算不出通路了，重来一次更稳"
+                        : canWatchAd
+                          ? adOffer.stepsNeeded !== null &&
+                            adOffer.stepsNeeded > adOffer.reward
+                            ? `还差 ${adOffer.stepsNeeded} 步，补 ${adOffer.reward} 步可能还不够`
+                            : `今日还可看 ${adStepsLeftToday} 次`
+                          : adStepsLeftToday === 0
+                            ? "今日广告补步已用完，明天再来"
+                            : "广告暂不可用，可用加步电池"}
+                    </p>
+                  )}
                 </div>
               )}
             </div>
@@ -840,28 +962,27 @@ export function CandyThemeShell(p: Props) {
 
         {p.screen === "victory" && (
           <main className="park-victory" aria-label="设施修复结算">
-            <h1 className="park-victory-title" aria-label="设施复苏！">
-              <span className="sr-only">设施复苏！</span>
-            </h1>
-            <div className="park-victory-showcase">
+            <div className="park-victory-scene" aria-hidden="true">
               <div className="park-sunrays" />
-              <div className="park-sparkles-layer" />
-              <Art
-                name={collection ? getExhibitArt(collection) : "carousel"}
-                className="park-victory-carousel"
-              />
-              <div className="park-victory-friends">
-                <Art name="sheep-cheer" />
-                <Art name="spirit-cheer" />
-                <Art name="rabbit-cheer" />
-              </div>
+            </div>
+            <h1 className="park-victory-title">
+              <img src="/assets/park/victory-title-banner.webp" alt="设施复苏！" />
+            </h1>
+            <div className="park-victory-hero" aria-hidden="true">
+              <div className="park-victory-halo" />
+              <Art name={facilityArt} className="park-victory-facility" />
+            </div>
+            <div className="park-victory-friends" aria-hidden="true">
+              <Art name="sheep-cheer" />
+              <Art name="spirit-cheer" />
+              <Art name="rabbit-cheer" />
             </div>
             <section className="park-victory-panel">
               <h2
                 className="park-red-sign"
-                aria-label={`${collection?.name ?? "旋转木马"} · 成功修复`}
+                aria-label={`${facilityName} · 成功修复`}
               >
-                <span>{collection?.name ?? "旋转木马"} · 成功修复</span>
+                <span>{facilityName} · 成功修复</span>
               </h2>
               <div className="park-repair-detail">
                 <ul className="park-repair-checklist">
@@ -871,7 +992,7 @@ export function CandyThemeShell(p: Props) {
                   </li>
                   <li>
                     <img src="/assets/park/icon-check.webp" className="park-check-icon" alt="" />
-                    <span>为{collection?.name ?? "旋转木马"}供能</span>
+                    <span>为{facilityName}供能</span>
                   </li>
                   <li>
                     <img src="/assets/park/icon-check.webp" className="park-check-icon" alt="" />
@@ -880,10 +1001,7 @@ export function CandyThemeShell(p: Props) {
                 </ul>
                 <div className="park-before-after">
                   <div className="park-compare-stage is-dormant">
-                    <Art
-                      name={collection ? getExhibitArt(collection) : "carousel"}
-                      className="sleeping"
-                    />
+                    <Art name={facilityArt} className="sleeping" />
                   </div>
                   <img
                     src="/assets/park/arrow-transition.webp"
@@ -891,9 +1009,7 @@ export function CandyThemeShell(p: Props) {
                     alt="➜"
                   />
                   <div className="park-compare-stage is-active">
-                    <Art
-                      name={collection ? getExhibitArt(collection) : "carousel"}
-                    />
+                    <Art name={facilityArt} />
                   </div>
                 </div>
               </div>
@@ -905,21 +1021,26 @@ export function CandyThemeShell(p: Props) {
                   ))}
                 </div>
               )}
-              <h3 className="park-reward-title">通关奖励</h3>
-              <div className="park-rewards">
-                <div className="park-reward-slot">
-                  <Icon name="star" className="park-reward-icon" />
-                  <b>+{reward.stars}</b>
-                </div>
-                <div className="park-reward-slot">
-                  <Icon name="coin" className="park-reward-icon" />
-                  <b>+{reward.coins}</b>
-                </div>
-                <div className="park-reward-slot">
-                  <Icon name="gem" className="park-reward-icon" />
-                  <b>+{reward.gems ?? 0}</b>
-                </div>
-              </div>
+              {p.gameMode === "story" && (
+                <>
+                  <h3 className="park-reward-title">通关奖励</h3>
+                  <div className="park-rewards">
+                    {([
+                      ["star", reward.stars],
+                      // 金币已下线：统一货币在界面上叫「钻石」，实际入账金额仍是 reward.coins
+                      ["gem", reward.coins],
+                    ] as const).map(([icon, amount]) => (
+                      <div
+                        key={icon}
+                        className={`park-reward-slot ${amount > 0 ? "" : "is-empty"}`}
+                      >
+                        <Icon name={icon} className="park-reward-icon" />
+                        <b>{amount > 0 ? `+${amount}` : "已领取"}</b>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
               <div className="park-result-score">
                 <Stars value={currentStars} />
                 <span>
@@ -977,7 +1098,13 @@ export function CandyThemeShell(p: Props) {
                   ×
                 </button>
               </header>
-              <div className="park-modal-body">
+              <div
+                className={
+                  activeModal === "shop"
+                    ? "park-modal-body has-shop"
+                    : "park-modal-body"
+                }
+              >
                 {activeModal === "levels" && (
                   <>
                     <div className="park-chapter-tabs">
@@ -1332,18 +1459,21 @@ export function CandyThemeShell(p: Props) {
                     </p>
                     <button
                       className="park-text-link"
-                      onClick={() => {
-                        const ok = window.confirm(
-                          "重置会清空已修复的关卡、钻石、提示灯泡与成就记录，确定吗？",
-                        );
-                        if (!ok) return;
-                        try {
-                          resetParkProgress(window.localStorage);
-                        } catch {
-                          // 存储被禁用时仍然刷新一次，至少退出异常状态
-                        }
-                        window.location.reload();
-                      }}
+                      onClick={() =>
+                        setConfirmAsk({
+                          title: "重置存档",
+                          body: "重置会清空已修复的关卡、钻石、提示灯泡与成就记录，确定吗？",
+                          confirmLabel: "确定重置存档",
+                          onConfirm: () => {
+                            try {
+                              resetParkProgress(window.localStorage);
+                            } catch {
+                              // 存储被禁用时仍然刷新一次，至少退出异常状态
+                            }
+                            window.location.reload();
+                          },
+                        })
+                      }
                     >
                       重置本地存档
                     </button>
@@ -1485,6 +1615,37 @@ export function CandyThemeShell(p: Props) {
                     />
                   </div>
                 )}
+              </div>
+            </section>
+          </div>
+        )}
+        {confirmAsk && (
+          <div className="park-modal-backdrop is-confirm">
+            <section
+              className="park-modal park-modal-confirm"
+              role="dialog"
+              aria-modal="true"
+              aria-label={confirmAsk.title}
+            >
+              <header>
+                <h2>{confirmAsk.title}</h2>
+              </header>
+              <div className="park-modal-body">
+                <p>{confirmAsk.body}</p>
+                <div className="park-confirm-actions">
+                  <ParkButton purple onClick={() => setConfirmAsk(null)}>
+                    取消
+                  </ParkButton>
+                  <ParkButton
+                    onClick={() => {
+                      const run = confirmAsk.onConfirm;
+                      setConfirmAsk(null);
+                      run();
+                    }}
+                  >
+                    {confirmAsk.confirmLabel}
+                  </ParkButton>
+                </div>
               </div>
             </section>
           </div>

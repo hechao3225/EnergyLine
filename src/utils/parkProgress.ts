@@ -30,6 +30,9 @@ export interface ParkProgress {
   lenses: number;
   rewindTokens: number;
   stepTokens: number;
+  /** 续命广告：最近一次使用的日期 + 当天已用次数，跨天在读档时归零 */
+  adStepsDate: string;
+  adStepsUsed: number;
   equippedTitleId: string | null;
   ownedCosmetics: CosmeticId[];
   equippedCosmetics: {
@@ -122,6 +125,8 @@ const DEFAULT_PROGRESS: ParkProgress = {
   lenses: 0,
   rewindTokens: 0,
   stepTokens: 0,
+  adStepsDate: "",
+  adStepsUsed: 0,
   equippedTitleId: null,
   ownedCosmetics: [],
   equippedCosmetics: {
@@ -184,6 +189,9 @@ export function sanitizeProgress(raw: unknown): ParkProgress {
       DEFAULT_PROGRESS.rewindTokens,
     ),
     stepTokens: asCount(source.stepTokens, DEFAULT_PROGRESS.stepTokens),
+    adStepsDate:
+      typeof source.adStepsDate === "string" ? source.adStepsDate : "",
+    adStepsUsed: asCount(source.adStepsUsed, DEFAULT_PROGRESS.adStepsUsed),
     equippedTitleId: getHonorTitle(source.equippedTitleId)
       ? String(source.equippedTitleId)
       : null,
@@ -352,6 +360,24 @@ export function consumeSupply(
   return {
     ...progress,
     [item.stockKey]: progress[item.stockKey] - 1,
+  };
+}
+/** 当天已经看掉几次续命广告；日期对不上就算 0，不用写回存档。 */
+export function adStepsUsedToday(progress: ParkProgress, date: string): number {
+  return progress.adStepsDate === date ? progress.adStepsUsed : 0;
+}
+/**
+ * 记一次续命广告额度。
+ * 广告拉取失败时的兜底发放也走这里：否则断网就能无限白嫖步数，每日上限形同虚设。
+ */
+export function consumeAdStep(
+  progress: ParkProgress,
+  date: string,
+): ParkProgress {
+  return {
+    ...progress,
+    adStepsDate: date,
+    adStepsUsed: adStepsUsedToday(progress, date) + 1,
   };
 }
 export function buyCosmetic(

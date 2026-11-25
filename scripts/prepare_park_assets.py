@@ -2,6 +2,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 import json, hashlib, os, shutil
 import numpy as np
+from park_chroma import soften_chroma, soften_cta_chroma
 from park_pipe_geometry import (TILE_PALE, grade_b1, grade_tile, normalize_pipe,
                                 normalize_source, port_metadata, standardize_couplers,
                                 soften_energy)
@@ -42,6 +43,12 @@ def asset(image,name,source,rect=None,trim=True,square=False,rotate=0):
     if name in ('spirit', 'spirit-cheer'):
         # 角色保留明亮度，只压掉荧光青的饱和度。
         im = soften_energy(im, name, sat_cap=0.52, v_scale=0.97)
+    if not name.startswith('pipe-'):
+        # 全站统一彩度柔化（Lab 保明度），管件走自己的 ENERGY_SOFT，避免二次降饱和。
+        im = soften_chroma(im)
+    if name == 'button-gold':
+        # 主按钮底板只降饱和（CTA_SOFT），亮度/色相不动，避免发灰发黑。
+        im = soften_cta_chroma(im)
     if name == 'tile' and TILE_PALE:
         im = grade_tile(im)
     limit=512 if name.startswith('pipe-') else 1100 if name in ['island','carousel','logo'] else 1800 if name=='background' else 400

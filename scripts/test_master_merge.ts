@@ -23,7 +23,7 @@ try {
     await expect(page.getByTestId("remaining-steps")).toHaveText(String(budget - 1));
     await page.getByRole("button", { name: "撤销", exact: true }).click();
     await expect(page.getByTestId("remaining-steps")).toHaveText(String(budget));
-    await expect(page.getByRole("button", { name: /操作足迹/ })).toContainText(`回溯 ${left}/3`);
+    await expect(page.getByRole("button", { name: /操作足迹/ })).toContainText(`回溯 ${left} 次`);
   }
   await tile.tap();
   await expect(page.getByTestId("remaining-steps")).toHaveText(String(budget - 1));
@@ -31,10 +31,12 @@ try {
   await page.keyboard.press("Control+z");
   await expect(page.getByTestId("remaining-steps")).toHaveText(String(budget - 1));
   await page.getByRole("button", { name: "重置", exact: true }).click();
-  await expect(page.getByRole("button", { name: /操作足迹/ })).toContainText("回溯 3/3");
+  await page.getByRole("button", { name: "确定重置", exact: true }).click();
+  await expect(page.getByRole("button", { name: /操作足迹/ })).toContainText("回溯 3 次");
   await tile.dblclick();
   await expect(page.getByTestId("remaining-steps")).toHaveText(String(budget - 2));
   await page.getByRole("button", { name: "重置", exact: true }).click();
+  await page.getByRole("button", { name: "确定重置", exact: true }).click();
   await solveThroughInput(page, 1);
   await expect(page.locator(".park-result-score .park-stars")).toHaveAttribute("aria-label", "4星");
   await expect(page.locator(".park-rewards > div").first()).toContainText("+4");

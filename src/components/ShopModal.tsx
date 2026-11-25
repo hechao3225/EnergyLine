@@ -59,39 +59,45 @@ export function ShopModal({
 
   return (
     <section className="park-shop" aria-label="乐园商店货架">
-      <div className="park-shop-balance" aria-label={`钻石余额 ${progress.coins}`}>
-        <Icon name="gem" />
-        <span>{progress.coins.toLocaleString()}</span>
-      </div>
+      {/* 余额与页签同属一条吸顶货架栏：列表滚到中部也能看到余额、随手切补给/装扮 */}
+      <div className="park-shop-head">
+        <div
+          className="park-shop-balance"
+          aria-label={`钻石余额 ${progress.coins}`}
+        >
+          <Icon name="gem" />
+          <span>{progress.coins.toLocaleString()}</span>
+        </div>
 
-      <div
-        className="park-shop-tabs"
-        role="tablist"
-        aria-label="商店分类"
-        onKeyDown={handleTabKeyDown}
-      >
-        <button
-          id={TAB_IDS.supply}
-          type="button"
-          role="tab"
-          aria-selected={tab === "supply"}
-          tabIndex={tab === "supply" ? 0 : -1}
-          aria-controls="park-shop-panel-supply"
-          onClick={() => selectTab("supply")}
+        <div
+          className="park-shop-tabs"
+          role="tablist"
+          aria-label="商店分类"
+          onKeyDown={handleTabKeyDown}
         >
-          补给
-        </button>
-        <button
-          id={TAB_IDS.cosmetic}
-          type="button"
-          role="tab"
-          aria-selected={tab === "cosmetic"}
-          tabIndex={tab === "cosmetic" ? 0 : -1}
-          aria-controls="park-shop-panel-cosmetic"
-          onClick={() => selectTab("cosmetic")}
-        >
-          装扮
-        </button>
+          <button
+            id={TAB_IDS.supply}
+            type="button"
+            role="tab"
+            aria-selected={tab === "supply"}
+            tabIndex={tab === "supply" ? 0 : -1}
+            aria-controls="park-shop-panel-supply"
+            onClick={() => selectTab("supply")}
+          >
+            补给
+          </button>
+          <button
+            id={TAB_IDS.cosmetic}
+            type="button"
+            role="tab"
+            aria-selected={tab === "cosmetic"}
+            tabIndex={tab === "cosmetic" ? 0 : -1}
+            aria-controls="park-shop-panel-cosmetic"
+            onClick={() => selectTab("cosmetic")}
+          >
+            装扮
+          </button>
+        </div>
       </div>
 
       <div

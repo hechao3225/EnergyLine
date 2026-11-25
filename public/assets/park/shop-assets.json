@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-11-20",
+  "generated": "2026-11-22",
   "assets": [
     {
       "name": "icon-lens",
@@ -23,23 +23,23 @@
         0,
         0
       ],
-      "bytes": 45704,
-      "sha256": "4e5b603a6709fa455c9c5d46d197b882b4f8f7892111e841366a0036ea6aef9c",
-      "processing": "边界近白泛洪去底；2px 软边；透明裁边；512x512 居中透明画布"
+      "bytes": 45890,
+      "sha256": "750b64f4289c170fb74cadf87c9da65509aee384515fd349929f2b2617d71c9a",
+      "processing": "边界近白泛洪去底；2px 软边；透明裁边；512x512 居中透明画布；蓝色系降饱和：195–292° 色相带 C*×0.65（软膝 6），L*、色相与 alpha 不变"
     },
     {
-      "name": "icon-coil",
-      "file": "public/assets/park/icon-coil.webp",
-      "source": "docs/UI设计稿2.0/generated-sources/shop/icon-coil.png",
+      "name": "icon-step",
+      "file": "public/assets/park/icon-step.webp",
+      "source": "docs/UI设计稿2.0/generated-sources/shop/icon-step.png",
       "size": [
         512,
         512
       ],
       "has_alpha": true,
       "alpha_bbox": [
-        114,
+        128,
         32,
-        398,
+        383,
         480
       ],
       "corner_alpha": [
@@ -48,9 +48,9 @@
         0,
         0
       ],
-      "bytes": 42430,
-      "sha256": "30dbcd964a0474bbb44297fbfe5fe6c784d2e6e7f9cfe551aef913c6defbf973",
-      "processing": "边界近白泛洪去底；2px 软边；透明裁边；512x512 居中透明画布"
+      "bytes": 24498,
+      "sha256": "35d8685c2fced71e035fb15b2fddaacd61f1da58b6bfd3084cee99b22ebbf639",
+      "processing": "边界近白泛洪去底；2px 软边；透明裁边；512x512 居中透明画布；整体彩度柔化：C* 高于软膝 6 的部分 ×0.82，封顶 C*≤76；L*、色相与 alpha 不变"
     },
     {
       "name": "outfit-sheep-starlight",

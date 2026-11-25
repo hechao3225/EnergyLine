@@ -7,6 +7,7 @@ import { solveRuleLevel } from "../src/utils/rule-solver";
 import { generate as generateAxisLevel } from "./axis-gen";
 import { generateWeldLevel } from "./weld-gen";
 import { applyLevelRepairs } from "./chapter-repairs";
+import { applyDecoyRevives } from "./decoy-revives";
 import {
   buildBasicFromBlueprint,
   buildMultiSourceLevel,
@@ -202,7 +203,7 @@ function buildChapter3(): LevelConfig[] {
   }).sort((a, b) => a.id - b.id);
 }
 
-const chapter = applyLevelRepairs(buildChapter3());
+const chapter = applyDecoyRevives(applyLevelRepairs(buildChapter3()));
 for (const level of chapter) {
   const solution = solveRuleLevel(level);
   console.log(

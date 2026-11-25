@@ -5,6 +5,7 @@ import { CHAPTER4_SCHEDULE, type Chapter4Spec } from "../src/data/chapter4Schedu
 import { CHAPTER5_SCHEDULE, type Chapter5Spec } from "../src/data/chapter5Schedule";
 import { DEFAULT_LEVELS } from "../src/data/defaultLevels";
 import { scoreBurden, type BurdenScore } from "../src/utils/burden";
+import { getTilePorts } from "../src/utils/circuit";
 import { solveRuleLevel } from "../src/utils/rule-solver";
 
 type MainlineSpec =
@@ -316,6 +317,24 @@ function auditMechanicCombinations(rows: AuditRow[]) {
   }
 }
 
+/**
+ * R8 能量源必须单口：美术（scripts/audit_pipe_ports.py）只给能量源画了朝右一个接口，
+ * 四向源会让玩家看到“源朝右却四面都亮”的破规盘面（L11 曾出现，已修）。
+ */
+function auditSourcePorts() {
+  const dirs = [1, 2, 4, 8];
+  for (const level of DEFAULT_LEVELS) {
+    for (const tile of level.tiles) {
+      if (tile.type !== "battery") continue;
+      const ports = getTilePorts(tile);
+      const count = dirs.filter((bit) => ports & bit).length;
+      if (count !== 1) {
+        fail("R8", "L" + level.id + " 能量源 " + tile.id + " 有 " + count + " 个朝向端口（只允许单口）");
+      }
+    }
+  }
+}
+
 function buildRows(): AuditRow[] {
   return SPECS.map((spec) => {
     const level = DEFAULT_LEVELS.find((item) => item.id === spec.id);
@@ -345,6 +364,7 @@ auditR6(rows);
 auditR7(rows);
 auditQuestionRotation(rows);
 auditMechanicCombinations(rows);
+auditSourcePorts();
 
 for (let chapter = 1; chapter <= 5; chapter++) {
   const chapterRows = rows.filter((row) => row.chapter === chapter);

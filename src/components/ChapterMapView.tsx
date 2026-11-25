@@ -58,7 +58,10 @@ export function ChapterMapView({
     return Math.max(0, Math.min(4, isNaN(ch) ? initialChapter : ch));
   });
 
-  const [unlockAll, setUnlockAll] = useState(false);
+  // 与 shell 的 chapterLocked 共用同一个本地键，否则在图上开了「全开」照样进不去关卡
+  const [unlockAll, setUnlockAll] = useState(
+    () => typeof localStorage !== "undefined" && localStorage.getItem("honeycomb_unlock_all") === "1",
+  );
   const [selectedLevelId, setSelectedLevelId] = useState<number | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const toastTimer = useRef<number | null>(null);
@@ -188,7 +191,17 @@ export function ChapterMapView({
 
         <button
           className={`chapter-unlock-toggle ${unlockAll ? "active" : ""}`}
-          onClick={() => setUnlockAll((u) => !u)}
+          onClick={() =>
+            setUnlockAll((u) => {
+              const next = !u;
+              try {
+                localStorage.setItem("honeycomb_unlock_all", next ? "1" : "0");
+              } catch {
+                // 存储不可用时只在本次会话生效
+              }
+              return next;
+            })
+          }
           title="临时全解锁切换"
           aria-label="切换全部解锁"
         >

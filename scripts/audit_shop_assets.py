@@ -23,7 +23,7 @@ ALPHA_VISIBLE_THRESHOLD = 28
 
 EXPECTED_ASSETS = {
     "icon-lens": (512, 512, True),
-    "icon-coil": (512, 512, True),
+    "icon-step": (512, 512, True),
     "outfit-sheep-starlight": (951, 1017, True),
     "outfit-rabbit-starlight": (719, 1024, True),
     "outfit-spirit-starlight": (988, 1015, True),

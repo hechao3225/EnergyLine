@@ -74,14 +74,14 @@ async function test(name: string, action: () => Promise<void>) {
 
 let failures = 0;
 try {
-  if (!(await test("应急线圈更新当前历史快照，撤销后恢复 3 步", async () => {
+  if (!(await test("加步电池更新当前历史快照，撤销后恢复 3 步", async () => {
     await openFreshHome();
     await enterFirstLevel();
     const budget = Number(await page.getByTestId("remaining-steps").textContent());
     for (let index = 0; index < budget; index += 1) await rotateFirstCell();
 
     await expect(page.getByText("修复步数用完啦", { exact: true })).toBeVisible();
-    await page.getByRole("button", { name: "使用应急线圈 · 余 1", exact: true }).click();
+    await page.getByRole("button", { name: "使用加步电池 · 余 1", exact: true }).click();
     await expect(page.getByTestId("remaining-steps")).toHaveText("3");
 
     await page.getByRole("button", { name: /操作足迹/ }).click();

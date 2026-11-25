@@ -13,6 +13,8 @@ from pathlib import Path
 
 from PIL import Image, ImageChops, ImageDraw, ImageFilter
 
+from park_chroma import soften_chroma, soften_hue_chroma
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_DIR = ROOT / "docs/UI设计稿2.0/generated-sources/shop"
@@ -25,9 +27,26 @@ BACKGROUND_MARKER = (255, 0, 255)
 REQUIRED_PILLOW_VERSION = "13.0.0"
 SHOP_ASSETS_PYTHON_ENV = "SHOP_ASSETS_PYTHON"
 
+# 火花透镜的蓝色玻璃太刺眼：只在蓝色相带压彩度，金色镜框、珍珠环与紫色手柄保持原样。
+# f 越小越淡（0.65 相比原稿蓝色 C* 均值约 -30%）；hue_hi 必须停在紫色手柄（约 300°）之前。
+LENS_BLUE_SOFT = {
+    "f": 0.65,
+    "knee": 6.0,
+    "hue_lo": 195.0,
+    "hue_hi": 292.0,
+    "feather": 10.0,
+}
+
+# 图标彩度处理：mode=hue 只压指定色相带（透镜蓝玻璃）；mode=global 走 11-19 全站彩化曲线。
+ICON_CHROMA_SOFT: dict[str, dict[str, float | str]] = {
+    "icon-lens": {"mode": "hue", **LENS_BLUE_SOFT},
+    # 加步电池：电池瓶身是整块高饱和蓝，按全站曲线整体收一档（C*≤76，k=0.82）。
+    "icon-step": {"mode": "global", "k": 0.82, "cap": 76.0, "knee": 6.0},
+}
+
 WHITE_SOURCES = {
     "icon-lens": ("icon-lens.png", "icon"),
-    "icon-coil": ("icon-coil.png", "icon"),
+    "icon-step": ("icon-step.png", "icon"),
     "outfit-sheep-starlight": ("shop-sample-sheep-starlight.png", "outfit"),
     "outfit-rabbit-starlight": ("shop-sample-rabbit-starlight.png", "outfit"),
     "outfit-spirit-starlight": ("shop-sample-spirit-starlight.png", "outfit"),
@@ -164,6 +183,14 @@ def build_assets() -> tuple[dict[str, Image.Image], dict[str, dict[str, str | bo
         source_path = SOURCE_DIR / filename
         processed = remove_white_background(Image.open(source_path))
         image = build_icon(processed) if kind == "icon" else build_outfit(processed)
+        grade = ICON_CHROMA_SOFT.get(name)
+        if grade:
+            params = {key: value for key, value in grade.items() if key != "mode"}
+            image = (
+                soften_hue_chroma(image, **params)
+                if grade["mode"] == "hue"
+                else soften_chroma(image, **params)
+            )
         assets[name] = image
         metadata[name] = {
             "source": f"docs/UI设计稿2.0/generated-sources/shop/{filename}",
@@ -174,6 +201,17 @@ def build_assets() -> tuple[dict[str, Image.Image], dict[str, dict[str, str | bo
                 else "边界近白泛洪去底；2px 软边；透明裁边并保留原始比例"
             ),
         }
+        if grade:
+            if grade["mode"] == "hue":
+                metadata[name]["processing"] += (
+                    f"；蓝色系降饱和：{grade['hue_lo']:g}–{grade['hue_hi']:g}° 色相带 "
+                    f"C*×{grade['f']:g}（软膝 {grade['knee']:g}），L*、色相与 alpha 不变"
+                )
+            else:
+                metadata[name]["processing"] += (
+                    f"；整体彩度柔化：C* 高于软膝 {grade['knee']:g} 的部分 ×{grade['k']:g}，"
+                    f"封顶 C*≤{grade['cap']:g}；L*、色相与 alpha 不变"
+                )
 
     moods = {}
     for name, (filename, kind) in MOOD_SOURCES.items():
@@ -230,7 +268,7 @@ def manifest_for(assets: dict[str, Image.Image], metadata: dict[str, dict[str, s
         )
     return {
         "version": 1,
-        "generated": "2026-11-20",
+        "generated": "2026-11-22",
         "assets": entries,
     }
 

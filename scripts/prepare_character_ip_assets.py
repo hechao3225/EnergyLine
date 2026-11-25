@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""整理角色 IP 资产：表情切片、48×48 头像、云绒庆祝姿态，并同步清单与 QA 证据。
+"""整理角色 IP 资产：表情切片、角色头像、云绒庆祝姿态，并同步清单与 QA 证据。
 
 数据来源：
-- docs/UI设计稿2.0/generated-sources/character-ip/*_raw.png（生图原始白底图）
-- docs/角色IP/素材/主角三人组-角色设计图.jpg（48×48 图标区）
+- docs/UI设计稿2.0/generated-sources/character-ip/*_raw.png（生图原始白底图，头像同样取自这里）
+- docs/角色IP/素材/主角三人组-角色设计图.jpg（历史 48×48 图标区；头像已不再从该图裁切）
 
 运行：
   python scripts/prepare_character_ip_assets.py
@@ -37,6 +37,16 @@ CHARACTERS = [
     {"id": "yunrong", "runtime": "rabbit", "label": "云绒", "sheet_box": (1427, 654, 1513, 730)},
 ]
 STATES = ["happy", "wink", "sleep", "surprised", "sparkle"]
+
+# 头像取自运行时主立绘（sheep / spirit / rabbit.webp，已带透明通道）。
+# 生图原图与设计稿面板都是纯白/浅粉底，云绒是白毛，实测毛色 (253,243,252) 与底色 (254,244,253) 几乎同色，
+# 无法用颜色抠底；主立绘本身就是透明产出。
+# 取景：整只完整放入（contain），不裁切任何部位——头部特写会把耳尖、天线球、下巴切掉。
+AVATAR_SPEC = {
+    "xingya": {"crop": (0.0, 0.0, 1.0, 1.0)},
+    "boling": {"crop": (0.0, 0.0, 1.0, 1.0)},
+    "yunrong": {"crop": (0.0, 0.0, 1.0, 1.0)},
+}
 MOOD_ORDER = ["sheep", "rabbit", "spirit"]
 
 
@@ -166,11 +176,28 @@ def build_expression(character_id: str, state: str) -> tuple[Image.Image, Path]:
     return image, path
 
 
-def build_avatar(sheet: Image.Image, box: tuple[int, int, int, int]) -> Image.Image:
-    crop = sheet.crop(box).resize((96, 96), Image.LANCZOS)
-    rgba = crop.convert("RGBA")
-    rgba.putalpha(rounded_mask(96, 21))
-    return rgba
+def build_avatar(character: dict) -> Image.Image:
+    """从运行时主立绘裁出头像：按比例取头部，主体居中，保留透明通道。"""
+    spec = AVATAR_SPEC[character["id"]]
+    source = Image.open(ASSET_DIR / f"{character['runtime']}.webp").convert("RGBA")
+    width, height = source.size
+    fx0, fy0, fx1, fy1 = spec["crop"]
+    subject = source.crop(
+        (round(fx0 * width), round(fy0 * height), round(fx1 * width), round(fy1 * height))
+    )
+    bbox = subject.split()[3].getbbox()
+    if bbox is None:
+        raise ValueError(f"{character['id']}: 裁切区域没有内容")
+    subject = subject.crop(bbox)
+    size = 256
+    scale = (size * 0.96) / max(subject.size)
+    subject = subject.resize(
+        (max(1, round(subject.width * scale)), max(1, round(subject.height * scale))),
+        Image.LANCZOS,
+    )
+    canvas = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    canvas.alpha_composite(subject, ((size - subject.width) // 2, (size - subject.height) // 2))
+    return clear_border(canvas)
 
 
 def build_cheer() -> Image.Image:
@@ -317,16 +344,16 @@ def build_expression_contact(expressions: dict[str, tuple[Image.Image, Path]], b
 
 
 def build_avatar_contact(avatars: dict[str, Image.Image]) -> Image.Image:
-    cell = 180
+    cell = 200
     sheet = Image.new("RGB", (cell * 3, cell * 2 + 40), "#241436")
     draw = ImageDraw.Draw(sheet)
-    draw.text((12, 10), "48×48 角色图标（上 4x 放大预览 / 下 48px 实际）", fill="#ffffff", font=load_font(16))
+    draw.text((12, 10), "角色头像（上 256px@2x / 下 128px 实际）", fill="#ffffff", font=load_font(16))
     for index, character in enumerate(CHARACTERS):
         icon = avatars[character["id"]]
-        preview = icon.resize((96, 96), Image.LANCZOS)
-        sheet.paste(preview, (index * cell + 42, 45), preview)
-        small = icon.resize((48, 48), Image.LANCZOS)
-        sheet.paste(small, (index * cell + 66, cell + 70), small)
+        preview = icon.resize((160, 160), Image.LANCZOS)
+        sheet.paste(preview, (index * cell + 20, 40), preview)
+        small = icon.resize((64, 64), Image.LANCZOS)
+        sheet.paste(small, (index * cell + 68, cell + 70), small)
         draw.text((index * cell + 12, cell + 130), character["label"], fill="#ffd76a", font=load_font(16))
     return sheet
 
@@ -379,16 +406,20 @@ def main() -> int:
     avatars: dict[str, Image.Image] = {}
     additions: list[dict] = [cheer_payload]
     for character in CHARACTERS:
-        icon = build_avatar(sheet, character["sheet_box"])
+        icon = build_avatar(character)
         avatars[character["id"]] = icon
-        for suffix, target in (("", 48), ("@2x", 96)):
-            image = icon if target == 96 else icon.resize((48, 48), Image.LANCZOS)
+        for suffix, target in (("", 128), ("@2x", 256)):
+            image = icon if target == 256 else icon.resize((128, 128), Image.LANCZOS)
             name = f"avatar-{character['id']}{suffix}"
             payload = save_asset(image, name)
-            payload["source"] = "docs/角色IP/素材/主角三人组-角色设计图.jpg"
-            payload["crop"] = list(character["sheet_box"])
-            payload["route"] = "design-sheet crop"
-            payload["processing"] = "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
+            payload["source"] = f"public/assets/park/{character['runtime']}.webp"
+            payload["route"] = "standup head crop"
+            spec = AVATAR_SPEC[character["id"]]
+            payload["processing"] = (
+                "运行时主立绘按比例裁头部 "
+                f"({spec['crop'][0]:.2f},{spec['crop'][1]:.2f})-({spec['crop'][2]:.2f},{spec['crop'][3]:.2f})；"
+                "透明裁边；等比居中；WebP 92"
+            )
             additions.append(payload)
 
     update_runtime_manifest(

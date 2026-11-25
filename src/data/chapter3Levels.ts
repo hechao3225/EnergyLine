@@ -3380,9 +3380,9 @@ export const CHAPTER3_LEVELS: LevelConfig[] = [
         "id": "t-0-1",
         "row": 0,
         "col": 1,
-        "type": "line",
-        "rotation": 90,
-        "basePorts": 10,
+        "type": "corner",
+        "rotation": 180,
+        "basePorts": 6,
         "locked": false
       },
       {
@@ -3432,9 +3432,10 @@ export const CHAPTER3_LEVELS: LevelConfig[] = [
         "id": "t-1-1",
         "row": 1,
         "col": 1,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
+        "type": "line",
+        "rotation": 180,
+        "basePorts": 10,
+        "locked": false
       },
       {
         "id": "t-1-2",
@@ -3474,18 +3475,18 @@ export const CHAPTER3_LEVELS: LevelConfig[] = [
         "id": "t-2-0",
         "row": 2,
         "col": 0,
-        "type": "battery",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 2,
-        "locked": true
+        "basePorts": 0,
+        "locked": false
       },
       {
         "id": "t-2-1",
         "row": 2,
         "col": 1,
-        "type": "line",
-        "rotation": 90,
-        "basePorts": 10,
+        "type": "corner",
+        "rotation": 0,
+        "basePorts": 6,
         "locked": false
       },
       {
@@ -3501,9 +3502,10 @@ export const CHAPTER3_LEVELS: LevelConfig[] = [
         "id": "t-2-3",
         "row": 2,
         "col": 3,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
+        "type": "corner",
+        "rotation": 270,
+        "basePorts": 6,
+        "locked": false
       },
       {
         "id": "t-2-4",
@@ -3771,9 +3773,10 @@ export const CHAPTER3_LEVELS: LevelConfig[] = [
         "id": "t-1-2",
         "row": 1,
         "col": 2,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
+        "type": "corner",
+        "rotation": 180,
+        "basePorts": 6,
+        "locked": false
       },
       {
         "id": "t-1-3",
@@ -3820,17 +3823,19 @@ export const CHAPTER3_LEVELS: LevelConfig[] = [
         "id": "t-2-2",
         "row": 2,
         "col": 2,
-        "type": "empty",
+        "type": "corner",
         "rotation": 0,
-        "basePorts": 0
+        "basePorts": 6,
+        "locked": false
       },
       {
         "id": "t-2-3",
         "row": 2,
         "col": 3,
-        "type": "empty",
-        "rotation": 0,
-        "basePorts": 0
+        "type": "line",
+        "rotation": 90,
+        "basePorts": 10,
+        "locked": false
       },
       {
         "id": "t-2-4",
@@ -5629,10 +5634,10 @@ export const CHAPTER3_LEVELS: LevelConfig[] = [
         "id": "t-4-0",
         "row": 4,
         "col": 0,
-        "type": "battery",
+        "type": "empty",
         "rotation": 0,
-        "basePorts": 2,
-        "locked": true
+        "basePorts": 0,
+        "locked": false
       },
       {
         "id": "t-4-1",

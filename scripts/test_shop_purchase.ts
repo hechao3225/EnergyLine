@@ -27,7 +27,7 @@ const supplies = [
   { name: "提示灯泡", key: "hints" },
   { name: "火花透镜", key: "lenses" },
   { name: "时光回针", key: "rewindTokens" },
-  { name: "应急线圈", key: "stepTokens" },
+  { name: "加步电池", key: "stepTokens" },
 ] as const;
 const cosmetics = ["开心问候", "星愿礼服", "星空展台", "宁静夜灯"] as const;
 
@@ -326,7 +326,7 @@ async function runPurchaseVisual(browser: Browser, width: number, height: number
   await openShop(page);
   await capture(page, viewport, "shop-supply-top");
   await scrollShop(page, "down");
-  await expect(card(page, "应急线圈")).toBeInViewport();
+  await expect(card(page, "加步电池")).toBeInViewport();
   await capture(page, viewport, "shop-supply-bottom");
 
   await page.getByRole("tab", { name: "装扮", exact: true }).click();

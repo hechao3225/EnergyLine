@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import assert from "node:assert/strict";
 import { DEFAULT_LEVELS } from "../src/data/defaultLevels";
-import { openFreshHome, finishFirstGuide, solveThroughInput, unlockAllChapters } from "./park_test_player";
+import { openFreshHome, finishFirstGuide, solveThroughInput, selectLevelOnMap } from "./park_test_player";
 const FIRST_BUDGET = DEFAULT_LEVELS[0].maxSteps;
 const ROOT = path.resolve(process.env.PARK_QA_DIR || "docs/QA/ui2-2026-11-10");
 const SCREENS = path.join(ROOT, "screens");
@@ -50,18 +50,7 @@ async function selectLevel(page: Page, id: number) {
     .getByRole("navigation")
     .getByRole("button", { name: "关卡", exact: true })
     .click();
-  await unlockAllChapters(page);
-  await page
-    .getByRole("button", {
-      name: `${Math.floor((id - 1) / 20) + 1}章`,
-      exact: true,
-    })
-    .click();
-  await page
-    .locator(".park-modal-levels")
-    .getByRole("button", { name: `修复第${id}处设施`, exact: true })
-    .click();
-  await expect(page.locator(".park-level-sign")).toHaveText(`第 ${id} 关`);
+  await selectLevelOnMap(page, id);
 }
 async function test(name: string, action: () => Promise<void>) {
   await action();
@@ -157,7 +146,8 @@ try {
       JSON.parse(localStorage.getItem("energy_park_progress_v2")!),
     );
     assert.equal(progress.coins, 80);
-    await expect(page.getByText("本次无新增奖励", { exact: true })).toBeVisible();
+    // 结算页改版后：重复通关不再写"本次无新增奖励"，而是两个奖励槽都显示「已领取」
+    await expect(page.locator(".park-rewards")).toContainText("已领取");
     await page.getByRole("button", { name: "下一关", exact: true }).click();
     await expect(page.locator(".park-level-sign")).toHaveText("第 2 关");
     await page.getByRole("button", { name: "提示", exact: true }).click();
@@ -180,8 +170,9 @@ try {
     await capture(page, "out-of-steps-390x844");
     await page.getByRole("button", { name: "撤销一步", exact: true }).click();
     await expect(page.getByTestId("remaining-steps")).toHaveText("1");
-    page.once("dialog", (dialog) => dialog.accept());
     await page.getByRole("button", { name: "重置", exact: true }).click();
+    // 重置确认走游戏内弹窗（不使用 window.confirm，WebView 里会被静默吞掉）
+    await page.getByRole("button", { name: "确定重置", exact: true }).click();
     await expect(page.getByTestId("remaining-steps")).toHaveText(String(FIRST_BUDGET));
   });
   for (const id of [24, 41, 61, 81]) {

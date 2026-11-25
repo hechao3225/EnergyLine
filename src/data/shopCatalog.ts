@@ -32,11 +32,11 @@ export const SUPPLY_ITEMS: readonly SupplyShopItem[] = [
   },
   {
     id: "step",
-    name: "应急线圈",
-    description: "步数归零后补回 3 步",
+    name: "加步电池",
+    description: "步数用完时，立即补回 3 步",
     price: 300,
     stockKey: "stepTokens",
-    iconArt: "icon-coil",
+    iconArt: "icon-step",
   },
 ];
 

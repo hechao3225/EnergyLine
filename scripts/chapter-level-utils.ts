@@ -6,7 +6,7 @@ import type {
   Tile,
 } from "../src/types/game";
 import { LEGACY_LEVELS } from "../src/data/defaultLevels";
-import { getDefaultBasePorts, simulateCircuit } from "../src/utils/circuit";
+import { getDefaultBasePorts, getTilePorts, simulateCircuit } from "../src/utils/circuit";
 import { applyRuleSolution, solveRuleLevel } from "../src/utils/rule-solver";
 import {
   createScrambledLevel,
@@ -56,7 +56,18 @@ export function solvedBlueprint(id: number): Tile[] {
   if (!level) throw new Error(`缺少旧拓扑 L${id}`);
   const solution = solveRuleLevel(level);
   if (!solution) throw new Error(`旧拓扑 L${id} 无解`);
-  return applyRuleSolution(level, solution);
+  const solved = applyRuleSolution(level, solution);
+  const multiPortSource = solved.find(
+    (tile) =>
+      tile.type === "battery" &&
+      [1, 2, 4, 8].filter((bit) => getTilePorts(tile) & bit).length !== 1,
+  );
+  if (multiPortSource) {
+    throw new Error(
+      `旧拓扑 L${id} 的能量源 ${multiPortSource.id} 是多向端口，不能当单口源蓝本（美术只支持朝右单口）`,
+    );
+  }
+  return solved;
 }
 
 export function buildBasicFromBlueprint(

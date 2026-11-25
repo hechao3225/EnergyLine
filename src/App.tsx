@@ -393,11 +393,12 @@ export default function App() {
     setLevelsOpen(false);
     reset(config);
   };
-  // 道具：步数用尽后补 3 步（切片里先免费发放，看手感再定经济）
-  const addSteps = (): boolean => {
+  // 道具：步数用尽后补步。加步电池和续命广告共用这个入口，补几步由调用方给。
+  const addSteps = (amount = 3): boolean => {
     const current = attempt.current;
     if (winProcessed.current || current.remaining > 0) return false;
-    const nextRemaining = current.remaining + 3;
+    const bonus = Math.max(1, Math.floor(amount));
+    const nextRemaining = current.remaining + bonus;
     const nextHistory = current.history.map((item, index) =>
       index === current.index
         ? { ...item, remainingSteps: nextRemaining }
