@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import type { Tile, SimulationResult } from "../types/game";
 import { TileView } from "./TileView";
 import { getRotorRingPositions } from "../utils/rotor";
@@ -23,6 +29,11 @@ interface GameBoardProps {
   wrap?: boolean;
   /** 焊死关卡：通电的格子锁住 */
   weld?: boolean;
+}
+
+interface RotorMotion {
+  rotor: Tile;
+  fromTiles: Tile[];
 }
 
 export function GameBoard({
@@ -111,16 +122,56 @@ export function GameBoard({
   );
   const rotorActive = Boolean(rotor?.rotorActivated);
   const previousRotorActive = useRef(rotorActive);
+  const previousTiles = useRef(tiles);
   const [rotorSpinning, setRotorSpinning] = useState(false);
-  useEffect(() => {
-    if (rotorActive && !previousRotorActive.current) {
+  const [rotorMotion, setRotorMotion] = useState<RotorMotion | null>(null);
+
+  useLayoutEffect(() => {
+    if (rotorActive && !previousRotorActive.current && rotor) {
+      setRotorMotion({ rotor: { ...rotor }, fromTiles: previousTiles.current });
       setRotorSpinning(true);
-      previousRotorActive.current = true;
-      const timer = setTimeout(() => setRotorSpinning(false), 920);
-      return () => clearTimeout(timer);
     }
     previousRotorActive.current = rotorActive;
-  }, [rotorActive]);
+  }, [rotorActive, rotor]);
+
+  useLayoutEffect(() => {
+    previousTiles.current = tiles;
+  }, [tiles]);
+
+  useEffect(() => {
+    if (!rotorSpinning) return;
+    const timer = setTimeout(() => {
+      setRotorSpinning(false);
+      setRotorMotion(null);
+    }, 880);
+    return () => clearTimeout(timer);
+  }, [rotorSpinning]);
+
+  const rotorMotionItems = useMemo(() => {
+    if (!rotorMotion) return [];
+    const positions = getRotorRingPositions(rotorMotion.rotor);
+    return positions.flatMap((position, index) => {
+      const tile = rotorMotion.fromTiles.find(
+        (candidate) =>
+          candidate.row === position.row && candidate.col === position.col,
+      );
+      if (!tile) return [];
+      const destination = positions[(index + 1) % positions.length];
+      return [
+        {
+          tile,
+          style: {
+            left: `${(position.col / gridCols) * 100}%`,
+            top: `${(position.row / gridRows) * 100}%`,
+            width: `${100 / gridCols}%`,
+            height: `${100 / gridRows}%`,
+            "--rotor-move-x": `${(destination.col - position.col) * 100}%`,
+            "--rotor-move-y": `${(destination.row - position.row) * 100}%`,
+          } as React.CSSProperties,
+        },
+      ];
+    });
+  }, [gridCols, gridRows, rotorMotion]);
 
   // 只有真的转过的格子才闪：撤销、进关都不触发。
   const previousRotation = useRef(new Map<string, number>());
@@ -207,9 +258,39 @@ export function GameBoard({
               height: `${((Math.max(1, rotor.rotorRadius ?? 1) * 2 + 1) / gridRows) * 100}%`,
             }}
             aria-hidden="true"
+          />
+        )}
+        {rotorMotion && (
+          <div className="park-rotor-motion" aria-hidden="true">
+            {rotorMotionItems.map(({ tile, style }) => (
+              <div
+                key={tile.id}
+                className="park-rotor-moving-tile"
+                style={style}
+              >
+                <TileView
+                  tile={tile}
+                  isPowered={simulation.poweredTileIds.has(tile.id)}
+                  colorMask={simulation.tileColors?.get(tile.id) ?? 0}
+                  onClick={() => {}}
+                  interactive={false}
+                  levelId={levelId}
+                />
+              </div>
+            ))}
+          </div>
+        )}
+        {rotorSpinning && rotor && (
+          <b
+            className="park-rotor-callout"
+            style={{
+              left: `${((rotor.col + 0.5) / gridCols) * 100}%`,
+              top: `${((rotor.row + 0.5) / gridRows) * 100}%`,
+            }}
+            aria-hidden="true"
           >
-            {rotorSpinning && <b>环轨换位</b>}
-          </span>
+            环轨换位
+          </b>
         )}
       </div>
       {wrapLinks.length > 0 && (

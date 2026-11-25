@@ -5,6 +5,12 @@
     "bodyOverflowX": false,
     "overlapsCoreControls": false
   },
+  "lessonState": {
+    "steps": 3,
+    "orbitVisible": true,
+    "insideViewport": true,
+    "clipped": []
+  },
   "initial": {
     "rotorMark": "↻动力",
     "orbitInsideBoard": true,
@@ -12,8 +18,14 @@
     "caption": "动力转盘通电后，周围 8 格管道会沿环轨换位",
     "clipped": []
   },
+  "motion": {
+    "movingTiles": 8,
+    "runningAnimations": 8,
+    "callout": "环轨换位"
+  },
   "afterShift": {
     "active": "true",
+    "movingTiles": 0,
     "switchedTileRowCol": {
       "id": "lab-1-2",
       "position": 9,
@@ -26,6 +38,10 @@
   "victory": {
     "title": "",
     "steps": "已用 2 步"
+  },
+  "compactLessonState": {
+    "insideViewport": true,
+    "bodyOverflowX": false
   },
   "compact": {
     "bodyOverflowX": false,

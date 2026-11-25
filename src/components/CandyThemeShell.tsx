@@ -142,9 +142,11 @@ const TITLES: Record<Exclude<Modal, "none">, string> = {
   world: "乐园宇宙",
 };
 const HONOR_TITLE_SEEN_KEY = "honeycomb_honor_titles_seen_v1";
+const ROTOR_LESSON_SEEN_KEY = "honeycomb_rotor_lesson_seen_v1";
 
 export function CandyThemeShell(p: Props) {
   const [modal, setModal] = useState<Modal>(() => localStorage.getItem("honeycomb_story_seen_v1") === "1" ? "none" : "story");
+  const [rotorLessonOpen, setRotorLessonOpen] = useState(false);
   const [progress, setProgress] = useState(
     readParkProgress.bind(null, localStorage),
   );
@@ -471,6 +473,22 @@ export function CandyThemeShell(p: Props) {
   const hasGear = p.tiles.some((t) => (t.axisDir ?? 0) !== 0);
   const rotor = p.tiles.find((t) => t.type === "rotor");
   const hasRotor = Boolean(rotor);
+  useEffect(() => {
+    if (p.screen !== "play" || !hasRotor) {
+      setRotorLessonOpen(false);
+      return;
+    }
+    if (
+      !rotor?.rotorActivated &&
+      localStorage.getItem(ROTOR_LESSON_SEEN_KEY) !== "1"
+    ) {
+      setRotorLessonOpen(true);
+    }
+  }, [hasRotor, p.attemptId, p.level.id, p.screen, rotor?.rotorActivated]);
+  const dismissRotorLesson = () => {
+    localStorage.setItem(ROTOR_LESSON_SEEN_KEY, "1");
+    setRotorLessonOpen(false);
+  };
   const navigation: { icon: IconName; text: string; action: () => void }[] = [
     {
       icon: "castle",
@@ -970,6 +988,41 @@ export function CandyThemeShell(p: Props) {
               操作足迹 · {p.stepsUsed} 步 · 回溯 {p.rewinds} 次
             </button>
             <span className="park-build-tag">{BUILD_TAG}</span>
+            {rotorLessonOpen && hasRotor && (
+              <div className="park-rotor-lesson-backdrop">
+                <section
+                  className="park-rotor-lesson"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="动力转盘教学"
+                >
+                  <span className="park-rotor-lesson-kicker">新机关</span>
+                  <h2>动力转盘</h2>
+                  <div className="park-rotor-lesson-demo" aria-hidden="true">
+                    <Art name="pipe-source" />
+                    <span className="park-rotor-lesson-flow">能量</span>
+                    <span className="park-rotor-lesson-orbit">
+                      <b>↻</b>
+                    </span>
+                  </div>
+                  <div className="park-rotor-lesson-steps">
+                    <div>
+                      <b>1</b>
+                      <span>旋转供能管道，接通中央转盘</span>
+                    </div>
+                    <div>
+                      <b>2</b>
+                      <span>周围 8 格管道沿环轨顺时针移动一格</span>
+                    </div>
+                    <div>
+                      <b>3</b>
+                      <span>管道朝向不变，继续接通剩余设施</span>
+                    </div>
+                  </div>
+                  <ParkButton onClick={dismissRotorLesson}>开始试玩</ParkButton>
+                </section>
+              </div>
+            )}
           </main>
         )}
 
