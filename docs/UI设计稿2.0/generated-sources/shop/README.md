@@ -5,7 +5,7 @@
 | 文件 | 用途 | 尺寸 |
 | --- | --- | --- |
 | `icon-lens.png` | 火花透镜商店图标白底源图 | 1024×1024 |
-| `icon-coil.png` | 应急线圈商店图标白底源图 | 1024×1024 |
+| `icon-step.png` | 加步电池商店图标白底源图 | 1254×1254 |
 | `shop-sample-sheep-starlight.png` | 羊伙伴星愿礼服白底源图 | 1024×1024 |
 | `shop-sample-rabbit-starlight.png` | 兔子伙伴星愿礼服白底源图 | 1024×1024 |
 | `shop-sample-spirit-starlight.png` | 精灵伙伴星愿礼服白底源图 | 1024×1024 |

@@ -1,0 +1,2638 @@
+{
+  "base": "http://127.0.0.1:4173",
+  "date": "2026-11-21T15:10:23.618Z",
+  "results": [
+    {
+      "viewport": "390x844",
+      "stage": {
+        "width": 390,
+        "height": 844
+      },
+      "first": {
+        "stage": {
+          "width": 390,
+          "height": 844
+        },
+        "victoryBackground": "rgb(138, 82, 216)",
+        "victoryBackgroundSize": "cover",
+        "victoryBackgroundImage": "url(\"http://127.0.0.1:4173/assets/park/victory-bg-v3.webp\")",
+        "backgrounds": [
+          "repeating-conic-gradient(at 50% 40%, rgba(255, 245, 193, 0) 0deg, rgba(255, 245, 193, 0) 12deg, rgba(255, 245, 193, 0.29) 14deg, rgba(255, 245, 193, 0.29) 17deg, rgba(255, 245, 193, 0) 21deg, rgba(255, 245, 193, 0) 30deg)",
+          "radial-gradient(circle, rgba(255, 247, 205, 0.78) 0%, rgba(255, 216, 128, 0.4) 36%, rgba(255, 168, 226, 0.16) 62%, rgba(0, 0, 0, 0) 76%)",
+          "linear-gradient(rgb(255, 251, 242) 0%, rgb(255, 244, 229) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/repair-sign-v2.webp\")",
+          "radial-gradient(circle, rgb(243, 233, 250) 40%, rgb(232, 213, 243) 80%, rgba(255, 255, 255, 0) 100%)",
+          "radial-gradient(circle, rgba(255, 235, 170, 0.8) 20%, rgba(255, 185, 215, 0.4) 60%, rgba(0, 0, 0, 0) 100%)",
+          "linear-gradient(90deg, rgb(255, 240, 181), rgb(248, 204, 226))",
+          "url(\"http://127.0.0.1:4173/assets/park/reward-ribbon.webp\")",
+          "linear-gradient(rgb(252, 235, 248) 0%, rgb(243, 218, 240) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/button-purple.webp\")",
+          "url(\"http://127.0.0.1:4173/assets/park/button-gold.webp\")"
+        ],
+        "sign": {
+          "top": 389.5625,
+          "bottom": 424.65625,
+          "width": 295.09375,
+          "height": 35.09375,
+          "objectFit": "fill",
+          "boxRatio": 8.408726625111308,
+          "artRatio": null
+        },
+        "list": {
+          "top": 425.421875,
+          "bottom": 530.046875,
+          "width": 108.421875,
+          "height": 104.625,
+          "objectFit": "fill",
+          "boxRatio": 1.0362903225806452,
+          "artRatio": 1
+        },
+        "compareActive": {
+          "top": 446.53125,
+          "bottom": 508.921875,
+          "width": 62.390625,
+          "height": 62.390625,
+          "objectFit": "fill",
+          "boxRatio": 1,
+          "artRatio": 1
+        },
+        "rewardTitle": {
+          "top": 560.625,
+          "bottom": 586.359375,
+          "width": 163.796875,
+          "height": 25.734375,
+          "objectFit": "fill",
+          "boxRatio": 6.364905889496053,
+          "artRatio": null
+        },
+        "rewards": {
+          "top": 582.46875,
+          "bottom": 650.71875,
+          "width": 341.5625,
+          "height": 68.25,
+          "objectFit": "fill",
+          "boxRatio": 5.004578754578755,
+          "artRatio": 1
+        },
+        "score": {
+          "top": 653.046875,
+          "bottom": 671.765625,
+          "width": 341.5625,
+          "height": 18.71875,
+          "objectFit": "fill",
+          "boxRatio": 18.247078464106846,
+          "artRatio": 1
+        },
+        "panel": {
+          "top": 405.109375,
+          "bottom": 676.875,
+          "width": 372.84375,
+          "height": 271.765625,
+          "objectFit": "fill",
+          "boxRatio": 1.3719312367044214,
+          "artRatio": 1
+        },
+        "actions": {
+          "top": 688.703125,
+          "bottom": 749.46875,
+          "width": 368.1875,
+          "height": 60.765625,
+          "objectFit": "fill",
+          "boxRatio": 6.059141167395217,
+          "artRatio": 1.1630434782608696
+        },
+        "replay": {
+          "top": 808.46875,
+          "bottom": 831.34375,
+          "width": 189.984375,
+          "height": 22.875,
+          "objectFit": "fill",
+          "boxRatio": 8.305327868852459,
+          "artRatio": null
+        },
+        "facility": {
+          "top": 79.28207397460938,
+          "bottom": 275.2508239746094,
+          "width": 249.59375,
+          "height": 195.96875,
+          "objectFit": "contain",
+          "boxRatio": 1.273640567692553,
+          "artRatio": 1
+        },
+        "titleBanner": {
+          "top": 12.65625,
+          "bottom": 67.703125,
+          "width": 210.59375,
+          "height": 55.046875,
+          "objectFit": "contain",
+          "boxRatio": 3.8257167187056487,
+          "artRatio": 3.8247422680412373
+        },
+        "friends": [
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.8949419789175304,
+            "artRatio": 0.895
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 1.1172671651937458,
+            "artRatio": 1.1173184357541899
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.9249507618948896,
+            "artRatio": 0.925
+          }
+        ],
+        "friendsBox": {
+          "top": 261.640625,
+          "bottom": 422,
+          "width": 390,
+          "height": 160.359375,
+          "objectFit": "fill",
+          "boxRatio": 2.4320374159602456,
+          "artRatio": 0.895
+        },
+        "facilitySrc": "./assets/park/exhibit-001.webp",
+        "compareSrc": "./assets/park/exhibit-001.webp",
+        "dormantSrc": "./assets/park/exhibit-001.webp",
+        "signText": "迎宾门 · 成功修复",
+        "rewardTitleText": "通关奖励",
+        "rewardNumbers": [
+          "+4",
+          "+100"
+        ],
+        "rewardIcons": [
+          "./assets/park/icon-star.webp",
+          "./assets/park/icon-gem.webp"
+        ],
+        "scoreText": "已用 5 步 · 最佳 5 步"
+      },
+      "replay": {
+        "stage": {
+          "width": 390,
+          "height": 844
+        },
+        "victoryBackground": "rgb(138, 82, 216)",
+        "victoryBackgroundSize": "cover",
+        "victoryBackgroundImage": "url(\"http://127.0.0.1:4173/assets/park/victory-bg-v3.webp\")",
+        "backgrounds": [
+          "repeating-conic-gradient(at 50% 40%, rgba(255, 245, 193, 0) 0deg, rgba(255, 245, 193, 0) 12deg, rgba(255, 245, 193, 0.29) 14deg, rgba(255, 245, 193, 0.29) 17deg, rgba(255, 245, 193, 0) 21deg, rgba(255, 245, 193, 0) 30deg)",
+          "radial-gradient(circle, rgba(255, 247, 205, 0.78) 0%, rgba(255, 216, 128, 0.4) 36%, rgba(255, 168, 226, 0.16) 62%, rgba(0, 0, 0, 0) 76%)",
+          "linear-gradient(rgb(255, 251, 242) 0%, rgb(255, 244, 229) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/repair-sign-v2.webp\")",
+          "radial-gradient(circle, rgb(243, 233, 250) 40%, rgb(232, 213, 243) 80%, rgba(255, 255, 255, 0) 100%)",
+          "radial-gradient(circle, rgba(255, 235, 170, 0.8) 20%, rgba(255, 185, 215, 0.4) 60%, rgba(0, 0, 0, 0) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/reward-ribbon.webp\")",
+          "linear-gradient(rgb(252, 235, 248) 0%, rgb(243, 218, 240) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/button-purple.webp\")",
+          "url(\"http://127.0.0.1:4173/assets/park/button-gold.webp\")"
+        ],
+        "sign": {
+          "top": 389.5625,
+          "bottom": 424.65625,
+          "width": 295.09375,
+          "height": 35.09375,
+          "objectFit": "fill",
+          "boxRatio": 8.408726625111308,
+          "artRatio": null
+        },
+        "list": {
+          "top": 425.421875,
+          "bottom": 558.6875,
+          "width": 108.421875,
+          "height": 133.265625,
+          "objectFit": "fill",
+          "boxRatio": 0.8135772071755188,
+          "artRatio": 1
+        },
+        "compareActive": {
+          "top": 460.84375,
+          "bottom": 523.234375,
+          "width": 62.390625,
+          "height": 62.390625,
+          "objectFit": "fill",
+          "boxRatio": 1,
+          "artRatio": 1
+        },
+        "rewardTitle": {
+          "top": 560.625,
+          "bottom": 586.359375,
+          "width": 163.796875,
+          "height": 25.734375,
+          "objectFit": "fill",
+          "boxRatio": 6.364905889496053,
+          "artRatio": null
+        },
+        "rewards": {
+          "top": 582.46875,
+          "bottom": 650.71875,
+          "width": 341.5625,
+          "height": 68.25,
+          "objectFit": "fill",
+          "boxRatio": 5.004578754578755,
+          "artRatio": 1
+        },
+        "score": {
+          "top": 653.046875,
+          "bottom": 671.765625,
+          "width": 341.5625,
+          "height": 18.71875,
+          "objectFit": "fill",
+          "boxRatio": 18.247078464106846,
+          "artRatio": 1
+        },
+        "panel": {
+          "top": 405.109375,
+          "bottom": 676.875,
+          "width": 372.84375,
+          "height": 271.765625,
+          "objectFit": "fill",
+          "boxRatio": 1.3719312367044214,
+          "artRatio": 1
+        },
+        "actions": {
+          "top": 688.703125,
+          "bottom": 749.46875,
+          "width": 368.1875,
+          "height": 60.765625,
+          "objectFit": "fill",
+          "boxRatio": 6.059141167395217,
+          "artRatio": 1.1630434782608696
+        },
+        "replay": {
+          "top": 808.46875,
+          "bottom": 831.34375,
+          "width": 189.984375,
+          "height": 22.875,
+          "objectFit": "fill",
+          "boxRatio": 8.305327868852459,
+          "artRatio": null
+        },
+        "facility": {
+          "top": 79.44659423828125,
+          "bottom": 275.41534423828125,
+          "width": 249.59375,
+          "height": 195.96875,
+          "objectFit": "contain",
+          "boxRatio": 1.273640567692553,
+          "artRatio": 1
+        },
+        "titleBanner": {
+          "top": 12.65625,
+          "bottom": 67.703125,
+          "width": 210.59375,
+          "height": 55.046875,
+          "objectFit": "contain",
+          "boxRatio": 3.8257167187056487,
+          "artRatio": 3.8247422680412373
+        },
+        "friends": [
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.8949419789175304,
+            "artRatio": 0.895
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 1.1172671651937458,
+            "artRatio": 1.1173184357541899
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.9249507618948896,
+            "artRatio": 0.925
+          }
+        ],
+        "friendsBox": {
+          "top": 261.640625,
+          "bottom": 422,
+          "width": 390,
+          "height": 160.359375,
+          "objectFit": "fill",
+          "boxRatio": 2.4320374159602456,
+          "artRatio": 0.895
+        },
+        "facilitySrc": "./assets/park/exhibit-001.webp",
+        "compareSrc": "./assets/park/exhibit-001.webp",
+        "dormantSrc": "./assets/park/exhibit-001.webp",
+        "signText": "迎宾门 · 成功修复",
+        "rewardTitleText": "通关奖励",
+        "rewardNumbers": [
+          "已领取",
+          "已领取"
+        ],
+        "rewardIcons": [
+          "./assets/park/icon-star.webp",
+          "./assets/park/icon-gem.webp"
+        ],
+        "scoreText": "已用 5 步 · 最佳 5 步"
+      },
+      "status": "通过"
+    },
+    {
+      "viewport": "361x727",
+      "stage": {
+        "width": 361,
+        "height": 727
+      },
+      "first": {
+        "stage": {
+          "width": 361,
+          "height": 727
+        },
+        "victoryBackground": "rgb(138, 82, 216)",
+        "victoryBackgroundSize": "cover",
+        "victoryBackgroundImage": "url(\"http://127.0.0.1:4173/assets/park/victory-bg-v3.webp\")",
+        "backgrounds": [
+          "repeating-conic-gradient(at 50% 40%, rgba(255, 245, 193, 0) 0deg, rgba(255, 245, 193, 0) 12deg, rgba(255, 245, 193, 0.29) 14deg, rgba(255, 245, 193, 0.29) 17deg, rgba(255, 245, 193, 0) 21deg, rgba(255, 245, 193, 0) 30deg)",
+          "radial-gradient(circle, rgba(255, 247, 205, 0.78) 0%, rgba(255, 216, 128, 0.4) 36%, rgba(255, 168, 226, 0.16) 62%, rgba(0, 0, 0, 0) 76%)",
+          "linear-gradient(rgb(255, 251, 242) 0%, rgb(255, 244, 229) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/repair-sign-v2.webp\")",
+          "radial-gradient(circle, rgb(243, 233, 250) 40%, rgb(232, 213, 243) 80%, rgba(255, 255, 255, 0) 100%)",
+          "radial-gradient(circle, rgba(255, 235, 170, 0.8) 20%, rgba(255, 185, 215, 0.4) 60%, rgba(0, 0, 0, 0) 100%)",
+          "linear-gradient(90deg, rgb(255, 240, 181), rgb(248, 204, 226))",
+          "url(\"http://127.0.0.1:4173/assets/park/reward-ribbon.webp\")",
+          "linear-gradient(rgb(252, 235, 248) 0%, rgb(243, 218, 240) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/button-purple.webp\")",
+          "url(\"http://127.0.0.1:4173/assets/park/button-gold.webp\")"
+        ],
+        "sign": {
+          "top": 334.71875,
+          "bottom": 367.203125,
+          "width": 272.90625,
+          "height": 32.484375,
+          "objectFit": "fill",
+          "boxRatio": 8.4011544011544,
+          "artRatio": null
+        },
+        "list": {
+          "top": 367.90625,
+          "bottom": 447.046875,
+          "width": 100.328125,
+          "height": 79.140625,
+          "objectFit": "fill",
+          "boxRatio": 1.2677196446199408,
+          "artRatio": 1
+        },
+        "compareActive": {
+          "top": 378.59375,
+          "bottom": 436.34375,
+          "width": 57.75,
+          "height": 57.75,
+          "objectFit": "fill",
+          "boxRatio": 1,
+          "artRatio": 1
+        },
+        "rewardTitle": {
+          "top": 475.328125,
+          "bottom": 499.140625,
+          "width": 151.609375,
+          "height": 23.8125,
+          "objectFit": "fill",
+          "boxRatio": 6.366797900262467,
+          "artRatio": null
+        },
+        "rewards": {
+          "top": 495.53125,
+          "bottom": 558.703125,
+          "width": 315.875,
+          "height": 63.171875,
+          "objectFit": "fill",
+          "boxRatio": 5.000247341083354,
+          "artRatio": 1
+        },
+        "score": {
+          "top": 560.859375,
+          "bottom": 578.171875,
+          "width": 315.875,
+          "height": 17.3125,
+          "objectFit": "fill",
+          "boxRatio": 18.24548736462094,
+          "artRatio": 1
+        },
+        "panel": {
+          "top": 348.953125,
+          "bottom": 583.046875,
+          "width": 345.125,
+          "height": 234.09375,
+          "objectFit": "fill",
+          "boxRatio": 1.474302496328928,
+          "artRatio": 1
+        },
+        "actions": {
+          "top": 593.21875,
+          "bottom": 645.5625,
+          "width": 340.8125,
+          "height": 52.34375,
+          "objectFit": "fill",
+          "boxRatio": 6.511044776119403,
+          "artRatio": 1.1630434782608696
+        },
+        "replay": {
+          "top": 694.765625,
+          "bottom": 716.109375,
+          "width": 175.875,
+          "height": 21.34375,
+          "objectFit": "fill",
+          "boxRatio": 8.240117130307468,
+          "artRatio": null
+        },
+        "facility": {
+          "top": 68.16030883789062,
+          "bottom": 236.95718383789062,
+          "width": 231.03125,
+          "height": 168.796875,
+          "objectFit": "contain",
+          "boxRatio": 1.3686938813292604,
+          "artRatio": 1
+        },
+        "titleBanner": {
+          "top": 10.890625,
+          "bottom": 61.84375,
+          "width": 194.9375,
+          "height": 50.953125,
+          "objectFit": "contain",
+          "boxRatio": 3.8258203005213125,
+          "artRatio": 3.8247422680412373
+        },
+        "friends": [
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.8948992184286302,
+            "artRatio": 0.895
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 1.117205998421468,
+            "artRatio": 1.1173184357541899
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.9249007100734143,
+            "artRatio": 0.925
+          }
+        ],
+        "friendsBox": {
+          "top": 225.375,
+          "bottom": 363.5,
+          "width": 361,
+          "height": 138.125,
+          "objectFit": "fill",
+          "boxRatio": 2.613574660633484,
+          "artRatio": 0.895
+        },
+        "facilitySrc": "./assets/park/exhibit-001.webp",
+        "compareSrc": "./assets/park/exhibit-001.webp",
+        "dormantSrc": "./assets/park/exhibit-001.webp",
+        "signText": "迎宾门 · 成功修复",
+        "rewardTitleText": "通关奖励",
+        "rewardNumbers": [
+          "+4",
+          "+100"
+        ],
+        "rewardIcons": [
+          "./assets/park/icon-star.webp",
+          "./assets/park/icon-gem.webp"
+        ],
+        "scoreText": "已用 5 步 · 最佳 5 步"
+      },
+      "replay": {
+        "stage": {
+          "width": 361,
+          "height": 727
+        },
+        "victoryBackground": "rgb(138, 82, 216)",
+        "victoryBackgroundSize": "cover",
+        "victoryBackgroundImage": "url(\"http://127.0.0.1:4173/assets/park/victory-bg-v3.webp\")",
+        "backgrounds": [
+          "repeating-conic-gradient(at 50% 40%, rgba(255, 245, 193, 0) 0deg, rgba(255, 245, 193, 0) 12deg, rgba(255, 245, 193, 0.29) 14deg, rgba(255, 245, 193, 0.29) 17deg, rgba(255, 245, 193, 0) 21deg, rgba(255, 245, 193, 0) 30deg)",
+          "radial-gradient(circle, rgba(255, 247, 205, 0.78) 0%, rgba(255, 216, 128, 0.4) 36%, rgba(255, 168, 226, 0.16) 62%, rgba(0, 0, 0, 0) 76%)",
+          "linear-gradient(rgb(255, 251, 242) 0%, rgb(255, 244, 229) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/repair-sign-v2.webp\")",
+          "radial-gradient(circle, rgb(243, 233, 250) 40%, rgb(232, 213, 243) 80%, rgba(255, 255, 255, 0) 100%)",
+          "radial-gradient(circle, rgba(255, 235, 170, 0.8) 20%, rgba(255, 185, 215, 0.4) 60%, rgba(0, 0, 0, 0) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/reward-ribbon.webp\")",
+          "linear-gradient(rgb(252, 235, 248) 0%, rgb(243, 218, 240) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/button-purple.webp\")",
+          "url(\"http://127.0.0.1:4173/assets/park/button-gold.webp\")"
+        ],
+        "sign": {
+          "top": 334.71875,
+          "bottom": 367.203125,
+          "width": 272.90625,
+          "height": 32.484375,
+          "objectFit": "fill",
+          "boxRatio": 8.4011544011544,
+          "artRatio": null
+        },
+        "list": {
+          "top": 367.90625,
+          "bottom": 473.53125,
+          "width": 100.328125,
+          "height": 105.625,
+          "objectFit": "fill",
+          "boxRatio": 0.9498520710059172,
+          "artRatio": 1
+        },
+        "compareActive": {
+          "top": 391.84375,
+          "bottom": 449.59375,
+          "width": 57.75,
+          "height": 57.75,
+          "objectFit": "fill",
+          "boxRatio": 1,
+          "artRatio": 1
+        },
+        "rewardTitle": {
+          "top": 475.328125,
+          "bottom": 499.140625,
+          "width": 151.609375,
+          "height": 23.8125,
+          "objectFit": "fill",
+          "boxRatio": 6.366797900262467,
+          "artRatio": null
+        },
+        "rewards": {
+          "top": 495.53125,
+          "bottom": 558.703125,
+          "width": 315.875,
+          "height": 63.171875,
+          "objectFit": "fill",
+          "boxRatio": 5.000247341083354,
+          "artRatio": 1
+        },
+        "score": {
+          "top": 560.859375,
+          "bottom": 578.171875,
+          "width": 315.875,
+          "height": 17.3125,
+          "objectFit": "fill",
+          "boxRatio": 18.24548736462094,
+          "artRatio": 1
+        },
+        "panel": {
+          "top": 348.953125,
+          "bottom": 583.046875,
+          "width": 345.125,
+          "height": 234.09375,
+          "objectFit": "fill",
+          "boxRatio": 1.474302496328928,
+          "artRatio": 1
+        },
+        "actions": {
+          "top": 593.21875,
+          "bottom": 645.5625,
+          "width": 340.8125,
+          "height": 52.34375,
+          "objectFit": "fill",
+          "boxRatio": 6.511044776119403,
+          "artRatio": 1.1630434782608696
+        },
+        "replay": {
+          "top": 694.765625,
+          "bottom": 716.109375,
+          "width": 175.875,
+          "height": 21.34375,
+          "objectFit": "fill",
+          "boxRatio": 8.240117130307468,
+          "artRatio": null
+        },
+        "facility": {
+          "top": 68.2386703491211,
+          "bottom": 237.0355453491211,
+          "width": 231.03125,
+          "height": 168.796875,
+          "objectFit": "contain",
+          "boxRatio": 1.3686938813292604,
+          "artRatio": 1
+        },
+        "titleBanner": {
+          "top": 10.890625,
+          "bottom": 61.84375,
+          "width": 194.9375,
+          "height": 50.953125,
+          "objectFit": "contain",
+          "boxRatio": 3.8258203005213125,
+          "artRatio": 3.8247422680412373
+        },
+        "friends": [
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.8948992184286302,
+            "artRatio": 0.895
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 1.117205998421468,
+            "artRatio": 1.1173184357541899
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.9249007100734143,
+            "artRatio": 0.925
+          }
+        ],
+        "friendsBox": {
+          "top": 225.375,
+          "bottom": 363.5,
+          "width": 361,
+          "height": 138.125,
+          "objectFit": "fill",
+          "boxRatio": 2.613574660633484,
+          "artRatio": 0.895
+        },
+        "facilitySrc": "./assets/park/exhibit-001.webp",
+        "compareSrc": "./assets/park/exhibit-001.webp",
+        "dormantSrc": "./assets/park/exhibit-001.webp",
+        "signText": "迎宾门 · 成功修复",
+        "rewardTitleText": "通关奖励",
+        "rewardNumbers": [
+          "已领取",
+          "已领取"
+        ],
+        "rewardIcons": [
+          "./assets/park/icon-star.webp",
+          "./assets/park/icon-gem.webp"
+        ],
+        "scoreText": "已用 5 步 · 最佳 5 步"
+      },
+      "status": "通过"
+    },
+    {
+      "viewport": "360x640",
+      "stage": {
+        "width": 360,
+        "height": 640
+      },
+      "first": {
+        "stage": {
+          "width": 360,
+          "height": 640
+        },
+        "victoryBackground": "rgb(138, 82, 216)",
+        "victoryBackgroundSize": "cover",
+        "victoryBackgroundImage": "url(\"http://127.0.0.1:4173/assets/park/victory-bg-v3.webp\")",
+        "backgrounds": [
+          "repeating-conic-gradient(at 50% 40%, rgba(255, 245, 193, 0) 0deg, rgba(255, 245, 193, 0) 12deg, rgba(255, 245, 193, 0.29) 14deg, rgba(255, 245, 193, 0.29) 17deg, rgba(255, 245, 193, 0) 21deg, rgba(255, 245, 193, 0) 30deg)",
+          "radial-gradient(circle, rgba(255, 247, 205, 0.78) 0%, rgba(255, 216, 128, 0.4) 36%, rgba(255, 168, 226, 0.16) 62%, rgba(0, 0, 0, 0) 76%)",
+          "linear-gradient(rgb(255, 251, 242) 0%, rgb(255, 244, 229) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/repair-sign-v2.webp\")",
+          "radial-gradient(circle, rgb(243, 233, 250) 40%, rgb(232, 213, 243) 80%, rgba(255, 255, 255, 0) 100%)",
+          "radial-gradient(circle, rgba(255, 235, 170, 0.8) 20%, rgba(255, 185, 215, 0.4) 60%, rgba(0, 0, 0, 0) 100%)",
+          "linear-gradient(90deg, rgb(255, 240, 181), rgb(248, 204, 226))",
+          "url(\"http://127.0.0.1:4173/assets/park/reward-ribbon.webp\")",
+          "linear-gradient(rgb(252, 235, 248) 0%, rgb(243, 218, 240) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/button-purple.webp\")",
+          "url(\"http://127.0.0.1:4173/assets/park/button-gold.webp\")"
+        ],
+        "sign": {
+          "top": 293,
+          "bottom": 325.390625,
+          "width": 272.15625,
+          "height": 32.390625,
+          "objectFit": "fill",
+          "boxRatio": 8.402315484804632,
+          "artRatio": null
+        },
+        "list": {
+          "top": 326.09375,
+          "bottom": 377.59375,
+          "width": 100.078125,
+          "height": 51.5,
+          "objectFit": "fill",
+          "boxRatio": 1.9432645631067962,
+          "artRatio": 1
+        },
+        "compareActive": {
+          "top": 323.046875,
+          "bottom": 380.640625,
+          "width": 57.59375,
+          "height": 57.59375,
+          "objectFit": "fill",
+          "boxRatio": 1,
+          "artRatio": 1
+        },
+        "rewardTitle": {
+          "top": 405.8125,
+          "bottom": 429.5625,
+          "width": 151.1875,
+          "height": 23.75,
+          "objectFit": "fill",
+          "boxRatio": 6.36578947368421,
+          "artRatio": null
+        },
+        "rewards": {
+          "top": 425.96875,
+          "bottom": 488.96875,
+          "width": 315,
+          "height": 63,
+          "objectFit": "fill",
+          "boxRatio": 5,
+          "artRatio": 1
+        },
+        "score": {
+          "top": 491.125,
+          "bottom": 508.390625,
+          "width": 315,
+          "height": 17.265625,
+          "objectFit": "fill",
+          "boxRatio": 18.244343891402714,
+          "artRatio": 1
+        },
+        "panel": {
+          "top": 307.1875,
+          "bottom": 513.265625,
+          "width": 344.1875,
+          "height": 206.078125,
+          "objectFit": "fill",
+          "boxRatio": 1.6701796952005459,
+          "artRatio": 1
+        },
+        "actions": {
+          "top": 522.234375,
+          "bottom": 568.3125,
+          "width": 339.84375,
+          "height": 46.078125,
+          "objectFit": "fill",
+          "boxRatio": 7.375381485249237,
+          "artRatio": 1.1630434782608696
+        },
+        "replay": {
+          "top": 609.125,
+          "bottom": 630.40625,
+          "width": 175.5,
+          "height": 21.28125,
+          "objectFit": "fill",
+          "boxRatio": 8.246696035242291,
+          "artRatio": null
+        },
+        "facility": {
+          "top": 59.21722412109375,
+          "bottom": 207.81097412109375,
+          "width": 230.390625,
+          "height": 148.59375,
+          "objectFit": "contain",
+          "boxRatio": 1.5504731861198737,
+          "artRatio": 1
+        },
+        "titleBanner": {
+          "top": 9.59375,
+          "bottom": 60.40625,
+          "width": 194.390625,
+          "height": 50.8125,
+          "objectFit": "contain",
+          "boxRatio": 3.8256457564575648,
+          "artRatio": 3.8247422680412373
+        },
+        "friends": [
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.8949766355140187,
+            "artRatio": 0.895
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 1.1173042438732814,
+            "artRatio": 1.1173184357541899
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.9249487354750513,
+            "artRatio": 0.925
+          }
+        ],
+        "friendsBox": {
+          "top": 198.40625,
+          "bottom": 320,
+          "width": 360,
+          "height": 121.59375,
+          "objectFit": "fill",
+          "boxRatio": 2.9606784888203546,
+          "artRatio": 0.895
+        },
+        "facilitySrc": "./assets/park/exhibit-001.webp",
+        "compareSrc": "./assets/park/exhibit-001.webp",
+        "dormantSrc": "./assets/park/exhibit-001.webp",
+        "signText": "迎宾门 · 成功修复",
+        "rewardTitleText": "通关奖励",
+        "rewardNumbers": [
+          "+4",
+          "+100"
+        ],
+        "rewardIcons": [
+          "./assets/park/icon-star.webp",
+          "./assets/park/icon-gem.webp"
+        ],
+        "scoreText": "已用 5 步 · 最佳 5 步"
+      },
+      "replay": {
+        "stage": {
+          "width": 360,
+          "height": 640
+        },
+        "victoryBackground": "rgb(138, 82, 216)",
+        "victoryBackgroundSize": "cover",
+        "victoryBackgroundImage": "url(\"http://127.0.0.1:4173/assets/park/victory-bg-v3.webp\")",
+        "backgrounds": [
+          "repeating-conic-gradient(at 50% 40%, rgba(255, 245, 193, 0) 0deg, rgba(255, 245, 193, 0) 12deg, rgba(255, 245, 193, 0.29) 14deg, rgba(255, 245, 193, 0.29) 17deg, rgba(255, 245, 193, 0) 21deg, rgba(255, 245, 193, 0) 30deg)",
+          "radial-gradient(circle, rgba(255, 247, 205, 0.78) 0%, rgba(255, 216, 128, 0.4) 36%, rgba(255, 168, 226, 0.16) 62%, rgba(0, 0, 0, 0) 76%)",
+          "linear-gradient(rgb(255, 251, 242) 0%, rgb(255, 244, 229) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/repair-sign-v2.webp\")",
+          "radial-gradient(circle, rgb(243, 233, 250) 40%, rgb(232, 213, 243) 80%, rgba(255, 255, 255, 0) 100%)",
+          "radial-gradient(circle, rgba(255, 235, 170, 0.8) 20%, rgba(255, 185, 215, 0.4) 60%, rgba(0, 0, 0, 0) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/reward-ribbon.webp\")",
+          "linear-gradient(rgb(252, 235, 248) 0%, rgb(243, 218, 240) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/button-purple.webp\")",
+          "url(\"http://127.0.0.1:4173/assets/park/button-gold.webp\")"
+        ],
+        "sign": {
+          "top": 293,
+          "bottom": 325.390625,
+          "width": 272.15625,
+          "height": 32.390625,
+          "objectFit": "fill",
+          "boxRatio": 8.402315484804632,
+          "artRatio": null
+        },
+        "list": {
+          "top": 326.09375,
+          "bottom": 404.015625,
+          "width": 100.078125,
+          "height": 77.921875,
+          "objectFit": "fill",
+          "boxRatio": 1.2843392821335473,
+          "artRatio": 1
+        },
+        "compareActive": {
+          "top": 336.25,
+          "bottom": 393.84375,
+          "width": 57.59375,
+          "height": 57.59375,
+          "objectFit": "fill",
+          "boxRatio": 1,
+          "artRatio": 1
+        },
+        "rewardTitle": {
+          "top": 405.8125,
+          "bottom": 429.5625,
+          "width": 151.1875,
+          "height": 23.75,
+          "objectFit": "fill",
+          "boxRatio": 6.36578947368421,
+          "artRatio": null
+        },
+        "rewards": {
+          "top": 425.96875,
+          "bottom": 488.96875,
+          "width": 315,
+          "height": 63,
+          "objectFit": "fill",
+          "boxRatio": 5,
+          "artRatio": 1
+        },
+        "score": {
+          "top": 491.125,
+          "bottom": 508.390625,
+          "width": 315,
+          "height": 17.265625,
+          "objectFit": "fill",
+          "boxRatio": 18.244343891402714,
+          "artRatio": 1
+        },
+        "panel": {
+          "top": 307.1875,
+          "bottom": 513.265625,
+          "width": 344.1875,
+          "height": 206.078125,
+          "objectFit": "fill",
+          "boxRatio": 1.6701796952005459,
+          "artRatio": 1
+        },
+        "actions": {
+          "top": 522.234375,
+          "bottom": 568.3125,
+          "width": 339.84375,
+          "height": 46.078125,
+          "objectFit": "fill",
+          "boxRatio": 7.375381485249237,
+          "artRatio": 1.1630434782608696
+        },
+        "replay": {
+          "top": 609.125,
+          "bottom": 630.40625,
+          "width": 175.5,
+          "height": 21.28125,
+          "objectFit": "fill",
+          "boxRatio": 8.246696035242291,
+          "artRatio": null
+        },
+        "facility": {
+          "top": 59.746551513671875,
+          "bottom": 208.34030151367188,
+          "width": 230.390625,
+          "height": 148.59375,
+          "objectFit": "contain",
+          "boxRatio": 1.5504731861198737,
+          "artRatio": 1
+        },
+        "titleBanner": {
+          "top": 9.59375,
+          "bottom": 60.40625,
+          "width": 194.390625,
+          "height": 50.8125,
+          "objectFit": "contain",
+          "boxRatio": 3.8256457564575648,
+          "artRatio": 3.8247422680412373
+        },
+        "friends": [
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.8949766355140187,
+            "artRatio": 0.895
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 1.1173042438732814,
+            "artRatio": 1.1173184357541899
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.9249487354750513,
+            "artRatio": 0.925
+          }
+        ],
+        "friendsBox": {
+          "top": 198.40625,
+          "bottom": 320,
+          "width": 360,
+          "height": 121.59375,
+          "objectFit": "fill",
+          "boxRatio": 2.9606784888203546,
+          "artRatio": 0.895
+        },
+        "facilitySrc": "./assets/park/exhibit-001.webp",
+        "compareSrc": "./assets/park/exhibit-001.webp",
+        "dormantSrc": "./assets/park/exhibit-001.webp",
+        "signText": "迎宾门 · 成功修复",
+        "rewardTitleText": "通关奖励",
+        "rewardNumbers": [
+          "已领取",
+          "已领取"
+        ],
+        "rewardIcons": [
+          "./assets/park/icon-star.webp",
+          "./assets/park/icon-gem.webp"
+        ],
+        "scoreText": "已用 5 步 · 最佳 5 步"
+      },
+      "status": "通过"
+    },
+    {
+      "viewport": "720x1280",
+      "stage": {
+        "width": 360,
+        "height": 640
+      },
+      "first": {
+        "stage": {
+          "width": 360,
+          "height": 640
+        },
+        "victoryBackground": "rgb(138, 82, 216)",
+        "victoryBackgroundSize": "cover",
+        "victoryBackgroundImage": "url(\"http://127.0.0.1:4173/assets/park/victory-bg-v3.webp\")",
+        "backgrounds": [
+          "repeating-conic-gradient(at 50% 40%, rgba(255, 245, 193, 0) 0deg, rgba(255, 245, 193, 0) 12deg, rgba(255, 245, 193, 0.29) 14deg, rgba(255, 245, 193, 0.29) 17deg, rgba(255, 245, 193, 0) 21deg, rgba(255, 245, 193, 0) 30deg)",
+          "radial-gradient(circle, rgba(255, 247, 205, 0.78) 0%, rgba(255, 216, 128, 0.4) 36%, rgba(255, 168, 226, 0.16) 62%, rgba(0, 0, 0, 0) 76%)",
+          "linear-gradient(rgb(255, 251, 242) 0%, rgb(255, 244, 229) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/repair-sign-v2.webp\")",
+          "radial-gradient(circle, rgb(243, 233, 250) 40%, rgb(232, 213, 243) 80%, rgba(255, 255, 255, 0) 100%)",
+          "radial-gradient(circle, rgba(255, 235, 170, 0.8) 20%, rgba(255, 185, 215, 0.4) 60%, rgba(0, 0, 0, 0) 100%)",
+          "linear-gradient(90deg, rgb(255, 240, 181), rgb(248, 204, 226))",
+          "url(\"http://127.0.0.1:4173/assets/park/reward-ribbon.webp\")",
+          "linear-gradient(rgb(252, 235, 248) 0%, rgb(243, 218, 240) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/button-purple.webp\")",
+          "url(\"http://127.0.0.1:4173/assets/park/button-gold.webp\")"
+        ],
+        "sign": {
+          "top": 293,
+          "bottom": 325.390625,
+          "width": 272.15625,
+          "height": 32.390625,
+          "objectFit": "fill",
+          "boxRatio": 8.402315484804632,
+          "artRatio": null
+        },
+        "list": {
+          "top": 326.09375,
+          "bottom": 377.59375,
+          "width": 100.078125,
+          "height": 51.5,
+          "objectFit": "fill",
+          "boxRatio": 1.9432645631067962,
+          "artRatio": 1
+        },
+        "compareActive": {
+          "top": 323.046875,
+          "bottom": 380.640625,
+          "width": 57.59375,
+          "height": 57.59375,
+          "objectFit": "fill",
+          "boxRatio": 1,
+          "artRatio": 1
+        },
+        "rewardTitle": {
+          "top": 405.8125,
+          "bottom": 429.5625,
+          "width": 151.1875,
+          "height": 23.75,
+          "objectFit": "fill",
+          "boxRatio": 6.36578947368421,
+          "artRatio": null
+        },
+        "rewards": {
+          "top": 425.96875,
+          "bottom": 488.96875,
+          "width": 315,
+          "height": 63,
+          "objectFit": "fill",
+          "boxRatio": 5,
+          "artRatio": 1
+        },
+        "score": {
+          "top": 491.125,
+          "bottom": 508.390625,
+          "width": 315,
+          "height": 17.265625,
+          "objectFit": "fill",
+          "boxRatio": 18.244343891402714,
+          "artRatio": 1
+        },
+        "panel": {
+          "top": 307.1875,
+          "bottom": 513.265625,
+          "width": 344.1875,
+          "height": 206.078125,
+          "objectFit": "fill",
+          "boxRatio": 1.6701796952005459,
+          "artRatio": 1
+        },
+        "actions": {
+          "top": 522.234375,
+          "bottom": 568.3125,
+          "width": 339.84375,
+          "height": 46.078125,
+          "objectFit": "fill",
+          "boxRatio": 7.375381485249237,
+          "artRatio": 1.1630434782608696
+        },
+        "replay": {
+          "top": 609.125,
+          "bottom": 630.40625,
+          "width": 175.5,
+          "height": 21.28125,
+          "objectFit": "fill",
+          "boxRatio": 8.246696035242291,
+          "artRatio": null
+        },
+        "facility": {
+          "top": 59.427513122558594,
+          "bottom": 208.0212631225586,
+          "width": 230.390625,
+          "height": 148.59375,
+          "objectFit": "contain",
+          "boxRatio": 1.5504731861198737,
+          "artRatio": 1
+        },
+        "titleBanner": {
+          "top": 9.59375,
+          "bottom": 60.40625,
+          "width": 194.390625,
+          "height": 50.8125,
+          "objectFit": "contain",
+          "boxRatio": 3.8256457564575648,
+          "artRatio": 3.8247422680412373
+        },
+        "friends": [
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.8949766355140187,
+            "artRatio": 0.895
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 1.1173042438732814,
+            "artRatio": 1.1173184357541899
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.9249487354750513,
+            "artRatio": 0.925
+          }
+        ],
+        "friendsBox": {
+          "top": 198.40625,
+          "bottom": 320,
+          "width": 360,
+          "height": 121.59375,
+          "objectFit": "fill",
+          "boxRatio": 2.9606784888203546,
+          "artRatio": 0.895
+        },
+        "facilitySrc": "./assets/park/exhibit-001.webp",
+        "compareSrc": "./assets/park/exhibit-001.webp",
+        "dormantSrc": "./assets/park/exhibit-001.webp",
+        "signText": "迎宾门 · 成功修复",
+        "rewardTitleText": "通关奖励",
+        "rewardNumbers": [
+          "+4",
+          "+100"
+        ],
+        "rewardIcons": [
+          "./assets/park/icon-star.webp",
+          "./assets/park/icon-gem.webp"
+        ],
+        "scoreText": "已用 5 步 · 最佳 5 步"
+      },
+      "replay": {
+        "stage": {
+          "width": 360,
+          "height": 640
+        },
+        "victoryBackground": "rgb(138, 82, 216)",
+        "victoryBackgroundSize": "cover",
+        "victoryBackgroundImage": "url(\"http://127.0.0.1:4173/assets/park/victory-bg-v3.webp\")",
+        "backgrounds": [
+          "repeating-conic-gradient(at 50% 40%, rgba(255, 245, 193, 0) 0deg, rgba(255, 245, 193, 0) 12deg, rgba(255, 245, 193, 0.29) 14deg, rgba(255, 245, 193, 0.29) 17deg, rgba(255, 245, 193, 0) 21deg, rgba(255, 245, 193, 0) 30deg)",
+          "radial-gradient(circle, rgba(255, 247, 205, 0.78) 0%, rgba(255, 216, 128, 0.4) 36%, rgba(255, 168, 226, 0.16) 62%, rgba(0, 0, 0, 0) 76%)",
+          "linear-gradient(rgb(255, 251, 242) 0%, rgb(255, 244, 229) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/repair-sign-v2.webp\")",
+          "radial-gradient(circle, rgb(243, 233, 250) 40%, rgb(232, 213, 243) 80%, rgba(255, 255, 255, 0) 100%)",
+          "radial-gradient(circle, rgba(255, 235, 170, 0.8) 20%, rgba(255, 185, 215, 0.4) 60%, rgba(0, 0, 0, 0) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/reward-ribbon.webp\")",
+          "linear-gradient(rgb(252, 235, 248) 0%, rgb(243, 218, 240) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/button-purple.webp\")",
+          "url(\"http://127.0.0.1:4173/assets/park/button-gold.webp\")"
+        ],
+        "sign": {
+          "top": 293,
+          "bottom": 325.390625,
+          "width": 272.15625,
+          "height": 32.390625,
+          "objectFit": "fill",
+          "boxRatio": 8.402315484804632,
+          "artRatio": null
+        },
+        "list": {
+          "top": 326.09375,
+          "bottom": 404.015625,
+          "width": 100.078125,
+          "height": 77.921875,
+          "objectFit": "fill",
+          "boxRatio": 1.2843392821335473,
+          "artRatio": 1
+        },
+        "compareActive": {
+          "top": 336.25,
+          "bottom": 393.84375,
+          "width": 57.59375,
+          "height": 57.59375,
+          "objectFit": "fill",
+          "boxRatio": 1,
+          "artRatio": 1
+        },
+        "rewardTitle": {
+          "top": 405.8125,
+          "bottom": 429.5625,
+          "width": 151.1875,
+          "height": 23.75,
+          "objectFit": "fill",
+          "boxRatio": 6.36578947368421,
+          "artRatio": null
+        },
+        "rewards": {
+          "top": 425.96875,
+          "bottom": 488.96875,
+          "width": 315,
+          "height": 63,
+          "objectFit": "fill",
+          "boxRatio": 5,
+          "artRatio": 1
+        },
+        "score": {
+          "top": 491.125,
+          "bottom": 508.390625,
+          "width": 315,
+          "height": 17.265625,
+          "objectFit": "fill",
+          "boxRatio": 18.244343891402714,
+          "artRatio": 1
+        },
+        "panel": {
+          "top": 307.1875,
+          "bottom": 513.265625,
+          "width": 344.1875,
+          "height": 206.078125,
+          "objectFit": "fill",
+          "boxRatio": 1.6701796952005459,
+          "artRatio": 1
+        },
+        "actions": {
+          "top": 522.234375,
+          "bottom": 568.3125,
+          "width": 339.84375,
+          "height": 46.078125,
+          "objectFit": "fill",
+          "boxRatio": 7.375381485249237,
+          "artRatio": 1.1630434782608696
+        },
+        "replay": {
+          "top": 609.125,
+          "bottom": 630.40625,
+          "width": 175.5,
+          "height": 21.28125,
+          "objectFit": "fill",
+          "boxRatio": 8.246696035242291,
+          "artRatio": null
+        },
+        "facility": {
+          "top": 59.74659729003906,
+          "bottom": 208.34034729003906,
+          "width": 230.390625,
+          "height": 148.59375,
+          "objectFit": "contain",
+          "boxRatio": 1.5504731861198737,
+          "artRatio": 1
+        },
+        "titleBanner": {
+          "top": 9.59375,
+          "bottom": 60.40625,
+          "width": 194.390625,
+          "height": 50.8125,
+          "objectFit": "contain",
+          "boxRatio": 3.8256457564575648,
+          "artRatio": 3.8247422680412373
+        },
+        "friends": [
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.8949766355140187,
+            "artRatio": 0.895
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 1.1173042438732814,
+            "artRatio": 1.1173184357541899
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.9249487354750513,
+            "artRatio": 0.925
+          }
+        ],
+        "friendsBox": {
+          "top": 198.40625,
+          "bottom": 320,
+          "width": 360,
+          "height": 121.59375,
+          "objectFit": "fill",
+          "boxRatio": 2.9606784888203546,
+          "artRatio": 0.895
+        },
+        "facilitySrc": "./assets/park/exhibit-001.webp",
+        "compareSrc": "./assets/park/exhibit-001.webp",
+        "dormantSrc": "./assets/park/exhibit-001.webp",
+        "signText": "迎宾门 · 成功修复",
+        "rewardTitleText": "通关奖励",
+        "rewardNumbers": [
+          "已领取",
+          "已领取"
+        ],
+        "rewardIcons": [
+          "./assets/park/icon-star.webp",
+          "./assets/park/icon-gem.webp"
+        ],
+        "scoreText": "已用 5 步 · 最佳 5 步"
+      },
+      "status": "通过"
+    },
+    {
+      "viewport": "360x800",
+      "stage": {
+        "width": 360,
+        "height": 800
+      },
+      "first": {
+        "stage": {
+          "width": 360,
+          "height": 800
+        },
+        "victoryBackground": "rgb(138, 82, 216)",
+        "victoryBackgroundSize": "cover",
+        "victoryBackgroundImage": "url(\"http://127.0.0.1:4173/assets/park/victory-bg-v3.webp\")",
+        "backgrounds": [
+          "repeating-conic-gradient(at 50% 40%, rgba(255, 245, 193, 0) 0deg, rgba(255, 245, 193, 0) 12deg, rgba(255, 245, 193, 0.29) 14deg, rgba(255, 245, 193, 0.29) 17deg, rgba(255, 245, 193, 0) 21deg, rgba(255, 245, 193, 0) 30deg)",
+          "radial-gradient(circle, rgba(255, 247, 205, 0.78) 0%, rgba(255, 216, 128, 0.4) 36%, rgba(255, 168, 226, 0.16) 62%, rgba(0, 0, 0, 0) 76%)",
+          "linear-gradient(rgb(255, 251, 242) 0%, rgb(255, 244, 229) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/repair-sign-v2.webp\")",
+          "radial-gradient(circle, rgb(243, 233, 250) 40%, rgb(232, 213, 243) 80%, rgba(255, 255, 255, 0) 100%)",
+          "radial-gradient(circle, rgba(255, 235, 170, 0.8) 20%, rgba(255, 185, 215, 0.4) 60%, rgba(0, 0, 0, 0) 100%)",
+          "linear-gradient(90deg, rgb(255, 240, 181), rgb(248, 204, 226))",
+          "url(\"http://127.0.0.1:4173/assets/park/reward-ribbon.webp\")",
+          "linear-gradient(rgb(252, 235, 248) 0%, rgb(243, 218, 240) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/button-purple.webp\")",
+          "url(\"http://127.0.0.1:4173/assets/park/button-gold.webp\")"
+        ],
+        "sign": {
+          "top": 381.8125,
+          "bottom": 414.203125,
+          "width": 272.15625,
+          "height": 32.390625,
+          "objectFit": "fill",
+          "boxRatio": 8.402315484804632,
+          "artRatio": null
+        },
+        "list": {
+          "top": 414.90625,
+          "bottom": 512.328125,
+          "width": 100.078125,
+          "height": 97.421875,
+          "objectFit": "fill",
+          "boxRatio": 1.0272654370489174,
+          "artRatio": 1
+        },
+        "compareActive": {
+          "top": 434.8125,
+          "bottom": 492.40625,
+          "width": 57.59375,
+          "height": 57.59375,
+          "objectFit": "fill",
+          "boxRatio": 1,
+          "artRatio": 1
+        },
+        "rewardTitle": {
+          "top": 540.546875,
+          "bottom": 564.296875,
+          "width": 151.1875,
+          "height": 23.75,
+          "objectFit": "fill",
+          "boxRatio": 6.36578947368421,
+          "artRatio": null
+        },
+        "rewards": {
+          "top": 560.703125,
+          "bottom": 623.703125,
+          "width": 315,
+          "height": 63,
+          "objectFit": "fill",
+          "boxRatio": 5,
+          "artRatio": 1
+        },
+        "score": {
+          "top": 625.859375,
+          "bottom": 643.125,
+          "width": 315,
+          "height": 17.265625,
+          "objectFit": "fill",
+          "boxRatio": 18.244343891402714,
+          "artRatio": 1
+        },
+        "panel": {
+          "top": 396,
+          "bottom": 648,
+          "width": 344.1875,
+          "height": 252,
+          "objectFit": "fill",
+          "boxRatio": 1.3658234126984128,
+          "artRatio": 1
+        },
+        "actions": {
+          "top": 660.796875,
+          "bottom": 718.390625,
+          "width": 339.84375,
+          "height": 57.59375,
+          "objectFit": "fill",
+          "boxRatio": 5.900705371676614,
+          "artRatio": 1.1630434782608696
+        },
+        "replay": {
+          "top": 766.71875,
+          "bottom": 788,
+          "width": 175.5,
+          "height": 21.28125,
+          "objectFit": "fill",
+          "boxRatio": 8.246696035242291,
+          "artRatio": null
+        },
+        "facility": {
+          "top": 69.02920532226562,
+          "bottom": 268.5448303222656,
+          "width": 230.390625,
+          "height": 199.515625,
+          "objectFit": "contain",
+          "boxRatio": 1.1547497846346622,
+          "artRatio": 1
+        },
+        "titleBanner": {
+          "top": 12,
+          "bottom": 62.8125,
+          "width": 194.390625,
+          "height": 50.8125,
+          "objectFit": "contain",
+          "boxRatio": 3.8256457564575648,
+          "artRatio": 3.8247422680412373
+        },
+        "friends": [
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.8949878246753247,
+            "artRatio": 0.895
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 1.1171966255678132,
+            "artRatio": 1.1173184357541899
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.9249584421752552,
+            "artRatio": 0.925
+          }
+        ],
+        "friendsBox": {
+          "top": 252,
+          "bottom": 392,
+          "width": 360,
+          "height": 140,
+          "objectFit": "fill",
+          "boxRatio": 2.5714285714285716,
+          "artRatio": 0.895
+        },
+        "facilitySrc": "./assets/park/exhibit-001.webp",
+        "compareSrc": "./assets/park/exhibit-001.webp",
+        "dormantSrc": "./assets/park/exhibit-001.webp",
+        "signText": "迎宾门 · 成功修复",
+        "rewardTitleText": "通关奖励",
+        "rewardNumbers": [
+          "+4",
+          "+100"
+        ],
+        "rewardIcons": [
+          "./assets/park/icon-star.webp",
+          "./assets/park/icon-gem.webp"
+        ],
+        "scoreText": "已用 5 步 · 最佳 5 步"
+      },
+      "replay": {
+        "stage": {
+          "width": 360,
+          "height": 800
+        },
+        "victoryBackground": "rgb(138, 82, 216)",
+        "victoryBackgroundSize": "cover",
+        "victoryBackgroundImage": "url(\"http://127.0.0.1:4173/assets/park/victory-bg-v3.webp\")",
+        "backgrounds": [
+          "repeating-conic-gradient(at 50% 40%, rgba(255, 245, 193, 0) 0deg, rgba(255, 245, 193, 0) 12deg, rgba(255, 245, 193, 0.29) 14deg, rgba(255, 245, 193, 0.29) 17deg, rgba(255, 245, 193, 0) 21deg, rgba(255, 245, 193, 0) 30deg)",
+          "radial-gradient(circle, rgba(255, 247, 205, 0.78) 0%, rgba(255, 216, 128, 0.4) 36%, rgba(255, 168, 226, 0.16) 62%, rgba(0, 0, 0, 0) 76%)",
+          "linear-gradient(rgb(255, 251, 242) 0%, rgb(255, 244, 229) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/repair-sign-v2.webp\")",
+          "radial-gradient(circle, rgb(243, 233, 250) 40%, rgb(232, 213, 243) 80%, rgba(255, 255, 255, 0) 100%)",
+          "radial-gradient(circle, rgba(255, 235, 170, 0.8) 20%, rgba(255, 185, 215, 0.4) 60%, rgba(0, 0, 0, 0) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/reward-ribbon.webp\")",
+          "linear-gradient(rgb(252, 235, 248) 0%, rgb(243, 218, 240) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/button-purple.webp\")",
+          "url(\"http://127.0.0.1:4173/assets/park/button-gold.webp\")"
+        ],
+        "sign": {
+          "top": 381.8125,
+          "bottom": 414.203125,
+          "width": 272.15625,
+          "height": 32.390625,
+          "objectFit": "fill",
+          "boxRatio": 8.402315484804632,
+          "artRatio": null
+        },
+        "list": {
+          "top": 414.90625,
+          "bottom": 538.75,
+          "width": 100.078125,
+          "height": 123.84375,
+          "objectFit": "fill",
+          "boxRatio": 0.808099924299773,
+          "artRatio": 1
+        },
+        "compareActive": {
+          "top": 448.015625,
+          "bottom": 505.609375,
+          "width": 57.59375,
+          "height": 57.59375,
+          "objectFit": "fill",
+          "boxRatio": 1,
+          "artRatio": 1
+        },
+        "rewardTitle": {
+          "top": 540.546875,
+          "bottom": 564.296875,
+          "width": 151.1875,
+          "height": 23.75,
+          "objectFit": "fill",
+          "boxRatio": 6.36578947368421,
+          "artRatio": null
+        },
+        "rewards": {
+          "top": 560.703125,
+          "bottom": 623.703125,
+          "width": 315,
+          "height": 63,
+          "objectFit": "fill",
+          "boxRatio": 5,
+          "artRatio": 1
+        },
+        "score": {
+          "top": 625.859375,
+          "bottom": 643.125,
+          "width": 315,
+          "height": 17.265625,
+          "objectFit": "fill",
+          "boxRatio": 18.244343891402714,
+          "artRatio": 1
+        },
+        "panel": {
+          "top": 396,
+          "bottom": 648,
+          "width": 344.1875,
+          "height": 252,
+          "objectFit": "fill",
+          "boxRatio": 1.3658234126984128,
+          "artRatio": 1
+        },
+        "actions": {
+          "top": 660.796875,
+          "bottom": 718.390625,
+          "width": 339.84375,
+          "height": 57.59375,
+          "objectFit": "fill",
+          "boxRatio": 5.900705371676614,
+          "artRatio": 1.1630434782608696
+        },
+        "replay": {
+          "top": 766.71875,
+          "bottom": 788,
+          "width": 175.5,
+          "height": 21.28125,
+          "objectFit": "fill",
+          "boxRatio": 8.246696035242291,
+          "artRatio": null
+        },
+        "facility": {
+          "top": 69.63710021972656,
+          "bottom": 269.1527099609375,
+          "width": 230.390625,
+          "height": 199.51560974121094,
+          "objectFit": "contain",
+          "boxRatio": 1.154749872948972,
+          "artRatio": 1
+        },
+        "titleBanner": {
+          "top": 12,
+          "bottom": 62.8125,
+          "width": 194.390625,
+          "height": 50.8125,
+          "objectFit": "contain",
+          "boxRatio": 3.8256457564575648,
+          "artRatio": 3.8247422680412373
+        },
+        "friends": [
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.8949878246753247,
+            "artRatio": 0.895
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 1.1171966255678132,
+            "artRatio": 1.1173184357541899
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.9249584421752552,
+            "artRatio": 0.925
+          }
+        ],
+        "friendsBox": {
+          "top": 252,
+          "bottom": 392,
+          "width": 360,
+          "height": 140,
+          "objectFit": "fill",
+          "boxRatio": 2.5714285714285716,
+          "artRatio": 0.895
+        },
+        "facilitySrc": "./assets/park/exhibit-001.webp",
+        "compareSrc": "./assets/park/exhibit-001.webp",
+        "dormantSrc": "./assets/park/exhibit-001.webp",
+        "signText": "迎宾门 · 成功修复",
+        "rewardTitleText": "通关奖励",
+        "rewardNumbers": [
+          "已领取",
+          "已领取"
+        ],
+        "rewardIcons": [
+          "./assets/park/icon-star.webp",
+          "./assets/park/icon-gem.webp"
+        ],
+        "scoreText": "已用 5 步 · 最佳 5 步"
+      },
+      "status": "通过"
+    },
+    {
+      "viewport": "897x1752",
+      "stage": {
+        "width": 449,
+        "height": 877
+      },
+      "first": {
+        "stage": {
+          "width": 449,
+          "height": 877
+        },
+        "victoryBackground": "rgb(138, 82, 216)",
+        "victoryBackgroundSize": "cover",
+        "victoryBackgroundImage": "url(\"http://127.0.0.1:4173/assets/park/victory-bg-v3.webp\")",
+        "backgrounds": [
+          "repeating-conic-gradient(at 50% 40%, rgba(255, 245, 193, 0) 0deg, rgba(255, 245, 193, 0) 12deg, rgba(255, 245, 193, 0.29) 14deg, rgba(255, 245, 193, 0.29) 17deg, rgba(255, 245, 193, 0) 21deg, rgba(255, 245, 193, 0) 30deg)",
+          "radial-gradient(circle, rgba(255, 247, 205, 0.78) 0%, rgba(255, 216, 128, 0.4) 36%, rgba(255, 168, 226, 0.16) 62%, rgba(0, 0, 0, 0) 76%)",
+          "linear-gradient(rgb(255, 251, 242) 0%, rgb(255, 244, 229) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/repair-sign-v2.webp\")",
+          "radial-gradient(circle, rgb(243, 233, 250) 40%, rgb(232, 213, 243) 80%, rgba(255, 255, 255, 0) 100%)",
+          "radial-gradient(circle, rgba(255, 235, 170, 0.8) 20%, rgba(255, 185, 215, 0.4) 60%, rgba(0, 0, 0, 0) 100%)",
+          "linear-gradient(90deg, rgb(255, 240, 181), rgb(248, 204, 226))",
+          "url(\"http://127.0.0.1:4173/assets/park/reward-ribbon.webp\")",
+          "linear-gradient(rgb(252, 235, 248) 0%, rgb(243, 218, 240) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/button-purple.webp\")",
+          "url(\"http://127.0.0.1:4173/assets/park/button-gold.webp\")"
+        ],
+        "sign": {
+          "top": 402.75,
+          "bottom": 443.15625,
+          "width": 340.21875,
+          "height": 40.40625,
+          "objectFit": "fill",
+          "boxRatio": 8.419953596287703,
+          "artRatio": null
+        },
+        "list": {
+          "top": 444.03125,
+          "bottom": 534.59375,
+          "width": 124.796875,
+          "height": 90.5625,
+          "objectFit": "fill",
+          "boxRatio": 1.3780193236714975,
+          "artRatio": 1
+        },
+        "compareActive": {
+          "top": 453.390625,
+          "bottom": 525.21875,
+          "width": 71.828125,
+          "height": 71.828125,
+          "objectFit": "fill",
+          "boxRatio": 1,
+          "artRatio": 1
+        },
+        "rewardTitle": {
+          "top": 569.8125,
+          "bottom": 599.4375,
+          "width": 188.578125,
+          "height": 29.625,
+          "objectFit": "fill",
+          "boxRatio": 6.3655063291139244,
+          "artRatio": null
+        },
+        "rewards": {
+          "top": 594.953125,
+          "bottom": 673.515625,
+          "width": 393.84375,
+          "height": 78.5625,
+          "objectFit": "fill",
+          "boxRatio": 5.013126491646778,
+          "artRatio": 1
+        },
+        "score": {
+          "top": 676.203125,
+          "bottom": 697.765625,
+          "width": 393.84375,
+          "height": 21.5625,
+          "objectFit": "fill",
+          "boxRatio": 18.265217391304347,
+          "artRatio": 1
+        },
+        "panel": {
+          "top": 420.953125,
+          "bottom": 703.34375,
+          "width": 429.25,
+          "height": 282.390625,
+          "objectFit": "fill",
+          "boxRatio": 1.5200575444032536,
+          "artRatio": 1
+        },
+        "actions": {
+          "top": 715.625,
+          "bottom": 778.765625,
+          "width": 423.875,
+          "height": 63.140625,
+          "objectFit": "fill",
+          "boxRatio": 6.713189804503836,
+          "artRatio": 1.1630434782608696
+        },
+        "replay": {
+          "top": 837.796875,
+          "bottom": 863.859375,
+          "width": 218.390625,
+          "height": 26.0625,
+          "objectFit": "fill",
+          "boxRatio": 8.379496402877697,
+          "artRatio": null
+        },
+        "facility": {
+          "top": 81.64242553710938,
+          "bottom": 285.2674255371094,
+          "width": 287.359375,
+          "height": 203.625,
+          "objectFit": "contain",
+          "boxRatio": 1.41121853898097,
+          "artRatio": 1
+        },
+        "titleBanner": {
+          "top": 13.140625,
+          "bottom": 76.53125,
+          "width": 242.453125,
+          "height": 63.390625,
+          "objectFit": "contain",
+          "boxRatio": 3.824747350258812,
+          "artRatio": 3.8247422680412373
+        },
+        "friends": [
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.8949701619778346,
+            "artRatio": 0.895
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 1.1172173154508778,
+            "artRatio": 1.1173184357541899
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.9249800478850758,
+            "artRatio": 0.925
+          }
+        ],
+        "friendsBox": {
+          "top": 271.875,
+          "bottom": 438.5,
+          "width": 449,
+          "height": 166.625,
+          "objectFit": "fill",
+          "boxRatio": 2.694673668417104,
+          "artRatio": 0.895
+        },
+        "facilitySrc": "./assets/park/exhibit-001.webp",
+        "compareSrc": "./assets/park/exhibit-001.webp",
+        "dormantSrc": "./assets/park/exhibit-001.webp",
+        "signText": "迎宾门 · 成功修复",
+        "rewardTitleText": "通关奖励",
+        "rewardNumbers": [
+          "+4",
+          "+100"
+        ],
+        "rewardIcons": [
+          "./assets/park/icon-star.webp",
+          "./assets/park/icon-gem.webp"
+        ],
+        "scoreText": "已用 5 步 · 最佳 5 步"
+      },
+      "replay": {
+        "stage": {
+          "width": 449,
+          "height": 877
+        },
+        "victoryBackground": "rgb(138, 82, 216)",
+        "victoryBackgroundSize": "cover",
+        "victoryBackgroundImage": "url(\"http://127.0.0.1:4173/assets/park/victory-bg-v3.webp\")",
+        "backgrounds": [
+          "repeating-conic-gradient(at 50% 40%, rgba(255, 245, 193, 0) 0deg, rgba(255, 245, 193, 0) 12deg, rgba(255, 245, 193, 0.29) 14deg, rgba(255, 245, 193, 0.29) 17deg, rgba(255, 245, 193, 0) 21deg, rgba(255, 245, 193, 0) 30deg)",
+          "radial-gradient(circle, rgba(255, 247, 205, 0.78) 0%, rgba(255, 216, 128, 0.4) 36%, rgba(255, 168, 226, 0.16) 62%, rgba(0, 0, 0, 0) 76%)",
+          "linear-gradient(rgb(255, 251, 242) 0%, rgb(255, 244, 229) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/repair-sign-v2.webp\")",
+          "radial-gradient(circle, rgb(243, 233, 250) 40%, rgb(232, 213, 243) 80%, rgba(255, 255, 255, 0) 100%)",
+          "radial-gradient(circle, rgba(255, 235, 170, 0.8) 20%, rgba(255, 185, 215, 0.4) 60%, rgba(0, 0, 0, 0) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/reward-ribbon.webp\")",
+          "linear-gradient(rgb(252, 235, 248) 0%, rgb(243, 218, 240) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/button-purple.webp\")",
+          "url(\"http://127.0.0.1:4173/assets/park/button-gold.webp\")"
+        ],
+        "sign": {
+          "top": 402.75,
+          "bottom": 443.15625,
+          "width": 340.21875,
+          "height": 40.40625,
+          "objectFit": "fill",
+          "boxRatio": 8.419953596287703,
+          "artRatio": null
+        },
+        "list": {
+          "top": 444.03125,
+          "bottom": 567.578125,
+          "width": 124.796875,
+          "height": 123.546875,
+          "objectFit": "fill",
+          "boxRatio": 1.0101176173011255,
+          "artRatio": 1
+        },
+        "compareActive": {
+          "top": 469.890625,
+          "bottom": 541.71875,
+          "width": 71.828125,
+          "height": 71.828125,
+          "objectFit": "fill",
+          "boxRatio": 1,
+          "artRatio": 1
+        },
+        "rewardTitle": {
+          "top": 569.8125,
+          "bottom": 599.4375,
+          "width": 188.578125,
+          "height": 29.625,
+          "objectFit": "fill",
+          "boxRatio": 6.3655063291139244,
+          "artRatio": null
+        },
+        "rewards": {
+          "top": 594.953125,
+          "bottom": 673.515625,
+          "width": 393.84375,
+          "height": 78.5625,
+          "objectFit": "fill",
+          "boxRatio": 5.013126491646778,
+          "artRatio": 1
+        },
+        "score": {
+          "top": 676.203125,
+          "bottom": 697.765625,
+          "width": 393.84375,
+          "height": 21.5625,
+          "objectFit": "fill",
+          "boxRatio": 18.265217391304347,
+          "artRatio": 1
+        },
+        "panel": {
+          "top": 420.953125,
+          "bottom": 703.34375,
+          "width": 429.25,
+          "height": 282.390625,
+          "objectFit": "fill",
+          "boxRatio": 1.5200575444032536,
+          "artRatio": 1
+        },
+        "actions": {
+          "top": 715.625,
+          "bottom": 778.765625,
+          "width": 423.875,
+          "height": 63.140625,
+          "objectFit": "fill",
+          "boxRatio": 6.713189804503836,
+          "artRatio": 1.1630434782608696
+        },
+        "replay": {
+          "top": 837.796875,
+          "bottom": 863.859375,
+          "width": 218.390625,
+          "height": 26.0625,
+          "objectFit": "fill",
+          "boxRatio": 8.379496402877697,
+          "artRatio": null
+        },
+        "facility": {
+          "top": 82.21448516845703,
+          "bottom": 285.83948516845703,
+          "width": 287.359375,
+          "height": 203.625,
+          "objectFit": "contain",
+          "boxRatio": 1.41121853898097,
+          "artRatio": 1
+        },
+        "titleBanner": {
+          "top": 13.140625,
+          "bottom": 76.53125,
+          "width": 242.453125,
+          "height": 63.390625,
+          "objectFit": "contain",
+          "boxRatio": 3.824747350258812,
+          "artRatio": 3.8247422680412373
+        },
+        "friends": [
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.8949701619778346,
+            "artRatio": 0.895
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 1.1172173154508778,
+            "artRatio": 1.1173184357541899
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.9249800478850758,
+            "artRatio": 0.925
+          }
+        ],
+        "friendsBox": {
+          "top": 271.875,
+          "bottom": 438.5,
+          "width": 449,
+          "height": 166.625,
+          "objectFit": "fill",
+          "boxRatio": 2.694673668417104,
+          "artRatio": 0.895
+        },
+        "facilitySrc": "./assets/park/exhibit-001.webp",
+        "compareSrc": "./assets/park/exhibit-001.webp",
+        "dormantSrc": "./assets/park/exhibit-001.webp",
+        "signText": "迎宾门 · 成功修复",
+        "rewardTitleText": "通关奖励",
+        "rewardNumbers": [
+          "已领取",
+          "已领取"
+        ],
+        "rewardIcons": [
+          "./assets/park/icon-star.webp",
+          "./assets/park/icon-gem.webp"
+        ],
+        "scoreText": "已用 5 步 · 最佳 5 步"
+      },
+      "status": "通过"
+    },
+    {
+      "viewport": "897x1754",
+      "stage": {
+        "width": 449,
+        "height": 878
+      },
+      "first": {
+        "stage": {
+          "width": 449,
+          "height": 878
+        },
+        "victoryBackground": "rgb(138, 82, 216)",
+        "victoryBackgroundSize": "cover",
+        "victoryBackgroundImage": "url(\"http://127.0.0.1:4173/assets/park/victory-bg-v3.webp\")",
+        "backgrounds": [
+          "repeating-conic-gradient(at 50% 40%, rgba(255, 245, 193, 0) 0deg, rgba(255, 245, 193, 0) 12deg, rgba(255, 245, 193, 0.29) 14deg, rgba(255, 245, 193, 0.29) 17deg, rgba(255, 245, 193, 0) 21deg, rgba(255, 245, 193, 0) 30deg)",
+          "radial-gradient(circle, rgba(255, 247, 205, 0.78) 0%, rgba(255, 216, 128, 0.4) 36%, rgba(255, 168, 226, 0.16) 62%, rgba(0, 0, 0, 0) 76%)",
+          "linear-gradient(rgb(255, 251, 242) 0%, rgb(255, 244, 229) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/repair-sign-v2.webp\")",
+          "radial-gradient(circle, rgb(243, 233, 250) 40%, rgb(232, 213, 243) 80%, rgba(255, 255, 255, 0) 100%)",
+          "radial-gradient(circle, rgba(255, 235, 170, 0.8) 20%, rgba(255, 185, 215, 0.4) 60%, rgba(0, 0, 0, 0) 100%)",
+          "linear-gradient(90deg, rgb(255, 240, 181), rgb(248, 204, 226))",
+          "url(\"http://127.0.0.1:4173/assets/park/reward-ribbon.webp\")",
+          "linear-gradient(rgb(252, 235, 248) 0%, rgb(243, 218, 240) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/button-purple.webp\")",
+          "url(\"http://127.0.0.1:4173/assets/park/button-gold.webp\")"
+        ],
+        "sign": {
+          "top": 403.234375,
+          "bottom": 443.640625,
+          "width": 340.21875,
+          "height": 40.40625,
+          "objectFit": "fill",
+          "boxRatio": 8.419953596287703,
+          "artRatio": null
+        },
+        "list": {
+          "top": 444.515625,
+          "bottom": 535.390625,
+          "width": 124.796875,
+          "height": 90.875,
+          "objectFit": "fill",
+          "boxRatio": 1.3732806052269602,
+          "artRatio": 1
+        },
+        "compareActive": {
+          "top": 454.03125,
+          "bottom": 525.859375,
+          "width": 71.828125,
+          "height": 71.828125,
+          "objectFit": "fill",
+          "boxRatio": 1,
+          "artRatio": 1
+        },
+        "rewardTitle": {
+          "top": 570.609375,
+          "bottom": 600.234375,
+          "width": 188.578125,
+          "height": 29.625,
+          "objectFit": "fill",
+          "boxRatio": 6.3655063291139244,
+          "artRatio": null
+        },
+        "rewards": {
+          "top": 595.75,
+          "bottom": 674.3125,
+          "width": 393.84375,
+          "height": 78.5625,
+          "objectFit": "fill",
+          "boxRatio": 5.013126491646778,
+          "artRatio": 1
+        },
+        "score": {
+          "top": 677,
+          "bottom": 698.5625,
+          "width": 393.84375,
+          "height": 21.5625,
+          "objectFit": "fill",
+          "boxRatio": 18.265217391304347,
+          "artRatio": 1
+        },
+        "panel": {
+          "top": 421.4375,
+          "bottom": 704.140625,
+          "width": 429.25,
+          "height": 282.703125,
+          "objectFit": "fill",
+          "boxRatio": 1.5183772729785,
+          "artRatio": 1
+        },
+        "actions": {
+          "top": 716.4375,
+          "bottom": 779.640625,
+          "width": 423.875,
+          "height": 63.203125,
+          "objectFit": "fill",
+          "boxRatio": 6.70655129789864,
+          "artRatio": 1.1630434782608696
+        },
+        "replay": {
+          "top": 838.78125,
+          "bottom": 864.84375,
+          "width": 218.390625,
+          "height": 26.0625,
+          "objectFit": "fill",
+          "boxRatio": 8.379496402877697,
+          "artRatio": null
+        },
+        "facility": {
+          "top": 81.76820373535156,
+          "bottom": 285.6275634765625,
+          "width": 287.359375,
+          "height": 203.85935974121094,
+          "objectFit": "contain",
+          "boxRatio": 1.409596181233906,
+          "artRatio": 1
+        },
+        "titleBanner": {
+          "top": 13.15625,
+          "bottom": 76.546875,
+          "width": 242.453125,
+          "height": 63.390625,
+          "objectFit": "contain",
+          "boxRatio": 3.824747350258812,
+          "artRatio": 3.8247422680412373
+        },
+        "friends": [
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.8949161202418462,
+            "artRatio": 0.895
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 1.117307482845006,
+            "artRatio": 1.1173184357541899
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.9249626307922272,
+            "artRatio": 0.925
+          }
+        ],
+        "friendsBox": {
+          "top": 272.1875,
+          "bottom": 439,
+          "width": 449,
+          "height": 166.8125,
+          "objectFit": "fill",
+          "boxRatio": 2.6916448107905584,
+          "artRatio": 0.895
+        },
+        "facilitySrc": "./assets/park/exhibit-001.webp",
+        "compareSrc": "./assets/park/exhibit-001.webp",
+        "dormantSrc": "./assets/park/exhibit-001.webp",
+        "signText": "迎宾门 · 成功修复",
+        "rewardTitleText": "通关奖励",
+        "rewardNumbers": [
+          "+4",
+          "+100"
+        ],
+        "rewardIcons": [
+          "./assets/park/icon-star.webp",
+          "./assets/park/icon-gem.webp"
+        ],
+        "scoreText": "已用 5 步 · 最佳 5 步"
+      },
+      "replay": {
+        "stage": {
+          "width": 449,
+          "height": 878
+        },
+        "victoryBackground": "rgb(138, 82, 216)",
+        "victoryBackgroundSize": "cover",
+        "victoryBackgroundImage": "url(\"http://127.0.0.1:4173/assets/park/victory-bg-v3.webp\")",
+        "backgrounds": [
+          "repeating-conic-gradient(at 50% 40%, rgba(255, 245, 193, 0) 0deg, rgba(255, 245, 193, 0) 12deg, rgba(255, 245, 193, 0.29) 14deg, rgba(255, 245, 193, 0.29) 17deg, rgba(255, 245, 193, 0) 21deg, rgba(255, 245, 193, 0) 30deg)",
+          "radial-gradient(circle, rgba(255, 247, 205, 0.78) 0%, rgba(255, 216, 128, 0.4) 36%, rgba(255, 168, 226, 0.16) 62%, rgba(0, 0, 0, 0) 76%)",
+          "linear-gradient(rgb(255, 251, 242) 0%, rgb(255, 244, 229) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/repair-sign-v2.webp\")",
+          "radial-gradient(circle, rgb(243, 233, 250) 40%, rgb(232, 213, 243) 80%, rgba(255, 255, 255, 0) 100%)",
+          "radial-gradient(circle, rgba(255, 235, 170, 0.8) 20%, rgba(255, 185, 215, 0.4) 60%, rgba(0, 0, 0, 0) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/reward-ribbon.webp\")",
+          "linear-gradient(rgb(252, 235, 248) 0%, rgb(243, 218, 240) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/button-purple.webp\")",
+          "url(\"http://127.0.0.1:4173/assets/park/button-gold.webp\")"
+        ],
+        "sign": {
+          "top": 403.234375,
+          "bottom": 443.640625,
+          "width": 340.21875,
+          "height": 40.40625,
+          "objectFit": "fill",
+          "boxRatio": 8.419953596287703,
+          "artRatio": null
+        },
+        "list": {
+          "top": 444.515625,
+          "bottom": 568.375,
+          "width": 124.796875,
+          "height": 123.859375,
+          "objectFit": "fill",
+          "boxRatio": 1.0075690677431564,
+          "artRatio": 1
+        },
+        "compareActive": {
+          "top": 470.515625,
+          "bottom": 542.34375,
+          "width": 71.828125,
+          "height": 71.828125,
+          "objectFit": "fill",
+          "boxRatio": 1,
+          "artRatio": 1
+        },
+        "rewardTitle": {
+          "top": 570.609375,
+          "bottom": 600.234375,
+          "width": 188.578125,
+          "height": 29.625,
+          "objectFit": "fill",
+          "boxRatio": 6.3655063291139244,
+          "artRatio": null
+        },
+        "rewards": {
+          "top": 595.75,
+          "bottom": 674.3125,
+          "width": 393.84375,
+          "height": 78.5625,
+          "objectFit": "fill",
+          "boxRatio": 5.013126491646778,
+          "artRatio": 1
+        },
+        "score": {
+          "top": 677,
+          "bottom": 698.5625,
+          "width": 393.84375,
+          "height": 21.5625,
+          "objectFit": "fill",
+          "boxRatio": 18.265217391304347,
+          "artRatio": 1
+        },
+        "panel": {
+          "top": 421.4375,
+          "bottom": 704.140625,
+          "width": 429.25,
+          "height": 282.703125,
+          "objectFit": "fill",
+          "boxRatio": 1.5183772729785,
+          "artRatio": 1
+        },
+        "actions": {
+          "top": 716.4375,
+          "bottom": 779.640625,
+          "width": 423.875,
+          "height": 63.203125,
+          "objectFit": "fill",
+          "boxRatio": 6.70655129789864,
+          "artRatio": 1.1630434782608696
+        },
+        "replay": {
+          "top": 838.78125,
+          "bottom": 864.84375,
+          "width": 218.390625,
+          "height": 26.0625,
+          "objectFit": "fill",
+          "boxRatio": 8.379496402877697,
+          "artRatio": null
+        },
+        "facility": {
+          "top": 82.3080062866211,
+          "bottom": 286.16735076904297,
+          "width": 287.359375,
+          "height": 203.85934448242188,
+          "objectFit": "contain",
+          "boxRatio": 1.409596286741607,
+          "artRatio": 1
+        },
+        "titleBanner": {
+          "top": 13.15625,
+          "bottom": 76.546875,
+          "width": 242.453125,
+          "height": 63.390625,
+          "objectFit": "contain",
+          "boxRatio": 3.824747350258812,
+          "artRatio": 3.8247422680412373
+        },
+        "friends": [
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.8949161202418462,
+            "artRatio": 0.895
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 1.117307482845006,
+            "artRatio": 1.1173184357541899
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.9249626307922272,
+            "artRatio": 0.925
+          }
+        ],
+        "friendsBox": {
+          "top": 272.1875,
+          "bottom": 439,
+          "width": 449,
+          "height": 166.8125,
+          "objectFit": "fill",
+          "boxRatio": 2.6916448107905584,
+          "artRatio": 0.895
+        },
+        "facilitySrc": "./assets/park/exhibit-001.webp",
+        "compareSrc": "./assets/park/exhibit-001.webp",
+        "dormantSrc": "./assets/park/exhibit-001.webp",
+        "signText": "迎宾门 · 成功修复",
+        "rewardTitleText": "通关奖励",
+        "rewardNumbers": [
+          "已领取",
+          "已领取"
+        ],
+        "rewardIcons": [
+          "./assets/park/icon-star.webp",
+          "./assets/park/icon-gem.webp"
+        ],
+        "scoreText": "已用 5 步 · 最佳 5 步"
+      },
+      "status": "通过"
+    },
+    {
+      "viewport": "456x763",
+      "stage": {
+        "width": 429,
+        "height": 763
+      },
+      "first": {
+        "stage": {
+          "width": 429,
+          "height": 763
+        },
+        "victoryBackground": "rgb(138, 82, 216)",
+        "victoryBackgroundSize": "cover",
+        "victoryBackgroundImage": "url(\"http://127.0.0.1:4173/assets/park/victory-bg-v3.webp\")",
+        "backgrounds": [
+          "repeating-conic-gradient(at 50% 40%, rgba(255, 245, 193, 0) 0deg, rgba(255, 245, 193, 0) 12deg, rgba(255, 245, 193, 0.29) 14deg, rgba(255, 245, 193, 0.29) 17deg, rgba(255, 245, 193, 0) 21deg, rgba(255, 245, 193, 0) 30deg)",
+          "radial-gradient(circle, rgba(255, 247, 205, 0.78) 0%, rgba(255, 216, 128, 0.4) 36%, rgba(255, 168, 226, 0.16) 62%, rgba(0, 0, 0, 0) 76%)",
+          "linear-gradient(rgb(255, 251, 242) 0%, rgb(255, 244, 229) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/repair-sign-v2.webp\")",
+          "radial-gradient(circle, rgb(243, 233, 250) 40%, rgb(232, 213, 243) 80%, rgba(255, 255, 255, 0) 100%)",
+          "radial-gradient(circle, rgba(255, 235, 170, 0.8) 20%, rgba(255, 185, 215, 0.4) 60%, rgba(0, 0, 0, 0) 100%)",
+          "linear-gradient(90deg, rgb(255, 240, 181), rgb(248, 204, 226))",
+          "url(\"http://127.0.0.1:4173/assets/park/reward-ribbon.webp\")",
+          "linear-gradient(rgb(252, 235, 248) 0%, rgb(243, 218, 240) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/button-purple.webp\")",
+          "url(\"http://127.0.0.1:4173/assets/park/button-gold.webp\")"
+        ],
+        "sign": {
+          "top": 348.921875,
+          "bottom": 387.546875,
+          "width": 325.0625,
+          "height": 38.625,
+          "objectFit": "fill",
+          "boxRatio": 8.415857605177994,
+          "artRatio": null
+        },
+        "list": {
+          "top": 388.390625,
+          "bottom": 450.578125,
+          "width": 119.3125,
+          "height": 62.1875,
+          "objectFit": "fill",
+          "boxRatio": 1.9185929648241207,
+          "artRatio": 1
+        },
+        "compareActive": {
+          "top": 385.15625,
+          "bottom": 453.8125,
+          "width": 68.65625,
+          "height": 68.65625,
+          "objectFit": "fill",
+          "boxRatio": 1,
+          "artRatio": 1
+        },
+        "rewardTitle": {
+          "top": 484.203125,
+          "bottom": 512.515625,
+          "width": 180.25,
+          "height": 28.3125,
+          "objectFit": "fill",
+          "boxRatio": 6.36644591611479,
+          "artRatio": null
+        },
+        "rewards": {
+          "top": 508.234375,
+          "bottom": 583.328125,
+          "width": 376.28125,
+          "height": 75.09375,
+          "objectFit": "fill",
+          "boxRatio": 5.010819808572617,
+          "artRatio": 1
+        },
+        "score": {
+          "top": 585.890625,
+          "bottom": 606.484375,
+          "width": 376.28125,
+          "height": 20.59375,
+          "objectFit": "fill",
+          "boxRatio": 18.271623672230653,
+          "artRatio": 1
+        },
+        "panel": {
+          "top": 366.234375,
+          "bottom": 611.90625,
+          "width": 410.3125,
+          "height": 245.671875,
+          "objectFit": "fill",
+          "boxRatio": 1.6701647268333015,
+          "artRatio": 1
+        },
+        "actions": {
+          "top": 622.59375,
+          "bottom": 677.515625,
+          "width": 405.15625,
+          "height": 54.921875,
+          "objectFit": "fill",
+          "boxRatio": 7.376955903271693,
+          "artRatio": 1.1630434782608696
+        },
+        "replay": {
+          "top": 726.59375,
+          "bottom": 751.5625,
+          "width": 208.765625,
+          "height": 24.96875,
+          "objectFit": "fill",
+          "boxRatio": 8.36107634543179,
+          "artRatio": null
+        },
+        "facility": {
+          "top": 70.63878631591797,
+          "bottom": 247.79503631591797,
+          "width": 274.671875,
+          "height": 177.15625,
+          "objectFit": "contain",
+          "boxRatio": 1.5504498147821486,
+          "artRatio": 1
+        },
+        "titleBanner": {
+          "top": 11.4375,
+          "bottom": 72.015625,
+          "width": 231.75,
+          "height": 60.578125,
+          "objectFit": "contain",
+          "boxRatio": 3.825638380190869,
+          "artRatio": 3.8247422680412373
+        },
+        "friends": [
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.894953454189123,
+            "artRatio": 0.895
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 1.117307933324978,
+            "artRatio": 1.1173184357541899
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.9248939341818598,
+            "artRatio": 0.925
+          }
+        ],
+        "friendsBox": {
+          "top": 236.53125,
+          "bottom": 381.5,
+          "width": 429.1875,
+          "height": 144.96875,
+          "objectFit": "fill",
+          "boxRatio": 2.960551843069627,
+          "artRatio": 0.895
+        },
+        "facilitySrc": "./assets/park/exhibit-001.webp",
+        "compareSrc": "./assets/park/exhibit-001.webp",
+        "dormantSrc": "./assets/park/exhibit-001.webp",
+        "signText": "迎宾门 · 成功修复",
+        "rewardTitleText": "通关奖励",
+        "rewardNumbers": [
+          "+4",
+          "+100"
+        ],
+        "rewardIcons": [
+          "./assets/park/icon-star.webp",
+          "./assets/park/icon-gem.webp"
+        ],
+        "scoreText": "已用 5 步 · 最佳 5 步"
+      },
+      "replay": {
+        "stage": {
+          "width": 429,
+          "height": 763
+        },
+        "victoryBackground": "rgb(138, 82, 216)",
+        "victoryBackgroundSize": "cover",
+        "victoryBackgroundImage": "url(\"http://127.0.0.1:4173/assets/park/victory-bg-v3.webp\")",
+        "backgrounds": [
+          "repeating-conic-gradient(at 50% 40%, rgba(255, 245, 193, 0) 0deg, rgba(255, 245, 193, 0) 12deg, rgba(255, 245, 193, 0.29) 14deg, rgba(255, 245, 193, 0.29) 17deg, rgba(255, 245, 193, 0) 21deg, rgba(255, 245, 193, 0) 30deg)",
+          "radial-gradient(circle, rgba(255, 247, 205, 0.78) 0%, rgba(255, 216, 128, 0.4) 36%, rgba(255, 168, 226, 0.16) 62%, rgba(0, 0, 0, 0) 76%)",
+          "linear-gradient(rgb(255, 251, 242) 0%, rgb(255, 244, 229) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/repair-sign-v2.webp\")",
+          "radial-gradient(circle, rgb(243, 233, 250) 40%, rgb(232, 213, 243) 80%, rgba(255, 255, 255, 0) 100%)",
+          "radial-gradient(circle, rgba(255, 235, 170, 0.8) 20%, rgba(255, 185, 215, 0.4) 60%, rgba(0, 0, 0, 0) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/reward-ribbon.webp\")",
+          "linear-gradient(rgb(252, 235, 248) 0%, rgb(243, 218, 240) 100%)",
+          "url(\"http://127.0.0.1:4173/assets/park/button-purple.webp\")",
+          "url(\"http://127.0.0.1:4173/assets/park/button-gold.webp\")"
+        ],
+        "sign": {
+          "top": 348.921875,
+          "bottom": 387.546875,
+          "width": 325.0625,
+          "height": 38.625,
+          "objectFit": "fill",
+          "boxRatio": 8.415857605177994,
+          "artRatio": null
+        },
+        "list": {
+          "top": 388.390625,
+          "bottom": 482.0625,
+          "width": 119.3125,
+          "height": 93.671875,
+          "objectFit": "fill",
+          "boxRatio": 1.2737281067556296,
+          "artRatio": 1
+        },
+        "compareActive": {
+          "top": 400.890625,
+          "bottom": 469.546875,
+          "width": 68.65625,
+          "height": 68.65625,
+          "objectFit": "fill",
+          "boxRatio": 1,
+          "artRatio": 1
+        },
+        "rewardTitle": {
+          "top": 484.203125,
+          "bottom": 512.515625,
+          "width": 180.25,
+          "height": 28.3125,
+          "objectFit": "fill",
+          "boxRatio": 6.36644591611479,
+          "artRatio": null
+        },
+        "rewards": {
+          "top": 508.234375,
+          "bottom": 583.328125,
+          "width": 376.28125,
+          "height": 75.09375,
+          "objectFit": "fill",
+          "boxRatio": 5.010819808572617,
+          "artRatio": 1
+        },
+        "score": {
+          "top": 585.890625,
+          "bottom": 606.484375,
+          "width": 376.28125,
+          "height": 20.59375,
+          "objectFit": "fill",
+          "boxRatio": 18.271623672230653,
+          "artRatio": 1
+        },
+        "panel": {
+          "top": 366.234375,
+          "bottom": 611.90625,
+          "width": 410.3125,
+          "height": 245.671875,
+          "objectFit": "fill",
+          "boxRatio": 1.6701647268333015,
+          "artRatio": 1
+        },
+        "actions": {
+          "top": 622.59375,
+          "bottom": 677.515625,
+          "width": 405.15625,
+          "height": 54.921875,
+          "objectFit": "fill",
+          "boxRatio": 7.376955903271693,
+          "artRatio": 1.1630434782608696
+        },
+        "replay": {
+          "top": 726.59375,
+          "bottom": 751.5625,
+          "width": 208.765625,
+          "height": 24.96875,
+          "objectFit": "fill",
+          "boxRatio": 8.36107634543179,
+          "artRatio": null
+        },
+        "facility": {
+          "top": 71.21501922607422,
+          "bottom": 248.37126922607422,
+          "width": 274.671875,
+          "height": 177.15625,
+          "objectFit": "contain",
+          "boxRatio": 1.5504498147821486,
+          "artRatio": 1
+        },
+        "titleBanner": {
+          "top": 11.4375,
+          "bottom": 72.015625,
+          "width": 231.75,
+          "height": 60.578125,
+          "objectFit": "contain",
+          "boxRatio": 3.825638380190869,
+          "artRatio": 3.8247422680412373
+        },
+        "friends": [
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.894953454189123,
+            "artRatio": 0.895
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 1.117307933324978,
+            "artRatio": 1.1173184357541899
+          },
+          {
+            "objectFit": "contain",
+            "boxRatio": 0.9248939341818598,
+            "artRatio": 0.925
+          }
+        ],
+        "friendsBox": {
+          "top": 236.53125,
+          "bottom": 381.5,
+          "width": 429.1875,
+          "height": 144.96875,
+          "objectFit": "fill",
+          "boxRatio": 2.960551843069627,
+          "artRatio": 0.895
+        },
+        "facilitySrc": "./assets/park/exhibit-001.webp",
+        "compareSrc": "./assets/park/exhibit-001.webp",
+        "dormantSrc": "./assets/park/exhibit-001.webp",
+        "signText": "迎宾门 · 成功修复",
+        "rewardTitleText": "通关奖励",
+        "rewardNumbers": [
+          "已领取",
+          "已领取"
+        ],
+        "rewardIcons": [
+          "./assets/park/icon-star.webp",
+          "./assets/park/icon-gem.webp"
+        ],
+        "scoreText": "已用 5 步 · 最佳 5 步"
+      },
+      "status": "通过"
+    }
+  ]
+}

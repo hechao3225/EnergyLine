@@ -140,15 +140,15 @@
       "name": "avatar-xingya",
       "file": "public/assets/park/avatar-xingya.webp",
       "size": [
-        48,
-        48
+        128,
+        128
       ],
       "has_alpha": true,
       "alpha_bbox": [
-        0,
-        0,
-        48,
-        48
+        7,
+        3,
+        121,
+        125
       ],
       "corner_alpha": [
         0,
@@ -156,31 +156,25 @@
         0,
         0
       ],
-      "bytes": 2076,
-      "sha256": "731eca8f9fc0867cfc4572f43fbdc365f2b9970138e6444bb8166e78d937eac4",
-      "source": "docs/角色IP/素材/主角三人组-角色设计图.jpg",
-      "crop": [
-        1215,
-        655,
-        1302,
-        731
-      ],
-      "route": "design-sheet crop",
-      "processing": "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
+      "bytes": 10688,
+      "sha256": "cf8a7589760c6bb402bbbed3da5af8f81aa70783fe5abc31259a8983d2a6c827",
+      "source": "public/assets/park/sheep.webp",
+      "route": "standup head crop",
+      "processing": "运行时主立绘按比例裁头部 (0.00,0.00)-(1.00,1.00)；透明裁边；等比居中；WebP 92"
     },
     {
       "name": "avatar-xingya@2x",
       "file": "public/assets/park/avatar-xingya@2x.webp",
       "size": [
-        96,
-        96
+        256,
+        256
       ],
       "has_alpha": true,
       "alpha_bbox": [
-        0,
-        0,
-        96,
-        96
+        15,
+        7,
+        242,
+        249
       ],
       "corner_alpha": [
         0,
@@ -188,31 +182,25 @@
         0,
         0
       ],
-      "bytes": 5250,
-      "sha256": "4255904a9c92cc732fdcb228a076c974ba152eddad6502c5352ed7f5037e694b",
-      "source": "docs/角色IP/素材/主角三人组-角色设计图.jpg",
-      "crop": [
-        1215,
-        655,
-        1302,
-        731
-      ],
-      "route": "design-sheet crop",
-      "processing": "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
+      "bytes": 28480,
+      "sha256": "fa236b82f6cd95569d6e1e6ab29603a3ce2302eac722add8a46e7000a38f724c",
+      "source": "public/assets/park/sheep.webp",
+      "route": "standup head crop",
+      "processing": "运行时主立绘按比例裁头部 (0.00,0.00)-(1.00,1.00)；透明裁边；等比居中；WebP 92"
     },
     {
       "name": "avatar-boling",
       "file": "public/assets/park/avatar-boling.webp",
       "size": [
-        48,
-        48
+        128,
+        128
       ],
       "has_alpha": true,
       "alpha_bbox": [
-        0,
-        0,
-        48,
-        48
+        2,
+        4,
+        124,
+        124
       ],
       "corner_alpha": [
         0,
@@ -220,31 +208,25 @@
         0,
         0
       ],
-      "bytes": 1914,
-      "sha256": "751a41c534f29e8342fc36557afd350a6f5d26d228c69c3dbf0938d4b66a1e5c",
-      "source": "docs/角色IP/素材/主角三人组-角色设计图.jpg",
-      "crop": [
-        1320,
-        654,
-        1407,
-        731
-      ],
-      "route": "design-sheet crop",
-      "processing": "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
+      "bytes": 8782,
+      "sha256": "612d788d8baab20654b67cb7be0ddbc4a6d5711ce074a21a4d28d129360f39e5",
+      "source": "public/assets/park/spirit.webp",
+      "route": "standup head crop",
+      "processing": "运行时主立绘按比例裁头部 (0.00,0.00)-(1.00,1.00)；透明裁边；等比居中；WebP 92"
     },
     {
       "name": "avatar-boling@2x",
       "file": "public/assets/park/avatar-boling@2x.webp",
       "size": [
-        96,
-        96
+        256,
+        256
       ],
       "has_alpha": true,
       "alpha_bbox": [
-        0,
-        0,
-        96,
-        96
+        5,
+        8,
+        248,
+        247
       ],
       "corner_alpha": [
         0,
@@ -252,31 +234,25 @@
         0,
         0
       ],
-      "bytes": 4652,
-      "sha256": "e6b45b22b554a41dfbb6ad023870b56558de8ce36a18593e3ffda9c4c17fc245",
-      "source": "docs/角色IP/素材/主角三人组-角色设计图.jpg",
-      "crop": [
-        1320,
-        654,
-        1407,
-        731
-      ],
-      "route": "design-sheet crop",
-      "processing": "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
+      "bytes": 21360,
+      "sha256": "9963a2c63a8412d3cbfe5f95ba70508c4b01ff3ca621ee63887ab432420dd83c",
+      "source": "public/assets/park/spirit.webp",
+      "route": "standup head crop",
+      "processing": "运行时主立绘按比例裁头部 (0.00,0.00)-(1.00,1.00)；透明裁边；等比居中；WebP 92"
     },
     {
       "name": "avatar-yunrong",
       "file": "public/assets/park/avatar-yunrong.webp",
       "size": [
-        48,
-        48
+        128,
+        128
       ],
       "has_alpha": true,
       "alpha_bbox": [
-        0,
-        0,
-        48,
-        48
+        22,
+        3,
+        106,
+        125
       ],
       "corner_alpha": [
         0,
@@ -284,31 +260,25 @@
         0,
         0
       ],
-      "bytes": 1758,
-      "sha256": "1119f9af50742c1aa4378178052e8b0dc8669e93a459b1e2f5a04691f9e859a4",
-      "source": "docs/角色IP/素材/主角三人组-角色设计图.jpg",
-      "crop": [
-        1427,
-        654,
-        1513,
-        730
-      ],
-      "route": "design-sheet crop",
-      "processing": "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
+      "bytes": 6534,
+      "sha256": "4ad594a095e2725f9ffeae8715de2d8f00fb183f0e48fdecaac59b87dd84d71c",
+      "source": "public/assets/park/rabbit.webp",
+      "route": "standup head crop",
+      "processing": "运行时主立绘按比例裁头部 (0.00,0.00)-(1.00,1.00)；透明裁边；等比居中；WebP 92"
     },
     {
       "name": "avatar-yunrong@2x",
       "file": "public/assets/park/avatar-yunrong@2x.webp",
       "size": [
-        96,
-        96
+        256,
+        256
       ],
       "has_alpha": true,
       "alpha_bbox": [
-        0,
-        0,
-        96,
-        96
+        43,
+        7,
+        212,
+        250
       ],
       "corner_alpha": [
         0,
@@ -316,17 +286,11 @@
         0,
         0
       ],
-      "bytes": 4184,
-      "sha256": "f4fc9a193abb5aa0961e5c733110006973cb55c913d40b1f7cc3f26ae8fcccd6",
-      "source": "docs/角色IP/素材/主角三人组-角色设计图.jpg",
-      "crop": [
-        1427,
-        654,
-        1513,
-        730
-      ],
-      "route": "design-sheet crop",
-      "processing": "设计图 48×48 图标区裁切；缩放方形后圆角遮罩去底；WebP 92"
+      "bytes": 15352,
+      "sha256": "6b59f53d8d419425ae2c4b7ecd87692c71918c42a7ef0bf65323357cce06d7b9",
+      "source": "public/assets/park/rabbit.webp",
+      "route": "standup head crop",
+      "processing": "运行时主立绘按比例裁头部 (0.00,0.00)-(1.00,1.00)；透明裁边；等比居中；WebP 92"
     }
   ],
   "mood_updates": {

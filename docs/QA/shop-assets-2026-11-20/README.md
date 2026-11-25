@@ -7,7 +7,7 @@
 | 资源 | 规格 | 来源 |
 | --- | --- | --- |
 | `icon-lens.webp` | 512×512 RGBA | 火花透镜白底生成源 |
-| `icon-coil.webp` | 512×512 RGBA | 应急线圈白底生成源 |
+| `icon-step.webp` | 512×512 RGBA | 加步电池白底生成源 |
 | `outfit-sheep-starlight.webp` | 951×1017 RGBA | 羊伙伴星愿礼服白底生成源 |
 | `outfit-rabbit-starlight.webp` | 719×1024 RGBA | 兔子伙伴星愿礼服白底生成源 |
 | `outfit-spirit-starlight.webp` | 988×1015 RGBA | 精灵伙伴星愿礼服白底生成源 |
@@ -16,6 +16,10 @@
 | `mood-spirit-happy.webp` | 144×136 RGBA | 现有 `boling_happy.png` |
 | `mood-joy.webp` | 512×256 RGBA | 三张开心表情横向合成 |
 | `theme-calm-preview.webp` | 512×512 RGB | 宁静主题真实首页截图 |
+
+> 2026-11-22 更新（一）：`icon-coil` 更名为 `icon-step`，对应商店道具「应急线圈」→「加步电池」；图标改为电池 + 大号「+3」+ 爪印，管线按全站彩度曲线收一档（k=0.82、cap=76）。验收记录见 `docs/QA/step-battery-2026-11-22/`。
+
+> 2026-11-22 更新（二）：`icon-lens` 的蓝色玻璃在生成管线里按 195°–292° 色相带降饱和（Lab C*×0.65，软膝 6），金色镜框、珍珠环与紫色手柄不变。参数见 `scripts/prepare_shop_assets.py` 的 `LENS_BLUE_SOFT`，验收记录见 `docs/QA/lens-blue-soft-2026-11-22/`。管线同时依赖 numpy，已写入 requirements。
 
 ## 复现与自动验收
 
@@ -64,7 +68,7 @@ export SHOP_ASSETS_PYTHON
 使用真实 Chrome 分别以 360×800、390×844 和 430×932 打开首页装扮状态与商店：
 
 1. 首页确认三套星愿礼服、三张开心表情与展台名称完整显示。
-2. 商店补给页确认火花透镜与应急线圈加载。
+2. 商店补给页确认火花透镜与加步电池加载。
 3. 商店装扮页确认开心问候、星愿礼服与宁静夜灯预览加载。
 4. 10 个资源均要求 `naturalWidth > 0`，展台名称不得出现横向或纵向裁切。
 
