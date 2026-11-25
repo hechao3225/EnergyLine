@@ -318,8 +318,8 @@ export default function App() {
     setHistory(nextHistory);
     setHistoryIndex(nextHistory.length - 1);
     if (rotorResult.activatedIds.length > 0) {
-      sound.playGear();
-      haptics.tapHeavy();
+      sound.playRotor();
+      haptics.rotorStart();
     } else if (toggle) {
       stats.current.switched = true;
       sound.playSwitch();

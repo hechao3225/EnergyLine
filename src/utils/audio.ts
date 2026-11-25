@@ -105,6 +105,53 @@ class SoundSystem {
     }
   }
 
+  // 动力转盘：低频启动、轨道细齿、末端金属落锁
+  public playRotor() {
+    if (this.muted) return;
+    this.initCtx();
+    if (!this.ctx) return;
+
+    try {
+      const now = this.ctx.currentTime;
+      const hit = (
+        freq: number,
+        targetFreq: number,
+        start: number,
+        duration: number,
+        level: number,
+        type: OscillatorType,
+      ) => {
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, now + start);
+        osc.frequency.exponentialRampToValueAtTime(
+          Math.max(35, targetFreq),
+          now + start + duration,
+        );
+        gain.gain.setValueAtTime(level, now + start);
+        gain.gain.exponentialRampToValueAtTime(
+          0.001,
+          now + start + duration,
+        );
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now + start);
+        osc.stop(now + start + duration);
+      };
+
+      hit(118, 64, 0, 0.17, 0.24, "sawtooth");
+      hit(420, 210, 0.07, 0.045, 0.1, "square");
+      hit(760, 460, 0.17, 0.035, 0.055, "triangle");
+      hit(680, 380, 0.46, 0.035, 0.045, "triangle");
+      hit(92, 52, 0.7, 0.13, 0.28, "square");
+      hit(1250, 820, 0.71, 0.025, 0.08, "triangle");
+    } catch {
+      // ignore
+    }
+  }
+
   // Electrical current connection pulse
   public playConnect() {
     if (this.muted) return;

@@ -74,6 +74,16 @@ class HapticEngine {
     }
   }
 
+  // 动力转盘：启动重拍、滑轨细颤、末端落锁
+  public rotorStart() {
+    if (!this.enabled || !this.isSupported()) return;
+    try {
+      navigator.vibrate([32, 90, 12, 480, 64]);
+    } catch {
+      // ignore
+    }
+  }
+
   // Celebratory victory vibration pattern when all water channels are connected
   public victory() {
     if (!this.enabled || !this.isSupported()) return;

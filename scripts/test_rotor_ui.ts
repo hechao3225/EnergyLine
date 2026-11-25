@@ -32,6 +32,16 @@ page.on("console", (message) => {
 page.on("pageerror", (error) => errors.push(error.message));
 
 await page.goto(BASE_URL, { waitUntil: "networkidle" });
+await page.evaluate(`
+  window.__rotorVibrations = [];
+  Object.defineProperty(navigator, "vibrate", {
+    configurable: true,
+    value: function (pattern) {
+      window.__rotorVibrations.push(pattern);
+      return true;
+    }
+  });
+`);
 await closeTransientModals(page);
 await page.evaluate(() => document.fonts.ready);
 
@@ -82,13 +92,18 @@ await page.screenshot({
   animations: "allow",
 });
 const lessonState = await page.evaluate(() => {
-  const card = document.querySelector(".park-rotor-lesson");
+  const card = document.querySelector(
+    ".park-rotor-lesson, .park-mechanic-lesson",
+  );
   const rect = card?.getBoundingClientRect();
   return {
-    steps: document.querySelectorAll(".park-rotor-lesson-steps > div").length,
+    steps: document.querySelectorAll(
+      ".park-rotor-lesson-steps > div, .park-mechanic-lesson-steps > div",
+    ).length,
     orbitVisible: Boolean(
-      document.querySelector(".park-rotor-lesson-orbit")?.getBoundingClientRect()
-        .width,
+      document.querySelector(
+        ".park-rotor-lesson-orbit, .park-mechanic-lesson-orbit",
+      )?.getBoundingClientRect().width,
     ),
     insideViewport:
       Boolean(rect) &&
@@ -97,7 +112,9 @@ const lessonState = await page.evaluate(() => {
       rect!.left >= 0 &&
       rect!.right <= window.innerWidth,
     clipped: Array.from(
-      document.querySelectorAll(".park-rotor-lesson h2, .park-rotor-lesson span"),
+      document.querySelectorAll(
+        ".park-rotor-lesson h2, .park-rotor-lesson span, .park-mechanic-lesson h2, .park-mechanic-lesson span",
+      ),
     )
       .filter((node) => {
         const nodeRect = node.getBoundingClientRect();
@@ -160,6 +177,13 @@ const motion = await page.evaluate(() => ({
   ).filter((node) =>
     node.getAnimations().some((animation) => animation.playState === "running"),
   ).length,
+  boardShaking: document
+    .querySelector(".park-board")
+    ?.getAnimations()
+    .some((animation) => animation.playState === "running"),
+  vibrationPatterns: (
+    window as Window & { __rotorVibrations?: (number | number[])[] }
+  ).__rotorVibrations,
   callout: document.querySelector(".park-rotor-callout")?.textContent?.trim(),
 }));
 await page.screenshot({
@@ -213,7 +237,7 @@ await page.screenshot({
 });
 const compactLessonState = await page.evaluate(() => {
   const rect = document
-    .querySelector(".park-rotor-lesson")
+    .querySelector(".park-rotor-lesson, .park-mechanic-lesson")
     ?.getBoundingClientRect();
   return {
     insideViewport:
@@ -275,6 +299,9 @@ if (
   initial.target !== "0/2" ||
   motion.movingTiles !== 8 ||
   motion.runningAnimations !== 8 ||
+  !motion.boardShaking ||
+  JSON.stringify(motion.vibrationPatterns?.at(-1)) !==
+    JSON.stringify([32, 90, 12, 480, 64]) ||
   motion.callout !== "环轨换位" ||
   afterShift.active !== "true" ||
   afterShift.movingTiles !== 0 ||

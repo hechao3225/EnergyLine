@@ -21,6 +21,16 @@
   "motion": {
     "movingTiles": 8,
     "runningAnimations": 8,
+    "boardShaking": true,
+    "vibrationPatterns": [
+      [
+        32,
+        90,
+        12,
+        480,
+        64
+      ]
+    ],
     "callout": "环轨换位"
   },
   "afterShift": {

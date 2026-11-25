@@ -143,7 +143,7 @@ export function GameBoard({
     const timer = setTimeout(() => {
       setRotorSpinning(false);
       setRotorMotion(null);
-    }, 880);
+    }, 960);
     return () => clearTimeout(timer);
   }, [rotorSpinning]);
 
@@ -157,6 +157,8 @@ export function GameBoard({
       );
       if (!tile) return [];
       const destination = positions[(index + 1) % positions.length];
+      const moveX = destination.col - position.col;
+      const moveY = destination.row - position.row;
       return [
         {
           tile,
@@ -165,8 +167,16 @@ export function GameBoard({
             top: `${(position.row / gridRows) * 100}%`,
             width: `${100 / gridCols}%`,
             height: `${100 / gridRows}%`,
-            "--rotor-move-x": `${(destination.col - position.col) * 100}%`,
-            "--rotor-move-y": `${(destination.row - position.row) * 100}%`,
+            "--rotor-glide-x": `${moveX * 68}%`,
+            "--rotor-glide-y": `${moveY * 68}%`,
+            "--rotor-lock-x": `${moveX * 96}%`,
+            "--rotor-lock-y": `${moveY * 96}%`,
+            "--rotor-over-x": `${moveX * 102}%`,
+            "--rotor-over-y": `${moveY * 102}%`,
+            "--rotor-settle-x": `${moveX * 99}%`,
+            "--rotor-settle-y": `${moveY * 99}%`,
+            "--rotor-move-x": `${moveX * 100}%`,
+            "--rotor-move-y": `${moveY * 100}%`,
           } as React.CSSProperties,
         },
       ];
