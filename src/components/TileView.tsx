@@ -23,6 +23,10 @@ interface TileViewProps {
   wrapEdges?: ("up" | "down" | "left" | "right")[];
   /** 焊死关卡：这一格已通电，不能再转 */
   weldLocked?: boolean;
+  /** 焊死关卡：本关管道通电即锁（用来给能量源挂关卡标记） */
+  weldLevel?: boolean;
+  /** 点了焊死格：父级播拒绝音效/震动（旋转被拦截，不扣步） */
+  onWeldBlocked?: () => void;
   /** 动力转盘：这一格位于当前转盘的环轨上 */
   isRotorRing?: boolean;
   /** 提示引擎高亮的格子 */
@@ -53,6 +57,8 @@ export const TileView: React.FC<TileViewProps> = ({
   gearFlash = 0,
   wrapEdges,
   weldLocked = false,
+  weldLevel = false,
+  onWeldBlocked,
   isRotorRing = false,
   isHint = false,
 }) => {
@@ -74,13 +80,33 @@ export const TileView: React.FC<TileViewProps> = ({
       if (weldTimer.current) clearTimeout(weldTimer.current);
     };
   }, [weldLocked]);
+  /** 焊死格点不动：抖动 + 「先断电」浮字，不扣步（音效/震动交给父级） */
+  const [weldDeniedTap, setWeldDeniedTap] = useState(0);
+  const weldDeniedTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const handleRotate = () => {
+    if (weldLocked) {
+      setWeldDeniedTap((value) => value + 1);
+      if (weldDeniedTimer.current) clearTimeout(weldDeniedTimer.current);
+      weldDeniedTimer.current = setTimeout(() => setWeldDeniedTap(0), 640);
+      onWeldBlocked?.();
+      return;
+    }
+    onClick(tile, "rotate");
+  };
+  useEffect(
+    () => () => {
+      if (weldDeniedTimer.current) clearTimeout(weldDeniedTimer.current);
+    },
+    [],
+  );
   /** 双色关：未通电时也要能看出源/设施要什么颜色 */
   const staticColor = tile.color === undefined ? 0 : tile.color === 0 ? 1 : 2;
   const shownColor = colorMask || staticColor;
   const goalEntry = isGoal && levelId ? getCollectionEntry(levelId) : null;
   /** 转了也不会变形的格子（十字管）：不该看起来、也不该表现得像个可转按钮。 */
   const noop = tile.type !== "empty" && !tile.axis && isRotationNoop(tile);
-  const locked = interactive && (tile.locked || tile.type === "empty" || noop || weldLocked);
+  /** 硬锁：点了也不该有任何反应（固定格 / 空格 / 转了也一样的十字管）。焊死格要能点，好给反馈。 */
+  const hardLocked = interactive && (tile.locked || tile.type === "empty" || noop);
   const base = getDefaultBasePorts(tile.type);
   const offset =
     [0, 90, 180, 270].find(
@@ -99,7 +125,7 @@ export const TileView: React.FC<TileViewProps> = ({
           : `pipe-${tile.type}-${isPowered ? "on" : "off"}`;
   return (
     <div
-      className={`park-tile ${isPowered ? "is-powered" : ""} ${isGoal ? "is-goal" : ""} ${isLit ? "is-lit" : ""} ${tile.locked ? "is-fixed" : ""} ${noop ? "is-noop" : ""} ${tile.axis ? "has-axis" : ""} ${weldLocked ? "is-welded" : ""} ${isRotor ? "has-rotor" : ""} ${tile.rotorActivated ? "is-rotor-active" : ""} ${isRotorRing ? "is-rotor-ring" : ""} ${isHint ? "is-hint" : ""} ${shownColor ? `color-${shownColor}` : ""}`}
+      className={`park-tile ${isPowered ? "is-powered" : ""} ${isGoal ? "is-goal" : ""} ${isLit ? "is-lit" : ""} ${tile.locked ? "is-fixed" : ""} ${noop ? "is-noop" : ""} ${tile.axis ? "has-axis" : ""} ${weldLocked ? "is-welded" : ""} ${weldDeniedTap > 0 ? "is-weld-denied" : ""} ${isRotor ? "has-rotor" : ""} ${tile.rotorActivated ? "is-rotor-active" : ""} ${isRotorRing ? "is-rotor-ring" : ""} ${isHint ? "is-hint" : ""} ${shownColor ? `color-${shownColor}` : ""}`}
       data-tile-id={tile.id}
       data-type={tile.type}
       data-rotor-active={isRotor ? Boolean(tile.rotorActivated) : undefined}
@@ -114,9 +140,9 @@ export const TileView: React.FC<TileViewProps> = ({
     >
       <button
         className="park-tile-rotate"
-        disabled={locked}
-        onClick={() => onClick(tile, "rotate")}
-        aria-label={`${tile.row + 1}行${tile.col + 1}列${TILE_NAMES[tile.type]}${tile.type === "empty" ? "不可操作" : isRotor ? (tile.rotorActivated ? "已启动" : "固定") : tile.locked ? "固定" : noop ? "四向对称，无需旋转" : "旋转"}`}
+        disabled={hardLocked}
+        onClick={handleRotate}
+        aria-label={`${tile.row + 1}行${tile.col + 1}列${TILE_NAMES[tile.type]}${weldLocked ? "已焊死，先断开上游才能转" : tile.type === "empty" ? "不可操作" : isRotor ? (tile.rotorActivated ? "已启动" : "固定") : tile.locked ? "固定" : noop ? "四向对称，无需旋转" : "旋转"}`}
       >
         {tile.type !== "empty" && (
           <Art
@@ -153,9 +179,9 @@ export const TileView: React.FC<TileViewProps> = ({
             {tile.axisDir ? (tile.axisDir < 0 ? "↺" : "↻") : "轴"}
           </span>
         )}
-        {weldLocked && (
-          <span className="park-weld-mark" aria-hidden="true">
-            焊
+        {weldLocked && weldDeniedTap > 0 && (
+          <span key={weldDeniedTap} className="park-weld-denied" aria-hidden="true">
+            先断电
           </span>
         )}
         {justWelded && (
@@ -175,6 +201,11 @@ export const TileView: React.FC<TileViewProps> = ({
           </span>
         )}
       </button>
+      {isSource && weldLevel && (
+        <span className="park-weld-badge" aria-hidden="true">
+          焊
+        </span>
+      )}
       {tile.type === "switch" && interactive && !tile.locked && (
         <button
           className={`park-switch-toggle ${tile.switchClosed === false ? "off" : ""}`}

@@ -104,6 +104,8 @@ interface Props {
   onRestart: () => void;
   onUndo: () => void;
   onTileClick: (tile: Tile, action?: "rotate" | "toggle-switch") => void;
+  /** 点了焊死格：播拒绝音效/震动（旋转被拦截，不扣步） */
+  onWeldBlocked?: () => void;
   onOpenLevels: () => void;
   onCloseLevels: () => void;
   onSelectLevel: (id: number) => void;
@@ -146,10 +148,15 @@ const TITLES: Record<Exclude<Modal, "none">, string> = {
 };
 const HONOR_TITLE_SEEN_KEY = "honeycomb_honor_titles_seen_v1";
 const ROTOR_LESSON_SEEN_KEY = "honeycomb_rotor_lesson_seen_v1";
+const WELD_LESSON_SEEN_KEY = "honeycomb_weld_lesson_seen_v1";
+/** 第一次真的点到焊死格时，补一句就地提示（只出现一次） */
+const WELD_DENY_HINT_KEY = "honeycomb_weld_deny_hint_seen_v1";
 
 export function CandyThemeShell(p: Props) {
   const [modal, setModal] = useState<Modal>(() => localStorage.getItem("honeycomb_story_seen_v1") === "1" ? "none" : "story");
   const [rotorLessonOpen, setRotorLessonOpen] = useState(false);
+  const [weldLessonOpen, setWeldLessonOpen] = useState(false);
+  const [weldDenyHint, setWeldDenyHint] = useState(false);
   const [progress, setProgress] = useState(
     readParkProgress.bind(null, localStorage),
   );
@@ -491,6 +498,20 @@ export function CandyThemeShell(p: Props) {
   const dismissRotorLesson = () => {
     localStorage.setItem(ROTOR_LESSON_SEEN_KEY, "1");
     setRotorLessonOpen(false);
+  };
+  const hasWeldRule = Boolean(p.level.rules?.weld);
+  useEffect(() => {
+    if (p.screen !== "play" || !hasWeldRule) {
+      setWeldLessonOpen(false);
+      return;
+    }
+    if (localStorage.getItem(WELD_LESSON_SEEN_KEY) !== "1") {
+      setWeldLessonOpen(true);
+    }
+  }, [hasWeldRule, p.attemptId, p.level.id, p.screen]);
+  const dismissWeldLesson = () => {
+    localStorage.setItem(WELD_LESSON_SEEN_KEY, "1");
+    setWeldLessonOpen(false);
   };
   const navigation: { icon: IconName; text: string; action: () => void }[] = [
     {
@@ -841,7 +862,7 @@ export function CandyThemeShell(p: Props) {
                 </b>
               </span>
             </section>
-            <div className="park-board-space">
+            <div className={`park-board-space ${hasWeldRule ? "is-weld-level" : ""}`}>
               <GameBoard
                 tiles={p.tiles}
                 gridRows={p.level.gridRows}
@@ -857,6 +878,13 @@ export function CandyThemeShell(p: Props) {
                 levelId={p.level.id}
                 wrap={Boolean(p.level.rules?.wrap)}
                 weld={Boolean(p.level.rules?.weld)}
+                onWeldBlocked={() => {
+                  p.onWeldBlocked?.();
+                  if (localStorage.getItem(WELD_DENY_HINT_KEY) === "1") return;
+                  localStorage.setItem(WELD_DENY_HINT_KEY, "1");
+                  setWeldDenyHint(true);
+                  window.setTimeout(() => setWeldDenyHint(false), 2800);
+                }}
                 rotorAnimation={p.rotorAnimation}
               />
               {p.remainingSteps === 0 && !p.simulation.isAllLit && (
@@ -925,8 +953,10 @@ export function CandyThemeShell(p: Props) {
                 </div>
               )}
             </div>
-            <div className="park-play-caption">
-              {p.simulation.overloaded
+            <div className={`park-play-caption ${weldDenyHint ? "is-hint" : ""}`}>
+              {weldDenyHint
+                ? "焊死：这根管子已通电锁死，先断开上游再转它"
+                : p.simulation.overloaded
                 ? "回路过载！能量在环里打转，整段熄灭 —— 通路不能连成圈"
                 : hasRotor
                   ? rotor?.rotorActivated
@@ -993,23 +1023,23 @@ export function CandyThemeShell(p: Props) {
             </button>
             <span className="park-build-tag">{BUILD_TAG}</span>
             {rotorLessonOpen && hasRotor && (
-              <div className="park-rotor-lesson-backdrop">
+              <div className="park-mechanic-lesson-backdrop">
                 <section
-                  className="park-rotor-lesson"
+                  className="park-mechanic-lesson"
                   role="dialog"
                   aria-modal="true"
                   aria-label="动力转盘教学"
                 >
-                  <span className="park-rotor-lesson-kicker">新机关</span>
+                  <span className="park-mechanic-lesson-kicker">新机关</span>
                   <h2>动力转盘</h2>
-                  <div className="park-rotor-lesson-demo" aria-hidden="true">
+                  <div className="park-mechanic-lesson-demo" aria-hidden="true">
                     <Art name="pipe-source" />
-                    <span className="park-rotor-lesson-flow">能量</span>
-                    <span className="park-rotor-lesson-orbit">
+                    <span className="park-mechanic-lesson-flow">能量</span>
+                    <span className="park-mechanic-lesson-orbit">
                       <b>↻</b>
                     </span>
                   </div>
-                  <div className="park-rotor-lesson-steps">
+                  <div className="park-mechanic-lesson-steps">
                     <div>
                       <b>1</b>
                       <span>旋转供能管道，接通中央转盘</span>
@@ -1024,6 +1054,41 @@ export function CandyThemeShell(p: Props) {
                     </div>
                   </div>
                   <ParkButton onClick={dismissRotorLesson}>开始试玩</ParkButton>
+                </section>
+              </div>
+            )}
+            {weldLessonOpen && hasWeldRule && (
+              <div className="park-mechanic-lesson-backdrop">
+                <section
+                  className="park-mechanic-lesson is-weld"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="焊死教学"
+                >
+                  <span className="park-mechanic-lesson-kicker">本关机制</span>
+                  <h2>焊死</h2>
+                  <div className="park-mechanic-lesson-demo is-weld" aria-hidden="true">
+                    <Art name="pipe-source" className="park-mechanic-lesson-source" />
+                    <span className="park-mechanic-lesson-flow">通电</span>
+                    <span className="park-mechanic-lesson-weld">
+                      <b>焊</b>
+                    </span>
+                  </div>
+                  <div className="park-mechanic-lesson-steps">
+                    <div>
+                      <b>1</b>
+                      <span>能量源变成钢色，就代表本关「通电即焊死」</span>
+                    </div>
+                    <div>
+                      <b>2</b>
+                      <span>接通的管道立刻锁死：先修远端，再回来接源头</span>
+                    </div>
+                    <div>
+                      <b>3</b>
+                      <span>想改就先断电：断开上游，失去供电后才能再转</span>
+                    </div>
+                  </div>
+                  <ParkButton onClick={dismissWeldLesson}>开始试玩</ParkButton>
                 </section>
               </div>
             )}
@@ -1465,6 +1530,15 @@ export function CandyThemeShell(p: Props) {
                           title: "固定管道",
                           text: "带锁标记的管道不能旋转，只能按它现在的方向规划。",
                         },
+                        ...(hasWeldRule
+                          ? [
+                              {
+                                art: "pipe-source",
+                                title: "焊死",
+                                text: "能量源是钢色时，本关「通电即焊死」：已通电的管道转不动。先修远端，再从源头接回来；想改回来，先断开上游让这一段失去供电。",
+                              },
+                            ]
+                          : []),
                         ...(hasRotor
                           ? [
                               {

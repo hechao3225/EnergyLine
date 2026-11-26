@@ -33,6 +33,8 @@ interface GameBoardProps {
   wrap?: boolean;
   /** 焊死关卡：通电的格子锁住 */
   weld?: boolean;
+  /** 点了焊死格：播拒绝音效/震动 */
+  onWeldBlocked?: () => void;
   /** 本次操作触发的连续转盘换位 */
   rotorAnimation?: RotorActivationStep[] | null;
 }
@@ -55,6 +57,7 @@ export function GameBoard({
   hintTileId,
   wrap = false,
   weld = false,
+  onWeldBlocked,
   rotorAnimation,
 }: GameBoardProps) {
   const [visualTiles, setVisualTiles] = useState<Tile[] | null>(null);
@@ -250,17 +253,20 @@ export function GameBoard({
               interactive={interactive && !rotorSpinning}
               isHint={Boolean(hintTileId) && hintTileId === tile.id}
               isRotorRing={rotorRing.has(`${tile.row},${tile.col}`)}
+              weldLevel={weld}
               levelId={levelId}
               gearIndex={tile.axis ? axisIndex.get(tile.axis) ?? 0 : 0}
               gearFlash={flash[tile.id] ?? 0}
               weldLocked={
                 weld &&
+                !tile.locked &&
                 tile.type !== "battery" &&
                 tile.type !== "bulb" &&
                 (tile.axis
                   ? weldedAxes.has(tile.axis)
                   : simulation.poweredTileIds.has(tile.id))
               }
+              onWeldBlocked={onWeldBlocked}
               wrapEdges={
                 wrap
                   ? [

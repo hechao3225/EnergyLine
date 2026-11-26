@@ -568,6 +568,10 @@ export default function App() {
       onUndo={() => travel(historyIndex - 1)}
       onRedo={() => travel(historyIndex + 1)}
       onTileClick={rotate}
+      onWeldBlocked={() => {
+        sound.playWeldDenied();
+        haptics.refuse();
+      }}
       onAddRewind={addRewind}
       onOpenLevels={() => setLevelsOpen(true)}
       onCloseLevels={() => setLevelsOpen(false)}

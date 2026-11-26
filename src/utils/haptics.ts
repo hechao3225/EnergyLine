@@ -64,6 +64,16 @@ class HapticEngine {
     }
   }
 
+  // 焊死格：点不动的短促拒绝震动
+  public refuse() {
+    if (!this.enabled || !this.isSupported()) return;
+    try {
+      navigator.vibrate([10, 42, 24]);
+    } catch {
+      // ignore
+    }
+  }
+
   // Medium 22ms pulse when a channel completes or lights up a flower
   public pulseFlower() {
     if (!this.enabled || !this.isSupported()) return;

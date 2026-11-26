@@ -1307,26 +1307,74 @@ img {
   box-shadow: 0 0 0.8cqw var(--gear);
   font-size: 3.1cqw;
 }
-/* 焊死：通电的格子锁住，右下角挂一枚「焊」章 */
-.park-weld-mark {
+/* 焊死关：只给「能量源」换材质——冷钢蓝 + 「焊」钢印。
+   用材质区分而不是换色相，免得和双色关的红源/蓝源抢语义；
+   钢印做形状冗余，色弱玩家也能认出本关规则。盘面管道保持原样。 */
+.park-stage {
+  --weld-source-filter: grayscale(0.52) sepia(0.55) hue-rotate(192deg) saturate(1.15)
+    brightness(0.66) contrast(1.32) drop-shadow(0 0 0.75cqw rgba(70, 120, 190, 0.32));
+}
+.is-weld-level .park-tile[data-type="battery"] .park-pipe,
+.park-mechanic-lesson-source {
+  filter: var(--weld-source-filter);
+}
+/* 「焊」角标：形状冗余，色弱也能分辨本关是焊死关；渲染在旋转按钮之外，才不会被玻璃瓶盖住 */
+.park-weld-badge {
   position: absolute;
   right: 4%;
   bottom: 4%;
-  width: 26%;
-  height: 26%;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #f2fbff, #9cc4d6 60%, #34505f);
-  color: #10232c;
-  font-size: 2.2cqw;
-  font-weight: 800;
+  width: 34%;
+  height: 34%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 26%;
+  background: linear-gradient(150deg, #63758c, #28313f);
+  color: #e6eef8;
+  font-size: 2.9cqw;
+  font-weight: 900;
   line-height: 1;
-  z-index: 5;
+  transform: rotate(-6deg);
+  box-shadow:
+    0 0 0 0.16cqw rgba(255, 255, 255, 0.9),
+    0 0 1cqw rgba(20, 40, 80, 0.5);
   pointer-events: none;
-  box-shadow: 0 0 0.7cqw #d8f0fa99;
+  z-index: 8;
 }
-.park-tile.is-welded .park-tile-rotate { cursor: default; }
+.park-play-caption.is-hint { color: #ffe6a2; }
+.park-tile.is-welded .park-tile-rotate { cursor: not-allowed; }
+.park-tile.is-welded .park-tile-rotate:active:not(:disabled) { background: none; }
+.park-tile.is-weld-denied .park-tile-rotate { animation: weldDenyShake 0.34s ease-in-out; }
+.park-weld-denied {
+  position: absolute;
+  left: 50%;
+  top: 6%;
+  transform: translateX(-50%);
+  padding: 0.5cqw 1.5cqw;
+  border-radius: 999px;
+  background: #2a1420e6;
+  color: #ffd9a5;
+  font-size: 2.7cqw;
+  font-weight: 900;
+  line-height: 1.15;
+  white-space: nowrap;
+  z-index: 8;
+  pointer-events: none;
+  box-shadow: 0 0 0 0.22cqw #f0a35a88;
+  animation: weldDenyLabel 0.64s ease-out both;
+}
+@keyframes weldDenyShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4%); }
+  46% { transform: translateX(3.4%); }
+  72% { transform: translateX(-1.8%); }
+}
+@keyframes weldDenyLabel {
+  0% { opacity: 0; transform: translate(-50%, 26%) scale(0.78); }
+  24% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  72% { opacity: 1; transform: translate(-50%, -6%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -34%) scale(0.96); }
+}
 .park-tile:has(.park-weld-flash)::after {
   content: "";
   position: absolute;
@@ -1588,7 +1636,7 @@ img {
   76% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
   100% { opacity: 0; transform: translate(-50%, -64%) scale(0.96); }
 }
-.park-rotor-lesson-backdrop {
+.park-mechanic-lesson-backdrop {
   position: absolute;
   inset: 0;
   z-index: 90;
@@ -1599,7 +1647,7 @@ img {
   backdrop-filter: blur(0.8cqw);
   animation: rotorLessonBackdrop 0.22s ease-out both;
 }
-.park-rotor-lesson {
+.park-mechanic-lesson {
   width: min(84cqw, 420px);
   padding: 5cqw;
   border: 0.6cqw solid #fff6d7;
@@ -1615,7 +1663,7 @@ img {
     inset 0 0 3cqw #7df0d126;
   animation: rotorLessonCard 0.34s cubic-bezier(0.2, 0.9, 0.28, 1.18) both;
 }
-.park-rotor-lesson-kicker {
+.park-mechanic-lesson-kicker {
   display: inline-block;
   padding: 0.4cqw 1.8cqw;
   border-radius: 999px;
@@ -1625,13 +1673,13 @@ img {
   font-weight: 900;
   letter-spacing: 0.16em;
 }
-.park-rotor-lesson h2 {
+.park-mechanic-lesson h2 {
   margin: 1.6cqw 0 2.2cqw;
   color: #fff6d7;
   font-size: 6.4cqw;
   text-shadow: 0 0.5cqw 0 #10242b;
 }
-.park-rotor-lesson-demo {
+.park-mechanic-lesson-demo {
   position: relative;
   display: grid;
   grid-template-columns: 1fr auto 1.35fr;
@@ -1644,11 +1692,11 @@ img {
   background: #071e24a6;
   box-shadow: inset 0 0 1.5cqw #7df0d133;
 }
-.park-rotor-lesson-demo > .park-art {
+.park-mechanic-lesson-demo > .park-art {
   width: 13cqw;
   justify-self: center;
 }
-.park-rotor-lesson-flow {
+.park-mechanic-lesson-flow {
   position: relative;
   display: flex;
   min-height: 11cqw;
@@ -1660,14 +1708,14 @@ img {
   line-height: 1.1;
   letter-spacing: 0.12em;
 }
-.park-rotor-lesson-flow::after {
+.park-mechanic-lesson-flow::after {
   content: "→";
   display: block;
   color: #7df0d1;
   font-size: 5.5cqw;
   line-height: 0.9;
 }
-.park-rotor-lesson-orbit {
+.park-mechanic-lesson-orbit {
   position: relative;
   width: 21cqw;
   aspect-ratio: 1;
@@ -1681,7 +1729,7 @@ img {
     0 0 1.8cqw #7df0d166;
   animation: rotorLessonOrbit 1.8s linear infinite;
 }
-.park-rotor-lesson-orbit::before {
+.park-mechanic-lesson-orbit::before {
   content: "";
   position: absolute;
   inset: 3.5cqw;
@@ -1690,19 +1738,19 @@ img {
     radial-gradient(circle at 35% 28%, #ffffff, #7df0d1 36%, #286f70 70%, #102b3e);
   box-shadow: 0 0 1.4cqw #7df0d1aa;
 }
-.park-rotor-lesson-orbit b {
+.park-mechanic-lesson-orbit b {
   position: relative;
   color: #092b32;
   font-size: 8.5cqw;
   line-height: 1;
 }
-.park-rotor-lesson-steps {
+.park-mechanic-lesson-steps {
   display: grid;
   gap: 1.4cqw;
   margin: 0 0 3cqw;
   text-align: left;
 }
-.park-rotor-lesson-steps > div {
+.park-mechanic-lesson-steps > div {
   display: grid;
   grid-template-columns: 6cqw 1fr;
   align-items: center;
@@ -1712,7 +1760,7 @@ img {
   border-radius: 2cqw;
   background: #ffffff0d;
 }
-.park-rotor-lesson-steps b {
+.park-mechanic-lesson-steps b {
   display: grid;
   place-items: center;
   width: 5.4cqw;
@@ -1722,12 +1770,12 @@ img {
   color: #513000;
   font-size: 3cqw;
 }
-.park-rotor-lesson-steps span {
+.park-mechanic-lesson-steps span {
   font-size: 3cqw;
   font-weight: 700;
   line-height: 1.4;
 }
-.park-rotor-lesson > .park-button {
+.park-mechanic-lesson > .park-button {
   width: 100%;
 }
 @keyframes rotorLessonBackdrop {
@@ -1741,6 +1789,47 @@ img {
 @keyframes rotorLessonOrbit {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+/* 焊死教学：同一套教学卡，换成熔接的暖钢色 */
+.park-mechanic-lesson.is-weld {
+  border-color: #ffe6bd;
+  background:
+    radial-gradient(circle at 50% 0, #c7702f 0, transparent 36%),
+    linear-gradient(165deg, #46281c, #241a3a 74%);
+  box-shadow:
+    0 0 0 0.8cqw #ffb26b44,
+    0 2cqw 5cqw #10051fcc,
+    inset 0 0 3cqw #ffb26b26;
+}
+.park-mechanic-lesson.is-weld .park-mechanic-lesson-kicker {
+  background: #ffb26b;
+  color: #3a1c06;
+}
+.park-mechanic-lesson-demo.is-weld {
+  background: #24101aa6;
+  box-shadow: inset 0 0 1.5cqw #ffb26b33;
+}
+.park-mechanic-lesson.is-weld .park-mechanic-lesson-flow { color: #ffd79a; }
+.park-mechanic-lesson.is-weld .park-mechanic-lesson-flow::after { color: #ffb26b; }
+.park-mechanic-lesson-weld {
+  position: relative;
+  width: 21cqw;
+  aspect-ratio: 1;
+  justify-self: center;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 0.4cqw solid #ffb26b;
+  background: radial-gradient(circle at 34% 28%, #ffffff, #b9c4d6 38%, #4c4a5e 74%, #221d2c);
+  box-shadow:
+    0 0 2cqw #ffb26b66,
+    inset 0 0 1.2cqw #ffffff33;
+}
+.park-mechanic-lesson-weld b {
+  color: #33200a;
+  font-size: 8cqw;
+  line-height: 1;
+  text-shadow: 0 0.2cqw 0 #ffffff80;
 }
 /* 设施复苏 */
 .park-victory {

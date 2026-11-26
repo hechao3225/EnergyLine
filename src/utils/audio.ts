@@ -285,6 +285,35 @@ class SoundSystem {
     }
   }
 
+  // 焊死：点已焊死的管道 —— 金属闷响（短促两声，末了带一点泄气）
+  public playWeldDenied() {
+    if (this.muted) return;
+    this.initCtx();
+    if (!this.ctx) return;
+
+    try {
+      const now = this.ctx.currentTime;
+      const clank = (freq: number, start: number, dur: number, level: number, type: OscillatorType) => {
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, now + start);
+        osc.frequency.exponentialRampToValueAtTime(freq * 0.58, now + start + dur);
+        gain.gain.setValueAtTime(level, now + start);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + start + dur);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now + start);
+        osc.stop(now + start + dur);
+      };
+      clank(208, 0, 0.11, 0.2, 'square');
+      clank(96, 0.02, 0.17, 0.16, 'sawtooth');
+    } catch {
+      // ignore
+    }
+  }
+
   // Gentle water trickle & floral chime when Sacred Tree sprouts a new leaf or flower
   public playChime() {
     if (this.muted) return;
